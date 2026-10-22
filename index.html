@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>染色質與染色體的本質定義與原文對照</title>
+<style>
+  :root {
+    --bg-primary: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-quote: #f1f5f9;
+    --bg-tag: #e2e8f0;
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    --primary: #2563eb;
+    --primary-light: #eff6ff;
+    --primary-border: #bfdbfe;
+    --border-color: #e2e8f0;
+    --accent: #0284c7;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg-primary: #0f172a;
+      --bg-card: #1e293b;
+      --bg-quote: #172554;
+      --bg-tag: #334155;
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --primary: #60a5fa;
+      --primary-light: #1e293b;
+      --primary-border: #2563eb;
+      --border-color: #334155;
+      --accent: #38bdf8;
+      --shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    font-size: 16px;
+    padding: 16px 12px 40px 12px;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  header {
+    margin-bottom: 24px;
+    padding: 8px 4px;
+  }
+
+  .badge-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+  }
+
+  .badge-primary {
+    background: var(--primary-light);
+    color: var(--primary);
+    border: 1px solid var(--primary-border);
+  }
+
+  h1 {
+    font-size: 24px;
+    line-height: 1.35;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* Section Title */
+  h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 32px 0 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  h2::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 18px;
+    background: var(--primary);
+    border-radius: 2px;
+  }
+
+  /* Summary Card Grid */
+  .grid-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  @media (min-width: 640px) {
+    .grid-cards {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .summary-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 16px;
+    box-shadow: var(--shadow);
+  }
+
+  .summary-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .summary-subtitle {
+    font-size: 12px;
+    font-weight: normal;
+    color: var(--text-muted);
+  }
+
+  .summary-item {
+    font-size: 14px;
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+
+  .summary-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .summary-item strong {
+    color: var(--text-primary);
+  }
+
+  /* Book Cards */
+  .book-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    margin-bottom: 18px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .book-header {
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .book-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .book-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .book-body {
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .quote-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .quote-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .quote-label::before {
+    content: "•";
+    color: var(--primary);
+    font-size: 16px;
+  }
+
+  .en-box {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 10px 14px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    font-style: italic;
+    word-break: break-word;
+  }
+
+  .zh-box {
+    padding: 4px 4px 0 4px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-primary);
+    word-break: break-word;
+  }
+
+  .zh-box strong {
+    color: var(--primary);
+    background: var(--primary-light);
+    padding: 0 4px;
+    border-radius: 3px;
+  }
+
+  /* Educational Insights Box */
+  .insight-card {
+    background: var(--bg-card);
+    border: 2px solid var(--primary-border);
+    border-radius: var(--radius);
+    padding: 18px 16px;
+    margin-top: 28px;
+    box-shadow: var(--shadow);
+  }
+
+  .insight-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .insight-point {
+    margin-bottom: 14px;
+    font-size: 14.5px;
+    line-height: 1.65;
+  }
+
+  .insight-point:last-child {
+    margin-bottom: 0;
+  }
+
+  .insight-point strong {
+    color: var(--text-primary);
+  }
+
+  .callout-mnemo {
+    background: var(--primary-light);
+    border-left: 4px solid var(--primary);
+    padding: 12px 14px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin-top: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  footer {
+    margin-top: 36px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <div class="badge-bar">
+      <span class="badge badge-primary">生物概念查證</span>
+      <span class="badge">原文書精確對照</span>
+      <span class="badge">臺灣審定術語</span>
+    </div>
+    <h1>染色質與染色體的本質定義與原文對照</h1>
+    <div class="subtitle">考證文獻：Lodish 9e、Alberts ECB6、Cox 2e、Becker 10e、Weaver 5e、Pierce 7e、Brooker 8e</div>
+  </header>
+
+  <h2>一、核心概念總覽</h2>
+  <div class="grid-cards">
+    <!-- 染色質 -->
+    <div class="summary-card">
+      <div class="summary-title">
+        <span>染色質</span>
+        <span class="summary-subtitle">Chromatin</span>
+      </div>
+      <div class="summary-item"><strong>本質層次：</strong>生化複合物／材料層次（Substance）</div>
+      <div class="summary-item"><strong>原文核心：</strong>Complex of DNA and proteins（DNA 與組蛋白及非組蛋白之複合物）。</div>
+      <div class="summary-item"><strong>存在時機：</strong>全程存在。為構成染色體的物質基礎，並非特定時期才出現。</div>
+    </div>
+    <!-- 染色體 -->
+    <div class="summary-card">
+      <div class="summary-title">
+        <span>染色體</span>
+        <span class="summary-subtitle">Chromosome</span>
+      </div>
+      <div class="summary-item"><strong>本質層次：</strong>離散遺傳與結構實體（Structural Unit）</div>
+      <div class="summary-item"><strong>原文核心：</strong>A single large DNA molecule and its associated proteins（單一連續大型 DNA 及其包裝蛋白）。</div>
+      <div class="summary-item"><strong>存在時機：</strong>全程存在。間期呈伸展瀰散態；分裂期凝縮為光鏡下可見實體。</div>
+    </div>
+  </div>
+
+  <h2>二、經典教科書原文段落考證</h2>
+
+  <!-- 1. Lodish -->
+  <div class="book-card">
+    <div class="book-header">
+      <div class="book-title">1. 《Molecular Cell Biology》（Lodish 9e）</div>
+      <div class="book-meta">Chapter 7: Genes, Chromatin, and Chromosomes</div>
+    </div>
+    <div class="book-body">
+      <div class="quote-entry">
+        <div class="quote-label">染色質與染色體的核心區分（Section 7.0）</div>
+        <div class="en-box">
+          "The chapter is organized around two major topics: (1) the organization and evolution of genetic information and (2) the structure and function of chromatin and chromosomes; the former being the complex of nuclear DNA and abundant nuclear proteins, and the latter being those structures that condense and become visible by light microscopy during mitosis."
+        </div>
+        <div class="zh-box">
+          「本章圍繞兩大主題開展：(1) 遺傳資訊的組織與演化，以及 (2) 染色質與染色體的結構與功能；<strong>前者（染色質）是細胞核 DNA 與豐富細胞核蛋白質的複合體</strong>，而<strong>後者（染色體）則是在有絲分裂期間凝縮、並能在光學顯微鏡下觀察到的結構</strong>。」
+        </div>
+      </div>
+
+      <div class="quote-entry">
+        <div class="quote-label">染色質的實體與觀察狀態（Section 7.0）</div>
+        <div class="en-box">
+          "In eukaryotes, the complex of DNA and the proteins that bind and organize the DNA is called chromatin. During mitosis, chromatin can be visualized by light microscopy as individual chromosomes."
+        </div>
+        <div class="zh-box">
+          「在真核生物中，DNA 與結合並組織 DNA 的蛋白質所構成的複合體稱為<strong>染色質</strong>。在有絲分裂期間，染色質可在光學顯微鏡下被觀察為個別的<strong>染色體</strong>。」
+        </div>
+      </div>
+
+      <div class="quote-entry">
+        <div class="quote-label">染色體的構成基礎（Figure 7-1 Legend）</div>
+        <div class="en-box">
+          "Each chromosome consists of a single, long molecule of DNA (as long as 280 Mb in humans), organized into nucleosomes that fold and interact to generate various levels of chromatin condensation... The combination of a DNA molecule, histone proteins, and nonhistone proteins is called chromatin."
+        </div>
+        <div class="zh-box">
+          「每一條染色體由單一條長 DNA 分子構成...組織成核小體並摺疊產生各層級的染色質凝縮。<strong>DNA 分子、組蛋白與非組蛋白蛋白質三者的組合，就稱為染色質。</strong>」
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Alberts -->
+  <div class="book-card">
+    <div class="book-header">
+      <div class="book-title">2. 《Essential Cell Biology》（Alberts ECB6）</div>
+      <div class="book-meta">Chapter 5: DNA and Chromosomes</div>
+    </div>
+    <div class="book-body">
+      <div class="quote-entry">
+        <div class="quote-label">染色質與染色體的內文定義（Section 5.1）</div>
+        <div class="en-box">
+          "In eukaryotes, such as ourselves, nuclear DNA is distributed among a set of different chromosomes... Each of these chromosomes consists of a single, enormously long, linear DNA molecule associated with proteins that fold and pack the fine thread of DNA into a more compact structure. This complex of DNA and protein is called chromatin."
+        </div>
+        <div class="zh-box">
+          「在真核生物中，細胞核 DNA 分配在一組不同的染色體中...每一條染色體都由一條極長、線性的單一 DNA 分子所組成，並與摺疊且包裝細緻 DNA 絲的蛋白質結合。<strong>這種 DNA 與蛋白質的複合體稱為染色質。</strong>」
+        </div>
+      </div>
+
+      <div class="quote-entry">
+        <div class="quote-label">辭彙表正式定義（Glossary）</div>
+        <div class="en-box">
+          "chromatin: Complex of DNA and proteins that makes up the chromosomes in a eukaryotic cell."
+        </div>
+        <div class="zh-box">
+          「<strong>染色質</strong>：構成真核細胞染色體的 DNA 與蛋白質複合體。」
+        </div>
+      </div>
+
+      <div class="quote-entry">
+        <div class="quote-label">未分裂細胞中的染色體狀態（Figure 5-1 Legend）</div>
+        <div class="en-box">
+          "The DNA, which is labeled with a fluorescent dye, is packaged into multiple chromosomes; these become visible as distinct structures only when they condense in preparation for cell division... The cell on the right, which is not dividing, contains the identical chromosomes, but they cannot be distinguished as individual entities because the DNA is in a much more extended conformation at this phase in the cell’s division cycle."
+        </div>
+        <div class="zh-box">
+          「DNA 包裝成多條染色體；只有當染色體為分裂凝縮時才會成為可區分的結構...未分裂的細胞<strong>含有完全相同的一組染色體</strong>，但無法被區分為個別實體，因為此階段 DNA 處於遠為伸展的構形。」
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Cox -->
+  <div class="book-card">
+    <div class="book-header">
+      <div class="book-title">3. 《Molecular Biology: Principles and Practice》（Cox 2e）</div>
+      <div class="book-meta">Glossary 專有名詞辭彙表</div>
+    </div>
+    <div class="book-body">
+      <div class="quote-entry">
+        <div class="quote-label">染色質（Chromatin）詞條</div>
+        <div class="en-box">
+          "chromatin: A filamentous complex of DNA, histones, and other proteins, constituting the eukaryotic chromosome."
+        </div>
+        <div class="zh-box">
+          「<strong>染色質</strong>：由 DNA、組蛋白及其他蛋白質組成的絲狀複合體，構成真核染色體。」
+        </div>
+      </div>
+
+      <div class="quote-entry">
+        <div class="quote-label">染色體（Chromosome）詞條</div>
+        <div class="en-box">
+          "chromosome: A single large DNA molecule and its associated proteins, containing many genes; stores and transmits genetic information."
+        </div>
+        <div class="zh-box">
+          「<strong>染色體</strong>：單一大型 DNA 分子及其相關蛋白質，含有許多基因；可儲存並傳遞遺傳資訊。」
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Becker -->
+  <div class="book-card">
+    <div class="book-header">
+      <div class="book-title">4. 《Becker's World of the Cell》（Becker 10e）</div>
+      <div class="book-meta">Chapter 16: The Structural Basis of Cellular Information</div>
+    </div>
+    <div class="book-body">
+      <div class="quote-entry">
+        <div class="quote-label">真核 DNA 包裝與個別染色體</div>
+        <div class="en-box">
+          "Each eukaryotic chromosome contains a single, linear DNA molecule of enormous size... When bound to these proteins, the DNA is known as chromatin, which forms fibers 10–30 nm in diameter that are normally dispersed throughout the nucleus. At the time of cell division (and in a few other situations), these fibers condense and fold into much larger, compact structures that become recognizable as individual chromosomes."
+        </div>
+        <div class="zh-box">
+          「每一條真核染色體都含有一條巨大的單一線性 DNA 分子...當 DNA 與這些蛋白質結合時稱為<strong>染色質</strong>，平時分散在核中。細胞分裂時，這些纖維進一步凝縮摺疊，成為可識別的個別<strong>染色體</strong>。」
+        </div>
+      </div>
+      <div class="quote-entry">
+        <div class="quote-label">染色體的實體功能定義</div>
+        <div class="en-box">
+          "...and the chromosome as the physical means of packaging DNA within cells."
+        </div>
+        <div class="zh-box">
+          「...<strong>染色體</strong>是細胞內包裝 DNA 的物理實體形式。」
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Weaver & Pierce / Brooker -->
+  <div class="book-card">
+    <div class="book-header">
+      <div class="book-title">5. 《Weaver 5e》與遺傳學權威教材（Pierce 7e / Brooker 8e）</div>
+      <div class="book-meta">分生與遺傳學視角考證</div>
+    </div>
+    <div class="book-body">
+      <div class="quote-entry">
+        <div class="quote-label">染色質是物質原料（Weaver 5e, Ch13）</div>
+        <div class="en-box">
+          "Eukaryotic genes do not exist naturally as naked DNA molecules, or even as DNA molecules bound only to transcription factors. Instead, they are complexed with an equal mass of other proteins to form a substance known as chromatin."
+        </div>
+        <div class="zh-box">
+          「真核基因在自然狀態下並非以裸露 DNA 存在，而是與等質量的其他蛋白質結合成一種稱為<strong>染色質</strong>的物質。」
+        </div>
+      </div>
+
+      <div class="quote-entry">
+        <div class="quote-label">染色質是染色體的原料（Pierce 7e, Ch02）</div>
+        <div class="en-box">
+          "This complex of DNA and histone proteins, called chromatin, is the stuff of eukaryotic chromosomes."
+        </div>
+        <div class="zh-box">
+          「這種 DNA 與組蛋白的複合物稱為<strong>染色質</strong>，是構成真核染色體的物質原料（the stuff）。」
+        </div>
+      </div>
+
+      <div class="quote-entry">
+        <div class="quote-label">染色體在間期的結構（Brooker 8e, Ch10）</div>
+        <div class="en-box">
+          "The DNA-protein complex found within eukaryotic chromosomes is termed chromatin... In this section, we will consider the structures of chromosomes during interphase."
+        </div>
+        <div class="zh-box">
+          「真核染色體內的 DNA-蛋白質複合體被稱為<strong>染色質</strong>...在本節中我們將探討<strong>染色體在間期時的結構</strong>。」
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>三、生物教學關鍵釐清</h2>
+  <div class="insight-card">
+    <div class="insight-title">常見迷思剖析：平時叫染色質，分裂期才叫染色體？</div>
+    
+    <div class="insight-point">
+      <strong>1. 材料層次 vs. 實體層次（層次範疇錯誤）：</strong><br>
+      • <strong>染色質</strong>是不可數的名詞／材料，如同「毛線」或「鋼筋混凝土」。<br>
+      • <strong>染色體</strong>是離散可數的結構單元，如同「毛衣」或「大樓」。<br>
+      若說「染色質在分裂期變成染色體」，語病在於將材料名稱與物體名稱放在同一個維度互相替代。
+    </div>
+
+    <div class="insight-point">
+      <strong>2. 間期細胞核內染色體依然完整存在：</strong><br>
+      未分裂細胞中擁有完整且數目恆定的染色體。現代 3C/Hi-C 技術與 FISH 螢光標定證實，間期核內的每條染色體都佔據專屬的「染色體領域」（chromosome territories），彼此並不混雜成一團，只是構形處於伸展、解凝縮的「染色質纖維狀態」。
+    </div>
+
+    <div class="callout-mnemo">
+      💡 教學精確口訣：<br>
+      「染色體是遺傳實體，染色質是成分材料；間期染色體伸展如絲，分裂期染色體凝縮成棒。」
+    </div>
+  </div>
+
+  <footer>
+    Ze-Agent 概念考證庫 • 繁體中文與審定名詞遵循臺灣教育部規範
+  </footer>
+
+</div>
+
+</body>
+</html>
