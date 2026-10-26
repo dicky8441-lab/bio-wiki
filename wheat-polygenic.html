@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小麥穀粒顏色多基因遺傳｜經典考題深度解析</title>
+  
+  <!-- KaTeX for Math Equations -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+          onload="renderMathInElement(document.body, {
+            delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+            ],
+            throwOnError: false
+          });"></script>
+
+  <!-- Chart.js for Interactive Distribution -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --primary: #991b1b; /* Wheat Kernel Dark Red */
+      --primary-light: #fef2f2;
+      --accent: #b45309;  /* Golden Wheat */
+      --accent-light: #fef3c7;
+      --highlight: #0284c7;
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.08);
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.7;
+      padding: 24px 16px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .badge-bar {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .badge {
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+    .badge.red {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary);
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 8px;
+    }
+
+    .question-box {
+      background: #fafaf9;
+      border-left: 4px solid var(--accent);
+      padding: 16px 20px;
+      border-radius: 4px 8px 8px 4px;
+      margin-bottom: 16px;
+      font-size: 0.98rem;
+    }
+
+    .question-box p {
+      margin-bottom: 8px;
+    }
+
+    .translation-box {
+      background: #f8fafc;
+      border-left: 4px solid var(--highlight);
+      padding: 16px 20px;
+      border-radius: 4px 8px 8px 4px;
+      font-size: 0.98rem;
+    }
+
+    .answer-hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .answer-tile {
+      background: linear-gradient(135deg, #ffffff 0%, #fff7f7 100%);
+      border: 2px solid #fecaca;
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .answer-tile .q-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .answer-tile .ans-value {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .answer-tile .ans-sub {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Wheat Colors Interactive Scale */
+    .wheat-scale {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .kernel-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: #f1f5f9;
+      transition: all 0.2s;
+    }
+
+    .kernel-row:hover {
+      transform: translateX(4px);
+    }
+
+    .kernel-swatch {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.15);
+      flex-shrink: 0;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);
+    }
+
+    .kernel-info {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 320px;
+      margin-top: 20px;
+    }
+
+    .step-box {
+      margin-bottom: 20px;
+    }
+
+    .step-box h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    table.custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 0.92rem;
+    }
+
+    table.custom-table th, table.custom-table td {
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      text-align: center;
+    }
+
+    table.custom-table th {
+      background-color: #f1f5f9;
+      font-weight: 600;
+    }
+
+    table.custom-table tr.highlight-tr {
+      background-color: #fef2f2;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .callout {
+      background: #f0fdf4;
+      border-left: 4px solid #16a34a;
+      padding: 16px 20px;
+      border-radius: 4px 8px 8px 4px;
+      margin: 20px 0;
+      font-size: 0.95rem;
+    }
+
+    .callout-title {
+      font-weight: 700;
+      color: #166534;
+      margin-bottom: 6px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 48px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      padding-bottom: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <nav style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:24px; padding:10px 16px; background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius); font-size:0.88rem; box-shadow:var(--shadow);">
+      <span style="font-weight:700; color:var(--text-muted); display:flex; align-items:center;">📚 Bio-Wiki 專題：</span>
+      <a href="index.html" style="text-decoration:none; color:var(--text-muted); font-weight:600; padding:4px 10px; border-radius:6px;">1. 染色質與染色體本質</a>
+      <a href="wheat-polygenic.html" style="text-decoration:none; color:var(--primary); font-weight:700; padding:4px 10px; border-radius:6px; background:var(--primary-light);">2. 小麥多基因累加模型 (Campbell 14e)</a>
+    </nav>
+
+    <header>
+      <div class="badge-bar">
+        <span class="badge">遺傳學經典題型</span>
+        <span class="badge red">多基因遺傳 (Polygenic)</span>
+        <span class="badge">數量遺傳學 (Quantitative)</span>
+        <span class="badge">Campbell Biology Ch.14</span>
+      </div>
+      <h1>小麥穀粒顏色遺傳｜累加模型解析</h1>
+      <p class="subtitle">赫爾曼·尼爾森-埃爾（Herman Nilsson-Ehle, 1909）經典實驗計算與第一性原理</p>
+    </header>
+
+    <!-- 題目對照卡片 -->
+    <section class="card">
+      <div class="card-title">📖 題目英中對照</div>
+      
+      <div class="question-box">
+        <p><strong>Original Question:</strong></p>
+        <p>3. The inheritance of grain color in wheat follows the additive model of polygenic inheritance. Assume that the grain color is controlled by 3 genes. The genotype of dark red is <em>AABBCC</em> and the genotype of white is <em>aabbcc</em>. In the parental generation, a white-grained variety is crossed with a dark red-grained variety.</p>
+        <p><strong>(1) How many classes, ranging from white to dark red, are expected in F2 generation? (2%)</strong><br>
+        <strong>(2) What is the expected frequency of "intermediate red" phenotype (same color in F1) in F2? (4%)</strong></p>
+      </div>
+
+      <div class="translation-box">
+        <p><strong>中文翻譯：</strong></p>
+        <p>小麥穀粒顏色的遺傳遵循多基因遺傳的<strong>累加模式（additive model）</strong>。假設穀粒顏色由 3 個基因座控制，深紅色的基因型為 <em>AABBCC</em>，白色的基因型為 <em>aabbcc</em>。在親代（P）中，將白色品種與深紅色品種進行雜交：</p>
+        <p><strong>(1) 在 $F_2$ 世代中，從白色到深紅色預期會出現幾種表現型類別（classes）？（2%）</strong><br>
+        <strong>(2) 在 $F_2$ 世代中，預期出現與 $F_1$ 顏色相同的「中等紅（intermediate red）」表現型的機率為何？（4%）</strong></p>
+      </div>
+
+      <!-- 核心答案 -->
+      <div class="answer-hero">
+        <div class="answer-tile">
+          <div class="q-label">第 (1) 小題答案</div>
+          <div class="ans-value">7 種</div>
+          <div class="ans-sub">類別公式：$2n + 1 = 2(3) + 1$</div>
+        </div>
+        <div class="answer-tile">
+          <div class="q-label">第 (2) 小題答案</div>
+          <div class="ans-value">20 / 64</div>
+          <div class="ans-sub">約分 $5/16$ 或 $31.25\%$</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 互動圖表與表現型階梯 -->
+    <section class="card">
+      <div class="card-title">📊 $F_2$ 世代 7 階表現型頻率分佈圖</div>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">
+        在累加模式中，每一對基因的顯性等位基因（A, B, C）均貢獻等量的色素沉澱。$F_2$ 表現型頻率遵循二項式展開 $(A+a)^6$ 的係數：
+      </p>
+
+      <div class="chart-container">
+        <canvas id="polygenicChart"></canvas>
+      </div>
+
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>顯性等位基因數</th>
+            <th>表現型（顏色）</th>
+            <th>組合數</th>
+            <th>$F_2$ 預期頻率</th>
+            <th>百分比</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>6</td>
+            <td>深紅 (Dark Red)</td>
+            <td>$\binom{6}{6} = 1$</td>
+            <td>$1 / 64$</td>
+            <td>1.56%</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>中深紅</td>
+            <td>$\binom{6}{5} = 6$</td>
+            <td>$6 / 64$</td>
+            <td>9.38%</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>紅</td>
+            <td>$\binom{6}{4} = 15$</td>
+            <td>$15 / 64$</td>
+            <td>23.44%</td>
+          </tr>
+          <tr class="highlight-tr">
+            <td>★ 3</td>
+            <td>中等紅 (Intermediate Red, 同 F1)</td>
+            <td>$\binom{6}{3} = 20$</td>
+            <td>20 / 64</td>
+            <td>31.25%</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>淺紅</td>
+            <td>$\binom{6}{2} = 15$</td>
+            <td>$15 / 64$</td>
+            <td>23.44%</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>極淺紅</td>
+            <td>$\binom{6}{1} = 6$</td>
+            <td>$6 / 64$</td>
+            <td>9.38%</td>
+          </tr>
+          <tr>
+            <td>0</td>
+            <td>白 (White)</td>
+            <td>$\binom{6}{0} = 1$</td>
+            <td>$1 / 64$</td>
+            <td>1.56%</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 第一性原理與原文書深度解析 -->
+    <section class="card">
+      <div class="card-title">🔬 原文書深度解析與第一性原理</div>
+
+      <div class="step-box">
+        <h3>1. 為什麼表現型階梯數是 $2n + 1$？</h3>
+        <p>
+          當一個數量性狀由 $n$ 對各自獨立分配的同源染色體基因座（非連鎖）控制時：
+        </p>
+        <ul>
+          <li>每個個體在 $n$ 個基因座上總共有 $2n$ 個等位基因位置。</li>
+          <li>在累加模式（Additive Model）下，顯性等位基因具有**基因劑量效應（Gene Dosage Effect）**，隱性等位基因此處無貢獻。</li>
+          <li>顯性等位基因的可能持有數，從完全沒有（0 個）到全部填滿（$2n$ 個），可能的情況共有：
+            $$0, 1, 2, \dots, 2n \implies (2n + 1) \text{ 種表現型}$$
+          </li>
+          <li>本題 $n = 3$，因此類別數為 $2(3) + 1 = 7$ 種。</li>
+        </ul>
+      </div>
+
+      <div class="step-box">
+        <h3>2. 為什麼「中等紅」的機率是 $20/64$？</h3>
+        <p>
+          在 $F_1 \times F_1$ 雜交（$AaBbCc \times AaBbCc$）中：
+        </p>
+        <ul>
+          <li>親代配子結合共有 $4 \times 4 \times 4 = 64$ 種可能組合。</li>
+          <li>$F_1$（$AaBbCc$）具有 3 個顯性等位基因（A, B, C），因此其顏色為「中等紅」。</li>
+          <li>要在 6 個等位基因位點中，恰好選出 3 個是顯性等位基因，其數學本質等同於二項式分佈：
+            $$\binom{6}{3} = \frac{6 \times 5 \times 4}{3 \times 2 \times 1} = 20$$
+          </li>
+          <li>因此在 64 種受精組合中，恰有 20 種呈現中等紅，機率為：
+            $$\text{Probability} = \frac{20}{64} = \frac{5}{16} = 31.25\%$$
+          </li>
+        </ul>
+      </div>
+
+      <div class="callout">
+        <div class="callout-title">💡 教學亮點：從離散階梯到平滑常態分佈</div>
+        <p>
+          <strong>為什麼自然界的數量性狀（如人類身高、膚色）不是階梯狀，而是光滑的鐘形曲線？</strong><br>
+          1. <strong>更多基因座參與</strong>：當控制基因增加到 10 對時，表型類別高達 21 階，直方圖已極為接近連續曲線。<br>
+          2. <strong>環境效應疊加（Environmental Variation）</strong>：營養、日照、荷爾蒙等外在因子，會使每一種特定基因型的表型產生微幅波動，眾多微幅波動相互填補後，便將原本離散的階梯平滑化為連續的常態分佈（Gaussian Bell Curve）。
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <p>高中生物教師甄試 & 醫學遺傳學專題知識庫</p>
+      <p>Deployed via GitHub Pages · Source: <em>Campbell Biology</em> & <em>Pierce Genetics</em></p>
+    </footer>
+  </div>
+
+  <script>
+    // Initialize Chart.js
+    const ctx = document.getElementById('polygenicChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [
+          '0 顯性\n(白)',
+          '1 顯性\n(極淺紅)',
+          '2 顯性\n(淺紅)',
+          '3 顯性 ★\n(中等紅)',
+          '4 顯性\n(紅)',
+          '5 顯性\n(中深紅)',
+          '6 顯性\n(深紅)'
+        ],
+        datasets: [{
+          label: 'F2 組合頻率 ( /64 )',
+          data: [1, 6, 15, 20, 15, 6, 1],
+          backgroundColor: [
+            '#f1f5f9',
+            '#fee2e2',
+            '#fca5a5',
+            '#ef4444', // Highlight F1 Intermediate Red
+            '#dc2626',
+            '#b91c1c',
+            '#7f1d1d'
+          ],
+          borderColor: [
+            '#cbd5e1',
+            '#f87171',
+            '#ef4444',
+            '#991b1b',
+            '#991b1b',
+            '#7f1d1d',
+            '#450a0a'
+          ],
+          borderWidth: 1.5,
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            callbacks: {
+              afterLabel: function(context) {
+                const ratios = ['1/64 (1.56%)', '6/64 (9.38%)', '15/64 (23.44%)', '20/64 (31.25%) ★ F1表型', '15/64 (23.44%)', '6/64 (9.38%)', '1/64 (1.56%)'];
+                return '頻率: ' + ratios[context.dataIndex];
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 24,
+            title: {
+              display: true,
+              text: '組合數 (總數 64)'
+            },
+            grid: {
+              color: '#f1f5f9'
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
