@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>啟動子（Promoter）、TATA 匣與 DNA 甲基化｜分子機制、演化意義與跨版本考證</title>
+<style>
+  :root {
+    --bg-primary: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-quote: #f1f5f9;
+    --bg-tag: #e2e8f0;
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    --primary: #2563eb;
+    --primary-light: #eff6ff;
+    --primary-border: #bfdbfe;
+    --accent: #0284c7;
+    --accent-light: #e0f2fe;
+    --border-color: #e2e8f0;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.08);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg-primary: #0f172a;
+      --bg-card: #1e293b;
+      --bg-quote: #172554;
+      --bg-tag: #334155;
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --primary: #60a5fa;
+      --primary-light: #1e3a8a;
+      --primary-border: #2563eb;
+      --accent: #38bdf8;
+      --accent-light: #0c4a6e;
+      --border-color: #334155;
+      --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.75;
+    font-size: 16px;
+    padding: 16px 12px 60px 12px;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  /* Navigation Bar */
+  nav.wiki-nav {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    padding: 10px 14px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    font-size: 0.88rem;
+    box-shadow: var(--shadow);
+  }
+
+  nav.wiki-nav span.nav-title {
+    font-weight: 700;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+  }
+
+  nav.wiki-nav a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+
+  nav.wiki-nav a:hover {
+    color: var(--primary);
+    background: var(--primary-light);
+  }
+
+  nav.wiki-nav a.active {
+    color: var(--primary);
+    background: var(--primary-light);
+    font-weight: 700;
+  }
+
+  /* Page Jump Bar */
+  .jump-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+    padding: 8px 12px;
+    background: var(--bg-quote);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 0.84rem;
+  }
+
+  .jump-bar span {
+    font-weight: 700;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+  }
+
+  .jump-bar a {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  .jump-bar a:hover {
+    background: var(--primary-light);
+  }
+
+  /* Header */
+  header {
+    margin-bottom: 28px;
+    padding: 8px 4px;
+  }
+
+  .badge-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+  }
+
+  .badge-primary {
+    background: var(--primary-light);
+    color: var(--primary);
+    border: 1px solid var(--primary-border);
+  }
+
+  h1 {
+    font-size: 25px;
+    line-height: 1.35;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* Section Title */
+  h2 {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 36px 0 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    scroll-margin-top: 20px;
+  }
+
+  h2::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 20px;
+    background: var(--primary);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  h3 {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 24px 0 12px 0;
+    scroll-margin-top: 20px;
+  }
+
+  /* Core Takeaway Card */
+  .hero-card {
+    background: var(--bg-card);
+    border-left: 4px solid var(--primary);
+    border-top: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-md);
+  }
+
+  .hero-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .hero-text {
+    font-size: 15px;
+    line-height: 1.72;
+    color: var(--text-primary);
+  }
+
+  .hero-text ul, .hero-text ol {
+    margin: 8px 0 0 20px;
+  }
+
+  .hero-text li {
+    margin-bottom: 6px;
+  }
+
+  /* Key Takeaway Grid */
+  .grid-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  @media (min-width: 640px) {
+    .grid-cards {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .summary-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    box-shadow: var(--shadow);
+  }
+
+  .summary-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .summary-badge {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--primary-light);
+    color: var(--primary);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .summary-item {
+    font-size: 14px;
+    margin-bottom: 8px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+  }
+
+  .summary-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .summary-item strong {
+    color: var(--text-primary);
+  }
+
+  /* Table Style */
+  .table-wrapper {
+    overflow-x: auto;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin: 16px 0 24px 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    text-align: left;
+  }
+
+  th {
+    background: var(--bg-quote);
+    padding: 12px 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    line-height: 1.65;
+    vertical-align: top;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  td strong {
+    color: var(--text-primary);
+  }
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.9em;
+    background: var(--bg-quote);
+    color: var(--primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  /* Book Cards & Quote Entries */
+  .book-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    margin-bottom: 18px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .book-header {
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .book-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .book-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .book-body {
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .quote-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .quote-label {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .quote-label::before {
+    content: "•";
+    color: var(--primary);
+    font-size: 16px;
+  }
+
+  .en-box {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 10px 14px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    font-style: italic;
+    word-break: break-word;
+  }
+
+  .zh-box {
+    padding: 4px 4px 0 4px;
+    font-size: 14.5px;
+    line-height: 1.72;
+    color: var(--text-primary);
+    word-break: break-word;
+  }
+
+  .zh-box strong {
+    color: var(--primary);
+    background: var(--primary-light);
+    padding: 0 4px;
+    border-radius: 3px;
+  }
+
+  /* Educational Insights Box */
+  .insight-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+  }
+
+  .insight-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .insight-point {
+    margin-bottom: 14px;
+    font-size: 14.5px;
+    line-height: 1.72;
+    color: var(--text-secondary);
+  }
+
+  .insight-point:last-child {
+    margin-bottom: 0;
+  }
+
+  .insight-point strong {
+    color: var(--text-primary);
+  }
+
+  .callout-mnemo {
+    margin-top: 16px;
+    padding: 14px 16px;
+    background: var(--primary-light);
+    border-left: 4px solid var(--primary);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.7;
+  }
+
+  footer {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Bio-Wiki Navigation Bar -->
+  <nav class="wiki-nav">
+    <span class="nav-title">📚 Bio-Wiki 專題：</span>
+    <a href="index.html">1. 染色質與染色體本質</a>
+    <a href="wheat-polygenic.html">2. 小麥多基因累加模型 (Campbell 14e)</a>
+    <a href="spermatogonia-hole.html">3. 精原細胞與生精歷程 (Hole 15e)</a>
+    <a href="griffith-transformation.html">4. Griffith 轉形作用</a>
+    <a href="promoter-tata-box.html" class="active">5. 啟動子、TATA 匣與甲基化</a>
+  </nav>
+
+  <!-- In-page Jump Bar -->
+  <div class="jump-bar">
+    <span>🧭 本頁快速跳轉：</span>
+    <a href="#q1">Q1 複製 vs. 轉錄（啟動子／起始序列）</a>
+    <a href="#q2">Q2 啟動子是雙股還是單股？</a>
+    <a href="#q3">Q3 解旋難易度與 DNA 甲基化</a>
+    <a href="#q4">Q4 TATA 匣機制與三大演化意義</a>
+    <a href="#sec-textbooks">原文書原句考證</a>
+    <a href="#sec-hs-7ed">高中 7 版比較表</a>
+    <a href="#sec-teaching">課堂說法與教甄判準</a>
+  </div>
+
+  <header>
+    <div class="badge-bar">
+      <span class="badge badge-primary">遺傳與分子生物學</span>
+      <span class="badge">跨版本教材考證</span>
+      <span class="badge">TATA 匣與三域演化</span>
+      <span class="badge">表觀遺傳與 DNA 甲基化</span>
+      <span class="badge">臺灣審定術語</span>
+    </div>
+    <h1>啟動子（Promoter）、TATA 匣與 DNA 甲基化：分子機制、演化意義與跨版本考證</h1>
+    <div class="subtitle">
+      考證文獻：Campbell 13e、Lodish 9e、Alberts ECB 6e、Weaver 5e、Brooker 8e、Stryer 10e、Lehninger 8e、Pierce 7e、Becker 10e、Cox 2e、Prescott 12e，以及臺灣高中 7 版生物教材（三民、全華、南一、康熹、泰宇、翰林、龍騰）
+    </div>
+  </header>
+
+  <h2>一、四大核心問題與結論總覽</h2>
+
+  <!-- Q1 -->
+  <h3 id="q1">問題一：DNA 複製 vs. 轉錄成 RNA，哪一個有「啟動子」（或叫「起始序列」）？</h3>
+
+  <div class="hero-card">
+    <div class="hero-title">💡 核心結論 1：「啟動子」專屬於轉錄（合成 RNA）；「起始序列」則是跨在複製與轉錄之間的混淆根源</div>
+    <div class="hero-text">
+      <ul>
+        <li><strong>只有「轉錄（合成 RNA）」才有「啟動子（promoter）」</strong>：啟動子是位於基因（轉錄單位）上游的一段特定雙股 DNA 序列，功能是讓 <strong>RNA 聚合酶</strong>（原核搭配 σ 因子；真核搭配通用轉錄因子）辨識、附著，並決定轉錄起點與哪一股作為<strong>模板股</strong>。轉錄過程<strong>不需要引子（primer）</strong>。</li>
+        <li><strong>「DNA 複製」沒有啟動子，它有的是「複製起點（origin of replication）」與「RNA 引子（primer）」</strong>：但為什麼「起始序列」這個詞會讓人混淆？因為在臺灣審定名詞與教材中剛好跨在兩邊：
+          <ol>
+            <li><strong>在 DNA 複製中</strong>：國家教育研究院《生命科學名詞》將 <code>origin of replication</code> 審定譯為「<strong>複製起始序列</strong>」（並將 <code>ORC</code> 譯為「<strong>起始序列辨識複合體</strong>」）。高中 7 版教材中，多數版本稱「複製起點」或「複製起始點」，唯獨<strong>南一版選修生物 I 課本（p.112）</strong>直接使用「<strong>複製起始序列</strong>」一詞；而大學原文書譯本（Alberts ECB 6e、Lehninger 8e）更常在內文將其簡稱為「<strong>起始序列</strong>」。</li>
+            <li><strong>在轉錄中</strong>：部分高中課本（如<strong>翰林版選修生物 I 圖 4-5</strong>）把轉錄終點處的終止子標為「<strong>終止序列</strong>」，學生在對稱記憶時很容易把前端的啟動子俗稱為「起始序列」；少數大學生化教材圖說（如 Stryer 10e 圖 9.13）也會描述性寫出「轉錄起始序列（啟動子）」。</li>
+          </ol>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>名詞（中／英）</th>
+          <th>所屬生理過程</th>
+          <th>化學本質與股數</th>
+          <th>在過程中的核心功能</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>啟動子</strong><br><code>promoter</code></td>
+          <td><strong>轉錄</strong><br>（DNA → RNA）</td>
+          <td><strong>雙股 DNA</strong> 上的特定區段（常位於基因上游，本身通常不被轉錄）</td>
+          <td>供 RNA 聚合酶（及轉錄因子）辨識、附著，決定轉錄方向與哪一股當<strong>模板股</strong>，並在此局部解開雙股</td>
+        </tr>
+        <tr>
+          <td><strong>複製起點／複製起始點／複製起始序列</strong><br><code>origin of replication, ori</code></td>
+          <td><strong>DNA 複製</strong><br>（DNA → DNA）</td>
+          <td><strong>雙股 DNA</strong> 上的特定區段（富含 A–T 鹼基對，如大腸桿菌 <em>oriC</em> 長 245 bp）</td>
+          <td>供複製起始蛋白質（如細菌 DnaA、真核 ORC 起始序列辨識複合體）與解旋酶辨識並解開雙股，形成複製泡</td>
+        </tr>
+        <tr>
+          <td><strong>RNA 引子</strong><br><code>RNA primer</code></td>
+          <td><strong>DNA 複製</strong><br>（DNA → DNA）</td>
+          <td><strong>單股 RNA</strong> 短片段（由引子酶／導引酶新合成，與模板股互補配對）</td>
+          <td>提供游離的 <strong>3′-OH 端</strong>，讓無法從零開始合成的 DNA 聚合酶往下接去氧核糖核苷酸（轉錄則不需要引子）</td>
+        </tr>
+        <tr>
+          <td><strong>起始密碼子／轉譯起始序列</strong><br><code>start codon AUG / Shine–Dalgarno / Kozak</code></td>
+          <td><strong>轉譯</strong><br>（mRNA → 蛋白質）</td>
+          <td><strong>單股 mRNA</strong> 上的核苷酸序列</td>
+          <td>供核糖體與起始 tRNA 辨識，決定多肽鏈合成的起點與正確讀框</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Q2 -->
+  <h3 id="q2">問題二：啟動子是一段雙股 DNA 片段，還是單股 DNA？</h3>
+
+  <div class="hero-card">
+    <div class="hero-title">💡 核心結論 2：啟動子（與複製起始序列）在染色體結構上，本質都是一段「雙股 DNA（dsDNA）」片段</div>
+    <div class="hero-text">
+      啟動子的長度以「鹼基對（bp）」計算（通常延伸數十個鹼基對）。在轉錄起始時，它會經歷<strong>「先辨識雙股（封閉複合體）→ 後局部解開成單股（開放複合體／轉錄泡）」</strong>的兩階段機制。
+    </div>
+  </div>
+
+  <div class="grid-cards">
+    <div class="summary-card">
+      <div class="summary-title">
+        階段一：辨識雙股 DNA
+        <span class="summary-badge">封閉複合體 Closed Complex</span>
+      </div>
+      <div class="summary-item"><strong>結構狀態：</strong>轉錄開始前，染色體 DNA 是閉合的雙股螺旋。</div>
+      <div class="summary-item"><strong>辨識方式：</strong>RNA 聚合酶的 σ 因子（利用螺旋—轉角—螺旋 HTH 基序伸入雙螺旋<strong>大溝 major groove</strong>）或真核 TBP（結合<strong>小溝 minor groove</strong>）無須先解開雙股，就能接觸鹼基對外露的化學基團，辨識並附著在雙股啟動子上。</div>
+      <div class="summary-item"><strong>決定方向與模板股：</strong>雙股啟動子序列具有<strong>不對稱性（極性 polarity）</strong>（如 −35 區到 −10 區的特定 5′→3′ 順序），使 RNA 聚合酶只能朝單一方向坐上去，進而決定只用 3′→5′ 走向的那一股當<strong>模板股</strong>。</div>
+    </div>
+
+    <div class="summary-card">
+      <div class="summary-title">
+        階段二：局部解旋露出單股
+        <span class="summary-badge">開放複合體 Open Complex</span>
+      </div>
+      <div class="summary-item"><strong>結構狀態：</strong>雙股 DNA 局部熔解約 12–18 bp，形成<strong>轉錄泡（transcription bubble）</strong>。</div>
+      <div class="summary-item"><strong>解旋位置：</strong>發生在啟動子內富含 A–T 鹼基對的區域（如原核 −10 區 <code>5′-TATAAT-3′</code> 或真核 <code>TATA box</code>）。</div>
+      <div class="summary-item"><strong>兩股分工：</strong>解開後，細菌 σ 因子的保守芳香族胺基酸會抓住並穩定「單股非模板股（編碼股）」，讓「單股模板股」進入聚合酶活性位點，與核糖核苷三磷酸（rNTP）進行互補配對合成單股 RNA。</div>
+    </div>
+  </div>
+
+  <div class="insight-card">
+    <div class="insight-title">🔍 為什麼很多人（甚至讀課本時）會誤以為啟動子是「單股 DNA」？三大原因剖析</div>
+    <div class="insight-point">
+      <strong>1. 分子生物學的「單股書寫慣例（convention）」：</strong><br>
+      課本或考題寫出啟動子序列時（如原核 −35 區 <code>5′-TTGACA-3′</code>、−10 區 <code>5′-TATAAT-3′</code>，或真核 <code>5′-TATAAA-3′</code>），幾乎只寫出一條單股。Pierce 7e、Becker 10e、Cox 2e 與 Lehninger 8e 皆特別提醒：這只是<strong>書寫慣例</strong>——為了省事並方便對照 RNA 序列，科學家約定俗成只寫出<strong>非模板股（編碼股，5′→3′）</strong>的序列，實際上它在雙螺旋中有互補股（如 <code>3′-ATATTA-5′</code>）配對。
+    </div>
+    <div class="insight-point">
+      <strong>2. 把「轉錄只用單股當模板股」或「單股 RNA 引子」過度類推：</strong><br>
+      高中各版課文在講完「RNA 聚合酶附著在啟動子上、解開雙股」之後，下一句一定緊接著強調「<strong>僅其中一股 DNA 會成為轉錄的模板股</strong>」，學生很容易把「模板股是單股」或複製的「單股 RNA 引子」倒推成「啟動子也是單股」。
+    </div>
+    <div class="insight-point">
+      <strong>3. 部分高中課本圖解的引線畫法或簡化色帶：</strong><br>
+      高中 7 版在畫轉錄時雖把啟動子顏色塗在上下兩股，但部分版本（如三民圖 4-1、泰宇圖 3-36）的文字引線只指到上股；到了「乳糖操縱組」單元（如南一圖 2-21、龍騰圖 4-17），又常把雙股 DNA 簡化畫成一條扁平或圓柱長條帶，容易造成單股的視覺誤解。
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <h3 id="q3">問題三：啟動子容不容易被 RNA 聚合酶解旋，和 DNA 甲基化有關係嗎？</h3>
+
+  <div class="hero-card" style="border-left-color: var(--accent);">
+    <div class="hero-title" style="color: var(--accent);">💡 核心結論 3：沒有直接因果關係！容易解旋靠「富含 A–T」；甲基化（發生在 C）是在「解旋之前」就鎖死染色質並擋住轉錄因子</div>
+    <div class="hero-text">
+      <ul>
+        <li><strong>決定雙股「容不容易解旋」的是 A–T 鹼基對比例與鹼基堆疊力</strong>：啟動子解旋區（如原核 −10 區 <code>TATAAT</code>、真核 <code>TATAAA</code>）幾乎全由 A–T 組成。因為 ① <strong>A–T 只有 2 個氫鍵</strong>（G–C 有 3 個氫鍵）、② <strong>A–T 的垂直鹼基堆疊作用力（base-stacking interactions）顯著弱於 G–C</strong>（Stryer 10e）、③ <strong><code>T–A</code> 二核苷酸步階在機械結構上最容易扭曲展開</strong>（Weaver 5e、Cox 2e）。</li>
+        <li><strong>真核 DNA 甲基化主要發生在胞嘧啶（C），而 TATA 匣根本沒有 C</strong>：脊椎動物與植物的 DNA 甲基化主要發生在 <code>5′-CG-3′</code>（CpG 島）的胞嘧啶第 5 號碳，形成 <strong>5-甲基胞嘧啶（5mC）</strong>。典型的 TATA 匣（<code>5′-TATAAA-3′</code>）完全不含胞嘧啶 C。</li>
+        <li><strong>啟動子甲基化抑制轉錄的兩大真正機制（皆發生在「解旋」步驟之前）</strong>：
+          <ol>
+            <li><strong>直接立體阻礙（大溝路障）</strong>：5mC 的甲基凸出到 DNA 雙螺旋的<strong>大溝（major groove）</strong>中，直接妨礙轉錄活化蛋白（activators）結合到啟動子。</li>
+            <li><strong>招募甲基結合蛋白與去乙醯酶，將染色質鎖成異染色質</strong>：甲基化的 CpG 島會吸引<strong>甲基-CpG 結合蛋白（如 MeCP2）</strong>，進而招募<strong>組蛋白去乙醯酶（HDAC，如 HDAC1）</strong>、組蛋白甲基轉移酶與染色質重塑因子（如 <strong>Sin3a</strong>），把核小體緊密壓縮成<strong>關閉構型（異染色質 heterochromatin）</strong>，使轉錄因子與 RNA 聚合酶連接觸啟動子 DNA 的機會都沒有！</li>
+          </ol>
+        </li>
+        <li><strong>關鍵反證（編碼區甲基化完全不阻礙 RNA 聚合酶解旋與延伸）</strong>：在脊椎動物與植物中，核心啟動子下游的<strong>基因編碼區（coding region）</strong>常含有大量甲基化胞嘧啶（5mC），但實驗證實<strong>這些 CG 甲基化完全不會減慢或阻礙 RNA 聚合酶邊解旋邊往前延伸的速度</strong>（Brooker 8e Ch15）。雖然生物物理實驗顯示 5mC 會因疏水堆疊力增加而使試管熔解溫度（<em>T</em><sub>m</sub>）微升約 0.5–1.5°C 並增加局部剛性（Severin et al., 2011; Pérez et al., 2012），但這點微小的物理穩定度根本擋不住 RNA 聚合酶與 ATP 驅動之 TFIIH（XPB 解旋酶次單元）的解旋力量！</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>比較層次（常被混淆的兩種「解開」）</th>
+          <th>染色質層次的「解開纏繞」<br>（Nucleosome Unwrapping / Chromatin Remodeling）</th>
+          <th>DNA 雙螺旋層次的「解旋」<br>（DNA Duplex Unwinding / Melting）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>物理動作本質</strong></td>
+          <td>把雙股 DNA 從<strong>組蛋白八聚體線軸</strong>上鬆開，暴露出啟動子區段（形成無核小體區 NFR / 真染色質）</td>
+          <td>打斷雙股 DNA 鹼基對之間的<strong>氫鍵與鹼基堆疊</strong>，使兩股分開形成約 12–18 bp 的單股<strong>轉錄泡</strong></td>
+        </tr>
+        <tr>
+          <td><strong>主要調控因子</strong></td>
+          <td><strong>DNA 甲基化（5mC）</strong>、<strong>MeCP2</strong>、<strong>組蛋白乙醯化（HAT）／去乙醯化（HDAC）</strong>、染色質重塑複合體</td>
+          <td>啟動子序列的 <strong>A–T 比例</strong>（如 TATA 匣／−10 區）、細菌 <strong>σ 因子</strong>、真核 <strong>TBP</strong> 與 <strong>TFIIH（XPB 解旋酶）</strong></td>
+        </tr>
+        <tr>
+          <td><strong>發生時序與結果</strong></td>
+          <td><strong>第 0 步（准入關卡）</strong>：決定轉錄因子與 RNA 聚合酶能不能靠近並接觸啟動子</td>
+          <td><strong>第 2 步（結合啟動子之後）</strong>：已附著在啟動子上的轉錄機器將雙股拉開，露出單股模板股</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Q4 -->
+  <h3 id="q4">問題四：TATA 匣（TATA box）是什麼？它有什麼重要的演化意義？</h3>
+
+  <div class="hero-card">
+    <div class="hero-title">💡 核心結論 4：TATA 匣是真核與古菌核心啟動子的定位錨點，也是連結「三域演化樹」與「真核基因體分工」的分子鑰匙</div>
+    <div class="hero-text">
+      <strong>TATA 匣（TATA box，又稱 TATA 盒、Hogness box）</strong>是位於真核生物與古菌核心啟動子內、轉錄起始點（+1）上游約 <strong>−25 至 −31 bp</strong> 處的富含 A–T 雙股保守序列，非模板股共識序列為 <code>5′-TATAAA-3′</code>（完整共識序列為 <code>5′-TATA(A/T)AA(G/A)-3′</code>）。
+    </div>
+  </div>
+
+  <div class="grid-cards">
+    <div class="summary-card">
+      <div class="summary-title">
+        TBP 獨特的「小溝馬鞍」結合機制
+        <span class="summary-badge">80° 劇烈彎折</span>
+      </div>
+      <div class="summary-item"><strong>反常結合小溝：</strong>絕大多數轉錄因子都用 α 螺旋辨識 DNA 的大溝；唯獨通用轉錄因子 TFIID 的 <strong>TBP（TATA 結合蛋白）</strong>長得像「馬鞍（saddle）」，以凹面的 <strong>8 股反平行 β 摺板</strong>跨坐在 TATA 匣的<strong>小溝（minor groove）</strong>上。</div>
+      <div class="summary-item"><strong>苯丙胺酸嵌入折曲：</strong>TBP 馬鞍兩端的「馬鐙」插入<strong>兩對（共 4 個）苯丙胺酸（Phe）側鏈</strong>嵌入鹼基對之間，利用富含 A–T 序列的柔韌性強行撐開小溝，使 DNA 產生約 <strong>80°（接近 90°）的劇烈彎折</strong>並解旋約 1/3 圈（105°）。</div>
+      <div class="summary-item"><strong>分子尺與單向定位：</strong>不對稱的 TBP–TATA 複合體依序招募 TFIIB、RNA 聚合酶 II 與 TFIIH，精準指定下游約 30 bp 處<strong>唯一、明確的起始點（+1）</strong>並確保<strong>單向轉錄</strong>。</div>
+    </div>
+
+    <div class="summary-card">
+      <div class="summary-title">
+        三大重要演化意義
+        <span class="summary-badge">跨三域與基因體分工</span>
+      </div>
+      <div class="summary-item"><strong>① 三域演化鐵證（古菌與真核同源）：</strong>細菌使用 −10 普里諾匣（<code>TATAAT</code>）搭配 <strong>σ 因子</strong>（無 TBP）；而<strong>古菌（Archaea）</strong>雖無細胞核，卻與真核生物共享同源的 <strong>TATA 匣、BRE 元件、TBP、TFB（同源於 TFIIB）與 TFE（同源於 TFIIE）</strong>，證明古菌與真核生物的親緣關係遠比細菌更近！</div>
+      <div class="summary-item"><strong>② TBP 的內部基因複製融合與通用性：</strong>TBP 馬鞍由兩個對稱結構域組成，源自遠古的<strong>基因複製與融合</strong>，在真核生物間序列保留度 >80%。且真核 Pol I、Pol II、Pol III 乃至「無 TATA 匣啟動子」全都必須依賴 TBP 才能啟動轉錄！</div>
+      <div class="summary-item"><strong>③ 真核基因體內的兩套啟動子分工：</strong>哺乳動物僅約 10%–25% 基因保有 TATA 匣（負責需快速爆發的組織專一性基因），約 70% 則演化為無 TATA 匣的 <strong>CpG 島啟動子</strong>（負責持續穩定表現的管家基因）。</div>
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>比較維度</th>
+          <th>有 TATA 匣的啟動子<br>（TATA-containing promoters）</th>
+          <th>無 TATA 匣的 CpG 島啟動子<br>（TATA-less / CpG island promoters）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>哺乳動物／人類基因佔比</strong></td>
+          <td>少數（約 <strong>10%–25%</strong>；果蠅約 30%）</td>
+          <td>多數（約 <strong>70%</strong> 蛋白質編碼基因）</td>
+        </tr>
+        <tr>
+          <td><strong>主要負責的基因類型</strong></td>
+          <td><strong>組織專一性基因</strong>（如血紅素、角質蛋白）、<strong>環境壓力／外在訊號反應基因</strong>、病毒基因</td>
+          <td><strong>管家基因（housekeeping genes）</strong>（所有細胞維持基礎生存與代謝都必須持續表現的基因）</td>
+        </tr>
+        <tr>
+          <td><strong>轉錄表現動態與演化特性</strong></td>
+          <td>平時關閉，收到訊號時需<strong>快速、高效率、大量爆發轉錄</strong>；在演化上表現量的可塑性與物種間變異度高</td>
+          <td><strong>持續、穩定、低至中度速率轉錄</strong>；在演化上表現量穩定、轉錄雜訊低</td>
+        </tr>
+        <tr>
+          <td><strong>轉錄起始點（TSS）與方向性</strong></td>
+          <td><strong>單一、精確界定的起始點（focused TSS）</strong>（由 TATA 匣固定距離 −26 至 −31 bp），且<strong>嚴格單向轉錄</strong></td>
+          <td><strong>在 100–1000 bp 區域內有多個分散的起始點（dispersed TSSs）</strong>，且常發生<strong>雙向發散轉錄（divergent transcription）</strong></td>
+        </tr>
+        <tr>
+          <td><strong>與核小體及 DNA 甲基化的關係</strong></td>
+          <td>缺乏 CpG 島（富含 A–T，易彎曲纏繞核小體），平時受核小體遮蔽，啟動時靠專一性轉錄因子與染色質重塑開關</td>
+          <td>富含 CG，平時保持<strong>未甲基化</strong>；因富含 CG 的 DNA 機械剛性高、不易彎曲纏繞在核小體上，自然暴露於<strong>核小體間的連接 DNA（linker DNA）</strong>供聚合酶隨時進入；若被 <strong>DNA 甲基化</strong>則轉為異染色質長期關閉</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Section 2: Verbatim Quotes -->
+  <h2 id="sec-textbooks">二、經典原文教科書與學術文獻原句考證</h2>
+
+  <!-- Card 1: Lodish 9e & Alberts ECB6 -->
+  <div class="book-card">
+    <div class="book-header">
+      <div class="book-title">1. 啟動子是「特定雙股 DNA 序列」：先在雙螺旋外側辨識，再解旋露出單股模板股</div>
+      <div class="book-meta">Lodish《Molecular Cell Biology》9e (Ch5) • Alberts《Essential Cell Biology》6e (Ch7) • Brooker《Genetics》8e (Ch12) • Weaver《Molecular Biology》5e (Ch6)</div>
+    </div>
+    <div class="book-body">
+      <div class="quote-entry">
+        <div class="quote-label">辨識雙股啟動子與分離兩股（Lodish 9e, Ch05, Section 5.4）</div>
+        <div class="en-box">
+          "During transcription initiation, RNA polymerase, with the help of initiation factors (called σ-factors in bacteria and general transcription factors in eukaryotes), recognizes and binds to a specific sequence of double-stranded DNA called a promoter (step 1). After binding, RNA polymerase and the initiation factors separate the DNA strands to make the bases in the template strand available for base pairing with the bases of the rNTPs that the RNA polymerase will polymerize (step 2)."
+        </div>
+        <div class="zh-box">
+          「在轉錄起始期間，RNA 聚合酶在起始因子（在細菌中稱為 σ 因子，在真核生物中稱為一般轉錄因子）的協助下，<strong>辨識並結合到一段稱為啟動子（promoter）的特定雙股 DNA 序列上（步驟 1）。結合之後，RNA 聚合酶與起始因子把 DNA 兩股分開，使模板股上的鹼基得以暴露出來</strong>，以便與 RNA 聚合酶將要聚合的那些 rNTP 的鹼基進行鹼基配對（步驟 2）。」
+        </div>
+      </div>
+
+      <div class="quote-entry">
+        <div class="quote-label">無須先分開雙股即可辨識啟動子，且啟動子極性決定轉錄方向與模板股（Alberts ECB 6e, Ch07）</div>
+        <div class="en-box">
+          "It turns out that each base presents unique features to the outside of the double helix, allowing the sigma factor to initially identify the promoter sequence without having to separate the entwined DNA strands. The nucleotide sequence labeled –35 in Figure 7–10 is recognized in this way. As the sigma factor begins to open the DNA double helix, it can then examine the exposed base pairs on the individual single strands—which is how it recognizes the sequence at the –10 position of the promoter. Every promoter has a certain polarity: it contains two different nucleotide sequences, laid out in a specific 5′-to-3′ order, upstream of the transcriptional start site. These asymmetric sequences position the RNA polymerase such that it binds to the promoter in only one orientation... once the enzyme is positioned on DNA it can only use the DNA strand that is oriented in the 3′-to-5′ direction as its template."
+        </div>
+        <div class="zh-box">
+          「原來，每種鹼基都會在雙螺旋外側呈現獨特特徵，<strong>使 σ 因子起初無須分開互相纏繞的 DNA 股，就能辨識啟動子序列</strong>。圖 7–10 中標為 −35 的核苷酸序列就是以這種方式被辨識。當 σ 因子開始打開 DNA 雙螺旋後，便能檢視個別單股上露出的鹼基對；它就是以這種方式辨識啟動子的 −10 序列。<strong>每個啟動子都具有特定極性</strong>：在轉錄起始點上游，有兩段不同的核苷酸序列依特定的 5′ 至 3′ 順序排列。這些不對稱序列讓 RNA 聚合酶只能以一種方向與啟動子結合……酵素在 DNA 上定位後，只能使用方向為 3′ 至 5′ 的 DNA 股作為<strong>模板股</strong>。」
+        </div>
+      </div>
+
+      <div class="quote-entry">
+        <div class="quote-label">大溝結合、封閉複合體（Closed Complex）與開放複合體（Open Complex）（Brooker 8e, Ch12 &amp; Weaver 5e, Ch06）</div>
+        <div class="en-box">
+          "The σ-factor protein contains a structure called a helix-turn-helix motif that can bind tightly to these sequences. Alpha (α) helices within the protein fit into the major groove of the DNA double helix and form hydrogen bonds with the bases... the process of transcription is initiated when σ factor within the holoenzyme binds to the promoter to form a closed complex, so named because the DNA strands at the promoter have not yet separated from each other. For transcription to begin, the double-stranded DNA must be unwound to form an open complex." (Brooker 8e)<br>
+          "One feature of open complex formation is binding of polymerase to the nontemplate strand in the −10 region of the promoter." (Weaver 5e)
+        </div>
+        <div class="zh-box">
+          「σ 因子蛋白質含有一種稱為螺旋—轉角—螺旋基序的構造，可緊密結合這些序列。<strong>蛋白質中的 α 螺旋嵌入 DNA 雙螺旋的大溝，並與鹼基形成氫鍵</strong>……轉錄過程起始於全酶內的 σ 因子與啟動子結合，形成<strong>封閉複合體</strong>；之所以如此命名，是因為啟動子處的 DNA 鏈尚未彼此分離。要開始轉錄，雙股 DNA 必須解旋而形成<strong>開放複合體</strong>。這種解旋起始於 −10 位點的 <code>TATAAT</code> 序列；該序列只含 A–T 鹼基對。」（Brooker 8e）<br>
+          「開放複合體形成的一個特徵是聚合酶（藉由 σ 因子的保守芳香族胺基酸）<strong>結合到啟動子 −10 區域的非模板股單股</strong>（使模板股單股得以進入活性位點）。」（Weaver 5e）
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 2: Single-strand convention & Origin of replication -->
+  <div class="book-card">
+    <div class="book-header">
+      <div class="book-title">2. 為何啟動子常只寫一條單股序列？以及「複製起始序列（Origin）」與「引子（Primer）」的區分</div>
+      <div class="book-meta">Pierce 7e (Ch13) • Becker 10e (Ch18) • Lehninger 8e (Ch25, Ch26) • Campbell 13e (Ch16, Ch17) • Stryer 10e (Ch09)</div>
+    </div>
+    <div class="book-body">
+      <div class="quote-entry">
+        <div class="quote-label">非模板股（編碼股）5′→3′ 單股書寫慣例（Pierce 7e, Ch13 &amp; Becker 10e, Ch18）</div>
+        <div class="en-box">
+          "When DNA sequences are written out, often the sequence of only one of the two strands is listed. Molecular biologists typically write the sequence of the nontemplate strand, because it will be the same as the sequence of the RNA transcribed from the template strand (with U in RNA replacing T in DNA)." (Pierce 7e)<br>
+          "By convention, promoter sequences are described in the 5′ → 3′ direction on the coding strand, which is the strand that lies opposite the template strand." (Becker 10e)
+        </div>
+        <div class="zh-box">
+          「<strong>書寫 DNA 序列時，往往只列出兩股之一。分子生物學家通常書寫非模板股的序列</strong>，因為它與從模板股轉錄出的 RNA 序列相同（只是 RNA 中的 U 取代了 DNA 中的 T）。」（Pierce 7e）<br>
+          「<strong>依慣例，啟動子序列以編碼股（非模板股）的 5′ → 3′ 方向描述</strong>；編碼股位於模板股的對面。」（Becker 10e）
+        </div>
+      </div>
+
+      <div class="quote-entry">
+        <div class="quote-label">DNA 複製的「複製起始點／複製起始序列（Origin of Replication）」與「RNA 引子」（Campbell 13e, Ch16 &amp; Lehninger 8e, Ch25）</div>
+        <div class="en-box">
+          "The replication of chromosomal DNA begins at particular sites called origins of replication, short stretches of DNA that have a specific sequence of nucleotides... A starting polynucleotide chain that can be used as a preexisting chain is produced during DNA synthesis; this is actually a short stretch of RNA, not DNA. This RNA chain is called a primer and is synthesized by the enzyme primase." (Campbell 13e)<br>
+          "The E. coli replication origin, oriC, consists of 245 bp... DnaA molecules bound at the R and I sites bind the DNA with an HTH domain... The A=T-rich DUE region is denatured as a result of the strain imparted by the DnaA binding." (Lehninger 8e)
+        </div>
+        <div class="zh-box">
+          「染色體 DNA 複製從特定位點開始，稱為<strong>複製起始點（origins of replication；此處的特定 DNA 序列亦稱複製起始序列）</strong>，是具有特定核苷酸序列的短段 DNA……DNA 合成過程中會產生一段可作為既有鏈使用的起始核苷酸鏈，這其實是一小段 RNA，而非 DNA。這段 RNA 鏈稱為<strong>引子（primer）</strong>，由<strong>引子酶（primase）</strong>合成。」（Campbell 13e）<br>
+          「大腸桿菌<strong>複製起始序列 <em>oriC</em> 長 245 bp</strong>……結合 R、I 位置的 DnaA 以 HTH 結構域結合雙股 DNA；DnaA 結合造成應力，使富含 A=T 的 DNA 解旋元件（DUE）變性成單股。」（Lehninger 8e）
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 3: DNA Methylation vs Unwinding -->
+  <div class="book-card">
+    <div class="book-header">
+      <div class="book-title">3. 啟動子解旋物理力學 vs. DNA 甲基化抑制轉錄的真正機制（及編碼區甲基化反證）</div>
+      <div class="book-meta">Brooker 8e (Ch15) • Becker 10e (Ch20) • Stryer 10e (Ch08, Ch31) • Cox 2e (Ch11) • 生物物理與細菌表觀遺傳文獻</div>
+    </div>
+    <div class="book-body">
+      <div class="quote-entry">
+        <div class="quote-label">CpG 島甲基化透過「大溝阻礙」與「MeCP2 招募 HDAC 緊縮染色質」抑制起始，但編碼區甲基化完全不阻礙 RNA 聚合酶解旋延伸（Brooker 8e, Ch15）</div>
+        <div class="en-box">
+          "Most transcription factors bind in the major groove of the DNA, and a methyl group gets in the way and prevents them from doing so. Whereas DNA methylation of CpG islands inhibits transcription initiation, it is interesting to note that the methylation of CG sequences in the coding region of a gene—downstream of the core promoter—does not usually hinder the elongation stage of transcription by RNA polymerase.<br>
+          A second way that the methylation of CpG islands may inhibit transcription is via proteins known as methyl-CpG-binding proteins... After methyl-CpG-binding proteins bind to methylated CpG islands, they recruit other proteins that have the enzymatic ability to cause the chemical modification of histones. A common example shown in Figure 15.7b is the recruitment of histone deacetylase... The action of histone deacetylase converts the chromatin to a closed conformation."
+        </div>
+        <div class="zh-box">
+          「<strong>大多數轉錄因子結合在 DNA 的大溝中，而（胞嘧啶上的）甲基會擋在中間，阻止它們這樣做。雖然 CpG 島的 DNA 甲基化會抑制轉錄起始，但有趣的是，基因編碼區（位於核心啟動子下游）中 CG 序列的甲基化，通常不會阻礙 RNA 聚合酶進行轉錄的延伸階段。</strong><br>
+          CpG 島甲基化抑制轉錄的第二種方式是透過稱為<strong>甲基-CpG 結合蛋白（如 MeCP2）</strong>的蛋白質……當它們結合到甲基化的 CpG 島後，會招募<strong>組蛋白去乙醯酶（HDAC，如 HDAC1 與染色質重塑因子 Sin3a）</strong>，將染色質轉變為<strong>關閉構型（異染色質）</strong>。」
+        </div>
+      </div>
+
+      <div class="quote-entry">
+        <div class="quote-label">雙股解旋難易度取決於 A–T 氫鍵數、鹼基堆疊力（Base Stacking）與 T–A 步階扭曲（Stryer 10e, Ch08 &amp; Weaver 5e, Ch11）</div>
+        <div class="en-box">
+          "The Tm of duplex DNA goes up with increasing content of G-C base pairs. Rather than the extra hydrogen bond of a G-C pair compared with an A-T pair, this increased stability is due primarily to more favorable base-stacking interactions in regions rich in G-C base pairs." (Stryer 10e)<br>
+          "Notice the distortion of the relatively weak T–A step, which undergoes metrics that facilitate the local melting of the DNA." (Weaver 5e)
+        </div>
+        <div class="zh-box">
+          「雙股 DNA 的熔解溫度（<em>T</em><sub>m</sub>）會隨著 G–C 鹼基對含量的增加而上升。相較於 G–C 配對比 A–T 配對多出的一個氫鍵，<strong>這種增加的穩定性主要歸因於在富含 G–C 鹼基對的區域中具有更有利的鹼基堆疊交互作用（base-stacking interactions）</strong>。」（Stryer 10e）<br>
+          「請注意<strong>相對較弱的 T–A 步階（step）的扭曲，它經歷了促進 DNA 局部熔解（local melting）的結構變化</strong>。」（Weaver 5e）
+        </div>
+      </div>
+
+      <div class="quote-entry">
+        <div class="quote-label">外部學術文獻補充：5mC 生物物理效應與細菌 Dam 甲基化（6mA）</div>
+        <div class="en-box">
+          • <strong>Severin et al. (2011), <em>Nucleic Acids Res.</em> 39(20):8740–8751</strong> (<a href="https://doi.org/10.1093/nar/gkr578" target="_blank" rel="noopener">doi:10.1093/nar/gkr578</a>) &amp; <strong>Pérez et al. (2012), <em>Biophys. J.</em> 102(9):2140–2148</strong> (<a href="https://doi.org/10.1016/j.bpj.2012.03.056" target="_blank" rel="noopener">doi:10.1016/j.bpj.2012.03.056</a>)<br>
+          • <strong>Casadesús &amp; Low (2006), <em>Microbiol. Mol. Biol. Rev.</em> 70(3):830–856</strong> (<a href="https://doi.org/10.1128/MMBR.00016-06" target="_blank" rel="noopener">doi:10.1128/MMBR.00016-06</a>)
+        </div>
+        <div class="zh-box">
+          • <strong>5mC 的生物物理效應</strong>：胞嘧啶 C5 加上甲基（5mC）會增強垂直方向的 π–π 鹼基堆疊力，使試管熱變性溫度（<em>T</em><sub>m</sub>）微升約 0.5–1.5°C 並增加 DNA 局部機械剛性（stiffness）。但在活細胞內，真核啟動子解旋有 ATP 驅動的 <strong>TFIIH（XPB 解旋酶）</strong>主動施力，這點微小的熱穩定度變化不會卡住解旋；甲基化改變剛性主要是影響核小體組裝與轉錄因子結合。<br>
+          • <strong>細菌的腺嘌呤甲基化（Dam methylation, 6mA）</strong>：在細菌 <code>5′-GATC-3′</code> 中，腺嘌呤 <em>N</em><sup>6</sup>-甲基化（6mA）在熱力學上反而會微幅<strong>降低</strong> DNA 的 <em>T</em><sub>m</sub>；但在細菌複製起點 <em>oriC</em>（半甲基化時被 <strong>SeqA</strong> 結合隔離，阻止 DnaA 重新結合，見 Cox 2e Ch11）或 <em>Tn10</em> 轉座酶啟動子、<em>pap</em> 菌毛操縱組中，甲基化之所以調控起始，同樣是因為<strong>改變蛋白質（SeqA、Lrp 或 RNA 聚合酶）對大溝位點的結合親和力</strong>，再次證明「蛋白質結合調控」才是主因。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 4: TATA Box Mechanism & Evolution -->
+  <div class="book-card">
+    <div class="book-header">
+      <div class="book-title">4. TATA 匣（TATA Box）的小溝馬鞍結合機制、三域演化意義與 CpG 島啟動子分工</div>
+      <div class="book-meta">Weaver 5e (Ch10, Ch11) • Stryer 10e (Ch29) • Brooker 8e (Ch12) • Prescott 12e (Ch15) • Lodish 9e (Ch08)</div>
+    </div>
+    <div class="book-body">
+      <div class="quote-entry">
+        <div class="quote-label">TBP 馬鞍結構結合小溝（Minor Groove）並以 4 個苯丙胺酸使 DNA 彎折 80°（Weaver 5e, Ch11 &amp; Stryer 10e, Ch29）</div>
+        <div class="en-box">
+          "The underside of the 'saddle' is lined with an eight-stranded antiparallel β-sheet... confirmed that the curved β-sheet at the bottom of the TBP saddle interacts with the minor groove of the TATA box... In fact, the minor groove is forced open to accommodate the TBP β-sheet. This opening results from the insertion of two pairs of phenylalanine side chains from the stirrups of TBP between base pairs at each end of the TATA box... The main effect is a sharp bend at each end of the TATA box, which bends the TATA box by about 80 degrees overall and unwinds the DNA by about a third of a turn (105 degrees)." (Weaver 5e)<br>
+          "The flexibility of AT-rich sequences is exploited in bending the DNA... This asymmetry is crucial for specifying a unique start site and ensuring that transcription proceeds unidirectionally." (Stryer 10e)
+        </div>
+        <div class="zh-box">
+          「TBP『馬鞍』的底面排列著一個<strong>八股反平行 β 摺板</strong>……與 TATA 匣的<strong>小溝（minor groove）</strong>發生交互作用。事實上，小溝被強行撐開以容納 TBP 的 β 摺板；這種撐開是由於來自 TBP 馬鐙的<strong>兩對（共 4 個）苯丙胺酸（phenylalanine）側鏈插入到 TATA 匣兩端的鹼基對之間</strong>……使 TATA 匣<strong>整體彎曲約 80 度，並使 DNA 解旋約三分之一圈（105 度）</strong>。」（Weaver 5e）<br>
+          「在彎曲 DNA 時利用了富含 AT 序列的柔韌性……<strong>這種不對稱性對於指定唯一的起始位點並確保轉錄單向進行至關重要。</strong>」（Stryer 10e）
+        </div>
+      </div>
+
+      <div class="quote-entry">
+        <div class="quote-label">三域演化比較：古菌與真核生物共享同源 TATA 匣、BRE、TBP、TFIIB 與 TFIIE（Brooker 8e, Ch12 &amp; Prescott 12e, Ch15）</div>
+        <div class="en-box">
+          "Although bacteria and archaea are both prokaryotes that lack a cell nucleus, many features of transcription in archaea are much closer to eukaryotes than to bacteria (Table 12.5). As discussed in Chapter 27, sequencing of whole genomes indicates that eukaryotes are most closely related to an archaeon within the group called Asgard archaea... the core promoter found in archaeal genes is similar to eukaryotic promoters of genes transcribed by RNA polymerase II, having a TATA box and a BRE (B recognition element), which is recognized by a protein that is homologous to eukaryotic TFIIB. Notice in Table 12.5 that archaea have general transcription factors that are homologous to eukaryotic TBP, TFIIB, and TFIIE. These observations suggest that the fundamental features of transcription observed in archaea and eukaryotes evolved before the divergence of the archaeal and eukaryotic lineages." (Brooker 8e)
+        </div>
+        <div class="zh-box">
+          「儘管細菌和古菌都是缺乏細胞核的原核生物，但<strong>古菌轉錄的許多特徵與真核生物的距離遠比與細菌更近</strong>（表 12.5）。全基因體定序顯示真核生物與稱為<strong>阿斯加德古菌（Asgard archaea）</strong>群體中的一種古菌親緣關係最近……<strong>在古菌基因中發現的核心啟動子類似於由 RNA 聚合酶 II 轉錄的真核基因啟動子，具有一個 TATA 匣和一個 BRE（B 辨識元件）</strong>……<strong>古菌具有與真核 TBP、TFIIB 和 TFIIE 同源的通用轉錄因子。這些觀察結果顯示，在古菌和真核生物中觀察到的轉錄基本特徵，是在古菌和真核生物譜系分歧之前演化出來的。</strong>」（Brooker 8e）
+        </div>
+      </div>
+
+      <div class="quote-entry">
+        <div class="quote-label">真核基因體內「有 TATA 匣啟動子」vs.「無 TATA 匣之 CpG 島啟動子（約 70%）」的結構與功能分工（Lodish 9e, Ch08）</div>
+        <div class="en-box">
+          "Site-directed mutagenesis of this sequence, designated the TATA box, established that it specifies that transcription initiates ~30 base pairs downstream at a single, well-defined nucleotide... Instead of a TATA box or initiator element, about 70 percent of mammalian genes with protein-coding regions have a region of 100–1000 base pairs with an unusually high frequency of CG sequences within their promoters; such regions are referred to as CpG islands... This effect has been attributed to the greater energy required to bend CG-rich regions of DNA into the small-diameter loops found in nucleosomes. Consequently, when chromosomal regions with CpG islands are assembled into chromatin, the islands tend to coincide with linker DNA between nucleosomes, where they may be more accessible to transcription factors and RNA polymerase."
+        </div>
+        <div class="zh-box">
+          「針對這段稱為 <strong>TATA 匣</strong>的序列進行定點突變證實，它指定轉錄在下游約 30 個鹼基對處的<strong>單一、明確界定的核苷酸</strong>起始（多見於高表現量的分化細胞特化基因）……相反地，<strong>約 70% 具蛋白質編碼區的哺乳動物基因（多為管家基因）啟動子沒有 TATA 匣，而是具有一段 100–1000 bp 富含 CG 序列的『CpG 島』</strong>……因為<strong>將富含 CG 的 DNA 區域彎曲成核小體中的小直徑環需要更大的能量</strong>，當具有 CpG 島的染色體區域組裝成染色質時，<strong>這些未甲基化的 CpG 島傾向於落在核小體之間的連接 DNA（linker DNA）上，使轉錄因子和 RNA 聚合酶更容易接觸</strong>（但會在多個分散位點雙向起始轉錄）。」
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: High School 7 Editions Comparison -->
+  <h2 id="sec-hs-7ed">三、臺灣高中 7 版生物教材完整對照表</h2>
+
+  <h3>表 3A：七版選修生物「DNA 複製起點／引子 vs. 轉錄啟動子」與「雙股／單股呈現」逐版比較</h3>
+  <div class="insight-card">
+    <div class="insight-point">
+      <strong>📌 高一必修生物概況：</strong>7 版<strong>學生課本</strong>在介紹 DNA 複製與轉錄時，皆依 108 課綱簡化，只提「DNA 聚合酶」與「RNA 聚合酶」，<strong>未在轉錄機制介紹啟動子，也未在複製機制介紹引子</strong>（僅<strong>全華必修課本 p.83</strong> 提到 DNA 複製從特定的「複製起點」開始；<strong>三民必修課本 p.105</strong> 在基改鮭魚案例提到「大洋鱈魚的啟動子」；全華、翰林、龍騰則在<strong>必修教師手冊／備課用書</strong>補充複製起始點、引子與啟動子）。以下為<strong>選修生物 I（康熹為 103 課綱選修生物下）</strong>之完整對照：
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>版本</th>
+          <th>介紹方式與條件（DNA 複製 vs. 轉錄／雙股或單股呈現）</th>
+          <th>差異或可能誤讀（整理者分析）</th>
+          <th>來源冊次與頁碼</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>三民</strong><br>（113／108）</td>
+          <td>
+            • <strong>DNA 複製</strong>：解旋酶附著在雙股 DNA 的「<strong>複製起點</strong>」解開雙股，先合成一小段 RNA 片段稱為「<strong>引子</strong>」，再由 DNA 聚合酶延伸。<br>
+            • <strong>轉錄</strong>：「RNA 聚合酶必須附著在位於基因之前一段稱為<strong>啟動子</strong>的特殊序列上，並使 DNA 的雙螺旋局部解開。僅其中一股 DNA 會成為轉錄的模板股，且<strong>轉錄過程不需要引子</strong>。」<br>
+            • <strong>雙股本質（最明確）</strong>：p.142 側欄「你知道嗎—啟動子」明寫：「<strong>不同基因的啟動子都會是富含 A 與 T 的 DNA 序列，因為 A 與 T 之間的氫鍵較少，雙股較容易分開。</strong>」
+          </td>
+          <td>
+            • <strong>優點</strong>：7 版中唯一在學生課本直接點出「啟動子富含 A 與 T、氫鍵較少、<strong>雙股較容易分開</strong>」，明確建立啟動子是雙股 DNA 的概念。<br>
+            • <strong>可能誤讀</strong>：p.143 圖 4-1「轉錄示意圖」雖把啟動子的黃綠色同時塗在上下兩股，但「啟動子」文字引線只指到上股（5′→3′），單看引線可能誤以為只指單股。
+          </td>
+          <td>
+            • 選修 I 課本 Ch3 p.122–123<br>
+            • 選修 I 課本 Ch4 p.142–143, 153<br>
+            • 選修 I 手冊 Ch4 p.282, 285
+          </td>
+        </tr>
+        <tr>
+          <td><strong>全華</strong><br>（2023／108）</td>
+          <td>
+            • <strong>DNA 複製</strong>：從特定的「<strong>複製起點</strong>」（同頁「充電」專欄亦稱「<strong>起始點 origin</strong>」）開始解開雙股，由 RNA 引子酶合成一小段「<strong>RNA 引子</strong>」（必修課本 p.83 亦提「複製起點」）。<br>
+            • <strong>轉錄</strong>：「RNA 聚合酶先附著在 DNA 轉錄起始點前面一段稱為<strong>啟動子</strong>的序列上，將轉錄區的雙股分開……另外，RNA 聚合酶<strong>不需引子</strong>即可合成單股的 RNA。」<br>
+            • <strong>雙股呈現</strong>：課本 p.133 圖 5-3 將啟動子淺綠色塗滿上下兩股並以水平括號括住；備課用書 CH5 p.235 直接以 <code>5′…3′</code> 與 <code>3′…5′</code> 雙股並列繪出啟動子區段。
+          </td>
+          <td>
+            • <strong>優點</strong>：圖 5-3 同時用水平區間括號標出「啟動子」（雙股區段）與「起始點」（位置點），且備課用書畫出雙股序列，不易產生單股誤解。<br>
+            • <strong>可能誤讀</strong>：選修 I p.118「充電」專欄將複製起點簡稱為「起始點（origin）」，需注意與轉錄圖 5-3 的「起始點（轉錄起始位）」區分。
+          </td>
+          <td>
+            • 必修課本 p.83<br>
+            • 選修 I 課本 CH4 p.118–119<br>
+            • 選修 I 課本 CH5 p.132–133, 144<br>
+            • 選修 I 備課用書 CH5 p.234–235
+          </td>
+        </tr>
+        <tr>
+          <td><strong>南一</strong><br>（108／114）</td>
+          <td>
+            • <strong>DNA 複製（★關鍵用語）</strong>：「有一種酵素會先在稱為『<strong>複製起始序列</strong>』的特定區域解開纏繞，並使 DNA 雙股之間的氫鍵斷裂而打開，暴露出的單股核苷酸鏈作為複製的模板。接著，另一種酵素在模板上合成一小段的 <strong>RNA 引子</strong>，提供 DNA 聚合酶作用的起點。」<br>
+            • <strong>轉錄</strong>：「轉錄一開始時，RNA 聚合酶必須先附著至稱為<strong>啟動子</strong>的一段 DNA 序列上，將 DNA 雙股螺旋打開，然後以其中一股為模板進行互補鹼基配對」。<br>
+            • <strong>雙股呈現</strong>：p.115 圖 2-15 第一步將雙股平行線左端的上下兩股皆塗上淺綠色，並以區間線標示「啟動子」。
+          </td>
+          <td>
+            • <strong>★最大混淆根源</strong>：南一版是 7 版中<strong>唯一</strong>把 DNA 複製起點稱為「<strong>複製起始序列</strong>」的版本（採用國教院審定譯名）！學生讀到南一版時，極容易把 DNA 複製的「複製起始序列」與轉錄的「啟動子」混為一談。<br>
+            • <strong>可能誤讀</strong>：p.116 圖 2-16 與 p.125 圖 2-21（乳糖操縱組）把雙股 DNA 簡化畫成一條扁平長條色帶（僅兩端畫出雙螺旋）。
+          </td>
+          <td>
+            • 選修 I 課本 Ch2 p.112–116, 125
+          </td>
+        </tr>
+        <tr>
+          <td><strong>康熹</strong><br>（103 選修下）</td>
+          <td>
+            • <strong>DNA 複製</strong>：起始位置稱為「<strong>複製起點</strong>」，雙股局部分開後，在模板股上先合成一小段「<strong>引子</strong>」。<br>
+            • <strong>轉錄</strong>：「首先，RNA 聚合酶會附著在 DNA 的<strong>啟動子</strong>上，並局部分開 DNA 雙股，開始進行轉錄。對每個基因而言，DNA 兩股中只有其中一股會作為轉錄的模板股。<strong>RNA 聚合酶不需引子</strong>」。<br>
+            • <strong>雙股呈現</strong>：p.87 圖 11-3.1 將雙股平行線左端上下兩股皆塗上磚紅色，並由下方以大括號標示「啟動子」。
+          </td>
+          <td>
+            • <strong>呈現清楚</strong>：圖 11-3.1 以大括號括住上下兩股的磚紅色區段，清楚表達啟動子是雙股 DNA 的一段區域。<br>
+            • <strong>版本演變</strong>：108 課綱由龍騰版承接後，龍騰版在轉錄小節反而刪去了此圖的啟動子標示。
+          </td>
+          <td>
+            • 選修(下)課本 Ch11 p.83–84, 87, 94
+          </td>
+        </tr>
+        <tr>
+          <td><strong>泰宇</strong><br>（115／113／108）</td>
+          <td>
+            • <strong>DNA 複製</strong>：由稱為「<strong>複製起始點（origin of replication）</strong>」的特殊核苷酸序列位置開始，藉導引酶合成約 10 個核苷酸長度的「<strong>RNA 引子</strong>」（p.153 專欄強調「單股 DNA 或 RNA 引子」）。<br>
+            • <strong>轉錄</strong>：包含起始點、終止點及其間區域合稱「<strong>轉錄單位</strong>」；「RNA 聚合酶首先附著到 DNA 上的序列稱為<strong>啟動子（promoter）</strong>，而告知轉錄終點的 DNA 序列則稱為<strong>終止子</strong>……局部解旋分開 DNA 雙股後，開始以其中一股作為模板進行轉錄。<strong>RNA 聚合酶不需引子</strong>」。<br>
+            • <strong>教師用書補充</strong>：授課指引 p.283–284 補充原核 −35 序列 <code>TTGACA</code>、−10 序列 <code>TATAAT</code>（普里布諾盒）。
+          </td>
+          <td>
+            • <strong>可能誤讀 1（圖解引線）</strong>：p.155 圖 3-36 雖將啟動子綠色同時塗在上下兩股，但文字「啟動子」的引線只從上方指到上股。<br>
+            • <strong>可能誤讀 2（單股序列）</strong>：授課指引列出 <code>TTGACA</code>、<code>TATAAT</code> 時未特別說明「依慣例只寫編碼股」，若直接抄上黑板，學生易誤以為啟動子只有單股。
+          </td>
+          <td>
+            • 選修 I 課本 Ch3 p.150–156, 164–165<br>
+            • 選修 I 授課指引 Ch3 p.281, 283–284
+          </td>
+        </tr>
+        <tr>
+          <td><strong>翰林</strong><br>（113／108）</td>
+          <td>
+            • <strong>DNA 複製</strong>：由「<strong>複製起始點</strong>」（手冊亦稱「複製起點 origin」）開始，以解旋酶將雙股解開，引子酶在模板股上合成一小段 RNA 稱為「<strong>引子</strong>」。<br>
+            • <strong>轉錄</strong>：起始階段「RNA 聚合酶會和欲轉錄基因上游的一段特定序列結合，該序列稱為<strong>啟動子（promoter）</strong>（圖 4-5a）。延長階段時，RNA 聚合酶將 DNA 雙股解開，然後沿著其中一股（模板股）滑行」；手冊 p.289 明言「不需要引子」。<br>
+            • <strong>雙股呈現（圖解最直觀）</strong>：p.143 圖 4-5 直接畫出<strong>立體交纏的 DNA 雙股螺旋</strong>，左端啟動子區段的<strong>兩條交纏股皆塗為綠色</strong>並以括號標示「啟動子」。
+          </td>
+          <td>
+            • <strong>優點</strong>：圖 4-5 直接畫出雙螺旋並把兩股都塗綠加括號，視覺上最能看出「啟動子是一段雙股 DNA 螺旋」。<br>
+            • <strong>可能誤讀（詞彙對稱）</strong>：圖 4-5 右端將終止子標為「<strong>終止序列</strong>」，學生對稱記憶時很容易把左端的啟動子自己改叫「起始序列」，進而與 DNA 複製的「複製起始點／複製起始序列」混淆。
+          </td>
+          <td>
+            • 必修教師手冊 CH2 p.183–184<br>
+            • 選修 I 課本 Ch4 p.140–143, 152<br>
+            • 選修 I 手冊 Ch4 p.282–291
+          </td>
+        </tr>
+        <tr>
+          <td><strong>龍騰</strong><br>（113／108）</td>
+          <td>
+            • <strong>DNA 複製</strong>：起始位置稱為「<strong>複製起點</strong>」（教師用書 p.150-1 亦稱「複製起始點」），雙股局部分開後，在模板股上先合成一小段 RNA 稱為「<strong>引子</strong>」。<br>
+            • <strong>轉錄（★編排特殊）</strong>：選修 I 課本 4-2.2「轉錄」（p.157）正文與圖 4-9 <strong>完全未提「啟動子」</strong>（僅寫「1. 起始：RNA 聚合酶先將 DNA 的雙股鬆開」），直到 <strong>4-3「乳糖操縱組」（p.163 圖 4-17）</strong>才首次出現「<strong>啟動子為 RNA 聚合酶附著的特定序列</strong>」。教師用書 4-3 p.165-1 才補回真核「啟動子」與「TATA 匣」。
+          </td>
+          <td>
+            • <strong>可能誤讀</strong>：龍騰版課本在 4-2.2 轉錄雙股解旋圖（圖 4-9）拿掉了前身康熹版原有的「啟動子」標示，學生第一次在龍騰課本看到「啟動子」是在 4-3 乳糖操縱組（圖 4-17），而該圖把操縱組畫成一條圓柱形長色帶，使學生缺乏「在雙股解旋圖上看到啟動子」的視覺印象。
+          </td>
+          <td>
+            • 必修教師用書 Ch02 p.94, 98-1<br>
+            • 選修 I 課本 Ch04 p.152–157, 163<br>
+            • 選修 I 教師用書 Ch04 p.150-1, 163, 165-1
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>表 3B：七版必修與選修生物「啟動子解旋原因、DNA 甲基化（表觀遺傳）與 TATA 匣（TATA box）」逐版比較</h3>
+  <div class="insight-card">
+    <div class="insight-point">
+      <strong>📌 跨版本分布統計：</strong><br>
+      • <strong>【學生課本】層級</strong>：7 版學生課本<strong>均未出現 <code>TATA box</code> 名稱</strong>；但<strong>三民版選修生物 I 課本（p.142）</strong>明確解釋「啟動子富含 A 與 T，氫鍵較少，雙股較容易分開」；<strong>三民（必修 p.143–144）、全華（選修 IV 習題 p.47）、翰林（選修 IV 專欄 p.13）</strong> 3 版課本有介紹「表觀遺傳與 DNA 甲基化關閉基因表現」。<br>
+      • <strong>【教師手冊／備課用書】層級</strong>：<strong>全華、南一、康熹、龍騰</strong> 4 版明確介紹 <strong><code>TATA 盒 / TATA 匣 (TATA box)</code></strong>；其中<strong>全華版必修備課用書 CH03（p.225）</strong>完整寫出 TATA 盒與 TBP 在<strong>古菌、真核生物與細菌（普里布諾盒 Pribnow box）之間的三域演化意義</strong>；<strong>龍騰版選修 I 教師用書（p.165-1）</strong>則將「TATA 匣」與「DNA 甲基化／異染色質使轉錄因子無法接觸 DNA」同頁對照！
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>版本</th>
+          <th>介紹方式與條件（嚴格區分【學生課本】vs.【教師手冊／備課用書】）</th>
+          <th>差異或可能誤讀（整理者分析）</th>
+          <th>來源冊次與頁碼</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>三民</strong><br>（113／114／108）</td>
+          <td>
+            • <strong>【學生課本】啟動子為何容易解旋</strong>：選修 I Ch4 p.142「你知道嗎—啟動子」明寫：「<strong>不同基因的啟動子都會是富含 A 與 T 的 DNA 序列，因為 A 與 T 之間的氫鍵較少，雙股較容易分開。</strong>」<br>
+            • <strong>【學生課本】表觀遺傳與 DNA 甲基化</strong>：必修 Ch3 p.143–144「生物展望鏡」明寫：「DNA 的甲基化，是甲基（−CH<sub>3</sub>）分子接在 DNA 的含氮鹼基的作用。<strong>這個作用會阻礙此處基因的轉錄過程，造成該基因無法被表現。</strong>」並將其與組蛋白修飾（「組蛋白是真核生物的染色體中用來纏繞 DNA 的一類蛋白質，而 <strong>DNA 勢必得解開纏繞才能進行轉錄</strong>」）並列。<br>
+            • <strong>【教師手冊】</strong>：必修手冊 Ch3 p.186–189 補充細胞分化與表觀遺傳；選修 III 手冊 Ch5 p.356 提及 TLR9 辨識細菌未甲基化 CpG DNA。課本與手冊均未出現 <code>TATA box</code> 名稱。
+          </td>
+          <td>
+            • <strong>優點</strong>：唯一在學生課本同時涵蓋「啟動子富含 A–T 易分開雙股」（選修 I p.142）與「DNA 甲基化阻礙轉錄、組蛋白修飾影響 DNA 解開纏繞」（必修 p.143–144）的版本。<br>
+            • <strong>可能誤讀</strong>：學生若把必修 p.144 講組蛋白修飾的「DNA 勢必得<strong>解開纏繞</strong>（從組蛋白鬆開）才能進行轉錄」與選修 I p.142 的「雙股<strong>解旋</strong>分開」混為一談，就會誤以為 DNA 甲基化是在阻礙雙股解旋。
+          </td>
+          <td>
+            • 選修 I 課本 Ch4 p.142, 172<br>
+            • 必修課本 Ch3 p.143–144<br>
+            • 必修手冊 Ch3 p.186–189<br>
+            • 選修 III 手冊 Ch5 p.356
+          </td>
+        </tr>
+        <tr>
+          <td><strong>全華</strong><br>（2023／108）</td>
+          <td>
+            • <strong>【備課用書】TATA 盒的功能與三域演化意義（★7 版最完整）</strong>：必修備課用書 CH03（演化）p.225 明寫：「古菌在形態和代謝這兩方面較接近細菌，但在<strong>轉錄和轉譯這兩個部分卻非常接近真核生物</strong>。例如，<strong>古菌的轉錄作用需要真核生物中的 TATA 盒結合蛋白等</strong>。<strong>TATA 盒（TATA box）又稱高得堡-哈葛尼斯箱（Goldberg-Hogness box），是一段由 T 和 A 所組成的序列，位於真核生物和古菌的啟動子中，其共有序列為 TATAWAW，其中 W 為 A 或 T。轉錄時 TATA 結合蛋白（TATA binding protein，TBP）會與 TATA 盒結合，並將打開雙股 DNA。TATA 盒也是 RNA 聚合酶結合的位置。TATA 盒的細菌同源物稱為普里布諾盒（Pribnow box），其共有序列較短。</strong>」<br>
+            • <strong>【學生課本】DNA 甲基化</strong>：選修 IV Ch2 習題第 15 題（p.47）介紹 DNA 甲基化附加在腺嘌呤或胞嘧啶上，會改變基因表現、防止已分化細胞逆分化，且某些甲基化修飾可遺傳（備課用書 CH02 p.152、選修 I CH6 p.36 另提細菌自身 DNA 甲基化防限制酶切割）。
+          </td>
+          <td>
+            • <strong>亮點</strong>：全華必修備課用書 p.225 直接把「TATA 盒組成與打開雙股 DNA」跟「古菌與真核生物共享 TATA 盒與 TBP、對應細菌 Pribnow box」放在演化章節，完整點出三域演化意義！<br>
+            • <strong>用語提醒</strong>：備課用書稱細菌 −10 區為 TATA 盒的「同源物」，嚴格來說細菌 −10 區由 σ 因子辨識、古菌／真核 TATA box 由 TBP 辨識，古菌與真核的 TATA box／TBP 才是真正的演化同源系統。
+          </td>
+          <td>
+            • 必修備課用書 CH03 p.225<br>
+            • 選修 IV 課本 CH2 p.47<br>
+            • 選修 IV 備課用書 CH02 PDF p.36<br>
+            • 必修備課用書 CH02 p.152
+          </td>
+        </tr>
+        <tr>
+          <td><strong>南一</strong><br>（108／114）</td>
+          <td>
+            • <strong>【學生課本】</strong>：必修與選修 I 課本未提及 <code>DNA 甲基化</code> 或 <code>TATA box</code>。<br>
+            • <strong>【教師手冊】TATA 匣與一般型轉錄因子</strong>：選修 I 教師手冊 Ch2 p.212「教學補充資料—轉錄因子的角色」明寫：「在發動轉錄時，真核細胞的 RNA 聚合酶必須仰仗稱為『轉錄因子』之蛋白質的協助……<strong>僅有少數的一般型轉錄因子能夠自行附著至 DNA 序列，例如啟動子內部的 TATA 匣（TATA box）；其餘的轉錄因子主要在認識蛋白質，包括轉錄因子彼此和 RNA 聚合酶。唯有當完整的起始複合體組裝完成，聚合酶才能開始沿著 DNA 模板股移行</strong>」。
+          </td>
+          <td>
+            • <strong>重點</strong>：清楚點出真核啟動子內的 <strong>TATA 匣（TATA box）</strong> 是少數能讓一般型轉錄因子（即 TFIID／TBP）直接自行辨識附著的 DNA 序列，作為招募其他轉錄因子與 RNA 聚合酶的定位錨點。
+          </td>
+          <td>
+            • 選修 I 教師手冊 Ch2 p.212（108 版 PDF p.81；114 版 PDF p.224）
+          </td>
+        </tr>
+        <tr>
+          <td><strong>康熹</strong><br>（103 選修下）</td>
+          <td>
+            • <strong>【學生課本】</strong>：選修（下）第 11 章課本未提 <code>DNA 甲基化</code> 或 <code>TATA box</code>。<br>
+            • <strong>【教師用書 &amp; 分冊講義】</strong>：選修（下）教師用書 Ch11 p.179 明寫：「<strong>一個完整的基因序列應包括 RNA 聚合酶的結合區（啟動子）及 TATA 盒（TATA box）</strong>……基因的轉錄受到多種轉錄因子的調控」；分冊講義解答則說明「<strong>兩股間氫鍵數目最少者最易被分開，而 A–T 間有 2 個氫鍵、C–G 間有 3 個氫鍵</strong>」。
+          </td>
+          <td>
+            • 將雙股分開難易度明確歸因於 A–T（2 個氫鍵）與 C–G（3 個氫鍵）的比例，並在教師用書提及啟動子與 TATA 盒。
+          </td>
+          <td>
+            • 選修(下)教師用書 Ch11 p.179<br>
+            • 選修(下)分冊講義解答 Ch11
+          </td>
+        </tr>
+        <tr>
+          <td><strong>泰宇</strong><br>（115／113／108）</td>
+          <td>
+            • <strong>【學生課本】</strong>：必修與選修 I 課本未提 <code>DNA 甲基化</code> 或 <code>TATA box</code>。<br>
+            • <strong>【授課指引】</strong>：選修 I 授課指引 Ch3 p.283–284 補充原核啟動子 <code>-35 序列 TTGACA</code> 與 <code>-10 序列 TATAAT（普里布諾盒）</code>；p.332 提及「細菌會在自身限制酶切割位 DNA 序列上，加上如<strong>甲基化</strong>等作用的修飾，以避開限制酶的切割」；必修授課指引 Ch3 p.218 僅列科普文章標題〈從用進廢退說到表觀遺傳學〉。
+          </td>
+          <td>
+            • 泰宇版在選修 I 授課指引補充了原核的 −10 區（<code>TATAAT</code>，普里布諾盒），但未在該處延伸列出真核的 <code>TATA box</code> 名稱；對甲基化的討論主要集中在細菌保護自身 DNA 免受限制酶切割。
+          </td>
+          <td>
+            • 選修 I 授課指引 Ch3 p.283–284, 332<br>
+            • 必修授課指引 Ch3 p.218
+          </td>
+        </tr>
+        <tr>
+          <td><strong>翰林</strong><br>（113／108）</td>
+          <td>
+            • <strong>【學生課本】表觀遺傳學與 DNA 甲基化</strong>：108 版選修 IV Ch1 課本 p.13「知識補給站：表觀遺傳學」明寫：「<strong>常見的表觀遺傳學機制如 DNA 甲基化會涉及基因的開啟或關閉</strong>……DNA 甲基化是一種將甲基團附加在腺嘌呤或胞嘧啶上的生化反應：胞嘧啶（C）→ 5′-甲基胞嘧啶（5mC）。」<br>
+            • <strong>【教師手冊】</strong>：必修手冊 Ch3 p.234 補充母體環境透過 DNA 甲基化影響子代表現；選修 I 手冊 Ch4 p.49 補充轉錄因子結合加強子促進 RNA 聚合酶與啟動子接合；Ch5 p.19 補充細菌胞嘧啶甲基化防禦自身限制酶。課本與手冊均未出現 <code>TATA box</code> 名稱。
+          </td>
+          <td>
+            • 課本清楚畫出胞嘧啶（C）甲基化變成 5′-甲基胞嘧啶（5mC）的化學結構，有助於向學生說明真核 DNA 甲基化發生在 <strong>C</strong>，而非富含 A–T 的解旋區段。
+          </td>
+          <td>
+            • 選修 IV 課本 Ch1 p.13（備課用書 PDF p.16）<br>
+            • 必修手冊 Ch3 p.234<br>
+            • 選修 I 手冊 Ch4 PDF p.49、Ch5 PDF p.19
+          </td>
+        </tr>
+        <tr>
+          <td><strong>龍騰</strong><br>（113／108）</td>
+          <td>
+            • <strong>【學生課本】</strong>：必修與選修 I 課本未提 <code>DNA 甲基化</code> 或 <code>TATA box</code>。<br>
+            • <strong>【教師用書】同時詳解「TATA 匣」與「DNA 甲基化／組蛋白乙醯化／染色質結構」（★機制對照最清楚）</strong>：<br>
+            1. 選修 I 教師用書 Ch4 p.165-1「深度探索 4-3」明寫：「轉錄單位前具有<strong>啟動子（promoter）</strong>序列，<strong>TATA 匣（TATA box）是常見的啟動子序列，其可供轉錄因子辨識，並協助 RNA 聚合酶附著至啟動子以啟動轉錄作用</strong>。」<br>
+            2. 同頁解釋染色質與甲基化：「異染色質……基因通常都處於不表現的狀態，<strong>這可能是因為轉錄因子無法接觸到 DNA 所致</strong>……<strong>DNA 甲基化是將甲基（−CH<sub>3</sub>）加到 DNA 的鹼基上，被甲基化的基因通常無法表現，若將基因去甲基化，則能開啟基因的表現；組蛋白乙醯化……導致組蛋白與 DNA 之間的作用力減弱，轉錄因子因此較易進入該區域，進而開啟基因的表現。</strong>」<br>
+            3. 選修 I 教師用書 Ch1 p.39-1 進一步說明 DNA 甲基化大多發生在<strong>胞嘧啶第 5 號碳</strong>、基因體印記，以及腫瘤抑制基因過甲基化。
+          </td>
+          <td>
+            • <strong>亮點</strong>：龍騰選修 I 教師用書把「TATA 匣（供轉錄因子辨識並協助 RNA 聚合酶附著）」與「DNA 甲基化／異染色質（使轉錄因子無法接觸到 DNA）」放在同一頁（p.165-1）對照，非常清楚地呈現：<strong>甲基化與異染色質阻擋的是「轉錄因子接觸啟動子 DNA」，而不是阻擋「雙股氫鍵解旋」</strong>。
+          </td>
+          <td>
+            • 選修 I 教師用書 Ch4 p.165-1, 180-2<br>
+            • 選修 I 教師用書 Ch1 p.39-1–39-2<br>
+            • 必修教師用書 Ch2 p.94、Ch3 p.121-1
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Section 4: Classroom Scripts & Exam Tips -->
+  <h2 id="sec-teaching">四、高中課堂教學建議說法與教甄命題判準</h2>
+
+  <div class="insight-card">
+    <div class="insight-title">🗣️ 課堂建議說法一：釐清「複製 vs. 轉錄」與「啟動子是雙股還是單股」（對應 Q1、Q2）</div>
+    <div class="insight-point">
+      「同學常把 <strong>DNA 複製</strong>和<strong>轉錄</strong>開頭用到的東西搞混，我們抓兩個重點就好：<br><br>
+      <strong>第一，『啟動子（promoter）』只有『轉錄（做 RNA）』才有！</strong><br>
+      轉錄的時候，RNA 聚合酶要怎麼知道從浩瀚的 DNA 何處開始抄？它會先認得基因前面一段特定的 DNA 序列，這段路標就叫做<strong>『啟動子』</strong>。至於 <strong>DNA 複製</strong>開始的地方，我們叫它<strong>『複製起點（或複製起始點）』</strong>，南一版課本則叫它<strong>『複製起始序列』</strong>——它跟轉錄的啟動子是不同功能的路標，而且 DNA 複製還需要引子酶先做一小段單股的 <strong>RNA 引子（primer）</strong> 讓 DNA 聚合酶接上去，轉錄則完全不需要引子。<br><br>
+      <strong>第二，不管是轉錄的『啟動子』還是複製的『複製起點』，它們本來就是染色體 DNA 的一部分，所以是一段『雙股 DNA 片段』！</strong><br>
+      為什麼呢？因為在轉錄還沒開始前，DNA 的兩股是合在一起的，RNA 聚合酶必須<strong>先認得並附著在雙股狀態的啟動子上</strong>（形成封閉複合體），接著才把富含 A–T（只有 2 個氫鍵、比較好拉開）的雙股局部解開（形成開放複合體），最後<strong>只挑其中一股當『模板股』</strong>來抄出單股 RNA。至於課本或考題寫出啟動子序列（如 <code>5′-TATAAA-3′</code>）時只寫一行，那只是科學家<strong>只寫非模板股（編碼股）的書寫慣例</strong>，千萬不要因為後面『只用單股當模板股』，或是跟『單股的 RNA 引子』搞混，就以為啟動子只有單股喔！」
+    </div>
+    <div class="callout-mnemo">
+      💡 教學精確口訣（Q1 + Q2）：<br>
+      「複製找起點、要引子；轉錄認啟動子、免引子。啟動子本質是雙股，先認雙股定方向，再解單股作模板！」
+    </div>
+  </div>
+
+  <div class="insight-card">
+    <div class="insight-title">🗣️ 課堂建議說法二：釐清「啟動子解旋 vs. DNA 甲基化」與「TATA 匣的演化大祕密」（對應 Q3、Q4）</div>
+    <div class="insight-point">
+      「很多同學會問：『老師，啟動子容不容易被 RNA 聚合酶解開雙股，是不是跟 DNA 甲基化有關？』答案是：<strong>這兩件事發生在不同步驟、連作用的鹼基都不一樣！</strong><br><br>
+      <strong>第一，決定啟動子雙股『好不好拉開（解旋）』的，是啟動子內部的『A–T 比例』，最有名的就叫做 TATA 匣（TATA box）！</strong><br>
+      為什麼叫 TATA 匣？因為這段序列幾乎都是由 T 和 A 排成的（像 <code>5′-TATAAA-3′</code>）。A 和 T 之間只有 <strong>2 個氫鍵</strong>、鹼基堆疊力也比較弱（C 和 G 有 <strong>3 個氫鍵</strong>且堆疊緊密），所以啟動子擺了一段滿滿都是 A 和 T 的 TATA 匣，就像衣服上的魔鬼氈比較疏一樣，轉錄因子（TBP）跨坐到小溝上把 DNA 折彎 80°、再配合 RNA 聚合酶與 TFIIH，就能輕鬆把雙股拉開。<br><br>
+      <strong>第二，那『DNA 甲基化』是在做什麼？它不是把雙股拉鍊黏死，而是『設路障＋把整件衣服鎖進衣櫃內』！</strong><br>
+      真核生物的 DNA 甲基化，主要是把甲基（−CH<sub>3</sub>）接在<strong>胞嘧啶（C）</strong>上面（你看 TATA 匣 <code>TATAAA</code> 內根本連 C 都沒有！）。當啟動子附近的 CpG 島被大量甲基化時，一方面甲基凸入大溝像路障一樣擋住轉錄因子，另一方面它會叫來甲基結合蛋白（MeCP2）與組蛋白去乙醯酶（HDAC），把 DNA 緊緊纏繞在組蛋白上（變成緊密的異染色質）。結果轉錄因子和 RNA 聚合酶<strong>連靠近啟動子都進不去</strong>，轉錄在第一步就被擋掉了，根本還沒走到後面『解開雙股螺旋』那一步！甚至如果甲基化發生在後面的基因編碼區，RNA 聚合酶照樣能邊解旋邊衝過去，完全不受阻礙！<br><br>
+      <strong>第三，這個小小的 TATA 匣還藏著兩個超酷的『演化大祕密』：</strong><br>
+      ① <strong>三域演化樹的鐵證</strong>：以前大家以為古菌跟細菌都是沒有細胞核的原核生物，應該很像對不對？結果科學家一看啟動子嚇一跳：細菌用的是 −10 普里諾匣搭配 <strong>σ 因子</strong>（沒有 TBP），但<strong>古菌的啟動子竟然跟我們真核生物一樣有 TATA 匣，而且還用同一種『TATA 結合蛋白（TBP）』與 TFIIB 來啟動轉錄！</strong> 這就是為什麼在三域演化樹上，<strong>古菌跟我們真核生物是同一條分支出來的親戚，反而離細菌比較遠！</strong><br>
+      ② <strong>真核基因體的聰明分工</strong>：我們身上其實只有約 10%–25% 的基因有 TATA 匣（專門負責像血紅素這種平時關閉、需要時要精準定位並瞬間大量爆發的<strong>組織專一性基因</strong>）；另外 70% 每天所有細胞都要穩定低量生產的<strong>管家基因</strong>，則改用沒有 TATA 匣的 <strong>CpG 島啟動子</strong>——平時保持『未甲基化』，利用高 CG 序列較硬、不容易纏繞在核小體上的特性，自然露在核小體外面讓聚合酶隨時抄寫；一旦某個組織不需要它，再把 CpG 島<strong>甲基化</strong>鎖起來！」
+    </div>
+    <div class="callout-mnemo">
+      💡 教學精確口訣（Q3 + Q4）：<br>
+      「解旋快慢看 AT（TATA 匣彎折開雙股）；基因開關看 CG（甲基化鎖死異染色質擋結合）。古菌真核共 TBP，三域親緣鐵證立！」
+    </div>
+  </div>
+
+  <footer>
+    Ze-Agent 概念考證庫 • 遵循臺灣教育部與國家教育研究院生物審定名詞規範 • 依據經典原文教科書與高中 7 版教材考證製作
+  </footer>
+
+</div>
+
+</body>
+</html>
