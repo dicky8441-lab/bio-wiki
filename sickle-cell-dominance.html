@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<title>鐮刀型貧血的顯隱性層次分析｜經典遺傳學考題與原文考證</title>
+<title>鐮刀型貧血的顯隱性層次分析｜以 Campbell 13e 為主之深度考證</title>
 
 <!-- KaTeX for Math Equations -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
@@ -61,17 +61,8 @@
     }
   }
 
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Segoe UI", Roboto, sans-serif;
     background-color: var(--bg-primary);
@@ -79,284 +70,80 @@
     line-height: 1.75;
     font-size: 16px;
     padding: 16px 12px 60px 12px;
-    text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
   }
+  .container { max-width: 840px; margin: 0 auto; }
 
-  .container {
-    max-width: 840px;
-    margin: 0 auto;
-  }
-
-  /* Navigation Bar */
   nav.wiki-nav {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    align-items: center;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    padding: 12px 16px;
-    border-radius: var(--radius);
-    margin-bottom: 20px;
-    box-shadow: var(--shadow);
-    font-size: 0.9rem;
+    display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+    background: var(--bg-card); border: 1px solid var(--border-color);
+    padding: 12px 16px; border-radius: var(--radius); margin-bottom: 20px;
+    box-shadow: var(--shadow); font-size: 0.9rem;
   }
-
-  nav.wiki-nav .nav-title {
-    font-weight: 700;
-    color: var(--text-muted);
-    margin-right: 4px;
-  }
-
-  nav.wiki-nav a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    padding: 4px 10px;
-    border-radius: 6px;
-    transition: all 0.2s ease;
-  }
-
-  nav.wiki-nav a:hover {
-    background: var(--bg-tag);
-    color: var(--text-primary);
-  }
-
+  nav.wiki-nav .nav-title { font-weight: 700; color: var(--text-muted); margin-right: 4px; }
+  nav.wiki-nav a { color: var(--text-secondary); text-decoration: none; padding: 4px 10px; border-radius: 6px; }
   nav.wiki-nav a.active {
-    background: var(--primary-light);
-    color: var(--primary);
-    font-weight: 700;
-    border: 1px solid var(--primary-border);
+    background: var(--primary-light); color: var(--primary); font-weight: 700; border: 1px solid var(--primary-border);
   }
 
-  /* Jump Bar */
   .jump-bar {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    align-items: center;
-    background: var(--bg-quote);
-    border: 1px dashed var(--border-color);
-    padding: 10px 14px;
-    border-radius: var(--radius-sm);
-    margin-bottom: 24px;
-    font-size: 0.85rem;
+    display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+    background: var(--bg-quote); border: 1px dashed var(--border-color);
+    padding: 10px 14px; border-radius: var(--radius-sm); margin-bottom: 24px; font-size: 0.85rem;
   }
+  .jump-bar a { color: var(--accent); text-decoration: none; font-weight: 600; }
 
-  .jump-bar a {
-    color: var(--accent);
-    text-decoration: none;
-    font-weight: 600;
-  }
+  header { text-align: center; margin-bottom: 32px; padding: 10px 0; }
+  .badge-bar { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .badge { font-size: 0.8rem; font-weight: 600; padding: 4px 10px; border-radius: 9999px; background: var(--bg-tag); color: var(--text-secondary); }
+  .badge-primary { background: var(--primary-light); color: var(--primary); border: 1px solid var(--primary-border); }
+  .badge-accent { background: var(--accent-light); color: var(--accent); }
 
-  .jump-bar a:hover {
-    text-decoration: underline;
-  }
-
-  header {
-    text-align: center;
-    margin-bottom: 32px;
-    padding: 10px 0;
-  }
-
-  .badge-bar {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 12px;
-  }
-
-  .badge {
-    font-size: 0.8rem;
-    font-weight: 600;
-    padding: 4px 10px;
-    border-radius: 9999px;
-    background: var(--bg-tag);
-    color: var(--text-secondary);
-  }
-
-  .badge-primary {
-    background: var(--primary-light);
-    color: var(--primary);
-    border: 1px solid var(--primary-border);
-  }
-
-  .badge-accent {
-    background: var(--accent-light);
-    color: var(--accent);
-  }
-
-  h1 {
-    font-size: 2rem;
-    font-weight: 800;
-    line-height: 1.3;
-    margin-bottom: 12px;
-    letter-spacing: -0.01em;
-  }
-
-  .subtitle {
-    color: var(--text-secondary);
-    font-size: 1rem;
-    max-width: 680px;
-    margin: 0 auto;
-  }
+  h1 { font-size: 2rem; font-weight: 800; line-height: 1.3; margin-bottom: 12px; letter-spacing: -0.01em; }
+  .subtitle { color: var(--text-secondary); font-size: 1rem; max-width: 680px; margin: 0 auto; }
 
   .card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius);
-    padding: 24px;
-    margin-bottom: 24px;
-    box-shadow: var(--shadow);
+    background: var(--bg-card); border: 1px solid var(--border-color);
+    border-radius: var(--radius); padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow);
   }
-
   .card-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--primary);
-    border-bottom: 2px solid var(--primary-light);
-    padding-bottom: 8px;
+    font-size: 1.25rem; font-weight: 700; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px; color: var(--primary);
+    border-bottom: 2px solid var(--primary-light); padding-bottom: 8px;
   }
+  h2 { font-size: 1.35rem; font-weight: 700; margin-top: 16px; margin-bottom: 12px; }
+  h3 { font-size: 1.15rem; font-weight: 700; margin-top: 14px; margin-bottom: 8px; color: var(--accent); }
+  p { margin-bottom: 14px; }
 
-  h2 {
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-top: 16px;
-    margin-bottom: 12px;
-    color: var(--text-primary);
-  }
-
-  h3 {
-    font-size: 1.15rem;
-    font-weight: 700;
-    margin-top: 14px;
-    margin-bottom: 8px;
-    color: var(--accent);
-  }
-
-  p {
-    margin-bottom: 14px;
-  }
-
-  /* Question Box */
   .question-box {
-    background: var(--primary-light);
-    border-left: 4px solid var(--primary);
-    padding: 16px 20px;
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    margin-bottom: 20px;
+    background: var(--primary-light); border-left: 4px solid var(--primary);
+    padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin-bottom: 20px;
   }
+  .question-box p { margin-bottom: 8px; font-weight: 500; }
+  .question-box p:last-child { margin-bottom: 0; }
 
-  .question-box p {
-    margin-bottom: 8px;
-    font-weight: 500;
-  }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.95rem; }
+  th, td { padding: 12px 14px; border: 1px solid var(--border-color); text-align: left; vertical-align: top; }
+  th { background: var(--bg-quote); font-weight: 700; color: var(--text-primary); }
+  tr:nth-child(even) td { background: rgba(0, 0, 0, 0.015); }
 
-  .question-box p:last-child {
-    margin-bottom: 0;
-  }
+  .callout { border-radius: var(--radius-sm); padding: 16px 18px; margin: 18px 0; border-left: 4px solid; }
+  .callout-blue { background: var(--accent-light); border-color: var(--accent); }
+  .callout-red { background: var(--primary-light); border-color: var(--primary); }
 
-  /* Table styling */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 16px 0;
-    font-size: 0.95rem;
-  }
-
-  th, td {
-    padding: 12px 14px;
-    border: 1px solid var(--border-color);
-    text-align: left;
-    vertical-align: top;
-  }
-
-  th {
-    background: var(--bg-quote);
-    font-weight: 700;
-    color: var(--text-primary);
-  }
-
-  tr:nth-child(even) td {
-    background: rgba(0, 0, 0, 0.015);
-  }
-
-  /* Highlight Callout */
-  .callout {
-    border-radius: var(--radius-sm);
-    padding: 16px 18px;
-    margin: 18px 0;
-    border-left: 4px solid;
-  }
-
-  .callout-blue {
-    background: var(--accent-light);
-    border-color: var(--accent);
-    color: var(--text-primary);
-  }
-
-  .callout-red {
-    background: var(--primary-light);
-    border-color: var(--primary);
-    color: var(--text-primary);
-  }
-
-  /* Dual language box */
   .quote-bilingual {
-    background: var(--bg-quote);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    padding: 16px 20px;
-    margin: 18px 0;
+    background: var(--bg-quote); border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm); padding: 16px 20px; margin: 18px 0;
   }
-
   .quote-en {
-    font-style: italic;
-    color: var(--text-secondary);
-    margin-bottom: 12px;
-    padding-bottom: 12px;
-    border-bottom: 1px dashed var(--border-color);
-    font-family: Georgia, serif;
-    font-size: 0.95rem;
+    font-style: italic; color: var(--text-secondary); margin-bottom: 12px;
+    padding-bottom: 12px; border-bottom: 1px dashed var(--border-color); font-family: Georgia, serif; font-size: 0.95rem;
   }
+  .quote-tw { color: var(--text-primary); font-weight: 500; }
+  .source-tag { display: inline-block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
 
-  .quote-tw {
-    color: var(--text-primary);
-    font-weight: 500;
-  }
-
-  .source-tag {
-    display: inline-block;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 6px;
-    letter-spacing: 0.05em;
-  }
-
-  ul, ol {
-    margin-left: 24px;
-    margin-bottom: 16px;
-  }
-
-  li {
-    margin-bottom: 8px;
-  }
-
-  footer {
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 0.85rem;
-    margin-top: 48px;
-    border-top: 1px solid var(--border-color);
-    padding-top: 24px;
-  }
+  ul, ol { margin-left: 24px; margin-bottom: 16px; }
+  li { margin-bottom: 8px; }
+  footer { text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: 48px; border-top: 1px solid var(--border-color); padding-top: 24px; }
 </style>
 </head>
 <body>
@@ -371,34 +158,34 @@
     <a href="spermatogonia-hole.html">3. 精原細胞與生精歷程 (Hole 15e)</a>
     <a href="griffith-transformation.html">4. Griffith 轉形作用</a>
     <a href="promoter-tata-box.html">5. 啟動子、TATA 匣與甲基化</a>
-    <a href="sickle-cell-dominance.html" class="active">6. 鐮刀型貧血顯隱性層次分析</a>
+    <a href="sickle-cell-dominance.html" class="active">6. 鐮刀型貧血顯隱性層次分析 (Campbell 13e)</a>
   </nav>
 
   <!-- In-page Jump Bar -->
   <div class="jump-bar">
     <span>🧭 本頁快速跳轉：</span>
     <a href="#sec-question">試題還原與解答</a>
-    <a href="#sec-griffiths">Griffiths 12e 權威考證</a>
-    <a href="#sec-brooker">Brooker 8e 三層次模型</a>
-    <a href="#sec-analysis">細胞層次爭議剖析</a>
-    <a href="#sec-teaching">教學與大考評分建議</a>
+    <a href="#sec-campbell13e">Campbell 13e 核心正典論述</a>
+    <a href="#sec-fig1417">圖 14.17 細胞與分子模型解密</a>
+    <a href="#sec-sickling-degree">「鐮刀化程度」到底指什麼？</a>
+    <a href="#sec-genetics-compare">Griffiths / Brooker 延伸對照</a>
+    <a href="#sec-teaching">教學與大考得分指南</a>
   </div>
 
   <header>
     <div class="badge-bar">
-      <span class="badge badge-primary">傳遞遺傳學</span>
-      <span class="badge badge-accent">顯隱性關係</span>
-      <span class="badge">Griffiths 12e 原文</span>
-      <span class="badge">Brooker 8e</span>
-      <span class="badge">教甄考點</span>
+      <span class="badge badge-primary">Campbell Biology 13e 主本</span>
+      <span class="badge badge-accent">Ch 14 圖 14.17</span>
+      <span class="badge">普通生物學正典</span>
+      <span class="badge">教甄命題母本</span>
     </div>
     <h1>鐮刀型貧血的顯隱性層次分析</h1>
-    <p class="subtitle">同一組等位基因在個體、細胞與分子層次為何表現出不同顯隱性？國際經典遺傳學教科書權威文獻深度考證與中英對照</p>
+    <p class="subtitle">以普通生物學權威正典 Campbell Biology 13e（Chapter 14 及圖 14.17）為核心，深入剖析個體、細胞與分子三層次的顯隱性劃分與「鐮刀化程度」真實機制</p>
   </header>
 
   <!-- Section: Question & Quick Summary -->
   <section id="sec-question" class="card">
-    <div class="card-title">📝 試題還原與官方遺傳學標準答案</div>
+    <div class="card-title">📝 試題還原與 Campbell 13e 標準答案</div>
     
     <div class="question-box">
       <p><strong>【題目】</strong> 鐮刀型貧血為遺傳性貧血，若以 $S$ 代表正常基因，$S'$ 代表突變基因，則基因型為 $S'S'$ 的個體為貧血症患者，基因型為 $SS'$ 的個體不會有鐮刀型貧血症狀，但登高山或長時間運動後容易貧血；基因型 $SS$ 則為健康人。根據上文判斷：</p>
@@ -412,141 +199,155 @@
         <tr>
           <th>小題</th>
           <th>觀察層次</th>
-          <th>遺傳學標準答案</th>
-          <th>學理依據與關鍵判準</th>
+          <th>Campbell 13e 標準判定</th>
+          <th>Campbell 13e 原文依據與題幹對應</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><strong>①</strong></td>
           <td><strong>個體層次</strong><br><em>(Organismal)</em></td>
-          <td><strong>不完全顯性</strong><br>（中間型遺傳）<br><span style="font-size:0.85rem;color:var(--text-muted);">*醫學診斷若二分法亦可作答隱性</span></td>
-          <td>$SS'$ 平時無嚴重貧血症狀，但題目特別限定「登高山或劇烈運動時容易貧血」，臨床表徵介於正常健康與重症貧血之間的中間型。</td>
+          <td><strong>不完全顯性</strong><br><em>(Incompletely dominant)</em><br><span style="font-size:0.85rem;color:var(--text-muted);">*若單純看是否罹患臨床疾病(disease)則為隱性</span></td>
+          <td><strong>Campbell 13e 原文直斷：</strong><br><em>"Thus, at the organismal level, the normal allele is incompletely dominant to the sickle-cell allele (Figure 14.17)."</em><br>異型合子帶有一個突變基因即會影響表現型，在長期缺氧、高山或運動下會出現症狀，表徵介於正常與重症之間。</td>
         </tr>
         <tr>
           <td><strong>②</strong></td>
           <td><strong>細胞層次</strong><br><em>(Cellular)</em></td>
-          <td><strong>不完全顯性</strong><br>（中間型遺傳）<br><span style="font-size:0.85rem;color:var(--text-muted);">*部分題庫誤判為等顯性</span></td>
-          <td>依據傳遞遺傳學權威 <strong>Griffiths 12e</strong> 原文：細胞形狀為「紅血球鐮刀化之程度（0%～100%）」，異型合子在低氧下部分變形，為典型的中間型表徵。</td>
+          <td><strong>等顯性（共顯性）</strong><br><em>(Codominance)</em><br><span style="font-size:0.85rem;color:var(--text-muted);">*若看整體鐮刀化程度比例亦可判不完全顯性</span></td>
+          <td><strong>直接對應 Campbell 13e 圖 14.17(b)：</strong><br>圖示標明 <em>"Sickled and normal red blood cells"</em>。題幹寫明「有部分形成鐮刀型，有部分維持正常狀態」，兩種細胞型態在血液中同時完整並存，此即等顯性之特徵。</td>
         </tr>
         <tr>
           <td><strong>③</strong></td>
-          <td><strong>血紅素層次</strong><br><em>(Molecular)</em></td>
-          <td><strong>等顯性</strong><br>（共顯性遺傳）<br><em>Codominance</em></td>
-          <td><strong>無爭議</strong>。分子層次上，正常血紅素與突變血紅素皆獨立合成且能透過電泳清晰分離為兩條色帶，兩者皆完整表現。</td>
+          <td><strong>血紅素表現層次</strong><br><em>(Molecular)</em></td>
+          <td><strong>等顯性（共顯性）</strong><br><em>(Codominant)</em></td>
+          <td><strong>Campbell 13e 原文直斷：</strong><br><em>"At the molecular level, the two alleles are codominant; both normal and abnormal (sickle-cell) hemoglobins are made in heterozygotes."</em> 異型合子同時合成兩種蛋白質分子。</td>
         </tr>
       </tbody>
     </table>
   </section>
 
-  <!-- Section: Griffiths 12e -->
-  <section id="sec-griffiths" class="card">
-    <div class="card-title">📖 Griffiths《Introduction to Genetic Analysis》12e 權威考證</div>
-    <p>Anthony Griffiths 等人所著的《Introduction to Genetic Analysis》（IGA）是全世界大學遺傳學系所最權威的經典教材。在 <strong>Chapter 5.1（第 157–158 頁）</strong> 中，作者以鐮刀型貧血為例，專門探討了「顯性分類的人為約定性與觀察層次」：</p>
+  <!-- Section: Campbell 13e Core Text -->
+  <section id="sec-campbell13e" class="card">
+    <div class="card-title">📖 Campbell Biology 13e (Chapter 14) 原文逐段考證</div>
+    <p>Campbell Biology 13e 在第 14 章<strong>〈孟德爾與基因概念〉（Mendel and the Gene Idea）</strong>的「鐮形血球疾病：具有演化意涵的遺傳疾病」專題中，白紙黑字寫下了對顯隱性層次的定性：</p>
 
     <div class="quote-bilingual">
-      <div class="source-tag">Griffiths 12e · Ch 5.1 · p. 157 原文</div>
+      <div class="source-tag">Campbell Biology 13e · Chapter 14 · p. 288 原文</div>
       <div class="quote-en">
-        "The human disease sickle-cell anemia illustrates the somewhat arbitrary ways in which we classify dominance. The gene concerned encodes the molecule hemoglobin, which is responsible for transporting oxygen in blood vessels and is the major constituent of red blood cells. There are two main alleles, HbA and HbS, and the three possible genotypes have different phenotypes, as follows:<br>
-        • HbA / HbA: normal; red blood cells never sickle<br>
-        • HbS / HbS: severe, often fatal anemia; abnormal hemoglobin causes red blood cells to have sickle shape<br>
-        • HbA / HbS: no anemia; red blood cells sickle only under low oxygen concentrations"
+        "Although two sickle-cell alleles are necessary for an individual to have sickle-cell disease and thus the condition is considered recessive, the presence of one sickle-cell allele can affect the phenotype. Thus, at the organismal level, the normal allele is incompletely dominant to the sickle-cell allele (Figure 14.17).<br><br>
+        At the molecular level, the two alleles are codominant; both normal and abnormal (sickle-cell) hemoglobins are made in heterozygotes (carriers), who are said to have sickle-cell trait. (Here the word 'trait' is used to distinguish this condition from sickle-cell disease, not as it was defined earlier—as any variant of a character.) Heterozygotes are usually healthy but may suffer some symptoms during long periods of reduced blood oxygen."
       </div>
       <div class="quote-tw">
-        人類的鐮刀型血球貧血症，正好說明了我們在分類「顯性」時帶有某種人為劃分的性質。相關的基因編碼血紅素分子，負責在血管中運輸氧氣，也是紅血球的主要成分。此基因有兩個主要等位基因：HbA 與 HbS，三種可能的基因型具有不同的表現型：<br>
-        • HbA / HbA：正常；紅血球絕不形成鐮刀型。<br>
-        • HbS / HbS：嚴重且常致死貧血；異常血紅素導致紅血球呈鐮刀型。<br>
-        • HbA / HbS：無貧血症狀；紅血球只有在低氧濃度下才會形成鐮刀型。
+        雖然個體需要同時擁有兩個鐮刀型等位基因才會患有鐮形血球疾病（sickle-cell disease），因此該疾病通常被視為<strong>隱性（recessive）</strong>，但只要單一鐮刀型等位基因的存在，就能影響表現型。<br>
+        因此，<strong>在個體層次（at the organismal level），正常等位基因對鐮刀型等位基因呈不完全顯性（incompletely dominant，圖 14.17）。</strong><br><br>
+        <strong>在分子層次（at the molecular level），這兩個等位基因呈共顯性／等顯性（codominant）</strong>；異型合子（帶因者，稱為具有<strong>鐮形血球性狀 sickle-cell trait</strong>）體內同時產生正常與異常（鐮刀型）血紅素。（此處使用「性狀 trait」一詞是為了區分這種攜帶狀態與鐮形血球疾病，而非先前定義的「性狀之任一變異」。）異型合子平時通常健康，但在長期血氧不足時可能出現一些症狀。
       </div>
-    </div>
-
-    <div class="quote-bilingual">
-      <div class="source-tag">Griffiths 12e · 核心判準原文（p. 157）</div>
-      <div class="quote-en">
-        "In regard to the presence or absence of anemia, the HbA allele is dominant. In the heterozygote, a single HbA allele produces enough functioning hemoglobin to prevent anemia.<br>
-        In regard to blood-cell shape, however, there is incomplete dominance, as shown by the fact that, in the heterozygote, many of the cells have a slight sickle shape.<br>
-        Finally, in regard to hemoglobin itself, there is codominance. The alleles HbA and HbS encode two different forms of hemoglobin that differ by a single amino acid, and both forms are synthesized in the heterozygote. The A and S forms of hemoglobin can be separated by electrophoresis because it happens that they have different charges... In other words, there is codominance at the molecular level."
-      </div>
-      <div class="quote-tw">
-        <strong>若以「是否出現貧血」來看［個體層次］</strong>，HbA 等位基因為<strong>顯性</strong>［致病等位基因為隱性］。在異型合子體內，單一個 HbA 等位基因便能產生足夠的功能性血紅素來防止貧血發生。<br>
-        <strong>然而，若以「紅血球形狀」來看［細胞層次］</strong>，則表現為<strong>不完全顯性</strong>，這可由異型合子體內有許多細胞呈現輕微鐮刀狀［或部分細胞在低氧下鐮刀化］的事實獲得證明。<br>
-        <strong>最後，若以「血紅素分子本身」來看［分子層次］</strong>，則表現為<strong>等顯性（共顯性）</strong>。HbA 與 HbS 等位基因分別編碼僅相差一個胺基酸的兩種不同形式血紅素，而且在異型合子體內這兩種形式都會被合成。A 型與 S 型血紅素因恰好帶有不同電荷，可透過蛋白質電泳分離⋯⋯換言之，在分子層次上存在著等顯性（共顯性）。
-      </div>
-    </div>
-
-    <div class="callout callout-blue">
-      <strong>🎯 KEY CONCEPT（Griffiths 12e p. 157）：</strong><br>
-      顯性可區分為三大類型：完全顯性、不完全顯性與等顯性（共顯性）。一組等位基因所表現出的顯性類型，是由其基因產物的分子功能以及<strong>研究所檢驗的層次（Investigative level of analysis）</strong>所共同決定的。
     </div>
   </section>
 
-  <!-- Section: Brooker & Pierce -->
-  <section id="sec-brooker" class="card">
-    <div class="card-title">🔬 Brooker 8e 與 Pierce 7e 的架構呼應</div>
-
-    <h3>1. Brooker《Genetics: Analysis & Principles》8e (2024) 習題 C25</h3>
-    <p>Brooker 在第四章習題特別設計了這道橫跨分子、細胞、個體的比較題：</p>
-    <div class="quote-bilingual">
-      <div class="quote-en">
-        "C25. Compare phenotypes at the molecular, cellular, and organism levels for individuals who are homozygous for the hemoglobin A allele, HbAHbA, and the sickle cell allele, HbSHbS.<br>
-        (Answer) At the molecular level: HbAHbA produces normal hemoglobin A; HbSHbS produces hemoglobin S with an altered amino acid sequence that aggregates when deoxygenated.<br>
-        At the cellular level: the red blood cells of the former maintain a normal biconcave disc shape and normal lifespan; the red blood cells of the latter sickle under low oxygen, are fragile/rupture easily, and clog capillaries.<br>
-        At the organism level: the former is typically free of sickle cell disease; the latter suffers from hemolytic anemia, pain, localized hypoxia, and organ damage, with a potentially shortened lifespan."
-      </div>
-      <div class="quote-tw">
-        <strong>【參考解答】</strong><br>
-        • <strong>分子層次：</strong> HbAHbA 製造正常的血紅素 A；HbSHbS 則製造胺基酸序列改變的血紅素 S，去氧時易聚集成纖維。<br>
-        • <strong>細胞層次：</strong> 前者的紅血球維持正常的雙凹圓盤狀與正常壽命；後者的紅血球在低氧下變形為鐮刀狀、容易破裂溶血，並會阻塞微血管。<br>
-        • <strong>個體層次：</strong> 前者通常完全沒有鐮刀型細胞疾病；後者則會出現溶血性貧血、疼痛、局部組織缺氧與器官損傷，壽命也可能縮短。
-      </div>
-    </div>
-
-    <h3>2. Pierce《Genetics: A Conceptual Approach》7e (2020) Ch 5.1</h3>
-    <p>Pierce 則總結道：「顯性只影響基因產物呈現為表現型的方式，而不改變基因傳遞的規律。同一個等位基因在某一個觀察層次上可能表現為<strong>等顯性</strong>，而在另一個觀察層次上則可能呈現為<strong>隱性</strong>。」</p>
-  </section>
-
-  <!-- Section: Deep Analysis -->
-  <section id="sec-analysis" class="card">
-    <div class="card-title">⚡ 深度辨析：細胞層次為何是「不完全顯性」而非「等顯性」？</div>
+  <!-- Section: Fig 14.17 Analysis -->
+  <section id="sec-fig1417" class="card">
+    <div class="card-title">🔬 Campbell 13e 圖 14.17：細胞與血紅素表現型模型</div>
     
-    <p>許多高中師生在遇到第 ② 小題時常產生激烈爭議：<strong>「既然體內有一半細胞是正常、一半細胞是鐮刀形，兩種都有出現，為什麼不能算等顯性（共顯性）？」</strong></p>
+    <p>Campbell 13e 圖 14.17 以兩側對比清楚呈現了兩者的生理機制：</p>
 
-    <div class="callout callout-red">
-      <strong>⚠️ 關鍵概念混淆：是「質的並存」還是「量的中間」？</strong>
+    <div style="background:var(--bg-quote); border:1px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; margin:16px 0;">
+      <h3 style="margin-top:0;">(a) 鐮形血球疾病純合子（Homozygote for sickle-cell disease）</h3>
       <ul>
-        <li><strong>等顯性（Codominance）的核心定義：</strong> 異型合子體內，兩個等位基因的產物<strong>在同一觀察單位上同時、獨立且完整地表現</strong>，沒有任何一方被遮蔽或減損。例如：一顆紅血球表面同時插滿了 A 抗原與 B 抗原（AB 型）；或者一根毛髮同時表現兩種色澤。</li>
-        <li><strong>不完全顯性（Incomplete dominance）的核心定義：</strong> 異型合子的表現型落在兩個同型合子親代的**定量光譜中間（Intermediate phenotype）**。</li>
+        <li><strong>染色體：</strong>兩條同源染色體均攜帶鐮刀型等位基因。</li>
+        <li><strong>分子層次：</strong>細胞內合成的所有血紅素均為異常的鐮刀型血紅素。</li>
+        <li><strong>纖維聚合：</strong>在低血氧時，異常血紅素聚集成堅硬的長桿狀螺旋纖維。</li>
+        <li><strong>細胞層次：</strong>紅血球被撐開變形為僵硬的典型鐮刀形（Sickled red blood cells）。</li>
+        <li><strong>個體層次：</strong>鐮刀形細胞阻塞微血管，引發嚴重溶血性貧血、疼痛發燒、組織壞死與器官損傷。</li>
+      </ul>
+
+      <h3 style="margin-top:16px;">(b) 鐮形血球性狀雜合子（Heterozygote with sickle-cell trait）——即題幹 SS'</h3>
+      <ul>
+        <li><strong>染色體：</strong>一條攜帶正常等位基因（S），另一條攜帶鐮刀型等位基因（S'）。</li>
+        <li><strong>分子層次：</strong>體內<strong>同時合成正常血紅素與鐮刀型血紅素</strong>（共顯性/等顯性）。</li>
+        <li><strong>纖維聚合：</strong>由於存在大量正常血紅素的空間阻礙，只有在<strong>血氧極度低下時</strong>，鐮刀型血紅素才會聚集形成長纖維。</li>
+        <li><strong>細胞層次：</strong>在低氧環境下，血液中<strong>「同時有鐮刀形紅血球和正常紅血球（Sickled and normal red blood cells）」</strong>（對應題幹 ②）。</li>
+        <li><strong>個體層次：</strong>平常完全沒有貧血症狀，但長期缺氧或高山運動時可能出現輕微症狀（不完全顯性）；同時賦予對瘧疾的抵抗力（異型合子優勢）。</li>
       </ul>
     </div>
-
-    <h3>在細胞層次觀察的是「紅血球整體的鐮刀化程度」</h3>
-    <ol>
-      <li><strong>正常純合子（$SS$）：</strong> 鐮刀化比率為 <strong>0%</strong>。</li>
-      <li><strong>患者純合子（$S'S'$）：</strong> 鐮刀化比率接近 <strong>100%</strong>。</li>
-      <li><strong>帶因雜合子（$SS'$）：</strong> 在低氧壓力下，鐮刀化比率約 <strong>35%～50%</strong>。</li>
-    </ol>
-    <p>從群體細胞的病理計數來看，這是一個<strong>介於 0% 到 100% 之間的中間數值</strong>。這就是為什麼 Griffiths 原文堅定寫下：<em>"In regard to blood-cell shape, however, there is incomplete dominance"</em>。</p>
-
-    <p style="font-size:0.95rem;color:var(--text-secondary);">（備註：若題目字面特別強調「同一視野內可同時看到兩種細胞獨立存在」，命題者若缺乏深層遺傳學訓練，偶爾會誤設答案為等顯性。作答時最保險的策略是寫出「不完全顯性」，並括號附註「因缺氧下紅血球鐮刀化比例介於中間；若著眼於兩類細胞並存亦有學者視為等顯性」即可滴水不漏。）</p>
   </section>
 
-  <!-- Section: Teaching & Exams -->
-  <section id="sec-teaching" class="card">
-    <div class="card-title">💡 高中教學板書與教甄作答心法</div>
+  <!-- Section: What does sickling degree mean? -->
+  <section id="sec-sickling-degree" class="card">
+    <div class="card-title">💡 核心問題解答：Campbell 視角下的「紅血球鐮刀化程度」是指什麼？</div>
 
-    <h3>課堂口述建議（高中生聽得懂的版本）：</h3>
-    <div class="quote-bilingual">
-      <div class="quote-tw">
-        「同學們，以後看到題目問『鐮刀型貧血是顯性還是隱性？』千萬不要急著回答，你要先反問他：『老師，你問的是哪一個層次？』<br><br>
-        1. <strong>如果你看的是人會不會發病（個體層次）</strong>：帶一個突變基因的人平常好端端的，所以致病基因是<strong>隱性</strong>；但如果題目強調他去爬合歡山會喘、會貧血，症狀介於健康與生病之間，這叫<strong>不完全顯性</strong>。<br>
-        2. <strong>如果你把抽出來的血拿去顯微鏡下看（細胞層次）</strong>：缺氧時只有一部分細胞變鐮刀形，鐮刀化的嚴重程度剛好落在中間，遺傳學課本稱作<strong>不完全顯性</strong>。<br>
-        3. <strong>如果你把細胞打碎、把裡面的血紅素拿去做電泳（分子層次）</strong>：你會同時看到一條正常 HbA、一條異常 HbS，兩種蛋白質各自完整出現，這叫做<strong>等顯性（共顯性）</strong>！」
-      </div>
+    <p>在讀到「紅血球鐮刀化程度」時，許多人容易困惑：這到底是指單顆細胞的形狀？還是細胞的比例？依據 Campbell 13e 的生理與細胞機制，鐮刀化程度主要表現在以下三大面向：</p>
+
+    <h3>1. 誘發細胞變形所需的「氧氣分壓門檻」（條件上的程度）</h3>
+    <p>Campbell 13e 特別強調<strong>「When the oxygen content of blood is low」</strong>：</p>
+    <ul>
+      <li><strong>正常純合子（SS）：</strong> 無論氧氣多低，血紅素皆不聚集，鐮刀化程度為 <strong>0</strong>（永不鐮刀化）。</li>
+      <li><strong>患者純合子（S'S'）：</strong> 在一般人體的正常靜脈血氧分壓（約 40 mmHg）下，異常血紅素就會迅速結晶聚合，紅血球全面鐮刀化。</li>
+      <li><strong>異型合子（SS'）：</strong> 正常靜脈血中不變形，必須達到<strong>「長期嚴重缺氧（long periods of reduced blood oxygen）」</strong>（如劇烈運動無氧代謝、高海拔極度缺氧）時，才會誘發聚合。其聚合所需的門檻剛好落在中間。</li>
+    </ul>
+
+    <h3>2. 血液中發生變形的「紅血球群體比例」（數量上的程度）</h3>
+    <p>如 Campbell 圖 14.17(b) 所示，在低氧壓力下：</p>
+    <ul>
+      <li>患者純合子（S'S'）：幾乎 <strong>100%</strong> 紅血球皆轉變成鐮刀狀。</li>
+      <li>異型合子（SS'）：只有<strong>「一部分紅血球形成鐮刀狀，另一部分仍維持正常的雙凹圓盤形」</strong>。變形紅血球佔全血的比例介於 0% 到 100% 之間的中間值。</li>
+    </ul>
+
+    <h3>3. 單顆紅血球的「微觀變形劇烈程度」</h3>
+    <p>在分子結構上，HbA 會嵌入並終止 HbS 的纖維生長。因此異型合子的聚合纖維較短且不完整，單顆細胞的扭曲變形程度通常不如純合患者那樣極端僵硬尖銳，在鏡檢下常呈現較為緩和的輕微變形。</p>
+  </section>
+
+  <!-- Section: Griffiths & Brooker -->
+  <section id="sec-genetics-compare" class="card">
+    <div class="card-title">📚 傳遞遺傳學課本（Griffiths / Brooker）與 Campbell 13e 的觀點互補</div>
+    
+    <p>將普通生物學（Campbell 13e）與專科遺傳學對照，能更清楚看出學術界的思考光譜：</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>層次</th>
+          <th>Campbell 13e（普生正典）</th>
+          <th>Griffiths 12e / Brooker 8e（遺傳學教材）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>個體層次</strong></td>
+          <td><strong>不完全顯性</strong><br><em>"the normal allele is incompletely dominant to the sickle-cell allele"</em>（因單一基因即影響缺氧表現型）</td>
+          <td><strong>顯性 / 隱性</strong>（若單純看疾病 Anemia 是否發病）<br>或<strong>不完全顯性</strong>（若考量異型合子性狀 trait）</td>
+        </tr>
+        <tr>
+          <td><strong>細胞層次</strong></td>
+          <td><strong>圖 14.17(b) 呈現等顯性直觀：</strong><br>正常細胞與鐮刀細胞同時在同一血液中並存（Sickled and normal cells）</td>
+          <td><strong>不完全顯性（Incomplete dominance）：</strong><br><em>"In regard to blood-cell shape, however, there is incomplete dominance, as shown by the fact that many of the cells have a slight sickle shape."</em>（看整體鐮刀化程度中間值）</td>
+        </tr>
+        <tr>
+          <td><strong>分子層次</strong></td>
+          <td><strong>共顯性 / 等顯性（Codominant）</strong><br>正常血紅素與突變血紅素同時被合成製造</td>
+          <td><strong>共顯性 / 等顯性（Codominance）：</strong><br>兩者蛋白質產物皆被合成，經電泳分離出兩條獨立色帶</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Section: Teaching Tips -->
+  <section id="sec-teaching" class="card">
+    <div class="card-title">🎯 教學口述與大考評分得分心法</div>
+    
+    <div class="callout callout-blue">
+      <strong>Campbell 13e 課堂一分鐘定錨口訣：</strong><br>
+      「看個體，缺氧會喘是中間（<strong>不完全顯性</strong>）；<br>
+      看細胞，鏡下紅白兩型並存（<strong>等顯性</strong>）或變形比例居中（<strong>不完全顯性</strong>）；<br>
+      看蛋白，HbA 與 HbS 兩條電泳帶各自完整（<strong>等顯性</strong>）！」
     </div>
+
+    <p>在大考或教甄閱卷標準中，針對第 ② 小題「細胞層次」：<br>
+    若題目字面描述<strong>「有部分會形成鐮刀型，有部分維持正常狀態」</strong>，強烈建議以 **等顯性（共顯性）** 為主答（緊扣 Campbell 13e 圖 14.17 的兩種細胞並存特徵），並括號補充：「若依傳遞遺傳學 Griffiths 視角，將整體血液之鐮刀化比率視為中間型表徵，亦可論為不完全顯性」，如此便能全面兼顧普生與遺傳學兩大權威閱卷標準！</p>
   </section>
 
   <footer>
-    <p>Bio-Wiki 原文生物教科書知識庫 · 專題建置於 2026 年 · 依據 Griffiths 12e / Brooker 8e / Pierce 7e 審定</p>
+    <p>Bio-Wiki 原文生物教科書知識庫 · 專題建置於 2026 年 · 核心依據 Campbell Biology 13e Chapter 14 審定</p>
   </footer>
 
 </div>
