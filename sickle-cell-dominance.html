@@ -164,7 +164,7 @@
   <!-- In-page Jump Bar -->
   <div class="jump-bar">
     <span>🧭 本頁快速跳轉：</span>
-    <a href="#sec-question">試題還原與解答</a>
+    <a href="#sec-question">試題還原與解答</a> · <a href="#sec-criteria">中間型 4 大判準</a>
     <a href="#sec-campbell13e">Campbell 13e 核心正典論述</a>
     <a href="#sec-fig1417">圖 14.17 細胞與分子模型解密</a>
     <a href="#sec-sickling-degree">「鐮刀化程度」到底指什麼？</a>
@@ -225,6 +225,59 @@
       </tbody>
     </table>
   </section>
+
+
+  <!-- Section: Incomplete Dominance Criteria -->
+  <section id="sec-criteria" class="card">
+    <div class="card-title">🧭 中間型遺傳（不完全顯性）的 4 大核心判準與判定決策樹</div>
+    
+    <p>要精準判斷題目在哪個層次屬於「中間型遺傳（不完全顯性）」，必須回到遺傳學第一原理。經典遺傳學（Pierce 7e / Griffiths 12e / Brooker 8e）定義中間型遺傳有 <strong>4 大核心判定要點</strong>：</p>
+
+    <div style="background:var(--bg-quote); border:1px solid var(--border-color); border-radius:var(--radius-sm); padding:16px 20px; margin:16px 0;">
+      <h3 style="margin-top:0; color:var(--primary);">🎯 中間型遺傳的 4 大檢驗清單</h3>
+      <ol style="margin-left:20px; margin-bottom:0;">
+        <li><strong>要點 1：表現型的「單一性」與「居中性」（最根本分水嶺）</strong><br>
+          異型合子（$Aa$）在所觀察的性狀維度上，<strong>只呈現「一種」單一的表現型</strong>，且這個表現型落在兩個同型合子親代（$AA$ 與 $aa$）的中間。<br>
+          <span style="font-size:0.9rem; color:var(--text-secondary);">• <strong>粉紅花 vs. 紅白斑花</strong>：像紅花 × 白花開出<strong>「粉紅花」</strong>（單一顏色、數值居中）為中間型；開出<strong>「紅白斑相間的花」</strong>（兩特徵各自完整並存）則是等顯性。</span>
+        </li>
+        <li style="margin-top:8px;"><strong>要點 2：分子機制的「劑量效應」（Gene Dosage Effect）</strong><br>
+          單一正常基因只產生約 <strong>50% 的正常蛋白質產物或活性</strong>（單倍不足），不足以達到同型合子（100%）的完全表現，使最終生理表徵呈現折半的中間狀態。
+        </li>
+        <li style="margin-top:8px;"><strong>要點 3：表現型比例 ＝ 基因型比例 ＝ 1:2:1</strong><br>
+          兩名異型合子交配（Aa × Aa），子代不會出現完全顯性的 $3:1$，而是嚴格呈現 <strong>$1(AA) : 2(Aa) : 1(aa)$</strong>，每種基因型各有獨立表現型。
+        </li>
+        <li style="margin-top:8px;"><strong>要點 4：衡量尺度為「連續程度性」，非「全有全無」</strong><br>
+          中間型遺傳衡量的通常是一個<strong>有程度差異的光譜</strong>（嚴重度、濃度、耐受度門檻），而非非黑即白的二分法。
+        </li>
+      </ol>
+    </div>
+
+    <h3>🌳 顯隱性層次判斷決策樹</h3>
+    <div style="background:var(--bg-primary); border:1px solid var(--border-color); border-radius:var(--radius-sm); padding:16px; font-family:monospace; line-height:1.6; font-size:0.95rem; margin:16px 0;">
+      <strong>問第 1 句：異型合子表現出的是「單一的中間狀態」，還是「兩種親代特徵各自完整並存」？</strong><br>
+      &nbsp;&nbsp;├─ <strong>單一中間狀態</strong>（如粉紅花、高山缺氧才引發的輕度貧血）<br>
+      &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└─► <strong style="color:var(--primary);">【中間型遺傳 / 不完全顯性】</strong>（👉 ① 個體臨床耐受度層次）<br>
+      &nbsp;&nbsp;│<br>
+      &nbsp;&nbsp;└─ <strong>兩種親代特徵各自獨立、完整並存</strong><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ <strong>分子層次：</strong>同時合成正常 HbA 與異常 HbS 兩條獨立色帶<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;└─► <strong style="color:var(--accent);">【等顯性 / 共顯性】</strong>（👉 ③ 血紅素表現層次）<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─ <strong>細胞型態層次：</strong>血液中同時並存正常圓盤細胞與鐮刀形細胞<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─► <strong style="color:var(--accent);">【等顯性 / 共顯性】</strong>（👉 ② 題幹字面視角：兩種細胞並存）
+    </div>
+
+    <h3>🔍 逐小題檢驗比對</h3>
+    <ul>
+      <li><strong>① 個體層次（臨床耐受度）：</strong> $SS$ 平地高山皆健康（耐受度 100%）、$S'S'$ 平地即重症（耐受度 0%），而 $SS'$ 唯獨在「高山或劇烈運動」才貧血。症狀嚴重度落在兩者中間 → <strong>完全符合要點 1 與要點 4（中間型遺傳）</strong>。</li>
+      <li><strong>② 細胞層次（題幹：部分鐮刀型、部分正常）：</strong>
+        <ul>
+          <li><strong>看型態並存（題幹直觀）：</strong> 同一個體血液中「正常紅血球」與「鐮刀型紅血球」同時獨立出現（如紅白斑花） → <strong>等顯性（共顯性）</strong>。</li>
+          <li><strong>看變形比率（病理計數）：</strong> 鐮刀化比例約 35%～50%，落在 0% 到 100% 的中間值 → <strong>不完全顯性</strong>。</li>
+        </ul>
+      </li>
+      <li><strong>③ 分子層次（血紅素合成）：</strong> 體內沒有任何「半正常半異常的中間雜種蛋白」，而是<strong>正常 HbA 蛋白與異常 HbS 蛋白各自完整合成</strong> → <strong>完全否定中間型，毫無爭議為等顯性（共顯性）</strong>。</li>
+    </ul>
+  </section>
+
 
   <!-- Section: Campbell 13e Core Text -->
   <section id="sec-campbell13e" class="card">
