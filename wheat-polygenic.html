@@ -23,274 +23,895 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
   <style>
-    :root {
-      --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --border: #e2e8f0;
-      --text-main: #0f172a;
-      --text-muted: #64748b;
-      --primary: #991b1b; /* Wheat Kernel Dark Red */
-      --primary-light: #fef2f2;
-      --accent: #b45309;  /* Golden Wheat */
-      --accent-light: #fef3c7;
-      --highlight: #0284c7;
-      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.05);
-      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.08);
-      --radius: 12px;
+  :root {
+    --bg-primary: #181614;
+    --bg-pillbar: #24201c;
+    --bg-card: #211e1a;
+    --bg-quote: #26221e;
+    --bg-tag: #2d2823;
+    --text-primary: #f6f1ea;
+    --text-body: #ddd5ca;
+    --text-secondary: #bfb5a8;
+    --text-muted: #9a8e80;
+    --primary: #5bc0eb;
+    --primary-light: rgba(91, 192, 235, 0.12);
+    --primary-border: rgba(91, 192, 235, 0.32);
+    --accent: #f4c44e;
+    --accent-light: rgba(244, 196, 78, 0.12);
+    --border-color: rgba(246, 241, 234, 0.09);
+    --border-strong: rgba(246, 241, 234, 0.16);
+    --taupe-fab: rgba(104, 91, 78, 0.94);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+  }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+    font-size: 18px;
+    line-height: 1.78;
+    padding: 0 0 96px 0;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Reading Outpost Signature Top Pill Header */
+  .ro-header-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-primary) 70%, rgba(24, 22, 20, 0));
+  }
+
+  .ro-pillbar {
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .ro-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .ro-menu-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    border: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .ro-menu-circle span {
+    display: block;
+    width: 16px;
+    height: 2.2px;
+    background: #181614;
+    border-radius: 2px;
+  }
+
+  .ro-brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .ro-brand-zh {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-brand-en {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .ro-cta-pill {
+    appearance: none;
+    background: var(--accent);
+    color: #1c1814;
+    border: none;
+    border-radius: 999px;
+    padding: 7px 15px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  /* Main Reading Column (Reading Outpost 16-18 chars/line on mobile) */
+  .container, .wrap, main.container, main.wrap {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 22px 0;
+  }
+
+  /* Hero / Article Header */
+  header, .hero {
+    text-align: left !important;
+    margin-bottom: 32px;
+    padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .badge-bar, .meta-line {
+    display: flex;
+    justify-content: flex-start !important;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .badge, .meta-pill, .meta-pill-muted, .eyebrow, .tag {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .badge-primary, .meta-pill, .eyebrow {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary-border);
+  }
+
+  .badge-accent, .badge.red {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: rgba(244, 196, 78, 0.32);
+  }
+
+  h1 {
+    font-size: clamp(26px, 6.2vw, 34px);
+    line-height: 1.38;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    margin: 6px 0 14px;
+    text-align: left;
+  }
+
+  .subtitle, .lead, .meta {
+    font-size: 17px;
+    line-height: 1.68;
+    color: var(--text-muted);
+    margin: 0;
+    max-width: none;
+    text-align: left;
+  }
+
+  /* Unboxed Article Flow */
+  section, section.card, .card {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-bottom: 42px;
+    scroll-margin-top: 84px;
+  }
+
+  h2, .card-title {
+    font-size: clamp(22px, 5.2vw, 27px);
+    line-height: 1.45;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 44px 0 18px;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+  }
+
+  h2::before {
+    display: none !important;
+  }
+
+  h2 .sec-num {
+    color: var(--accent);
+    margin-right: 6px;
+    font-weight: 800;
+  }
+
+  h3, .step-box h3, .insight-title {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 30px 0 12px;
+  }
+
+  p, .summary-item, .insight-point, .hero-text {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--text-body);
+    margin-bottom: 18px;
+  }
+
+  ul, ol {
+    margin: 0 0 22px 24px;
+    color: var(--text-body);
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+    color: var(--text-body);
+  }
+
+  strong, b {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  /* Reading Outpost Signature Cyan-Underlined Content Links */
+  main a:not(.ro-cta-pill):not(.ro-brand-link),
+  .container a:not(.ro-cta-pill):not(.ro-brand-link),
+  .wrap a:not(.ro-cta-pill):not(.ro-brand-link) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  /* Soft Warm Sub-cards (Quotes, Takeaways, Callouts) */
+  .tldr-card, .hero-card, .summary-card, .book-card, .source-card,
+  .quote-bilingual, .insight-card, .callout, .callout-mnemo,
+  .question-box, .translation-box, .answer, .boundary, .source,
+  .answer-tile, aside.card, .step-list li {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius) !important;
+    padding: 20px 20px !important;
+    margin: 20px 0 !important;
+    box-shadow: none !important;
+  }
+
+  .tldr-card, .hero-card, .callout-mnemo, .answer, .question-box {
+    border-left: 4px solid var(--accent) !important;
+  }
+
+  .callout, .translation-box {
+    border-left: 4px solid var(--primary) !important;
+  }
+
+  .tldr-label, .hero-title, .summary-title, .book-title, .source-book, .callout-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent) !important;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .timeline-step {
+    padding-left: 4px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 12px;
+  }
+
+  .timeline-step:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .timeline-step-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .timeline-step-title span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    font-size: 14px;
+    font-weight: 800;
+    margin-right: 8px;
+  }
+
+  .grid-cards, .summary-grid, .two-col, .source-grid, .answer-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  @media (min-width: 640px) {
+    .grid-cards, .source-grid, .answer-hero {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* Bilingual Textbook Quote Blocks */
+  .book-header, .source-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .book-meta, .source-loc, .source-tag, .summary-subtitle, .summary-badge {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .quote-entry, .quote-block {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .quote-entry:last-child, .quote-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quote-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .en-box, .quote-en, blockquote {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 10px 0 12px;
+    word-break: break-word;
+  }
+
+  body.hide-en .en-box,
+  body.hide-en .quote-en {
+    display: none;
+  }
+
+  .zh-box, .quote-tw {
+    font-size: 17.5px;
+    line-height: 1.78;
+    color: var(--text-body);
+  }
+
+  .zh-box strong, .quote-tw strong {
+    color: var(--accent);
+    background: rgba(244, 196, 78, 0.10);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+
+  .toggle-en-btn {
+    appearance: none;
+    background: var(--bg-tag);
+    color: var(--accent);
+    border: 1px solid rgba(244, 196, 78, 0.35);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  /* Figures & Images */
+  .figure-card, .fig-card, figure, .figure-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .figure-img-wrap, .fig-body, .figure-body {
+    padding: 14px;
+  }
+
+  .figure-img-wrap {
+    background: #f8fafc;
+    cursor: zoom-in;
+  }
+
+  main img, .container img, .wrap img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 8px;
+    margin: 0 auto;
+    cursor: zoom-in;
+  }
+
+  .zoom-hint {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    padding: 6px 4px 0;
+  }
+
+  .figure-title, .fig-title, .fig-header {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding: 12px 16px 4px;
+  }
+
+  .figure-caption, .fig-caption, figcaption {
+    font-size: 15px;
+    line-height: 1.68;
+    color: var(--text-secondary);
+    padding: 6px 16px 14px;
+    background: transparent;
+    border: none;
+  }
+
+  .figure-caption-en {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 0 16px 14px;
+  }
+
+  /* Layer List & Flow */
+  .layer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 16px 0 24px;
+  }
+
+  .layer-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-size: 17px;
+  }
+
+  .layer-badge {
+    font-size: 13px;
+    font-weight: 700;
+    color: #181614;
+    background: var(--accent);
+    padding: 2px 9px;
+    border-radius: 6px;
+    white-space: nowrap;
+    margin-top: 3px;
+  }
+
+  .flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    padding: 18px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    margin: 18px 0;
+  }
+
+  .flow span {
+    padding: 6px 11px;
+    border-radius: 8px;
+    background: var(--bg-tag);
+    color: var(--text-primary);
+    font-size: 15px;
+  }
+
+  .flow b {
+    color: var(--accent);
+  }
+
+  .step-list {
+    list-style: none;
+    margin-left: 0;
+  }
+
+  .ans-value {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+
+  .chart-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin: 20px 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 14px;
+  }
+
+  /* Responsive Tables -> Stacked Mobile Cards (< 680px) */
+  .table-wrap, .table-wrapper {
+    width: 100%;
+    margin: 18px 0 26px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 16px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-body);
+  }
+
+  th {
+    background: var(--bg-pillbar);
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  tr.highlight-tr td {
+    background: rgba(244, 196, 78, 0.12);
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  @media (max-width: 680px) {
+    table.ro-resp-table,
+    table.ro-resp-table thead,
+    table.ro-resp-table tbody,
+    table.ro-resp-table th,
+    table.ro-resp-table td,
+    table.ro-resp-table tr {
+      display: block;
+      width: 100%;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    table.ro-resp-table thead {
+      display: none;
     }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
-      background-color: var(--bg);
-      color: var(--text-main);
-      line-height: 1.7;
-      padding: 24px 16px;
+    table.ro-resp-table tr {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 14px;
     }
 
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
+    table.ro-resp-table td {
+      border: none;
+      border-bottom: 1px dashed var(--border-color);
+      padding: 8px 0;
+      text-align: left !important;
     }
 
-    header {
-      text-align: center;
-      margin-bottom: 32px;
+    table.ro-resp-table td:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
     }
 
-    .badge-bar {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 12px;
-    }
-
-    .badge {
-      font-size: 0.8rem;
-      font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 9999px;
-      background: var(--accent-light);
+    table.ro-resp-table td:first-child {
+      padding-top: 0;
+      font-size: 17.5px;
+      font-weight: 700;
       color: var(--accent);
     }
-    .badge.red {
-      background: var(--primary-light);
-      color: var(--primary);
-    }
 
-    h1 {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--text-main);
-      margin-bottom: 8px;
-      letter-spacing: -0.02em;
-    }
-
-    .subtitle {
-      color: var(--text-muted);
-      font-size: 1rem;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px;
-      margin-bottom: 28px;
-      box-shadow: var(--shadow);
-    }
-
-    .card-title {
-      font-size: 1.25rem;
+    table.ro-resp-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 12.5px;
       font-weight: 700;
-      margin-bottom: 16px;
-      display: flex;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+  }
+
+  /* Reading Outpost Bottom-Left TOC Pill & Bottom-Right Up Button */
+  .ro-bottom-toc {
+    position: fixed;
+    left: 16px;
+    bottom: 20px;
+    z-index: 95;
+    background: var(--taupe-fab);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 9px 15px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: calc(100vw - 88px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-up-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 95;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--taupe-fab);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    text-decoration: none !important;
+  }
+
+  /* Drawers & Lightbox */
+  .ro-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ro-drawer-backdrop.open {
+    display: flex;
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-backdrop {
       align-items: center;
-      gap: 8px;
-      color: var(--primary);
-      border-bottom: 2px solid var(--primary-light);
-      padding-bottom: 8px;
+      padding: 24px;
     }
+  }
 
-    .question-box {
-      background: #fafaf9;
-      border-left: 4px solid var(--accent);
-      padding: 16px 20px;
-      border-radius: 4px 8px 8px 4px;
-      margin-bottom: 16px;
-      font-size: 0.98rem;
-    }
+  .ro-drawer-panel {
+    width: 100%;
+    max-width: 500px;
+    max-height: 78vh;
+    overflow-y: auto;
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px 20px 0 0;
+    padding: 18px 18px 28px;
+    box-shadow: var(--shadow);
+  }
 
-    .question-box p {
-      margin-bottom: 8px;
+  @media (min-width: 640px) {
+    .ro-drawer-panel {
+      border-radius: 18px;
     }
+  }
 
-    .translation-box {
-      background: #f8fafc;
-      border-left: 4px solid var(--highlight);
-      padding: 16px 20px;
-      border-radius: 4px 8px 8px 4px;
-      font-size: 0.98rem;
-    }
+  .ro-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
 
-    .answer-hero {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-      margin: 20px 0;
-    }
+  .ro-drawer-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
 
-    .answer-tile {
-      background: linear-gradient(135deg, #ffffff 0%, #fff7f7 100%);
-      border: 2px solid #fecaca;
-      border-radius: var(--radius);
-      padding: 20px;
-      text-align: center;
-    }
+  .ro-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
 
-    .answer-tile .q-label {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
+  .ro-drawer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
 
-    .answer-tile .ans-value {
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: var(--primary);
-      margin-bottom: 4px;
-    }
+  .ro-drawer-list a {
+    display: block;
+    text-decoration: none !important;
+    color: var(--text-body) !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    font-weight: 600;
+  }
 
-    .answer-tile .ans-sub {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
+  .ro-drawer-list a.active {
+    color: #181614 !important;
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 800;
+  }
 
-    /* Wheat Colors Interactive Scale */
-    .wheat-scale {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin: 20px 0;
-    }
+  .ro-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    cursor: zoom-out;
+  }
 
-    .kernel-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 8px 12px;
-      border-radius: 8px;
-      background: #f1f5f9;
-      transition: all 0.2s;
-    }
+  .ro-lightbox.open {
+    display: flex;
+  }
 
-    .kernel-row:hover {
-      transform: translateX(4px);
-    }
+  .ro-lightbox img {
+    max-width: 100%;
+    max-height: 92vh;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+  }
 
-    .kernel-swatch {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 1px solid rgba(0,0,0,0.15);
-      flex-shrink: 0;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);
-    }
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
 
-    .kernel-info {
-      flex: 1;
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.9rem;
-    }
-
-    .chart-container {
-      position: relative;
-      width: 100%;
-      height: 320px;
-      margin-top: 20px;
-    }
-
-    .step-box {
-      margin-bottom: 20px;
-    }
-
-    .step-box h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 8px;
-    }
-
-    table.custom-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 16px 0;
-      font-size: 0.92rem;
-    }
-
-    table.custom-table th, table.custom-table td {
-      border: 1px solid var(--border);
-      padding: 10px 14px;
-      text-align: center;
-    }
-
-    table.custom-table th {
-      background-color: #f1f5f9;
-      font-weight: 600;
-    }
-
-    table.custom-table tr.highlight-tr {
-      background-color: #fef2f2;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    .callout {
-      background: #f0fdf4;
-      border-left: 4px solid #16a34a;
-      padding: 16px 20px;
-      border-radius: 4px 8px 8px 4px;
-      margin: 20px 0;
-      font-size: 0.95rem;
-    }
-
-    .callout-title {
-      font-weight: 700;
-      color: #166534;
-      margin-bottom: 6px;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 48px;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      padding-bottom: 24px;
-    }
-  </style>
+  .katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    padding: 6px 0;
+  }
+</style>
 </head>
 <body>
+<!-- Reading Outpost Dark Style Shell -->
+<div class="ro-header-wrap">
+  <div class="ro-pillbar">
+    <div class="ro-brand-group">
+      <button class="ro-menu-circle" type="button" aria-label="開啟專題選單" onclick="roOpenDrawer('roSiteDrawer')">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="ro-brand-link" href="index.html">
+        <span class="ro-brand-zh">生物考證前哨站</span>
+        <span class="ro-brand-en">BIO-WIKI EVIDENCE</span>
+      </a>
+    </div>
+    <button class="ro-cta-pill" type="button" onclick="roOpenDrawer('roSiteDrawer')">專題目錄</button>
+  </div>
+</div>
+
+<div class="ro-drawer-backdrop" id="roSiteDrawer" onclick="if(event.target===this)roCloseDrawer('roSiteDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📚 Bio-Wiki 全站專題</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roSiteDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list">
+      <a href="index.html">1. 染色質與染色體本質</a>
+      <a href="wheat-polygenic.html" class="active">2. 小麥多基因累加模型 (Campbell 14e)</a>
+      <a href="spermatogonia-hole.html">3. 精原細胞與生精歷程 (Hole 15e)</a>
+      <a href="griffith-transformation.html">4. Griffith 轉形作用</a>
+      <a href="promoter-tata-box.html">5. 啟動子、TATA 匣與甲基化</a>
+      <a href="sickle-cell-dominance.html">6. 鐮刀型貧血顯隱性層次分析</a>
+      <a href="endosymbiosis.html">7. 內共生假說與演化序列</a>
+    </div>
+  </div>
+</div>
+
+<div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📑 本篇段落導覽</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list" id="roTocList" onclick="roCloseDrawer('roTocDrawer')"></div>
+  </div>
+</div>
+
+<div class="ro-lightbox" id="roLightbox" onclick="this.classList.remove('open')">
+  <img id="roLightboxImg" alt="">
+</div>
+
 
   <div class="container">
-    <nav style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:24px; padding:10px 16px; background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius); font-size:0.88rem; box-shadow:var(--shadow);">
-      <span style="font-weight:700; color:var(--text-muted); display:flex; align-items:center;">📚 Bio-Wiki 專題：</span>
-      <a href="index.html" style="text-decoration:none; color:var(--text-muted); font-weight:600; padding:4px 10px; border-radius:6px;">1. 染色質與染色體本質</a>
-      <a href="wheat-polygenic.html" style="text-decoration:none; color:var(--primary); font-weight:700; padding:4px 10px; border-radius:6px; background:var(--primary-light);">2. 小麥多基因累加模型 (Campbell 14e)</a>
-      <a href="spermatogonia-hole.html" style="text-decoration:none; color:var(--text-muted); font-weight:600; padding:4px 10px; border-radius:6px;">3. 精原細胞與生精歷程 (Hole 15e)</a>
-      <a href="griffith-transformation.html" style="text-decoration:none; color:var(--text-muted); font-weight:600; padding:4px 10px; border-radius:6px;">4. Griffith 轉形作用</a>
-      <a href="promoter-tata-box.html" style="text-decoration:none; color:var(--text-muted); font-weight:600; padding:4px 10px; border-radius:6px;">5. 啟動子、TATA 匣與甲基化</a>
-    <a href="sickle-cell-dominance.html" style="text-decoration:none; color:var(--text-muted); font-weight:600; padding:4px 10px; border-radius:6px;">6. 鐮刀型貧血顯隱性層次分析</a>
-      <a href="endosymbiosis.html" style="text-decoration:none; color:var(--text-muted); font-weight:600; padding:4px 10px; border-radius:6px;">7. 內共生假說與演化序列</a>
-    </nav>
-
     <header>
       <div class="badge-bar">
         <span class="badge">遺傳學經典題型</span>
@@ -421,7 +1042,7 @@
         </p>
         <ul>
           <li>每個個體在 $n$ 個基因座上總共有 $2n$ 個等位基因位置。</li>
-          <li>在累加模式（Additive Model）下，顯性等位基因具有**基因劑量效應（Gene Dosage Effect）**，隱性等位基因此處無貢獻。</li>
+          <li>在累加模式（Additive Model）下，顯性等位基因具有<strong>基因劑量效應（Gene Dosage Effect）</strong>，隱性等位基因此處無貢獻。</li>
           <li>顯性等位基因的可能持有數，從完全沒有（0 個）到全部填滿（$2n$ 個），可能的情況共有：
             $$0, 1, 2, \dots, 2n \implies (2n + 1) \text{ 種表現型}$$
           </li>
@@ -524,10 +1145,10 @@
             max: 24,
             title: {
               display: true,
-              text: '組合數 (總數 64)'
+              text: '組合數 (總數 64)', color: '#bfb5a8'
             },
             grid: {
-              color: '#f1f5f9'
+              color: 'rgba(246, 241, 234, 0.12)'
             }
           },
           x: {
@@ -539,5 +1160,70 @@
       }
     });
   </script>
+<!-- Reading Outpost Bottom Bar & Script -->
+<button class="ro-bottom-toc" type="button" onclick="roOpenDrawer('roTocDrawer')">📑 本篇段落導覽</button>
+<a class="ro-up-btn" href="#top" aria-label="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<script>
+  function roOpenDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('open');
+  }
+  function roCloseDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  }
+  function openLightbox(src, alt) {
+    var lb = document.getElementById('roLightbox');
+    var img = document.getElementById('roLightboxImg');
+    if (lb && img) {
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.add('open');
+    }
+  }
+  function toggleEnglish() {
+    document.body.classList.toggle('hide-en');
+    var btn = document.getElementById('toggleEnBtn');
+    if (btn) {
+      btn.textContent = document.body.classList.contains('hide-en')
+        ? '完整：顯示英文原文'
+        : '精簡：隱藏英文原文';
+    }
+  }
+  (function initReadingOutpostShell() {
+    var tocList = document.getElementById('roTocList');
+    var headings = document.querySelectorAll('h2, .card-title');
+    if (tocList && headings.length) {
+      headings.forEach(function(h, idx) {
+        if (!h.id) h.id = 'ro-sec-' + (idx + 1);
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent.trim();
+        tocList.appendChild(a);
+      });
+    }
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th, tr:first-child th')).map(function(th) {
+        return th.innerText.trim().replace(/[\r\n\t ]+/g, ' ');
+      });
+      if (!headers.length) return;
+      table.classList.add('ro-resp-table');
+      table.querySelectorAll('tr').forEach(function(tr) {
+        if (tr.querySelector('th')) return;
+        Array.from(tr.children).forEach(function(td, idx) {
+          if (td.tagName === 'TD' && !td.getAttribute('data-label') && headers[idx]) {
+            td.setAttribute('data-label', headers[idx]);
+          }
+        });
+      });
+    });
+    document.querySelectorAll('main img, .container img, .wrap img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        openLightbox(img.src, img.alt);
+      });
+    });
+  })();
+</script>
 </body>
 </html>
