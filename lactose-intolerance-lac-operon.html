@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>乳糖不耐症與大腸桿菌 lac 操縱組：大腸養分、寡醣與 cAMP 的真實接軌｜Bio-Wiki</title>
+<style>
+  :root {
+    --bg-primary: #181614;
+    --bg-pillbar: #24201c;
+    --bg-card: #211e1a;
+    --bg-quote: #26221e;
+    --bg-tag: #2d2823;
+    --text-primary: #f6f1ea;
+    --text-body: #ddd5ca;
+    --text-secondary: #bfb5a8;
+    --text-muted: #9a8e80;
+    --primary: #5bc0eb;
+    --primary-light: rgba(91, 192, 235, 0.12);
+    --primary-border: rgba(91, 192, 235, 0.32);
+    --accent: #f4c44e;
+    --accent-light: rgba(244, 196, 78, 0.12);
+    --border-color: rgba(246, 241, 234, 0.09);
+    --border-strong: rgba(246, 241, 234, 0.16);
+    --taupe-fab: rgba(104, 91, 78, 0.94);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+  }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+    font-size: 18px;
+    line-height: 1.78;
+    padding: 0 0 96px 0;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Reading Outpost Signature Top Pill Header */
+  .ro-header-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-primary) 70%, rgba(24, 22, 20, 0));
+  }
+
+  .ro-pillbar {
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .ro-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .ro-menu-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    border: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .ro-menu-circle span {
+    display: block;
+    width: 16px;
+    height: 2.2px;
+    background: #181614;
+    border-radius: 2px;
+  }
+
+  .ro-brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .ro-brand-zh {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-brand-en {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .ro-cta-pill {
+    appearance: none;
+    background: var(--accent);
+    color: #1c1814;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  /* Main Reading Column */
+  .container, .wrap, main.container, main.wrap {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 22px 0;
+  }
+
+  /* Hero / Article Header */
+  header, .hero {
+    text-align: left !important;
+    margin-bottom: 32px;
+    padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .badge-bar, .meta-line {
+    display: flex;
+    justify-content: flex-start !important;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .badge, .meta-pill, .meta-pill-muted, .eyebrow, .tag {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .badge-primary, .meta-pill, .eyebrow {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary-border);
+  }
+
+  .badge-accent, .badge.red {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: rgba(244, 196, 78, 0.32);
+  }
+
+  h1 {
+    font-size: clamp(26px, 6.2vw, 34px);
+    line-height: 1.38;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    margin: 6px 0 14px;
+    text-align: left;
+  }
+
+  .subtitle, .lead, .meta {
+    font-size: 17px;
+    line-height: 1.68;
+    color: var(--text-muted);
+    margin: 0;
+    max-width: none;
+    text-align: left;
+  }
+
+  /* Unboxed Article Flow */
+  section, section.card, .card {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-bottom: 42px;
+    scroll-margin-top: 84px;
+  }
+
+  h2, .card-title {
+    font-size: clamp(22px, 5.2vw, 27px);
+    line-height: 1.45;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 44px 0 18px;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+  }
+
+  h2::before {
+    display: none !important;
+  }
+
+  h2 .sec-num {
+    color: var(--accent);
+    margin-right: 6px;
+    font-weight: 800;
+  }
+
+  h3, .step-box h3, .insight-title {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 30px 0 12px;
+  }
+
+  p, .summary-item, .insight-point, .hero-text {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--text-body);
+    margin-bottom: 18px;
+  }
+
+  ul, ol {
+    margin: 0 0 22px 24px;
+    color: var(--text-body);
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+    color: var(--text-body);
+  }
+
+  strong, b {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.88em;
+    background: var(--bg-tag);
+    padding: 2px 6px;
+    border-radius: 6px;
+    color: var(--primary);
+  }
+
+  /* Reading Outpost Signature Cyan-Underlined Content Links */
+  main a:not(.ro-cta-pill):not(.ro-brand-link),
+  .container a:not(.ro-cta-pill):not(.ro-brand-link),
+  .wrap a:not(.ro-cta-pill):not(.ro-brand-link) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  /* Soft Warm Sub-cards */
+  .tldr-card, .hero-card, .summary-card, .book-card, .source-card,
+  .quote-bilingual, .insight-card, .callout, .callout-mnemo,
+  .question-box, .translation-box, .answer, .boundary, .source,
+  .answer-tile, aside.card, .step-list li {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius) !important;
+    padding: 20px 20px !important;
+    margin: 20px 0 !important;
+    box-shadow: none !important;
+  }
+
+  .tldr-card, .hero-card, .callout-mnemo, .answer, .question-box {
+    border-left: 4px solid var(--accent) !important;
+  }
+
+  .callout, .translation-box, .boundary {
+    border-left: 4px solid var(--primary) !important;
+  }
+
+  .tldr-label, .hero-title, .summary-title, .book-title, .source-book, .callout-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent) !important;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .timeline-step {
+    padding-left: 4px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 12px;
+  }
+
+  .timeline-step:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .timeline-step-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .timeline-step-title span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    font-size: 14px;
+    font-weight: 800;
+    margin-right: 8px;
+  }
+
+  /* Bilingual Textbook Quote Blocks */
+  .book-header, .source-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .book-meta, .source-loc, .source-tag, .summary-subtitle, .summary-badge {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .quote-entry, .quote-block {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .quote-entry:last-child, .quote-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quote-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .en-box, .quote-en, blockquote {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 10px 0 12px;
+    word-break: break-word;
+  }
+
+  body.hide-en .en-box,
+  body.hide-en .quote-en {
+    display: none;
+  }
+
+  .zh-box, .quote-tw {
+    font-size: 17.5px;
+    line-height: 1.78;
+    color: var(--text-body);
+  }
+
+  .zh-box strong, .quote-tw strong {
+    color: var(--accent);
+    background: rgba(244, 196, 78, 0.10);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+
+  .toggle-en-btn {
+    appearance: none;
+    background: var(--bg-tag);
+    color: var(--accent);
+    border: 1px solid rgba(244, 196, 78, 0.35);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  /* Figures & Images */
+  .figure-card, .fig-card, figure, .figure-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .figure-img-wrap, .fig-body, .figure-body {
+    padding: 14px;
+  }
+
+  .figure-img-wrap {
+    background: #f8fafc;
+    cursor: zoom-in;
+  }
+
+  main img, .container img, .wrap img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 8px;
+    margin: 0 auto;
+    cursor: zoom-in;
+  }
+
+  .zoom-hint {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    padding: 6px 4px 0;
+  }
+
+  .figure-title, .fig-title, .fig-header {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding: 12px 16px 4px;
+  }
+
+  .figure-caption, .fig-caption, figcaption {
+    font-size: 15px;
+    line-height: 1.68;
+    color: var(--text-secondary);
+    padding: 6px 16px 14px;
+    background: transparent;
+    border: none;
+  }
+
+  .figure-caption-en {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 0 16px 14px;
+  }
+
+  /* Layer List */
+  .layer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 16px 0 24px;
+  }
+
+  .layer-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-size: 17px;
+  }
+
+  .layer-badge {
+    font-size: 13px;
+    font-weight: 700;
+    color: #181614;
+    background: var(--accent);
+    padding: 2px 9px;
+    border-radius: 6px;
+    white-space: nowrap;
+    margin-top: 3px;
+  }
+
+  /* Responsive Tables -> Stacked Mobile Cards (< 680px) */
+  .table-wrap, .table-wrapper {
+    width: 100%;
+    margin: 18px 0 26px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 16px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-body);
+  }
+
+  th {
+    background: var(--bg-pillbar);
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  @media (max-width: 680px) {
+    table.ro-resp-table,
+    table.ro-resp-table thead,
+    table.ro-resp-table tbody,
+    table.ro-resp-table th,
+    table.ro-resp-table td,
+    table.ro-resp-table tr {
+      display: block;
+      width: 100%;
+    }
+
+    table.ro-resp-table thead {
+      display: none;
+    }
+
+    table.ro-resp-table tr {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    table.ro-resp-table td {
+      border: none;
+      border-bottom: 1px dashed var(--border-color);
+      padding: 8px 0;
+      text-align: left !important;
+    }
+
+    table.ro-resp-table td:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    table.ro-resp-table td:first-child {
+      padding-top: 0;
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    table.ro-resp-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+  }
+
+  /* Bottom TOC Pill & Up Button */
+  .ro-bottom-toc {
+    position: fixed;
+    left: 16px;
+    bottom: 20px;
+    z-index: 95;
+    background: var(--taupe-fab);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 9px 15px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: calc(100vw - 88px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-up-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 95;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--taupe-fab);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    text-decoration: none !important;
+  }
+
+  /* Drawers & Lightbox */
+  .ro-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ro-drawer-backdrop.open {
+    display: flex;
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-backdrop {
+      align-items: center;
+      padding: 24px;
+    }
+  }
+
+  .ro-drawer-panel {
+    width: 100%;
+    max-width: 500px;
+    max-height: 78vh;
+    overflow-y: auto;
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px 20px 0 0;
+    padding: 18px 18px 28px;
+    box-shadow: var(--shadow);
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-panel {
+      border-radius: 18px;
+    }
+  }
+
+  .ro-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .ro-drawer-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .ro-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .ro-drawer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ro-drawer-list a {
+    display: block;
+    text-decoration: none !important;
+    color: var(--text-body) !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .ro-drawer-list a.active {
+    color: #181614 !important;
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 800;
+  }
+
+  .ro-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    cursor: zoom-out;
+  }
+
+  .ro-lightbox.open {
+    display: flex;
+  }
+
+  .ro-lightbox img {
+    max-width: 100%;
+    max-height: 92vh;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  html[data-theme="light"] {
+    --bg-primary: #fbf8f4;
+    --bg-pillbar: #f0ece3;
+    --bg-card: #ffffff;
+    --bg-quote: #f6f2ea;
+    --bg-tag: #eee8dd;
+    --text-primary: #2f2820;
+    --text-body: #4a3f35;
+    --text-secondary: #5e5043;
+    --text-muted: #756656;
+    --primary: #1b9dce;
+    --primary-light: rgba(27, 157, 206, 0.12);
+    --primary-border: rgba(27, 157, 206, 0.35);
+    --accent: #b86b11;
+    --accent-light: rgba(244, 196, 78, 0.22);
+    --border-color: rgba(74, 63, 53, 0.12);
+    --border-strong: rgba(74, 63, 53, 0.22);
+    --taupe-fab: rgba(105, 90, 74, 0.94);
+    --shadow: 0 4px 18px rgba(47, 40, 32, 0.08);
+    color-scheme: light;
+  }
+
+  html[data-theme="light"] .ro-header-wrap {
+    background: linear-gradient(180deg, #fbf8f4 70%, rgba(251, 248, 244, 0));
+  }
+
+  html[data-theme="light"] .ro-menu-circle {
+    background: #67c3eb;
+    color: #1f1a15;
+  }
+
+  html[data-theme="light"] .ro-cta-pill {
+    background: #f6c84c;
+    color: #2f2820;
+  }
+
+  html[data-theme="light"] .ro-bottom-toc,
+  html[data-theme="light"] .ro-up-btn {
+    color: #ffffff;
+  }
+
+  html[data-theme="light"] .ro-drawer-list a.active {
+    background: #f6c84c;
+    border-color: #e0b034;
+    color: #2f2820 !important;
+  }
+
+  html[data-theme="light"] .zh-box strong,
+  html[data-theme="light"] .quote-tw strong {
+    color: #8c4d06;
+    background: rgba(246, 200, 76, 0.28);
+  }
+
+  .ro-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .ro-theme-btn {
+    appearance: none;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    transition: transform 0.15s ease;
+  }
+
+  .ro-theme-btn:active {
+    transform: scale(0.96);
+  }
+</style>
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem('biowiki-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<!-- Reading Outpost Dark Style Shell -->
+<div class="ro-header-wrap">
+  <div class="ro-pillbar">
+    <div class="ro-brand-group">
+      <button class="ro-menu-circle" type="button" aria-label="開啟專題選單" onclick="roOpenDrawer('roSiteDrawer')">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="ro-brand-link" href="index.html">
+        <span class="ro-brand-zh">400X 的日常切片</span>
+        <span class="ro-brand-en">BIO-WIKI EVIDENCE</span>
+      </a>
+    </div>
+    <div class="ro-top-actions">
+      <button class="ro-theme-btn" id="roThemeBtn" type="button" onclick="roToggleTheme()">☀️ 亮色</button>
+      <button class="ro-cta-pill" type="button" onclick="roOpenDrawer('roSiteDrawer')">專題目錄</button>
+    </div>
+  </div>
+</div>
+
+<div class="ro-drawer-backdrop" id="roSiteDrawer" onclick="if(event.target===this)roCloseDrawer('roSiteDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📚 Bio-Wiki 全站專題</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roSiteDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list">
+      <a href="index.html">🏠 首頁：主題分類總覽</a>
+      <a href="chromatin.html">1. 染色質與染色體本質</a>
+      <a href="wheat-polygenic.html">2. 小麥多基因累加模型 (Campbell 14e)</a>
+      <a href="spermatogonia-hole.html">3. 精原細胞與生精歷程 (Hole 15e)</a>
+      <a href="griffith-transformation.html">4. Griffith 轉形作用</a>
+      <a href="promoter-tata-box.html">5. 啟動子、TATA 匣與甲基化</a>
+      <a href="sickle-cell-dominance.html">6. 鐮刀型貧血顯隱性層次分析</a>
+      <a href="endosymbiosis.html">7. 內共生假說與演化序列</a>
+      <a href="lactose-intolerance-lac-operon.html" class="active">8. 乳糖不耐症與大腸桿菌 lac 操縱組</a>
+    </div>
+  </div>
+</div>
+
+<div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📑 本篇段落導覽</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list" id="roTocList" onclick="roCloseDrawer('roTocDrawer')"></div>
+  </div>
+</div>
+
+<div class="ro-lightbox" id="roLightbox" onclick="this.classList.remove('open')">
+  <img id="roLightboxImg" alt="">
+</div>
+
+<main class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="meta-line">
+      <span class="meta-pill">分子生物 × 消化生理</span>
+      <span class="meta-pill-muted">8 部大學教科書考證</span>
+      <span class="meta-pill-muted">5 張原書圖解</span>
+    </div>
+    <h1>乳糖不耐症與大腸桿菌 <em>lac</em> 操縱組：大腸養分、寡醣與 cAMP 的真實接軌</h1>
+    <p class="subtitle">沒消化完的乳糖衝進大腸，真的會打開大腸桿菌的 <em>lac</em> 操縱組嗎？如果不喝牛奶，大腸裡的 <em>E. coli</em> 平常吃什麼，又為什麼課本總把 <em>lac</em> 操縱組和 cAMP 綁在一起？</p>
+  </div>
+
+  <!-- Section 1: TL;DR + Matrix -->
+  <section id="sec-core">
+    <div class="tldr-card">
+      <div class="tldr-label">一句話因果時間軸結論</div>
+      <div class="timeline">
+        <div class="timeline-step">
+          <div class="timeline-step-title"><span>①</span> 小腸起點｜乳糖沒被切開，但飲食葡萄糖早被吸光</div>
+          <p>乳糖不耐者因小腸刷狀緣的<strong>乳糖酶（lactase）</strong>不足，未消化的乳糖直接流入大腸並拉住水分；同時，一般飲食中的葡萄糖早已在小腸被吸收殆盡，使大腸管腔長期處於<strong>極低游離葡萄糖</strong>的環境。</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-step-title"><span>②</span> 大腸發酵｜厭氧菌群為主力，大腸桿菌 <em>lac</em> 操縱組共襄盛舉</div>
+          <p>結腸內約 90% 是<strong>擬桿菌門與厚壁菌門嚴格厭氧菌</strong>，<em>E. coli</em> 只占極小比例；然而 <em>E. coli</em> 確實棲息於結腸並具備 <strong><em>lac</em> 操縱組</strong>與甲酸去氫酶（FDH-H），與整體菌群共同發酵乳糖產生 CO₂、H₂ 與<strong>短鏈脂肪酸（SCFAs）</strong>，引起腹脹與腹瀉。</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-step-title"><span>③</span> 分子接軌｜低葡萄糖維持高 cAMP，日常撿食寡醣碎片、遇乳糖即全開</div>
+          <p>因為大腸平常游離葡萄糖極少，<em>E. coli</em> 透過 PTS 系統維持<strong>高 cAMP → CAP 長期活化就位</strong>，平時用來開啟利用其他替代糖類（包括厭氧菌修剪黏蛋白 O-連結寡醣或纖維後釋出的糖碎片）的操縱組；一旦乳糖湧入解除 LacI 抑制，剛好滿足「<strong>高 cAMP ＋ 有誘導物</strong>」的最高轉錄條件。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <h2><span class="sec-num">01</span> 四種大腸真實情境：乳糖、葡萄糖與 cAMP 如何聯動？</h2>
+    </div>
+
+    <table class="resp-table">
+      <thead>
+        <tr>
+          <th>腸道生理情境</th>
+          <th>游離葡萄糖 ＆ cAMP</th>
+          <th>誘導物（異乳糖）與 LacI</th>
+          <th><em>lac</em> 操縱組狀態與實際代謝重心</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="腸道生理情境"><strong>健康成人日常飲食</strong><br>（無乳糖進大腸）</td>
+          <td data-label="游離葡萄糖 ＆ cAMP">葡萄糖已於小腸吸乾 → <strong>cAMP 高、CAP 活化就位</strong></td>
+          <td data-label="誘導物（異乳糖）與 LacI">無乳糖 → <strong>LacI 緊緊結合 <em>lacO</em></strong>（煞車踩死）</td>
+          <td data-label="lac 操縱組狀態與實際代謝重心"><strong>關閉</strong>；<em>E. coli</em> 把資源留給對應黏蛋白／纖維衍生單醣的操縱組。</td>
+        </tr>
+        <tr>
+          <td data-label="腸道生理情境"><strong>乳糖不耐者喝牛奶</strong><br>（大量乳糖進大腸）</td>
+          <td data-label="游離葡萄糖 ＆ cAMP">葡萄糖仍稀缺 → <strong>cAMP 高、CAP 結合啟動子</strong></td>
+          <td data-label="誘導物（異乳糖）與 LacI">乳糖進入細菌轉成異乳糖 → <strong>LacI 脫離 <em>lacO</em></strong></td>
+          <td data-label="lac 操縱組狀態與實際代謝重心"><strong>最高度開啟</strong>；合成乳糖通透酶與 β-半乳糖苷酶，與結腸菌群一同發酵產氣、產短鏈脂肪酸。</td>
+        </tr>
+        <tr>
+          <td data-label="腸道生理情境"><strong>局部出現大量游離葡萄糖</strong><br>（例：鄰菌胞外先切出葡萄糖）</td>
+          <td data-label="游離葡萄糖 ＆ cAMP">PTS 磷酸轉給葡萄糖 → <strong>cAMP 下降、CAP 失活</strong></td>
+          <td data-label="誘導物（異乳糖）與 LacI">即使有乳糖解除 LacI，缺少 CAP 輔助</td>
+          <td data-label="lac 操縱組狀態與實際代謝重心"><strong>轉錄壓抑（低量）</strong>；優先消耗最省能的葡萄糖，待耗盡後才切換（雙相生長邏輯）。</td>
+        </tr>
+        <tr>
+          <td data-label="腸道生理情境"><strong>嬰兒純母乳哺育期</strong><br>（含乳糖與人乳寡醣 HMOs）</td>
+          <td data-label="游離葡萄糖 ＆ cAMP">宿主幼年期乳糖酶高，但仍有部分糖與 HMOs 抵結腸</td>
+          <td data-label="誘導物（異乳糖）與 LacI">環境偏向選汰可利用 HMOs 的共生菌</td>
+          <td data-label="lac 操縱組狀態與實際代謝重心"><strong>雙歧桿菌（<em>Bifidobacterium</em>）</strong>藉攝取並發酵 HMOs 占優勢；離乳轉固體食物後菌群轉向擬桿菌與腸桿菌。</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Section 2: Gut Food Web -->
+  <section id="sec-foodweb">
+    <div class="section-head">
+      <h2><span class="sec-num">02</span> 大腸食物網：大腸桿菌平常吃什麼？和「切下來的寡醣」有何關係？</h2>
+    </div>
+
+    <p>教《選修生物》時，學生常把「大腸細菌」直接等同於「大腸桿菌」，甚至以為沒有牛奶可喝時，大腸桿菌在大腸裡只能餓肚子。其實，大腸是一個分工嚴密的<strong>微生物生態系</strong>：</p>
+
+    <div class="layer-list">
+      <div class="layer-item">
+        <span class="layer-badge">結腸主力軍</span>
+        <div><strong>約 90% 為嚴格厭氧菌（擬桿菌門 ＆ 厚壁菌門）</strong>：每克結腸內容物含 10¹¹–10¹² 個微生物。這些厭氧菌編碼了數千種人體沒有的多醣降解酵素，專責拆解兩大聚合物——<strong>飲食膳食纖維</strong>與<strong>宿主黏液層的黏蛋白（mucin）</strong>，並發酵成乙酸、丙酸與丁酸等短鏈脂肪酸（SCFAs）。</div>
+      </div>
+      <div class="layer-item">
+        <span class="layer-badge">黏蛋白寡醣</span>
+        <div><strong>腸黏液不只是物理屏障，也是碳源庫</strong>：杯狀細胞分泌的黏蛋白（mucin）在蛋白質骨架的絲胺酸／蘇胺酸側鏈上接滿長短不一的 <strong>O-連結寡醣鏈</strong>（富含 GalNAc、半乳糖、岩藻糖與唾液酸）。像 <em>Akkermansia muciniphila</em> 這類專職共生菌便能直接以黏蛋白為唯一碳源。</div>
+      </div>
+      <div class="layer-item">
+        <span class="layer-badge">E. coli 生態位</span>
+        <div><strong>交叉餵食（cross-feeding）的下游撿食者</strong>：<em>E. coli</em> 缺乏拆解完整植物纖維或完整黏蛋白的胞外水解酶，因此在成人結腸內占不到 1%，主要居住在黏液層外緣撿食厭氧菌「剪碎」寡醣鏈與多醣後釋出的游離單醣、糖酸（如半乳糖、葡萄糖酸、岩藻糖等）及胺基酸。</div>
+      </div>
+    </div>
+
+    <p>這也順帶回答了一個延伸問題：<strong>為什麼斷奶後的成年哺乳動物腸道裡，<em>E. coli</em> 依然保留著 <em>lac</em> 操縱組？</strong>一方面，哺乳動物世世代代都在哺育期幼體的腸道提供大量乳糖；另一方面，宿主黏蛋白 O-連結寡醣與植物半乳聚糖被切解後，也會出現帶有 β-半乳糖苷鍵的寡醣／雙醣片段。而在沒有乳糖的平日，<em>E. coli</em> 會把 LacI 抑制蛋白關上以省下資源，同時靠高 cAMP 讓細胞保持「隨時可切換碳源」的彈性。</p>
+  </section>
+
+  <!-- Section 3: Figures -->
+  <section id="sec-figures">
+    <div class="section-head">
+      <h2><span class="sec-num">03</span> 教科書原圖精選（點擊圖片可放大）</h2>
+    </div>
+
+    <div class="figure-grid">
+      <article class="figure-card">
+        <div class="figure-img-wrap" onclick="openLightbox('images/Vander16e_Fig15-29_small_intestine_carb_absorption.png', this.querySelector('img').alt)">
+          <img src="images/Vander16e_Fig15-29_small_intestine_carb_absorption.png" alt="Vander 16e Figure 15.29 Carbohydrate digestion and absorption in the small intestine" loading="lazy">
+          <span class="zoom-hint">點擊放大</span>
+        </div>
+        <div class="figure-body">
+          <div class="figure-title">圖證 1｜Vander 16e 圖 15.29：小腸刷狀緣酵素與單醣主動吸收</div>
+          <p class="figure-caption">胰澱粉酶與小腸微絨毛上的刷狀緣雙醣酶（包含乳糖酶）將碳水化合物切為單醣後，葡萄糖與半乳糖經 SGLT 與 Na⁺ 協同運輸進入上皮細胞。這說明了兩件事：① 飲食中的葡萄糖早在小腸就被吸光，導致大腸游離葡萄糖極低；② 缺乏乳糖酶時，雙醣乳糖無法被吸收而整批流向大腸。</p>
+          <p class="figure-caption-en">Figure 15.29 Carbohydrate digestion and absorption in the small intestine (Vander's Human Physiology, 16th ed., Ch. 15).</p>
+        </div>
+      </article>
+
+      <article class="figure-card">
+        <div class="figure-img-wrap" onclick="openLightbox('images/Prescott12e_Fig33-4_gut_microbiota_scfa.png', this.querySelector('img').alt)">
+          <img src="images/Prescott12e_Fig33-4_gut_microbiota_scfa.png" alt="Prescott 12e Figure 33.4 Impact of fermentation end products on host metabolism" loading="lazy">
+          <span class="zoom-hint">點擊放大</span>
+        </div>
+        <div class="figure-body">
+          <div class="figure-title">圖證 2｜Prescott 12e 圖 33.4：腸道微生物群發酵未消化醣類與短鏈脂肪酸去向</div>
+          <p class="figure-caption">人體無法消化的複雜碳水化合物（以及乳糖不耐者滯留的乳糖）進入結腸後，由腸道菌群發酵產生<strong>乙酸、丙酸與丁酸</strong>等短鏈脂肪酸（SCFAs），分別供應結腸細胞能量或送往肝臟參與代謝；過量急性發酵則會產氣並改變腸腔滲透壓造成腹瀉。</p>
+          <p class="figure-caption-en">Figure 33.4 Concept Map of the Impact Fermentation End Products Have on Host Metabolism (Prescott's Microbiology, 12th ed., Ch. 33).</p>
+        </div>
+      </article>
+
+      <article class="figure-card">
+        <div class="figure-img-wrap" onclick="openLightbox('images/Prescott12e_Fig14-19_pts_adenyl_cyclase_camp.png', this.querySelector('img').alt)">
+          <img src="images/Prescott12e_Fig14-19_pts_adenyl_cyclase_camp.png" alt="Prescott 12e Figure 14.19 Activation of adenyl cyclase by the PTS system" loading="lazy">
+          <span class="zoom-hint">點擊放大</span>
+        </div>
+        <div class="figure-body">
+          <div class="figure-title">圖證 3｜Prescott 12e 圖 14.19：大腸桿菌 PTS 系統感測低葡萄糖並拉高 cAMP</div>
+          <p class="figure-caption">有葡萄糖時，PEP 的磷醯基經 EI → HPr → EIIA → EIIB 轉給進入細胞的葡萄糖；<strong>當大腸環境缺乏游離葡萄糖時，磷酸停留在 EIIA（EIIA~P）上並活化腺苷酸環化酶（AC）</strong>，把 ATP 轉成 cAMP，向全基因體發出「切換替代碳源」的訊號。</p>
+          <p class="figure-caption-en">Figure 14.19 Activation of Adenyl Cyclase by the Phosphoenolpyruvate: Sugar Phosphotransferase System (PTS) (Prescott's Microbiology, 12th ed., Ch. 14).</p>
+        </div>
+      </article>
+
+      <article class="figure-card">
+        <div class="figure-img-wrap" onclick="openLightbox('images/Prescott12e_Fig14-18_lac_repressor_cap_camp.png', this.querySelector('img').alt)">
+          <img src="images/Prescott12e_Fig14-18_lac_repressor_cap_camp.png" alt="Prescott 12e Figure 14.18 Regulation of the lac operon by lac repressor and CAP" loading="lazy">
+          <span class="zoom-hint">點擊放大</span>
+        </div>
+        <div class="figure-body">
+          <div class="figure-title">圖證 4｜Prescott 12e 圖 14.18：Lac 抑制蛋白與 CAP–cAMP 整合四種營養組合</div>
+          <p class="figure-caption">對照四種環境：(c) 對應「平日無乳糖、低葡萄糖的成人大腸」——CAP–cAMP 已就位，但 LacI 仍鎖死操作子；(a) 對應「乳糖不耐者喝牛奶後的大腸」——低葡萄糖維持高 cAMP，同時異乳糖解除 LacI，轉錄全速開啟。</p>
+          <p class="figure-caption-en">Figure 14.18 Regulation of the lac Operon by the lac Repressor and CAP (Prescott's Microbiology, 12th ed., Ch. 14).</p>
+        </div>
+      </article>
+
+      <article class="figure-card">
+        <div class="figure-img-wrap" onclick="openLightbox('images/Lehninger8e_Fig28-18_crp_lac_positive_control.png', this.querySelector('img').alt)">
+          <img src="images/Lehninger8e_Fig28-18_crp_lac_positive_control.png" alt="Lehninger 8e Figure 28-18 Positive regulation of the lac operon by CRP" loading="lazy">
+          <span class="zoom-hint">點擊放大</span>
+        </div>
+        <div class="figure-body">
+          <div class="figure-title">圖證 5｜Lehninger 8e 圖 28-18：CRP–cAMP 正調控與 mRNA 產量倍數對比</div>
+          <p class="figure-caption">清楚呈現 (b) 無乳糖＋低葡萄糖時 DNA 仍被四聚體 Lac 抑制蛋白拉成環而關閉轉錄；對比 (c) 有乳糖＋高葡萄糖僅極低量轉錄，以及 (d) 有乳糖＋低葡萄糖時 CRP–cAMP 與 RNA 聚合酶 α 次單元互動，使轉錄增加約 50 倍。</p>
+          <p class="figure-caption-en">Figure 28-18 Positive regulation of the lac operon by CRP (Lehninger Principles of Biochemistry, 8th ed., Ch. 28).</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Section 4: Original Literature Part A -->
+  <section id="sec-sources-gut">
+    <div class="section-head">
+      <h2><span class="sec-num">04</span> 原始文獻段落 A：乳糖不耐症、結腸菌群與黏蛋白寡醣</h2>
+      <button class="toggle-en-btn" type="button" id="toggleEnBtn" onclick="toggleEnglish()">精簡：隱藏英文原文</button>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">1. 《Vander's Human Physiology》16e</span>
+        <span class="source-loc">Ch. 15: Digestion and Absorption of Food</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"Because the absorption of water requires prior absorption of solute to provide an osmotic gradient, the unabsorbed lactose in persons with lactose intolerance prevents some of the water from being absorbed. This lactose-containing fluid is passed on to the large intestine, where bacteria digest the lactose. They then metabolize the released monosaccharides, producing large quantities of gas (which distends the colon, producing pain) and short-chain fatty acids, which cause fluid movement into the lumen of the large intestine, producing diarrhea."</div>
+        <div class="quote-tw">「水的吸收需要先吸收溶質來建立滲透梯度，因此乳糖不耐症患者未被吸收的乳糖，會使部分水分無法被吸收。<strong>含乳糖的液體接著進入大腸，由細菌消化乳糖；細菌再代謝釋出的單醣，產生大量氣體（使結腸擴張並引起疼痛）與短鏈脂肪酸。短鏈脂肪酸會使液體移入大腸管腔，造成腹瀉。</strong>」</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">2. 《Lehninger Principles of Biochemistry》8e</span>
+        <span class="source-loc">Ch. 7: Carbohydrates and Glycobiology</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"The enzyme lactase — absent in lactose-intolerant individuals — begins the digestive process in the small intestine by splitting the (β1→4) bond of lactose into monosaccharides, which can be absorbed from the small intestine. Lactose, like other disaccharides, is not absorbed from the small intestine, and in lactose-intolerant individuals the undigested lactose passes into the large intestine. Here, the increased osmolarity due to dissolved lactose opposes the absorption of water from the intestine into the bloodstream, causing watery, loose stools. In addition, fermentation of the lactose by intestinal bacteria produces large volumes of CO₂, which leads to the bloating, cramps, and gas associated with lactose intolerance."</div>
+        <div class="quote-tw">「缺乏乳糖酶的人會發生乳糖不耐症。乳糖酶在小腸中切開乳糖的 (β1→4) 鍵……乳糖不耐症者未消化的乳糖會進入大腸。在此，溶解的乳糖提高滲透濃度，阻礙水分從腸道吸收入血，造成稀水便。<strong>此外，腸道細菌發酵乳糖會產生大量 CO₂，導致乳糖不耐症常見的腹脹、腹部絞痛與脹氣。</strong>」</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">3. 《Guyton &amp; Hall Textbook of Medical Physiology》15e</span>
+        <span class="source-loc">Ch. 63: Gastrointestinal Microbiota</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"In healthy humans, most gut microbes are strictly anaerobic and about 90% belong to the phyla Bacteroidetes and Firmicutes, although there are many different types of bacteria in each of these phyla. The concentration of these microbes increases steadily along the gastrointestinal tract, with relatively small numbers in the stomach and extremely large numbers in the colon. The estimated number of bacterial cells present in the mammalian stomach and duodenum averages 10¹ to 10³ bacteria per gram of contents, progressing to 10⁴ to 10⁷ bacteria per gram in the jejunum and ileum, and reaching 10¹¹ to 10¹² microbes per gram in the colon."</div>
+        <div class="quote-tw">「健康人體內<strong>大多數腸道微生物都是嚴格厭氧菌，約 90% 屬於擬桿菌門與厚壁菌門</strong>……沿著胃腸道向後，這些微生物的濃度會持續增加：胃與十二指腸平均為每公克 10¹～10³ 個，空腸與迴腸增加至每公克 10⁴～10⁷ 個，<strong>結腸則達每公克 10¹¹～10¹² 個微生物</strong>。」</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">4. 《Fox Human Physiology》16e ＆ 《Lodish Molecular Cell Biology》9e</span>
+        <span class="source-loc">膳食纖維、黏蛋白與 O-連結寡醣</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">[Fox 16e Ch. 18] "In addition, the commensal bacteria of the colon contain enzymes that digest dietary fiber—polysaccharides that cannot be hydrolyzed by our own digestive enzymes—into monosaccharides. ... The microbiota also helps maintain a healthy epithelial barrier to pathogenic bacteria by stimulating mucus production by goblet cells, which in the small intestine contains a web of mucin (glycoprotein molecules that bond with one another to give mucus its high viscosity) and antimicrobial peptides..."</div>
+        <div class="quote-tw">[Fox 16e] 「結腸共生菌也含有<strong>能把人類消化酵素無法水解的膳食纖維多醣分解為單醣的酵素</strong>……微生物群刺激杯狀細胞產生黏液，含有由互相結合之 <strong>mucin（黏蛋白）糖蛋白</strong>形成的網……」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">[Lodish 9e Ch. 20] "O-linked oligosaccharides are attached to the hydroxyl side chains of specific serine and threonine residues in a variety of secreted proteins and the exoplasmic (extracellular) domains of some membrane proteins. For example, mucin-like O-linked chains are covalently bound to glycoproteins via an N-acetylgalactosamine (GalNAc) monosaccharide to which are covalently attached a variety of other sugars, often including sialic acid (SA; Figure 20-31b)."</div>
+        <div class="quote-tw">[Lodish 9e] 「<strong>O-連結寡醣</strong>接在多種分泌蛋白、以及某些膜蛋白外質面結構域中特定絲胺酸與蘇胺酸殘基的羥基側鏈上。舉例來說，<strong>黏液素型 O-連結鏈</strong>透過一個 N-乙醯半乳糖胺（GalNAc）單醣共價結合到醣蛋白上，而這個 GalNAc 上又共價接著各式各樣其他的糖，常包括唾液酸。」</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">5. 《Prescott's Microbiology》12e</span>
+        <span class="source-loc">Ch. 20（黏蛋白分解菌）＆ Ch. 33（人乳寡醣、結腸密度與 SCFA）</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">[Ch. 20] "Akkermansia muciniphila has received a great deal of attention. This bacterium makes up 1 to 5% of the typical human gut microbial community and has been shown to diminish obesity-related systemic inflammation. As its name suggests, A. muciniphila consumes mucus and was initially grown in pure culture by providing gastric mucin as the sole carbon source."</div>
+        <div class="quote-tw">[Ch. 20] 「<em>Akkermansia muciniphila</em> 占典型人類腸道微生物群落的 1–5%……正如種名所示，<em>A. muciniphila</em> 會消耗黏液；研究人員最初以<strong>胃黏蛋白作為唯一碳源</strong>，使它在純培養中生長。」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">[Ch. 33] "Early in life, human milk acts as a selective medium for nonpathogenic bacteria. Human milk oligosaccharides include complex carbohydrates that select for the growth of intestinal bifidobacteria. ... Switching to cow's milk or solid food (mostly polysaccharide) appears to result in the loss of bifidobacteria predominance; proteobacteria, firmicutes, and bacteroidetes—specifically enterobacteria, enterococci, lactobacilli, clostridia, and Bacteroides spp.—increase and outcompete bifidobacteria."</div>
+        <div class="quote-tw">[Ch. 33] 「生命早期，人乳會提供適合非致病性細菌的選擇性生長環境。<strong>人乳寡醣</strong>包含複雜碳水化合物，有利於腸道雙歧桿菌生長……改喝牛乳或改吃固體食物（主要是多醣）後，雙歧桿菌便不再占優勢；變形菌、厚壁菌與擬桿菌會增加。」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">[Ch. 33] "Because we can digest only a few complex polysaccharides, we feed most of them to our microbiota. Unlike our own cells, the typical gut microbiome encodes thousands of enzymes that evolved to break down complex polysaccharides into their constituent monomers. Importantly many bacteria ferment these monomers into short-chain fatty acids (SCFAs). Three key SCFAs are butyrate, propionate, and acetate (figure 33.4)."</div>
+        <div class="quote-tw">[Ch. 33] 「我們只能消化少數複雜多醣，因此會把其中大多數交給微生物相。典型腸道微生物體與人體細胞不同，<strong>編碼了數千種在演化中形成、可把複雜多醣分解成組成單體的酵素</strong>。重要的是，許多細菌會把這些單體發酵成<strong>短鏈脂肪酸（SCFAs）</strong>。3 種關鍵 SCFA 是丁酸、丙酸與乙酸。」</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Original Literature Part B -->
+  <section id="sec-sources-lac">
+    <div class="section-head">
+      <h2><span class="sec-num">05</span> 原始文獻段落 B：<em>E. coli</em> 與 <em>lac</em> 操縱組、cAMP 正調控</h2>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">6. 《Prescott's Microbiology》12e</span>
+        <span class="source-loc">Ch. 14（lac 操縱組與 PTS–cAMP）＆ Ch. 21（E. coli 結腸棲地）</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">[Ch. 21] "E. coli is undoubtedly the best-studied bacterium and the experimental organism of choice for many microbiologists. It is an inhabitant of the colon of humans and other warm-blooded animals, and it is useful in detecting fecal contamination in water. ... it should be emphasized that the vast majority of E. coli strains are harmless and help metabolize the food we eat."</div>
+        <div class="quote-tw">[Ch. 21] 「<em>E. coli</em> 無疑是研究最深入的細菌……<strong>它棲息於人類與其他溫血動物的結腸</strong>……絕大多數 <em>E. coli</em> 菌株都無害，並協助代謝我們吃下的食物。」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">[Ch. 14] "When E. coli grows with lactose as its only carbon source, each cell contains about 3,000 β-galactosidase molecules, but it has fewer than three molecules in the absence of lactose. ... When glucose levels are low, enzyme IIB cannot accept the phosphate from enzyme IIA and transfer it to glucose. Instead, enzyme IIA phosphorylates adenyl cyclase, thus stimulating cAMP production. The cAMP second messenger, then, relays the information about decreasing glucose concentration to molecules that can respond by exploiting alternative carbon sources that may be available."</div>
+        <div class="quote-tw">[Ch. 14] 「當 <em>E. coli</em> 以乳糖作為唯一碳源生長時，每個細胞約含有 3,000 個 β-半乳糖苷酶分子；但沒有乳糖時，每個細胞不到 3 個。……<strong>葡萄糖濃度低時，酵素 IIB 無法從酵素 IIA 接受磷酸，再轉移給葡萄糖。此時，酵素 IIA 會改為活化腺苷酸環化酶，促進 cAMP 生成。</strong>cAMP 第二傳訊者會把葡萄糖濃度下降的資訊，傳給能利用其他可用碳源作出反應的分子。」（註：現行模型描述磷酸化 EIIA<sup>Glc</sup> 互動並活化腺苷酸環化酶。）</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">7. 《Lehninger Principles of Biochemistry》8e</span>
+        <span class="source-loc">Ch. 28: Regulation of Gene Expression</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"When glucose is absent, CRP-cAMP binds to a site near the lac promoter (Fig. 28-18) and stimulates RNA transcription 50-fold. ... CRP-cAMP is therefore a positive regulatory element responsive to glucose levels, whereas the Lac repressor is a negative regulatory element responsive to lactose. The two act in concert. CRP-cAMP has little effect on the lac operon when the Lac repressor is blocking transcription, and dissociation of the repressor from the lac operator has little effect on transcription of the lac operon unless CRP-cAMP is present to facilitate transcription. ... Thus, optimal expression of the lac operon requires dissociation of the Lac repressor (indicating that lactose is available) and the binding of CRP-cAMP (indicating that glucose is not available)."</div>
+        <div class="quote-tw">「缺少葡萄糖時，<strong>CRP－cAMP 會結合 lac 啟動子附近的位置（圖 28-18），使 RNA 轉錄增加 50 倍</strong>……因此，CRP－cAMP 是回應葡萄糖濃度的正調控元件，Lac 抑制蛋白則是回應乳糖的負調控元件；兩者協同作用。<strong>lac 操縱組的最佳表現，需要 Lac 抑制蛋白解離（表示乳糖可用），也需要 CRP－cAMP 結合（表示葡萄糖不可用）。</strong>」</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">8. 高中《選修生物一》跨版本整合（§25 乳糖操縱組）</span>
+        <span class="source-loc">中文教材定位（Campbell 18.1 骨架）</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-tw">「當葡萄糖充足時，細胞內 cAMP 濃度低，CAP 不易形成具活性的 CAP–cAMP 複合體，RNA 聚合酶與 lac 啟動子的結合較弱；即使有乳糖，轉錄仍不強。當葡萄糖缺乏而乳糖存在時，cAMP 升高，CAP–cAMP 結合啟動子附近並協助 RNA 聚合酶穩定結合，lac 操縱組才強烈轉錄。因此最高表現同時需要『乳糖解除抑制』與『低葡萄糖啟動正調控』。」</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Teaching, Traps & Boundary -->
+  <section id="sec-teaching">
+    <div class="section-head">
+      <h2><span class="sec-num">06</span> 高中教學、常見陷阱與考證邊界</h2>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">高中課堂情境化教學亮點</div>
+      <p>學生學 <em>lac</em> 操縱組時常背不起來「為什麼細菌要同時檢查沒有葡萄糖、又有乳糖」。用人體消化道順序當生活情境最直覺：<strong>食物中的葡萄糖早已在小腸被吸乾 → 大腸內的 <em>E. coli</em> 平常就處於低葡萄糖、高 cAMP 的待命狀態 → 乳糖不耐者喝牛奶後，未消化的乳糖整批衝進大腸</strong>，瞬間把 LacI 煞車放開、搭配原本踩好油門的 CAP–cAMP，把整組分解酵素開到最大。</p>
+    </div>
+
+    <div class="callout callout-warn">
+      <div class="callout-title">教甄命題與觀念三大陷阱</div>
+      <ul>
+        <li><strong>陷阱 1</strong>：「乳糖不耐症是大腸桿菌致病毒素引起的發炎腹瀉」→ <strong>錯</strong>。病因是宿主小腸乳糖酶缺乏，症狀源自<strong>未吸收乳糖造成的滲透性滯水</strong>，加上<strong>結腸共生菌發酵產氣（CO₂、H₂）與短鏈脂肪酸</strong>。</li>
+        <li><strong>陷阱 2</strong>：「大腸裡數量最多、負責把所有乳糖發酵完的就是大腸桿菌」→ <strong>錯</strong>。健康成人結腸約 90% 為<strong>擬桿菌門與厚壁菌門的嚴格厭氧菌</strong>，<em>E. coli</em> 只是眾多參與發酵的兼性厭氧菌之一。</li>
+        <li><strong>陷阱 3</strong>：「沒有乳糖時 cAMP 很高，所以 <em>lac</em> 操縱組也會大量表現」→ <strong>錯</strong>。CAP–cAMP 是正調控油門，但只要缺乏異乳糖，LacI 抑制蛋白仍會鎖住操作子；大腸平日高 cAMP 是為了讓其他替代碳源操縱組隨時能啟動。</li>
+      </ul>
+    </div>
+
+    <div class="callout boundary">
+      <div class="callout-title">考證邊界說明（Vault 原典 vs. 外部微生物生態學補充）</div>
+      <p><strong>Vault 原典直接支持</strong>：乳糖不耐症與滲透／發酵機制（Vander 16e、Fox 16e、Lehninger 8e）、結腸 90% 為擬桿菌門與厚壁菌門厭氧菌（Guyton 15e、Prescott 12e）、膳食纖維降解成 SCFAs 與黏蛋白含 O-連結寡醣（Fox 16e、Lodish 9e、Prescott 12e）、<em>E. coli</em> 棲息結腸及 PTS–cAMP–CAP 調控（Prescott 12e、Lehninger 8e）。</p>
+      <p style="margin-bottom:0;"><strong>外部學術常識補充（Vault 內目前未收錄專論）</strong>：① <em>E. coli</em> 在健康成人結腸菌群中的精確占比通常低於 1%；② <em>E. coli</em> 在結腸黏液層中缺乏胞外多醣酶、主要依賴厭氧菌交叉餵食（cross-feeding）釋出的游離單醣與糖酸譜（如葡萄糖酸、岩藻糖、唾液酸、半乳糖）維生；③ 黏蛋白或植物多醣降解產生之 β-半乳糖苷片段對成人期保留 <em>lac</em> 操縱組的演化意義。若要撰寫研究級專論，建議再核對 Conway ＆ Cohen 等腸道黏液代謝綜述文獻。</p>
+    </div>
+  </section>
+
+  <footer>
+    400X 的日常切片 Bio-Wiki · 繁體中文與審定名詞遵循臺灣教育部規範 · 原文書與圖片引自 Ze-Agent Vault 正式譯本
+  </footer>
+
+</main>
+
+<!-- Reading Outpost Bottom Bar & Script -->
+<button class="ro-bottom-toc" type="button" onclick="roOpenDrawer('roTocDrawer')">📑 本篇段落導覽</button>
+<a class="ro-up-btn" href="#top" aria-label="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<script>
+  function roToggleTheme() {
+    var root = document.documentElement;
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('biowiki-theme', next); } catch (e) {}
+    roUpdateThemeBtn();
+  }
+  function roUpdateThemeBtn() {
+    var btn = document.getElementById('roThemeBtn');
+    if (!btn) return;
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.innerHTML = isLight ? '🌙 深色' : '☀️ 亮色';
+    btn.setAttribute('aria-label', isLight ? '切換為深色閱讀模式' : '切換為亮色閱讀模式');
+  }
+  roUpdateThemeBtn();
+  function roOpenDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('open');
+  }
+  function roCloseDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  }
+  function openLightbox(src, alt) {
+    var lb = document.getElementById('roLightbox');
+    var img = document.getElementById('roLightboxImg');
+    if (lb && img) {
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.add('open');
+    }
+  }
+  function toggleEnglish() {
+    document.body.classList.toggle('hide-en');
+    var btn = document.getElementById('toggleEnBtn');
+    if (btn) {
+      btn.textContent = document.body.classList.contains('hide-en')
+        ? '完整：顯示英文原文'
+        : '精簡：隱藏英文原文';
+    }
+  }
+  (function initReadingOutpostShell() {
+    var tocList = document.getElementById('roTocList');
+    var headings = document.querySelectorAll('h2, .card-title');
+    if (tocList && headings.length) {
+      headings.forEach(function(h, idx) {
+        if (!h.id) h.id = 'ro-sec-' + (idx + 1);
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent.trim();
+        tocList.appendChild(a);
+      });
+    }
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th, tr:first-child th')).map(function(th) {
+        return th.innerText.trim().replace(/[\r\n\t ]+/g, ' ');
+      });
+      if (!headers.length) return;
+      table.classList.add('ro-resp-table');
+      table.querySelectorAll('tr').forEach(function(tr) {
+        if (tr.querySelector('th')) return;
+        Array.from(tr.children).forEach(function(td, idx) {
+          if (td.tagName === 'TD' && !td.getAttribute('data-label') && headers[idx]) {
+            td.setAttribute('data-label', headers[idx]);
+          }
+        });
+      });
+    });
+    document.querySelectorAll('main img, .container img, .wrap img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        openLightbox(img.src, img.alt);
+      });
+    });
+  })();
+</script>
+</body>
+</html>
