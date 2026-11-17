@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>遺傳因子、基因、等位基因、DNA 與染色體｜Bio-Wiki</title>
+<style>
+  :root {
+    --bg-primary: #181614;
+    --bg-pillbar: #24201c;
+    --bg-card: #211e1a;
+    --bg-quote: #26221e;
+    --bg-tag: #2d2823;
+    --text-primary: #f6f1ea;
+    --text-body: #ddd5ca;
+    --text-secondary: #bfb5a8;
+    --text-muted: #9a8e80;
+    --primary: #5bc0eb;
+    --primary-light: rgba(91, 192, 235, 0.12);
+    --primary-border: rgba(91, 192, 235, 0.32);
+    --accent: #f4c44e;
+    --accent-light: rgba(244, 196, 78, 0.12);
+    --border-color: rgba(246, 241, 234, 0.09);
+    --border-strong: rgba(246, 241, 234, 0.16);
+    --taupe-fab: rgba(104, 91, 78, 0.94);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+  }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+    font-size: 18px;
+    line-height: 1.78;
+    padding: 0 0 96px 0;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Reading Outpost Signature Top Pill Header */
+  .ro-header-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-primary) 70%, rgba(24, 22, 20, 0));
+  }
+
+  .ro-pillbar {
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .ro-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .ro-menu-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    border: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .ro-menu-circle span {
+    display: block;
+    width: 16px;
+    height: 2.2px;
+    background: #181614;
+    border-radius: 2px;
+  }
+
+  .ro-brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .ro-brand-zh {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-brand-en {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .ro-cta-pill {
+    appearance: none;
+    background: var(--accent);
+    color: #1c1814;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  /* Main Reading Column (Reading Outpost 16-18 chars/line on mobile) */
+  .container, .wrap, main.container, main.wrap {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 22px 0;
+  }
+
+  /* Hero / Article Header */
+  header, .hero {
+    text-align: left !important;
+    margin-bottom: 32px;
+    padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .badge-bar, .meta-line {
+    display: flex;
+    justify-content: flex-start !important;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .badge, .meta-pill, .meta-pill-muted, .eyebrow, .tag {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .badge-primary, .meta-pill, .eyebrow {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary-border);
+  }
+
+  .badge-accent, .badge.red {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: rgba(244, 196, 78, 0.32);
+  }
+
+  h1 {
+    font-size: clamp(26px, 6.2vw, 34px);
+    line-height: 1.38;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    margin: 6px 0 14px;
+    text-align: left;
+  }
+
+  .subtitle, .lead, .meta {
+    font-size: 17px;
+    line-height: 1.68;
+    color: var(--text-muted);
+    margin: 0;
+    max-width: none;
+    text-align: left;
+  }
+
+  /* Unboxed Article Flow */
+  section, section.card, .card {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-bottom: 42px;
+    scroll-margin-top: 84px;
+  }
+
+  h2, .card-title {
+    font-size: clamp(22px, 5.2vw, 27px);
+    line-height: 1.45;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 44px 0 18px;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+  }
+
+  h2::before {
+    display: none !important;
+  }
+
+  h2 .sec-num {
+    color: var(--accent);
+    margin-right: 6px;
+    font-weight: 800;
+  }
+
+  h3, .step-box h3, .insight-title {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 30px 0 12px;
+  }
+
+  p, .summary-item, .insight-point, .hero-text {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--text-body);
+    margin-bottom: 18px;
+  }
+
+  ul, ol {
+    margin: 0 0 22px 24px;
+    color: var(--text-body);
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+    color: var(--text-body);
+  }
+
+  strong, b {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  /* Reading Outpost Signature Cyan-Underlined Content Links */
+  main a:not(.ro-cta-pill):not(.ro-brand-link),
+  .container a:not(.ro-cta-pill):not(.ro-brand-link),
+  .wrap a:not(.ro-cta-pill):not(.ro-brand-link) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  /* Soft Warm Sub-cards (Quotes, Takeaways, Callouts) */
+  .tldr-card, .hero-card, .summary-card, .book-card, .source-card,
+  .quote-bilingual, .insight-card, .callout, .callout-mnemo,
+  .question-box, .translation-box, .answer, .boundary, .source,
+  .answer-tile, aside.card, .step-list li {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius) !important;
+    padding: 20px 20px !important;
+    margin: 20px 0 !important;
+    box-shadow: none !important;
+  }
+
+  .tldr-card, .hero-card, .callout-mnemo, .answer, .question-box {
+    border-left: 4px solid var(--accent) !important;
+  }
+
+  .callout, .translation-box {
+    border-left: 4px solid var(--primary) !important;
+  }
+
+  .tldr-label, .hero-title, .summary-title, .book-title, .source-book, .callout-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent) !important;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .timeline-step {
+    padding-left: 4px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 12px;
+  }
+
+  .timeline-step:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .timeline-step-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .timeline-step-title span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    font-size: 14px;
+    font-weight: 800;
+    margin-right: 8px;
+  }
+
+  .grid-cards, .summary-grid, .two-col, .source-grid, .answer-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  @media (min-width: 640px) {
+    .grid-cards, .source-grid, .answer-hero {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* Bilingual Textbook Quote Blocks */
+  .book-header, .source-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .book-meta, .source-loc, .source-tag, .summary-subtitle, .summary-badge {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .quote-entry, .quote-block {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .quote-entry:last-child, .quote-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quote-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .en-box, .quote-en, blockquote {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 10px 0 12px;
+    word-break: break-word;
+  }
+
+  body.hide-en .en-box,
+  body.hide-en .quote-en {
+    display: none;
+  }
+
+  .zh-box, .quote-tw {
+    font-size: 17.5px;
+    line-height: 1.78;
+    color: var(--text-body);
+  }
+
+  .zh-box strong, .quote-tw strong {
+    color: var(--accent);
+    background: rgba(244, 196, 78, 0.10);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+
+  .toggle-en-btn {
+    appearance: none;
+    background: var(--bg-tag);
+    color: var(--accent);
+    border: 1px solid rgba(244, 196, 78, 0.35);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  /* Figures & Images */
+  .figure-card, .fig-card, figure, .figure-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .figure-img-wrap, .fig-body, .figure-body {
+    padding: 14px;
+  }
+
+  .figure-img-wrap {
+    background: #f8fafc;
+    cursor: zoom-in;
+  }
+
+  main img, .container img, .wrap img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 8px;
+    margin: 0 auto;
+    cursor: zoom-in;
+  }
+
+  .zoom-hint {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    padding: 6px 4px 0;
+  }
+
+  .figure-title, .fig-title, .fig-header {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding: 12px 16px 4px;
+  }
+
+  .figure-caption, .fig-caption, figcaption {
+    font-size: 15px;
+    line-height: 1.68;
+    color: var(--text-secondary);
+    padding: 6px 16px 14px;
+    background: transparent;
+    border: none;
+  }
+
+  .figure-caption-en {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 0 16px 14px;
+  }
+
+  /* Layer List & Flow */
+  .layer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 16px 0 24px;
+  }
+
+  .layer-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-size: 17px;
+  }
+
+  .layer-badge {
+    font-size: 13px;
+    font-weight: 700;
+    color: #181614;
+    background: var(--accent);
+    padding: 2px 9px;
+    border-radius: 6px;
+    white-space: nowrap;
+    margin-top: 3px;
+  }
+
+  .flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    padding: 18px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    margin: 18px 0;
+  }
+
+  .flow span {
+    padding: 6px 11px;
+    border-radius: 8px;
+    background: var(--bg-tag);
+    color: var(--text-primary);
+    font-size: 15px;
+  }
+
+  .flow b {
+    color: var(--accent);
+  }
+
+  .step-list {
+    list-style: none;
+    margin-left: 0;
+  }
+
+  .ans-value {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+
+  .chart-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin: 20px 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 14px;
+  }
+
+  /* Responsive Tables -> Stacked Mobile Cards (< 680px) */
+  .table-wrap, .table-wrapper {
+    width: 100%;
+    margin: 18px 0 26px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 16px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-body);
+  }
+
+  th {
+    background: var(--bg-pillbar);
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  tr.highlight-tr td {
+    background: rgba(244, 196, 78, 0.12);
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  @media (max-width: 680px) {
+    table.ro-resp-table,
+    table.ro-resp-table thead,
+    table.ro-resp-table tbody,
+    table.ro-resp-table th,
+    table.ro-resp-table td,
+    table.ro-resp-table tr {
+      display: block;
+      width: 100%;
+    }
+
+    table.ro-resp-table thead {
+      display: none;
+    }
+
+    table.ro-resp-table tr {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    table.ro-resp-table td {
+      border: none;
+      border-bottom: 1px dashed var(--border-color);
+      padding: 8px 0;
+      text-align: left !important;
+    }
+
+    table.ro-resp-table td:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    table.ro-resp-table td:first-child {
+      padding-top: 0;
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    table.ro-resp-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+  }
+
+  /* Reading Outpost Bottom-Left TOC Pill & Bottom-Right Up Button */
+  .ro-bottom-toc {
+    position: fixed;
+    left: 16px;
+    bottom: 20px;
+    z-index: 95;
+    background: var(--taupe-fab);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 9px 15px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: calc(100vw - 88px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-up-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 95;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--taupe-fab);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    text-decoration: none !important;
+  }
+
+  /* Drawers & Lightbox */
+  .ro-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ro-drawer-backdrop.open {
+    display: flex;
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-backdrop {
+      align-items: center;
+      padding: 24px;
+    }
+  }
+
+  .ro-drawer-panel {
+    width: 100%;
+    max-width: 500px;
+    max-height: 78vh;
+    overflow-y: auto;
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px 20px 0 0;
+    padding: 18px 18px 28px;
+    box-shadow: var(--shadow);
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-panel {
+      border-radius: 18px;
+    }
+  }
+
+  .ro-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .ro-drawer-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .ro-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .ro-drawer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ro-drawer-list a {
+    display: block;
+    text-decoration: none !important;
+    color: var(--text-body) !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .ro-drawer-list a.active {
+    color: #181614 !important;
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 800;
+  }
+
+  .ro-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    cursor: zoom-out;
+  }
+
+  .ro-lightbox.open {
+    display: flex;
+  }
+
+  .ro-lightbox img {
+    max-width: 100%;
+    max-height: 92vh;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    padding: 6px 0;
+  }
+
+  html[data-theme="light"] {
+    --bg-primary: #fbf8f4;
+    --bg-pillbar: #f0ece3;
+    --bg-card: #ffffff;
+    --bg-quote: #f6f2ea;
+    --bg-tag: #eee8dd;
+    --text-primary: #2f2820;
+    --text-body: #4a3f35;
+    --text-secondary: #5e5043;
+    --text-muted: #756656;
+    --primary: #1b9dce;
+    --primary-light: rgba(27, 157, 206, 0.12);
+    --primary-border: rgba(27, 157, 206, 0.35);
+    --accent: #b86b11;
+    --accent-light: rgba(244, 196, 78, 0.22);
+    --border-color: rgba(74, 63, 53, 0.12);
+    --border-strong: rgba(74, 63, 53, 0.22);
+    --taupe-fab: rgba(105, 90, 74, 0.94);
+    --shadow: 0 4px 18px rgba(47, 40, 32, 0.08);
+    color-scheme: light;
+  }
+
+  html[data-theme="light"] .ro-header-wrap {
+    background: linear-gradient(180deg, #fbf8f4 70%, rgba(251, 248, 244, 0));
+  }
+
+  html[data-theme="light"] .ro-menu-circle {
+    background: #67c3eb;
+    color: #1f1a15;
+  }
+
+  html[data-theme="light"] .ro-cta-pill {
+    background: #f6c84c;
+    color: #2f2820;
+  }
+
+  html[data-theme="light"] .ro-bottom-toc,
+  html[data-theme="light"] .ro-up-btn {
+    color: #ffffff;
+  }
+
+  html[data-theme="light"] .ro-drawer-list a.active {
+    background: #f6c84c;
+    border-color: #e0b034;
+    color: #2f2820 !important;
+  }
+
+  html[data-theme="light"] .zh-box strong,
+  html[data-theme="light"] .quote-tw strong {
+    color: #8c4d06;
+    background: rgba(246, 200, 76, 0.28);
+  }
+
+  .ro-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .ro-theme-btn {
+    appearance: none;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    transition: transform 0.15s ease;
+  }
+
+  .ro-theme-btn:active {
+    transform: scale(0.96);
+  }
+
+</style>
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem('biowiki-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<!-- Reading Outpost Dark Style Shell -->
+<div class="ro-header-wrap">
+  <div class="ro-pillbar">
+    <div class="ro-brand-group">
+      <button class="ro-menu-circle" type="button" aria-label="開啟專題選單" onclick="roOpenDrawer('roSiteDrawer')">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="ro-brand-link" href="index.html">
+        <span class="ro-brand-zh">400X 的日常切片</span>
+        <span class="ro-brand-en">BIO-WIKI EVIDENCE</span>
+      </a>
+    </div>
+    <div class="ro-top-actions">
+      <button class="ro-theme-btn" id="roThemeBtn" type="button" onclick="roToggleTheme()">☀️ 亮色</button>
+      <button class="ro-cta-pill" type="button" onclick="roOpenDrawer('roSiteDrawer')">專題目錄</button>
+    </div>
+  </div>
+</div>
+
+<div class="ro-drawer-backdrop" id="roSiteDrawer" onclick="if(event.target===this)roCloseDrawer('roSiteDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📚 Bio-Wiki 全站專題</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roSiteDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list">
+      <a href="index.html">🏠 首頁：主題分類總覽</a>
+      <a href="chromatin.html">1. 染色質與染色體本質</a>
+      <a href="wheat-polygenic.html">2. 小麥多基因累加模型 (Campbell 14e)</a>
+      <a href="spermatogonia-hole.html">3. 精原細胞與生精歷程 (跨正典考證)</a>
+      <a href="griffith-transformation.html">4. Griffith 轉形作用</a>
+      <a href="promoter-tata-box.html">5. 啟動子、TATA 匣與甲基化</a>
+      <a href="sickle-cell-dominance.html">6. 鐮刀型貧血顯隱性層次分析</a>
+      <a href="endosymbiosis.html">7. 內共生假說與演化序列</a>
+      <a href="lactose-intolerance-lac-operon.html">8. 乳糖不耐症與大腸桿菌 lac 操縱組</a>
+      <a href="operon-inference-pierce.html">9. Pierce 操縱組推論過程</a>
+      <a href="gene-allele-dna-chromosome.html" class="active">10. 遺傳因子、基因、等位基因與染色體</a>
+    </div>
+  </div>
+</div>
+
+<div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📑 本篇段落導覽</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list" id="roTocList" onclick="roCloseDrawer('roTocDrawer')"></div>
+  </div>
+</div>
+
+<div class="ro-lightbox" id="roLightbox" onclick="this.classList.remove('open')">
+  <img id="roLightboxImg" alt="">
+</div>
+
+
+<!-- Minimal Sticky Topbar -->
+<!-- In-Page TOC Drawer -->
+<!-- Site-Wide Topics Drawer -->
+<!-- Lightbox for Images -->
+<main class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="meta-line">
+      <span class="meta-pill">遺傳與分子生物學</span>
+      <span class="meta-pill-muted">8 部原文正典考證</span>
+      <span class="meta-pill-muted">高中 7 版對照</span>
+      <span class="meta-pill-muted">2 張原書圖解</span>
+    </div>
+    <h1>遺傳因子、基因、等位基因、DNA 與染色體：從孟德爾到現代分子生物學</h1>
+    <p class="subtitle">五個詞分屬不同的「實體尺度」與「科學史階段」——一次釐清包含階層、高中各版課本定義差異、為何曾誤認遺傳物質是蛋白質，以及 115 大同代理教甄口試實戰切入點。</p>
+  </div>
+
+  <!-- Section 1: TL;DR + Hierarchy -->
+  <section id="sec-core">
+    <div class="tldr-card">
+      <div class="tldr-label">一句話核心與科學史演變軸</div>
+      <div class="timeline">
+        <div class="timeline-step">
+          <div class="timeline-step-title"><span>①</span> 1865 孟德爾｜抽象「遺傳因子」</div>
+          <p>由豌豆雜交比例推論出的離散遺傳單位（成對存在、配子形成時分離），當時尚不知道細胞核、染色體或 DNA。</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-step-title"><span>②</span> 1902–1910 染色體學說與基因命名｜定位到染色體</div>
+          <p>Sutton–Boveri 與 Morgan 將遺傳因子定位於染色體上的特定<strong>基因座（locus）</strong>；1909 年 Johannsen 正式命名為<strong>基因（gene）</strong>，成對替代版本即<strong>等位基因（allele）</strong>。</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-step-title"><span>③</span> 1910–1940s 蛋白質假說誤判｜曾壓寶 20 種胺基酸</div>
+          <p>染色體含 DNA 與蛋白質；因蛋白質有 20 種胺基酸且染色實驗曾遭誤讀，科學界主流一度認為遺傳因子由蛋白質構成，DNA 只是 4 種鹼基重複的結構支撐。</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-step-title"><span>④</span> 1944–1953 現代分子生物學｜確立為 DNA 功能區域</div>
+          <p>Avery（1944）與 Hershey–Chase（1952）確立遺傳物質為 <strong>DNA</strong>；現代定義將基因界定為「DNA 上能表現功能性產物（多肽或功能性 RNA）所需的整段序列（含調控區）」。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <h2><span class="sec-num">01</span> 實體包含階層：染色體、DNA、基因與等位基因</h2>
+    </div>
+
+    <p>高中選修生物課本特別提醒：<strong>「染色體、DNA、基因」不可畫成三個彼此並列的獨立物件</strong>。真核細胞複製前的一條染色體只含有一條極長的雙股 DNA 分子與組蛋白等蛋白質；這條 DNA 上排著數百至數千個基因，每個基因在同源染色體相同基因座上又可能有序列微調的不同版本（等位基因）。</p>
+
+    <table class="resp-table">
+      <thead>
+        <tr>
+          <th>名詞（中英）</th>
+          <th>實體尺度／所屬層次</th>
+          <th>正式定義與教學白話</th>
+          <th>經典範例</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="名詞（中英）"><strong>染色體</strong><br>chromosome</td>
+          <td data-label="實體尺度／所屬層次">細胞核內的結構載體（最大）</td>
+          <td data-label="正式定義與教學白話">由 1 條長 DNA 與蛋白質（組蛋白等）纏繞構成；間期呈鬆散<strong>染色質（chromatin）</strong>，分裂期濃縮成獨立可見構造。</td>
+          <td data-label="經典範例">人類體細胞 46 條染色體；每條含數百至數千個基因。</td>
+        </tr>
+        <tr>
+          <td data-label="名詞（中英）"><strong>DNA</strong><br>deoxyribonucleic acid</td>
+          <td data-label="實體尺度／所屬層次">儲存遺傳資訊的化學巨分子</td>
+          <td data-label="正式定義與教學白話">由 A、T、G、C 四種去氧核糖核苷酸連接而成的雙股螺旋長鏈，鹼基排列次序即遺傳密碼。</td>
+          <td data-label="經典範例">每條未複製真核染色體僅含 1 條線性雙股 DNA。</td>
+        </tr>
+        <tr>
+          <td data-label="名詞（中英）"><strong>基因</strong><br>gene</td>
+          <td data-label="實體尺度／所屬層次">DNA 上的功能序列區域</td>
+          <td data-label="正式定義與教學白話">可被表現以產生功能性產物（多肽或 tRNA／rRNA 等功能性 RNA）的 DNA 區域；現代分子生物學亦納入啟動子、強化子與剪接位點等調控序列。</td>
+          <td data-label="經典範例">豌豆種子形狀基因、花色基因。</td>
+        </tr>
+        <tr>
+          <td data-label="名詞（中英）"><strong>等位基因</strong><br>allele</td>
+          <td data-label="實體尺度／所屬層次">同一基因座的不同序列版本</td>
+          <td data-label="正式定義與教學白話">佔據一對同源染色體相對應<strong>基因座（locus）</strong>、決定同一性狀變異的基因版本；分子差異在於 DNA 核苷酸序列的細微不同。</td>
+          <td data-label="經典範例">豌豆花色 <em>P</em> 與 <em>p</em> 只差 1 個核苷酸（C vs. A）。</td>
+        </tr>
+        <tr>
+          <td data-label="名詞（中英）"><strong>遺傳因子</strong><br>hereditary factor</td>
+          <td data-label="實體尺度／所屬層次">歷史上的抽象離散單位</td>
+          <td data-label="正式定義與教學白話">孟德爾由雜交比例推論出的抽象單位；廣義上為「基因」前身，若指成對替代版本（圓粒因子／皺粒因子）則對應「等位基因」。</td>
+          <td data-label="經典範例">孟德爾 1865 年豌豆雜交實驗之單位因子。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <div class="callout-title">Solomon 11e 閱讀提醒：「基因」一詞的雙重語義</div>
+      <p><em>Solomon Biology</em> 11e Ch. 11 特別指出，遺傳學家有時用「基因」指稱染色體上的特定<strong>基因座（locus）</strong>，有時又指該基因座上的某一個<strong>等位基因（allele）</strong>，例如「黃色與綠色種子是支配同一性狀變異的等位基因」。閱讀英文題幹時，必須依上下文區分作者指的究竟是「位置」還是「版本」。</p>
+    </div>
+  </section>
+
+  <!-- Section 2: Textbook Figures -->
+  <section id="sec-figures">
+    <div class="section-head">
+      <h2><span class="sec-num">02</span> 教科書原圖考證（點擊可放大）</h2>
+    </div>
+
+    <div class="figure-grid">
+      <article class="figure-card">
+        <div class="figure-img-wrap" onclick="openLightbox('images/Campbell13e_Fig14-4_alleles_dna_sequence.jpg', this.querySelector('img').alt)">
+          <img src="images/Campbell13e_Fig14-4_alleles_dna_sequence.jpg" alt="Campbell Biology 13e Figure 14.4 Alleles, alternative versions of a gene" loading="lazy">
+          <span class="zoom-hint">點擊放大</span>
+        </div>
+        <div class="figure-body">
+          <div class="figure-title">圖證 1｜Campbell 13e 圖 14.4：等位基因的分子本質（DNA 序列只差 1 個核苷酸）</div>
+          <p class="figure-caption">將抽象的「等位基因」落實到染色體與 DNA 層次：一對同源染色體在花色基因座上分別帶有紫花（<code>CTAAATCGGT</code>）與白花（<code>ATAAATCGGT</code>）等位基因，單一核苷酸差異決定能否合成正常紫色素酵素。</p>
+          <p class="figure-caption-en">Figure 14.4 Alleles, alternative versions of a gene. This diagram shows a pair of homologous chromosomes in an F₁ hybrid pea plant, with the actual DNA sequence from the flower-color allele of each chromosome (Campbell Biology, 13th ed., Ch. 14).</p>
+        </div>
+      </article>
+
+      <article class="figure-card">
+        <div class="figure-img-wrap" onclick="openLightbox('images/Solomon11e_Fig11-5_gene_loci_alleles.png', this.querySelector('img').alt)">
+          <img src="images/Solomon11e_Fig11-5_gene_loci_alleles.png" alt="Solomon Biology 11e Figure 11-5 Gene loci and their alleles" loading="lazy">
+          <span class="zoom-hint">點擊放大</span>
+        </div>
+        <div class="figure-body">
+          <div class="figure-title">圖證 2｜Solomon 11e 圖 11-5：非同源染色體上的不同基因 vs. 同源染色體對應基因座上的等位基因</div>
+          <p class="figure-caption">清楚區分「兩條非同源染色體上的不同基因（彼此不是等位基因）」與「一對同源染色體相同基因座上的基因對（才是等位基因）」，並呈現減數分裂時配子只取得每對等位基因之一。</p>
+          <p class="figure-caption-en">Figure 11-5 Gene loci and their alleles. Nonhomologous chromosomes carry different genes that are not allelic to each other, whereas alleles occupy corresponding loci on homologous chromosomes (Solomon Biology, 11th ed., Ch. 11).</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Section 3: High School Editions Comparison -->
+  <section id="sec-highschool">
+    <div class="section-head">
+      <h2><span class="sec-num">03</span> 高中現行課本跨版本對照（必修 6 版 × 選修 7 來源）</h2>
+    </div>
+
+    <p>整理自 108 課綱高中必修生物 6 版（三民、全華、南一、泰宇、翰林、龍騰；未收錄康熹）與選修生物一 7 組來源（含康熹舊課綱與「來源 A 疑翰林」），各版皆採「古典定義 → 染色體定位 → DNA 序列」推進，但在四個細節上有明確差異：</p>
+
+    <table class="resp-table">
+      <thead>
+        <tr>
+          <th>版本</th>
+          <th>「遺傳因子」對應誰</th>
+          <th>「等位基因」定義切入點</th>
+          <th>分子定義與產物是否明示 RNA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="版本"><strong>龍騰版</strong></td>
+          <td data-label="「遺傳因子」對應誰">必修明寫 1909 年約翰森將「遺傳因子改稱為基因」</td>
+          <td data-label="「等位基因」定義切入點">控制同一性狀，且位於同源染色體相同位置的基因；另明述 <em>P</em> 與 <em>p</em> 核苷酸序列不同</td>
+          <td data-label="分子定義與產物是否明示 RNA">必修寫「可表現蛋白質的 DNA 片段」；選修改為「<strong>通常</strong>是蛋白質」</td>
+        </tr>
+        <tr>
+          <td data-label="版本"><strong>翰林版</strong><br>（含來源 A 疑翰林）</td>
+          <td data-label="「遺傳因子」對應誰">必修明寫孟德爾的「成對因子」指的就是<strong>等位基因</strong></td>
+          <td data-label="「等位基因」定義切入點">必修：位在同源染色體上相同位置的基因；選修：一基因在同源染色體上的其中一種型式</td>
+          <td data-label="分子定義與產物是否明示 RNA">「一段有功能的 DNA 序列」；選修概念表列產物可為蛋白質或功能性 RNA</td>
+        </tr>
+        <tr>
+          <td data-label="版本"><strong>南一版</strong></td>
+          <td data-label="「遺傳因子」對應誰">必修偏向基因；選修寫「等位基因（即孟德爾的『遺傳因子』）」</td>
+          <td data-label="「等位基因」定義切入點">選修<strong>唯一正式引入「基因座（locus）」</strong>，並比喻為同一基因的不同「版本」</td>
+          <td data-label="分子定義與產物是否明示 RNA">選修明寫「DNA（<strong>或某些病毒之 RNA</strong>）中帶有遺傳資訊的一段核苷酸序列」</td>
+        </tr>
+        <tr>
+          <td data-label="版本"><strong>三民版</strong></td>
+          <td data-label="「遺傳因子」對應誰">明確寫成對控制同一性狀的兩個遺傳因子＝<strong>等位基因</strong></td>
+          <td data-label="「等位基因」定義切入點">知識框特別說明因位於同源染色體「相互對應的位置」，故命名為「等位」基因</td>
+          <td data-label="分子定義與產物是否明示 RNA"><strong>選修設專欄明示</strong>最終產物包含 <strong>RNA（rRNA、tRNA）與蛋白質</strong>兩者</td>
+        </tr>
+        <tr>
+          <td data-label="版本"><strong>泰宇版</strong></td>
+          <td data-label="「遺傳因子」對應誰">必修同章內先後出現「遺傳因子（等位基因）」與「遺傳因子（基因）」兩種括號對譯</td>
+          <td data-label="「等位基因」定義切入點">決定同一性狀的一對遺傳因子有不同型式，稱為等位基因，位於同源染色體相對位置</td>
+          <td data-label="分子定義與產物是否明示 RNA">DNA 中攜帶合成特定蛋白質密碼的一段特定核苷酸序列</td>
+        </tr>
+        <tr>
+          <td data-label="版本"><strong>全華版</strong></td>
+          <td data-label="「遺傳因子」對應誰">控制一種性狀的遺傳因子稱為<strong>基因</strong></td>
+          <td data-label="「等位基因」定義切入點">「一種基因的不同型式」稱為等位基因，分別位於成對的同源染色體上</td>
+          <td data-label="分子定義與產物是否明示 RNA">能控制遺傳性狀／帶有遺傳訊息的 DNA 片段</td>
+        </tr>
+        <tr>
+          <td data-label="版本"><strong>康熹版</strong><br>（僅選修舊課綱）</td>
+          <td data-label="「遺傳因子」對應誰">將遺傳因子命名為「基因」</td>
+          <td data-label="「等位基因」定義切入點">每一對染色體上必有一對以上的等位基因</td>
+          <td data-label="分子定義與產物是否明示 RNA"><strong>明示</strong>「攜有可合成某特定蛋白質<strong>或 RNA</strong> 的編碼」</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Section 4: Original Literature Part A -->
+  <section id="sec-sources-hierarchy">
+    <div class="section-head">
+      <h2><span class="sec-num">04</span> 原始文獻段落 A：基因、等位基因與染色體階層</h2>
+      <button class="toggle-en-btn" type="button" id="toggleEnBtn" onclick="toggleEnglish()">精簡：隱藏英文原文</button>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">1. 《Campbell Biology》13e</span>
+        <span class="source-loc">Ch. 13, Ch. 14 ＆ Ch. 17</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"Each chromosome consists of a single long DNA molecule, elaborately coiled in association with various proteins. One chromosome includes several hundred to a few thousand genes, each gene being a precise sequence of nucleotides along the DNA molecule. A gene's specific location along the length of a chromosome is called the gene's locus (plural, loci; from the Latin, meaning 'place')."</div>
+        <div class="quote-tw">「<strong>每條染色體由一個長 DNA 分子組成，並與各種蛋白質精細纏繞在一起。一條染色體包含數百到數千個基因，每個基因都是 DNA 分子上一段精確的核苷酸序列。</strong>基因在染色體上的特定位置稱為<strong>基因座</strong>（locus）。」（Ch. 13）</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"Molecular biologists also often include promoters and certain other regulatory regions of DNA within the boundaries of a gene. These DNA sequences are not transcribed, but they can be considered part of the functional gene because they must be present for transcription to occur. ... Thus, we arrive at the following definition: A gene is a region of DNA that can be expressed to produce a final functional product that is either a polypeptide or an RNA molecule."</div>
+        <div class="quote-tw">「分子生物學家也常常將<strong>啟動子和某些其他調控區域的 DNA 包括在基因的邊界內</strong>……因此，我們得出以下定義：<strong>基因是 DNA 的一個區域，可以被表達，產生最終的功能性產物——可以是多肽，也可以是 RNA 分子。</strong>」（Ch. 17）</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">2. 《Molecular Cell Biology》9e (Lodish) ＆ 《Essential Cell Biology》6e (Alberts)</span>
+        <span class="source-loc">Lodish Ch. 7 ＆ Alberts Ch. 5</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">[Lodish 9e Ch. 7] "In molecular terms, a gene is commonly defined as the entire nucleic acid sequence that is necessary for the synthesis of a functional gene product (polypeptide or RNA). According to this definition, a gene includes more than the nucleotides encoding an amino acid sequence or a functional RNA... A gene also includes all of the DNA sequences required for synthesis of a particular RNA transcript, no matter where those sequences are located in relation to the coding region."</div>
+        <div class="quote-tw">[Lodish 9e] 「就分子層面而言，基因通常被定義為『合成某個有功能之基因產物（多肽或 RNA）所必需的整段核酸序列』……<strong>還包括合成某條特定 RNA 轉錄本所需的所有 DNA 序列，無論這些序列相對於編碼區位在何處（如強化子、啟動子、poly(A) 位點與剪接位點）。</strong>」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">[Alberts ECB6 Ch. 5] "chromosome: Long, threadlike structure composed of DNA and proteins that carries the genetic information of an organism; becomes visible as a distinct entity when a plant or animal cell prepares to divide. / gene: Unit of heredity containing the instructions that dictate the characteristics or phenotype of an organism; in molecular terms, a segment of DNA that directs the production of a particular protein or functional RNA molecule."</div>
+        <div class="quote-tw">[Alberts ECB6] 「<strong>染色體</strong>：由 DNA 與蛋白質構成、攜帶生物遺傳資訊的長絲狀結構；植物或動物細胞準備分裂時，會成為可見的獨立構造。／<strong>基因</strong>：含有決定生物特徵或表現型之指示的遺傳單位；以分子層次而言，是一段引導特定蛋白質或功能性 RNA 分子生成的 DNA。」</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">3. 《Solomon Biology》11e</span>
+        <span class="source-loc">Ch. 11</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"Remember that the term locus designates not only a position on a chromosome but also a type of gene controlling a particular character; thus, Y (yellow) and y (green) represent a specific pair of alleles of a locus involved in determining seed color in peas. Although you may initially be uncomfortable with geneticists sometimes using the term gene to specify a locus and at other times to specify one of the alleles of that locus, the meaning is usually clear from the context."</div>
+        <div class="quote-tw">「請記得，基因座一詞不只指染色體上的一個位置，也指控制特定性狀的一類基因；因此 Y 與 y 代表決定豌豆種子顏色之基因座的特定等位基因對。<strong>遺傳學家有時使用『基因』指基因座，有時又指該基因座的某一個等位基因</strong>，這最初可能令你感到不自在，但其意義通常可以從上下文判斷。」</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Original Literature Part B -->
+  <section id="sec-sources-history">
+    <div class="section-head">
+      <h2><span class="sec-num">05</span> 原始文獻段落 B：為何曾認為遺傳因子是蛋白質？</h2>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">4. 《Becker's World of the Cell》10e</span>
+        <span class="source-loc">Ch. 16（16.1 節）</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"In the early 1880s a botanist, Eduard Zacharias, reported that extracting DNA from cells causes the staining of the chromosomes to disappear. Zacharias and others therefore inferred that DNA is the genetic material. This view prevailed until the early 1900s, when incorrectly interpreted staining experiments led to the false conclusion that the amount of DNA changes dramatically within cells. ... As a result, from around 1910 to the 1940s, most scientists believed that genes were made of protein rather than DNA. It was argued that proteins are constructed from 20 different amino acids that can be assembled in a vast number of combinations... In contrast, DNA was thought to be a simple polymer consisting of the same sequence of four bases repeated over and over, thereby lacking the variability expected of a genetic molecule. Such a simple polymer was thought to serve merely as a structural support for the genetic material in the form of protein."</div>
+        <div class="quote-tw">「1880 年代初期 Zacharias 曾推論 DNA 是遺傳物質，直到 1900 年代初期被錯誤解讀的染色實驗讓人誤以為細胞內 DNA 含量會大幅改變……因此，<strong>約從 1910 年到 1940 年代，多數科學家相信基因由蛋白質而非 DNA 構成。他們主張蛋白質由 20 種胺基酸組成，能產生極其多樣的排列組合</strong>；相較之下，DNA 被認為只是四種鹼基重複排列的簡單聚合物，僅為蛋白質形式的遺傳物質提供結構支撐。」</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Teaching & Exam Tips -->
+  <section id="sec-teaching">
+    <div class="section-head">
+      <h2><span class="sec-num">06</span> 高中教學與 115 大同代理教甄口試實戰</h2>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">115 學年大同高中代理教甄口試實戰題組</div>
+      <p>委員曾現場提問：<strong>① 遺傳因子、基因、等位基因、性狀、表徵的定義是什麼？怎麼從 2-1 串到「遺傳的染色體學說」？ ② 黑板寫的英文代號是「因子」還是「基因」？</strong><br>
+      <strong>實戰板書切換策略</strong>：講孟德爾 2-1 時先用「<strong>遺傳因子</strong>」，串到減數分裂與遺傳的染色體學說後統一改稱「<strong>基因</strong>」；黑板上的大小寫字母（如 <em>Y</em>／<em>y</em>）代表的是同一基因的<strong>等位基因</strong>。</p>
+    </div>
+
+    <div class="callout callout-warn">
+      <div class="callout-title">四大高頻命題與迷思陷阱</div>
+      <ul class="clean-list">
+        <li><strong>陷阱 1（階層並列）</strong>：「染色體、DNA、基因是三個並列的構造」→ <strong>錯</strong>（一條複製前染色體含一條 DNA 分子＋蛋白質，基因是 DNA 上的功能區域）。</li>
+        <li><strong>陷阱 2（兩表徵＝兩基因）</strong>：「圓粒與皺粒由兩個不同基因控制」→ <strong>錯</strong>（在單基因模型中，兩者是同一基因的兩種等位基因）。</li>
+        <li><strong>陷阱 3（一基因一蛋白質）</strong>：「所有基因都一定要轉譯成蛋白質」→ <strong>錯</strong>（rRNA、tRNA 等功能性 RNA 基因不經轉譯即具功能）。</li>
+        <li><strong>陷阱 4（直接遺傳表現型）</strong>：「親代把表現型直接遺傳給子代」→ <strong>錯</strong>（親代傳遞的是等位基因／基因型，表現型由基因型與環境共同決定）。</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    Bio-Wiki 概念考證庫 · 繁體中文與審定名詞遵循臺灣教育部規範 · 原文書與圖片引自 Ze-Agent Vault 正式譯本
+  </footer>
+
+</main>
+
+<!-- Reading Outpost Bottom Bar & Script -->
+<button class="ro-bottom-toc" type="button" onclick="roOpenDrawer('roTocDrawer')">📑 本篇段落導覽</button>
+<a class="ro-up-btn" href="#top" aria-label="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<script>
+  function roToggleTheme() {
+    var root = document.documentElement;
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('biowiki-theme', next); } catch (e) {}
+    roUpdateThemeBtn();
+  }
+  function roUpdateThemeBtn() {
+    var btn = document.getElementById('roThemeBtn');
+    if (!btn) return;
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.innerHTML = isLight ? '🌙 深色' : '☀️ 亮色';
+    btn.setAttribute('aria-label', isLight ? '切換為深色閱讀模式' : '切換為亮色閱讀模式');
+  }
+  roUpdateThemeBtn();
+  function roOpenDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('open');
+  }
+  function roCloseDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  }
+  function openLightbox(src, alt) {
+    var lb = document.getElementById('roLightbox');
+    var img = document.getElementById('roLightboxImg');
+    if (lb && img) {
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.add('open');
+    }
+  }
+  function toggleEnglish() {
+    document.body.classList.toggle('hide-en');
+    var btn = document.getElementById('toggleEnBtn');
+    if (btn) {
+      btn.textContent = document.body.classList.contains('hide-en')
+        ? '完整：顯示英文原文'
+        : '精簡：隱藏英文原文';
+    }
+  }
+  (function initReadingOutpostShell() {
+    var tocList = document.getElementById('roTocList');
+    var headings = document.querySelectorAll('h2, .card-title');
+    if (tocList && headings.length) {
+      headings.forEach(function(h, idx) {
+        if (!h.id) h.id = 'ro-sec-' + (idx + 1);
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent.trim();
+        tocList.appendChild(a);
+      });
+    }
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th, tr:first-child th')).map(function(th) {
+        return th.innerText.trim().replace(/[\r\n\t ]+/g, ' ');
+      });
+      if (!headers.length) return;
+      table.classList.add('ro-resp-table');
+      table.querySelectorAll('tr').forEach(function(tr) {
+        if (tr.querySelector('th')) return;
+        Array.from(tr.children).forEach(function(td, idx) {
+          if (td.tagName === 'TD' && !td.getAttribute('data-label') && headers[idx]) {
+            td.setAttribute('data-label', headers[idx]);
+          }
+        });
+      });
+    });
+    document.querySelectorAll('main img, .container img, .wrap img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        openLightbox(img.src, img.alt);
+      });
+    });
+  })();
+</script>
+</body>
+</html>
