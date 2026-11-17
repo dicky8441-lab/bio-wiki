@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>Pierce 遺傳學中的操縱組推論過程｜從突變株到部分二倍體的邏輯鏈｜Bio-Wiki</title>
+<style>
+  :root {
+    --bg-primary: #181614;
+    --bg-pillbar: #24201c;
+    --bg-card: #211e1a;
+    --bg-quote: #26221e;
+    --bg-tag: #2d2823;
+    --text-primary: #f6f1ea;
+    --text-body: #ddd5ca;
+    --text-secondary: #bfb5a8;
+    --text-muted: #9a8e80;
+    --primary: #5bc0eb;
+    --primary-light: rgba(91, 192, 235, 0.12);
+    --primary-border: rgba(91, 192, 235, 0.32);
+    --accent: #f4c44e;
+    --accent-light: rgba(244, 196, 78, 0.12);
+    --border-color: rgba(246, 241, 234, 0.09);
+    --border-strong: rgba(246, 241, 234, 0.16);
+    --taupe-fab: rgba(104, 91, 78, 0.94);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+  }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+    font-size: 18px;
+    line-height: 1.78;
+    padding: 0 0 96px 0;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Reading Outpost Signature Top Pill Header */
+  .ro-header-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-primary) 70%, rgba(24, 22, 20, 0));
+  }
+
+  .ro-pillbar {
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .ro-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .ro-menu-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    border: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .ro-menu-circle span {
+    display: block;
+    width: 16px;
+    height: 2.2px;
+    background: #181614;
+    border-radius: 2px;
+  }
+
+  .ro-brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .ro-brand-zh {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-brand-en {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .ro-cta-pill {
+    appearance: none;
+    background: var(--accent);
+    color: #1c1814;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  /* Main Reading Column */
+  .container, .wrap, main.container, main.wrap {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 22px 0;
+  }
+
+  /* Hero / Article Header */
+  header, .hero {
+    text-align: left !important;
+    margin-bottom: 32px;
+    padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .badge-bar, .meta-line {
+    display: flex;
+    justify-content: flex-start !important;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .badge, .meta-pill, .meta-pill-muted, .eyebrow, .tag {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .badge-primary, .meta-pill, .eyebrow {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary-border);
+  }
+
+  .badge-accent, .badge.red {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: rgba(244, 196, 78, 0.32);
+  }
+
+  h1 {
+    font-size: clamp(26px, 6.2vw, 34px);
+    line-height: 1.38;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    margin: 6px 0 14px;
+    text-align: left;
+  }
+
+  .subtitle, .lead, .meta {
+    font-size: 17px;
+    line-height: 1.68;
+    color: var(--text-muted);
+    margin: 0;
+    max-width: none;
+    text-align: left;
+  }
+
+  /* Unboxed Article Flow */
+  section, section.card, .card {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-bottom: 42px;
+    scroll-margin-top: 84px;
+  }
+
+  h2, .card-title {
+    font-size: clamp(22px, 5.2vw, 27px);
+    line-height: 1.45;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 44px 0 18px;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+  }
+
+  h2::before {
+    display: none !important;
+  }
+
+  h2 .sec-num {
+    color: var(--accent);
+    margin-right: 6px;
+    font-weight: 800;
+  }
+
+  h3, .step-box h3, .insight-title {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 30px 0 12px;
+  }
+
+  p, .summary-item, .insight-point, .hero-text {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--text-body);
+    margin-bottom: 18px;
+  }
+
+  ul, ol {
+    margin: 0 0 22px 24px;
+    color: var(--text-body);
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+    color: var(--text-body);
+  }
+
+  strong, b {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.88em;
+    background: var(--bg-tag);
+    padding: 2px 6px;
+    border-radius: 6px;
+    color: var(--primary);
+  }
+
+  /* Reading Outpost Signature Cyan-Underlined Content Links */
+  main a:not(.ro-cta-pill):not(.ro-brand-link),
+  .container a:not(.ro-cta-pill):not(.ro-brand-link),
+  .wrap a:not(.ro-cta-pill):not(.ro-brand-link) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  /* Soft Warm Sub-cards */
+  .tldr-card, .hero-card, .summary-card, .book-card, .source-card,
+  .quote-bilingual, .insight-card, .callout, .callout-mnemo,
+  .question-box, .translation-box, .answer, .boundary, .source,
+  .answer-tile, aside.card, .step-box {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius) !important;
+    padding: 20px 20px !important;
+    margin: 20px 0 !important;
+    box-shadow: none !important;
+  }
+
+  .tldr-card, .hero-card, .callout-mnemo, .answer, .question-box {
+    border-left: 4px solid var(--accent) !important;
+  }
+
+  .callout, .translation-box, .boundary {
+    border-left: 4px solid var(--primary) !important;
+  }
+
+  .callout-warn {
+    border-left: 4px solid var(--accent) !important;
+  }
+
+  .tldr-label, .hero-title, .summary-title, .book-title, .source-book, .callout-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent) !important;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .timeline-step {
+    padding-left: 4px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 12px;
+  }
+
+  .timeline-step:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .timeline-step-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .timeline-step-title span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    font-size: 14px;
+    font-weight: 800;
+    margin-right: 8px;
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  @media (min-width: 640px) {
+    .grid-2 {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .mini-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 18px;
+  }
+
+  .mini-card h4 {
+    font-size: 18px;
+    color: var(--accent);
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  .mini-card p:last-child {
+    margin-bottom: 0;
+  }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    font-weight: 800;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .step-title {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  /* Bilingual Textbook Quote Blocks */
+  .book-header, .source-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .book-meta, .source-loc, .source-tag, .summary-subtitle, .summary-badge {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .quote-entry, .quote-block {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .quote-entry:last-child, .quote-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quote-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .en-box, .quote-en, blockquote {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 10px 0 12px;
+    word-break: break-word;
+  }
+
+  body.hide-en .en-box,
+  body.hide-en .quote-en {
+    display: none;
+  }
+
+  .zh-box, .quote-tw {
+    font-size: 17.5px;
+    line-height: 1.78;
+    color: var(--text-body);
+  }
+
+  .zh-box strong, .quote-tw strong {
+    color: var(--accent);
+    background: rgba(244, 196, 78, 0.10);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+
+  .toggle-en-btn {
+    appearance: none;
+    background: var(--bg-tag);
+    color: var(--accent);
+    border: 1px solid rgba(244, 196, 78, 0.35);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  /* Figures & Images */
+  .figure-card, .fig-card, figure, .figure-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .figure-img-wrap, .fig-body, .figure-body {
+    padding: 14px;
+  }
+
+  .figure-img-wrap {
+    background: #f8fafc;
+    cursor: zoom-in;
+  }
+
+  main img, .container img, .wrap img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 8px;
+    margin: 0 auto;
+    cursor: zoom-in;
+  }
+
+  .zoom-hint {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    padding: 6px 4px 0;
+  }
+
+  .figure-title, .fig-title, .fig-header {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding: 12px 16px 4px;
+  }
+
+  .figure-caption, .fig-caption, figcaption {
+    font-size: 15px;
+    line-height: 1.68;
+    color: var(--text-secondary);
+    padding: 6px 16px 14px;
+    background: transparent;
+    border: none;
+  }
+
+  .figure-caption-en {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 0 16px 14px;
+  }
+
+  /* Responsive Tables -> Stacked Mobile Cards (< 680px) */
+  .table-wrap, .table-wrapper {
+    width: 100%;
+    margin: 18px 0 26px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 16px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-body);
+  }
+
+  th {
+    background: var(--bg-pillbar);
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  @media (max-width: 680px) {
+    table.ro-resp-table,
+    table.ro-resp-table thead,
+    table.ro-resp-table tbody,
+    table.ro-resp-table th,
+    table.ro-resp-table td,
+    table.ro-resp-table tr {
+      display: block;
+      width: 100%;
+    }
+
+    table.ro-resp-table thead {
+      display: none;
+    }
+
+    table.ro-resp-table tr {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    table.ro-resp-table td {
+      border: none;
+      border-bottom: 1px dashed var(--border-color);
+      padding: 8px 0;
+      text-align: left !important;
+    }
+
+    table.ro-resp-table td:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    table.ro-resp-table td:first-child {
+      padding-top: 0;
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    table.ro-resp-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+  }
+
+  /* Bottom TOC Pill & Up Button */
+  .ro-bottom-toc {
+    position: fixed;
+    left: 16px;
+    bottom: 20px;
+    z-index: 95;
+    background: var(--taupe-fab);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 9px 15px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: calc(100vw - 88px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-up-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 95;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--taupe-fab);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    text-decoration: none !important;
+  }
+
+  /* Drawers & Lightbox */
+  .ro-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ro-drawer-backdrop.open {
+    display: flex;
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-backdrop {
+      align-items: center;
+      padding: 24px;
+    }
+  }
+
+  .ro-drawer-panel {
+    width: 100%;
+    max-width: 500px;
+    max-height: 78vh;
+    overflow-y: auto;
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px 20px 0 0;
+    padding: 18px 18px 28px;
+    box-shadow: var(--shadow);
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-panel {
+      border-radius: 18px;
+    }
+  }
+
+  .ro-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .ro-drawer-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .ro-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .ro-drawer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ro-drawer-list a {
+    display: block;
+    text-decoration: none !important;
+    color: var(--text-body) !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .ro-drawer-list a.active {
+    color: #181614 !important;
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 800;
+  }
+
+  .ro-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    cursor: zoom-out;
+  }
+
+  .ro-lightbox.open {
+    display: flex;
+  }
+
+  .ro-lightbox img {
+    max-width: 100%;
+    max-height: 92vh;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  html[data-theme="light"] {
+    --bg-primary: #fbf8f4;
+    --bg-pillbar: #f0ece3;
+    --bg-card: #ffffff;
+    --bg-quote: #f6f2ea;
+    --bg-tag: #eee8dd;
+    --text-primary: #2f2820;
+    --text-body: #4a3f35;
+    --text-secondary: #5e5043;
+    --text-muted: #756656;
+    --primary: #1b9dce;
+    --primary-light: rgba(27, 157, 206, 0.12);
+    --primary-border: rgba(27, 157, 206, 0.35);
+    --accent: #b86b11;
+    --accent-light: rgba(244, 196, 78, 0.22);
+    --border-color: rgba(74, 63, 53, 0.12);
+    --border-strong: rgba(74, 63, 53, 0.22);
+    --taupe-fab: rgba(105, 90, 74, 0.94);
+    --shadow: 0 4px 18px rgba(47, 40, 32, 0.08);
+    color-scheme: light;
+  }
+
+  html[data-theme="light"] .ro-header-wrap {
+    background: linear-gradient(180deg, #fbf8f4 70%, rgba(251, 248, 244, 0));
+  }
+
+  html[data-theme="light"] .ro-menu-circle {
+    background: #67c3eb;
+    color: #1f1a15;
+  }
+
+  html[data-theme="light"] .ro-cta-pill {
+    background: #f6c84c;
+    color: #2f2820;
+  }
+
+  html[data-theme="light"] .ro-bottom-toc,
+  html[data-theme="light"] .ro-up-btn {
+    color: #ffffff;
+  }
+
+  html[data-theme="light"] .ro-drawer-list a.active {
+    background: #f6c84c;
+    border-color: #e0b034;
+    color: #2f2820 !important;
+  }
+
+  html[data-theme="light"] .zh-box strong,
+  html[data-theme="light"] .quote-tw strong {
+    color: #8c4d06;
+    background: rgba(246, 200, 76, 0.28);
+  }
+
+  .ro-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .ro-theme-btn {
+    appearance: none;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    transition: transform 0.15s ease;
+  }
+
+  .ro-theme-btn:active {
+    transform: scale(0.96);
+  }
+</style>
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem('biowiki-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<!-- Reading Outpost Dark Style Shell -->
+<div class="ro-header-wrap">
+  <div class="ro-pillbar">
+    <div class="ro-brand-group">
+      <button class="ro-menu-circle" type="button" aria-label="開啟專題選單" onclick="roOpenDrawer('roSiteDrawer')">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="ro-brand-link" href="index.html">
+        <span class="ro-brand-zh">400X 的日常切片</span>
+        <span class="ro-brand-en">BIO-WIKI EVIDENCE</span>
+      </a>
+    </div>
+    <div class="ro-top-actions">
+      <button class="ro-theme-btn" id="roThemeBtn" type="button" onclick="roToggleTheme()">☀️ 亮色</button>
+      <button class="ro-cta-pill" type="button" onclick="roOpenDrawer('roSiteDrawer')">專題目錄</button>
+    </div>
+  </div>
+</div>
+
+<div class="ro-drawer-backdrop" id="roSiteDrawer" onclick="if(event.target===this)roCloseDrawer('roSiteDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📚 Bio-Wiki 全站專題</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roSiteDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list">
+      <a href="index.html">🏠 首頁：主題分類總覽</a>
+      <a href="chromatin.html">1. 染色質與染色體本質</a>
+      <a href="wheat-polygenic.html">2. 小麥多基因累加模型 (Campbell 14e)</a>
+      <a href="spermatogonia-hole.html">3. 精原細胞與生精歷程 (Hole 15e)</a>
+      <a href="griffith-transformation.html">4. Griffith 轉形作用</a>
+      <a href="promoter-tata-box.html">5. 啟動子、TATA 匣與甲基化</a>
+      <a href="sickle-cell-dominance.html">6. 鐮刀型貧血顯隱性層次分析</a>
+      <a href="endosymbiosis.html">7. 內共生假說與演化序列</a>
+      <a href="lactose-intolerance-lac-operon.html">8. 乳糖不耐症與大腸桿菌 lac 操縱組</a>
+      <a href="operon-inference-pierce.html" class="active">9. Pierce 操縱組推論過程</a>
+    </div>
+  </div>
+</div>
+
+<div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📑 本篇段落導覽</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list" id="roTocList" onclick="roCloseDrawer('roTocDrawer')"></div>
+  </div>
+</div>
+
+<div class="ro-lightbox" id="roLightbox" onclick="this.classList.remove('open')">
+  <img id="roLightboxImg" alt="">
+</div>
+
+<main class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="meta-line">
+      <span class="meta-pill">Pierce Genetics 7e</span>
+      <span class="meta-pill-muted">Ch 09 &amp; Ch 16 遺傳推理</span>
+      <span class="meta-pill-muted">6 張原書圖解</span>
+    </div>
+    <h1>Pierce 遺傳學中的操縱組推論過程</h1>
+    <p class="subtitle">從 Benjamin A. Pierce《Genetics: A Conceptual Approach》（第 7 版）第 9 章與第 16 章出發，拆解 Jacob 與 Monod 如何在沒有 DNA 定序技術的年代，靠突變株與 F′ 部分二倍體反推出 <em>lac</em> 操縱組的調控線路。</p>
+  </div>
+
+  <!-- Section 1: Overview -->
+  <section id="sec-overview">
+    <div class="tldr-card">
+      <div class="tldr-label">一句話帶走</div>
+      <div class="timeline">
+        <div class="timeline-step">
+          <div class="timeline-step-title"><span>①</span> 跨章遺傳工具｜F′ 質體製造部分二倍體</div>
+          <p>大腸桿菌平常為單倍體，無法測顯隱性；因此藉 <strong>F′ 質體接合</strong>把第二套 <em>lac</em> 區送進細胞，形成<strong>部分二倍體（局部合子）</strong>。</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-step-title"><span>②</span> 順反判準｜反式作用（蛋白質）vs 順式作用（DNA 位點）</div>
+          <p>能跨兩條 DNA 分子互補或壓制的是<strong>可擴散的蛋白質</strong>（如 <em>lacI</em>）；只能影響同一條 DNA 相連基因的，則是 <strong>DNA 上的物理結合位點</strong>（如 <em>lacO</em>、<em>lacP</em>）。</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-step-title"><span>③</span> 教學編排｜先模型、後推論</div>
+          <p>Pierce 先在 16.2 前半直接呈現完整的 <em>lac</em> 線路圖（圖 16.7），再於「<em>lac</em> 突變」一節回頭用 5 類突變株證明每個元件確實存在。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <h2><span class="sec-num">01</span> 先看結論：Pierce 如何鋪陳這段科學推理？</h2>
+    </div>
+
+    <p>在編排順序上，Pierce 採取的是<strong>「先模型、後推論」</strong>的概念導向路線：</p>
+    <ol>
+      <li><strong>章節導引（科學史起點）</strong>：1958 年夏天，雅各（François Jacob，研究噬菌體 λ）與莫諾（Jacques Monod，研究大腸桿菌代謝乳糖的 β-半乳糖苷酶）在巴斯德研究所閣樓兩端各自研究，發現噬菌體誘導與乳糖酵素誘導遵從同一套開關邏輯，於 1961 年提出操縱組模型，並在 1965 年與 André Lwoff 共獲諾貝爾獎。</li>
+      <li><strong>先給完整結構與運作機制（16.2 前半）</strong>：先說明結構基因（<em>lacZ</em>、<em>lacY</em>、<em>lacA</em>）、啟動子（<em>lacP</em>）、操作子（<em>lacO</em>）與調控基因（<em>lacI</em>）如何運作（圖 16.7）。</li>
+      <li><strong>再透過突變交互作用回頭論證（<em>lac</em> Mutations 小節）</strong>：以 5 類關鍵突變株與部分二倍體實驗，解釋遺傳學家當初如何證實這些零件確實存在且各有分工。</li>
+    </ol>
+
+    <article class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Pierce7e_Ch16_Fig16-7.jpg', this.querySelector('img').alt)">
+        <img src="images/Pierce7e_Ch16_Fig16-7.jpg" alt="Pierce 7e 圖 16.7：lac 操縱組調節乳糖代謝" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖證 1｜Pierce 7e 圖 16.7：<em>lac</em> 操縱組的整體模型（負性可誘導）</div>
+        <p class="figure-caption">Pierce 先呈現這張完整線路圖，接著才在「<em>lac</em> 突變」一節展示如何透過突變株與部分二倍體把圖中的每個零件推論出來。</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- Section 2: Partial Diploids & Cis/Trans -->
+  <section id="sec-tool">
+    <div class="section-head">
+      <h2><span class="sec-num">02</span> 跨章核心工具：F′ 部分二倍體與順／反式判準（Ch09 → Ch16）</h2>
+    </div>
+
+    <p>大腸桿菌正常只有一條環狀染色體（單倍體），無法直接測試兩個突變等位基因之間的顯隱性與互補關係。因此 Pierce 在第 9 章先鋪陳細菌接合機制，說明研究者如何製造「對特定區域有兩份基因拷貝」的實驗材料：</p>
+
+    <article class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Pierce7e_Ch09_Fig9-14.jpg', this.querySelector('img').alt)">
+        <img src="images/Pierce7e_Ch09_Fig9-14.jpg" alt="Pierce 7e 圖 9.14：F′ 細胞與 F⁻ 細胞接合產生部分二倍體（局部合子）" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖證 2｜Pierce 7e 圖 9.14：F′ 細胞與 F⁻ 細胞接合產生部分二倍體（局部合子）</div>
+        <p class="figure-caption">Hfr 細胞中的 F 因子不精確切除時會帶走鄰近染色體基因（如 <em>lac</em> 區）成為 F′ 細胞；F′ × F⁻ 接合後即得到帶有兩套 <em>lac</em> 基因座的部分二倍體，使顯隱性與順／反式互補分析成為可能。</p>
+      </div>
+    </article>
+
+    <div class="grid-2">
+      <div class="mini-card">
+        <h4>反式作用（trans acting）</h4>
+        <p>位於<strong>不同條 DNA 分子</strong>上的正常拷貝，可以控制或挽救另一條 DNA 分子上的基因表現。</p>
+        <p><strong>推論意義：</strong>該序列編碼的是<strong>可擴散的分子產物</strong>（例如在細胞質中移動的蛋白質），可同時作用於染色體與質體上的操縱組。</p>
+      </div>
+      <div class="mini-card">
+        <h4>順式作用（cis acting）</h4>
+        <p>突變只能影響<strong>物理連接在同一條 DNA 分子上</strong>的結構基因表現，完全管不到另一條 DNA 分子。</p>
+        <p><strong>推論意義：</strong>該序列不是製造可擴散蛋白的基因，而是 <strong>DNA 本身上的調控位點</strong>（結合位置或起跑點）。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Five Steps -->
+  <section id="sec-steps">
+    <div class="section-head">
+      <h2><span class="sec-num">03</span> 推論的五個關鍵步驟（Ch16, Sec. 16.2 <em>lac</em> Mutations）</h2>
+    </div>
+
+    <div class="step-box">
+      <div class="step-header">
+        <span class="step-num">1</span>
+        <div class="step-title">區分獨立的結構基因：<em>lacZ⁻</em> 與 <em>lacY⁻</em></div>
+      </div>
+      <ul>
+        <li><strong>實驗觀察：</strong>部分突變株失去了製造 β-半乳糖苷酶（<em>lacZ⁻</em>）或乳糖通透酶（<em>lacY⁻</em>，Pierce 譯本正文亦譯為透過酶）的能力，突變改變了蛋白質胺基酸序列，但並未破壞「有乳糖才誘導」的調控開關。</li>
+        <li><strong>部分二倍體測試：</strong><code>lacZ⁺ lacY⁻ / lacZ⁻ lacY⁺</code> 在乳糖存在時可正常同時產生兩種酵素。</li>
+        <li><strong>推論結論：</strong><em>lacZ</em> 與 <em>lacY</em> 是彼此獨立的<strong>結構基因</strong>，各自只需一份野生型拷貝即可互補產生對應酵素，與另一條 DNA 上是否相連無關。</li>
+      </ul>
+    </div>
+
+    <div class="step-box">
+      <div class="step-header">
+        <span class="step-num">2</span>
+        <div class="step-title">由組成型突變 <em>lacI⁻</em> 推出「可擴散的負調控抑制蛋白」（圖 16.9）</div>
+      </div>
+      <ul>
+        <li><strong>實驗觀察：</strong><em>lacI⁻</em> 突變同時影響 β-半乳糖苷酶與通透酶，且呈<strong>組成型（constitutive）</strong>——無論培養基有沒有乳糖，兩種酵素都持續製造（證明兩者受同一系統協調調控）。</li>
+        <li><strong>部分二倍體測試：</strong><code>lacI⁺ lacZ⁻ / lacI⁻ lacZ⁺</code> 只在乳糖存在時才合成 β-半乳糖苷酶（恢復正常可誘導狀態）。</li>
+        <li><strong>推論結論：</strong>
+          <ol>
+            <li><code>lacI⁺</code> 對 <code>lacI⁻</code> 為<strong>顯性</strong>：只要有一份正常拷貝，就能把系統「關回」無乳糖時不表現的狀態，表示 <em>lacI⁺</em> 的正常功能是<strong>主動抑制轉錄（負調控）</strong>。</li>
+            <li><code>lacI⁺</code> 與唯一的 <code>lacZ⁺</code> 位於<strong>不同條 DNA 分子</strong>卻能壓制其表現，證明 <em>lacI</em> 編碼一個<strong>可擴散的反式作用（trans acting）抑制蛋白</strong>。</li>
+          </ol>
+        </li>
+      </ul>
+      <article class="figure-card">
+        <div class="figure-img-wrap" onclick="openLightbox('images/Pierce7e_Ch16_Fig16-9.jpg', this.querySelector('img').alt)">
+          <img src="images/Pierce7e_Ch16_Fig16-9.jpg" alt="Pierce 7e 圖 16.9：部分二倍體 lacI+ lacZ- / lacI- lacZ+ 的反式顯性效應" loading="lazy">
+          <span class="zoom-hint">點擊放大</span>
+        </div>
+        <div class="figure-body">
+          <div class="figure-title">圖證 3｜Pierce 7e 圖 16.9：<em>lacI⁺</em> 呈反式顯性（trans dominant）</div>
+          <p class="figure-caption">染色體上的 <em>lacI⁺</em> 雖與有缺陷的 <em>lacZ⁻</em> 相連，但產生的正常抑制蛋白可擴散到質體上，與質體的 <em>lacO⁺</em> 結合並關閉 <em>lacZ⁺</em>，直到乳糖出現才解除抑制。</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="step-box">
+      <div class="step-header">
+        <span class="step-num">3</span>
+        <div class="step-title">由超抑制蛋白突變 <em>lacIˢ</em> 推出「雙結合位點與別構效應」（圖 16.10）</div>
+      </div>
+      <ul>
+        <li><strong>實驗觀察：</strong><em>lacIˢ</em>（superrepressor）突變株即使在乳糖存在下也完全不轉錄（永遠關）。</li>
+        <li><strong>部分二倍體測試：</strong><code>lacIˢ lacZ⁺ lacY⁺ / lacI⁺ lacZ⁺ lacY⁺</code> 無論有沒有乳糖，都無法合成 β-半乳糖苷酶或通透酶。</li>
+        <li><strong>推論結論：</strong><em>lacIˢ</em> 對 <em>lacI⁺</em> 呈<strong>反式顯性</strong>。突變蛋白仍能正常擴散並結合到兩條 DNA 的操作子上，只是<strong>誘導物結合位點</strong>受損，無法與異乳糖結合而脫離 DNA。即使細胞裡同時有正常的 <code>lacI⁺</code> 蛋白，只要 <code>lacIˢ</code> 死死占住兩套操作子，兩條 DNA 就全被關死——由此驗證抑制蛋白具備分開的 <strong>DNA 結合位點</strong>與<strong>誘導物結合位點</strong>（屬於<strong>別構蛋白</strong> allosteric protein，Pierce 譯本作同位效應蛋白）。</li>
+      </ul>
+      <article class="figure-card">
+        <div class="figure-img-wrap" onclick="openLightbox('images/Pierce7e_Ch16_Fig16-10.jpg', this.querySelector('img').alt)">
+          <img src="images/Pierce7e_Ch16_Fig16-10.jpg" alt="Pierce 7e 圖 16.10：部分二倍體 lacIs lacZ+ / lacI+ lacZ+ 呈現永遠關閉" loading="lazy">
+          <span class="zoom-hint">點擊放大</span>
+        </div>
+        <div class="figure-body">
+          <div class="figure-title">圖證 4｜Pierce 7e 圖 16.10：<em>lacIˢ</em> 超抑制蛋白突變</div>
+          <p class="figure-caption"><em>lacIˢ</em> 編碼的超抑制蛋白可擴散至細胞內兩條 DNA 分子的操作子上，且對乳糖（異乳糖）沒有反應，因此對 <em>lacI⁺</em> 呈顯性抑制。</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="step-box">
+      <div class="step-header">
+        <span class="step-num">4</span>
+        <div class="step-title">由組成型突變 <em>lacOᶜ</em> 區分「DNA 位點」與「調控蛋白基因」（圖 16.11）</div>
+      </div>
+      <ul>
+        <li><strong>關鍵難題：</strong>單看單倍體表現型，<em>lacOᶜ</em> 和 <em>lacI⁻</em> 一樣都是「組成型（永遠開）」，怎麼知道它不是另一種可擴散調控蛋白壞掉，而是操作子這個 DNA 位點壞掉？</li>
+        <li><strong>部分二倍體順反對照測試：</strong>
+          <ul>
+            <li><code>lacI⁺ lacO⁺ lacZ⁻ / lacI⁺ lacOᶜ lacZ⁺</code>（圖 16.11a）→ <strong>組成型</strong>（有無乳糖都製造 β-半乳糖苷酶，因功能完整的 <code>lacZ⁺</code> 與 <code>lacOᶜ</code> 在同一條 DNA 上）。</li>
+            <li><code>lacI⁺ lacO⁺ lacZ⁺ / lacI⁺ lacOᶜ lacZ⁻</code>（圖 16.11b）→ <strong>可誘導</strong>（只在有乳糖時才製造 β-半乳糖苷酶，因正常的 <code>lacZ⁺</code> 與正常的 <code>lacO⁺</code> 在同一條 DNA 上）。</li>
+          </ul>
+        </li>
+        <li><strong>推論結論：</strong><em>lacOᶜ</em> 只控制<strong>同一條 DNA 分子上</strong>相連的基因（<strong>順式作用 cis acting</strong>，且對相連基因呈顯性），無法影響另一條 DNA 上的操作子。這證明 <em>lacO</em> 不是製造可擴散蛋白的基因，而是抑制蛋白必須直接結合上去的 <strong>DNA 序列位點</strong>。</li>
+      </ul>
+      <article class="figure-card">
+        <div class="figure-img-wrap" onclick="openLightbox('images/Pierce7e_Ch16_Fig16-11.jpg', this.querySelector('img').alt)">
+          <img src="images/Pierce7e_Ch16_Fig16-11.jpg" alt="Pierce 7e 圖 16.11：lacOc 突變為組成型且為順式作用" loading="lazy">
+          <span class="zoom-hint">點擊放大</span>
+        </div>
+        <div class="figure-body">
+          <div class="figure-title">圖證 5｜Pierce 7e 圖 16.11：<em>lacOᶜ</em> 突變為組成型且呈順式作用</div>
+          <p class="figure-caption">將 <em>lacOᶜ</em> 與正常的 <em>lacZ⁺</em> 放在同一條 DNA 上（a）會表現組成型合成；一旦把 <em>lacOᶜ</em> 改與無功能的 <em>lacZ⁻</em> 相連（b），另一條上的 <em>lacZ⁺</em> 依然受 <em>lacO⁺</em> 正常調控，一舉證明 <em>lacO</em> 是順式作用元件。</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="step-box">
+      <div class="step-header">
+        <span class="step-num">5</span>
+        <div class="step-title">由啟動子突變 <em>lacP⁻</em> 確認 RNA 聚合酶結合的順式起跑點</div>
+      </div>
+      <ul>
+        <li><strong>實驗觀察：</strong><em>lacP⁻</em> 突變株在乳糖存在或缺失時都完全不表現 <em>lac</em> 蛋白質。</li>
+        <li><strong>部分二倍體測試：</strong><code>lacI⁺ lacP⁺ lacZ⁺ / lacI⁺ lacP⁻ lacZ⁻</code> 可正常合成 β-半乳糖苷酶，而 <code>lacI⁺ lacP⁻ lacZ⁺ / lacI⁺ lacP⁺ lacZ⁻</code> 無論有無乳糖都無法產生 β-半乳糖苷酶。</li>
+        <li><strong>推論結論：</strong><em>lacP⁻</em> 同樣是<strong>順式作用（cis acting）</strong>，影響的是 RNA 聚合酶結合到同一條 DNA 分子並啟動轉錄的能力。</li>
+      </ul>
+      <div class="callout callout-warn">
+        <div class="callout-title">譯本勘誤提醒</div>
+        <p style="margin-bottom:0;">Pierce 7e 英文原文 16.2 節給出的啟動子測試基因型為 <code>lacI⁺ lacP⁺ lacZ⁺ / lacI⁺ lacP⁻ lacZ⁻</code>（實務上亦測 <code>lacI⁺ lacP⁺ lacZ⁺ / lacI⁺ lacP⁻ lacZ⁺</code>）與 <code>lacI⁺ lacP⁻ lacZ⁺ / lacI⁺ lacP⁺ lacZ⁻</code>（不產生）；中文譯本將該兩組中的 <code>lacZ⁺</code>／<code>lacZ⁻</code> 誤植對調，研讀時請以英文原文為準。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Table 16.2 -->
+  <section id="sec-table">
+    <div class="section-head">
+      <h2><span class="sec-num">04</span> Pierce <em>lac</em> 突變推論總表（對應 Ch16 表 16.2）</h2>
+    </div>
+
+    <table class="resp-table">
+      <thead>
+        <tr>
+          <th>元件</th>
+          <th>突變型</th>
+          <th>單倍體表現型</th>
+          <th>部分二倍體關鍵測試與表現</th>
+          <th>順式／反式</th>
+          <th>推論出的生物學身分</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="元件"><em>lacZ</em> / <em>lacY</em></td>
+          <td data-label="突變型"><em>lacZ⁻</em> / <em>lacY⁻</em></td>
+          <td data-label="單倍體表現型">失去單一酵素活性，另一酵素仍受正常調控</td>
+          <td data-label="部分二倍體關鍵測試與表現"><code>Z⁺Y⁻ / Z⁻Y⁺</code> → 有乳糖時雙酵素皆正常合成</td>
+          <td data-label="順式／反式">僅影響該基因產物</td>
+          <td data-label="推論出的生物學身分">各自獨立編碼酵素的<strong>結構基因</strong></td>
+        </tr>
+        <tr>
+          <td data-label="元件"><em>lacI</em></td>
+          <td data-label="突變型"><em>lacI⁻</em></td>
+          <td data-label="單倍體表現型">組成型（永遠開）</td>
+          <td data-label="部分二倍體關鍵測試與表現"><code>I⁺Z⁻ / I⁻Z⁺</code> → 恢復正常可誘導（<code>I⁺</code> 顯性）</td>
+          <td data-label="順式／反式"><strong>反式作用</strong></td>
+          <td data-label="推論出的生物學身分">製造可擴散<strong>抑制蛋白</strong>的調控基因（負調控）</td>
+        </tr>
+        <tr>
+          <td data-label="元件"><em>lacI</em></td>
+          <td data-label="突變型"><em>lacIˢ</em></td>
+          <td data-label="單倍體表現型">不可誘導（永遠關）</td>
+          <td data-label="部分二倍體關鍵測試與表現"><code>IˢZ⁺Y⁺ / I⁺Z⁺Y⁺</code> → 無論有無乳糖皆關</td>
+          <td data-label="順式／反式"><strong>反式作用</strong></td>
+          <td data-label="推論出的生物學身分">證實抑制蛋白另有獨立的<strong>誘導物結合位點</strong></td>
+        </tr>
+        <tr>
+          <td data-label="元件"><em>lacO</em></td>
+          <td data-label="突變型"><em>lacOᶜ</em></td>
+          <td data-label="單倍體表現型">組成型（永遠開）</td>
+          <td data-label="部分二倍體關鍵測試與表現"><code>O⁺Z⁻ / OᶜZ⁺</code> → 組成型；<code>O⁺Z⁺ / OᶜZ⁻</code> → 可誘導</td>
+          <td data-label="順式／反式"><strong>順式作用</strong></td>
+          <td data-label="推論出的生物學身分">抑制蛋白直接結合的 <strong>DNA 操作子位點</strong></td>
+        </tr>
+        <tr>
+          <td data-label="元件"><em>lacP</em></td>
+          <td data-label="突變型"><em>lacP⁻</em></td>
+          <td data-label="單倍體表現型">不可誘導（永遠關）</td>
+          <td data-label="部分二倍體關鍵測試與表現"><code>P⁺Z⁺ / P⁻Z⁻</code> → 正常；<code>P⁻Z⁺ / P⁺Z⁻</code> → 永遠關</td>
+          <td data-label="順式／反式"><strong>順式作用</strong></td>
+          <td data-label="推論出的生物學身分">RNA 聚合酶結合的 <strong>DNA 啟動子位點</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Section 5: Original Bilingual Quotes -->
+  <section id="sec-sources">
+    <div class="section-head">
+      <h2><span class="sec-num">05</span> Pierce 7e 原文書關鍵文獻對照（中英原文）</h2>
+      <button class="toggle-en-btn" type="button" id="toggleEnBtn" onclick="toggleEnglish()">精簡：隱藏英文原文</button>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">1. 部分二倍體工具（Ch. 9, Sec. 9.2）</span>
+        <span class="source-loc">F′ Cells ＆ Merozygotes</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"During conjugation between an F′ cell and an F⁻ cell, the F plasmid is transferred to the F⁻ cell, which means that any genes on the F plasmid, including those from the bacterial chromosome, may be transferred to the F⁻ recipient cell (see Figure 9.14). This process produces partial diploids, or merozygotes, which are cells with two copies of some genes, one on the bacterial chromosome and one on the newly introduced F plasmid."</div>
+        <div class="quote-tw">「在 F′ 細胞與 F⁻ 細胞進行接合的過程中，F 質體會轉移到 F⁻ 細胞中……這個過程會產生<strong>部分二倍體（partial diploids），或稱局部合子（merozygotes）</strong>，即對某些基因擁有兩份拷貝的細胞：一份位於細菌染色體上，另一份位於新導入的 F 質體上。」</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">2. 順式操作子 vs 反式超抑制蛋白（Ch. 16, Sec. 16.2）</span>
+        <span class="source-loc">lacI⁺ / lacIˢ / lacOᶜ / lacP⁻ 實證段落</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"Despite the fact that at the time, no methods were available for determining nucleotide sequences, Jacob and Monod deduced the structure of the operon genetically by analyzing the interactions of mutations that interfered with the normal regulation of lactose metabolism."</div>
+        <div class="quote-tw">「儘管在那個時候沒有任何確定核苷酸序列的方法，但雅各和莫諾透過分析干擾乳糖代謝正常調控的突變之間的交互作用，<strong>以遺傳學方式推斷出了操縱組的結構</strong>。」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"A lacI^s mutation produced a repressor with an altered inducer-binding site; consequently, the inducer was unable to bind to the repressor, and the repressor was always able to attach to the operator and prevent transcription of the lac genes. Superrepressor mutations were dominant over lacI⁺; partial diploids with genotype lacI^s lacZ⁺ lacY⁺ / lacI⁺ lacZ⁺ lacY⁺ were unable to synthesize either β-galactosidase or permease, whether or not lactose was present (Figure 16.10)."</div>
+        <div class="quote-tw">「<em>lacIˢ</em> 突變產生了一個<strong>誘導物結合位點改變的抑制蛋白</strong>；因此，誘導物無法結合到抑制蛋白，抑制蛋白始終能夠附著到操作子，阻止 <em>lac</em> 基因的轉錄。<strong>超抑制蛋白突變對 <em>lacI⁺</em> 是顯性的</strong>……」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"Analysis of other partial diploids showed that the lacO gene is cis acting, affecting only genes on the same DNA molecule. For example, a partial diploid with genotype lacI⁺ lacO⁺ lacZ⁻/lacI⁺ lacO^c lacZ⁺ was constitutive, producing β-galactosidase in the presence or absence of lactose (Figure 16.11a), but a partial diploid with genotype lacI⁺ lacO⁺ lacZ⁺/lacI⁺ lacO^c lacZ⁻ produced β-galactosidase only in the presence of lactose (Figure 16.11b)."</div>
+        <div class="quote-tw">「對其他部分二倍體的分析表明，<strong><em>lacO</em> 基因是順式作用的，只影響同一 DNA 分子上的基因（圖 16.11）</strong>。」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"Like operator mutations, lacP⁻ mutations are cis acting and thus affect only genes on the same DNA molecule. The partial diploid lacI⁺ lacP⁺ lacZ⁺/lacI⁺ lacP⁻ lacZ⁺ exhibits normal synthesis of β-galactosidase, whereas lacI⁺ lacP⁻ lacZ⁺/lacI⁺ lacP⁺ lacZ⁻ fails to produce β-galactosidase whether or not lactose is present."</div>
+        <div class="quote-tw">「與操作子突變一樣，<strong><em>lacP⁻</em> 突變是順式作用的</strong>，只影響同一 DNA 分子上的基因。」</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">3. 基礎漏轉錄與定序後的座標修正（Ch. 16, Sec. 16.2）</span>
+        <span class="source-loc">Leaky Transcription ＆ Fig. 16.8</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"The answer is that repression never completely shuts down transcription of the lac operon. Even with active repressor bound to the operator, there is a low level of transcription and small amounts of β-galactosidase, permease, and transacetylase are synthesized."</div>
+        <div class="quote-tw">「答案是，<strong>阻遏從未完全關閉 <em>lac</em> 操縱組的轉錄</strong>。即使活性抑制蛋白結合到操作子，也有低量的轉錄，少量的 β-半乳糖苷酶、透過酶和轉乙醯酶被合成。」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"Jacob and Monod mapped the operator to a position adjacent to the lacZ gene; nucleotide sequencing has demonstrated that the operator actually overlaps the 3′ end of the promoter and the 5′ end of lacZ (Figure 16.8)."</div>
+        <div class="quote-tw">「雅各和莫諾將操作子定位到 <em>lacZ</em> 基因附近；<strong>核苷酸定序已證明操作子實際上與啟動子的 3′ 端和 <em>lacZ</em> 的 5′ 端重疊（圖 16.8）</strong>。」</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: More Clues & Teaching -->
+  <section id="sec-teaching">
+    <div class="section-head">
+      <h2><span class="sec-num">06</span> 延伸推理、定序修正與教學邊界</h2>
+    </div>
+
+    <div class="step-box">
+      <div class="step-header">
+        <span class="step-num">A</span>
+        <div class="step-title">「啟動漏洞」的反向推論（16.2 節）</div>
+      </div>
+      <p>既然乳糖需要<strong>乳糖通透酶</strong>才能進入細胞，而且必須由 <strong>β-半乳糖苷酶</strong>把乳糖轉成真正的誘導物<strong>異乳糖（allolactose）</strong>，那麼當操縱組在無乳糖時處於關閉狀態，第一批乳糖怎麼進細胞、又怎麼變成異乳糖來拉開抑制蛋白？</p>
+      <p style="margin-bottom:0;">Pierce 由此指出推論結果：<strong>抑制蛋白的阻遏從未 100% 關死轉錄</strong>，即使處於關閉狀態，細胞內仍有極低量的基礎漏轉錄（leaky transcription），維持少數通透酶與 β-半乳糖苷酶分子作為啟動火種。</p>
+    </div>
+
+    <div class="step-box">
+      <div class="step-header">
+        <span class="step-num">B</span>
+        <div class="step-title">其他調控機制的實驗線索（CAP–cAMP 與 <em>trp</em> 弱化作用）</div>
+      </div>
+      <ul style="margin-bottom:0;">
+        <li><strong>分解代謝物阻遏（正調控）：</strong>針對「有葡萄糖時 <em>lac</em> 操縱組幾乎不轉錄」的現象，Pierce 釐清這雖然名為「阻遏」，機制上其實是低葡萄糖誘導 cAMP 上升、與 CAP 結合後彎曲 DNA 並招募 RNA 聚合酶的<strong>正調控</strong>（提升轉錄約 50 倍）。</li>
+        <li><strong><em>trp</em> 操縱組弱化作用（16.3 節，Pierce 譯本作衰減作用）：</strong>Charles Yanofsky 等人在 1970 年代初期分離到「操作子控制正常但轉錄量卻偏高」的突變株，並觀察到除了完整長 mRNA 外，還有一段僅 <strong>140 個核苷酸</strong>的短 mRNA，由此推論轉錄起始之後還有「提前終止」的第二層調控。</li>
+      </ul>
+    </div>
+
+    <div class="step-box">
+      <div class="step-header">
+        <span class="step-num">C</span>
+        <div class="step-title">把「從數據反推未知操縱組」放在章末問題</div>
+      </div>
+      <p style="margin-bottom:0;">除了正文以 <em>lac</em> 操縱組示範推論邏輯外，Pierce 把更多純數據反推題安排在 Ch16 章末，例如：<strong>Worked Problem 1</strong>（<em>fox</em> 操縱組突變表反推啟動子、調控基因與結構基因）、<strong>第 25 題</strong>（<em>mmm</em> 可抑制操縱組）、<strong>第 26 題</strong>（引述 Engelsberg 1965 阿拉伯糖 <em>ara</em> 操縱組部分二倍體數據，推論正調控與反式調節蛋白），以及 <strong>第 27 題</strong>（Ramakrishnan &amp; Adelberg 1965 纈胺酸操縱組部分二倍體數據判讀）。</p>
+    </div>
+
+    <article class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Pierce7e_Ch16_Fig16-8.jpg', this.querySelector('img').alt)">
+        <img src="images/Pierce7e_Ch16_Fig16-8.jpg" alt="Pierce 7e 圖 16.8：定序證實 lac 操作子與啟動子 3′ 端及 lacZ 5′ 端重疊" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖證 6｜Pierce 7e 圖 16.8（定序後的補充修正）：操作子跨過啟動子 3′ 端與 <em>lacZ</em> 5′ 端</div>
+        <p class="figure-caption">Jacob 與 Monod 當初只能透過遺傳作圖得知 <em>lacO</em> 位於 <em>lacZ</em> 附近；後來核苷酸定序才證實操作子其實與啟動子 3′ 端（−10 區附近）及 <em>lacZ</em> 5′ 端（+1 下游）重疊，直接解釋了抑制蛋白為何能從物理空間上阻擋 RNA 聚合酶。</p>
+      </div>
+    </article>
+
+    <div class="callout">
+      <div class="callout-title">Pierce 7e 與 Griffiths IGA 的教學互補</div>
+      <p style="margin-bottom:0;">Pierce 的強項是用清晰故事與圖解建立概念模型，因此採「先給操縱組模型、再用部分二倍體驗證」。如果要在課堂上讓學生先不看答案、純靠突變株表型自己反推出線路圖（例如區分 <em>lacI⁻</em> 與 <em>lacOᶜ</em>），可搭配 <strong>Griffiths《Introduction to Genetic Analysis》Ch11</strong> 的實驗數據題組一起使用。</p>
+    </div>
+  </section>
+
+  <footer>
+    400X 的日常切片 Bio-Wiki · 依 Pierce《Genetics: A Conceptual Approach》7e 譯本與英文原文編整 · 繁體中文與審定名詞遵循臺灣教育部規範
+  </footer>
+
+</main>
+
+<!-- Reading Outpost Bottom Bar & Script -->
+<button class="ro-bottom-toc" type="button" onclick="roOpenDrawer('roTocDrawer')">📑 本篇段落導覽</button>
+<a class="ro-up-btn" href="#top" aria-label="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<script>
+  function roToggleTheme() {
+    var root = document.documentElement;
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('biowiki-theme', next); } catch (e) {}
+    roUpdateThemeBtn();
+  }
+  function roUpdateThemeBtn() {
+    var btn = document.getElementById('roThemeBtn');
+    if (!btn) return;
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.innerHTML = isLight ? '🌙 深色' : '☀️ 亮色';
+    btn.setAttribute('aria-label', isLight ? '切換為深色閱讀模式' : '切換為亮色閱讀模式');
+  }
+  roUpdateThemeBtn();
+  function roOpenDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('open');
+  }
+  function roCloseDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  }
+  function openLightbox(src, alt) {
+    var lb = document.getElementById('roLightbox');
+    var img = document.getElementById('roLightboxImg');
+    if (lb && img) {
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.add('open');
+    }
+  }
+  function toggleEnglish() {
+    document.body.classList.toggle('hide-en');
+    var btn = document.getElementById('toggleEnBtn');
+    if (btn) {
+      btn.textContent = document.body.classList.contains('hide-en')
+        ? '完整：顯示英文原文'
+        : '精簡：隱藏英文原文';
+    }
+  }
+  (function initReadingOutpostShell() {
+    var tocList = document.getElementById('roTocList');
+    var headings = document.querySelectorAll('h2, .card-title');
+    if (tocList && headings.length) {
+      headings.forEach(function(h, idx) {
+        if (!h.id) h.id = 'ro-sec-' + (idx + 1);
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent.trim();
+        tocList.appendChild(a);
+      });
+    }
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th, tr:first-child th')).map(function(th) {
+        return th.innerText.trim().replace(/[\r\n\t ]+/g, ' ');
+      });
+      if (!headers.length) return;
+      table.classList.add('ro-resp-table');
+      table.querySelectorAll('tr').forEach(function(tr) {
+        if (tr.querySelector('th')) return;
+        Array.from(tr.children).forEach(function(td, idx) {
+          if (td.tagName === 'TD' && !td.getAttribute('data-label') && headers[idx]) {
+            td.setAttribute('data-label', headers[idx]);
+          }
+        });
+      });
+    });
+    document.querySelectorAll('main img, .container img, .wrap img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        openLightbox(img.src, img.alt);
+      });
+    });
+  })();
+</script>
+</body>
+</html>
