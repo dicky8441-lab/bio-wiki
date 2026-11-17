@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="color-scheme" content="light dark">
-<title>精原細胞與生精歷程全貌考證｜Hole's Human Anatomy &amp; Physiology 15e</title>
+<meta name="color-scheme" content="dark">
+<title>精原細胞與生精歷程全貌考證：幹細胞分化、血睪屏障與跨教材邊界｜Bio-Wiki</title>
 <style>
   :root {
     --bg-primary: #181614;
@@ -146,7 +146,7 @@
     white-space: nowrap;
   }
 
-  /* Main Reading Column (Reading Outpost 16-18 chars/line on mobile) */
+  /* Main Reading Column */
   .container, .wrap, main.container, main.wrap {
     max-width: 700px;
     width: 100%;
@@ -185,12 +185,6 @@
     background: var(--primary-light);
     color: var(--primary);
     border-color: var(--primary-border);
-  }
-
-  .badge-accent, .badge.red {
-    background: var(--accent-light);
-    color: var(--accent);
-    border-color: rgba(244, 196, 78, 0.32);
   }
 
   h1 {
@@ -243,7 +237,7 @@
     font-weight: 800;
   }
 
-  h3, .step-box h3, .insight-title {
+  h3 {
     font-size: 20px;
     line-height: 1.5;
     font-weight: 700;
@@ -251,7 +245,7 @@
     margin: 30px 0 12px;
   }
 
-  p, .summary-item, .insight-point, .hero-text {
+  p {
     font-size: 18px;
     line-height: 1.78;
     color: var(--text-body);
@@ -275,10 +269,17 @@
     font-weight: 700;
   }
 
-  /* Reading Outpost Signature Cyan-Underlined Content Links */
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.88em;
+    background: var(--bg-tag);
+    padding: 2px 6px;
+    border-radius: 6px;
+    color: var(--primary);
+  }
+
   main a:not(.ro-cta-pill):not(.ro-brand-link),
-  .container a:not(.ro-cta-pill):not(.ro-brand-link),
-  .wrap a:not(.ro-cta-pill):not(.ro-brand-link) {
+  .container a:not(.ro-cta-pill):not(.ro-brand-link) {
     color: var(--text-primary);
     text-decoration: underline;
     text-decoration-color: var(--primary);
@@ -286,11 +287,8 @@
     text-underline-offset: 4px;
   }
 
-  /* Soft Warm Sub-cards (Quotes, Takeaways, Callouts) */
-  .tldr-card, .hero-card, .summary-card, .book-card, .source-card,
-  .quote-bilingual, .insight-card, .callout, .callout-mnemo,
-  .question-box, .translation-box, .answer, .boundary, .source,
-  .answer-tile, aside.card, .step-list li {
+  /* Soft Warm Sub-cards */
+  .tldr-card, .source-card, .callout, .callout-warn, .boundary {
     background: var(--bg-card) !important;
     border: 1px solid var(--border-color) !important;
     border-radius: var(--radius) !important;
@@ -299,15 +297,15 @@
     box-shadow: none !important;
   }
 
-  .tldr-card, .hero-card, .callout-mnemo, .answer, .question-box {
+  .tldr-card, .callout-warn {
     border-left: 4px solid var(--accent) !important;
   }
 
-  .callout, .translation-box {
+  .callout, .boundary {
     border-left: 4px solid var(--primary) !important;
   }
 
-  .tldr-label, .hero-title, .summary-title, .book-title, .source-book, .callout-title {
+  .tldr-label, .source-book, .callout-title {
     font-size: 18px;
     font-weight: 700;
     color: var(--accent) !important;
@@ -357,39 +355,26 @@
     margin-right: 8px;
   }
 
-  .grid-cards, .summary-grid, .two-col, .source-grid, .answer-hero {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-    margin: 20px 0;
-  }
-
-  @media (min-width: 640px) {
-    .grid-cards, .source-grid, .answer-hero {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
   /* Bilingual Textbook Quote Blocks */
-  .book-header, .source-header {
+  .source-header {
     padding-bottom: 12px;
     margin-bottom: 14px;
     border-bottom: 1px solid var(--border-color);
   }
 
-  .book-meta, .source-loc, .source-tag, .summary-subtitle, .summary-badge {
+  .source-loc {
     font-size: 13px;
     font-weight: 600;
     color: var(--primary);
   }
 
-  .quote-entry, .quote-block {
+  .quote-block {
     margin-bottom: 18px;
     padding-bottom: 18px;
     border-bottom: 1px dashed var(--border-color);
   }
 
-  .quote-entry:last-child, .quote-block:last-child {
+  .quote-block:last-child {
     margin-bottom: 0;
     padding-bottom: 0;
     border-bottom: none;
@@ -402,7 +387,7 @@
     margin-bottom: 8px;
   }
 
-  .en-box, .quote-en, blockquote {
+  .quote-en {
     background: var(--bg-quote);
     border-left: 3px solid var(--primary);
     border-radius: 0 10px 10px 0;
@@ -416,18 +401,17 @@
     word-break: break-word;
   }
 
-  body.hide-en .en-box,
   body.hide-en .quote-en {
     display: none;
   }
 
-  .zh-box, .quote-tw {
+  .quote-tw {
     font-size: 17.5px;
     line-height: 1.78;
     color: var(--text-body);
   }
 
-  .zh-box strong, .quote-tw strong {
+  .quote-tw strong {
     color: var(--accent);
     background: rgba(244, 196, 78, 0.10);
     padding: 0 4px;
@@ -448,7 +432,7 @@
   }
 
   /* Figures & Images */
-  .figure-card, .fig-card, figure, .figure-box {
+  .figure-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--radius);
@@ -456,7 +440,7 @@
     margin: 24px 0;
   }
 
-  .figure-img-wrap, .fig-body, .figure-body {
+  .figure-img-wrap, .figure-body {
     padding: 14px;
   }
 
@@ -465,7 +449,7 @@
     cursor: zoom-in;
   }
 
-  main img, .container img, .wrap img {
+  main img, .container img {
     display: block;
     width: 100%;
     max-width: 100%;
@@ -486,30 +470,30 @@
     padding: 6px 4px 0;
   }
 
-  .figure-title, .fig-title, .fig-header {
+  .figure-title {
     font-size: 16.5px;
     font-weight: 700;
     color: var(--text-primary);
-    padding: 12px 16px 4px;
+    padding: 6px 4px 4px;
   }
 
-  .figure-caption, .fig-caption, figcaption {
+  .figure-caption {
     font-size: 15px;
     line-height: 1.68;
     color: var(--text-secondary);
-    padding: 6px 16px 14px;
-    background: transparent;
-    border: none;
+    padding: 6px 4px 10px;
+    margin-bottom: 0;
   }
 
   .figure-caption-en {
     font-size: 13.5px;
     color: var(--text-muted);
     font-style: italic;
-    padding: 0 16px 14px;
+    padding: 0 4px 6px;
+    margin-bottom: 0;
   }
 
-  /* Layer List & Flow */
+  /* Layer List */
   .layer-list {
     display: flex;
     flex-direction: column;
@@ -539,58 +523,7 @@
     margin-top: 3px;
   }
 
-  .flow {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
-    padding: 18px;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius);
-    margin: 18px 0;
-  }
-
-  .flow span {
-    padding: 6px 11px;
-    border-radius: 8px;
-    background: var(--bg-tag);
-    color: var(--text-primary);
-    font-size: 15px;
-  }
-
-  .flow b {
-    color: var(--accent);
-  }
-
-  .step-list {
-    list-style: none;
-    margin-left: 0;
-  }
-
-  .ans-value {
-    font-size: 32px;
-    font-weight: 800;
-    color: var(--accent);
-  }
-
-  .chart-container {
-    position: relative;
-    width: 100%;
-    height: 300px;
-    margin: 20px 0;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius);
-    padding: 14px;
-  }
-
   /* Responsive Tables -> Stacked Mobile Cards (< 680px) */
-  .table-wrap, .table-wrapper {
-    width: 100%;
-    margin: 18px 0 26px;
-  }
-
   table {
     width: 100%;
     border-collapse: collapse;
@@ -609,12 +542,6 @@
   th {
     background: var(--bg-pillbar);
     color: var(--text-primary);
-    font-weight: 700;
-  }
-
-  tr.highlight-tr td {
-    background: rgba(244, 196, 78, 0.12);
-    color: var(--accent);
     font-weight: 700;
   }
 
@@ -670,7 +597,7 @@
     }
   }
 
-  /* Reading Outpost Bottom-Left TOC Pill & Bottom-Right Up Button */
+  /* Bottom TOC Pill & Up Button */
   .ro-bottom-toc {
     position: fixed;
     left: 16px;
@@ -836,13 +763,6 @@
     color: var(--text-muted);
   }
 
-  .katex-display {
-    overflow-x: auto;
-    overflow-y: hidden;
-    max-width: 100%;
-    padding: 6px 0;
-  }
-
   html[data-theme="light"] {
     --bg-primary: #fbf8f4;
     --bg-pillbar: #f0ece3;
@@ -890,7 +810,6 @@
     color: #2f2820 !important;
   }
 
-  html[data-theme="light"] .zh-box strong,
   html[data-theme="light"] .quote-tw strong {
     color: #8c4d06;
     background: rgba(246, 200, 76, 0.28);
@@ -923,7 +842,6 @@
   .ro-theme-btn:active {
     transform: scale(0.96);
   }
-
 </style>
 <script>
   (function() {
@@ -966,7 +884,7 @@
       <a href="index.html">🏠 首頁：主題分類總覽</a>
       <a href="chromatin.html">1. 染色質與染色體本質</a>
       <a href="wheat-polygenic.html">2. 小麥多基因累加模型 (Campbell 14e)</a>
-      <a href="spermatogonia-hole.html" class="active">3. 精原細胞與生精歷程 (Hole 15e)</a>
+      <a href="spermatogonia-hole.html" class="active">3. 精原細胞與生精歷程 (跨正典考證)</a>
       <a href="griffith-transformation.html">4. Griffith 轉形作用</a>
       <a href="promoter-tata-box.html">5. 啟動子、TATA 匣與甲基化</a>
       <a href="sickle-cell-dominance.html">6. 鐮刀型貧血顯隱性層次分析</a>
@@ -991,376 +909,500 @@
   <img id="roLightboxImg" alt="">
 </div>
 
+<main class="container">
 
-<div class="container">
-
-  <!-- Bio-Wiki Navigation Bar -->
-  <header>
-    <div class="badge-bar">
-      <span class="badge badge-primary">解剖生理學正典</span>
-      <span class="badge">Hole 15e Ch19</span>
-      <span class="badge">配子發生</span>
-      <span class="badge">A/B 型精原細胞</span>
-      <span class="badge">教甄命題關鍵</span>
+  <!-- Hero -->
+  <div class="hero">
+    <div class="meta-line">
+      <span class="meta-pill">動物生理 × 組織與發育</span>
+      <span class="meta-pill-muted">11 部大學正典考證</span>
+      <span class="meta-pill-muted">高中 6 版 ＋ 教甄真題</span>
+      <span class="meta-pill-muted">8 張原書圖解</span>
     </div>
-    <h1>《Hole 15e》精原細胞與生精歷程全貌考證</h1>
-    <div class="subtitle">
-      全面檢索《Hole's Human Anatomy &amp; Physiology (15th ed.)》第 19 章所有相關段落、超微圖解、荷爾蒙調控軸與中英對照考證。
-    </div>
-  </header>
-
-  <!-- 核心重點卡 -->
-  <div class="hero-card">
-    <div class="hero-title">💡 核心修正：精原細胞不是「全部都未分化」</div>
-    <div class="hero-text">
-      <strong>精原細胞（spermatogonia）是包含多種發育狀態的總稱</strong>：其中一部分保留自我更新能力，屬於未分化的精原幹細胞；另一部分已進入暫時擴增與分化路徑。B 型精原細胞仍是二倍體，但已大致承諾形成初級精母細胞。兩者的差別不是染色體不同，而是<strong>發育潛能、所處微環境與基因表現狀態不同</strong>。
-    </div>
+    <h1>精原細胞與生精歷程全貌考證：幹細胞分化、血睪屏障與跨教材邊界</h1>
+    <p class="subtitle">讀《Hole 15e》時常看到「精原細胞每次分裂產生一個 A 型維持未分化、一個 B 型成初級精母細胞，且胚胎期就停在該階段」——對照《Campbell 13e》、《Junqueira 17e》、《Gilbert 13e》、《Vander 16e》等正典與高中六版課本後，哪些是入門簡化、哪些才是真實分子與組織學機制？</p>
   </div>
 
-  <h2>一、精原細胞的核心分化機制：未分化、暫時擴增與 B 型</h2>
-
-  <div class="grid-cards">
-    <div class="summary-card">
-      <div class="summary-title">
-        未分化精原細胞
-        <span class="summary-badge">自我更新</span>
+  <!-- Section 1: TL;DR + Differentiation Models -->
+  <section id="sec-core">
+    <div class="tldr-card">
+      <div class="tldr-label">一句話核心結論時間軸</div>
+      <div class="timeline">
+        <div class="timeline-step">
+          <div class="timeline-step-title"><span>①</span> 基底幹細胞庫｜精原細胞不是「全部都未分化」，也非每次固定 1:1 分裂</div>
+          <p><strong>精原細胞（spermatogonia）</strong>是基底層二倍體生殖前驅細胞的總稱：包含深染低頻分裂的<strong>幹細胞</strong>、以不完全胞質分裂（<strong>細胞質橋</strong>）相連的暫時擴增 <strong>A 型前驅細胞</strong>，以及進行最後一輪有絲分裂的 <strong>B 型精原細胞</strong>。B 型仍是 2n，差別在幹細胞微環境訊號傾向（GDNF 維持自新 vs. BMP/Wnt 與 RA—STRA8 推進分化），而非染色體套數。</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-step-title"><span>②</span> 胚胎期爭議｜現代發育生物學證實：雄性胚胎停滯在「有絲分裂」，不是減數分裂</div>
+          <p>儘管《Hole 15e》與《Fox 16e》簡寫為胚胎期已形成初級精母細胞並暫停，但《Gilbert 13e》以分子證據指出：胚胎睪丸分泌 <strong>Cyp26b1</strong> 降解視黃酸（RA）、以 <strong>Fgf9</strong> 與 <strong>Nanos2</strong> 抑制 <strong>Stra8</strong>，刻意阻斷雄性生殖細胞啟動減數分裂，使其<strong>停滯於有絲分裂成為精原細胞</strong>；直到青春期賽托立氏細胞合成 RA 誘導 Stra8，才正式啟動減數分裂。</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-step-title"><span>③</span> 空間與激素｜血睪屏障隔離免疫攻擊、ABP 濃縮局部睪固酮、抑制素負回饋 FSH</div>
+          <p>新形成的初級精母細胞暫時拆解賽托立氏細胞緊密連接，由基底隔室遷入近腔隔室（加上缺 MHC 與 FasL 誘導 T 細胞凋亡形成免疫豁免）；同一殖株以細胞質橋共享 <strong>X 染色體基因產物</strong>讓 Y 精子得以發育；最後經 <strong>spermiogenesis</strong>（Protamines 取代組蛋白、排除殘餘體）塑形並由副睪成熟，全長約 64～74 天。</p>
+        </div>
       </div>
-      <div class="summary-item"><strong>位置</strong>：細精管基底側的幹細胞微環境，與賽托立氏細胞及附近血管訊號密切相關。</div>
-      <div class="summary-item"><strong>能力</strong>：可長期自我更新，也可產生進入分化途徑的子代。</div>
-      <div class="summary-item"><strong>訊號傾向</strong>：DMRT1 與賽托立氏細胞分泌的 GDNF 有助於維持增殖及幹細胞族群。</div>
     </div>
 
-    <div class="summary-card">
-      <div class="summary-title">
-        暫時擴增的 A 型前驅細胞
-        <span class="summary-badge">過渡狀態</span>
-      </div>
-      <div class="summary-item"><strong>特徵</strong>：分裂速度較快，同一殖株的細胞常以細胞質橋相連。</div>
-      <div class="summary-item"><strong>命運</strong>：大量增加將走向分化的前驅細胞數量；早期階段仍保留一定程度的可塑性。</div>
-      <div class="summary-item"><strong>分類提醒</strong>：A 型不等於全部未分化；人類古典 Ad／Ap 分類也不能直接套用到所有哺乳類。</div>
-    </div>
+    <h2><span class="sec-num">01</span> 精原細胞分化層級：各大學正典與高中六版如何模型化？</h2>
 
-    <div class="summary-card">
-      <div class="summary-title">
-        B 型精原細胞
-        <span class="summary-badge">分化承諾</span>
-      </div>
-      <div class="summary-item"><strong>位置</strong>：最初仍位於基底隔室；形成初級精母細胞後，子代才通過血睪屏障進入近管腔隔室。</div>
-      <div class="summary-item"><strong>命運</strong>：進行此譜系最後一次有絲分裂，形成初級精母細胞。</div>
-      <div class="summary-item"><strong>分子狀態</strong>：STRA8 表現較高，已準備銜接 DNA 複製與減數分裂。</div>
-    </div>
-  </div>
+    <p>不同教科書依教學目標對「如何同時保住幹細胞庫、又不斷產出精母細胞」採取不同精細度的模型，讀書與命題時必須分清各教材的簡化層級：</p>
 
-  <div class="insight-card">
-    <div class="insight-point">
-      <strong>「分化」在這裡是什麼意思？</strong><br>
-      它不是指染色體套數下降，也不是指細胞已經長出精子的頭與尾，而是指細胞的發育選擇逐漸縮小：從「可留下來自我更新，也可產生後代」，轉成「已承諾形成初級精母細胞並進入減數分裂」。
-    </div>
-    <div class="insight-point">
-      <strong>兩類細胞的 DNA 並沒有因此不同。</strong><br>
-      未分化精原細胞與尚未進行減數分裂前 DNA 複製的 B 型精原細胞皆為二倍體。差異主要來自基因表現、微環境訊號、分裂行為與未來命運。
-    </div>
-    <div class="callout-mnemo">
-      教學判準：未分化看「能否長期自我更新」；B 型看「是否已承諾形成初級精母細胞」。不要只用染色深淺或 2n／n 判斷。
-    </div>
-  </div>
-
-  <div class="table-wrapper">
-    <table>
+    <table class="resp-table">
       <thead>
         <tr>
-          <th>比較項目</th>
-          <th>未分化精原細胞</th>
-          <th>暫時擴增的 A 型前驅細胞</th>
-          <th>B 型精原細胞</th>
+          <th>教材來源</th>
+          <th>幹細胞與精原細胞分類模型</th>
+          <th>A／B 型區分</th>
+          <th>關鍵機制與命題注意</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><strong>發育潛能</strong></td>
-          <td>可自我更新，也可產生分化子代</td>
-          <td>主要擴增分化中的細胞群，早期仍有可塑性</td>
-          <td>大致已承諾形成初級精母細胞</td>
+          <td><strong>Campbell 13e</strong><br>（Ch. 46 基準正典）</td>
+          <td>幹細胞（stem cell）→ 精原細胞（spermatogonium）→ 初級精母細胞</td>
+          <td>否</td>
+          <td>圖 46.11 與習題 9 明確區分「幹細胞」與「精原細胞」，並追問若幹細胞皆像精原細胞般直接分化，幹細胞庫將會耗竭。</td>
         </tr>
         <tr>
-          <td><strong>分裂行為</strong></td>
-          <td>低頻或依需求增殖，以維持幹細胞庫</td>
-          <td>進行多輪較快速的有絲分裂</td>
-          <td>進行最後一次有絲分裂</td>
+          <td><strong>Hole 15e</strong><br>（Ch. 19）</td>
+          <td>每次有絲分裂產生 1 個 A 型（維持未分化）＋ 1 個 B 型（分化成初級精母細胞）</td>
+          <td>是（僅 A／B）</td>
+          <td>入門級簡化示意，便於理解「一邊留底、一邊前進」，但不代表實務上每次分裂都嚴格 1:1 不對稱。</td>
         </tr>
         <tr>
-          <td><strong>細胞連結</strong></td>
-          <td>幹細胞可較為獨立</td>
-          <td>同一殖株常以細胞質橋相連</td>
-          <td>與同一殖株細胞保持細胞質橋</td>
+          <td><strong>Vander 16e</strong><br>（Ch. 17）</td>
+          <td>幹細胞分裂形成<strong>克隆（clone）</strong>循環；早期有 1 個細胞「退出（drops out）」循環維持儲備</td>
+          <td>是（僅 A／B）</td>
+          <td>強調以殖株動態平衡維持儲備；B 型移動離開基底膜、穿過血睪屏障成為初級精母細胞。</td>
         </tr>
         <tr>
-          <td><strong>代表訊號</strong></td>
-          <td>DMRT1、GDNF 偏向維持自我更新</td>
-          <td>BMP、Wnt 開始推動進一步分化</td>
-          <td>STRA8 較高；RA—STRA8 軸推進減數分裂承諾</td>
+          <td><strong>Junqueira 17e</strong><br>（Ch. 21 組織學）</td>
+          <td>深染卵圓核 A 型（低頻幹細胞）→ 淡染卵圓核 A 型（暫時擴增前驅）→ 圓形淡染核 B 型 → 初級精母細胞</td>
+          <td>是（核形態細分）</td>
+          <td>明確指出「A 型不等於全部未分化」；進入暫時擴增即行不完全胞質分裂，形成可達約 100 個細胞的<strong>生精合胞體</strong>。</td>
         </tr>
         <tr>
-          <td><strong>染色體狀態</strong></td>
-          <td>2n；G1 期通常為 2C</td>
-          <td>仍為 2n</td>
-          <td>仍為 2n；成為初級精母細胞後才完成複製至 4C</td>
+          <td><strong>Gilbert 13e</strong><br>（Ch. 06 發育學）</td>
+          <td>基底幹細胞微環境（Sertoli＋Leydig＋血管）；A 型具<strong>脆弱細胞質橋</strong>，單一細胞可脫離重返幹細胞</td>
+          <td>是（且比對物種）</td>
+          <td>訊號決定命運：Dmrt1 → Sertoli <strong>GDNF</strong> 維持自新；<strong>BMP／Wnt</strong> 推向分化；<strong>RA—STRA8</strong> 促成減數分裂承諾。小鼠 12 輪擴增（16 細胞連群），人類僅 5 輪（連結限約 4 細胞）。</td>
+        </tr>
+        <tr>
+          <td><strong>Sherwood ／ Sadava 12e</strong></td>
+          <td>精原細胞有絲分裂維持生殖系，並由細胞質橋連接後代至精子成熟</td>
+          <td>Sherwood 提 A 型</td>
+          <td>強調<strong>細胞質橋使四個精母細胞／精細胞共享 X 染色體基因產物</strong>，拯救僅帶 Y 染色體的精細胞存活與發育。</td>
+        </tr>
+        <tr>
+          <td><strong>高中 6 版整合</strong><br>（選修 III ／ 必修一）</td>
+          <td>精原細胞以有絲分裂自我增殖，部分分化為初級精母細胞（2n）</td>
+          <td>否</td>
+          <td><strong>翰林、龍騰</strong>明述精原細胞具幹細胞特性；<strong>三民</strong>必修一區分「生殖原細胞（精原／卵原）」與「生殖母細胞（初級精／卵母）」。</td>
         </tr>
       </tbody>
     </table>
-  </div>
+  </section>
 
-  <div class="hero-card" style="border-left-color: var(--accent);">
-    <div class="hero-title" style="color: var(--accent);">🧭 決定細胞命運的是訊號平衡，不是染色體差異</div>
-    <div class="hero-text">
-      基底側幹細胞微環境中的 GDNF 等訊號偏向維持自我更新；BMP、Wnt 促進 A 型細胞走向分化；青春期後，賽托立氏細胞產生的視黃酸（RA）誘導 STRA8，將精子前驅細胞推向減數分裂。FSH 與睪固酮負責建立支持精子生成的整體生理環境，但不能簡化成「某一個荷爾蒙直接把 A 型變成 B 型」。
-    </div>
-  </div>
+  <!-- Section 2: Embryonic Pause Controversy -->
+  <section id="sec-embryo">
+    <h2><span class="sec-num">02</span> 跨書關鍵爭議：男性胚胎期到底有沒有「產生初級精母細胞並暫停」？</h2>
 
-  <!-- 原文圖解 19.4 -->
-  <div class="fig-card">
-    <div class="fig-header">
-      <div class="fig-title">圖 19.4　精原細胞的有絲分裂與 A/B 型分岔（Hole 15e）</div>
-    </div>
-    <div class="fig-body">
-      <img src="images/Hole15e_Fig19-4.png" alt="Hole 15e Fig 19.4 Mitosis in spermatogonia">
-    </div>
-    <div class="fig-caption">
-      <strong>原文圖說</strong>：Mitosis in spermatogonia results in type A spermatogonia that continue the germ cell line and type B spermatogonia that give rise to primary spermatocytes. The primary spermatocytes, in turn, give rise to sperm cells by meiosis. Changes in chromosome number and structure are represented by a single pair of chromosomes. Note that as the cells approach the lumen they mature.<br><br>
-      <strong>視覺解析與限制</strong>：圖示用「1 個 A 型留存、1 個 B 型分化」呈現細胞族群如何同時維持自我更新與分化，但這是教學用流程簡圖，<strong>不代表每一次有絲分裂都固定產生 1 個 A 型與 1 個 B 型</strong>。較精確的觀點是：精原細胞以殖株與族群層次在自我更新和分化之間維持平衡。精原細胞與 B 型精原細胞皆為二倍體；成為初級精母細胞並完成 S 期後，才具有 46 條染色體、92 條染色分體。後續依序形成次級精母細胞、精細胞與精子。
-    </div>
-  </div>
+    <p>把《Hole 15e》與《Gilbert 13e》、《Campbell 13e》及高中六版課本並排比對時，會發現一個極易在教甄或備課時混淆的陳述差異：</p>
 
-  <h2>二、曲細精管內的三大細胞空間分工</h2>
-
-  <div class="table-wrapper">
-    <table>
+    <table class="resp-table">
       <thead>
         <tr>
-          <th>細胞名稱 (中英對照)</th>
-          <th>解剖分佈位置</th>
-          <th>核心生理功能</th>
-          <th>染色體套數與狀態</th>
+          <th>教科書陣營</th>
+          <th>代表書目與章節</th>
+          <th>原文核心敘述</th>
+          <th>現代發育學與教學判準</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><strong>精原細胞<br>Spermatogonia</strong></td>
-          <td>曲細精管複層上皮基底部，貼近基底膜</td>
-          <td>包含可自我更新的幹細胞，以及已進入暫時擴增與分化途徑的前驅細胞</td>
-          <td>二倍體（2n = 46，23 對）</td>
+          <td><strong>「胚胎期形成初級精母細胞並暫停」說</strong></td>
+          <td><strong>Hole 15e</strong>（Ch. 19）<br><strong>Fox 16e</strong>（Ch. 20）<br><strong>Vander 16e</strong>（§17.1；但 §17.6 改寫為「青春期前靜止」）</td>
+          <td>Hole 稱胚胎期荷爾蒙刺激精原細胞分裂產生 A／B 型與初級精母細胞，生精「在此階段暫停」；Fox 英文原文亦寫初級精母細胞形成與進入早期前期 I 始於胚胎期並 <em>arrested at this point until puberty</em>。</td>
+          <td>屬部分人體生理課本的傳統／簡化敘述，未納入哺乳類胚胎睪丸抑制減數分裂的分子證據；連 Vander 本書 §17.1 與 §17.6 前後亦出現張力。</td>
         </tr>
         <tr>
-          <td><strong>支持細胞（賽托立氏細胞）<br>Sustentacular / Sertoli cells</strong></td>
-          <td>貫穿曲細精管全壁厚度，由基底膜直達管腔</td>
-          <td>① 支持、滋養與調節精原細胞<br>② 緊密連接構成<strong>血睪屏障</strong><br>③ 分泌抑制素（inhibin）負回饋抑制 FSH</td>
-          <td>體細胞（2n = 46）</td>
-        </tr>
-        <tr>
-          <td><strong>間質細胞（萊迪氏細胞）<br>Interstitial cells / Leydig cells</strong></td>
-          <td>曲細精管之間的結締組織空隙中</td>
-          <td>受腦垂腺前葉分泌之 <strong>LH (ICSH)</strong> 刺激，產生並分泌雄性激素（睪固酮）</td>
-          <td>體細胞（2n = 46）</td>
+          <td><strong>「胚胎期停滯於有絲分裂，青春期才啟動減數分裂」說</strong></td>
+          <td><strong>Gilbert 13e</strong>（Ch. 06）<br><strong>Campbell 13e</strong>（Ch. 46）<br><strong>Junqueira 17e</strong>（Ch. 21）<br><strong>Guyton &amp; Hall 15e</strong>（Ch. 81）<br><strong>高中 6 版</strong></td>
+          <td><strong>Gilbert 13e</strong> 明言「雌性在胚胎性腺開始減數分裂；雄性則要到青春期才開始」：胚胎睪丸由 <strong>Fgf9</strong> 下調 Stra8、分泌 <strong>Cyp26b1</strong> 降解來自中腎的視黃酸（RA），並由 <strong>Nanos2</strong> 阻斷 <strong>Stra8</strong>，使雄性生殖細胞「<strong>停滯於有絲分裂成為精原細胞</strong>」；青春期時 Sertoli 細胞合成 RA 誘導 Stra8 才啟動減數分裂。</td>
+          <td><strong>現代發育生物學與臺灣高中課綱一致採用的精準機制</strong>。男、女配子發生最核心的時序對照，正是「男性出生前停在有絲分裂、青春期才進入減數分裂」vs.「女性胎兒期即進入前期 I 雙線期並停滯 12～40 年」。</td>
         </tr>
       </tbody>
     </table>
-  </div>
+  </section>
 
-  <!-- 原文圖解 19.2 -->
-  <div class="fig-card">
-    <div class="fig-header">
-      <div class="fig-title">圖 19.2　曲細精管橫切面與微觀細胞分層（Hole 15e）</div>
-    </div>
-    <div class="fig-body">
-      <img src="images/Hole15e_Fig19-2.png" alt="Hole 15e Fig 19.2 Seminiferous tubule structure">
-    </div>
-    <div class="fig-caption">
-      <strong>結構要點</strong>：曲細精管管壁外圍為基底膜（basement membrane），管間分布間質細胞（萊迪氏細胞）。管壁內的生殖細胞大致隨成熟由基底側向管腔排列：支持細胞與精原細胞位於最外圍，初級與次級精母細胞居中，精細胞與伸出管腔的成熟精子位於最內層。
-    </div>
-  </div>
+  <!-- Section 3: Compartments, BTB, Spermiogenesis & Chromosome Count -->
+  <section id="sec-structure">
+    <h2><span class="sec-num">03</span> 曲細精管微觀分工、血睪屏障、細胞質橋與精子形成</h2>
 
-  <h2>三、精子發生的細胞分裂與染色體計數</h2>
+    <div class="layer-list">
+      <div class="layer-item">
+        <span class="layer-badge">精原細胞</span>
+        <div><strong>位於基底隔室（血睪屏障外側）</strong>：緊鄰基底膜與間質微血管，保留幹細胞微環境並接收養分與訊號；人類直徑約 12 μm，為 2n = 46 的二倍體前驅細胞（《Junqueira 17e》）。</div>
+      </div>
+      <div class="layer-item">
+        <span class="layer-badge">賽托立氏細胞</span>
+        <div><strong>貫穿全壁、構築血睪屏障與免疫豁免</strong>：每個細胞支撐 30～50 個生殖細胞，並以基底外側膜緊密閉鎖連接分隔<strong>基底隔室</strong>與<strong>近腔隔室</strong>。當初級精母細胞形成後，會<strong>暫時拆解局部黏附分子</strong>移行至近腔隔室；加上生殖細胞缺乏 MHC I/II 且 Sertoli 表現 <strong>FasL</strong> 誘導活化的 T 細胞凋亡，共同避免自體免疫攻擊（《Junqueira 17e》、《Fox 16e》）。代謝上以 GLUT-1 攝取葡萄糖轉為<strong>乳酸</strong>供給精細胞，並分泌 <strong>ABP</strong> 濃縮管腔睪固酮、分泌 <strong>39-kDa 抑制素</strong>負回饋 FSH，且吞噬精細胞排出的<strong>殘餘體</strong>（《Sherwood》、《Junqueira 17e》）。</div>
+      </div>
+      <div class="layer-item">
+        <span class="layer-badge">萊迪氏細胞</span>
+        <div><strong>位於曲細精管之間質空間</strong>：占成人睪丸質量約 20%，富含<strong>平滑內質網（SER）</strong>、粒線體與小脂滴；在胚胎第 3～4 個月受胎盤性腺刺激素（hCG）活化分泌睪固酮，兒童期轉為類成纖維母細胞之靜止細胞，青春期起受腦垂腺 <strong>LH（ICSH）</strong> 刺激大量合成並分泌睪固酮（《Guyton 15e》、《Junqueira 17e》）。</div>
+      </div>
+      <div class="layer-item">
+        <span class="layer-badge">細胞質橋</span>
+        <div><strong>功能上仍為二倍體的生精合胞體</strong>：暫時擴增後的不完全胞質分裂讓同一殖株（《Junqueira 17e》記可達約 100 個細胞；《Gilbert 13e》記人類連結約限 4 細胞、小鼠可達 16 個 B 型）共享蛋白質與 RNA。因為 Y 染色體缺乏許多精子發育必需的基因，此走廊讓單倍體 Y 精細胞得以取得 X 染色體的基因產物（《Sadava 12e》、《Sherwood》）。</div>
+      </div>
+      <div class="layer-item">
+        <span class="layer-badge">精子形成</span>
+        <div><strong>減數分裂後的無分裂塑形（Spermiogenesis）</strong>：分四期（高基氏體期→帽期→頂體期→成熟期），由高基氏體融合形成含透明質酸酶與 acrosin 的<strong>頂體</strong>、微管鞘（<strong>manchette</strong>）引導延長、<strong>魚精蛋白（protamines）</strong>取代組蛋白使染色質極度凝縮、粒線體聚集成中段、排除<strong>殘餘體</strong>後排精（<strong>spermiation</strong>）進入副睪，於 6 公尺長的副睪再成熟獲得運動能力（《Junqueira 17e》、《Campbell 13e》）。</div>
+      </div>
+    </div>
 
-  <!-- 原文圖解 19.3 -->
-  <div class="fig-card">
-    <div class="fig-header">
-      <div class="fig-title">圖 19.3　精子生成中的兩次連續減數分裂（Hole 15e）</div>
-    </div>
-    <div class="fig-body">
-      <img src="images/Hole15e_Fig19-3.png" alt="Hole 15e Fig 19.3 Two successive meiotic divisions">
-    </div>
-    <div class="fig-caption">
-      <strong>歷程總結</strong>：初級精母細胞（46 條染色體，每條具 2 條姊妹染色分體）經第一次減數分裂（同源染色體分離）形成 2 個單倍體次級精母細胞（各 23 條染色體，每條仍含 2 條分體）；再經第二次減數分裂（染色分體分離）形成 4 個單倍體精細胞（各 23 條獨立染色體）。
-    </div>
-  </div>
+    <h3>染色體套數、DNA 量與歷時對照表</h3>
 
-  <div class="table-wrapper">
-    <table>
+    <table class="resp-table">
       <thead>
         <tr>
           <th>發育階段</th>
-          <th>分裂機制</th>
-          <th>染色體套數 (n)</th>
-          <th>染色體條數</th>
-          <th>染色分體狀態</th>
-          <th>子細胞產量</th>
+          <th>分裂方式</th>
+          <th>染色體條數（套數）</th>
+          <th>DNA 相對量 ／ 染色分體狀態</th>
+          <th>隔室位置與關鍵特徵</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><strong>精原細胞 (Spermatogonium)</strong></td>
-          <td>有絲分裂 (Mitosis)</td>
-          <td>2n (二倍體)</td>
-          <td>46 條</td>
-          <td>G1 期每條染色體含 1 條染色分體；S 期後含 2 條</td>
-          <td>族群中同時保留自我更新與分化中的子代；不是每次固定 1 個 A 型＋1 個 B 型</td>
+          <td><strong>A 型精原細胞</strong>（幹細胞／暫時擴增）</td>
+          <td>有絲分裂</td>
+          <td>46 條（2n）</td>
+          <td>G₁ 期 2C（1 分體/條）<br>S 期後 4C（2 分體/條）</td>
+          <td>位於<strong>基底隔室</strong>（屏障外）；暫時擴增期開始形成細胞質橋</td>
         </tr>
         <tr>
-          <td><strong>初級精母細胞 (Primary spermatocyte)</strong></td>
-          <td>減數分裂 I (Meiosis I)</td>
-          <td>2n (二倍體)</td>
-          <td>46 條</td>
-          <td>每條染色體含 2 條姊妹染色分體</td>
-          <td>產生 2 個次級精母細胞</td>
+          <td><strong>B 型精原細胞</strong></td>
+          <td>最後一次有絲分裂</td>
+          <td>46 條（2n）</td>
+          <td>G₁ 期 2C → S 期後 4C</td>
+          <td>高表現 <strong>STRA8</strong>；仍在基底隔室，分裂產生 2 個初級精母細胞</td>
         </tr>
         <tr>
-          <td><strong>次級精母細胞 (Secondary spermatocyte)</strong></td>
-          <td>減數分裂 II (Meiosis II)</td>
-          <td>n (單倍體)</td>
-          <td>23 條</td>
-          <td>每條染色體含 2 條姊妹染色分體</td>
-          <td>每個分裂產生 2 個精細胞</td>
+          <td><strong>初級精母細胞</strong>（Primary spermatocyte）</td>
+          <td>減數分裂 I</td>
+          <td>46 條（2n）</td>
+          <td>4C（每條含 2 條姊妹染色分體）</td>
+          <td>暫時拆解緊密連接移入<strong>近腔隔室</strong>；前期 I 極長（約 3 週／三民記 24 天），切片最常見</td>
         </tr>
         <tr>
-          <td><strong>精細胞 (Spermatid)</strong></td>
-          <td>精子形成 (Spermiogenesis)</td>
-          <td>n (單倍體)</td>
-          <td>23 條</td>
-          <td>每條染色體含 1 條染色分體</td>
-          <td>共 4 個精細胞分化為 4 個精子</td>
+          <td><strong>次級精母細胞</strong>（Secondary spermatocyte）</td>
+          <td>減數分裂 II</td>
+          <td>23 條（n）</td>
+          <td>2C（每條仍含 2 條姊妹染色分體）</td>
+          <td>近腔隔室；壽命極短、不經 S 期即進入減 II，切片少見</td>
         </tr>
         <tr>
-          <td><strong>成熟精子 (Sperm cell)</strong></td>
-          <td>高度特化形態轉變</td>
-          <td>n (單倍體)</td>
-          <td>23 條</td>
-          <td>高度緻密化染色質</td>
-          <td>頭部 (核+頂體) + 中段 (粒線體) + 尾部 (鞭毛)</td>
+          <td><strong>精細胞</strong>（Spermatid）</td>
+          <td>無分裂（進行 Spermiogenesis）</td>
+          <td>23 條（n）</td>
+          <td>1C（每條僅 1 條染色分體）</td>
+          <td>單倍體核但藉細胞質橋功能上互補；人類全長生精約 <strong>64～74 天</strong>（Campbell 記約 7 週）</td>
+        </tr>
+        <tr>
+          <td><strong>成熟精子</strong>（Spermatozoon）</td>
+          <td>—</td>
+          <td>23 條（n）</td>
+          <td>1C（魚精蛋白高度凝縮染色質）</td>
+          <td>排精至管腔後移往<strong>副睪</strong>成熟（Campbell 記約 3 週具運動力）；女性生殖道內完成獲能</td>
         </tr>
       </tbody>
     </table>
-  </div>
+  </section>
 
-  <h2>四、荷爾蒙調控軸（下視丘—腦垂腺—睪丸軸）</h2>
+  <!-- Section 4: Textbook Figures -->
+  <section id="sec-figures">
+    <h2><span class="sec-num">04</span> 教科書原圖精選（點擊圖片可放大）</h2>
 
-  <div class="hero-card" style="border-left-color: var(--accent);">
-    <div class="hero-title" style="color: var(--accent);">🧬 青春期精子生成的啟動環境</div>
-    <div class="hero-text">
-      胎兒與青春期前的男性生殖細胞不會完成成人型精子生成；青春期時，下視丘分泌 <strong>GnRH</strong>，驅使腦垂腺前葉分泌促性腺素：<br>
-      • <strong>LH</strong>：刺激萊迪氏細胞產生睪固酮。<br>
-      • <strong>FSH</strong>：作用於賽托立氏細胞，協助建立支持精子生成的環境。<br>
-      • <strong>局部命運訊號</strong>：GDNF 偏向維持幹細胞；BMP、Wnt 與 RA—STRA8 軸則推動分化及進入減數分裂。<br>
-      因此，FSH 與睪固酮是精子生成不可缺少的整體支持條件，但個別精原細胞是否維持未分化，仍取決於幹細胞微環境及局部訊號。
-    </div>
-  </div>
+    <article class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Campbell13e_Fig46-9_male_reproductive_anatomy.jpg', this.querySelector('img').alt)">
+        <img src="images/Campbell13e_Fig46-9_male_reproductive_anatomy.jpg" alt="Campbell 13e Figure 46.9 Human male reproductive anatomy" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖證 1｜Campbell 13e 圖 46.9：人類男性生殖解剖與睪丸細精管、副睪管路</div>
+        <p class="figure-caption">呈現在陰囊（較核心體溫低約 2°C）內的睪丸細精管、盤繞 6 公尺的副睪、輸精管、射精管、三大附屬腺（儲精囊、攝護腺、尿道球腺）及尿道位置，先建立精原細胞所處之解剖管路定位。</p>
+        <p class="figure-caption-en">Figure 46.9 Reproductive anatomy of the human male (Campbell Biology, 13th ed., Ch. 46).</p>
+      </div>
+    </article>
 
-  <h2>五、《Hole 15e》原文逐字英漢對照收錄</h2>
+    <article class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Campbell13e_Fig46-11_spermatogenesis.jpg', this.querySelector('img').alt)">
+        <img src="images/Campbell13e_Fig46-11_spermatogenesis.jpg" alt="Campbell 13e Figure 46.11 Spermatogenesis" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖證 2｜Campbell 13e 圖 46.11（上）：睪丸、細精管與「幹細胞 → 精原細胞 → 精子」基準骨架</div>
+        <p class="figure-caption">普通生物學基準正典清楚標出外緣的<strong>精原幹細胞（spermatogonial stem cell）</strong>先經有絲分裂自我更新並產生<strong>精原細胞（spermatogonium）</strong>，再經有絲分裂產生初級精母細胞，其子代逐步向細精管管腔推進、於塞托利細胞（Sertoli cell）包圍下完成兩次減數分裂與分化，最後移往副睪成熟。</p>
+        <p class="figure-caption-en">Figure 46.11 Exploring Human Gametogenesis: Spermatogenesis (Campbell Biology, 13th ed., Ch. 46).</p>
+      </div>
+    </article>
 
-  <!-- 1. 生精上皮與胚胎有絲分裂 -->
-  <div class="quote-entry">
-    <div class="quote-label">1. 胚胎期精原細胞與 A/B 型分化（Hole 15e, Ch19, p.298-300）</div>
-    <div class="en-box">
-      "In the male embryo, an undifferentiated spermatogenic cell is called spermatogonium. Each spermatogonium contains 46 chromosomes (23 pairs) in its nucleus, the usual number for human body cells. Beginning during embryonic development, hormones stimulate spermatogonia to undergo mitosis. Each cell division gives rise to two new cells, one of which (type A) maintains the supply of undifferentiated cells, the other of which (type B) differentiates, becoming a primary spermatocyte. Sperm cell production, or spermatogenesis, pauses at this stage."
-    </div>
-    <div class="zh-box">
-      「在男性胚胎中，未分化的生精細胞稱為<strong>精原細胞（spermatogonium）</strong>。每個精原細胞核內含 46 條染色體（23 對），是人類體細胞的常見數目。從胚胎發育期開始，激素刺激精原細胞進行有絲分裂。每次細胞分裂產生兩個新細胞，其中一個（<strong>A 型</strong>）維持未分化細胞的供應，另一個（<strong>B 型</strong>）則分化成為初級精母細胞。精子的產生，即精子生成，在此階段暫停。」
-    </div>
-  </div>
+    <article class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Campbell13e_Fig46-11_oogenesis_comparison.jpg', this.querySelector('img').alt)">
+        <img src="images/Campbell13e_Fig46-11_oogenesis_comparison.jpg" alt="Campbell 13e Figure 46.11 Oogenesis for timing comparison" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖證 3｜Campbell 13e 圖 46.11（下）：卵子發生對照（胚胎期停滯於前期 I vs. 青春期恢復）</div>
+        <p class="figure-caption">對比圖證 2 可一目了然：女性在 <strong>IN EMBRYO</strong> 時期即產生初級卵母細胞並停滯於減數分裂前期 I，出生後不再新增，且減數分裂呈極不均等分裂；反觀男性青春期起由幹細胞連續補位並均等產出 4 個精子，不提前於胚胎期停滯在減數分裂。</p>
+        <p class="figure-caption-en">Figure 46.11 Exploring Human Gametogenesis: Oogenesis (Campbell Biology, 13th ed., Ch. 46).</p>
+      </div>
+    </article>
 
-  <div class="insight-card">
-    <div class="insight-point">
-      <strong>原文層級提醒：</strong>上述 Hole 15e 句子是入門型流程簡化。它可以表達「幹細胞來源必須保留」與「部分子代進入分化」的核心，但不宜延伸成「所有 A 型都未分化」或「每一次分裂都固定產生 1 個 A 型與 1 個 B 型」。Junqueira、Gilbert 與 Vander 提供了更細緻的族群與訊號觀點。
-    </div>
-  </div>
+    <article class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Hole15e_Fig19-4.png', this.querySelector('img').alt)">
+        <img src="images/Hole15e_Fig19-4.png" alt="Hole 15e Figure 19.4 Mitosis in spermatogonia" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖證 4｜Hole 15e 圖 19.4：入門版 A／B 型精原細胞簡圖與支持細胞緊密連接</div>
+        <p class="figure-caption">本圖以「1 個 A 型留底、1 個 B 型前進」作為教學簡圖，並明確畫出藍色支持細胞之間的<strong>緊密連接（血睪屏障）</strong>；閱讀時應注意實務上並非每次分裂固定產出 1 個 A 型與 1 個 B 型，而是靠殖株族群維持動態平衡。</p>
+        <p class="figure-caption-en">Figure 19.4 Mitosis in spermatogonia results in type A and type B spermatogonia (Hole's Human Anatomy &amp; Physiology, 15th ed., Ch. 19).</p>
+      </div>
+    </article>
 
-  <!-- 2. 青春期恢復與減數分裂 -->
-  <div class="quote-entry">
-    <div class="quote-label">2. 青春期有絲分裂恢復與減數分裂（Hole 15e, Ch19, p.302-304）</div>
-    <div class="en-box">
-      "At puberty, mitosis resumes, and new spermatogonia form. Testosterone secretion increases and the primary spermatocytes then reproduce by a special type of cell division called meiosis. Meiosis includes two successive divisions, called the first and second meiotic divisions."
-    </div>
-    <div class="zh-box">
-      「到了青春期，有絲分裂恢復，新的精原細胞形成。睪固酮分泌增加，初級精母細胞接著以一種特殊的細胞分裂方式——<strong>減數分裂（meiosis）</strong>——進行繁殖。減數分裂包含兩次連續的分裂，稱為第一次和第二次減數分裂。」
-    </div>
-  </div>
+    <article class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Junqueira17e_Fig21-7_clonal_syncytium.png', this.querySelector('img').alt)">
+        <img src="images/Junqueira17e_Fig21-7_clonal_syncytium.png" alt="Junqueira 17e Figure 21-7 Clonal nature of spermatogenesis" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖證 5｜Junqueira 17e 圖 21.7：A 型幹細胞／暫時擴增前驅、細胞間橋與殘餘體</div>
+        <p class="figure-caption">組織學正典補足了入門圖漏掉的關鍵細節：A 型精原細胞包含彼此分離的<strong>幹細胞</strong>，以及行不完全胞質分裂的<strong>暫時擴增前驅細胞</strong>；細胞質橋一路維持過 B 型精原細胞、初級／次級精母細胞與精細胞，直到精子形成時排除<strong>殘餘體（residual bodies）</strong>才切斷。</p>
+        <p class="figure-caption-en">Figure 21–7 Clonal nature of spermatogenesis (Junqueira's Basic Histology, 17th ed., Ch. 21).</p>
+      </div>
+    </article>
 
-  <!-- 3. 支持細胞與生精調節 -->
-  <div class="quote-entry">
-    <div class="quote-label">3. 支持細胞對精原細胞的滋養與荷爾蒙反應（Hole 15e, Ch19, p.294, 386-390）</div>
-    <div class="en-box">
-      "The epithelium of the seminiferous tubules consists of sustentacular cells (Sertoli cells) and spermatogenic cells. Sustentacular cells support, nourish, and regulate the spermatogenic cells... Then, in the presence of FSH and testosterone, sustentacular cells stimulate the spermatogenic cells to undergo spermatogenesis, giving rise to sperm cells."
-    </div>
-    <div class="zh-box">
-      「曲細精管的上皮由<strong>支持細胞（Sertoli 細胞）</strong>與<strong>生精細胞</strong>組成。支持細胞支持、滋養並調節生精細胞...接著，在 <strong>FSH 與睪固酮的存在下</strong>，支持細胞刺激生精細胞進行精子生成，產生精子。」
-    </div>
-  </div>
+    <article class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Junqueira17e_Fig21-5_btb_spermiogenesis.png', this.querySelector('img').alt)">
+        <img src="images/Junqueira17e_Fig21-5_btb_spermiogenesis.png" alt="Junqueira 17e Figure 21-5 Spermatogenesis and spermiogenesis" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖證 6｜Junqueira 17e 圖 21.5：基底／近腔隔室移行與精子形成（Spermiogenesis）</div>
+        <p class="figure-caption">左圖（a）呈現新形成的初級精母細胞如何<strong>暫時拆解緊密連接</strong>、從基底隔室移入近腔隔室而不破壞血睪屏障；右圖（b）呈現精細胞在無分裂下進行胞器重塑：頂體帽擴展、鞭毛由基體長出、粒線體集中於中段並排出多餘細胞質。</p>
+        <p class="figure-caption-en">Figure 21–5 Spermatogenesis and spermiogenesis (Junqueira's Basic Histology, 17th ed., Ch. 21).</p>
+      </div>
+    </article>
 
-  <h2>六、高中生物教學與教甄試題深度剖析</h2>
+    <article class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Gilbert13e_Fig6-18_ra_cyp26b1_nanos2_stra8.png', this.querySelector('img').alt)">
+        <img src="images/Gilbert13e_Fig6-18_ra_cyp26b1_nanos2_stra8.png" alt="Gilbert 13e Figure 6.18 Retinoic acid determines timing of meiosis" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖證 7｜Gilbert 13e 圖 6.18：破解胚胎期謎題——雄性性腺以 Cyp26b1 與 Nanos2 抑制 Stra8</div>
+        <p class="figure-caption">證實男性胚胎<strong>不會</strong>先進入減數分裂：雖然中腎會分泌視黃酸（RA），但胚胎睪丸在胚胎第 13.5 天前分泌 <strong>Cyp26b1</strong> 降解 RA，第 13.5 天後由 <strong>Nanos2</strong> 抑制 <strong>Stra8</strong> 表現，鎖住減數分裂守門員，使生殖細胞停留在有絲分裂狀態（精原細胞），直到青春期才由 Sertoli 細胞合成 RA 重啟。</p>
+        <p class="figure-caption-en">Figure 6.18 Retinoic acid (RA) determines the timing of meiosis and sexual differentiation of mammalian germ cells (Gilbert Developmental Biology, 13th ed., Ch. 6).</p>
+      </div>
+    </article>
 
-  <div class="insight-card">
-    <div class="insight-point">
-      <strong>🎯 考點 1：精原細胞不等於全部都是幹細胞</strong><br>
-      「精原細胞」是階段總稱，其中只有一部分保留長期自我更新能力；暫時擴增的 A 型前驅細胞與 B 型精原細胞已逐步進入分化途徑。考題若寫「所有精原細胞均未分化」，應判為過度概括。
+    <article class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Campbell13e_Fig46-13_male_hormonal_control.jpg', this.querySelector('img').alt)">
+        <img src="images/Campbell13e_Fig46-13_male_hormonal_control.jpg" alt="Campbell 13e Figure 46.13 Hormonal control of the testes" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖證 8｜Campbell 13e 圖 46.13：下視丘—腦垂腺—睪丸雙重協同與雙重負回饋軸</div>
+        <p class="figure-caption">GnRH 驅動腦垂腺前葉分泌 FSH 與 LH：<strong>FSH</strong> 刺激塞托立細胞協助生精並分泌<strong>抑制素（inhibin）</strong>選擇性負回饋腦垂腺前葉；<strong>LH</strong> 刺激萊迪希細胞分泌<strong>睪固酮</strong>促進生精，並對腦垂腺前葉與下視丘施以負回饋。</p>
+        <p class="figure-caption-en">Figure 46.13 Hormonal control of the testes (Campbell Biology, 13th ed., Ch. 46).</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- Section 5: Original Literature Part A -->
+  <section id="sec-sources-a">
+    <h2><span class="sec-num">05</span> 原始文獻段落 A：精原細胞分化、細胞質橋與胚胎停滯機制</h2>
+    <button class="toggle-en-btn" type="button" id="toggleEnBtn" onclick="toggleEnglish()">精簡：隱藏英文原文</button>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">1. 《Campbell Biology》13e（基準正典）</span>
+        <span class="source-loc">Ch. 46: Animal Reproduction（圖 46.11 ＆ 習題 9）</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"Spermatogenesis is continuous in adult males. In producing hundreds of millions of sperm each day, cell division and maturation occur throughout the seminiferous tubules. For a single sperm, the process takes about seven weeks. ... Stem cells that give rise to sperm are situated near the outer edge of the seminiferous tubules. ... In mature testes, they divide mitotically to form spermatogonia, which in turn generate spermatocytes by mitosis."</div>
+        <div class="quote-tw">「精子發生在成年男性中是連續的。在每天製造數億個精子的過程中，細胞分裂與成熟遍及整個細精管。<strong>對單一精子而言，這個過程約需七週。</strong>……產生精子的幹細胞位於細精管的外緣附近……在成熟睪丸中，<strong>它們有絲分裂形成精原細胞，精原細胞再藉有絲分裂產生精母細胞。</strong>」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">[Q9. DRAW IT] "In human spermatogenesis, mitosis of a stem cell gives rise to one cell that remains a stem cell and one cell that becomes a spermatogonium. (a) Draw four rounds of mitosis for a stem cell, and label the daughter cells. (b) For one spermatogonium, draw the cells it would produce from one round of mitosis followed by meiosis. ... (c) Explain what would happen if stem cells divided like spermatogonia."</div>
+        <div class="quote-tw">[習題 9] 「在人類精子發生中，幹細胞的有絲分裂產生一個仍為幹細胞的細胞，以及一個成為精原細胞的細胞……<strong>(c) 解釋若幹細胞像精原細胞那樣分裂，會發生什麼事。</strong>」（按：若皆分化，精原幹細胞庫將會耗竭。）</div>
+      </div>
     </div>
 
-    <div class="insight-point">
-      <strong>🎯 考點 2：自我更新與分化是族群平衡，不是固定的一分為二</strong><br>
-      Hole 的圖以「A 型留底、B 型前進」呈現核心概念，但不宜推論成每一次有絲分裂都必定產生 1 個 A 型和 1 個 B 型。較精確的說法是：細胞族群一方面保留幹細胞來源，另一方面產生分化中的殖株。
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">2. 《Hole's Human Anatomy &amp; Physiology》15e</span>
+        <span class="source-loc">Ch. 19: Reproductive Systems（19.3 ＆ 19.4）</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"In the male embryo, an undifferentiated spermatogenic cell is called spermatogonium. Each spermatogonium contains 46 chromosomes (23 pairs) in its nucleus, the usual number for human body cells. Beginning during embryonic development, hormones stimulate spermatogonia to undergo mitosis (see section 3.4, The Cell Cycle). Each cell division gives rise to two new cells, one of which (type A) maintains the supply of undifferentiated cells, the other of which (type B) differentiates, becoming a primary spermatocyte. Sperm cell production, or spermatogenesis, pauses at this stage."</div>
+        <div class="quote-tw">「在男性胚胎中，未分化的精原細胞稱為精原母細胞（spermatogonium）……從胚胎發育期開始，激素刺激精原母細胞進行有絲分裂。每次細胞分裂產生兩個新細胞，其中一個（<strong>A 型</strong>）維持未分化細胞的供應，另一個（<strong>B 型</strong>）則分化成為初級精母細胞。精子的產生，即精子生成，在此階段暫停。」（註：此為入門簡化敘述，胚胎停滯機制請對照下方 Gilbert 13e。）</div>
+      </div>
     </div>
 
-    <div class="insight-point">
-      <strong>🎯 考點 3：分化不等於染色體套數改變</strong><br>
-      B 型精原細胞雖已承諾形成初級精母細胞，仍為二倍體。套數由 2n 降為 n 發生在第一次減數分裂，不是發生在 A 型轉成 B 型時。
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">3. 《Junqueira's Basic Histology》17e</span>
+        <span class="source-loc">Ch. 21: The Male Reproductive System</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"Different stages of spermatogonia development can be recognized by subtle changes in shape and staining properties of their nuclei. Spermatogonia with dark, ovoid nuclei act as stem cells, dividing infrequently and giving rise both to new stem cells and to cells with more pale-staining, ovoid nuclei that divide more rapidly as transit amplifying (progenitor) cells (Figure 21–7). These type A spermatogonia each undergo several unique clonal divisions that leave most of the cells interconnected as a syncytium. These become type B spermatogonia, which have more spherical and pale nuclei."</div>
+        <div class="quote-tw">「<strong>具有深染卵圓形細胞核的精原細胞充當幹細胞，分裂頻率低</strong>，可同時產生新的幹細胞，以及<strong>具有較淡染卵圓形細胞核、分裂較快速的暫時擴增（前驅）細胞</strong>。這些 A 型精原細胞各自進行數次特殊分裂，使同一來源的大多數細胞彼此連接成合胞體。其後成為 <strong>B 型精原細胞，細胞核較圓且較淡染。</strong>」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"The stem cells produced by mitotic divisions of spermatogonia remain as separate cells. However, all subsequent divisions of the daughter cells, which become transit amplifying progenitor cells, have incomplete cytokinesis after telophase and the cells remain attached to one another by intercellular bridges of cytoplasm (Figure 21–7). ... clones of approximately a hundred cells may remain linked through meiosis. ... the cytoplasmic bridges allow the haploid cells to be supplied with products of the complete diploid genome, including proteins and RNA encoded by genes on the X or Y chromosome missing in their haploid nuclei."</div>
+        <div class="quote-tw">「精原細胞經有絲分裂產生的幹細胞保持為彼此分離的細胞。然而，後續成為暫時擴增前驅細胞的子細胞，在有絲分裂末期之後只進行<strong>不完全胞質分裂</strong>，因此細胞之間仍由細胞質的<strong>細胞間橋</strong>相連……約 100 個同一來源的細胞可在減數分裂期間持續相連……<strong>使單倍體細胞獲得完整二倍體基因體的產物，包括由其單倍體細胞核所缺少之 X 或 Y 染色體基因編碼的蛋白質與 RNA。</strong>」</div>
+      </div>
     </div>
 
-    <div class="insight-point">
-      <strong>🎯 考點 4：男性胎兒期不會先製造一批初級精母細胞再停住</strong><br>
-      男性生殖細胞在胎兒期受到抑制減數分裂的調控；青春期後，視黃酸誘導 STRA8，生殖前驅細胞才進入成人型精子生成與減數分裂。這不同於卵母細胞在胎兒期已進入減數分裂前期 I 的情況。
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">4. 《Gilbert Developmental Biology》13e</span>
+        <span class="source-loc">Ch. 06: Sex Determination and Gametogenesis</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"Once within the female or male gonad, however, they either (1) begin meiosis and become oocytes (immature eggs); or (2) arrest in mitosis and become spermatogonia (sperm stem cells; McLaren 1995; Brennan and Capel 2004). Germ cells stay in this state of arrested meiosis (oocytes) or mitosis (spermatogonia) until puberty. ... In the developing testes, Stra8 is downregulated by Fgf9, and the RA produced by the developing kidney is degraded by the testes’ secretion of the RA-degrading enzyme Cyp26b1 (FIGURE 6.18)... During male puberty, however, RA is synthesized in the Sertoli cells and induces Stra8 in spermatogonial stem cells. Once Stra8 is present, the sperm progenitor cells become committed to meiosis."</div>
+        <div class="quote-tw">「生殖細胞一旦進入雌性或雄性性腺，就會採取以下其中一條路徑：(1) 開始減數分裂並成為卵母細胞；或 <strong>(2) 停滯於有絲分裂狀態並成為精原細胞</strong>。……在發育中的睪丸裡，<strong>Fgf9 會使 Stra8 下調，而發育中腎臟製造的 RA，則會被睪丸分泌的 RA 降解酵素 Cyp26b1 分解</strong>（圖 6.18；後期並由 Nanos2 阻斷 Stra8）。然而，雄性進入青春期時，<strong>Sertoli 細胞會合成 RA，並在精原幹細胞中誘導 Stra8</strong>；Stra8 一旦出現，精子前驅細胞就會進入減數分裂。」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"The mitotic proliferation of the stem cells produces type A spermatogonia, which are held together by cytoplasmic bridges. These bridges are fragile, however, and a cell can split off from the group and become a stem cell again (Hara et al. 2014). The testes transcription factor Dmrt1... appears to induce glial-derived neurotrophic factor (GDNF), which when secreted from the Sertoli cells, keeps the stem cells in mitosis... However, BMPs and Wnts start inducing the type A spermatogonia to differentiate further to sperm... Type B spermatogonia are the precursors of the spermatocytes and contain high levels of Stra8..."</div>
+        <div class="quote-tw">「幹細胞進行有絲分裂增殖後，會產生以細胞質橋相連的 A 型精原細胞；<strong>不過這些橋很脆弱，單一細胞可以脫離群體，再次成為幹細胞</strong>。睪丸轉錄因子 Dmrt1 似乎會誘導 Sertoli 細胞分泌 <strong>GDNF</strong>，使幹細胞持續有絲分裂；然而 <strong>BMP 與 Wnt</strong> 會開始誘導 A 型精原細胞進一步分化。<strong>B 型精原細胞含有高量 Stra8</strong>，是這條譜系中最後進行有絲分裂的細胞。」</div>
+      </div>
     </div>
 
-    <div class="insight-point">
-      <strong>🎯 考點 5：血睪屏障的位置</strong><br>
-      未分化與分化中的精原細胞主要位於屏障外側的基底隔室。新形成的初級精母細胞才通過賽托立氏細胞間的緊密連接，進入近管腔隔室；不能簡化成「B 型精原細胞一形成就已在管腔側」。
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">5. 《Vander's Human Physiology》16e</span>
+        <span class="source-loc">Ch. 17: Reproduction（17.6 克隆退出循環）</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"It should be emphasized that if all the cells in the clone produced by each stem cell spermatogonium followed this pathway, the spermatogonia would disappear—that is, they would all be converted to primary spermatocytes. This does not occur because, at an early point, one of the cells of each clone “drops out” of the mitosis–differentiation cycle to remain a stem cell spermatogonium that will later enter into its own full sequence of divisions."</div>
+        <div class="quote-tw">「如果每個幹細胞型精原細胞產生的克隆中，所有細胞都沿著這條路徑發育，精原細胞就會消失……實際上不會如此，因為在早期階段，<strong>每個克隆都有一個細胞會『退出』有絲分裂－分化循環，保留為幹細胞型精原細胞</strong>，日後再進入一整套分裂程序。」</div>
+      </div>
     </div>
 
-    <div class="callout-mnemo">
-      💡 精確口訣：<br>
-      「幹細胞能自新，前驅細胞先擴增；B 型仍是 2n，形成初級才備戰減數分裂。」
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">6. 《Sherwood Animal Physiology》＆《Sadava Life》12e</span>
+        <span class="source-loc">細胞質橋共享 X 染色體基因產物之演化與細胞學意義</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">[Sherwood Ch. 16] "Until sperm maturation is complete, the developing germ cells arising from a single primary spermatocyte remain joined by cytoplasmic bridges. ... This linkage is important in mammals because the X chromosome, but not the Y chromosome, contains genes that code for cellular products essential for development of the sperm. ... If it were not for the sharing of cytoplasm so that all the haploid cells are provided with the products coded for by X chromosomes until sperm development is complete, the Y-bearing, male-producing sperm would not be able to develop and survive."</div>
+        <div class="quote-tw">[Sherwood] 「在精子成熟完成以前，由同一個初級精母細胞產生的發育中生殖細胞，會一直以細胞質橋相連……因為 X 染色體含有編碼精子發育所必需細胞產物的基因，Y 染色體卻沒有。<strong>如果不能透過共享細胞質獲得 X 染色體編碼的產物，帶有 Y 染色體、可產生雄性子代的精子便無法發育與存活。</strong>」</div>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <h2>七、延伸考證來源與分類邊界</h2>
+  <!-- Section 6: Original Literature Part B -->
+  <section id="sec-sources-b">
+    <h2><span class="sec-num">06</span> 原始文獻段落 B：血睪屏障、激素軸、高中六版與教甄真題</h2>
 
-  <div class="insight-card">
-    <div class="insight-point">
-      <strong>Junqueira 17e《基礎組織學》Ch21</strong>：區分深染、低頻分裂的 A 型幹細胞，淡染、快速分裂的暫時擴增 A 型前驅細胞，以及進行最後一次有絲分裂的 B 型精原細胞。
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">7. 《Junqueira 17e》＆《Fox 16e》＆《Vander 16e》</span>
+        <span class="source-loc">血睪屏障、免疫豁免與 ABP／抑制素</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">[Junqueira 17e Ch. 21] "Spermatogonia lie in a basal compartment of the tubule, below the tight junctions and not sealed off from the vascularized interstitial tissue containing lymphocytes and other immune cells. Newly formed primary spermatocytes temporarily disassemble the adhesion molecules of the local occluding junctions and move into the tubule’s adluminal compartment while still adhering to Sertoli cells... Production of nutrients and androgen-binding protein (ABP), which concentrates testosterone to a level required for spermiogenesis, is promoted by follicle-stimulating hormone (FSH). As endocrine cells, they secrete the 39-kDa glycoprotein inhibin, which feeds back on the anterior pituitary gland to suppress FSH synthesis and release."</div>
+        <div class="quote-tw">[Junqueira 17e] 「<strong>精原細胞位於小管的基底隔室</strong>，在緊密連接下方，未與含淋巴球及免疫細胞的血管化間質組織隔絕。<strong>新形成的初級精母細胞暫時拆解局部閉鎖連接的黏附分子，在仍附著 Sertoli 細胞的狀態下移入近腔隔室</strong>……FSH 促進 Sertoli 細胞製造營養物及<strong>雄性激素結合蛋白（ABP）</strong>，將睪固酮濃縮至精子形成所需濃度；作為內分泌細胞則分泌 <strong>39-kDa 醣蛋白 inhibin</strong> 抑制 FSH 合成與釋放。」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">[Fox 16e Ch. 20] "The Sertoli cells help make the seminiferous tubules an immunologically privileged site (protected from immune attack) through another mechanism as well. ... the Sertoli cells produce FAS ligand, which binds to the FAS receptor on the surface of T lymphocytes. This triggers apoptosis (cell suicide) of the T lymphocytes... Immunological protection of the germinal cells of the testis is also helped by their usual lack of MHC class-1 or class-2 molecules to interact with the T cell receptors..."</div>
+        <div class="quote-tw">[Fox 16e] 「Sertoli 細胞也藉另一機制使曲細精管成為<strong>免疫特權部位</strong>：Sertoli 細胞表現 <strong>FAS 配體</strong>，結合 T 淋巴球表面的 FAS 受體並觸發其凋亡；此外，睪丸生殖細胞通常<strong>缺乏第 I 類或第 II 類 MHC 分子</strong>，進一步防止免疫攻擊。」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">[Vander 16e Ch. 17] "Testosterone alone usually does not restore spermatogenesis to normal. FSH is necessary to stimulate spermatogenesis from the Sertoli cell independently of local testosterone production. Furthermore, giving testosterone as a drug is usually not sufficient to replace the high local concentrations of testosterone in the testes necessary to maintain spermatogenesis."</div>
+        <div class="quote-tw">[Vander 16e] 「<strong>單獨給予睪固酮通常無法使精子生成恢復正常。</strong>FSH 必須作用於賽氏細胞，且以藥物方式給予睪固酮，通常不足以取代睪丸內維持精子生成所需的<strong>高濃度局部睪固酮</strong>。」</div>
+      </div>
     </div>
-    <div class="insight-point">
-      <strong>Gilbert 13e《發育生物學》Ch06</strong>：補充精原幹細胞微環境、DMRT1／GDNF 的自我更新作用、BMP／Wnt 的分化作用，以及 RA—STRA8 軸對減數分裂承諾的影響。
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">8. 《Campbell 13e》＆《Guyton &amp; Hall 15e》</span>
+        <span class="source-loc">激素調控軸、74 天生精與生長激素（GH）</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">[Campbell 13e Ch. 46] "In directing spermatogenesis, FSH and LH act on two types of cells in the testis (Figure 46.13). FSH stimulates Sertoli cells, located within the seminiferous tubules, to nourish developing sperm... LH causes Leydig cells, scattered in connective tissue between the tubules, to produce testosterone and other androgens, which promote spermatogenesis in the tubules. Two negative-feedback mechanisms control sex hormone production in males... Testosterone regulates the blood concentration of GnRH, FSH, and LH... In addition, inhibin, a hormone that in males is produced by Sertoli cells, acts on the anterior pituitary gland to reduce FSH secretion."</div>
+        <div class="quote-tw">[Campbell 13e] 「FSH 刺激細精管內的<strong>塞托利細胞</strong>滋養發育中的精子；LH 使管道間結締組織中的<strong>萊迪希細胞</strong>製造睪固酮與其他雄性素。兩條負回饋機制調控雄性性激素：睪固酮抑制下視丘與腦垂腺前葉的 GnRH、FSH 與 LH；塞托利細胞製造的<strong>抑制素（inhibin）</strong>則作用於腦垂腺前葉以減少 FSH 分泌。」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">[Guyton &amp; Hall 15e Ch. 81] "The entire period of spermatogenesis, from spermatogonia to spermatozoa, takes about 74 days. ... Growth hormone specifically promotes early division of the spermatogonia; in its absence, as in pituitary dwarfs, spermatogenesis is severely deficient or absent, thus causing infertility."</div>
+        <div class="quote-tw">[Guyton 15e] 「精子發生從精原細胞到精子，整個過程約需 <strong>74 天</strong>。……<strong>生長激素（GH）會特別促進精原細胞早期分裂</strong>；缺乏生長激素時（如腦垂腺性侏儒症），精子發生會嚴重不足或完全缺失，因而造成不孕。」</div>
+      </div>
     </div>
-    <div class="insight-point">
-      <strong>Vander 16e《人體生理學》Ch17</strong>：強調精原細胞殖株中必須保留未分化來源，否則所有細胞都形成初級精母細胞後，幹細胞庫將會耗竭。
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">9. 高中《選修生物 III》＆《必修生物》六版跨版本整合</span>
+        <span class="source-loc">三民／全華／南一／泰宇／翰林／龍騰異同定位</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-tw"><strong>〔共同核心〕</strong> 男性自青春期開始製造精子，且終生持續。睪丸細精管管壁上的精原細胞可行有絲分裂以自我增殖〔<strong>翰林、龍騰明述</strong>：部分精原細胞具幹細胞特性，能持續補充自身數量〕，部分精原細胞經染色質複製分化為初級精母細胞（2n）→ 2 個次級精母細胞（n）→ 4 個精細胞（n）→ 精子。這些細胞在細精管中由管壁向管腔依序排列，剛離開睪丸的精子須在副睪內進一步成熟。<br><br><strong>〔版本獨有與課綱邊界〕</strong> ① <strong>三民</strong>必修一明確區分「生殖原細胞（精原／卵原）」與「生殖母細胞（初級精／卵母）」，並獨有補充「人類初級精母細胞進入 S 期完成 DNA 複製後，<strong>減數分裂 I 前期約歷時 24 天</strong>」；② <strong>翰林、龍騰</strong>補充男性的 LH 刺激間質細胞分泌睪固酮、FSH 與雄性激素一同刺激細精管產生精子；③ <strong>泰宇、翰林</strong>詳述精子頭部頂體含水解酵素、中節含粒線體；④ <strong>高中六版正文皆未收錄</strong>支持細胞（賽托立氏細胞）、血睪屏障、抑制素、ABP、細胞質橋及 A／B 型精原細胞細分。</div>
+      </div>
     </div>
-    <div class="insight-point">
-      <strong>分類限制</strong>：人類古典 Ad／Ap／B 是依細胞核形態與染色性質建立的分類，不能直接與小鼠各 A 型亞群一對一等同；現代觀點更接近一條具有可塑性的連續分化路徑。
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">10. 114／115 學年度高中生物教甄實戰真題</span>
+        <span class="source-loc">近年教甄常考大學生理與組織學延伸點</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-tw">
+          • <strong>114 羅東高中 第 15 題（官方答案 E）</strong>：問雄性素結合蛋白（androgen-binding protein, ABP）之主要功能？正確選項為 <strong>(E) 維持細精管管腔中雄性素的濃度穩定</strong>（而非 (B) 主動運送雄性素通過血睪屏障——類固醇睪固酮本可脂溶性擴散入管腔，需要 ABP 結合才能留在管腔維持高濃度）。<br>
+          • <strong>114 竹科實中 名詞解釋第 3 題</strong>：比較 <strong>Leydig cell vs. Sertoli cell</strong>（定義、相同處：皆位於睪丸且受腦垂腺促性腺素調控支持生精；相異處：間質 vs. 管內體細胞、LH vs. FSH、類固醇睪固酮 vs. ABP／抑制素／AMH／血睪屏障）。<br>
+          • <strong>115 全國聯招 名詞解釋第 8 題</strong>：<strong>Inhibin（抑制素）</strong>——性腺（男性賽托立氏細胞／女性顆粒細胞）受 FSH 刺激分泌之醣蛋白激素，對腦垂腺前葉具選擇性負回饋抑制 FSH 分泌。<br>
+          • <strong>115 花蓮女中 多選第 2 題</strong>：哪些細胞的平滑內質網（SER）明顯發達？其中 <strong>(C) Leydig cell</strong> 因合成類固醇激素睪固酮而富含 SER 與脂滴。<br>
+          • <strong>115 陽交附中 第 9 題（官方答案 ABD）</strong>：配子形成考點——釐清選項 (C)「若有互換發生，則一個 2n 初級精母細胞『必』產生 4 種基因型精子」實為正確或需視基因座異型合子配置而定（該題官方未選 C）。
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
+
+  <!-- Section 7: Teaching, Traps & Boundary -->
+  <section id="sec-teaching">
+    <h2><span class="sec-num">07</span> 高中教學、常見陷阱與考證邊界</h2>
+
+    <div class="callout">
+      <div class="callout-title">高中教學與教甄雙軌準繩</div>
+      <p style="margin-bottom:0;"><strong>高一／高三課堂準繩</strong>：依現行六版課本，「精原細胞位於細精管外緣、具幹細胞特性（翰林／龍騰）、青春期後啟動產生初級精母細胞，一個初級精母細胞均等產生四個精子」。<strong>教甄筆試與口試深化</strong>：必須補齊<strong>賽托立氏細胞（血睪屏障、ABP、抑制素、乳酸滋養、吞噬殘餘體）</strong>、<strong>細胞質橋共享 X 基因產物</strong>、<strong>Spermatogenesis vs. Spermiogenesis</strong>，以及 <strong>RA—STRA8／Cyp26b1／Nanos2</strong> 解釋為何雄性胚胎不提前啟動減數分裂。</p>
+    </div>
+
+    <div class="callout callout-warn">
+      <div class="callout-title">教甄命題五大高頻陷阱</div>
+      <ul style="margin-bottom:0;">
+        <li><strong>陷阱 1</strong>：「B 型精原細胞已經開始分化，所以染色體變成單倍體（n）」→ <strong>錯</strong>。B 型精原細胞仍是 <strong>2n</strong>，還需再進行最後一次有絲分裂才成為初級精母細胞；套數減半發生在減數分裂 I。</li>
+        <li><strong>陷阱 2</strong>：「精原細胞每次有絲分裂一定剛好產生 1 個 A 型與 1 個 B 型」→ <strong>錯</strong>。Hole 15e 圖示是教學簡化；實務上靠殖株循環與微環境訊號平衡維持，且早期 A 型細胞質橋脆弱可脫離重返幹細胞。</li>
+        <li><strong>陷阱 3</strong>：「男性在胎兒期就先形成一批初級精母細胞並暫停到青春期」→ <strong>以現代發育學判準為誤</strong>。那是部分入門生理書的簡化寫法；《Gilbert 13e》明確證明胚胎睪丸以 Cyp26b1 降解 RA 並由 Nanos2 抑制 Stra8，使生殖細胞停滯在有絲分裂階段。</li>
+        <li><strong>陷阱 4</strong>：「男性只分泌睪固酮，不分泌抑制素，也沒有雌激素作用」→ <strong>錯</strong>。賽托立氏細胞分泌抑制素專一負回饋 FSH，且可藉芳香化酶將睪固酮轉為雌二醇參與精子形成與液體再吸收。</li>
+        <li><strong>陷阱 5</strong>：「施打外源性睪固酮可刺激更多精子產生」→ <strong>錯</strong>。外源性睪固酮會負回饋壓低 LH 與 FSH，導致睪丸局部睪固酮與 ABP 不足，反而抑制生精作用。</li>
+      </ul>
+    </div>
+
+    <div class="callout boundary">
+      <div class="callout-title">考證邊界說明（Vault 原典支持 vs. 未收錄項目）</div>
+      <p><strong>Vault 原典直接支持</strong>：以上 11 部大學譯本、高中六版跨版本整合及 114／115 教甄試題皆已完成本機知識庫原文比對並建立 <code>^anchor</code> 區塊錨點（概念問答庫筆記：<code>精原細胞與生精歷程_幹細胞分化與曲細精管調控.md</code>）。</p>
+      <p style="margin-bottom:0;"><strong>Vault 內未見之術語與細節</strong>：人類精原細胞古典縮寫 <code>Ad</code>（A dark）與 <code>Ap</code>（A pale）在《Junqueira 17e》Ch. 21 中已有「dark, ovoid nuclei」與「pale-staining, ovoid nuclei」之完整組織學描述，但全 Vault 實際檢索皆未出現「Ad／Ap」縮寫字樣，故本頁不將該縮寫硬套為所有哺乳類通用分類（例如小鼠係採 As／Apr／Aal 體系）。</p>
+    </div>
+  </section>
 
   <footer>
-    Ze-Agent 概念考證庫 • 遵循臺灣教育部生物審定名詞規範 • 依據 Hole 15e 授權與經典教科書考證製作
+    400X 的日常切片 Bio-Wiki • 遵循臺灣教育部生物審定名詞規範 • 依據 Vault 11 部正典與高中跨版本教材考證製作
   </footer>
 
-</div>
+</main>
 
 <!-- Reading Outpost Bottom Bar & Script -->
 <button class="ro-bottom-toc" type="button" onclick="roOpenDrawer('roTocDrawer')">📑 本篇段落導覽</button>
@@ -1436,7 +1478,7 @@
         });
       });
     });
-    document.querySelectorAll('main img, .container img, .wrap img').forEach(function(img) {
+    document.querySelectorAll('main img, .container img').forEach(function(img) {
       img.addEventListener('click', function() {
         openLightbox(img.src, img.alt);
       });
