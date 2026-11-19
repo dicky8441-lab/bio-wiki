@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>初級卵母細胞、間期與二分體｜Bio-Wiki</title>
+<style>
+  :root {
+    --bg-primary: #181614;
+    --bg-pillbar: #24201c;
+    --bg-card: #211e1a;
+    --bg-quote: #26221e;
+    --bg-tag: #2d2823;
+    --text-primary: #f6f1ea;
+    --text-body: #ddd5ca;
+    --text-secondary: #bfb5a8;
+    --text-muted: #9a8e80;
+    --primary: #5bc0eb;
+    --primary-light: rgba(91, 192, 235, 0.12);
+    --primary-border: rgba(91, 192, 235, 0.32);
+    --accent: #f4c44e;
+    --accent-light: rgba(244, 196, 78, 0.12);
+    --border-color: rgba(246, 241, 234, 0.09);
+    --border-strong: rgba(246, 241, 234, 0.16);
+    --taupe-fab: rgba(104, 91, 78, 0.94);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+  }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+    font-size: 18px;
+    line-height: 1.78;
+    padding: 0 0 96px 0;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Reading Outpost Signature Top Pill Header */
+  .ro-header-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-primary) 70%, rgba(24, 22, 20, 0));
+  }
+
+  .ro-pillbar {
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .ro-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .ro-menu-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    border: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .ro-menu-circle span {
+    display: block;
+    width: 16px;
+    height: 2.2px;
+    background: #181614;
+    border-radius: 2px;
+  }
+
+  .ro-brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .ro-brand-zh {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-brand-en {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .ro-cta-pill {
+    appearance: none;
+    background: var(--accent);
+    color: #1c1814;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  /* Main Reading Column */
+  .container, .wrap, main.container, main.wrap {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 22px 0;
+  }
+
+  /* Hero / Article Header */
+  header, .hero {
+    text-align: left !important;
+    margin-bottom: 32px;
+    padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .badge-bar, .meta-line {
+    display: flex;
+    justify-content: flex-start !important;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .badge, .meta-pill, .meta-pill-muted, .eyebrow, .tag {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .badge-primary, .meta-pill, .eyebrow {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary-border);
+  }
+
+  .badge-accent, .badge.red {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: rgba(244, 196, 78, 0.32);
+  }
+
+  h1 {
+    font-size: clamp(26px, 6.2vw, 34px);
+    line-height: 1.38;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    margin: 6px 0 14px;
+    text-align: left;
+  }
+
+  .subtitle, .lead, .meta {
+    font-size: 17px;
+    line-height: 1.68;
+    color: var(--text-muted);
+    margin: 0;
+    max-width: none;
+    text-align: left;
+  }
+
+  /* Unboxed Article Flow */
+  section, section.card, .card {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-bottom: 42px;
+    scroll-margin-top: 84px;
+  }
+
+  .section-head {
+    margin: 44px 0 18px;
+  }
+
+  h2, .card-title {
+    font-size: clamp(22px, 5.2vw, 27px);
+    line-height: 1.45;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 44px 0 18px;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+  }
+
+  .section-head h2 {
+    margin: 0 0 10px;
+  }
+
+  h2::before {
+    display: none !important;
+  }
+
+  h2 .sec-num {
+    color: var(--accent);
+    margin-right: 6px;
+    font-weight: 800;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 30px 0 12px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--text-body);
+    margin-bottom: 18px;
+  }
+
+  ul, ol {
+    margin: 0 0 22px 24px;
+    color: var(--text-body);
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+    color: var(--text-body);
+  }
+
+  strong, b {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  main a:not(.ro-cta-pill):not(.ro-brand-link),
+  .container a:not(.ro-cta-pill):not(.ro-brand-link) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  /* Soft Warm Sub-cards */
+  .tldr-card, .source-card, .callout {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius) !important;
+    padding: 20px 20px !important;
+    margin: 20px 0 !important;
+    box-shadow: none !important;
+  }
+
+  .tldr-card, .callout-warn {
+    border-left: 4px solid var(--accent) !important;
+  }
+
+  .callout:not(.callout-warn) {
+    border-left: 4px solid var(--primary) !important;
+  }
+
+  .tldr-label, .source-book, .callout-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent) !important;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .callout p:last-child, .callout ul:last-child {
+    margin-bottom: 0;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .timeline-step {
+    padding-left: 4px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 12px;
+  }
+
+  .timeline-step:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .timeline-step p:last-child {
+    margin-bottom: 0;
+  }
+
+  .timeline-step-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .timeline-step-title span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    font-size: 14px;
+    font-weight: 800;
+    margin-right: 8px;
+  }
+
+  /* Bilingual Textbook Quote Blocks */
+  .source-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .source-loc {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .quote-block {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .quote-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quote-en {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 10px 0 12px;
+    word-break: break-word;
+  }
+
+  body.hide-en .quote-en {
+    display: none;
+  }
+
+  .quote-tw {
+    font-size: 17.5px;
+    line-height: 1.78;
+    color: var(--text-body);
+  }
+
+  .quote-tw strong {
+    color: var(--accent);
+    background: rgba(244, 196, 78, 0.10);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+
+  .toggle-en-btn {
+    appearance: none;
+    background: var(--bg-tag);
+    color: var(--accent);
+    border: 1px solid rgba(244, 196, 78, 0.35);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  /* Figures & Images */
+  .figure-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .figure-img-wrap, .figure-body {
+    padding: 14px;
+  }
+
+  .figure-img-wrap {
+    background: #f8fafc;
+    cursor: zoom-in;
+  }
+
+  main img, .container img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 8px;
+    margin: 0 auto;
+    cursor: zoom-in;
+  }
+
+  .zoom-hint {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    padding: 6px 4px 0;
+  }
+
+  .figure-title {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding: 12px 16px 4px;
+  }
+
+  .figure-caption {
+    font-size: 15px;
+    line-height: 1.68;
+    color: var(--text-secondary);
+    padding: 6px 16px 14px;
+    margin-bottom: 0;
+  }
+
+  .figure-caption-en {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 0 16px 14px;
+    margin-bottom: 0;
+  }
+
+  /* Responsive Tables -> Stacked Mobile Cards (< 680px) */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 16px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-body);
+  }
+
+  th {
+    background: var(--bg-pillbar);
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  tr.highlight-tr td {
+    background: rgba(244, 196, 78, 0.12);
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  @media (max-width: 680px) {
+    table.ro-resp-table,
+    table.ro-resp-table thead,
+    table.ro-resp-table tbody,
+    table.ro-resp-table th,
+    table.ro-resp-table td,
+    table.ro-resp-table tr {
+      display: block;
+      width: 100%;
+    }
+
+    table.ro-resp-table thead {
+      display: none;
+    }
+
+    table.ro-resp-table tr {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    table.ro-resp-table td {
+      border: none;
+      border-bottom: 1px dashed var(--border-color);
+      padding: 8px 0;
+      text-align: left !important;
+    }
+
+    table.ro-resp-table td:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    table.ro-resp-table td:first-child {
+      padding-top: 0;
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    table.ro-resp-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+  }
+
+  /* Bottom-Left TOC Pill & Bottom-Right Up Button */
+  .ro-bottom-toc {
+    position: fixed;
+    left: 16px;
+    bottom: 20px;
+    z-index: 95;
+    background: var(--taupe-fab);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 9px 15px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: calc(100vw - 88px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-up-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 95;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--taupe-fab);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    text-decoration: none !important;
+  }
+
+  /* Drawers & Lightbox */
+  .ro-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ro-drawer-backdrop.open {
+    display: flex;
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-backdrop {
+      align-items: center;
+      padding: 24px;
+    }
+  }
+
+  .ro-drawer-panel {
+    width: 100%;
+    max-width: 500px;
+    max-height: 78vh;
+    overflow-y: auto;
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px 20px 0 0;
+    padding: 18px 18px 28px;
+    box-shadow: var(--shadow);
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-panel {
+      border-radius: 18px;
+    }
+  }
+
+  .ro-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .ro-drawer-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .ro-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .ro-drawer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ro-drawer-list a {
+    display: block;
+    text-decoration: none !important;
+    color: var(--text-body) !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .ro-drawer-list a.active {
+    color: #181614 !important;
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 800;
+  }
+
+  .ro-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    cursor: zoom-out;
+  }
+
+  .ro-lightbox.open {
+    display: flex;
+  }
+
+  .ro-lightbox img {
+    max-width: 100%;
+    max-height: 92vh;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  html[data-theme="light"] {
+    --bg-primary: #fbf8f4;
+    --bg-pillbar: #f0ece3;
+    --bg-card: #ffffff;
+    --bg-quote: #f6f2ea;
+    --bg-tag: #eee8dd;
+    --text-primary: #2f2820;
+    --text-body: #4a3f35;
+    --text-secondary: #5e5043;
+    --text-muted: #756656;
+    --primary: #1b9dce;
+    --primary-light: rgba(27, 157, 206, 0.12);
+    --primary-border: rgba(27, 157, 206, 0.35);
+    --accent: #b86b11;
+    --accent-light: rgba(244, 196, 78, 0.22);
+    --border-color: rgba(74, 63, 53, 0.12);
+    --border-strong: rgba(74, 63, 53, 0.22);
+    --taupe-fab: rgba(105, 90, 74, 0.94);
+    --shadow: 0 4px 18px rgba(47, 40, 32, 0.08);
+    color-scheme: light;
+  }
+
+  html[data-theme="light"] .ro-header-wrap {
+    background: linear-gradient(180deg, #fbf8f4 70%, rgba(251, 248, 244, 0));
+  }
+
+  html[data-theme="light"] .ro-menu-circle {
+    background: #67c3eb;
+    color: #1f1a15;
+  }
+
+  html[data-theme="light"] .ro-cta-pill {
+    background: #f6c84c;
+    color: #2f2820;
+  }
+
+  html[data-theme="light"] .ro-bottom-toc,
+  html[data-theme="light"] .ro-up-btn {
+    color: #ffffff;
+  }
+
+  html[data-theme="light"] .ro-drawer-list a.active {
+    background: #f6c84c;
+    border-color: #e0b034;
+    color: #2f2820 !important;
+  }
+
+  html[data-theme="light"] .quote-tw strong {
+    color: #8c4d06;
+    background: rgba(246, 200, 76, 0.28);
+  }
+
+  .ro-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .ro-theme-btn {
+    appearance: none;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    transition: transform 0.15s ease;
+  }
+
+  .ro-theme-btn:active {
+    transform: scale(0.96);
+  }
+</style>
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem('biowiki-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<!-- Reading Outpost Dark Style Shell -->
+<div class="ro-header-wrap">
+  <div class="ro-pillbar">
+    <div class="ro-brand-group">
+      <button class="ro-menu-circle" type="button" aria-label="開啟專題選單" onclick="roOpenDrawer('roSiteDrawer')">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="ro-brand-link" href="index.html">
+        <span class="ro-brand-zh">400X 的日常切片</span>
+        <span class="ro-brand-en">BIO-WIKI EVIDENCE</span>
+      </a>
+    </div>
+    <div class="ro-top-actions">
+      <button class="ro-theme-btn" id="roThemeBtn" type="button" onclick="roToggleTheme()">☀️ 亮色</button>
+      <button class="ro-cta-pill" type="button" onclick="roOpenDrawer('roSiteDrawer')">專題目錄</button>
+    </div>
+  </div>
+</div>
+
+<div class="ro-drawer-backdrop" id="roSiteDrawer" onclick="if(event.target===this)roCloseDrawer('roSiteDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📚 Bio-Wiki 全站專題</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roSiteDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list">
+      <a href="index.html">🏠 首頁：主題分類總覽</a>
+      <a href="chromatin.html">1. 染色質與染色體本質</a>
+      <a href="wheat-polygenic.html">2. 小麥多基因累加模型 (Campbell 14e)</a>
+      <a href="spermatogonia-hole.html">3. 精原細胞與生精歷程 (跨正典考證)</a>
+      <a href="griffith-transformation.html">4. Griffith 轉形作用</a>
+      <a href="promoter-tata-box.html">5. 啟動子、TATA 匣與甲基化</a>
+      <a href="sickle-cell-dominance.html">6. 鐮刀型貧血顯隱性層次分析</a>
+      <a href="endosymbiosis.html">7. 內共生假說與演化序列</a>
+      <a href="lactose-intolerance-lac-operon.html">8. 乳糖不耐症與大腸桿菌 lac 操縱組</a>
+      <a href="operon-inference-pierce.html">9. Pierce 操縱組推論過程</a>
+      <a href="gene-allele-dna-chromosome.html">10. 遺傳因子、基因、等位基因與染色體</a>
+      <a href="oogenesis-interphase-dyad.html" class="active">11. 初級卵母細胞、間期與二分體</a>
+    </div>
+  </div>
+</div>
+
+<div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📑 本篇段落導覽</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list" id="roTocList" onclick="roCloseDrawer('roTocDrawer')"></div>
+  </div>
+</div>
+
+<div class="ro-lightbox" id="roLightbox" onclick="this.classList.remove('open')">
+  <img id="roLightboxImg" alt="">
+</div>
+
+<main class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="meta-line">
+      <span class="meta-pill">動物構造與生殖生理</span>
+      <span class="meta-pill">細胞週期與減數分裂</span>
+      <span class="meta-pill-muted">高中生易讀版</span>
+      <span class="meta-pill-muted">8 部原文正典考證</span>
+      <span class="meta-pill-muted">5 張原書圖解</span>
+    </div>
+    <h1>初級卵母細胞、間期與二分體：卵原細胞何時複製並形成二分體？</h1>
+    <p class="subtitle">讀卵的形成時，最常卡在兩個問題：① 課本寫「卵原細胞完成複製後變成初級卵母細胞」，是不是代表初級卵母細胞沒有間期？② 進入減數分裂的<strong>二分體（dyad）</strong>，是拿上次有絲分裂複製的染色體直接轉過去，還是在轉成初級卵母細胞時才重新複製？用四步驟時間軸、人類 2n = 46 數字表與 8 部英文原文教科書一次講清楚。</p>
+  </div>
+
+  <!-- Section 01: Core Timeline & Definitions -->
+  <section id="sec-timeline">
+    <div class="tldr-card">
+      <div class="tldr-label">一句話核心結論與四步驟時間軸</div>
+      <p><strong>結論先記：</strong>卵原細胞完成最後一次有絲分裂後，會在「<strong>轉成初級卵母細胞、進入減數分裂 I 之前</strong>」再跑一次全新的<strong>間期 S 期（複製染色質）</strong>，進入減數分裂<strong>前期 I</strong> 才緊密盤繞成<strong>二分體（dyad）</strong>，並隨即聯會成<strong>四分體（tetrad）</strong>。各版課本只是把「換名字」的位置貼在 S 期前或 S 期後，細胞實際做的事完全一樣。</p>
+      <div class="timeline">
+        <div class="timeline-step">
+          <div class="timeline-step-title"><span>1</span> 最後一次有絲分裂結束（2n、2C）</div>
+          <p>有絲分裂後期已經把先前的姊妹染色分體拉開，平分進兩個新生卵原細胞。此時細胞內回到<strong>未複製的鬆散染色質</strong>（46 條染色體、46 條染色分體）。</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-step-title"><span>2</span> 減數分裂前間期 S 期：重新複製染色質（2n、4C）</div>
+          <p>細胞決定離開有絲分裂、改走減數分裂路線，於是進行<strong>新一輪 DNA 複製</strong>。每條變成兩條相連的姊妹染色分體（46 條染色體、92 條染色分體），但<strong>此時仍是鬆散染色質</strong>。</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-step-title"><span>3</span> 進入減數分裂前期 I（初期）：盤繞成二分體（2n、4C）</div>
+          <p>已完成複製的染色質緊密盤繞、縮短加粗，成為光學顯微鏡下可見的 46 條<strong>二分體（dyad）</strong>。</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-step-title"><span>4</span> 減數分裂前期 I（聯會～雙線期）：配對成四分體並停滯（2n、4C）</div>
+          <p>同源的兩條二分體並排<strong>聯會（synapsis）</strong>形成 23 個<strong>四分體（tetrad / 二價體 bivalent）</strong>並可發生互換；人類初級卵母細胞在此<strong>長期停滯</strong>（雙線期），直到青春期後排卵前才繼續完成減數分裂 I。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-warn">
+      <div class="callout-title">高中生最容易混淆的 2 件事</div>
+      <ul>
+        <li><strong>不是沿用「上次有絲分裂間期」的複製染色體：</strong>有絲分裂間期複製出來的兩條姊妹染色分體，在有絲分裂後期早就分開、各自進到兩個子細胞了。要進減數分裂，一定會再經歷一次全新的「減數分裂前 S 期」。</li>
+        <li><strong>「DNA 複製」跟「轉成二分體」不是同一瞬間：</strong>DNA 在<strong>間期 S 期</strong>就複製完成（此時是鬆散的染色質）；要到進入<strong>前期 I</strong> 染色質盤繞凝縮，才呈現形態上可見的<strong>二分體（dyad）</strong>，接著迅速聯會成<strong>四分體（tetrad）</strong>。</li>
+      </ul>
+    </div>
+
+    <div class="section-head">
+      <h2><span class="sec-num">01</span> 四組必懂名詞：課本定義 vs. 高中生白話理解</h2>
+    </div>
+
+    <table class="resp-table">
+      <thead>
+        <tr>
+          <th>名詞（中英對照）</th>
+          <th>課本正式定義</th>
+          <th>高中生白話理解</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="名詞（中英對照）"><strong>減數分裂前間期</strong><br>premeiotic interphase</td>
+          <td data-label="課本正式定義">第一次減數分裂前的準備階段，包含 S 期，會進行一輪染色體 DNA 複製。</td>
+          <td data-label="高中生白話理解">減數分裂雖然連續分兩次，但在「第一次分之前」仍得先在間期把 DNA 複製成兩份，不能拿未複製的 DNA 硬分。</td>
+        </tr>
+        <tr>
+          <td data-label="名詞（中英對照）"><strong>卵原細胞 vs. 初級卵母細胞</strong><br>oogonium / primary oocyte</td>
+          <td data-label="課本正式定義">卵原細胞是可持續有絲分裂增殖的雙套生殖原細胞；初級卵母細胞是由其分化、準備或已進入減數分裂 I 的雙套細胞。</td>
+          <td data-label="高中生白話理解">這是細胞的「發育身分名稱」，不是細胞週期的「時期名稱」。還在有絲分裂增殖時叫卵原細胞；準備轉進減數分裂路線後就改稱初級卵母細胞。</td>
+        </tr>
+        <tr>
+          <td data-label="名詞（中英對照）"><strong>二分體</strong><br>dyad</td>
+          <td data-label="課本正式定義">已完成複製的單一條染色體，由兩條相同姊妹染色分體在同一個中節相連構成（國教院《生命科學名詞》審定為「二分體」，無「雙分體」一詞）。</td>
+          <td data-label="高中生白話理解">複製完的染色質進到分裂前期盤繞變短後，呈現 X 形、兩條姊妹染色分體連在同一個中節上的構造就是 1 條二分體；染色體數看中節，所以 1 條二分體仍算 1 條染色體。</td>
+        </tr>
+        <tr>
+          <td data-label="名詞（中英對照）"><strong>四分體（二價體）</strong><br>tetrad / bivalent</td>
+          <td data-label="課本正式定義">減數分裂前期 I 時，兩條同源染色體（各自為一條二分體）聯會配對形成的構造，共含四條染色分體。</td>
+          <td data-label="高中生白話理解">2 條同源的二分體靠在一起配對，合起來總共 4 條染色分體，就叫四分體。</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Section 02: Textbook Figures -->
+  <section id="sec-figures">
+    <div class="section-head">
+      <h2><span class="sec-num">02</span> 教科書原圖考證（點擊可全螢幕放大）</h2>
+    </div>
+
+    <div class="figure-grid">
+      <article class="figure-card">
+        <div class="figure-img-wrap" onclick="openLightbox('images/Vander16e_Fig17-19_oogenesis_summary.png', this.querySelector('img').alt)">
+          <img src="images/Vander16e_Fig17-19_oogenesis_summary.png" alt="Vander 16e Figure 17.19 Summary of oogenesis" loading="lazy">
+          <span class="zoom-hint">點擊放大</span>
+        </div>
+        <div class="figure-body">
+          <div class="figure-title">圖證 1｜Vander 16e 圖 17.19：卵子生成時間軸與染色體／染色分體數一覽</div>
+          <p class="figure-caption">一次對齊人生時間軸（胎兒期 → 出生 → 兒童期 → 青春期 → 成年）與右方數值：卵原細胞（Oogonia）經有絲分裂與分化成初級卵母細胞（Primary oocyte），在減數分裂 I 開始時每顆細胞有 <strong>46 條染色體、每條含 2 條染色分體</strong>；減數分裂 I 後次級卵母細胞變為 <strong>23 條染色體、每條仍含 2 條染色分體（二分體）</strong>；受精完成減數分裂 II 後，卵（Ovum）才是 <strong>23 條染色體、每條 1 條染色分體</strong>。</p>
+          <p class="figure-caption-en">Figure 17.19 Summary of oogenesis. Compare with the male pattern in Figure 17.10. The secondary oocyte is ovulated and does not complete its meiotic division unless it is penetrated (fertilized) by a sperm (Vander's Human Physiology, 16th ed., Ch. 17).</p>
+        </div>
+      </article>
+
+      <article class="figure-card">
+        <div class="figure-img-wrap" onclick="openLightbox('images/Campbell13e_Fig46-11_oogenesis_comparison.jpg', this.querySelector('img').alt)">
+          <img src="images/Campbell13e_Fig46-11_oogenesis_comparison.jpg" alt="Campbell 13e Figure 46.11 Oogenesis in humans" loading="lazy">
+          <span class="zoom-hint">點擊放大</span>
+        </div>
+        <div class="figure-body">
+          <div class="figure-title">圖證 2｜Campbell 13e 圖 46.11：人類卵子發生與卵巢濾泡對照</div>
+          <p class="figure-caption">清楚呈現胎兒期（IN EMBRYO）原始生殖細胞經有絲分裂產生 2n 卵原細胞，接著形成 2n 初級卵母細胞並<strong>停滯於減數分裂 I 前期（arrested in prophase of meiosis I）</strong>，女嬰出生時即以此狀態存在於原始濾泡中，並非停在間期。</p>
+          <p class="figure-caption-en">Figure 46.11 Exploring Human Gametogenesis: Oogenesis. Oogonia divide by mitosis to form cells that begin meiosis, but stop the process at prophase I before birth (Campbell Biology, 13th ed., Ch. 46).</p>
+        </div>
+      </article>
+
+      <article class="figure-card">
+        <div class="figure-img-wrap" onclick="openLightbox('images/BrookerGenetics8e_Fig2-6_dyad_monad.png', this.querySelector('img').alt)">
+          <img src="images/BrookerGenetics8e_Fig2-6_dyad_monad.png" alt="Brooker Genetics 8e Figure 2.6 Chromosomes following DNA replication: dyad and monad" loading="lazy">
+          <span class="zoom-hint">點擊放大</span>
+        </div>
+        <div class="figure-body">
+          <div class="figure-title">圖證 3｜Brooker 遺傳學 8e 圖 2.6：什麼是二分體（dyad）與單分體（monad）？</div>
+          <p class="figure-caption">左為人類核型與高倍放大的單一條已複製染色體顯微照片，右為示意圖：複製後的兩條姊妹染色分體在中節（Centromere）與著絲點蛋白（Kinetochore）相連，合稱 1 個<strong>二分體（a dyad）</strong>；其中單獨一條染色分體（或未複製染色體）稱為<strong>單分體（a monad）</strong>。</p>
+          <p class="figure-caption-en">Figure 2.6 Chromosomes following DNA replication. (a) Photomicrograph of a human karyotype and a chromosome in the form called a dyad, or pair of sister chromatids. (b) Schematic drawing showing two chromatids (each a monad) joined at the centromere (Brooker, Genetics: Analysis &amp; Principles, 8th ed., Ch. 2).</p>
+        </div>
+      </article>
+
+      <article class="figure-card">
+        <div class="figure-img-wrap" onclick="openLightbox('images/Campbell13e_Fig13-7_meiosis_overview.jpg', this.querySelector('img').alt)">
+          <img src="images/Campbell13e_Fig13-7_meiosis_overview.jpg" alt="Campbell 13e Figure 13.7 Overview of meiosis" loading="lazy">
+          <span class="zoom-hint">點擊放大</span>
+        </div>
+        <div class="figure-body">
+          <div class="figure-title">圖證 4｜Campbell 13e 圖 13.7：減數分裂概覽——先間期複製，再連續兩次分裂</div>
+          <p class="figure-caption">一眼看懂「只複製一次、分兩次」：<strong>間期（Interphase）</strong>先完成染色體複製；<strong>減數分裂 I</strong> 分離同源染色體，產生的單套細胞仍保有已複製染色體（二分體）；<strong>減數分裂 II</strong> 不再複製，直接分離姊妹染色分體成為未複製染色體（單分體）。</p>
+          <p class="figure-caption-en">Figure 13.7 Overview of meiosis: how meiosis reduces chromosome number. After the chromosomes duplicate in interphase, the diploid cell divides twice, yielding four haploid daughter cells (Campbell Biology, 13th ed., Ch. 13).</p>
+        </div>
+      </article>
+
+      <article class="figure-card">
+        <div class="figure-img-wrap" onclick="openLightbox('images/Hickman19e_Fig5-2_meiosis_synapsis.jpg', this.querySelector('img').alt)">
+          <img src="images/Hickman19e_Fig5-2_meiosis_synapsis.jpg" alt="Hickman 19e Figure 5.2 Meiosis and synapsis" loading="lazy">
+          <span class="zoom-hint">點擊放大</span>
+        </div>
+        <div class="figure-body">
+          <div class="figure-title">圖證 5｜Hickman 動物學 19e 圖 5.2：從早前期 I 盤繞成二分體，到聯會成四分體與互換</div>
+          <p class="figure-caption">(A) 清楚呈現早前期 I（Early prophase I）已複製的細長染色質逐步凝縮成二分體並配對成四分體，後期 I 拉開同源二分體、後期 II 拉開姊妹染色分體；(B) 放大同源染色體聯會（SYNAPSIS）時兩條二分體並排、共四條染色分體形成四分體與互換區。</p>
+          <p class="figure-caption-en">Figure 5.2 A, Meiosis in a sex cell with two pairs of chromosomes. B, Synapsis occurs in prophase I, bringing two homologous dyads together to form a bivalent / tetrad where crossing over occurs (Hickman, Integrated Principles of Zoology, 19th ed., Ch. 5).</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Section 03: Why Textbooks Differ in Naming Cutpoints -->
+  <section id="sec-naming">
+    <div class="section-head">
+      <h2><span class="sec-num">03</span> 為什麼各版課本寫法不同？改名位置不同，細胞做的事完全一樣</h2>
+    </div>
+
+    <p>同學翻不同版本講義時，常會看到兩種看似矛盾的句子：一邊寫「卵原細胞先完成染色質複製，才變成初級卵母細胞」，另一邊寫「卵原細胞先分化成初級卵母細胞，初級卵母細胞再複製 DNA」。其實兩邊說的是<strong>同一套細胞事件</strong>，差別只在於<strong>作者把「改名叫初級卵母細胞」的標籤貼在時間軸的哪一點</strong>：</p>
+
+    <table class="resp-table">
+      <thead>
+        <tr>
+          <th>改名切點分類</th>
+          <th>代表教科書與高中版本</th>
+          <th>「初級卵母細胞」貼在哪裡？</th>
+          <th>課本文字讀起來的樣子</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="改名切點分類"><strong>切在 S 期前</strong></td>
+          <td data-label="代表教科書與高中版本">Vander 16e、高中《細胞的構造與功能》跨版本整合（三民・全華脈絡）</td>
+          <td data-label="「初級卵母細胞」貼在哪裡？">第 1 步 → 第 2 步之間<br>（先分化改名，再跑 S 期）</td>
+          <td data-label="課本文字讀起來的樣子">卵原細胞先發育／分化為初級卵母細胞，<strong>初級卵母細胞再複製 DNA</strong>、開始減數分裂 I。</td>
+        </tr>
+        <tr>
+          <td data-label="改名切點分類"><strong>切在 S 期後</strong></td>
+          <td data-label="代表教科書與高中版本">臺灣高中多數版本（南一、泰宇、翰林選修、龍騰、三民圖示）、Hill 4e、Brooker 4e 圖表</td>
+          <td data-label="「初級卵母細胞」貼在哪裡？">第 2 步 → 第 3 步之間<br>（跑完 S 期才改名）</td>
+          <td data-label="課本文字讀起來的樣子"><strong>卵原細胞完成染色質／DNA 複製</strong>後，形成初級卵母細胞，隨即進入前期 I。</td>
+        </tr>
+        <tr>
+          <td data-label="改名切點分類"><strong>切在進入前期 I</strong></td>
+          <td data-label="代表教科書與高中版本">Campbell 13e、Pierce 7e、Junqueira 17e、Fox 16e、Sherwood</td>
+          <td data-label="「初級卵母細胞」貼在哪裡？">第 3 步<br>（進入前期 I 時改名）</td>
+          <td data-label="課本文字讀起來的樣子">卵原細胞進入減數分裂前期 I 時稱為初級卵母細胞（此時細胞內已含 2n 條複製好的染色體）。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <div class="callout-title">高中生解題心法：名稱切點 ≠ 跳過間期</div>
+      <p>看到流程圖畫成「卵原細胞 →（染色質複製）→ 初級卵母細胞」，<strong>絕不可以推論「初級卵母細胞沒有間期」</strong>！那只是圖表選擇在 S 期結束後才幫這顆細胞換名字；從最後一次有絲分裂結束到進入減數分裂前期 I，它扎扎實實有經歷過減數分裂前間期與 S 期。</p>
+    </div>
+  </section>
+
+  <!-- Section 04: Chromosome / Chromatid / DNA Count Table -->
+  <section id="sec-numbers">
+    <div class="section-head">
+      <h2><span class="sec-num">04</span> 以人類（2n = 46）追蹤：染色體數、染色分體數與 DNA 量</h2>
+    </div>
+
+    <p>不管題目附哪一版課本的流程圖，只要對照下面這張數字表，就能立刻判斷套數、條數與染色體形態：</p>
+
+    <table class="resp-table">
+      <thead>
+        <tr>
+          <th>階段</th>
+          <th>套數</th>
+          <th>染色體數<br>（算中節）</th>
+          <th>染色分體數</th>
+          <th>DNA 量</th>
+          <th>染色體形態</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="階段">S 期前的卵原細胞（或剛分化尚未複製的初級卵母細胞）</td>
+          <td data-label="套數">2n</td>
+          <td data-label="染色體數（算中節）">46 條</td>
+          <td data-label="染色分體數">46 條</td>
+          <td data-label="DNA 量">2C</td>
+          <td data-label="染色體形態">未複製染色質（單分體）</td>
+        </tr>
+        <tr class="highlight-tr">
+          <td data-label="階段">S 期完成、進入前期 I 的初級卵母細胞</td>
+          <td data-label="套數">2n</td>
+          <td data-label="染色體數（算中節）">46 條</td>
+          <td data-label="染色分體數">92 條</td>
+          <td data-label="DNA 量">4C</td>
+          <td data-label="染色體形態">盤繞成 46 條<strong>二分體</strong> → 聯會為 23 個<strong>四分體</strong></td>
+        </tr>
+        <tr>
+          <td data-label="階段">完成減數分裂 I 的次級卵母細胞（與第一極體）</td>
+          <td data-label="套數">n</td>
+          <td data-label="染色體數（算中節）">23 條</td>
+          <td data-label="染色分體數">46 條</td>
+          <td data-label="DNA 量">2C</td>
+          <td data-label="染色體形態">同源染色體已分離，但姊妹染色分體未分開，仍為 23 條<strong>二分體</strong></td>
+        </tr>
+        <tr>
+          <td data-label="階段">完成減數分裂 II 的卵細胞（與第二極體）</td>
+          <td data-label="套數">n</td>
+          <td data-label="染色體數（算中節）">23 條</td>
+          <td data-label="染色分體數">23 條</td>
+          <td data-label="DNA 量">1C</td>
+          <td data-label="染色體形態">中節分裂，姊妹染色分體分開成 23 條獨立染色體（單分體）</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <div class="callout-title">再補兩個段考最愛考的關鍵觀念</div>
+      <ul>
+        <li><strong>減數分裂 I 與 II 之間「不再複製 DNA」：</strong>次級卵母細胞已經拿著 23 條複製好的<strong>二分體</strong>，減數分裂 II 只要把姊妹染色分體拉開就好（即使部分大學教科書稱中間短暫過渡期為間裂期或間期 II，裡面也沒有 S 期）。</li>
+        <li><strong>初級卵母細胞停留數十年的是「前期 I」，不是「間期」：</strong>人類女嬰出生時，初級卵母細胞早已過完 S 期、並已進入減數分裂前期 I（雙線期，可停留 12～40 年直到青春期後排卵前才繼續）。這段休止期屬於<strong>前期 I 停滯</strong>，不是退回間期。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Section 05: Original Literature Sources -->
+  <section id="sec-sources">
+    <div class="section-head">
+      <h2><span class="sec-num">05</span> 原始文獻中英對照考證（8 部原文正典＋高中跨版本）</h2>
+      <button class="toggle-en-btn" type="button" id="toggleEnBtn" onclick="toggleEnglish()">精簡：隱藏英文原文</button>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">1. 《Vander's Human Physiology》16e</span>
+        <span class="source-loc">Ch. 17 Reproduction（17.1 ＆ 17.13 節）</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"The events preceding the first meiotic division are identical to those preceding a mitotic division. During the interphase period, which precedes a mitotic division, chromosomal DNA is replicated. Therefore, after DNA replication, an interphase cell has 46 chromosomes, but each chromosome consists of two identical strands of DNA, called sister chromatids, which are joined together by a centromere."</div>
+        <div class="quote-tw">「<strong>第一次減數分裂前發生的事件，與有絲分裂前相同。細胞在有絲分裂前的間期會複製染色體 DNA</strong>；因此，DNA 複製後的間期細胞仍有 46 條染色體，但每條染色體由兩條完全相同的 DNA 鏈構成，稱為姊妹染色分體，兩者以中節相連。」（Ch. 17.1）</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"In the fetal ovary, all the oogonia develop into primary oocytes (analogous to primary spermatocytes), which then begin a first meiotic division by replicating their DNA. They do not, however, complete the division in the fetus. Accordingly, all the eggs present in the ovary of the newborn female are primary oocytes containing 46 chromosomes, each with two sister chromatids. The cells are said to be in a state of meiotic arrest."</div>
+        <div class="quote-tw">「胎兒卵巢中的所有卵原細胞都會<strong>發育成初級卵母細胞（相當於初級精母細胞），並先複製 DNA、開始第一次減數分裂</strong>；但它們不會在胎兒期完成這次分裂。因此，新生女嬰卵巢內的所有卵都是初級卵母細胞，各含 46 條染色體，每條染色體有兩條姊妹染色分體；這些細胞處於減數分裂停滯狀態。」（Ch. 17.13｜命名切點在 S 期前）</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">2. 《Hill's Animal Physiology》4e</span>
+        <span class="source-loc">Ch. 17 Reproduction</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"In the fetal ovaries, diploid germ cells called oogonia divide repeatedly by mitosis to produce many oogonia. Each of these oogonia undergoes the very first stage of meiosis—during which its chromosomes replicate (see Appendix H)—during fetal life or shortly afterward. The cells are then called primary oocytes. Thereafter the cells remain as primary oocytes, without completing the first meiotic division, until they are ovulated following a female’s attainment of reproductive maturity at puberty."</div>
+        <div class="quote-tw">「胎兒卵巢中的二倍體生殖細胞稱為卵原細胞（oogonia），會反覆進行有絲分裂，產生許多卵原細胞。<strong>每個卵原細胞在胎兒期或出生後不久進入減數分裂的最初階段，此時染色體會複製；細胞之後稱為初級卵母細胞。</strong>」（Ch. 17｜命名切點在染色體複製後）</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">3. 《Gilbert Developmental Biology》13e</span>
+        <span class="source-loc">Ch. 6 Sex Determination and Gametogenesis（6.5 節）</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"This is accomplished by the occurrence of a single round of DNA replication followed by two successive chromosomal divisions. After the germ cell’s final mitotic division, a period of DNA synthesis occurs, so that the cell initiating meiosis doubles the amount of DNA in its nucleus. In this state, each chromosome consists of two sister chromatids attached at a common kinetochore."</div>
+        <div class="quote-tw">「這個過程先進行一輪 DNA 複製，接著連續進行兩次染色體分裂。<strong>生殖細胞完成最後一次有絲分裂後，會進行一段 DNA 合成，使開始減數分裂的細胞把細胞核內的 DNA 量加倍。</strong>在這種狀態下，每條染色體由兩條相連的姊妹染色分體構成。」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">"Most oogonia die soon after this first stage, but the surviving cells, under the influence of retinoic acid and gonadotropins, become primary oocytes and initiate the first meiotic division... primary oocytes remain in a prolonged diplotene stage of first meiotic prophase, sometimes referred to as the dictyate resting stage, that can last from 12 to 40 years."</div>
+        <div class="quote-tw">「存活的細胞則在視黃酸與促性腺激素的影響下成為初級卵母細胞，並啟動第一次減數分裂……<strong>初級卵母細胞會長期停留在第一次減數分裂前期的雙線期</strong>，有時稱為網絲期休止階段；這段時間可能長達 12 至 40 年。」</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">4. 《Campbell Biology》13e ＆ 《Essential Cell Biology》6e (Alberts) ＆ 《Becker's World of the Cell》10e</span>
+        <span class="source-loc">Campbell Ch. 13 · Alberts Ch. 19 · Becker Ch. 25</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">[Campbell 13e Ch. 13] "Meiosis, like mitosis, is preceded by interphase, which includes S phase (the duplication of chromosomes). However, this is followed by not one but two consecutive cell divisions, called meiosis I and meiosis II."</div>
+        <div class="quote-tw">[Campbell 13e] 「<strong>與有絲分裂一樣，減數分裂之前有間期（interphase），其中包括 S 期（染色體複製）。</strong>然而，接下來發生的不是一次，而是連續兩次細胞分裂，稱為減數分裂 I 和減數分裂 II。」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">[Alberts ECB6 Ch. 19] "Although meiosis ultimately halves this diploid chromosome complement—producing haploid gametes that carry only a single set of chromosomes—it, too, begins with a round of chromosome duplication. The subsequent reduction in chromosome number occurs because this single round of duplication is followed by two successive rounds of nuclear division, without further DNA replication."</div>
+        <div class="quote-tw">[Alberts ECB6] 「減數分裂最終雖會把二倍體染色體組減半，產生只帶一套染色體的單倍體配子，但<strong>它同樣從一輪染色體複製開始</strong>。之後染色體數之所以減半，是因為這一輪複製後接續兩輪核分裂，期間不再複製 DNA。」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">[Becker 10e Ch. 25, Fig. 25-3] "(a) During prophase I, the chromosomes (duplicated during the previous S phase) condense and the two centrosomes migrate to opposite poles of the cell. Each chromosome (four in this example) consists of two sister chromatids. Homologous chromosomes pair to form bivalents."</div>
+        <div class="quote-tw">[Becker 10e] 「（a）<strong>前期 I 時，染色體（已在先前的 S 期複製）凝縮</strong>，兩個中心體移向細胞的相對兩極。每條染色體都由兩條姊妹染色分體組成。同源染色體配對形成二價體。」</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">5. 《Integrated Principles of Zoology》19e (Hickman) ＆ 《Genetics: Analysis &amp; Principles》8e (Brooker)</span>
+        <span class="source-loc">Hickman Ch. 5 · Brooker Genetics Ch. 2（二分體與四分體定義）</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">[Hickman 19e Ch. 5] "Immediately following a mitotic cell division, each chromosome contains a single long double-stranded DNA molecule bound to chromosomal proteins, which is called a chromatid. DNA and its associated chromosomal material are replicated during an 'interphase' of the cell cycle between cell divisions... A replicated chromosome entering meiosis is often called a dyad because it contains a pair of identical chromatids."</div>
+        <div class="quote-tw">[Hickman 19e] 「<strong>在一次有絲分裂剛結束後，每條染色體含有一條長的雙股 DNA 分子，稱為一條染色分體</strong>；DNA 及其相關染色體物質在間期複製……<strong>進入減數分裂的已複製染色體，常被稱為二分體（dyad）</strong>，因為它含有一對相同的染色分體。」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">[Hickman 19e Ch. 5] "The two members of each pair of homologous chromosomes make side-by-side contact (synapsis) to form a bivalent... Each bivalent comprises two pairs of chromatids (each pair is a dyad, sister chromatids held together at their centromere), or four future chromosomes, and is thus called a tetrad."</div>
+        <div class="quote-tw">[Hickman 19e] 「每一對同源染色體並排接觸（<strong>聯會</strong>）形成一個<strong>二價體（bivalent）</strong>……每個二價體包含兩對染色分體（每一對是一個二分體，即在中節相連的姊妹染色分體），亦即四條未來的染色體，因此稱為<strong>四分體（tetrad）</strong>。」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-en">[Brooker Genetics 8e Ch. 2] "Once past the restriction point, the cell then advances to the S phase, during which the chromosomes are replicated. After replication, the two copies of a chromosome are called chromatids. They are joined to each other at a region of DNA called the centromere to form a unit known as a pair of sister chromatids, or a dyad (Figure 2.6). A single chromatid within a dyad is called a monad. An unreplicated chromosome can also be called a monad."</div>
+        <div class="quote-tw">[Brooker Genetics 8e] 「進入 S 期完成複製後，一條染色體的兩份複本稱為染色分體。兩者在中節相連，形成<strong>一對姊妹染色分體或二分體（dyad）</strong>。二分體中的單一染色分體，以及尚未複製的染色體，都稱為<strong>單分體（monad）</strong>。」</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">6. 臺灣高中 108 課綱跨版本整合（三民・全華・南一・泰宇・翰林・龍騰）</span>
+        <span class="source-loc">高中必修《細胞的構造與功能》＆ 高中選修《生殖系統》</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-tw"><strong>【高中必修｜二分體 → 聯會成四分體】</strong>「<strong>減數分裂 I 開始時，已完成複製的染色質緊密盤繞成二分體；兩條同源的二分體並排配對，這種現象稱為聯會。聯會後形成的構造含有四條染色分體，稱為四分體。</strong>」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-tw"><strong>【兩種高中教材切點並存】</strong><br>• 必修《細胞的構造與功能》跨版本整合（偏三民・全華脈絡）：「女性在胚胎期，卵巢中的卵原細胞已分化為初級卵母細胞；<strong>初級卵母細胞完成 DNA 複製並進入減數分裂 I 後，停留在前期</strong>。」<br>• 選修《生殖系統》跨版本整合（偏南一・泰宇・翰林・龍騰寫法）：「雌性胚胎發育時，卵巢中的<strong>卵原細胞（2n）即完成染色質複製，形成初級卵母細胞</strong>並停滯在減數分裂第一階段的前期。」</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 06: Teaching & Exam Tips -->
+  <section id="sec-exam">
+    <div class="section-head">
+      <h2><span class="sec-num">06</span> 高中段考陷阱與教甄實戰考點</h2>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">教甄真題連結：115 陽交附中 ＆ 115 台中二中</div>
+      <ul>
+        <li><strong>115 學年陽交附中簡答第 1 題：</strong>直接考 <code>dyad</code>（二分體）與 <code>tetrad</code>（四分體）的中文翻譯與高中教學差異分析。重點在於：<strong>二分體</strong>＝單一條已複製染色體（1 個中節、2 條姊妹染色分體，有絲分裂與減數分裂 I／II 都會出現）；<strong>四分體</strong>＝兩條同源二分體聯會（2 個中節、4 條染色分體，僅出現於減數分裂前期 I～中期 I）。</li>
+        <li><strong>115 學年台中二中名詞解釋第 7 題：</strong>考 <code>Synapsis</code>（聯會），解題必須點明是「<strong>間期複製完成的一對同源染色體</strong>」於減數分裂前期 I 緊密配對形成四分體。</li>
+      </ul>
+    </div>
+
+    <div class="callout callout-warn">
+      <div class="callout-title">四大段考／教甄高頻陷阱與臺灣審定術語提醒</div>
+      <ul>
+        <li><strong>陷阱 1（看圖誤判無間期）：</strong>看到流程圖畫「卵原細胞複製染色質形成初級卵母細胞」，就誤選「初級卵母細胞不經間期」→ <strong>錯</strong>，名稱切點不等於跳過 S 期。</li>
+        <li><strong>陷阱 2（複製與凝縮混為一談）：</strong>以為 S 期 DNA 一複製完就立刻形成四分體 → <strong>錯</strong>，S 期仍是鬆散染色質；進前期 I 才盤繞成二分體，並隨即聯會成四分體。</li>
+        <li><strong>陷阱 3（停滯時期記錯）：</strong>以為初級卵母細胞在卵巢內停留十幾年是停在間期 → <strong>錯</strong>，停在<strong>減數分裂前期 I</strong>（雙線期）。</li>
+        <li><strong>陷阱 4（第二次複製迷思）：</strong>以為減數分裂 I 與 II 之間還有一次 DNA 複製 → <strong>錯</strong>，整個減數分裂只複製一次 DNA；次級卵母細胞內每條染色體仍是二分體，減數分裂 II 直接分離姊妹染色分體。</li>
+        <li><strong>臺灣審定名詞提醒：</strong>一律使用「<strong>染色分體</strong>」（切勿誤用中國用語）與「<strong>二分體</strong>」（國教院《生命科學名詞》審定 <code>dyad</code> 為二分體，全知識庫與名詞表皆無「雙分體」一詞）。</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    Bio-Wiki 概念考證庫 · 繁體中文與審定名詞遵循臺灣教育部規範 · 原文書與圖片引自 Ze-Agent Vault 正式譯本
+  </footer>
+
+</main>
+
+<!-- Reading Outpost Bottom Bar & Script -->
+<button class="ro-bottom-toc" type="button" onclick="roOpenDrawer('roTocDrawer')">📑 本篇段落導覽</button>
+<a class="ro-up-btn" href="#top" aria-label="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<script>
+  function roToggleTheme() {
+    var root = document.documentElement;
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('biowiki-theme', next); } catch (e) {}
+    roUpdateThemeBtn();
+  }
+  function roUpdateThemeBtn() {
+    var btn = document.getElementById('roThemeBtn');
+    if (!btn) return;
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.innerHTML = isLight ? '🌙 深色' : '☀️ 亮色';
+    btn.setAttribute('aria-label', isLight ? '切換為深色閱讀模式' : '切換為亮色閱讀模式');
+  }
+  roUpdateThemeBtn();
+  function roOpenDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('open');
+  }
+  function roCloseDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  }
+  function openLightbox(src, alt) {
+    var lb = document.getElementById('roLightbox');
+    var img = document.getElementById('roLightboxImg');
+    if (lb && img) {
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.add('open');
+    }
+  }
+  function toggleEnglish() {
+    document.body.classList.toggle('hide-en');
+    var btn = document.getElementById('toggleEnBtn');
+    if (btn) {
+      btn.textContent = document.body.classList.contains('hide-en')
+        ? '完整：顯示英文原文'
+        : '精簡：隱藏英文原文';
+    }
+  }
+  (function initReadingOutpostShell() {
+    var tocList = document.getElementById('roTocList');
+    var headings = document.querySelectorAll('h2, .card-title');
+    if (tocList && headings.length) {
+      headings.forEach(function(h, idx) {
+        if (!h.id) h.id = 'ro-sec-' + (idx + 1);
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent.trim();
+        tocList.appendChild(a);
+      });
+    }
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th, tr:first-child th')).map(function(th) {
+        return th.innerText.trim().replace(/[\r\n\t ]+/g, ' ');
+      });
+      if (!headers.length) return;
+      table.classList.add('ro-resp-table');
+      table.querySelectorAll('tr').forEach(function(tr) {
+        if (tr.querySelector('th')) return;
+        Array.from(tr.children).forEach(function(td, idx) {
+          if (td.tagName === 'TD' && !td.getAttribute('data-label') && headers[idx]) {
+            td.setAttribute('data-label', headers[idx]);
+          }
+        });
+      });
+    });
+    document.querySelectorAll('main img, .container img, .wrap img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        openLightbox(img.src, img.alt);
+      });
+    });
+  })();
+</script>
+</body>
+</html>
