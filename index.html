@@ -617,7 +617,7 @@
       <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roSiteDrawer')">✕</button>
     </div>
     <div class="ro-drawer-list">
-      <a href="index.html" class="active">🏠 首頁：主題分類總覽</a>
+            <a href="index.html" class="active">🏠 首頁：主題分類總覽</a>
       <a href="chromatin.html">1. 染色質與染色體本質</a>
       <a href="wheat-polygenic.html">2. 小麥多基因累加模型 (Campbell 14e)</a>
       <a href="spermatogonia-hole.html">3. 精原細胞與生精歷程 (跨正典考證)</a>
@@ -629,6 +629,8 @@
       <a href="operon-inference-pierce.html">9. Pierce 操縱組推論過程</a>
       <a href="gene-allele-dna-chromosome.html">10. 遺傳因子、基因、等位基因與染色體</a>
       <a href="oogenesis-interphase-dyad.html">11. 初級卵母細胞、間期與二分體</a>
+      <a href="xy-synapsis-crossing-over.html">12. 人類 XY 染色體聯會、互換與四分體判定</a>
+      <a href="chromosome-breakage-cri-du-chat.html">13. 染色體斷裂成因與貓叫症（5p 缺失）</a>
     </div>
   </div>
 </div>
@@ -642,7 +644,7 @@
     </div>
     <div class="ro-drawer-list" onclick="roCloseDrawer('roTocDrawer')">
       <a href="#cat-molbio">🧬 分子生物與基因表現（5 篇）</a>
-      <a href="#cat-genetics">🌱 遺傳學與顯隱性判準（2 篇）</a>
+      <a href="#cat-genetics">🌱 遺傳學與顯隱性判準（4 篇）</a>
       <a href="#cat-evolution">🦠 細胞演化與生物多樣性（1 篇）</a>
       <a href="#cat-physiology">🫀 動物構造與生殖生理（2 篇）</a>
     </div>
@@ -665,9 +667,9 @@
         <input class="search-input" id="searchInput" type="search" placeholder="搜尋概念、關鍵字或教科書（例：內共生、Campbell、RecA、鐮刀）" oninput="filterPosts()">
       </div>
       <div class="filter-pills">
-        <button class="filter-pill active" type="button" data-cat="all" onclick="selectCat('all', this)">全部專題 (10)</button>
+        <button class="filter-pill active" type="button" data-cat="all" onclick="selectCat('all', this)">全部專題 (12)</button>
         <button class="filter-pill" type="button" data-cat="molbio" onclick="selectCat('molbio', this)">分子生物與轉錄 (5)</button>
-        <button class="filter-pill" type="button" data-cat="genetics" onclick="selectCat('genetics', this)">遺傳與數量性狀 (2)</button>
+        <button class="filter-pill" type="button" data-cat="genetics" onclick="selectCat('genetics', this)">遺傳與數量性狀 (4)</button>
         <button class="filter-pill" type="button" data-cat="evolution" onclick="selectCat('evolution', this)">細胞演化與內共生 (1)</button>
         <button class="filter-pill" type="button" data-cat="physiology" onclick="selectCat('physiology', this)">動物生理與生殖 (2)</button>
       </div>
@@ -764,11 +766,41 @@
   <section class="category-section" id="cat-genetics" data-cat-section="genetics">
     <div class="category-header">
       <h2 class="category-title">遺傳學與顯隱性判準</h2>
-      <p class="category-subtitle">個體／細胞／分子三層次顯隱性、多基因累加模型與二項式分佈</p>
+      <p class="category-subtitle">性染色體聯會互換、染色體斷裂與缺失、顯隱性層次與多基因累加模型</p>
       <div class="category-divider"></div>
     </div>
 
     <div class="post-list">
+      <a class="post-card" href="xy-synapsis-crossing-over.html" data-keywords="XY染色體 性染色體 聯會 互換 易位 偽體染色體區 PAR PAR1 PAR2 MSY SRY XX男性 XY女性 四分體 二分體 二聯染色體 二價體 bivalent tetrad 23個四分體 高中易讀版 Goldberg Klug Pierce Brooker Campbell Solomon Raven Kandel">
+        <div class="post-thumb">
+          <span class="post-thumb-icon">🧬</span>
+          <span class="post-thumb-tag">高中易讀版</span>
+        </div>
+        <div class="post-content">
+          <h3 class="post-title">《人類 XY 染色體聯會、互換與四分體判定》PAR 局部配對、<em>SRY</em> 易位與第 23 個四分體</h3>
+          <p class="post-excerpt">專為高中生寫清楚三大迷思：X、Y 靠兩端 PAR1／PAR2 局部聯會與互換（95% MSY 不重組）；<em>SRY</em> 移到 X 上結果歸易位；複製後 XY 二分體聯會仍算人類 23 個四分體之一。</p>
+          <div class="post-meta">
+            <span class="post-badge accent">8 部正典 · 4 張原圖</span>
+            <span class="post-badge">Goldberg 7e · Klug · Campbell 13e · Kandel 6e</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="chromosome-breakage-cri-du-chat.html" data-keywords="染色體斷裂 DNA雙股斷裂 DSB 貓叫症 貓哭症 5p缺失 活性含氧物 ROS 游離輻射 複製叉崩潰 端粒 Spo11 RAG 伯基特淋巴瘤 脆弱X 紅綠色盲 缺失 重複 倒位 易位 高中易讀版 Brooker Alberts Pierce Goldberg Solomon Klug">
+        <div class="post-thumb">
+          <span class="post-thumb-icon">✂️</span>
+          <span class="post-thumb-tag">高中易讀版</span>
+        </div>
+        <div class="post-content">
+          <h3 class="post-title">《染色體斷裂成因與貓叫症（5p 缺失）》為何每天自然斷 10–100 次？與專一酵素有關嗎？</h3>
+          <p class="post-excerpt">用高中生秒懂的「意外斷裂 vs. 細胞主動切斷」拆解 DNA 雙股斷裂成因，並以貓叫症斷點因人而異反證它與專一酵素定點分解無關，完整對照紅綠色盲、脆弱 X 與伯基特氏淋巴瘤。</p>
+          <div class="post-meta">
+            <span class="post-badge accent">7 部正典 · 6 張原圖</span>
+            <span class="post-badge">Brooker 8e · Alberts ECB6 · Goldberg 7e · Solomon 11e</span>
+          </div>
+        </div>
+      </a>
+
       <a class="post-card" href="sickle-cell-dominance.html" data-keywords="鐮刀型貧血 sickle cell 不完全顯性 中間型遺傳 等顯性 共顯性 codominance incomplete dominance 血紅素 HbA HbS Campbell Goldberg Griffiths Brooker">
         <div class="post-thumb">
           <span class="post-thumb-icon">🩸</span>

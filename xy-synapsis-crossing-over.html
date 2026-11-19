@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>人類 XY 染色體聯會、互換與四分體判定｜Bio-Wiki</title>
+<style>
+  :root {
+    --bg-primary: #181614;
+    --bg-pillbar: #24201c;
+    --bg-card: #211e1a;
+    --bg-quote: #26221e;
+    --bg-tag: #2d2823;
+    --text-primary: #f6f1ea;
+    --text-body: #ddd5ca;
+    --text-secondary: #bfb5a8;
+    --text-muted: #9a8e80;
+    --primary: #5bc0eb;
+    --primary-light: rgba(91, 192, 235, 0.12);
+    --primary-border: rgba(91, 192, 235, 0.32);
+    --accent: #f4c44e;
+    --accent-light: rgba(244, 196, 78, 0.12);
+    --border-color: rgba(246, 241, 234, 0.09);
+    --border-strong: rgba(246, 241, 234, 0.16);
+    --taupe-fab: rgba(104, 91, 78, 0.94);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+  }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+    font-size: 18px;
+    line-height: 1.78;
+    padding: 0 0 96px 0;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Reading Outpost Signature Top Pill Header */
+  .ro-header-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-primary) 70%, rgba(24, 22, 20, 0));
+  }
+
+  .ro-pillbar {
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .ro-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .ro-menu-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    border: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .ro-menu-circle span {
+    display: block;
+    width: 16px;
+    height: 2.2px;
+    background: #181614;
+    border-radius: 2px;
+  }
+
+  .ro-brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .ro-brand-zh {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-brand-en {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .ro-cta-pill {
+    appearance: none;
+    background: var(--accent);
+    color: #1c1814;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  /* Main Reading Column (Reading Outpost 16-18 chars/line on mobile) */
+  .container, .wrap, main.container, main.wrap {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 22px 0;
+  }
+
+  /* Hero / Article Header */
+  header, .hero {
+    text-align: left !important;
+    margin-bottom: 32px;
+    padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .badge-bar, .meta-line {
+    display: flex;
+    justify-content: flex-start !important;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .badge, .meta-pill, .meta-pill-muted, .eyebrow, .tag {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .badge-primary, .meta-pill, .eyebrow {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary-border);
+  }
+
+  .badge-accent, .badge.red {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: rgba(244, 196, 78, 0.32);
+  }
+
+  h1 {
+    font-size: clamp(26px, 6.2vw, 34px);
+    line-height: 1.38;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    margin: 6px 0 14px;
+    text-align: left;
+  }
+
+  .subtitle, .lead, .meta {
+    font-size: 17px;
+    line-height: 1.68;
+    color: var(--text-muted);
+    margin: 0;
+    max-width: none;
+    text-align: left;
+  }
+
+  /* Unboxed Article Flow */
+  section, section.card, .card {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-bottom: 42px;
+    scroll-margin-top: 84px;
+  }
+
+  h2, .card-title {
+    font-size: clamp(22px, 5.2vw, 27px);
+    line-height: 1.45;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 44px 0 18px;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+  }
+
+  h2::before {
+    display: none !important;
+  }
+
+  h2 .sec-num {
+    color: var(--accent);
+    margin-right: 6px;
+    font-weight: 800;
+  }
+
+  h3, .step-box h3, .insight-title {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 30px 0 12px;
+  }
+
+  p, .summary-item, .insight-point, .hero-text {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--text-body);
+    margin-bottom: 18px;
+  }
+
+  ul, ol {
+    margin: 0 0 22px 24px;
+    color: var(--text-body);
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+    color: var(--text-body);
+  }
+
+  strong, b {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  /* Reading Outpost Signature Cyan-Underlined Content Links */
+  main a:not(.ro-cta-pill):not(.ro-brand-link),
+  .container a:not(.ro-cta-pill):not(.ro-brand-link),
+  .wrap a:not(.ro-cta-pill):not(.ro-brand-link) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  /* Soft Warm Sub-cards (Quotes, Takeaways, Callouts) */
+  .tldr-card, .hero-card, .summary-card, .book-card, .source-card,
+  .quote-bilingual, .insight-card, .callout, .callout-mnemo,
+  .question-box, .translation-box, .answer, .boundary, .source,
+  .answer-tile, aside.card, .step-list li {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius) !important;
+    padding: 20px 20px !important;
+    margin: 20px 0 !important;
+    box-shadow: none !important;
+  }
+
+  .tldr-card, .hero-card, .callout-mnemo, .answer, .question-box {
+    border-left: 4px solid var(--accent) !important;
+  }
+
+  .callout, .translation-box {
+    border-left: 4px solid var(--primary) !important;
+  }
+
+  .tldr-label, .hero-title, .summary-title, .book-title, .source-book, .callout-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent) !important;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .timeline-step {
+    padding-left: 4px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 12px;
+  }
+
+  .timeline-step:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .timeline-step-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .timeline-step-title span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    font-size: 14px;
+    font-weight: 800;
+    margin-right: 8px;
+  }
+
+  .grid-cards, .summary-grid, .two-col, .source-grid, .answer-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  @media (min-width: 640px) {
+    .grid-cards, .source-grid, .answer-hero {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* Bilingual Textbook Quote Blocks */
+  .book-header, .source-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .book-meta, .source-loc, .source-tag, .summary-subtitle, .summary-badge {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .quote-entry, .quote-block {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .quote-entry:last-child, .quote-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quote-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .en-box, .quote-en, blockquote {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 10px 0 12px;
+    word-break: break-word;
+  }
+
+  body.hide-en .en-box,
+  body.hide-en .quote-en {
+    display: none;
+  }
+
+  .zh-box, .quote-tw {
+    font-size: 17.5px;
+    line-height: 1.78;
+    color: var(--text-body);
+  }
+
+  .zh-box strong, .quote-tw strong {
+    color: var(--accent);
+    background: rgba(244, 196, 78, 0.10);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+
+  .toggle-en-btn {
+    appearance: none;
+    background: var(--bg-tag);
+    color: var(--accent);
+    border: 1px solid rgba(244, 196, 78, 0.35);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  /* Figures & Images */
+  .figure-card, .fig-card, figure, .figure-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .figure-img-wrap, .fig-body, .figure-body {
+    padding: 14px;
+  }
+
+  .figure-img-wrap {
+    background: #f8fafc;
+    cursor: zoom-in;
+  }
+
+  main img, .container img, .wrap img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 8px;
+    margin: 0 auto;
+    cursor: zoom-in;
+  }
+
+  .zoom-hint {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    padding: 6px 4px 0;
+  }
+
+  .figure-title, .fig-title, .fig-header {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding: 12px 16px 4px;
+  }
+
+  .figure-caption, .fig-caption, figcaption {
+    font-size: 15px;
+    line-height: 1.68;
+    color: var(--text-secondary);
+    padding: 6px 16px 14px;
+    background: transparent;
+    border: none;
+  }
+
+  .figure-caption-en {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 0 16px 14px;
+  }
+
+  /* Layer List & Flow */
+  .layer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 16px 0 24px;
+  }
+
+  .layer-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-size: 17px;
+  }
+
+  .layer-badge {
+    font-size: 13px;
+    font-weight: 700;
+    color: #181614;
+    background: var(--accent);
+    padding: 2px 9px;
+    border-radius: 6px;
+    white-space: nowrap;
+    margin-top: 3px;
+  }
+
+  .flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    padding: 18px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    margin: 18px 0;
+  }
+
+  .flow span {
+    padding: 6px 11px;
+    border-radius: 8px;
+    background: var(--bg-tag);
+    color: var(--text-primary);
+    font-size: 15px;
+  }
+
+  .flow b {
+    color: var(--accent);
+  }
+
+  .step-list {
+    list-style: none;
+    margin-left: 0;
+  }
+
+  .ans-value {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+
+  .chart-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin: 20px 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 14px;
+  }
+
+  /* Responsive Tables -> Stacked Mobile Cards (< 680px) */
+  .table-wrap, .table-wrapper {
+    width: 100%;
+    margin: 18px 0 26px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 16px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-body);
+  }
+
+  th {
+    background: var(--bg-pillbar);
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  tr.highlight-tr td {
+    background: rgba(244, 196, 78, 0.12);
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  @media (max-width: 680px) {
+    table.ro-resp-table,
+    table.ro-resp-table thead,
+    table.ro-resp-table tbody,
+    table.ro-resp-table th,
+    table.ro-resp-table td,
+    table.ro-resp-table tr {
+      display: block;
+      width: 100%;
+    }
+
+    table.ro-resp-table thead {
+      display: none;
+    }
+
+    table.ro-resp-table tr {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    table.ro-resp-table td {
+      border: none;
+      border-bottom: 1px dashed var(--border-color);
+      padding: 8px 0;
+      text-align: left !important;
+    }
+
+    table.ro-resp-table td:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    table.ro-resp-table td:first-child {
+      padding-top: 0;
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    table.ro-resp-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+  }
+
+  /* Reading Outpost Bottom-Left TOC Pill & Bottom-Right Up Button */
+  .ro-bottom-toc {
+    position: fixed;
+    left: 16px;
+    bottom: 20px;
+    z-index: 95;
+    background: var(--taupe-fab);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 9px 15px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: calc(100vw - 88px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-up-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 95;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--taupe-fab);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    text-decoration: none !important;
+  }
+
+  /* Drawers & Lightbox */
+  .ro-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ro-drawer-backdrop.open {
+    display: flex;
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-backdrop {
+      align-items: center;
+      padding: 24px;
+    }
+  }
+
+  .ro-drawer-panel {
+    width: 100%;
+    max-width: 500px;
+    max-height: 78vh;
+    overflow-y: auto;
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px 20px 0 0;
+    padding: 18px 18px 28px;
+    box-shadow: var(--shadow);
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-panel {
+      border-radius: 18px;
+    }
+  }
+
+  .ro-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .ro-drawer-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .ro-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .ro-drawer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ro-drawer-list a {
+    display: block;
+    text-decoration: none !important;
+    color: var(--text-body) !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .ro-drawer-list a.active {
+    color: #181614 !important;
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 800;
+  }
+
+  .ro-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    cursor: zoom-out;
+  }
+
+  .ro-lightbox.open {
+    display: flex;
+  }
+
+  .ro-lightbox img {
+    max-width: 100%;
+    max-height: 92vh;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    padding: 6px 0;
+  }
+
+  html[data-theme="light"] {
+    --bg-primary: #fbf8f4;
+    --bg-pillbar: #f0ece3;
+    --bg-card: #ffffff;
+    --bg-quote: #f6f2ea;
+    --bg-tag: #eee8dd;
+    --text-primary: #2f2820;
+    --text-body: #4a3f35;
+    --text-secondary: #5e5043;
+    --text-muted: #756656;
+    --primary: #1b9dce;
+    --primary-light: rgba(27, 157, 206, 0.12);
+    --primary-border: rgba(27, 157, 206, 0.35);
+    --accent: #b86b11;
+    --accent-light: rgba(244, 196, 78, 0.22);
+    --border-color: rgba(74, 63, 53, 0.12);
+    --border-strong: rgba(74, 63, 53, 0.22);
+    --taupe-fab: rgba(105, 90, 74, 0.94);
+    --shadow: 0 4px 18px rgba(47, 40, 32, 0.08);
+    color-scheme: light;
+  }
+
+  html[data-theme="light"] .ro-header-wrap {
+    background: linear-gradient(180deg, #fbf8f4 70%, rgba(251, 248, 244, 0));
+  }
+
+  html[data-theme="light"] .ro-menu-circle {
+    background: #67c3eb;
+    color: #1f1a15;
+  }
+
+  html[data-theme="light"] .ro-cta-pill {
+    background: #f6c84c;
+    color: #2f2820;
+  }
+
+  html[data-theme="light"] .ro-bottom-toc,
+  html[data-theme="light"] .ro-up-btn {
+    color: #ffffff;
+  }
+
+  html[data-theme="light"] .ro-drawer-list a.active {
+    background: #f6c84c;
+    border-color: #e0b034;
+    color: #2f2820 !important;
+  }
+
+  html[data-theme="light"] .zh-box strong,
+  html[data-theme="light"] .quote-tw strong {
+    color: #8c4d06;
+    background: rgba(246, 200, 76, 0.28);
+  }
+
+  .ro-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .ro-theme-btn {
+    appearance: none;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    transition: transform 0.15s ease;
+  }
+
+  .ro-theme-btn:active {
+    transform: scale(0.96);
+  }
+
+</style>
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem('biowiki-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<!-- Reading Outpost Dark Style Shell -->
+<div class="ro-header-wrap">
+  <div class="ro-pillbar">
+    <div class="ro-brand-group">
+      <button class="ro-menu-circle" type="button" aria-label="開啟專題選單" onclick="roOpenDrawer('roSiteDrawer')">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="ro-brand-link" href="index.html">
+        <span class="ro-brand-zh">400X 的日常切片</span>
+        <span class="ro-brand-en">BIO-WIKI EVIDENCE</span>
+      </a>
+    </div>
+    <div class="ro-top-actions">
+      <button class="ro-theme-btn" id="roThemeBtn" type="button" onclick="roToggleTheme()">☀️ 亮色</button>
+      <button class="ro-cta-pill" type="button" onclick="roOpenDrawer('roSiteDrawer')">專題目錄</button>
+    </div>
+  </div>
+</div>
+
+<div class="ro-drawer-backdrop" id="roSiteDrawer" onclick="if(event.target===this)roCloseDrawer('roSiteDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📚 Bio-Wiki 全站專題</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roSiteDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list">
+            <a href="index.html">🏠 首頁：主題分類總覽</a>
+      <a href="chromatin.html">1. 染色質與染色體本質</a>
+      <a href="wheat-polygenic.html">2. 小麥多基因累加模型 (Campbell 14e)</a>
+      <a href="spermatogonia-hole.html">3. 精原細胞與生精歷程 (跨正典考證)</a>
+      <a href="griffith-transformation.html">4. Griffith 轉形作用</a>
+      <a href="promoter-tata-box.html">5. 啟動子、TATA 匣與甲基化</a>
+      <a href="sickle-cell-dominance.html">6. 鐮刀型貧血顯隱性層次分析</a>
+      <a href="endosymbiosis.html">7. 內共生假說與演化序列</a>
+      <a href="lactose-intolerance-lac-operon.html">8. 乳糖不耐症與大腸桿菌 lac 操縱組</a>
+      <a href="operon-inference-pierce.html">9. Pierce 操縱組推論過程</a>
+      <a href="gene-allele-dna-chromosome.html">10. 遺傳因子、基因、等位基因與染色體</a>
+      <a href="oogenesis-interphase-dyad.html">11. 初級卵母細胞、間期與二分體</a>
+      <a href="xy-synapsis-crossing-over.html" class="active">12. 人類 XY 染色體聯會、互換與四分體判定</a>
+      <a href="chromosome-breakage-cri-du-chat.html">13. 染色體斷裂成因與貓叫症（5p 缺失）</a>
+    </div>
+  </div>
+</div>
+
+<div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📑 本篇段落導覽</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list" id="roTocList" onclick="roCloseDrawer('roTocDrawer')"></div>
+  </div>
+</div>
+
+<div class="ro-lightbox" id="roLightbox" onclick="this.classList.remove('open')">
+  <img id="roLightboxImg" alt="">
+</div>
+
+<main class="container" id="top">
+
+  <div class="hero">
+    <div class="badge-bar">
+      <span class="badge badge-primary">高中易讀版</span>
+      <span class="badge badge-accent">遺傳與分子生物學</span>
+      <span class="badge">8 部原文正典 · 4 張原圖</span>
+    </div>
+    <h1>人類 XY 染色體會聯會和互換嗎？PAR 局部配對、<em>SRY</em> 易位與第 23 個四分體</h1>
+    <p class="subtitle">課本裡的同源染色體兩條長得一模一樣，但男性的 X 與 Y 染色體一大一小、基因幾乎不同——它們在減數分裂時到底能不能聯會與互換？如果 <em>SRY</em> 跑到 X 上算易位還是互換？複製後的 XY 二分體聯會算不算四分體？</p>
+  </div>
+
+  <!-- 一分鐘結論 -->
+  <div class="tldr-card">
+    <div class="tldr-label">⚡ 一分鐘抓重點：三個問題一次答完</div>
+    <div class="timeline">
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>1</span>XY 會聯會也會互換嗎？→ 會，但只限兩端「偽體染色體區（PAR）」</div>
+        <p style="margin-bottom:0;">X 與 Y 的頭尾兩端各有一小段同源 DNA 序列（PAR1、PAR2），減數分裂前期 I 會靠這裡<strong>局部聯會並互換</strong>；其餘約 95%（Y 染色體男性特異區 MSY）則不聯會也不正常互換。</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>2</span><em>SRY</em> 跑到 X 上算易位還是互換？→ 結果算「易位」（機制為異常重組）</div>
+        <p style="margin-bottom:0;">正常發生在 PAR 內叫<strong>互換</strong>；但 <em>SRY</em> 位在 Y 的非同源區（緊鄰 PAR1），一旦切越界把 <em>SRY</em> 移到 X 上，屬非同源區段異常搬家、改變連鎖群，故歸為<strong>易位</strong>（造成 46,XX 男性與 46,XY 女性）。</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>3</span>複製後的 XY 二分體聯會算四分體嗎？→ 算！人類男性仍有 23 個四分體</div>
+        <p style="margin-bottom:0;">複製後的 X（1 個二分體）與 Y（1 個二分體）聯會成 1 個 <strong>X–Y 二聯染色體（X–Y bivalent）</strong>，含 2 條染色體、4 條染色分體，在正典教科書中一律計為人類 23 個四分體之一（共 92 條染色分體）。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 1 -->
+  <section id="sec-par-msy">
+    <h2><span class="sec-num">01</span> XY 染色體哪裡會聯會？哪裡不會？</h2>
+    <p>先看一眼真正的 X 與 Y 染色體：X 染色體很長、帶有約 800～900 個蛋白質編碼基因；Y 染色體非常短小，只有約 50～60 個基因（Brooker 8e Ch04）。兩條長得完全不像，為什麼在男性睪丸進行減數分裂 I 時還能像同源染色體一樣配對並分開？</p>
+    <p>秘密在於兩條染色體的「<strong>頭尾兩端</strong>」。演化上，X 與 Y 原本來自一對相同的體染色體，雖然中間大部分區段後來分道揚鑣，但兩端各保留了一小段序列相同的區域，叫做<strong>偽體染色體區（pseudoautosomal regions，簡稱 PAR1、PAR2）</strong>。你可以把 PAR 想像成兩條染色體頭尾的「同源對接口」，減數分裂前期 I 就靠這兩小段完成聯會與互換。</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>區域名稱</th>
+            <th>位置與佔比</th>
+            <th>減數分裂 I 行為</th>
+            <th>基因與遺傳特徵</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-tr">
+            <td>偽體染色體區<br>（PAR1、PAR2）</td>
+            <td>X 與 Y 的短臂與長臂兩端<br>（約佔 Y 染色體 5% 以下）</td>
+            <td><strong>會聯會、會互換</strong>，形成交叉（chiasma）</td>
+            <td>X 與 Y 上共有約 30 個相同基因（如 <em>SHOX</em>、<em>MIC2</em>），遺傳方式像體染色體一樣（故名「偽體染色體」）</td>
+          </tr>
+          <tr>
+            <td>Y 染色體男性特異區<br>（MSY，舊稱 NRY）</td>
+            <td>Y 染色體其餘<strong>約 95%</strong> 區域</td>
+            <td><strong>不聯會、不發生正常互換</strong></td>
+            <td>含決定睪丸發育的 <em>SRY</em> 基因與生育力基因，正常情況下只隨 Y 染色體由父傳子</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">💡 高中生最常忽略的關鍵：為什麼一定得聯會與互換？</div>
+      <p style="margin-bottom:0;">互換不只是為了「增加子代變異」，它還有一個更關鍵的物理任務——<strong>把配對的兩條染色體暫時繫在一起</strong>。減數分裂中期 I 需要靠聯會與互換形成的<strong>交叉（chiasma）</strong>搭配姊妹染色分體黏連，讓兩極紡錘絲拉出穩定張力，X 與 Y 才能準確分往兩極（一半精子得 X、一半得 Y）。若這一步配對或分離失敗（無分離），就會產生同時帶 X 與 Y 的精子，受精後形成 47,XXY 的克氏症候群。</p>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 1｜掃描電鏡下的已複製人類 X 與 Y 染色體（二分體對比）</div>
+      <div class="figure-img-wrap">
+        <img src="images/Campbell13e_Fig15-5_human_xy_sem.jpg" alt="Campbell 13e 圖 15.5 人類已複製狀態的 X 與 Y 染色體掃描電鏡影像">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Campbell Biology 13e, Fig. 15.5</strong>：已複製狀態的 X 與 Y 各自都是由兩條姊妹染色分體組成的「二分體」，體積相差約四倍，但兩端仍保有短小同源區讓彼此在減數分裂 I 配對。</div>
+      <div class="figure-caption-en">Original caption: Human sex chromosomes (duplicated). (Campbell Biology 13e, Ch. 15)</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 2｜人類 X 與 Y 染色體的共用區（PAR1、PAR2）與專屬區（MSY）</div>
+      <div class="figure-img-wrap">
+        <img src="images/Goldberg7e_Fig4-4_human_xy_par_msy.png" alt="Goldberg 7e 圖 4.4 人類 X 與 Y 染色體的 PAR1、PAR2 與 MSY 分區">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Goldberg Genetics 7e, Fig. 4.4</strong>：黑色兩端為 PAR1 與 PAR2（合計約 30 個共用基因），使原本差異懸殊的 X 與 Y 能在減數分裂 I 彼此配對；Y 染色體其餘部分為 MSY，內含 <em>SRY</em> 與男性生育力基因。</div>
+      <div class="figure-caption-en">Original caption: Figure 4.4 Human sex chromosomes have both shared and unique genes. PAR1 and PAR2 (black) are homologous regions of the X and Y chromosomes that together contain about 30 genes.</div>
+    </div>
+  </section>
+
+  <!-- Section 2 -->
+  <section id="sec-sry-translocation">
+    <h2><span class="sec-num">02</span> <em>SRY</em> 跑到 X 上，算「易位」還是「互換」？</h2>
+    <p>決定男性生殖腺發育成睪丸的總開關——<strong><em>SRY</em> 基因</strong>——位於 Y 染色體短臂上，而且位置<strong>緊貼著 PAR1 邊界</strong>（圖 3）。正常減數分裂時，互換只發生在 PAR1 內部，不會動到 <em>SRY</em>。但如果配對重組時不小心「切越界」，把鄰近的 <em>SRY</em> 移轉到 X 染色體上，就會產生兩種罕見的性別反轉案例（圖 4）：</p>
+    <ul>
+      <li><strong>帶有 <em>SRY</em> 的 X 染色體</strong>受精 → <strong>46,XX 男性</strong>（染色體組成是 XX，但因有 <em>SRY</em> 而發育為男性，通常不孕因缺乏其他 Y 染色體生精基因）。</li>
+      <li><strong>缺失 <em>SRY</em> 的 Y 染色體</strong>受精 → <strong>46,XY 女性</strong>（Swyer 症候群）。</li>
+    </ul>
+
+    <p>這時很多高中生會卡關：<strong>既然是在 X、Y 減數分裂配對時出錯交換過去的，這到底算「易位」還是「互換」？</strong> 抓住遺傳學的黃金判準就不會混亂：</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>情境</th>
+            <th>發生位置</th>
+            <th>歸類判準</th>
+            <th>原因與正典教科書說法</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>正常交換</strong></td>
+            <td>PAR1／PAR2 同源區內部</td>
+            <td><strong>互換（crossing over）</strong></td>
+            <td>同源區段之間對等交換對應等位基因，連鎖群不變，屬於減數分裂前期 I 的正常程序（Klug Ch07、Solomon 11e Ch11）。</td>
+          </tr>
+          <tr class="highlight-tr">
+            <td><strong>異常把 <em>SRY</em> 移到 X 上</strong></td>
+            <td>越過 PAR1 邊界，動到 Y 專屬非同源區（MSY）</td>
+            <td><strong>結果歸為「易位」</strong><br>（機制稱「異常重組／異常互換」）</td>
+            <td><em>SRY</em> 位於非同源區，原本 X 沒有該基因座；將非同源區基因異常搬到另條染色體、改變連鎖群，依 Pierce 7e Ch08 定義屬染色體結構突變。故 Raven 13e 與 Kandel 6e 直接稱為「<strong><em>SRY</em> 易位至 X 染色體</strong>」；Goldberg 7e 則從發生過程稱為「中節與 PAR1 間的<strong>異常重組</strong>」。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 3｜人類 Y 染色體電鏡照片與分區（<em>SRY</em> 緊鄰短臂 PAR）</div>
+      <div class="figure-img-wrap">
+        <img src="images/Klug_Fig7-3_human_y_par_sry_msy.png" alt="Klug 圖 7.3 人類 Y 染色體電子顯微鏡與 PAR、SRY、MSY 構造圖">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Klug Concepts of Genetics, Fig. 7.3</strong>：短臂頂端為 PAR，緊鄰其下方的真染色質區即為 <em>SRY</em> 基因，其餘約 95% 為不與 X 聯會重組的 MSY。</div>
+      <div class="figure-caption-en">Original caption: FIGURE 7.3 (a) Electron micrograph of the human Y chromosome (magnification × 35,000) and (b) regions of the Y chromosome.</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 4｜<em>SRY</em> 易位導致 XX 男性與 XY 女性（性別反轉）</div>
+      <div class="figure-img-wrap">
+        <img src="images/Kandel6e_Fig51-1_sry_translocation_sex_reversal.png" alt="Kandel 6e 圖 51-1 SRY 易位與刪除造成性別反轉示意圖">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Kandel Principles of Neural Science 6e, Fig. 51-1</strong>：<em>SRY</em>（藍色區段）位於 Y 染色體短臂非同源區；若於精子生成期間罕見易位至 X 染色體，受精後產生 XX<sup>SRY</sup> 雄性與 XY<sup>ΔSRY</sup> 雌性。</div>
+      <div class="figure-caption-en">Original caption: Figure 51–1 The role of the SRY gene in sex determination in humans. Rarely, SRY translocates to the X chromosome or an autosome.</div>
+    </div>
+  </section>
+
+  <!-- Section 3 -->
+  <section id="sec-tetrad-count">
+    <h2><span class="sec-num">03</span> 複製後的 X、Y 二分體聯會，算不算第 23 個四分體？</h2>
+    <p><strong>算！人類不論男女，初級生殖母細胞在減數分裂前期 I 一律計為 23 個四分體（共 92 條染色分體）</strong>，絕不是「男性只有 22 個」。</p>
+    <p>你可以用三個白話標準直接檢查：</p>
+    <ol>
+      <li><strong>名詞與數目完全吻合</strong>：課本裡的<strong>二聯染色體（bivalent，大學譯本常作二價體／雙價體）</strong>與<strong>四分體（tetrad）</strong>指的是同一個構造——「二聯」看的是 2 條聯會染色體，「四分體」看的是合計 4 條染色分體（2 個二分體）。複製後的 X 是 1 個二分體（2 條姊妹染色分體），複製後的 Y 也是 1 個二分體（2 條姊妹染色分體），合起來確實是 2 條染色體、4 條染色分體。</li>
+      <li><strong>遺傳學正典直接稱它為「X–Y 二聯體」並計入總數</strong>：Goldberg 7e 在 Ch03 定義 bivalent＝tetrad，並於 Ch05 習題 16（雄性初級精母細胞減數分裂圖）直接稱它為 <strong>X–Y 二聯體（X–Y bivalent）</strong>，明明白白計入雄性總數（小鼠 n = 20 個二聯體、類比人類雄性 n = 23 個二聯體）。Solomon 11e、Sadava 12e、Vander 16e 也全都寫人類有 23 個四分體／二聯體，全資料庫查無任何教科書寫「男性只有 22 個四分體」。</li>
+      <li><strong>差別只在「全長貼齊 vs. 兩端貼合」</strong>：22 對體染色體是整條從頭到尾全長聯會；第 23 對（X、Y）屬於異型性染色體，只在兩端 PAR <strong>局部聯會</strong>，中間未配對區會呈歪斜狀。但它們仍作為單一配對單位在中期 I 排隊並分向兩極，所以計數與功能上都是第 23 個四分體。</li>
+    </ol>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>比較項目</th>
+            <th>22 對體染色體四分體</th>
+            <th>第 23 個四分體（X–Y 二聯染色體）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>染色體與染色分體數</td>
+            <td>2 條染色體（2 個二分體）＝ 4 條染色分體</td>
+            <td>2 條染色體（X 二分體＋Y 二分體）＝ 4 條染色分體</td>
+          </tr>
+          <tr>
+            <td>聯會方式</td>
+            <td>沿染色體<strong>全長聯會</strong></td>
+            <td>僅於兩端偽體染色體區（PAR1、PAR2）<strong>局部聯會</strong></td>
+          </tr>
+          <tr>
+            <td>正常互換範圍</td>
+            <td>全長各處同源區皆可能互換</td>
+            <td>僅限兩端 PAR 內部（約 95% MSY 不正常互換）</td>
+          </tr>
+          <tr>
+            <td>減數分裂 I 分離行為</td>
+            <td>靠交叉繫住，後期 I 拉向兩極</td>
+            <td>同樣靠 PAR 交叉繫住，後期 I 使 X 與 Y 分往兩極</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 4: Bilingual Sources -->
+  <section id="sec-sources">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+      <h2 style="margin-bottom:8px;flex:1;"><span class="sec-num">04</span> 經典英文原文教科書逐句考證</h2>
+      <button class="toggle-en-btn" id="toggleEnBtn" type="button" onclick="toggleEnglish()">精簡：隱藏英文原文</button>
+    </div>
+    <p>以下所有英文段落均原封不動摘自 Vault 正式譯本，方便高中老師備課或同學對照大學原典核查。</p>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">1. 《Goldberg Genetics: From Genes to Genomes》7e</span>
+        <span class="source-loc">Ch. 03 / Ch. 04 / Ch. 05</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">四分體＝二聯體定義，以及 X、Y 靠 PAR 局部配對（Ch. 03）</div>
+        <div class="quote-en">"Each synapsed chromosome pair is known as a bivalent (because it encompasses two chromosomes), or a tetrad (because it contains four chromatids). ... Because X and Y chromosomes are not identical, they do not synapse completely. However, pseudoautosomal regions (to be described in the next chapter) provide small stretches of similarity between the X and the Y chromosomes that allow them to pair with each other during meiosis I in males."</div>
+        <div class="quote-tw">每一對聯會的染色體稱為<strong>二聯體</strong>，因為它包含兩條染色體；也稱為<strong>四分體</strong>，因為它包含四條染色分體……由於 X 與 Y 染色體並不相同，兩者不會完全聯會。然而，<strong>偽體染色體區</strong>為 X 與 Y 染色體提供一小段相似序列，使它們在男性減數分裂 I 期間可以彼此配對。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">PAR1、PAR2 位置與共用基因，以及 <em>SRY</em> 異常重組（Ch. 04）</div>
+        <div class="quote-en">"The two ends of the Y chromosome are called the pseudoautosomal regions (PARs) because homologous DNA sequences are present at the ends of the X chromosome (Fig. 4.4). The two PARs (PAR1 and PAR2) together contain about 30 genes, copies of which are found on both the X and Y chromosomes. The PARs allow the otherwise dissimilar X and Y chromosomes to pair with each other during meiosis I."</div>
+        <div class="quote-tw">Y 染色體的兩端稱為<strong>偽體染色體區（PAR）</strong>，因為 X 染色體兩端也有同源 DNA 序列（圖 4.4）。兩個 PAR（PAR1 與 PAR2）合計約含 30 個基因，PAR 使原本不同的 X 與 Y 染色體能在減數分裂 I 期間彼此配對。（Ch. 04 習題 5 官方簡答亦指出：X 與 Y 在中節與 PAR1 間發生<strong>異常重組</strong>，可將鄰近的 <em>SRY</em> 區段轉移到 X，或使 Y 缺失該區段。）</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">明確命名「X–Y 二聯體（X–Y bivalent）」並計入人類雄性 n = 23（Ch. 05 習題 16）</div>
+        <div class="quote-en">"Figure 5.7a shows chromosomes during prophase of meiosis I in a mouse primary spermatocyte. a. How would you know immediately that this figure shows male meiosis in a mouse and not in a human? (Hint: In mice, n = 20.) ... d. Where is the X–Y bivalent in Fig. 5.7a? (Note: Mouse sex chromosomes have only a single pseudoautosomal region, instead of two as in humans.)"</div>
+        <div class="quote-tw">圖 5.7a 顯示小鼠初級精母細胞減數分裂前期 I 的染色體（小鼠 n = 20、人類 n = 23），並直接指出其中的 <strong>X–Y 二聯體（X–Y bivalent）</strong>；PAR 讓不同的 X、Y 配對並互換，交叉與姊妹染色分體連結有助在減數分裂 I 使它們朝相反兩極分離。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">2. 《Klug Concepts of Genetics》＆《Pierce Genetics》7e</span>
+        <span class="source-loc">Klug Ch. 07 · Pierce Ch. 04 &amp; Ch. 08</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">PAR 聯會重組 vs. 約 95% MSY 不聯會不重組（Klug Ch. 07）</div>
+        <div class="quote-en">"Present on both ends of the Y chromosome are so-called pseudoautosomal regions (PARs) that share homology with regions on the X chromosome and synapse and recombine with it during meiosis. The presence of such a pairing region is critical to segregation of the X and Y chromosomes during male gametogenesis. The remainder of the chromosome, about 95 percent of it, does not synapse or recombine with the X chromosome. ... More recently, researchers have designated this region as the male-specific region of the Y (MSY)."</div>
+        <div class="quote-tw">Y 染色體兩端都有<strong>偽體染色體區（PAR）</strong>，與 X 上的區域同源，減數分裂時會和 X <strong>聯會並重組</strong>。這個配對區對男性配子形成時 X、Y 的正確分離非常重要。其餘約 <strong>95%</strong> 不會和 X 聯會或重組，現稱為 <strong>Y 染色體男性特異區（MSY）</strong>。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">易位與互換的界線（Pierce 7e Ch. 08）</div>
+        <div class="quote-en">"A translocation is the movement of genetic material between nonhomologous chromosomes or within the same chromosome. Translocation should not be confused with crossing over, in which there is an exchange of genetic material between homologous chromosomes."</div>
+        <div class="quote-tw"><strong>易位</strong>是遺傳物質在非同源染色體之間（或同一染色體內）的移動。易位不應與<strong>互換</strong>混淆——互換是同源染色體之間遺傳物質的交換。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">3. 《Campbell Biology》13e ＆ 《Solomon Biology》11e</span>
+        <span class="source-loc">Campbell Ch. 15 · Solomon Ch. 10 &amp; Ch. 11</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">兩端短同源區讓 X、Y 像同源染色體一樣聯會並交換遺傳物質</div>
+        <div class="quote-en">[Campbell 13e Ch. 15] "Short segments at either end of the Y chromosome are the only regions that are homologous with regions on the X. These homologous regions allow the X and Y chromosomes in males to pair and behave like homologs during meiosis in the testes."<br><br>[Solomon 11e Ch. 11] "Nevertheless, the Y chromosome has short, homologous 'pairing regions' at its tips that lets it synapse and exchange genetic material with the X chromosome during meiosis."<br><br>[Solomon 11e Ch. 10] "In an animal cell with a diploid number of 4, there are 2 tetrads (and a total of 8 chromatids); in a human cell at prophase I, there are 23 tetrads (and a total of 92 chromatids)."</div>
+        <div class="quote-tw">[Campbell 13e] Y 染色體兩端只有短小區段與 X 染色體同源，正是這些同源區段讓 X 和 Y 得以在睪丸減數分裂時<strong>像同源染色體一樣配對行動</strong>。<br>[Solomon 11e] 末端短小同源「配對區域」使 Y 在減數分裂時與 X <strong>聯會並交換遺傳物質</strong>；人類前期 I 細胞計有 <strong>23 個四分體（共 92 個染色分體）</strong>。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">4. 《Raven Biology》13e ＆ 《Kandel Principles of Neural Science》6e</span>
+        <span class="source-loc">Raven Ch. 51 · Kandel Ch. 51</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label"><em>SRY</em> 片段移至 X 染色體之正典稱呼：易位（translocation）</div>
+        <div class="quote-en">[Raven 13e Ch. 51] "For example, translocation of the part of the Y chromosome bearing SRY to the X chromosome can cause otherwise XX individuals to develop as males."<br><br>[Kandel 6e Ch. 51] "Conversely, in rare instances, SRY translocates to another chromosome (to the X chromosome or an autosome) during spermatogenesis. Such sperm can fertilize eggs to produce individuals who are chromosomally female (XX) but externally male."</div>
+        <div class="quote-tw">兩部正典均將 Y 染色體攜帶 <em>SRY</em> 的片段轉移至 X 染色體（或體染色體）稱為<strong>易位（translocation）</strong>，受精後可產生染色體為 XX、表現型為男性的個體。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Teaching & Boundary -->
+  <section id="sec-teaching">
+    <h2><span class="sec-num">05</span> 高中教學、常見陷阱與查證邊界</h2>
+
+    <div class="callout">
+      <div class="callout-title">🎯 高中段考／教甄一句話最穩作答策略</div>
+      <p style="margin-bottom:0;">
+        ① 問「XY 會不會聯會／互換？」→ <strong>會，但僅限兩端偽體染色體區（PAR）</strong>。<br>
+        ② 問「男性初級精母細胞有幾個四分體？」→ <strong>23 個</strong>（22 個體染色體全長聯會四分體＋1 個 X–Y 局部聯會二聯染色體）。<br>
+        ③ 問「<em>SRY</em> 跑到 X 上造成 XX 男性？」→ 單選二選一答<strong>易位</strong>；申論寫「<strong>減數分裂異常重組導致含 <em>SRY</em> 片段易位至 X 染色體</strong>」最無懈可擊。
+      </p>
+    </div>
+
+    <h3>常見命題陷阱與術語提醒</h3>
+    <ul>
+      <li><strong>陷阱 1</strong>：「因為 X、Y 大小不同，男性初級精母細胞只有 22 個四分體」→ <strong>錯</strong>，X–Y 局部聯會仍計為第 23 個四分體（X–Y 二聯染色體）。</li>
+      <li><strong>陷阱 2</strong>：「演化教材寫 Y 染色體不重組，所以 X、Y 完全不能互換」→ <strong>錯</strong>，「不重組」指的是佔 95% 的 MSY 區段，兩端 PAR 仍會正常重組。</li>
+      <li><strong>審定名詞</strong>：臺灣教育部《生命科學名詞》審定為<strong>偽體染色體區</strong>（pseudoautosomal regions）、<strong>二聯染色體</strong>（bivalent）、<strong>二分體</strong>（dyad）、<strong>四分體</strong>（tetrad）、<strong>染色分體</strong>（chromatid）。</li>
+    </ul>
+
+    <div class="boundary">
+      <div class="callout-title">📌 本機資料庫（Vault）查證邊界聲明</div>
+      <p style="margin-bottom:0;">本頁主軸論點（PAR1/PAR2 局部聯會互換、95% MSY 不重組、<em>SRY</em> 異常重組／易位、X–Y bivalent 計入 23 個四分體）皆有上述 8 部正典原文段落白紙黑字支持。進階分子遺傳學數據如「PAR1 約 2.6–2.7 Mb、PAR2 約 320–330 kb」、「PAR1 強制互換（obligate crossover）統計率」、「XY 體（XY body／sex vesicle）與 MSCI 機制」及專詞 <code>heteromorphic bivalent</code> 目前在 Vault 譯本中查無原文，屬外部學術常識邊界。</p>
+    </div>
+  </section>
+
+
+  <footer>
+    Bio-Wiki 概念考證庫 · 繁體中文與審定名詞遵循臺灣教育部規範 · 原文書與圖片引自 Ze-Agent Vault 正式譯本
+  </footer>
+</main>
+
+<!-- Reading Outpost Bottom Bar & Script -->
+<button class="ro-bottom-toc" type="button" onclick="roOpenDrawer('roTocDrawer')">📑 本篇段落導覽</button>
+<a class="ro-up-btn" href="#top" aria-label="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<script>
+  function roToggleTheme() {
+    var root = document.documentElement;
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('biowiki-theme', next); } catch (e) {}
+    roUpdateThemeBtn();
+  }
+  function roUpdateThemeBtn() {
+    var btn = document.getElementById('roThemeBtn');
+    if (!btn) return;
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.innerHTML = isLight ? '🌙 深色' : '☀️ 亮色';
+    btn.setAttribute('aria-label', isLight ? '切換為深色閱讀模式' : '切換為亮色閱讀模式');
+  }
+  roUpdateThemeBtn();
+  function roOpenDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('open');
+  }
+  function roCloseDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  }
+  function openLightbox(src, alt) {
+    var lb = document.getElementById('roLightbox');
+    var img = document.getElementById('roLightboxImg');
+    if (lb && img) {
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.add('open');
+    }
+  }
+  function toggleEnglish() {
+    document.body.classList.toggle('hide-en');
+    var btn = document.getElementById('toggleEnBtn');
+    if (btn) {
+      btn.textContent = document.body.classList.contains('hide-en')
+        ? '完整：顯示英文原文'
+        : '精簡：隱藏英文原文';
+    }
+  }
+  (function initReadingOutpostShell() {
+    var tocList = document.getElementById('roTocList');
+    var headings = document.querySelectorAll('h2, .card-title');
+    if (tocList && headings.length) {
+      headings.forEach(function(h, idx) {
+        if (!h.id) h.id = 'ro-sec-' + (idx + 1);
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent.trim();
+        tocList.appendChild(a);
+      });
+    }
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th, tr:first-child th')).map(function(th) {
+        return th.innerText.trim().replace(/[\r\n\t ]+/g, ' ');
+      });
+      if (!headers.length) return;
+      table.classList.add('ro-resp-table');
+      table.querySelectorAll('tr').forEach(function(tr) {
+        if (tr.querySelector('th')) return;
+        Array.from(tr.children).forEach(function(td, idx) {
+          if (td.tagName === 'TD' && !td.getAttribute('data-label') && headers[idx]) {
+            td.setAttribute('data-label', headers[idx]);
+          }
+        });
+      });
+    });
+    document.querySelectorAll('main img, .container img, .wrap img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        openLightbox(img.src, img.alt);
+      });
+    });
+  })();
+</script>
+</body>
+</html>

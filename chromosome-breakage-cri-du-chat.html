@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>染色體斷裂成因與貓叫症（5p 缺失）｜Bio-Wiki</title>
+<style>
+  :root {
+    --bg-primary: #181614;
+    --bg-pillbar: #24201c;
+    --bg-card: #211e1a;
+    --bg-quote: #26221e;
+    --bg-tag: #2d2823;
+    --text-primary: #f6f1ea;
+    --text-body: #ddd5ca;
+    --text-secondary: #bfb5a8;
+    --text-muted: #9a8e80;
+    --primary: #5bc0eb;
+    --primary-light: rgba(91, 192, 235, 0.12);
+    --primary-border: rgba(91, 192, 235, 0.32);
+    --accent: #f4c44e;
+    --accent-light: rgba(244, 196, 78, 0.12);
+    --border-color: rgba(246, 241, 234, 0.09);
+    --border-strong: rgba(246, 241, 234, 0.16);
+    --taupe-fab: rgba(104, 91, 78, 0.94);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+  }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+    font-size: 18px;
+    line-height: 1.78;
+    padding: 0 0 96px 0;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Reading Outpost Signature Top Pill Header */
+  .ro-header-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-primary) 70%, rgba(24, 22, 20, 0));
+  }
+
+  .ro-pillbar {
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .ro-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .ro-menu-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    border: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .ro-menu-circle span {
+    display: block;
+    width: 16px;
+    height: 2.2px;
+    background: #181614;
+    border-radius: 2px;
+  }
+
+  .ro-brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .ro-brand-zh {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-brand-en {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .ro-cta-pill {
+    appearance: none;
+    background: var(--accent);
+    color: #1c1814;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  /* Main Reading Column (Reading Outpost 16-18 chars/line on mobile) */
+  .container, .wrap, main.container, main.wrap {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 22px 0;
+  }
+
+  /* Hero / Article Header */
+  header, .hero {
+    text-align: left !important;
+    margin-bottom: 32px;
+    padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .badge-bar, .meta-line {
+    display: flex;
+    justify-content: flex-start !important;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .badge, .meta-pill, .meta-pill-muted, .eyebrow, .tag {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .badge-primary, .meta-pill, .eyebrow {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary-border);
+  }
+
+  .badge-accent, .badge.red {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: rgba(244, 196, 78, 0.32);
+  }
+
+  h1 {
+    font-size: clamp(26px, 6.2vw, 34px);
+    line-height: 1.38;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    margin: 6px 0 14px;
+    text-align: left;
+  }
+
+  .subtitle, .lead, .meta {
+    font-size: 17px;
+    line-height: 1.68;
+    color: var(--text-muted);
+    margin: 0;
+    max-width: none;
+    text-align: left;
+  }
+
+  /* Unboxed Article Flow */
+  section, section.card, .card {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-bottom: 42px;
+    scroll-margin-top: 84px;
+  }
+
+  h2, .card-title {
+    font-size: clamp(22px, 5.2vw, 27px);
+    line-height: 1.45;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 44px 0 18px;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+  }
+
+  h2::before {
+    display: none !important;
+  }
+
+  h2 .sec-num {
+    color: var(--accent);
+    margin-right: 6px;
+    font-weight: 800;
+  }
+
+  h3, .step-box h3, .insight-title {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 30px 0 12px;
+  }
+
+  p, .summary-item, .insight-point, .hero-text {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--text-body);
+    margin-bottom: 18px;
+  }
+
+  ul, ol {
+    margin: 0 0 22px 24px;
+    color: var(--text-body);
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+    color: var(--text-body);
+  }
+
+  strong, b {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  /* Reading Outpost Signature Cyan-Underlined Content Links */
+  main a:not(.ro-cta-pill):not(.ro-brand-link),
+  .container a:not(.ro-cta-pill):not(.ro-brand-link),
+  .wrap a:not(.ro-cta-pill):not(.ro-brand-link) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  /* Soft Warm Sub-cards (Quotes, Takeaways, Callouts) */
+  .tldr-card, .hero-card, .summary-card, .book-card, .source-card,
+  .quote-bilingual, .insight-card, .callout, .callout-mnemo,
+  .question-box, .translation-box, .answer, .boundary, .source,
+  .answer-tile, aside.card, .step-list li {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius) !important;
+    padding: 20px 20px !important;
+    margin: 20px 0 !important;
+    box-shadow: none !important;
+  }
+
+  .tldr-card, .hero-card, .callout-mnemo, .answer, .question-box {
+    border-left: 4px solid var(--accent) !important;
+  }
+
+  .callout, .translation-box {
+    border-left: 4px solid var(--primary) !important;
+  }
+
+  .tldr-label, .hero-title, .summary-title, .book-title, .source-book, .callout-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent) !important;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .timeline-step {
+    padding-left: 4px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 12px;
+  }
+
+  .timeline-step:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .timeline-step-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .timeline-step-title span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    font-size: 14px;
+    font-weight: 800;
+    margin-right: 8px;
+  }
+
+  .grid-cards, .summary-grid, .two-col, .source-grid, .answer-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  @media (min-width: 640px) {
+    .grid-cards, .source-grid, .answer-hero {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* Bilingual Textbook Quote Blocks */
+  .book-header, .source-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .book-meta, .source-loc, .source-tag, .summary-subtitle, .summary-badge {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .quote-entry, .quote-block {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .quote-entry:last-child, .quote-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quote-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .en-box, .quote-en, blockquote {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 10px 0 12px;
+    word-break: break-word;
+  }
+
+  body.hide-en .en-box,
+  body.hide-en .quote-en {
+    display: none;
+  }
+
+  .zh-box, .quote-tw {
+    font-size: 17.5px;
+    line-height: 1.78;
+    color: var(--text-body);
+  }
+
+  .zh-box strong, .quote-tw strong {
+    color: var(--accent);
+    background: rgba(244, 196, 78, 0.10);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+
+  .toggle-en-btn {
+    appearance: none;
+    background: var(--bg-tag);
+    color: var(--accent);
+    border: 1px solid rgba(244, 196, 78, 0.35);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  /* Figures & Images */
+  .figure-card, .fig-card, figure, .figure-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .figure-img-wrap, .fig-body, .figure-body {
+    padding: 14px;
+  }
+
+  .figure-img-wrap {
+    background: #f8fafc;
+    cursor: zoom-in;
+  }
+
+  main img, .container img, .wrap img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 8px;
+    margin: 0 auto;
+    cursor: zoom-in;
+  }
+
+  .zoom-hint {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    padding: 6px 4px 0;
+  }
+
+  .figure-title, .fig-title, .fig-header {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding: 12px 16px 4px;
+  }
+
+  .figure-caption, .fig-caption, figcaption {
+    font-size: 15px;
+    line-height: 1.68;
+    color: var(--text-secondary);
+    padding: 6px 16px 14px;
+    background: transparent;
+    border: none;
+  }
+
+  .figure-caption-en {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 0 16px 14px;
+  }
+
+  /* Layer List & Flow */
+  .layer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 16px 0 24px;
+  }
+
+  .layer-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-size: 17px;
+  }
+
+  .layer-badge {
+    font-size: 13px;
+    font-weight: 700;
+    color: #181614;
+    background: var(--accent);
+    padding: 2px 9px;
+    border-radius: 6px;
+    white-space: nowrap;
+    margin-top: 3px;
+  }
+
+  .flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    padding: 18px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    margin: 18px 0;
+  }
+
+  .flow span {
+    padding: 6px 11px;
+    border-radius: 8px;
+    background: var(--bg-tag);
+    color: var(--text-primary);
+    font-size: 15px;
+  }
+
+  .flow b {
+    color: var(--accent);
+  }
+
+  .step-list {
+    list-style: none;
+    margin-left: 0;
+  }
+
+  .ans-value {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+
+  .chart-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin: 20px 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 14px;
+  }
+
+  /* Responsive Tables -> Stacked Mobile Cards (< 680px) */
+  .table-wrap, .table-wrapper {
+    width: 100%;
+    margin: 18px 0 26px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 16px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-body);
+  }
+
+  th {
+    background: var(--bg-pillbar);
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  tr.highlight-tr td {
+    background: rgba(244, 196, 78, 0.12);
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  @media (max-width: 680px) {
+    table.ro-resp-table,
+    table.ro-resp-table thead,
+    table.ro-resp-table tbody,
+    table.ro-resp-table th,
+    table.ro-resp-table td,
+    table.ro-resp-table tr {
+      display: block;
+      width: 100%;
+    }
+
+    table.ro-resp-table thead {
+      display: none;
+    }
+
+    table.ro-resp-table tr {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    table.ro-resp-table td {
+      border: none;
+      border-bottom: 1px dashed var(--border-color);
+      padding: 8px 0;
+      text-align: left !important;
+    }
+
+    table.ro-resp-table td:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    table.ro-resp-table td:first-child {
+      padding-top: 0;
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    table.ro-resp-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+  }
+
+  /* Reading Outpost Bottom-Left TOC Pill & Bottom-Right Up Button */
+  .ro-bottom-toc {
+    position: fixed;
+    left: 16px;
+    bottom: 20px;
+    z-index: 95;
+    background: var(--taupe-fab);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 9px 15px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: calc(100vw - 88px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-up-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 95;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--taupe-fab);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    text-decoration: none !important;
+  }
+
+  /* Drawers & Lightbox */
+  .ro-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ro-drawer-backdrop.open {
+    display: flex;
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-backdrop {
+      align-items: center;
+      padding: 24px;
+    }
+  }
+
+  .ro-drawer-panel {
+    width: 100%;
+    max-width: 500px;
+    max-height: 78vh;
+    overflow-y: auto;
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px 20px 0 0;
+    padding: 18px 18px 28px;
+    box-shadow: var(--shadow);
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-panel {
+      border-radius: 18px;
+    }
+  }
+
+  .ro-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .ro-drawer-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .ro-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .ro-drawer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ro-drawer-list a {
+    display: block;
+    text-decoration: none !important;
+    color: var(--text-body) !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .ro-drawer-list a.active {
+    color: #181614 !important;
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 800;
+  }
+
+  .ro-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    cursor: zoom-out;
+  }
+
+  .ro-lightbox.open {
+    display: flex;
+  }
+
+  .ro-lightbox img {
+    max-width: 100%;
+    max-height: 92vh;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    padding: 6px 0;
+  }
+
+  html[data-theme="light"] {
+    --bg-primary: #fbf8f4;
+    --bg-pillbar: #f0ece3;
+    --bg-card: #ffffff;
+    --bg-quote: #f6f2ea;
+    --bg-tag: #eee8dd;
+    --text-primary: #2f2820;
+    --text-body: #4a3f35;
+    --text-secondary: #5e5043;
+    --text-muted: #756656;
+    --primary: #1b9dce;
+    --primary-light: rgba(27, 157, 206, 0.12);
+    --primary-border: rgba(27, 157, 206, 0.35);
+    --accent: #b86b11;
+    --accent-light: rgba(244, 196, 78, 0.22);
+    --border-color: rgba(74, 63, 53, 0.12);
+    --border-strong: rgba(74, 63, 53, 0.22);
+    --taupe-fab: rgba(105, 90, 74, 0.94);
+    --shadow: 0 4px 18px rgba(47, 40, 32, 0.08);
+    color-scheme: light;
+  }
+
+  html[data-theme="light"] .ro-header-wrap {
+    background: linear-gradient(180deg, #fbf8f4 70%, rgba(251, 248, 244, 0));
+  }
+
+  html[data-theme="light"] .ro-menu-circle {
+    background: #67c3eb;
+    color: #1f1a15;
+  }
+
+  html[data-theme="light"] .ro-cta-pill {
+    background: #f6c84c;
+    color: #2f2820;
+  }
+
+  html[data-theme="light"] .ro-bottom-toc,
+  html[data-theme="light"] .ro-up-btn {
+    color: #ffffff;
+  }
+
+  html[data-theme="light"] .ro-drawer-list a.active {
+    background: #f6c84c;
+    border-color: #e0b034;
+    color: #2f2820 !important;
+  }
+
+  html[data-theme="light"] .zh-box strong,
+  html[data-theme="light"] .quote-tw strong {
+    color: #8c4d06;
+    background: rgba(246, 200, 76, 0.28);
+  }
+
+  .ro-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .ro-theme-btn {
+    appearance: none;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    transition: transform 0.15s ease;
+  }
+
+  .ro-theme-btn:active {
+    transform: scale(0.96);
+  }
+
+</style>
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem('biowiki-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<!-- Reading Outpost Dark Style Shell -->
+<div class="ro-header-wrap">
+  <div class="ro-pillbar">
+    <div class="ro-brand-group">
+      <button class="ro-menu-circle" type="button" aria-label="開啟專題選單" onclick="roOpenDrawer('roSiteDrawer')">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="ro-brand-link" href="index.html">
+        <span class="ro-brand-zh">400X 的日常切片</span>
+        <span class="ro-brand-en">BIO-WIKI EVIDENCE</span>
+      </a>
+    </div>
+    <div class="ro-top-actions">
+      <button class="ro-theme-btn" id="roThemeBtn" type="button" onclick="roToggleTheme()">☀️ 亮色</button>
+      <button class="ro-cta-pill" type="button" onclick="roOpenDrawer('roSiteDrawer')">專題目錄</button>
+    </div>
+  </div>
+</div>
+
+<div class="ro-drawer-backdrop" id="roSiteDrawer" onclick="if(event.target===this)roCloseDrawer('roSiteDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📚 Bio-Wiki 全站專題</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roSiteDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list">
+            <a href="index.html">🏠 首頁：主題分類總覽</a>
+      <a href="chromatin.html">1. 染色質與染色體本質</a>
+      <a href="wheat-polygenic.html">2. 小麥多基因累加模型 (Campbell 14e)</a>
+      <a href="spermatogonia-hole.html">3. 精原細胞與生精歷程 (跨正典考證)</a>
+      <a href="griffith-transformation.html">4. Griffith 轉形作用</a>
+      <a href="promoter-tata-box.html">5. 啟動子、TATA 匣與甲基化</a>
+      <a href="sickle-cell-dominance.html">6. 鐮刀型貧血顯隱性層次分析</a>
+      <a href="endosymbiosis.html">7. 內共生假說與演化序列</a>
+      <a href="lactose-intolerance-lac-operon.html">8. 乳糖不耐症與大腸桿菌 lac 操縱組</a>
+      <a href="operon-inference-pierce.html">9. Pierce 操縱組推論過程</a>
+      <a href="gene-allele-dna-chromosome.html">10. 遺傳因子、基因、等位基因與染色體</a>
+      <a href="oogenesis-interphase-dyad.html">11. 初級卵母細胞、間期與二分體</a>
+      <a href="xy-synapsis-crossing-over.html">12. 人類 XY 染色體聯會、互換與四分體判定</a>
+      <a href="chromosome-breakage-cri-du-chat.html" class="active">13. 染色體斷裂成因與貓叫症（5p 缺失）</a>
+    </div>
+  </div>
+</div>
+
+<div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📑 本篇段落導覽</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list" id="roTocList" onclick="roCloseDrawer('roTocDrawer')"></div>
+  </div>
+</div>
+
+<div class="ro-lightbox" id="roLightbox" onclick="this.classList.remove('open')">
+  <img id="roLightboxImg" alt="">
+</div>
+
+<main class="container" id="top">
+
+  <div class="hero">
+    <div class="badge-bar">
+      <span class="badge badge-primary">高中易讀版</span>
+      <span class="badge badge-accent">遺傳與分子生物學</span>
+      <span class="badge">7 部原文正典 · 6 張原圖</span>
+    </div>
+    <h1>染色體真的會斷裂嗎？為什麼會斷？與貓叫症（5p 缺失）的真實成因</h1>
+    <p class="subtitle">課本裡的染色體看起來像一根實心的「X」，但其實正常人類細胞每天都在發生 10～100 次染色體斷裂！究竟是什麼弄斷了它？而高中必考的「貓叫症」是因為隨機斷裂，還是有某種酵素專一跑去剪第 5 號染色體？</p>
+  </div>
+
+  <!-- 一分鐘結論 -->
+  <div class="tldr-card">
+    <div class="tldr-label">⚡ 一分鐘抓重點：先破除三大直覺迷思</div>
+    <div class="timeline">
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>1</span>染色體真的會斷裂嗎？→ 會，正常人類細胞每天自然發生約 10–100 次</div>
+        <p style="margin-bottom:0;">染色體的本體是一條極長極細的雙股 DNA 分子；當兩條骨架的磷酸二酯鍵在相近處同時斷開，就是<strong>DNA 雙股斷裂（DSB）</strong>，也就是染色體斷成兩截。</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>2</span>為什麼會斷裂？→ 分成「意外被動斷裂」與「細胞主動刻意切斷」</div>
+        <p style="margin-bottom:0;"><strong>意外來源</strong>包括游離輻射、有氧呼吸副產物（活性含氧物 ROS）、DNA 複製叉崩潰、端粒失效被紡錘絲拉斷；<strong>主動來源</strong>則是減數分裂 Spo11 刻意切斷啟動互換、免疫細胞 RAG 酵素重排抗體基因。</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>3</span>貓叫症和「專一酵素分解特定位點」有關嗎？→ 無關！</div>
+        <p style="margin-bottom:0;">貓叫症（46,5p−）是第 5 號染色體短臂偶發斷裂後未能重接造成的缺失；患者<strong>確切斷裂點因人而異、缺失長度大小不一</strong>，這正是它屬於隨機偶發斷裂而非專一酵素定點切割的最直接證據。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 1 -->
+  <section id="sec-why-break">
+    <h2><span class="sec-num">01</span> 為什麼染色體會斷裂？分成「意外」與「刻意」兩大類</h2>
+    <p>很多高中生看到染色體插圖，會直覺以為它像塑膠棒一樣結實。其實染色體是極長的雙股 DNA 纏繞蛋白質而成，DNA 骨架靠化學鍵（磷酸二酯鍵）串起來。如果只斷一股，另一股還能當備份迅速補回；但當兩股在相近位置一起斷開（<strong>DNA 雙股斷裂，double-strand break, DSB</strong>），染色體就真的斷成兩段了。</p>
+
+    <h3>（一）意外被打斷或拉斷（被動斷裂）——構造變異的起點</h3>
+    <div class="layer-list">
+      <div class="layer-item">
+        <span class="layer-badge">1. 物理與化學攻擊</span>
+        <div><strong>高能游離輻射（X 射線、γ 射線）</strong>能量高、穿透力強，能把原子中的電子撞出來，直接打斷 DNA 雙股骨架上的磷酸二酯鍵（Pierce 7e Ch18）；特定化學誘變劑、化療藥物與病毒也會誘發斷裂。</div>
+      </div>
+      <div class="layer-item">
+        <span class="layer-badge">2. 細胞呼吸副產物</span>
+        <div>就算整天待在室內沒照 X 光，細胞行有氧呼吸時仍會自然產生<strong>活性含氧物（ROS，課本常稱活性氧或自由基）</strong>，會氧化破壞 DNA 鹼基與骨架——這正是人類細胞每天自發產生 10～100 次雙股斷裂的主因之一（Brooker 8e Ch19）。</div>
+      </div>
+      <div class="layer-item">
+        <span class="layer-badge">3. DNA 複製出車禍</span>
+        <div>S 期高速複製 DNA 時，若原本模板股上剛好有一個還沒補好的「單股小缺口」，複製機器一路解鏈衝過去，失去另一股支撐的那一邊就會直接斷開脫落，稱為<strong>複製叉崩潰</strong>（Alberts ECB6 Ch06）。</div>
+      </div>
+      <div class="layer-item">
+        <span class="layer-badge">4. 分裂時機械拉斷</span>
+        <div>染色體兩端原本靠端粒保護避免亂黏；若端粒耗損或斷端誤黏，形成「帶有兩個中節」的異常染色體，進入分裂後期時紡錘絲把兩個中節往相反兩極硬扯，就會把中間的染色體<strong>物理拉斷</strong>（Weinberg Ch10、Klug Ch08）。</div>
+      </div>
+    </div>
+
+    <h3>（二）細胞自己「刻意切斷」（主動／正常生理性斷裂）</h3>
+    <p>斷裂不一定都是意外災難！為了完成兩件極為重要的生命任務，細胞其實會派出專屬酵素<strong>有計畫地切斷自己的染色體</strong>：</p>
+    <ul>
+      <li><strong>減數分裂前期 I 的「互換」</strong>：同源染色體不是靠在一起就會自然融合交換，而是細胞先派出 <strong>Spo11 酵素</strong>主動切開其中一條染色分體的雙股 DNA，再啟動同源重組修復系統去找另一條同源染色體對接交換（Goldberg 7e Ch06；高中三民版備課用書也稱之為「有計畫性的 DNA 雙股斷裂」）。</li>
+      <li><strong>免疫細胞製造上億種抗體（V(D)J 重組）</strong>：發育中的 B 細胞與 T 細胞利用 <strong>RAG1／RAG2 重組酶</strong>刻意切開抗體基因片段、重新洗牌拼接，才能用有限基因應付千變萬化的病原體（Janeway 10e Ch05、Goldberg 7e Ch14）。</li>
+      <li><strong>解開 DNA 纏結（拓樸異構酶 II）</strong>：複製或轉錄時 DNA 過度扭轉打結，拓樸異構酶 II 會暫時切斷雙股讓另一段穿過解結，再立刻縫合（Becker 10e Ch17）。</li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-title">🔧 每天斷 10～100 次，為什麼我們沒有全身突變？</div>
+      <p style="margin-bottom:0;">因為細胞內建了強大的 <strong>DNA 雙股斷裂修復系統</strong>（圖 1）：包含以未受損姊妹染色分體為範本、精準無誤的<strong>同源重組修復（HR）</strong>，以及搶快先把斷端黏回、但常少掉幾個鹼基的<strong>非同源末端接合（NHEJ）</strong>。絕大多數斷裂會立刻修好；<strong>只有當斷片遺失、轉 180° 接回，或錯接到別條非同源染色體上</strong>，才會變成高中選修生物一教的四種構造變異——<strong>缺失、重複、倒位、易位</strong>。</p>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 1｜細胞修復 DNA 雙股斷裂的兩種策略（NHEJ vs. 同源重組）</div>
+      <div class="figure-img-wrap">
+        <img src="images/AlbertsECB6_Fig6-30_dsb_nhej_hr.png" alt="Alberts ECB6 圖 6-30 非同源末端接合與同源重組修復 DNA 雙股斷裂">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Alberts Essential Cell Biology 6e, Fig. 6–30</strong>：（A）非同源末端接合（NHEJ）快速封合斷端，但修整過程通常會遺失核苷酸；（B）同源重組（HR）利用未受損姊妹雙螺旋當範本，能毫無錯誤地恢復原始序列。</div>
+      <div class="figure-caption-en">Original caption: Figure 6–30 Cells can repair double-strand breaks in one of two ways: (A) nonhomologous end joining; (B) homologous recombination.</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 2｜細胞「主動切斷」實例：減數分裂由 Spo11 製造雙股斷裂啟動互換</div>
+      <div class="figure-img-wrap">
+        <img src="images/Goldberg7e_Fig6-27_spo11_meiotic_dsb.png" alt="Goldberg 7e 圖 6.27 Spo11 在減數分裂啟動雙股斷裂與同源重組模型">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Goldberg Genetics 7e, Fig. 6.27</strong>：減數分裂互換的第一步，正是由 Spo11 蛋白刻意在非姊妹染色分體之一切出雙股斷裂，再經末端切除、股侵入與 DNA 合成完成互換。</div>
+      <div class="figure-caption-en">Original caption: Feature Figure 6.27 A Model of Recombination at the Molecular Level (double-strand-break repair model initiated by Spo11).</div>
+    </div>
+  </section>
+
+  <!-- Section 2 -->
+  <section id="sec-cri-du-chat">
+    <h2><span class="sec-num">02</span> 貓叫症是因為這樣嗎？和「專一酵素分解特定位點」有關嗎？</h2>
+    <p><strong>第一問：貓叫症是因為染色體斷裂嗎？——是的！</strong><br>
+    貓叫症（<em>cri-du-chat syndrome</em>，核型 46,5p−）就是因為<strong>第 5 號染色體短臂（p 臂）發生斷裂後未能重新接合</strong>，失去中節的末端片段在細胞分裂時無法被紡錘絲帶進子細胞核而被分解遺失（圖 3、圖 4）。大多數病例不是爸媽遺傳來的，而是親代產生精子或卵時<strong>偶發的染色體斷裂與遺失</strong>（Klug Ch08）。缺少這段區域會讓許多基因只剩單一複本（遺傳不平衡），導致胎兒喉頭與聲門發育異常（哭聲近似貓叫）、小頭與動作／認知發展遲緩。</p>
+
+    <p><strong>第二問：這和「酵素專一分解某特定位點」有關嗎？——不是！</strong><br>
+    最直接的反證，就是教科書白紙黑字記載的<strong>「斷點不固定」</strong>：</p>
+    <ul>
+      <li>如果真是某種像限制酶一樣的專一酵素，專門跑去辨識第 5 號染色體上的某個序列把它剪斷，那每位貓叫症患者缺掉的長度應該會高度一致。</li>
+      <li>但實情完全相反：<strong>第 5 號染色體的確切斷裂點因人而異，缺失片段的鹼基對長度大小不一</strong>——有些患者只缺一小段，有些患者缺一大段，且缺失越長通常影響越嚴重（Solomon 11e Ch16、Klug Ch08）。</li>
+      <li>至於為什麼課本老是舉第 5 號染色體短臂當例子、而不是別條染色體？其實各條染色體都可能隨機斷裂，只是斷掉關鍵必需基因的大片段多半在胚胎早期就流產無法出生；5p 缺失的胎兒仍能活產存活，因此在臨床上最具辨識度。</li>
+    </ul>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 3｜染色體斷裂如何產生末端缺失與中間缺失</div>
+      <div class="figure-img-wrap">
+        <img src="images/Brooker8e_Fig8-3_terminal_interstitial_deletion.png" alt="Brooker 8e 圖 8.3 染色體斷裂產生末端缺失與中間缺失">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Brooker Genetics 8e, Fig. 8.3</strong>：染色體單處斷裂後，沒有中節的斷片在分裂時無法被分配進細胞核，最終在細胞質被分解，留下末端缺失染色體（圖 a）；若兩處斷裂、中間段遺失並由外側兩段接合，則形成中間缺失（圖 b）。</div>
+      <div class="figure-caption-en">Original caption: FIGURE 8.3 Production of terminal and interstitial deletions.</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 4｜貓叫症的第 5 號染色體短臂（5p）缺失與基因劑量不平衡</div>
+      <div class="figure-img-wrap">
+        <img src="images/Brooker8e_Fig8-4_cri_du_chat_5p_deletion.png" alt="Brooker 8e 圖 8.4 貓叫症第 5 號染色體短臂缺失核型與特徵">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Brooker Genetics 8e, Fig. 8.4</strong>：其中一條第 5 號染色體的短臂缺少一段，使該區段基因從兩份變成單份（部分單體），引起基因劑量不平衡與多系統發育特徵。</div>
+      <div class="figure-caption-en">Original caption: FIGURE 8.4 Cri-du-chat syndrome. (a) Chromosome 5 from the karyotype of an individual with this disorder. A section of the short arm of one copy of chromosome 5 is missing.</div>
+    </div>
+  </section>
+
+  <!-- Section 3: Comparison -->
+  <section id="sec-compare">
+    <h2><span class="sec-num">03</span> 隨機斷裂 vs. 真的有固定弱點或專一酵素切錯的案例</h2>
+    <p>為了讓高中生徹底分清楚「貓叫症」跟「特定位置／專一酵素出錯」有什麼不同，把教科書裡的四個經典人類疾病擺在一起對照，一眼就能看透：</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>變異型態</th>
+            <th>真正成因</th>
+            <th>斷點是否固定？</th>
+            <th>教科書經典案例（Vault 依據）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-tr">
+            <td><strong>偶發隨機斷裂未重接</strong></td>
+            <td>輻射、活性含氧物、複製意外等導致雙股斷裂後無中節斷片遺失</td>
+            <td><strong>不固定</strong><br>（因人而異、長度不一）</td>
+            <td><strong>貓叫症</strong>（5p 短臂缺失；Solomon 11e Ch16、Klug Ch08）</td>
+          </tr>
+          <tr>
+            <td><strong>高度相似序列錯位不等互換</strong></td>
+            <td>相鄰基因 DNA 序列高達 98% 相同，減數分裂易錯位對齊</td>
+            <td>集中於相似基因區</td>
+            <td><strong>紅綠色盲</strong>（X 染色體紅、綠視蛋白基因不等互換；Pierce 7e Ch08，圖 5）</td>
+          </tr>
+          <tr>
+            <td><strong>固定染色體脆弱位點</strong></td>
+            <td>特定三核苷酸重複（CGG 達 200～1000+ 次）造成結構固定脆弱</td>
+            <td><strong>固定</strong><br>（同家族同一位置）</td>
+            <td><strong>脆弱 X 染色體症</strong>（Solomon 11e Ch16、Klug Ch08）</td>
+          </tr>
+          <tr>
+            <td><strong>真的是「專一酵素」切錯位點</strong></td>
+            <td>免疫細胞負責剪接抗體基因的 <strong>RAG1／RAG2</strong> 酵素辨識失誤</td>
+            <td>集中於抗體重組訊號與 <em>c-myc</em> 附近</td>
+            <td><strong>伯基特氏淋巴瘤</strong>（體細胞第 8、14 號染色體易位；Goldberg 7e Ch14，圖 6）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 5｜對照組 A：高度相似序列錯位不等互換（紅綠色盲）</div>
+      <div class="figure-img-wrap">
+        <img src="images/Pierce7e_Fig8-8_unequal_crossing_over_opsins.jpg" alt="Pierce 7e 圖 8.8 不等互換產生基因重複與缺失">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Pierce Genetics 7e, Fig. 8.8</strong>：當染色體上存在高度相似的相鄰基因（如紅、綠視蛋白基因序列 98% 相同），減數分裂前期 I 容易錯位發生不等互換，同時產生一條重複、一條缺失的染色體。</div>
+      <div class="figure-caption-en">Original caption: Figure 8.8 Unequal crossing over produces duplications and deletions.</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 6｜對照組 B：真的是「專一酵素」切錯位點（伯基特氏淋巴瘤）</div>
+      <div class="figure-img-wrap">
+        <img src="images/Goldberg7e_Ch14_BoxC_rag_burkitt_translocation.png" alt="Goldberg 7e Ch14 Box C RAG1 與 RAG2 錯誤易位導致伯基特淋巴瘤">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Goldberg Genetics 7e, Ch. 14 Box Fig. C</strong>：免疫系統專責切接抗體基因的 RAG1／RAG2 酵素偶爾出錯，把第 14 號染色體的抗體強化子接到第 8 號染色體的 <em>c-myc</em> 旁，造成 B 細胞失控增生。這種才是真的「專一重排酵素切錯位點」。</div>
+      <div class="figure-caption-en">Original caption: Figure C Misguided translocations can help cause Burkitt lymphoma. Apparently, the RagI and RagII enzymes have mistakenly connected a JH segment on chromosome 14 to the c-myc gene from chromosome 8.</div>
+    </div>
+  </section>
+
+  <!-- Section 4: Bilingual Sources -->
+  <section id="sec-sources">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+      <h2 style="margin-bottom:8px;flex:1;"><span class="sec-num">04</span> 經典英文原文教科書逐句考證</h2>
+      <button class="toggle-en-btn" id="toggleEnBtn" type="button" onclick="toggleEnglish()">精簡：隱藏英文原文</button>
+    </div>
+    <p>以下所有英文原文段落均原封不動摘錄自 Vault 正式譯本，提供高中老師與學生完整溯源。</p>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">1. 《Brooker Genetics》8e ＆ 《Alberts Essential Cell Biology》6e</span>
+        <span class="source-loc">Brooker Ch. 19 · Alberts Ch. 06</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">人類細胞每天自然發生約 10–100 次 DNA 雙股斷裂（Brooker 8e Ch. 19）</div>
+        <div class="quote-en">"Of the many types of DNA damage that can occur within living cells, the breakage of chromosomes—called a DNA double-strand break (DSB)—is perhaps the most dangerous. DSBs can be caused by ionizing radiation (X-rays or gamma rays), chemical mutagens, and certain drugs used for chemotherapy. In addition, reactive oxygen species that are the by-products of aerobic metabolism can cause double-strand breaks. Surprisingly, researchers estimate that naturally occurring double-strand breaks in a typical human cell occur at a rate of 10 to 100 breaks per cell per day!"</div>
+        <div class="quote-tw">活細胞各類 DNA 損傷裡，染色體斷裂——即 <strong>DNA 雙股斷裂（DSB）</strong>——最為危險，可由游離輻射、化學誘變劑、化療藥物及有氧代謝副產物<strong>活性含氧物（ROS）</strong>引起。一般人類細胞每天自然發生的 DSB 估計達 <strong>10–100 處</strong>！</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">複製叉意外、輻射與化學傷害（Alberts ECB6 Ch. 06）</div>
+        <div class="quote-en">"But what happens when both strands of a DNA segment are damaged at the same time? Mishaps at the replication fork, radiation, and various chemical assaults can all fracture DNA, creating a double-strand break. Such lesions are particularly dangerous, because they can lead to the fragmentation of chromosomes and the subsequent loss of genes."</div>
+        <div class="quote-tw"><strong>複製叉的意外、輻射及各種化學傷害</strong>都可能使 DNA 斷裂，產生雙股斷裂；這類損傷尤其危險，可能造成染色體碎裂與基因遺失。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">2. 《Pierce Genetics》7e ＆ 《Goldberg Genetics》7e</span>
+        <span class="source-loc">Pierce Ch. 18 · Goldberg Ch. 06 &amp; Ch. 14</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">游離輻射打斷磷酸二酯鍵（Pierce 7e Ch. 18）與 Spo11 主動製造雙股斷裂（Goldberg 7e Ch. 06）</div>
+        <div class="quote-en">[Pierce 7e Ch. 18] "Ionizing radiation such as X-rays and gamma rays damages DNA by dislodging electrons from atoms; these electrons then break phosphodiester bonds and alter the structure of bases."<br><br>[Goldberg 7e Ch. 06] "A meiotic recombination event begins when Spo11 makes a double-strand break in one of the four chromatids (Fig. 6.27, Step 1)."</div>
+        <div class="quote-tw">[Pierce 7e] <strong>游離輻射</strong>透過從原子中驅逐電子損傷 DNA，這些電子隨即<strong>斷裂磷酸二酯鍵</strong>並改變鹼基結構。<br>[Goldberg 7e] 一次減數分裂重組事件開始時，<strong>Spo11</strong> 在四條染色分體之一主動造成<strong>雙股斷裂</strong>。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">專一重排酵素出錯之對照：RAG1／RAG2 與伯基特淋巴瘤（Goldberg 7e Ch. 14）</div>
+        <div class="quote-en">"RagI and RagII are enzymes that interact with DNA sequences in antibody genes to help catalyze the rearrangements just described. Those enzymes sometimes make a mistake that results in a reciprocal translocation between human chromosomes 8 and 14. ... This uncontrolled B-cell division leads to a cancer known as Burkitt lymphoma (Fig. C)."</div>
+        <div class="quote-tw"><strong>RagI 與 RagII</strong> 酵素催化抗體基因重排時偶爾出錯，造成第 8 與第 14 號人類染色體對換式易位，活化 <em>c-myc</em> 而引發<strong>伯基特氏淋巴瘤</strong>。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">3. 《Solomon Biology》11e ＆ 《Klug Concepts of Genetics》</span>
+        <span class="source-loc">Solomon Ch. 16 · Klug Ch. 08</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">貓叫症核心證據：斷裂點因人而異、偶發非遺傳、缺失長度不一</div>
+        <div class="quote-en">[Solomon 11e Ch. 16] "Sometimes chromosomes break and fail to rejoin. ... One deletion disorder (1 in 20,000–50,000 live births) is cri du chat syndrome, in which part of the short arm of chromosome 5 is deleted. As in most deletions, the exact point of breakage in chromosome 5 varies from one individual to another; some cases of cri du chat involve a small loss, whereas others involve a more substantial deletion of base pairs."<br><br>[Klug Ch. 08] "Most often, the condition is not inherited but instead results from the sporadic loss of chromosomal material in gametes. The length of the short arm that is deleted varies somewhat; longer deletions appear to have a greater impact on the physical, psychomotor, and mental skill levels of those children who survive."</div>
+        <div class="quote-tw">[Solomon 11e] 染色體有時會斷裂卻未能重新接合。<strong>如同多數缺失，貓叫症第 5 號染色體的確切斷裂點因人而異</strong>；有些病例只遺失一小部分，其他則有較大量鹼基對缺失。<br>[Klug] <strong>此症多半不是遺傳而來，而是配子偶發失去染色體物質所致</strong>；短臂缺失的長度不一，缺失越長影響似乎越大。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Teaching & Boundary -->
+  <section id="sec-teaching">
+    <h2><span class="sec-num">05</span> 高中教學、常見陷阱與查證邊界</h2>
+
+    <div class="callout">
+      <div class="callout-title">🎯 課堂講解最順的因果鏈（讓學生不用死背名詞）</div>
+      <p style="margin-bottom:0;">先點出「<strong>DNA 雙股斷裂每天都在發生（10～100 次）</strong>」→ 區分「<strong>意外斷裂 vs. 細胞主動切斷（互換）</strong>」→ 說明「<strong>修復成功就沒事；沒接好就變成缺失、重複、倒位、易位</strong>」→ 最後拿「<strong>貓叫症斷點因人而異</strong>」反證它不是專一酵素剪的。</p>
+    </div>
+
+    <h3>常見命題陷阱與審定名詞</h3>
+    <ul>
+      <li><strong>陷阱 1</strong>：「沒照放射線、沒吃致突變物質，染色體就不會斷裂」→ <strong>錯</strong>（細胞有氧呼吸的活性含氧物、複製叉崩潰與減數分裂 Spo11 主動切斷在日常生理就會發生）。</li>
+      <li><strong>陷阱 2</strong>：「貓叫症是特定酵素專一剪斷第 5 號染色體固定位點」→ <strong>錯</strong>（斷點因人而異、缺失大小不一，屬偶發隨機斷裂或異常重組所致）。</li>
+      <li><strong>審定名詞</strong>：臺灣教育部《生命科學名詞》審定 <code>cri-du-chat syndrome</code> 為<strong>貓叫症</strong>（譯本亦見貓哭症候群）；<code>reactive oxygen species</code> 為<strong>活性含氧物</strong>；<code>chromatid</code> 為<strong>染色分體</strong>。</li>
+    </ul>
+
+    <div class="boundary">
+      <div class="callout-title">📌 本機資料庫（Vault）查證邊界聲明</div>
+      <p style="margin-bottom:0;">本頁所有核心機制（每日 10–100 次 DSB、游離輻射與 ROS、複製叉崩潰、Spo11 主動切割、RAG1/2 伯基特氏淋巴瘤易位、紅綠色盲 98% 相似序列不等互換、貓叫症斷點因人而異且多屬偶發）均有上述 7 部正典與高中選修跨版本整合支持。臨床常見補充統計「約 80–85% 貓叫症為新發斷裂、約 10–15% 源自親代平衡易位」之確切百分比目前在 Vault 譯本中查無數字，屬外部臨床統計常識；「5p 缺失胎兒能存活而其他致命大缺失早期淘汰」則係結合 Solomon 11e 大型缺失多致死所作之教學解讀。</p>
+    </div>
+  </section>
+
+
+  <footer>
+    Bio-Wiki 概念考證庫 · 繁體中文與審定名詞遵循臺灣教育部規範 · 原文書與圖片引自 Ze-Agent Vault 正式譯本
+  </footer>
+</main>
+
+<!-- Reading Outpost Bottom Bar & Script -->
+<button class="ro-bottom-toc" type="button" onclick="roOpenDrawer('roTocDrawer')">📑 本篇段落導覽</button>
+<a class="ro-up-btn" href="#top" aria-label="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<script>
+  function roToggleTheme() {
+    var root = document.documentElement;
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('biowiki-theme', next); } catch (e) {}
+    roUpdateThemeBtn();
+  }
+  function roUpdateThemeBtn() {
+    var btn = document.getElementById('roThemeBtn');
+    if (!btn) return;
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.innerHTML = isLight ? '🌙 深色' : '☀️ 亮色';
+    btn.setAttribute('aria-label', isLight ? '切換為深色閱讀模式' : '切換為亮色閱讀模式');
+  }
+  roUpdateThemeBtn();
+  function roOpenDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('open');
+  }
+  function roCloseDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  }
+  function openLightbox(src, alt) {
+    var lb = document.getElementById('roLightbox');
+    var img = document.getElementById('roLightboxImg');
+    if (lb && img) {
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.add('open');
+    }
+  }
+  function toggleEnglish() {
+    document.body.classList.toggle('hide-en');
+    var btn = document.getElementById('toggleEnBtn');
+    if (btn) {
+      btn.textContent = document.body.classList.contains('hide-en')
+        ? '完整：顯示英文原文'
+        : '精簡：隱藏英文原文';
+    }
+  }
+  (function initReadingOutpostShell() {
+    var tocList = document.getElementById('roTocList');
+    var headings = document.querySelectorAll('h2, .card-title');
+    if (tocList && headings.length) {
+      headings.forEach(function(h, idx) {
+        if (!h.id) h.id = 'ro-sec-' + (idx + 1);
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent.trim();
+        tocList.appendChild(a);
+      });
+    }
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th, tr:first-child th')).map(function(th) {
+        return th.innerText.trim().replace(/[\r\n\t ]+/g, ' ');
+      });
+      if (!headers.length) return;
+      table.classList.add('ro-resp-table');
+      table.querySelectorAll('tr').forEach(function(tr) {
+        if (tr.querySelector('th')) return;
+        Array.from(tr.children).forEach(function(td, idx) {
+          if (td.tagName === 'TD' && !td.getAttribute('data-label') && headers[idx]) {
+            td.setAttribute('data-label', headers[idx]);
+          }
+        });
+      });
+    });
+    document.querySelectorAll('main img, .container img, .wrap img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        openLightbox(img.src, img.alt);
+      });
+    });
+  })();
+</script>
+</body>
+</html>
