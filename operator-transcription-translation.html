@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>操作子會不會被轉錄與轉譯產生蛋白質？｜Bio-Wiki</title>
+<style>
+  :root {
+    --bg-primary: #181614;
+    --bg-pillbar: #24201c;
+    --bg-card: #211e1a;
+    --bg-quote: #26221e;
+    --bg-tag: #2d2823;
+    --text-primary: #f6f1ea;
+    --text-body: #ddd5ca;
+    --text-secondary: #bfb5a8;
+    --text-muted: #9a8e80;
+    --primary: #5bc0eb;
+    --primary-light: rgba(91, 192, 235, 0.12);
+    --primary-border: rgba(91, 192, 235, 0.32);
+    --accent: #f4c44e;
+    --accent-light: rgba(244, 196, 78, 0.12);
+    --border-color: rgba(246, 241, 234, 0.09);
+    --border-strong: rgba(246, 241, 234, 0.16);
+    --taupe-fab: rgba(104, 91, 78, 0.94);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+  }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+    font-size: 18px;
+    line-height: 1.78;
+    padding: 0 0 96px 0;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Reading Outpost Signature Top Pill Header */
+  .ro-header-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-primary) 70%, rgba(24, 22, 20, 0));
+  }
+
+  .ro-pillbar {
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .ro-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .ro-menu-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    border: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .ro-menu-circle span {
+    display: block;
+    width: 16px;
+    height: 2.2px;
+    background: #181614;
+    border-radius: 2px;
+  }
+
+  .ro-brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .ro-brand-zh {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-brand-en {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .ro-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .ro-theme-btn {
+    appearance: none;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    transition: transform 0.15s ease;
+  }
+
+  .ro-theme-btn:active {
+    transform: scale(0.96);
+  }
+
+  .ro-cta-pill {
+    appearance: none;
+    background: var(--accent);
+    color: #1c1814;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  /* Main Reading Column */
+  .container {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 22px 0;
+  }
+
+  /* Hero */
+  header.hero {
+    text-align: left;
+    margin-bottom: 32px;
+    padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .badge-bar {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .badge-primary {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary-border);
+  }
+
+  .badge-accent {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: rgba(244, 196, 78, 0.32);
+  }
+
+  h1 {
+    font-size: clamp(26px, 6.2vw, 34px);
+    line-height: 1.38;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    margin: 6px 0 14px;
+    text-align: left;
+  }
+
+  .subtitle {
+    font-size: 17px;
+    line-height: 1.68;
+    color: var(--text-muted);
+    margin: 0;
+    text-align: left;
+  }
+
+  /* Unboxed Article Flow */
+  section {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: 42px;
+    scroll-margin-top: 84px;
+  }
+
+  h2 {
+    font-size: clamp(22px, 5.2vw, 27px);
+    line-height: 1.45;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 44px 0 18px;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+  }
+
+  h2 .sec-num {
+    color: var(--accent);
+    margin-right: 6px;
+    font-weight: 800;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 30px 0 12px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--text-body);
+    margin-bottom: 18px;
+  }
+
+  ul, ol {
+    margin: 0 0 22px 24px;
+    color: var(--text-body);
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+    color: var(--text-body);
+  }
+
+  strong, b {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.9em;
+    background: var(--bg-tag);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 6px;
+  }
+
+  main a:not(.ro-cta-pill):not(.ro-brand-link) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  /* Soft Warm Sub-cards */
+  .tldr-card, .source-card, .callout, .callout-warn, .boundary, .glossary-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 20px 20px;
+    margin: 20px 0;
+  }
+
+  .tldr-card {
+    border-left: 4px solid var(--accent);
+  }
+
+  .callout {
+    border-left: 4px solid var(--primary);
+  }
+
+  .callout-warn {
+    border-left: 4px solid var(--accent);
+  }
+
+  .boundary {
+    border-left: 4px solid var(--text-muted);
+  }
+
+  .tldr-label, .callout-title, .source-book {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 14px;
+  }
+
+  .timeline-step {
+    padding-left: 4px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 12px;
+  }
+
+  .timeline-step:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .timeline-step-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .timeline-step-title span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    font-size: 14px;
+    font-weight: 800;
+    margin-right: 8px;
+  }
+
+  .glossary-item {
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .glossary-item:last-child {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+
+  .glossary-term {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+
+  /* Bilingual Textbook Quote Blocks */
+  .source-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .source-loc {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .quote-block {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .quote-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quote-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .quote-en {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 10px 0 12px;
+    word-break: break-word;
+  }
+
+  body.hide-en .quote-en {
+    display: none;
+  }
+
+  .quote-tw {
+    font-size: 17.5px;
+    line-height: 1.78;
+    color: var(--text-body);
+  }
+
+  .quote-tw strong {
+    color: var(--accent);
+    background: rgba(244, 196, 78, 0.10);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+
+  .toggle-en-btn {
+    appearance: none;
+    background: var(--bg-tag);
+    color: var(--accent);
+    border: 1px solid rgba(244, 196, 78, 0.35);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  /* Figures & Images */
+  .figure-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .figure-title {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding: 12px 16px 4px;
+  }
+
+  .figure-img-wrap {
+    padding: 14px;
+    background: #f8fafc;
+    cursor: zoom-in;
+  }
+
+  main img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 8px;
+    margin: 0 auto;
+    cursor: zoom-in;
+  }
+
+  .zoom-hint {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    padding: 6px 4px 0;
+  }
+
+  .figure-caption {
+    font-size: 15px;
+    line-height: 1.68;
+    color: var(--text-secondary);
+    padding: 10px 16px 8px;
+  }
+
+  .figure-caption-en {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 0 16px 14px;
+  }
+
+  /* Responsive Tables -> Stacked Mobile Cards (< 680px) */
+  .table-wrap {
+    width: 100%;
+    margin: 18px 0 26px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 16px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-body);
+  }
+
+  th {
+    background: var(--bg-pillbar);
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  @media (max-width: 680px) {
+    table.ro-resp-table,
+    table.ro-resp-table thead,
+    table.ro-resp-table tbody,
+    table.ro-resp-table th,
+    table.ro-resp-table td,
+    table.ro-resp-table tr {
+      display: block;
+      width: 100%;
+    }
+
+    table.ro-resp-table thead {
+      display: none;
+    }
+
+    table.ro-resp-table tr {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    table.ro-resp-table td {
+      border: none;
+      border-bottom: 1px dashed var(--border-color);
+      padding: 8px 0;
+      text-align: left !important;
+    }
+
+    table.ro-resp-table td:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    table.ro-resp-table td:first-child {
+      padding-top: 0;
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    table.ro-resp-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+  }
+
+  /* Bottom Floating TOC & Up Button */
+  .ro-bottom-toc {
+    position: fixed;
+    left: 16px;
+    bottom: 20px;
+    z-index: 95;
+    background: var(--taupe-fab);
+    color: #f6f1ea;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 9px 15px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: calc(100vw - 88px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-up-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 95;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--taupe-fab);
+    color: #f6f1ea;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    text-decoration: none !important;
+  }
+
+  /* Drawers & Lightbox */
+  .ro-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ro-drawer-backdrop.open {
+    display: flex;
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-backdrop {
+      align-items: center;
+      padding: 24px;
+    }
+  }
+
+  .ro-drawer-panel {
+    width: 100%;
+    max-width: 500px;
+    max-height: 78vh;
+    overflow-y: auto;
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px 20px 0 0;
+    padding: 18px 18px 28px;
+    box-shadow: var(--shadow);
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-panel {
+      border-radius: 18px;
+    }
+  }
+
+  .ro-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .ro-drawer-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .ro-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .ro-drawer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ro-drawer-list a {
+    display: block;
+    text-decoration: none !important;
+    color: var(--text-body) !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .ro-drawer-list a.active {
+    color: #181614 !important;
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 800;
+  }
+
+  .ro-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    cursor: zoom-out;
+  }
+
+  .ro-lightbox.open {
+    display: flex;
+  }
+
+  .ro-lightbox img {
+    max-width: 100%;
+    max-height: 92vh;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  /* Light Mode Overrides */
+  html[data-theme="light"] {
+    --bg-primary: #fbf8f4;
+    --bg-pillbar: #f0ece3;
+    --bg-card: #ffffff;
+    --bg-quote: #f6f2ea;
+    --bg-tag: #eee8dd;
+    --text-primary: #2f2820;
+    --text-body: #4a3f35;
+    --text-secondary: #5e5043;
+    --text-muted: #756656;
+    --primary: #1b9dce;
+    --primary-light: rgba(27, 157, 206, 0.12);
+    --primary-border: rgba(27, 157, 206, 0.35);
+    --accent: #b86b11;
+    --accent-light: rgba(244, 196, 78, 0.22);
+    --border-color: rgba(74, 63, 53, 0.12);
+    --border-strong: rgba(74, 63, 53, 0.22);
+    --taupe-fab: rgba(105, 90, 74, 0.94);
+    --shadow: 0 4px 18px rgba(47, 40, 32, 0.08);
+    color-scheme: light;
+  }
+
+  html[data-theme="light"] .ro-header-wrap {
+    background: linear-gradient(180deg, #fbf8f4 70%, rgba(251, 248, 244, 0));
+  }
+
+  html[data-theme="light"] .ro-menu-circle {
+    background: #67c3eb;
+    color: #1f1a15;
+  }
+
+  html[data-theme="light"] .ro-cta-pill {
+    background: #f6c84c;
+    color: #2f2820;
+  }
+
+  html[data-theme="light"] .ro-bottom-toc,
+  html[data-theme="light"] .ro-up-btn {
+    color: #ffffff;
+  }
+
+  html[data-theme="light"] .ro-drawer-list a.active {
+    background: #f6c84c;
+    border-color: #e0b034;
+    color: #2f2820 !important;
+  }
+
+  html[data-theme="light"] .quote-tw strong {
+    color: #8c4d06;
+    background: rgba(246, 200, 76, 0.28);
+  }
+</style>
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem('biowiki-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+
+<!-- Reading Outpost Dark Style Shell -->
+<div class="ro-header-wrap" id="top">
+  <div class="ro-pillbar">
+    <div class="ro-brand-group">
+      <button class="ro-menu-circle" type="button" aria-label="開啟專題選單" onclick="roOpenDrawer('roSiteDrawer')">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="ro-brand-link" href="index.html">
+        <span class="ro-brand-zh">400X 的日常切片</span>
+        <span class="ro-brand-en">BIO-WIKI EVIDENCE</span>
+      </a>
+    </div>
+    <div class="ro-top-actions">
+      <button class="ro-theme-btn" id="roThemeBtn" type="button" onclick="roToggleTheme()">☀️ 亮色</button>
+      <button class="ro-cta-pill" type="button" onclick="roOpenDrawer('roSiteDrawer')">專題目錄</button>
+    </div>
+  </div>
+</div>
+
+<!-- Site-Wide Topics Drawer -->
+<div class="ro-drawer-backdrop" id="roSiteDrawer" onclick="if(event.target===this)roCloseDrawer('roSiteDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📚 Bio-Wiki 全站專題</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roSiteDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list">
+      <a href="index.html">🏠 首頁：主題分類總覽</a>
+      <a href="chromatin.html">1. 染色質與染色體本質</a>
+      <a href="wheat-polygenic.html">2. 小麥多基因累加模型 (Campbell 14e)</a>
+      <a href="spermatogonia-hole.html">3. 精原細胞與生精歷程 (跨正典考證)</a>
+      <a href="griffith-transformation.html">4. Griffith 轉形作用</a>
+      <a href="promoter-tata-box.html">5. 啟動子、TATA 匣與甲基化</a>
+      <a href="sickle-cell-dominance.html">6. 鐮刀型貧血顯隱性層次分析</a>
+      <a href="endosymbiosis.html">7. 內共生假說與演化序列</a>
+      <a href="lactose-intolerance-lac-operon.html">8. 乳糖不耐症與大腸桿菌 lac 操縱組</a>
+      <a href="operon-inference-pierce.html">9. Pierce 操縱組推論過程</a>
+      <a href="gene-allele-dna-chromosome.html">10. 遺傳因子、基因、等位基因與染色體</a>
+      <a href="oogenesis-interphase-dyad.html">11. 初級卵母細胞、間期與二分體</a>
+      <a href="xy-synapsis-crossing-over.html">12. 人類 XY 染色體聯會、互換與四分體判定</a>
+      <a href="chromosome-breakage-cri-du-chat.html">13. 染色體斷裂成因與貓叫症（5p 缺失）</a>
+      <a href="operator-transcription-translation.html" class="active">14. 操作子會不會被轉錄與轉譯？（基因 vs. 子）</a>
+    </div>
+  </div>
+</div>
+
+<!-- In-Page TOC Drawer -->
+<div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📑 本篇段落導覽</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list" id="roTocList" onclick="roCloseDrawer('roTocDrawer')"></div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="ro-lightbox" id="roLightbox" onclick="this.classList.remove('open')">
+  <img id="roLightboxImg" src="" alt="">
+</div>
+
+<main class="container">
+
+  <header class="hero">
+    <div class="badge-bar">
+      <span class="badge badge-primary">分子生物與基因表現</span>
+      <span class="badge badge-accent">高中易讀版</span>
+      <span class="badge">10 部正典 · 5 張原圖</span>
+    </div>
+    <h1>操作子會不會被轉錄與轉譯產生蛋白質？</h1>
+    <p class="subtitle">一次解開「調節基因、結構基因」為何叫「基因」，而「啟動子、操作子」卻叫「子」——從高中核心觀念到乳糖（<em>lac</em>）與色胺酸（<em>trp</em>）操縱組的鹼基座標真相。</p>
+  </header>
+
+  <!-- TL;DR Card -->
+  <div class="tldr-card">
+    <div class="tldr-label">⚡ 一句話先講結論（高中生三步驟秒懂）</div>
+    <p><strong>操作子（operator）不會轉譯產生蛋白質。</strong>它只是一段留在 DNA 上供抑制蛋白結合的調控序列，真正負責製造抑制蛋白的是位在操縱組外的「<strong>調節基因</strong>」。至於「會不會被轉錄進 mRNA」，則取決於操作子相對於轉錄起始點（+1）的位置。</p>
+    <div class="timeline">
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>1</span>看名字最後一個字，秒分「會不會做蛋白質」</div>
+        <p style="margin-bottom:0;">結尾叫「<strong>基因</strong>」（調節基因、結構基因）＝會轉錄並轉譯出蛋白質；結尾叫「<strong>子</strong>」（啟動子、操作子、終止子）＝DNA 上的調控序列／結合位點，本身不編碼蛋白質。</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>2</span>第一關：會不會「轉譯」產生抑制蛋白？→ 絕對不會</div>
+        <p style="margin-bottom:0;">從高中七版課本到大學分生正典完全一致：操作子不是編碼抑制蛋白的基因；抑制蛋白由擁有自身啟動子的調節基因（如 <em>lacI</em>、<em>trpR</em>）獨立表現。</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>3</span>第二關：會不會「被轉錄」進 mRNA？→ 視操縱組位置而定</div>
+        <p style="margin-bottom:0;">在<strong>色胺酸（<em>trp</em>）操縱組</strong>，操作子夾在啟動子內部（−35 與 −10 區之間）；在<strong>乳糖（<em>lac</em>）操縱組</strong>，主操作子 <strong>O₁</strong> 位在轉錄起點（+1）正下游（中心 +11），操縱組開啟時其部分核苷酸<strong>確實會被順路轉錄進 mRNA 前端</strong>，但仍位在編碼起點（ATG）之前，不會轉譯成抑制蛋白。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 1 -->
+  <section id="sec-naming">
+    <h2><span class="sec-num">01</span> 為什麼叫「調節基因、結構基因」，卻叫「啟動子、操作子」？</h2>
+    <p>讀原核生物的操縱組（operon）時，最常見的困惑就是：為什麼同一個章節裡，有的名詞結尾叫「<strong>基因</strong>」，有的卻叫「<strong>子</strong>」，而不叫做「啟動基因」或「操作基因」？</p>
+    <p>其實，這個命名差異就是整個操縱組最直覺的解題密碼——<strong>在分子生物學與臺灣教育部審定術語中，「基因（gene）」代表能表現出功能產物（蛋白質或功能性 RNA）的編碼區段；而「子（-er / -or）」則代表 DNA 上執行控制功能的特定序列位點</strong>。</p>
+
+    <div class="table-wrap">
+      <table class="ro-resp-table">
+        <thead>
+          <tr>
+            <th>名稱類別</th>
+            <th>操縱組相關名詞</th>
+            <th>英文對應</th>
+            <th>DNA 上的身分</th>
+            <th>會不會轉譯產生蛋白質？</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>結尾是「<strong>基因</strong>」</td>
+            <td><strong>調節基因</strong><br><strong>結構基因</strong></td>
+            <td>regulatory <strong>gene</strong><br>structural <strong>gene</strong></td>
+            <td>攜帶多肽藍圖的編碼區段</td>
+            <td><strong>會。</strong><br>• 調節基因（<em>lacI</em>、<em>trpR</em>）→ 產生<strong>抑制蛋白</strong><br>• 結構基因（<em>lacZ</em>、<em>lacY</em>、<em>lacA</em> 等）→ 產生代謝<strong>酵素</strong></td>
+          </tr>
+          <tr>
+            <td>結尾是「<strong>子</strong>」</td>
+            <td><strong>啟動子</strong><br><strong>操作子</strong><br>（終止子）</td>
+            <td>promot<strong>er</strong><br>operat<strong>or</strong><br>（terminat<strong>or</strong>）</td>
+            <td>DNA 上的<strong>調控序列（功能結合位點）</strong>，供特定蛋白質辨識與停靠</td>
+            <td><strong>不會。</strong><br>• 啟動子 → 給 <strong>RNA 聚合酶</strong>結合<br>• 操作子 → 給<strong>抑制蛋白</strong>結合<br>• 終止子 → 標示轉錄結束</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>如果把啟動子或操作子叫成「啟動基因」或「操作基因」，同學就會誤以為這兩段 DNA 要負責合成「啟動蛋白」或「操作蛋白」。事實上，<strong>負責製造抑制蛋白的是「調節基因」，而「操作子」只是讓抑制蛋白結合上來的 DNA 結合位點</strong>。</p>
+
+    <div class="callout-warn">
+      <div class="callout-title">⚠️ 高中生最常踩的記憶混亂</div>
+      <p style="margin-bottom:0;">記住一句話就好：<strong>「調節基因造蛋白，操作子只給蛋白黏。」</strong>調節基因通常位在操縱組之外、有自己的啟動子，製造出可擴散的抑制蛋白；操作子則是固定在操縱組內 DNA 上的位點，讓抑制蛋白停靠上來擋住轉錄。</p>
+    </div>
+
+    <h3>六個必懂專有名詞白話解析</h3>
+    <div class="glossary-card">
+      <div class="glossary-item">
+        <div class="glossary-term">操作子（operator）</div>
+        <p style="margin-bottom:0;"><strong>課本定義</strong>：位於操縱組啟動子內或啟動子與第一個結構基因間的一小段特定 DNA 調控序列，供調節蛋白（如抑制蛋白）結合。<br><strong>白話理解</strong>：DNA 上專給抑制蛋白停靠的閘口位點——抑制蛋白坐上來就封路，離開就放行，本身不編碼蛋白質。</p>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">啟動子（promoter）</div>
+        <p style="margin-bottom:0;"><strong>課本定義</strong>：位於基因上游的特定 DNA 序列，供 RNA 聚合酶辨識、結合並決定轉錄起點與方向。<br><strong>白話理解</strong>：RNA 聚合酶上車準備開始轉錄的起跑站標記，本身同樣不編碼蛋白質。</p>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">調節基因（regulatory gene）</div>
+        <p style="margin-bottom:0;"><strong>課本定義</strong>：通常位於操縱組外、擁有自身啟動子並獨立轉錄與轉譯的基因（如 <em>lacI</em>、<em>trpR</em>），其產物為調節蛋白（如抑制蛋白）。<br><strong>白話理解</strong>：真正負責「生產抑制蛋白」的基因，因為會造出蛋白質，所以名字叫「基因」。</p>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">結構基因（structural gene）</div>
+        <p style="margin-bottom:0;"><strong>課本定義</strong>：位於操縱組內、共用同一啟動子與操作子的一群功能相關基因（如 <em>lacZ</em>、<em>lacY</em>、<em>lacA</em>），轉錄成多順反子 mRNA 並分別轉譯出代謝酵素。<br><strong>白話理解</strong>：操縱組裡真正負責「製造代謝酵素」的編碼區段。</p>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">操縱組（operon）</div>
+        <p style="margin-bottom:0;"><strong>課本定義</strong>：原核生物 DNA 上由單一啟動子、操作子與一群功能相關的結構基因構成的協同轉錄單位（調節基因通常位於操縱組外）。<br><strong>白話理解</strong>：細菌把同一條代謝任務的酵素基因排成一排，共用一套開關同步啟閉。</p>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">5′ 非轉譯區（5′ untranslated region, 5′-UTR）</div>
+        <p style="margin-bottom:0;"><strong>課本定義</strong>：mRNA 上位在轉錄起始點（+1）與轉譯起始密碼子（AUG）之間的非編碼段，原核生物此區內含核糖體結合位（RBS）。<br><strong>白話理解</strong>：已經被 RNA 聚合酶抄進 mRNA 前端、但核糖體還不會開始翻譯成胺基酸的前導段落。</p>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 1｜一張圖看懂「調節基因」vs.「操縱組內的啟動子、操作子與結構基因」</div>
+      <div class="figure-img-wrap">
+        <img src="images/Becker10e_Fig20-2_lac_operon_overview.png" alt="Becker 10e 圖 20-2 大腸桿菌乳糖操縱組結構與獨立調節基因 lacI">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Becker's World of the Cell 10e, Fig. 20-2</strong>：左側的 <strong>Regulatory gene（<em>lacI</em>）</strong>擁有獨立啟動子 <em>P</em><sub>I</sub>，經轉錄與轉譯產生 <strong>Repressor protein（R）</strong>；右側的 <strong><em>lac</em> operon</strong> 則由 <em>P</em><sub>lac</sub>（啟動子）、<em>O</em>（操作子）與 <em>lacZ</em>、<em>lacY</em>、<em>lacA</em> 三個結構基因組成。注意圖中紅色的 <em>lac</em>-mRNA 是從啟動子／操作子交界處開始向右延伸，但三個紫色的蛋白質產物只對應到 <em>lacZ</em>、<em>lacY</em>、<em>lacA</em>。</div>
+      <div class="figure-caption-en">Original caption: Figure 20-2 The Lactose (lac) Operon of E. coli. The lac operon consists of a segment of DNA that includes three contiguous genes (lacZ, lacY, and lacA), which are transcribed and regulated coordinately. The nearby regulatory gene lacI encodes the lac repressor protein R. Both the regulatory gene and the lac operon itself contain promoters (PI and Plac, respectively) at which RNA polymerase binds and terminators at which transcription halts. Plac overlaps with the operator site (O) to which the active form of the repressor protein binds. The operon is transcribed into a single long molecule of mRNA that encodes all three polypeptides.</div>
+    </div>
+  </section>
+
+  <!-- Section 2 -->
+  <section id="sec-two-gates">
+    <h2><span class="sec-num">02</span> 把「轉錄」與「轉譯」拆開看：高中層次 vs. 分子生物學實情</h2>
+    <p>同學之所以容易覺得不同課本講法好像「打架」，是因為大家常把「<strong>不會轉譯成蛋白質</strong>」直接等同於「<strong>永遠不會被轉錄</strong>」。其實這兩道關卡要分開檢查：</p>
+
+    <div class="table-wrap">
+      <table class="ro-resp-table">
+        <thead>
+          <tr>
+            <th>比較層次／系統</th>
+            <th>操作子的精確位置</th>
+            <th>操縱組開啟時，操作子會被轉錄進 mRNA 嗎？</th>
+            <th>會被轉譯成抑制蛋白嗎？</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>高中七版課本／普生入門簡化</strong><br>（如 Sadava 12e）</td>
+            <td>泛稱位於啟動子內，或啟動子與結構基因之間</td>
+            <td>高中課本不細考 +1 座標；部分普生教材（如 Sadava 12e）簡化寫成「不被轉錄的調節序列」</td>
+            <td><strong>不會</strong></td>
+          </tr>
+          <tr>
+            <td><strong>色胺酸操縱組</strong><br>（<em>trp</em> operon）</td>
+            <td>完全位於 <em>trp</em> 啟動子內部，夾在 −35 與 −10 序列之間（Alberts ECB6、Weaver 5e、Campbell 13e）</td>
+            <td>位於轉錄起始點（+1）上游的啟動子內部，主要直接阻擋 RNA 聚合酶結合</td>
+            <td><strong>不會</strong></td>
+          </tr>
+          <tr>
+            <td><strong>乳糖操縱組</strong><br>（<em>lac</em> operon）分子細節</td>
+            <td>主操作子 <strong>O₁</strong>（21 bp）中心位於 <strong>+11</strong>，緊鄰 +1 下游，與啟動子 3′ 端及 <em>lacZ</em> 5′ 端相鄰或重疊（Goldberg 7e、Weaver 5e、Pierce 7e、Klug）</td>
+            <td><strong>會有一段被轉錄進 mRNA 前端</strong>（Goldberg 7e 明確記載；Becker 10e 亦描述轉錄通過操作子）</td>
+            <td><strong>不會</strong>（O₁ 位於 <em>lacZ</em> 編碼序列起點 ATG 之前，不編碼抑制蛋白）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>用肉眼直接看鹼基序列：為什麼 <em>lac</em> 操作子「會被轉錄，但不轉譯」？</h3>
+    <p>把大腸桿菌 <em>lac</em> 操縱組的鹼基序列攤開來看（見下方圖 2 與圖 3），所有疑惑會瞬間消失：</p>
+    <ol>
+      <li><strong>沒有乳糖時（關閉）</strong>：<em>lacI</em> 調節基因製造出的抑制蛋白緊密結合在操作子（紫色區域）上，直接擋住 RNA 聚合酶結合啟動子 → <strong>完全不轉錄</strong>。</li>
+      <li><strong>有乳糖時（開啟）</strong>：異乳糖使抑制蛋白離開操作子，RNA 聚合酶從 <strong>Transcriptional start site（+1）</strong>開始向右抄寫 mRNA。因為主操作子 <strong>O₁</strong> 就橫跨在 +1 下游（中心在 +11），RNA 聚合酶出發後<strong>會順路把 O₁ 的部分核苷酸一起轉錄進 mRNA 的最前端</strong>。</li>
+      <li><strong>核糖體從哪裡開始轉譯？</strong>：看圖 2 最右邊標示的 <code>Beginning of lacZ coding sequence (ATG)</code>——真正開始轉譯成 β-半乳糖苷酶蛋白質的起始密碼子還在操作子更右邊（Klug 圖 16.10 標示於 +35 附近）。換句話說，被順路抄進 mRNA 前端的這段操作子序列落在轉錄起點與轉譯起點之間（即 5′ 非轉譯區），<strong>核糖體並不會把它轉譯成抑制蛋白</strong>。</li>
+    </ol>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 2｜關鍵鹼基實證：轉錄起點落在操作子內，而 <em>lacZ</em> 編碼起點（ATG）還在右側！</div>
+      <div class="figure-img-wrap">
+        <img src="images/Goldberg7e_Fig18-16_operator_promoter_overlap.png" alt="Goldberg 7e 圖 18.16 lac 操縱組啟動子、操作子、轉錄起始位點與 lacZ 編碼起點重疊鹼基序列">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Goldberg Genetics 7e, Fig. 18.16</strong>：這張 DNase 足跡定位圖把每一個鹼基畫出來：紫色區塊是 <strong>Operator（操作子）</strong>，箭頭標示的 <strong>Transcriptional start site → mRNA</strong> 正落在紫色操作子中，證明操縱組開啟時操作子右側核苷酸會被轉錄進 mRNA；同時清楚標出 <strong>Beginning of <em>lacZ</em> coding sequence（ATG）</strong> 位於操作子之後，因此操作子不會轉譯產生蛋白質。</div>
+      <div class="figure-caption-en">Original caption: Figure 18.16 Regulatory protein binding sites overlap. The Lac repressor bound to the operator prevents RNA polymerase from binding to the promoter. The binding sites for RNA polymerase and repressor (determined by DNase digestion experiments) show that there is overlap between the operator and promoter. Note the rotational symmetry of nucleotide sequences in the operator (purple) and also in the binding site for CRP-cAMP (green) centered on the black circles.</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 3｜Pierce 7e 鹼基序列放大圖：−35、−10 啟動子區與操作子交界</div>
+      <div class="figure-img-wrap">
+        <img src="images/Pierce7e_Fig16-8_lac_operator_start_site.jpg" alt="Pierce 7e 圖 16.8 lac 操縱組啟動子 3' 端、轉錄起點與操作子重疊區域">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Pierce Genetics 7e, Fig. 16.8</strong>：橘色橢圓標示 <em>lac</em> 抑制蛋白覆蓋的範圍（Operator），可見其左側重疊啟動子（<em>lacP</em>）3′ 端，右側跨過綠色箭頭所示的 <strong>Transcription start site</strong> 並延伸至藍色 <em>lacZ</em> 轉錄區起始端。</div>
+      <div class="figure-caption-en">Original caption: In the lac operon, the operator overlaps the 3′ end of promoter and the 5′ end of the first structural gene.</div>
+    </div>
+
+    <h3>大學分生進階對照：<em>lac</em> 三個操作子（O₁／O₂／O₃）vs. <em>trp</em> 啟動子內操作子</h3>
+    <p>若進一步看大學分子生物學正典（Weaver 5e、Cox 2e、Klug），大腸桿菌 <em>lac</em> 操縱組其實不只一個操作子，而是有三個抑制蛋白結合位：主操作子 <strong>O₁（+11）</strong>、上游輔助操作子 <strong>O₃（−82，位在 <em>lacI</em> 末端）</strong>，以及下游輔助操作子 <strong>O₂（+412，嵌在 <em>lacZ</em> 基因編碼區內部）</strong>。抑制蛋白四聚體同時抓住 O₁ 與 O₂（或 O₃），會把中間 DNA 拉成環狀，使抑制效果由 18 倍大幅提升到 1,300 倍（圖 4）。</p>
+    <p>相對地，在<strong>色胺酸（<em>trp</em>）操縱組</strong>中，操作子則是完全夾在啟動子的 −35 與 −10 辨識序列之間，落在 +1 轉錄起點的上游（圖 5）——這也是為什麼不能一概而論地把所有操縱組的操作子位置畫在同一個點上。</p>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 4｜進階地圖：<em>lac</em> 操縱組三個操作子相對於轉錄起點（+1）之座標</div>
+      <div class="figure-img-wrap">
+        <img src="images/Weaver5e_Fig7-10_three_lac_operators.png" alt="Weaver 5e 圖 7.10 三個 lac 操作子 O3 (-82)、O1 (+11)、O2 (+412) 空間排列與序列對齊">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Weaver Molecular Biology 5e, Fig. 7.10</strong>：(a) 紅色主操作子 <strong>O₁</strong> 中心位於 <strong>+11</strong>（緊鄰藍色 RNAP 結合區下游）；粉紅色輔助操作子 <strong>O₃</strong> 位於 <strong>−82</strong>、<strong>O₂</strong> 位於 <em>lacZ</em> 內部的 <strong>+412</strong>。(b) 三段 21 bp 序列對齊，以中央粗體 G 為對稱中心。</div>
+      <div class="figure-caption-en">Original caption: The three lac operators. (a) Map of the lac control region. The major operator (O1) is shown in red; the two auxiliary operators are shown in pink. The CAP and RNA polymerase binding sites are in yellow and blue, respectively. (b) Sequences of the three operators. The sequences are aligned, with the central G of each in boldface.</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 5｜完美對照組：<em>trp</em> 操縱組的操作子夾在 −35 與 −10 之間、位在 +1 上游</div>
+      <div class="figure-img-wrap">
+        <img src="images/AlbertsECB6_Fig8-7_trp_operator_in_promoter.png" alt="Alberts ECB 6e 圖 8-7 色胺酸操縱組的操作子位於啟動子 -35 與 -10 之間並阻擋 RNA 聚合酶結合">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Alberts Essential Cell Biology 6e, Fig. 8–7</strong>：注意最上方 DNA 刻度：黃色為啟動子 −35 與 −10 辨識區，淺綠色的 <strong>operator</strong> 正夾在兩者之間，位於 <strong>start of transcription（+1）上游</strong>。當色胺酸充足時，活化型 Trp 抑制蛋白結合操作子，直接把 RNA 聚合酶擋在啟動子外。</div>
+      <div class="figure-caption-en">Original caption: Figure 8–7 Genes can be switched off by repressor proteins. If the concentration of tryptophan inside a bacterium is low (left), RNA polymerase (blue) binds to the promoter and transcribes the five genes of the tryptophan operon. However, if the concentration of tryptophan is high (right), the repressor protein (dark green) becomes active and binds to the operator (light green), where it blocks the binding of RNA polymerase to the promoter. The promoter contains two key blocks of DNA sequence information, the –35 and –10 regions, highlighted in yellow, which are recognized by RNA polymerase.</div>
+    </div>
+  </section>
+
+  <!-- Section 3: Bilingual Sources -->
+  <section id="sec-sources">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+      <h2 style="margin-bottom:8px;flex:1;"><span class="sec-num">03</span> 經典英文原文教科書逐句考證</h2>
+      <button class="toggle-en-btn" id="toggleEnBtn" type="button" onclick="toggleEnglish()">精簡：隱藏英文原文</button>
+    </div>
+    <p>以下所有英文原文均原封不動回溯自 Ze-Agent Vault 正式譯本，提供高中教師備課、教甄申論與學生查證之第一手依據。</p>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">1. 《Cox Molecular Biology》2e — 操作子完全不編碼基因產物</span>
+        <span class="source-loc">Ch. 20 細菌基因表現的調控</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">lacO 完全不編碼基因產物，而是影響細胞功能的遺傳基因座</div>
+        <div class="quote-en">"But research on lactose metabolism revealed that some genes encode other kinds of proteins, such as DNA-binding proteins (e.g., the Lac repressor), and that some DNA sequences do not code for a gene product at all, but instead form genetic loci that affect cell function (e.g., lacO, the operator region)."</div>
+        <div class="quote-tw">乳糖代謝研究顯示，有些基因編碼的是其他種類的蛋白質，例如 DNA 結合蛋白（Lac 抑制蛋白），也<strong>有些 DNA 序列完全不編碼基因產物，而是形成影響細胞功能的遺傳基因座（如 <em>lacO</em> 操作子區）</strong>。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">O₁ 緊鄰轉錄起始點；O₂ 位於 lacZ 內、O₃ 位於 lacI 末端</div>
+        <div class="quote-en">"The O1 operator, to which the Lac repressor binds most tightly, abuts the lac operon's transcription start site (Figure 20-5a), but the operon also has two secondary binding sites for the repressor. One (O2) is about 400 bp downstream, within the gene encoding β-galactosidase (lacZ); the other (O3) is about 100 bp upstream, at the end of the lacI gene."</div>
+        <div class="quote-tw">Lac 抑制蛋白結合最緊密的 <strong>O₁ 操作子緊鄰 <em>lac</em> 操縱組的轉錄起始點</strong>；操縱組另有兩個次要結合位：<strong>O₂</strong> 位於下游約 400 bp、在 <em>lacZ</em> 內；<strong>O₃</strong> 位於上游約 100 bp、在 <em>lacI</em> 末端。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">2. 《Goldberg Genetics》7e ＆ 《Becker World of the Cell》10e — 操縱組開啟時，部分操作子核苷酸會被轉錄進 mRNA</span>
+        <span class="source-loc">Goldberg Ch. 18 · Becker Ch. 20</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Goldberg 7e Ch. 18：直接白紙黑字指出操作子部分核苷酸會被轉錄進 mRNA</div>
+        <div class="quote-en">"DNA footprinting experiments showed that some of the nucleotides in the lac operon operator are also part of the lac operon promoter (that is, where RNA polymerase first binds to the gene) (Fig. 18.16). In fact, some of the nucleotides in the operator are actually transcribed into mRNA when the operon is turned on."</div>
+        <div class="quote-tw">DNA 足跡實驗顯示，<em>lac</em> 操縱組操作子中的部分核苷酸，也屬於 <em>lac</em> 操縱組啟動子（圖 18.16）。<strong>事實上，操縱組開啟時，操作子中的部分核苷酸確實會被轉錄進 mRNA。</strong></div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Becker 10e Ch. 20：轉錄從啟動子開始，通過操作子與結構基因</div>
+        <div class="quote-en">"Transcription of the lac operon begins at the promoter, which is the site of RNA polymerase attachment, and then proceeds through the operator and the lacZ, lacY, and lacA genes until finally ending at a terminator sequence. The net result is a single molecule of mRNA encoding the polypeptide products of all three genes."</div>
+        <div class="quote-tw"><em>lac</em> 操縱組的轉錄從啟動子開始；啟動子是 RNA 聚合酶的附著位置。<strong>轉錄接著通過操作子與 <em>lacZ</em>、<em>lacY</em>、<em>lacA</em> 基因</strong>，最後在終止子序列結束。其最終結果是一個 mRNA 分子，編碼這三個基因的多肽產物。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">3. 《Weaver Molecular Biology》5e ＆ 《Klug Concepts of Genetics》 — 精確座標與 trp 對比</span>
+        <span class="source-loc">Weaver Ch. 07 · Klug Ch. 16</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Weaver 5e Ch. 07：O₁ 中心位於 +11；trp 操作子完全位於啟動子內</div>
+        <div class="quote-en">"Figure 7.10 shows the spatial arrangement of these operators, the classical (major) operator O1, centered at position +11, the downstream auxiliary operator O2, centered at position +412, and the upstream auxiliary operator O3, centered at position −82."<br><br>"However, the trp operator lies wholly within the trp promoter, whereas the two loci are merely adjacent in the lac operon."</div>
+        <div class="quote-tw">圖 7.10 顯示這些操作子的空間排列：古典（主要）操作子 <strong>O₁ 中心位於 +11 位置</strong>；下游輔助操作子 <strong>O₂ 中心位於 +412</strong>；上游輔助操作子 <strong>O₃ 中心位於 −82</strong>。<br>然而，<strong><em>trp</em> 操作子完全位於 <em>trp</em> 啟動子之內</strong>，而在 <em>lac</em> 操縱組中，這兩個基因座只是彼此相鄰而已。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Klug Ch. 16：O₁ 長 21 bp，位於 lacZ 編碼序列起點（+35 附近）之正上游</div>
+        <div class="quote-en">"The operator DNA that was previously defined by mutational studies (lacOc) and confirmed by DNA-sequencing analysis is located just upstream from the beginning of the actual coding sequence of the lacZ gene. Crystallographic studies show that the actual region of repressor binding of this primary operator, O1, consists of 21 base pairs."</div>
+        <div class="quote-tw">操作子 DNA <strong>位於 <em>lacZ</em> 基因實際編碼序列起點的正上游</strong>。晶體結構研究顯示，抑制蛋白與主要操作子 <strong>O₁</strong> 實際結合的區域由 <strong>21 個鹼基對</strong>構成。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">4. 《Pierce Genetics》7e ＆ 《Campbell Biology》13e — 調節基因製造抑制蛋白，操作子為結合位點</span>
+        <span class="source-loc">Pierce Ch. 16 · Campbell Ch. 18</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Pierce 7e Ch. 16：調控基因有自身啟動子並轉譯為蛋白質；操作子與啟動子 3′ 端及 lacZ 5′ 端重疊</div>
+        <div class="quote-en">"Although it affects operon function, the regulator gene is not considered part of the operon. The regulator gene has its own promoter and is transcribed into a short mRNA, which is translated into a small protein. This regulator protein can bind to a region of the operon called the operator and affect whether transcription can take place. The operator usually overlaps the 3′ end of the promoter and sometimes the 5′ end of the first structural gene (see Figure 16.3)."</div>
+        <div class="quote-tw">儘管調節基因影響操縱組功能，但並不被視為操縱組的一部分。<strong>調節基因有其自己的啟動子，被轉錄成一段短 mRNA，再轉譯成一個小蛋白質</strong>。這個調節蛋白能結合到操縱組中稱為<strong>操作子</strong>的區域；操作子通常與啟動子的 3′ 端重疊，有時也與第一個結構基因的 5′ 端重疊。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Campbell 13e Ch. 18：操作子是 DNA 開關；調節基因 lacI 位在操縱組外</div>
+        <div class="quote-en">"The on-off switch is a segment of DNA called an operator. Both its location and name suit its function: Positioned within the promoter or, in some cases, between the promoter and the enzyme-coding genes, the operator controls the access of RNA polymerase to the genes."<br><br>"The regulatory gene, lacI, located outside the lac operon, codes for an allosteric repressor protein that can switch off the lac operon by binding to the lac operator."</div>
+        <div class="quote-tw">這個開—關開關是一段稱為<strong>操作子（operator）的 DNA</strong>，位於啟動子之內，或在某些情況下位於啟動子與酵素編碼基因之間，控制 RNA 聚合酶接近這些基因的途徑。<strong>位於 <em>lac</em> 操縱組之外的調節基因 <em>lacI</em>，編碼一個異位調節抑制蛋白</strong>，藉由結合 <em>lac</em> 操作子來關閉 <em>lac</em> 操縱組。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">5. 《Alberts ECB》6e · 《Sadava Life》12e · 《Brock》15e — 簡化表述對照與 5′-UTR 定義</span>
+        <span class="source-loc">Alberts Ch. 08 · Sadava Ch. 16 · Brock Ch. 06</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Alberts ECB 6e Ch. 08：trp 操作子位於啟動子內</div>
+        <div class="quote-en">"Within the operon’s promoter is a short DNA sequence, called the operator (see Figure 8–6), which is recognized by a transcription regulator. When this regulator binds to the operator, it blocks access of RNA polymerase to the promoter, thus preventing transcription of the operon and, ultimately, the production of the tryptophan-synthesizing enzymes."</div>
+        <div class="quote-tw"><strong>操縱組的啟動子內有一小段稱為操作子的 DNA 序列</strong>，可由一種轉錄調控蛋白辨識。當這個調控蛋白與操作子結合時，會阻擋 RNA 聚合酶接近啟動子，因而防止操縱組轉錄。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Sadava 12e Ch. 16：普通生物學入門教材對操作子的簡化表述</div>
+        <div class="quote-en">"In addition to having a promoter, an operon has other regulatory sequences (DNA sequences to which the protein products of regulatory genes bind) that are not transcribed."<br><br>"You can see from this example that a key to transcriptional control of gene expression is the presence of regulatory sequences that do not code for proteins but are binding sites for regulatory proteins and other proteins involved in transcription."</div>
+        <div class="quote-tw">除了啟動子之外，操縱組還具有其他<strong>不被轉錄的調節序列</strong>（即調節基因蛋白質產物結合的 DNA 序列）。基因表現轉錄控制的關鍵之一，是存在<strong>不編碼蛋白質的調節序列</strong>；這些序列是調節蛋白及其他參與轉錄之蛋白質的結合位。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Brock 15e Ch. 06：原核 mRNA 5′-UTR 的位置定義</div>
+        <div class="quote-en">"The 5′ untranslated region (5′-UTR) is a short region between the start of transcription and the start of translation, including the ribosome-binding site (RBS)."</div>
+        <div class="quote-tw"><strong>5′ 非轉譯區（5′-UTR）位在轉錄起點與轉譯起點之間</strong>，含有核糖體結合位（RBS）。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">6. 臺灣高中選修生物一（七版本跨版本整合）</span>
+        <span class="source-loc">高中教材中文整合（三民／全華／南一／康熹／泰宇／龍騰／來源 A）</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">高中七版共同核心定位（無英文原文，僅列中文教材整合）</div>
+        <div class="quote-tw"><strong>操縱組</strong>由啟動子、操作子與一群功能相關的結構基因構成。啟動子是 RNA 聚合酶結合並開始轉錄的位置；<strong>操作子是調節蛋白結合、影響 RNA 聚合酶能否轉錄的 DNA 區域</strong>；結構基因則編碼實際參與代謝或其他功能的蛋白質。製造調節蛋白的<strong>調節基因</strong>通常位於操縱組之外，所以不應把它固定畫進操縱組括號內。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Teaching & Boundary -->
+  <section id="sec-teaching">
+    <h2><span class="sec-num">04</span> 高中教學、常見陷阱、教甄實戰與查證邊界</h2>
+
+    <div class="callout">
+      <div class="callout-title">🎯 課堂講解最順的板書順序（讓高中生徹底不搞混）</div>
+      <p style="margin-bottom:0;">先在黑板把名詞拆成兩欄：左欄「<strong>基因（會造蛋白質）</strong>：調節基因 → 抑制蛋白；結構基因 → 代謝酵素」，右欄「<strong>子（DNA 結合位點）</strong>：啟動子 → RNA 聚合酶；操作子 → 抑制蛋白」。建立清楚的身分邊界後，再補充「乳糖操縱組開啟時，操作子雖可能被 RNA 聚合酶順路掃過而轉錄進 mRNA 前端，但落在起始密碼子之前，絕不轉譯成抑制蛋白」。</p>
+    </div>
+
+    <h3>常見命題陷阱與考場準繩</h3>
+    <ul>
+      <li><strong>陷阱 1（角色錯置）</strong>：「操作子會轉錄並轉譯出抑制蛋白」→ <strong>錯</strong>。製造抑制蛋白的是位於操縱組外的<strong>調節基因（<em>lacI</em>／<em>trpR</em>）</strong>，操作子只是抑制蛋白結合的 DNA 序列（Solomon 11e Ch. 14 複習選擇題直接以此為誘答項）。</li>
+      <li><strong>陷阱 2（偷換層級）</strong>：「抑制蛋白與操作子結合，抑制蛋白質的<strong>轉譯</strong>」→ <strong>錯</strong>。操作子調控的是 <strong>RNA 聚合酶的轉錄</strong>，不是核糖體的轉譯（115 陽交附中教甄第 7 題選項 A 即以此設陷）。</li>
+      <li><strong>陷阱 3（把簡化當唯一真相）</strong>：「操作子在任何情況下都絕對不會被轉錄」→ <strong>視考題層級小心判斷</strong>。高中段考與部分普生課本（如 Sadava 12e）確實採此簡化說法；但遇到進階遺傳學或教甄細問 <em>lac</em> 操作子序列位置時，須知道主操作子 O₁ 中心位於 +11，開啟時部分核苷酸確實會出現在 mRNA 前端（Goldberg 7e Fig. 18.16），只是不轉譯成蛋白質。</li>
+      <li><strong>延伸閱讀（本站相關專題）</strong>：想了解 Jacob 與 Monod 當年如何用部分二倍體與順／反式測試證明操作子是 DNA 位點而非蛋白質基因，請見 <a href="operon-inference-pierce.html">Pierce 操縱組推論過程</a>；想看 <em>lac</em> 操縱組在人類大腸內的真實生態與 CAP–cAMP 正調控，請見 <a href="lactose-intolerance-lac-operon.html">乳糖不耐症與大腸桿菌 lac 操縱組</a>；對啟動子本身有興趣則可對照 <a href="promoter-tata-box.html">啟動子、TATA 匣與甲基化</a>。</li>
+    </ul>
+
+    <div class="boundary">
+      <div class="callout-title">📌 本機資料庫（Vault）查證邊界聲明</div>
+      <p style="margin-bottom:0;">本頁所有核心機制（操作子不編碼基因產物、抑制蛋白由獨立調節基因表現、<em>lac</em> 主操作子 O₁ 位於 +11 且開啟時部分核苷酸會被轉錄進 mRNA、<em>O₂</em> 位於 <em>lacZ</em> 內 +412、<em>trp</em> 操作子位於啟動子內、Sadava 入門簡化表述與高中七版跨版本定位）皆直接回溯自上述 10 部原文書正典與高中跨版本整合檔。至於「將 <em>lac</em> O₁ 被轉錄下來的非編碼區段明確稱為 mRNA 的 5′-UTR」這句單句表述，目前在 Vault 原文書中查無同一句並陳，係依 Goldberg 7e（操作子部分核苷酸轉錄進 mRNA）、Weaver 5e／Klug（O₁ 位於 +11、<em>lacZ</em> 編碼起點位於 +35 附近）與 Brock 15e（5′-UTR 定義為轉錄起點與轉譯起點之間）跨來源整合推導而得；「基因 vs. 子」則為配合臺灣教育部《生命科學名詞》審定譯名所整理之教學構詞對照。</p>
+    </div>
+  </section>
+
+  <footer>
+    Bio-Wiki 概念考證庫 · 繁體中文與審定名詞遵循臺灣教育部規範 · 原文書與圖片引自 Ze-Agent Vault 正式譯本
+  </footer>
+</main>
+
+<!-- Reading Outpost Bottom Bar & Script -->
+<button class="ro-bottom-toc" type="button" onclick="roOpenDrawer('roTocDrawer')">📑 本篇段落導覽</button>
+<a class="ro-up-btn" href="#top" aria-label="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<script>
+  function roToggleTheme() {
+    var root = document.documentElement;
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('biowiki-theme', next); } catch (e) {}
+    roUpdateThemeBtn();
+  }
+  function roUpdateThemeBtn() {
+    var btn = document.getElementById('roThemeBtn');
+    if (!btn) return;
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.innerHTML = isLight ? '🌙 深色' : '☀️ 亮色';
+    btn.setAttribute('aria-label', isLight ? '切換為深色閱讀模式' : '切換為亮色閱讀模式');
+  }
+  roUpdateThemeBtn();
+  function roOpenDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('open');
+  }
+  function roCloseDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  }
+  function openLightbox(src, alt) {
+    var lb = document.getElementById('roLightbox');
+    var img = document.getElementById('roLightboxImg');
+    if (lb && img) {
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.add('open');
+    }
+  }
+  function toggleEnglish() {
+    document.body.classList.toggle('hide-en');
+    var btn = document.getElementById('toggleEnBtn');
+    if (btn) {
+      btn.textContent = document.body.classList.contains('hide-en')
+        ? '完整：顯示英文原文'
+        : '精簡：隱藏英文原文';
+    }
+  }
+  (function initReadingOutpostShell() {
+    var tocList = document.getElementById('roTocList');
+    var headings = document.querySelectorAll('h2');
+    if (tocList && headings.length) {
+      headings.forEach(function(h, idx) {
+        if (!h.id) h.id = 'ro-sec-' + (idx + 1);
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent.trim();
+        tocList.appendChild(a);
+      });
+    }
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th, tr:first-child th')).map(function(th) {
+        return th.innerText.trim().replace(/[\r\n\t ]+/g, ' ');
+      });
+      if (!headers.length) return;
+      table.classList.add('ro-resp-table');
+      table.querySelectorAll('tr').forEach(function(tr) {
+        if (tr.querySelector('th')) return;
+        Array.from(tr.children).forEach(function(td, idx) {
+          if (td.tagName === 'TD' && !td.getAttribute('data-label') && headers[idx]) {
+            td.setAttribute('data-label', headers[idx]);
+          }
+        });
+      });
+    });
+    document.querySelectorAll('main img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        openLightbox(img.src, img.alt);
+      });
+    });
+  })();
+</script>
+</body>
+</html>
