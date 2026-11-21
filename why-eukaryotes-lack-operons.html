@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>為什麼真核細胞幾乎沒有操縱組？｜Bio-Wiki</title>
+<style>
+  :root {
+    --bg-primary: #181614;
+    --bg-pillbar: #24201c;
+    --bg-card: #211e1a;
+    --bg-quote: #26221e;
+    --bg-tag: #2d2823;
+    --text-primary: #f6f1ea;
+    --text-body: #ddd5ca;
+    --text-secondary: #bfb5a8;
+    --text-muted: #9a8e80;
+    --primary: #5bc0eb;
+    --primary-light: rgba(91, 192, 235, 0.12);
+    --primary-border: rgba(91, 192, 235, 0.32);
+    --accent: #f4c44e;
+    --accent-light: rgba(244, 196, 78, 0.12);
+    --border-color: rgba(246, 241, 234, 0.09);
+    --border-strong: rgba(246, 241, 234, 0.16);
+    --taupe-fab: rgba(104, 91, 78, 0.94);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+  }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+    font-size: 18px;
+    line-height: 1.78;
+    padding: 0 0 96px 0;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .ro-header-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-primary) 70%, rgba(24, 22, 20, 0));
+  }
+
+  .ro-pillbar {
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .ro-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .ro-menu-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    border: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .ro-menu-circle span {
+    display: block;
+    width: 16px;
+    height: 2.2px;
+    background: #181614;
+    border-radius: 2px;
+  }
+
+  .ro-brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .ro-brand-zh {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-brand-en {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .ro-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .ro-theme-btn {
+    appearance: none;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    transition: transform 0.15s ease;
+  }
+
+  .ro-theme-btn:active {
+    transform: scale(0.96);
+  }
+
+  .ro-cta-pill {
+    appearance: none;
+    background: var(--accent);
+    color: #1c1814;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .container {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 22px 0;
+  }
+
+  header.hero {
+    text-align: left;
+    margin-bottom: 32px;
+    padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .badge-bar {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .badge-primary {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary-border);
+  }
+
+  .badge-accent {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: rgba(244, 196, 78, 0.32);
+  }
+
+  h1 {
+    font-size: clamp(26px, 6.2vw, 34px);
+    line-height: 1.38;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    margin: 6px 0 14px;
+    text-align: left;
+  }
+
+  .subtitle {
+    font-size: 17px;
+    line-height: 1.68;
+    color: var(--text-muted);
+    margin: 0;
+    text-align: left;
+  }
+
+  section {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: 42px;
+    scroll-margin-top: 84px;
+  }
+
+  h2 {
+    font-size: clamp(22px, 5.2vw, 27px);
+    line-height: 1.45;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 44px 0 18px;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+  }
+
+  h2 .sec-num {
+    color: var(--accent);
+    margin-right: 6px;
+    font-weight: 800;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 30px 0 12px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--text-body);
+    margin-bottom: 18px;
+  }
+
+  ul, ol {
+    margin: 0 0 22px 24px;
+    color: var(--text-body);
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+    color: var(--text-body);
+  }
+
+  strong, b {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.9em;
+    background: var(--bg-tag);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 6px;
+  }
+
+  main a:not(.ro-cta-pill):not(.ro-brand-link) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  .tldr-card, .source-card, .callout, .callout-warn, .boundary, .glossary-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 20px 20px;
+    margin: 20px 0;
+  }
+
+  .tldr-card {
+    border-left: 4px solid var(--accent);
+  }
+
+  .callout {
+    border-left: 4px solid var(--primary);
+  }
+
+  .callout-warn {
+    border-left: 4px solid var(--accent);
+  }
+
+  .boundary {
+    border-left: 4px solid var(--text-muted);
+  }
+
+  .tldr-label, .callout-title, .source-book {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 14px;
+  }
+
+  .timeline-step {
+    padding-left: 4px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 12px;
+  }
+
+  .timeline-step:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .timeline-step-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .timeline-step-title span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    font-size: 14px;
+    font-weight: 800;
+    margin-right: 8px;
+  }
+
+  .source-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .source-loc {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .quote-block {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .quote-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quote-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .quote-en {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 10px 0 12px;
+    word-break: break-word;
+  }
+
+  body.hide-en .quote-en {
+    display: none;
+  }
+
+  .quote-tw {
+    font-size: 17.5px;
+    line-height: 1.78;
+    color: var(--text-body);
+  }
+
+  .quote-tw strong {
+    color: var(--accent);
+    background: rgba(244, 196, 78, 0.10);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+
+  .toggle-en-btn {
+    appearance: none;
+    background: var(--bg-tag);
+    color: var(--accent);
+    border: 1px solid rgba(244, 196, 78, 0.35);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  .figure-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .figure-title {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding: 12px 16px 4px;
+  }
+
+  .figure-img-wrap {
+    padding: 14px;
+    background: #f8fafc;
+    cursor: zoom-in;
+  }
+
+  main img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 8px;
+    margin: 0 auto;
+    cursor: zoom-in;
+  }
+
+  .zoom-hint {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    padding: 6px 4px 0;
+  }
+
+  .figure-caption {
+    font-size: 15px;
+    line-height: 1.68;
+    color: var(--text-secondary);
+    padding: 10px 16px 8px;
+  }
+
+  .figure-caption-en {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 0 16px 14px;
+  }
+
+  .table-wrap {
+    width: 100%;
+    margin: 18px 0 26px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 16px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-body);
+  }
+
+  th {
+    background: var(--bg-pillbar);
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  @media (max-width: 680px) {
+    table.ro-resp-table,
+    table.ro-resp-table thead,
+    table.ro-resp-table tbody,
+    table.ro-resp-table th,
+    table.ro-resp-table td,
+    table.ro-resp-table tr {
+      display: block;
+      width: 100%;
+    }
+
+    table.ro-resp-table thead {
+      display: none;
+    }
+
+    table.ro-resp-table tr {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    table.ro-resp-table td {
+      border: none;
+      border-bottom: 1px dashed var(--border-color);
+      padding: 8px 0;
+      text-align: left !important;
+    }
+
+    table.ro-resp-table td:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    table.ro-resp-table td:first-child {
+      padding-top: 0;
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    table.ro-resp-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+  }
+
+  .ro-bottom-toc {
+    position: fixed;
+    left: 16px;
+    bottom: 20px;
+    z-index: 95;
+    background: var(--taupe-fab);
+    color: #f6f1ea;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 9px 15px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: calc(100vw - 88px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-up-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 95;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--taupe-fab);
+    color: #f6f1ea;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    text-decoration: none !important;
+  }
+
+  .ro-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ro-drawer-backdrop.open {
+    display: flex;
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-backdrop {
+      align-items: center;
+      padding: 24px;
+    }
+  }
+
+  .ro-drawer-panel {
+    width: 100%;
+    max-width: 500px;
+    max-height: 78vh;
+    overflow-y: auto;
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px 20px 0 0;
+    padding: 18px 18px 28px;
+    box-shadow: var(--shadow);
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-panel {
+      border-radius: 18px;
+    }
+  }
+
+  .ro-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .ro-drawer-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .ro-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .ro-drawer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ro-drawer-list a {
+    display: block;
+    text-decoration: none !important;
+    color: var(--text-body) !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .ro-drawer-list a.active {
+    color: #181614 !important;
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 800;
+  }
+
+  .ro-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    cursor: zoom-out;
+  }
+
+  .ro-lightbox.open {
+    display: flex;
+  }
+
+  .ro-lightbox img {
+    max-width: 100%;
+    max-height: 92vh;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  html[data-theme="light"] {
+    --bg-primary: #fbf8f4;
+    --bg-pillbar: #f0ece3;
+    --bg-card: #ffffff;
+    --bg-quote: #f6f2ea;
+    --bg-tag: #eee8dd;
+    --text-primary: #2f2820;
+    --text-body: #4a3f35;
+    --text-secondary: #5e5043;
+    --text-muted: #756656;
+    --primary: #1b9dce;
+    --primary-light: rgba(27, 157, 206, 0.12);
+    --primary-border: rgba(27, 157, 206, 0.35);
+    --accent: #b86b11;
+    --accent-light: rgba(244, 196, 78, 0.22);
+    --border-color: rgba(74, 63, 53, 0.12);
+    --border-strong: rgba(74, 63, 53, 0.22);
+    --taupe-fab: rgba(105, 90, 74, 0.94);
+    --shadow: 0 4px 18px rgba(47, 40, 32, 0.08);
+    color-scheme: light;
+  }
+
+  html[data-theme="light"] .ro-header-wrap {
+    background: linear-gradient(180deg, #fbf8f4 70%, rgba(251, 248, 244, 0));
+  }
+
+  html[data-theme="light"] .ro-menu-circle {
+    background: #67c3eb;
+    color: #1f1a15;
+  }
+
+  html[data-theme="light"] .ro-cta-pill {
+    background: #f6c84c;
+    color: #2f2820;
+  }
+
+  html[data-theme="light"] .ro-bottom-toc,
+  html[data-theme="light"] .ro-up-btn {
+    color: #ffffff;
+  }
+
+  html[data-theme="light"] .ro-drawer-list a.active {
+    background: #f6c84c;
+    border-color: #e0b034;
+    color: #2f2820 !important;
+  }
+
+  html[data-theme="light"] .quote-tw strong {
+    color: #8c4d06;
+    background: rgba(246, 200, 76, 0.28);
+  }
+</style>
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem('biowiki-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+
+<!-- Reading Outpost Dark Style Shell -->
+<div class="ro-header-wrap" id="top">
+  <div class="ro-pillbar">
+    <div class="ro-brand-group">
+      <button class="ro-menu-circle" type="button" aria-label="開啟專題選單" onclick="roOpenDrawer('roSiteDrawer')">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="ro-brand-link" href="index.html">
+        <span class="ro-brand-zh">400X 的日常切片</span>
+        <span class="ro-brand-en">BIO-WIKI EVIDENCE</span>
+      </a>
+    </div>
+    <div class="ro-top-actions">
+      <button class="ro-theme-btn" id="roThemeBtn" type="button" onclick="roToggleTheme()">☀️ 亮色</button>
+      <button class="ro-cta-pill" type="button" onclick="roOpenDrawer('roSiteDrawer')">專題目錄</button>
+    </div>
+  </div>
+</div>
+
+<!-- Site-Wide Topics Drawer -->
+<div class="ro-drawer-backdrop" id="roSiteDrawer" onclick="if(event.target===this)roCloseDrawer('roSiteDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📚 Bio-Wiki 全站專題</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roSiteDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list">
+      <a href="index.html">🏠 首頁：主題分類總覽</a>
+      <a href="chromatin.html">1. 染色質與染色體本質</a>
+      <a href="wheat-polygenic.html">2. 小麥多基因累加模型 (Campbell 14e)</a>
+      <a href="spermatogonia-hole.html">3. 精原細胞與生精歷程 (跨正典考證)</a>
+      <a href="griffith-transformation.html">4. Griffith 轉形作用</a>
+      <a href="promoter-tata-box.html">5. 啟動子、TATA 匣與甲基化</a>
+      <a href="sickle-cell-dominance.html">6. 鐮刀型貧血顯隱性層次分析</a>
+      <a href="endosymbiosis.html">7. 內共生假說與演化序列</a>
+      <a href="lactose-intolerance-lac-operon.html">8. 乳糖不耐症與大腸桿菌 lac 操縱組</a>
+      <a href="operon-inference-pierce.html">9. Pierce 操縱組推論過程</a>
+      <a href="gene-allele-dna-chromosome.html">10. 遺傳因子、基因、等位基因與染色體</a>
+      <a href="oogenesis-interphase-dyad.html">11. 初級卵母細胞、間期與二分體</a>
+      <a href="xy-synapsis-crossing-over.html">12. 人類 XY 染色體聯會、互換與四分體判定</a>
+      <a href="chromosome-breakage-cri-du-chat.html">13. 染色體斷裂成因與貓叫症（5p 缺失）</a>
+      <a href="operator-transcription-translation.html">14. 操作子會不會被轉錄與轉譯？（基因 vs. 子）</a>
+      <a href="lac-operon-sugar-sensing.html">15. 大腸桿菌如何感測葡萄糖與乳糖？</a>
+      <a href="why-eukaryotes-lack-operons.html" class="active">16. 為什麼真核細胞幾乎沒有操縱組？</a>
+    </div>
+  </div>
+</div>
+
+<!-- In-Page TOC Drawer -->
+<div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📑 本篇段落導覽</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list" id="roTocList" onclick="roCloseDrawer('roTocDrawer')"></div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="ro-lightbox" id="roLightbox" onclick="this.classList.remove('open')">
+  <img id="roLightboxImg" src="" alt="">
+</div>
+
+<main class="container">
+
+  <header class="hero">
+    <div class="badge-bar">
+      <span class="badge badge-primary">分子生物與基因表現</span>
+      <span class="badge badge-accent">高中易讀版</span>
+      <span class="badge">8 部正典 · 6 張原圖</span>
+    </div>
+    <h1>為什麼真核細胞幾乎沒有操縱組？</h1>
+    <p class="subtitle">從「真核核糖體只認 5′ 端帽」的轉譯硬限制、分散各染色體的「無線遙控＋密碼鎖」協調調控，到線蟲靠反式剪接「補貼帽子」的絕妙反證。</p>
+  </header>
+
+  <!-- TL;DR Card -->
+  <div class="tldr-card">
+    <div class="tldr-label">⚡ 一句話先講結論（先校準前提，再抓三大原因）</div>
+    <p>真核細胞的核基因是「<strong>幾乎沒有</strong>」細菌式操縱組（但並非 100% 零例外——線蟲 <em>C. elegans</em> 與內共生胞器葉綠體就是精彩例外）。絕大多數真核細胞不採細菌式操縱組，背後有三個關鍵原因：</p>
+    <div class="timeline">
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>1</span>核糖體「讀法」的硬限制：只認 5′ 端帽，讀不了後面的基因</div>
+        <p style="margin-bottom:0;">細菌核糖體能從多順反子 mRNA 中間的多個核糖體結合位空降起跑；真核核糖體卻仰賴最前端的 <strong>5′ 端帽</strong>往下掃描找第一個 AUG。如果把三個基因串在同一條 mRNA，<strong>只有第一個基因有帽子能被有效轉譯</strong>（Weaver 5e；Alberts ECB6；Lodish 9e）。</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>2</span>更好的替代方案：把「延長線」升級成「無線遙控器＋密碼鎖」</div>
+        <p style="margin-bottom:0;">真核不需把相關基因硬塞在同一段 DNA，只要讓散落在不同染色體的基因各自裝上相同的<strong>調控元件／回應元件</strong>，單一轉錄活化蛋白（如類固醇激素受體、熱休克因子）就能同時開啟整組基因（Campbell 13e；Alberts ECB6；Sadava 12e）。</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>3</span>多細胞分化需要高度彈性（組合調控＋染色質＋細胞尺度）</div>
+        <p style="margin-bottom:0;">多細胞生物有數百種分化細胞，靠獨立啟動子與強化子的<strong>組合式調控</strong>才能自由排列搭檔；加上真核細胞體積較大、隨機生化波動影響較小，也更不需靠操縱組綁死多個基因（Campbell 13e；Pierce 7e）。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 1 -->
+  <section id="sec-cap-limit">
+    <h2><span class="sec-num">01</span> 最硬的分子限制：真核核糖體只認 5′ 端帽，讀不了多順反子 mRNA</h2>
+    <p>很多同學直覺以為，把同一條代謝路徑的 3 個基因排在一起共用 1 個啟動子很省事，為什麼人類細胞不這樣做？答案最直接的卡關點就在<strong>核糖體尋找起始密碼子（AUG）的方式</strong>：</p>
+
+    <div class="table-wrap">
+      <table class="ro-resp-table">
+        <thead>
+          <tr>
+            <th>比較項目</th>
+            <th>原核細胞（細菌）</th>
+            <th>真核細胞（絕大多數核基因）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>典型 mRNA 類型</strong></td>
+            <td><strong>多順反子 mRNA</strong>（一條編碼多種蛋白質）</td>
+            <td><strong>單順反子 mRNA</strong>（一條只編碼一種蛋白質）</td>
+          </tr>
+          <tr>
+            <td><strong>核糖體怎麼找起點？</strong></td>
+            <td>每個編碼區前面都有獨立的<strong>核糖體結合位（Shine–Dalgarno 序列）</strong>，核糖體可直接從 mRNA 中間結合起跑</td>
+            <td>核糖體小次單元必須先辨認 mRNA 最前端的 <strong>5′ 端帽（5′ cap）</strong>，再沿 5′ → 3′ 方向掃描找第一個 AUG</td>
+          </tr>
+          <tr>
+            <td><strong>如果把 3 個基因串成 1 條 mRNA？</strong></td>
+            <td>3 個基因各有停靠點 → <strong>3 種蛋白質都能順利同時轉譯</strong></td>
+            <td>只有最前面的第 1 個基因有 5′ 端帽 → <strong>後面 2 個基因幾乎無法有效轉譯</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 1｜原核多順反子 mRNA：三個深藍色核糖體結合位，讓細菌核糖體直接從中間空降</div>
+      <div class="figure-img-wrap">
+        <img src="images/AlbertsECB6_Fig7-42_prokaryotic_polycistronic_rbs.png" alt="Alberts ECB 6e 圖 7-42 原核多順反子 mRNA 上有三個內部核糖體結合位，可同時合成三種不同蛋白質">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Alberts Essential Cell Biology 6e, Fig. 7–42</strong>：細菌 mRNA 沒有真核的 5′ 端帽（5′ 端只有三磷酸），但每個蛋白質編碼區前面都配有獨立的<strong>核糖體結合位（深藍色）</strong>。細菌核糖體能直接結合在 mRNA 內部，因此操縱組轉錄出的單一條 mRNA 能同時合成 protein α、β、γ 三種不同蛋白質。</div>
+      <div class="figure-caption-en">Original caption: Figure 7–42 A single prokaryotic mRNA molecule can encode several different proteins. Bacterial ribosomes initiate translation at ribosome-binding sites (dark blue), which can be located in the interior of an mRNA molecule.</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 2｜真核單順反子 mRNA：核糖體只認最前端的 5′ 端帽，一路掃描找第一個 AUG</div>
+      <div class="figure-img-wrap">
+        <img src="images/AlbertsECB6_Fig7-41_eukaryotic_5cap_scanning.png" alt="Alberts ECB 6e 圖 7-41 真核核糖體小次單元結合 mRNA 5' 端帽後沿 5' 至 3' 掃描尋找第一個 AUG">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Alberts Essential Cell Biology 6e, Fig. 7–41</strong>：真核核糖體小次單元裝載起始 tRNA 與起始因子後，會先結合在 mRNA 最前端的 <strong>5′ cap</strong>，再往 3′ 端掃描直到遇見第一個 AUG。因為缺乏細菌式的內部降落站，一條成熟真核 mRNA 通常只轉譯出單一種蛋白質。</div>
+      <div class="figure-caption-en">Original caption: Figure 7–41 Initiation of protein synthesis in eukaryotes requires translation initiation factors and a special initiator tRNA. The small ribosomal subunit loaded with the initiator tRNA binds to the 5′ end of an mRNA molecule, which is marked by the 5′ cap, and then scans the mRNA searching for the first AUG.</div>
+    </div>
+  </section>
+
+  <!-- Section 2 -->
+  <section id="sec-alternative">
+    <h2><span class="sec-num">02</span> 更好的替代方案：把「延長線」升級成「無線遙控器＋密碼鎖」</h2>
+    <p>細菌把相關基因排在同一段 DNA 上組成操縱組，就像把幾台電器插在同一條<strong>延長線</strong>上共用總開關。那真核細胞沒有操縱組，怎麼同時打開散落在不同染色體上的相關基因？</p>
+    <p>真核細胞靠的是「<strong>共用調控元件／回應元件</strong>」加上「<strong>組合式調控</strong>」——就像幫分散在不同房間的電器裝上<strong>同一頻率的無線遙控接收器</strong>，而且還升級成<strong>密碼鎖</strong>（Campbell 13e Ch. 18；Alberts ECB6 Ch. 08；Sadava 12e Ch. 16）：</p>
+    <ul>
+      <li><strong>植物乾旱逆境（圖 3）</strong>：面對缺水時，植物必須同時開啟多個保護基因；這些基因散布在全基因體各處，但只要啟動子旁都帶有一段共同的<strong>逆境反應元件（SRE）</strong>，同一個轉錄因子就能同步啟動基因 A、B、C（Sadava 12e Ch. 16）。</li>
+      <li><strong>人類皮質醇與雌激素（圖 4）</strong>：類固醇激素與受體結合進核後，同時結合多個分散基因的激素回應元件，宛如幫多把密碼鎖同時輸入最後一個號碼，讓整組基因同步開啟（Alberts ECB6 Ch. 08；Campbell 13e Ch. 18）。</li>
+      <li><strong>多細胞分化的組合彈性（圖 5）</strong>：肝細胞與眼睛水晶體細胞明明帶著完全相同的 DNA，但白蛋白基因和晶體蛋白基因各有獨立啟動子與含不同元件組合的<strong>強化子（enhancer）</strong>——肝細胞只開白蛋白、水晶體細胞只開晶體蛋白（Campbell 13e Fig. 18.12）。如果把基因硬綁死在操縱組裡，反而喪失這種隨組織自由排列搭檔的彈性。</li>
+      <li><strong>細胞體積與生化噪音假說（演化觀點）</strong>：Pierce <em>Genetics</em> 7e Ch. 16 指出（Igoshin &amp; Ray 模型），細菌體積小、分子數少，把基因串成操縱組能降低轉錄轉譯的隨機波動噪音；真核細胞體積大得多，隨機波動影響較小，且已演化出染色質結構改變與核內轉錄工廠等耦聯機制，因此更不需要操縱組。</li>
+    </ul>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 3｜真核的「無線遙控器」：分散各處的基因 A、B、C 靠共用 SRE 同步啟動</div>
+      <div class="figure-img-wrap">
+        <img src="images/Sadava12e_Fig16-13_sre_coordinated_genes.png" alt="Sadava 12e 圖 16.13 植物乾旱逆境下單一轉錄因子結合共同 SRE 同步開啟分散的基因 A、B、C">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Sadava Life 12e, Fig. 16.13</strong>：植物遭遇乾旱時，單一轉錄因子被合成出來，同時結合到散布於基因體不同位置的基因 A、基因 B 與基因 C 上游共同的<strong>逆境反應元件（SRE）</strong>，各自轉錄出獨立的單順反子 mRNA，一樣能達到整組同步反應！</div>
+      <div class="figure-caption-en">Original caption: Figure 16.13 Coordinating Gene Expression. A single environmental signal, such as drought stress, causes the synthesis of a transcription factor that acts on many genes sharing a stress response element (SRE).</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 4｜「密碼鎖」模型：皮質醇受體補齊最後一碼，一次打開三個分散基因</div>
+      <div class="figure-img-wrap">
+        <img src="images/AlbertsECB6_Fig8-16_cortisol_coordinated_genes.png" alt="Alberts ECB 6e 圖 8-16 活化的皮質醇受體結合三個基因共同的調控序列，完成組合並同步開啟轉錄">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Alberts Essential Cell Biology 6e, Fig. 8–16</strong>：左側三個基因各自已結合不同的活化蛋白，但還不足以高量啟動；右側加入<strong>皮質醇—受體複合體</strong>結合共同綠色調控序列後，瞬間補齊三把鎖的最後一碼，三個分散基因整組開啟！</div>
+      <div class="figure-caption-en">Original caption: Figure 8–16 A single transcription regulator can coordinate the expression of many different genes. The activated cortisol receptor completes the combination of transcription regulators required for efficient initiation of transcription, and all three genes are now switched on as a set.</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 5｜多細胞生物為什麼需要獨立啟動子？肝細胞 vs. 水晶體細胞的組合式調控</div>
+      <div class="figure-img-wrap">
+        <img src="images/Campbell13e_Fig18-12_combinatorial_control_liver_lens.jpg" alt="Campbell 13e 圖 18.12 肝細胞與水晶體細胞擁有相同基因但因強化子調控元件與活化子組合不同而表現不同蛋白質">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Campbell Biology 13e, Fig. 18.12</strong>：白蛋白基因（強化子含元件 1、2、3）與晶體蛋白基因（強化子含元件 4、2、5）雖然共享灰色元件 2，但各自需要不同的轉錄活化子組合。這套「獨立啟動子＋遠端強化子」架構讓多細胞真核生物能用少數轉錄因子精準分化出幾百種細胞。</div>
+      <div class="figure-caption-en">Original caption: Figure 18.12 Cell type–specific transcription. Both liver cells and lens cells have the genes for making the proteins albumin and crystallin, but each enhancer has a unique combination of control elements.</div>
+    </div>
+  </section>
+
+  <!-- Section 3 -->
+  <section id="sec-exceptions">
+    <h2><span class="sec-num">03</span> 絕妙反證彩蛋：少數真核生物真的有操縱組——靠「反式剪接」補貼帽子！</h2>
+    <p>生物學裡最迷人的時刻，往往是<strong>例外反過來證明了規則</strong>：</p>
+    <ul>
+      <li><strong>秀麗隱桿線蟲（<em>C. elegans</em>）等蠕蟲與少數原始脊索動物</strong>：在秀麗隱桿線蟲的細胞核裡，確實有超過 <strong>15%</strong> 的 mRNA 是來自 2～8 個基因排在一起、由單一啟動子控制的「類操縱組」（Weaver 5e Ch. 16；Pierce 7e Ch. 17）。但線蟲怎麼讓真核核糖體讀到後面第 2 到第 8 個基因？它靠的是<strong>反式剪接（trans-splicing）</strong>——先在細胞核裡把多順反子前驅 mRNA 切開，再把一段自帶 <strong>5′ 端帽</strong>的短前導序列（<strong>SL RNA</strong>）一一貼到每個基因的前端，加工成各自有帽子的<strong>單順反子 mRNA</strong> 才送去轉譯（圖 6）！</li>
+      <li><strong>真核細胞內的半自主胞器（葉綠體與粒線體）</strong>：因為源自古老的內共生細菌（見 <a href="endosymbiosis.html">內共生假說與演化序列</a>），植物<strong>葉綠體 DNA 至今仍以類似細菌的多順反子操縱組表現許多基因</strong>（Lodish 9e Ch. 12；Stryer 10e Ch. 19），粒線體也會產生大型多順反子轉錄本（Becker 10e Ch. 20）。</li>
+    </ul>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 6｜線蟲如何破解 5′ 端帽限制？反式剪接（Trans-splicing）幫每個基因補貼帽子！</div>
+      <div class="figure-img-wrap">
+        <img src="images/Cox2e_Fig16-18_nematode_trans_splicing.jpg" alt="Cox 2e 圖 16-18 線蟲反式剪接機制，將帶有 5' 端帽的 SL RNA 剪接到前驅 mRNA 前端形成帶帽成熟 mRNA">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Cox Molecular Biology 2e, Fig. 16-18</strong>：線蟲把一段獨立轉錄、前端帶有紅色 <strong>5′ 端帽</strong>的短前導 RNA（SL RNA），透過反式剪接貼到多基因前驅 mRNA 切出來的每一段編碼序列前端，使每個內部基因都拿到自己的帽子、成為可被真核核糖體讀取的成熟 mRNA。</div>
+      <div class="figure-caption-en">Original caption: FIGURE 16-18 Trans-splicing. In nematodes, a short, 5′-capped leader sequence (SL RNA) is spliced onto a primary transcript (pre-mRNA) to produce the mature mRNA.</div>
+    </div>
+  </section>
+
+  <!-- Section 4: Bilingual Sources -->
+  <section id="sec-sources">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+      <h2 style="margin-bottom:8px;flex:1;"><span class="sec-num">04</span> 經典英文原文教科書逐句考證</h2>
+      <button class="toggle-en-btn" id="toggleEnBtn" type="button" onclick="toggleEnglish()">精簡：隱藏英文原文</button>
+    </div>
+    <p>以下所有英文原文均原封不動回溯自 Ze-Agent Vault 正式譯本，提供高中教師備課、教甄申論與同學深度溯源。</p>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">1. 《Weaver Molecular Biology》5e — 反式剪接補帽直接點破真核為何難用細菌式操縱組</span>
+        <span class="source-loc">Ch. 16 其他 RNA 加工事件與轉錄後控制</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">沒有反式剪接補帽時，真核只有第一個編碼區有帽子能被有效轉譯</div>
+        <div class="quote-en">"In C. elegans, for example, all or nearly all mRNAs are trans-spliced to a small group of spliced leaders. And more than 15% of these trans-spliced mRNAs are encoded in groups of two to eight genes that can be considered a kind of operon. ... Indeed, trans-splicing makes such eukaryotic 'operons' possible by providing each of the internal coding regions with its own cap. Otherwise, only the first coding region would receive a cap upon transcription, and therefore would be the only one to be efficiently translated. This is not a problem in bacteria, which have unique translation start sites for each gene within a polycistronic mRNA (Chapter 7), but it would be in eukaryotes, whose mRNAs generally do not have internal translation start sites and instead depend on caps to recruit ribosomes (Chapter 17)."</div>
+        <div class="quote-tw">在秀麗隱桿線蟲中，超過 15% 的反式剪接 mRNA 由 2 到 8 個基因組成的基因群編碼，可視為一種操縱組。<strong>事實上，反式剪接藉由為每個內部編碼區提供其自身的帽結構，使此類真核生物「操縱組」成為可能。否則，在轉錄時只有第一個編碼區會接收到帽結構，因此將是唯一能被有效轉譯的區域。</strong>這在細菌中不是問題，因為細菌在多順反子 mRNA 內為每個基因具有獨特的轉譯起始位點；但真核生物的 mRNA 通常沒有內部轉譯起始位點，而是依賴帽結構來募集核糖體。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">2. 《Alberts ECB》6e ＆ 《Lodish》9e — 核糖體起始機制與單／多順反子 mRNA 根本差異</span>
+        <span class="source-loc">Alberts Ch. 07 · Lodish Ch. 07 &amp; Ch. 12</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Alberts ECB 6e Ch. 07：細菌核糖體可直接結合內部起始密碼子，真核則仰賴 5′ 帽</div>
+        <div class="quote-en">"Unlike a eukaryotic ribosome, a bacterial ribosome can readily bind directly to a start codon that lies in the interior of an mRNA, as long as a ribosome-binding site precedes it by several nucleotides. Such ribosome-binding sequences are necessary in bacteria, as their mRNAs are often polycistronic—that is, the mRNAs encode several different proteins on the same molecule; these transcripts contain a separate ribosome-binding site for each protein-coding sequence (Figure 7–42). In contrast, a eukaryotic mRNA usually carries the information for a single protein, and so it can rely on the 5′ cap—and the proteins that recognize it—to position the ribosome for its AUG search."</div>
+        <div class="quote-tw">只要前方數個核苷酸處有核糖體結合位，<strong>細菌核糖體就能直接結合 mRNA 內部的起始密碼子；真核核糖體則無法如此</strong>。細菌需要這類序列是因為其 mRNA 常為<strong>多順反子</strong>；相較之下，<strong>真核 mRNA 通常只攜帶一種蛋白質的資訊，仰賴 5′ 帽定位核糖體搜尋 AUG</strong>。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Lodish 9e Ch. 07 ＆ Ch. 12：單順反子只用最靠近 5′ 端帽的 AUG；葉綠體保留細菌式操縱組</div>
+        <div class="quote-en">[Ch. 07] "In most eukaryotic mRNAs, however, the 5′ cap directs ribosome binding, and translation begins at the closest AUG start codon to the 5′ cap. As a result, translation of most eukaryotic mRNAs begins only at this site..."<br><br>[Ch. 12] "Chloroplast DNAs encode the subunits of a bacteria-like RNA polymerase, and they express many of their genes from polycistronic operons, in which multiple proteins are translated from a single messenger RNA, as in bacteria."</div>
+        <div class="quote-tw">[Ch. 07] 在大多數真核生物 mRNA 中，<strong>5′ 端帽引導核糖體結合，轉譯只從最靠近 5′ 端帽的 AUG 起始密碼子開始</strong>。<br>[Ch. 12] <strong>葉綠體 DNA 編碼類似細菌的 RNA 聚合酶次單元，並像細菌一樣從多順反子操縱組表現許多基因</strong>。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">3. 《Campbell Biology》13e · 《Alberts ECB》6e · 《Sadava》12e — 分散基因的協調調控與密碼鎖</span>
+        <span class="source-loc">Campbell Ch. 18 · Alberts Ch. 08 · Sadava Ch. 16</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Campbell 13e Ch. 18：除少數例外真核無細菌式操縱組，分散在不同染色體的基因靠共用調控元件協調</div>
+        <div class="quote-en">"With a few exceptions, operons that work in this way have not been found in eukaryotic cells. Eukaryotic genes that are co-expressed, such as genes coding for the enzymes of a metabolic pathway, are typically scattered over different chromosomes. Here, coordinate gene expression depends on every gene of a dispersed group having a specific combination of control elements. Transcription activators in the nucleus that recognize the control elements bind to them, promoting simultaneous transcription of the genes, no matter where they are in the genome."</div>
+        <div class="quote-tw"><strong>除少數例外，真核細胞中並未發現這種運作方式的操縱組。</strong>真核生物中共同表現的基因通常散布在不同的染色體上；<strong>協調基因表現依賴於每個散布的基因都具備特定的調控元件組合</strong>，讓細胞核中的轉錄活化子促進基因同步轉錄。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Alberts ECB 6e Ch. 08 ＆ Sadava 12e Ch. 16：「密碼鎖」模型與植物逆境反應元件（SRE）</div>
+        <div class="quote-en">[Alberts Ch. 08] "This is like dialing in the final number of a combination lock: the lock will spring open if the other numbers have been previously entered. And just as the same number can complete the combination for different locks, the same protein can complete the combination for several different genes."<br><br>[Sadava Ch. 16] "Under conditions of drought stress, a plant must simultaneously synthesize several proteins whose genes are scattered throughout the genome. To coordinate expression of the stress response, each of the associated genes has a specific regulatory sequence near its promoter called the stress response element (SRE)."</div>
+        <div class="quote-tw">[Alberts] 這就像輸入<strong>密碼鎖的最後一個號碼</strong>：同一個號碼可完成不同鎖的密碼，同一種轉錄調控蛋白也能同時完成數個分散基因的調控組合。<br>[Sadava] 植物乾旱逆境下，散布在基因體中的多個基因各自在啟動子旁共享<strong>逆境反應元件（SRE）</strong>，受同一轉錄因子同步啟動。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">4. 《Pierce Genetics》7e — 細胞體積噪音假說、染色質核膜分隔與原始脊索動物例外</span>
+        <span class="source-loc">Pierce Ch. 16 &amp; Ch. 17</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Ch. 16（Igoshin &amp; Ray 假說）＆ Ch. 17（蠕蟲與原始脊索動物例外、染色質與核膜差異）</div>
+        <div class="quote-en">[Ch. 16] "Igoshin and Ray speculated that operons are less common in eukaryotes because the larger volume of eukaryotic cells reduces the effect of random fluctuations and, perhaps, because eukaryotes have other mechanisms (such as changes in chromatin structure) to couple the transcription of multiple genes."<br><br>[Ch. 17] "Although some operon-like gene clusters have been found in worms and even in some primitive chordates, most eukaryotic genes have their own promoters and are transcribed separately. Second, chromatin structure affects gene expression in eukaryotic cells... Third, the presence of the nuclear membrane in eukaryotic cells separates transcription and translation in time and space."</div>
+        <div class="quote-tw">[Ch. 16] Igoshin 與 Ray 推測，<strong>操縱組在真核生物中較少見，部分原因是真核細胞較大體積降低了隨機波動的影響，另一部分原因是真核具有其他耦聯多基因轉錄的機制（如染色質結構改變）</strong>。<br>[Ch. 17] 雖然在<strong>蠕蟲甚至某些原始脊索動物</strong>中發現類似操縱組的基因簇，但大多數真核基因各有獨立啟動子、分別轉錄，並受染色質結構與核膜時空分隔影響。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Teaching & Boundary -->
+  <section id="sec-teaching">
+    <h2><span class="sec-num">05</span> 高中教學、常見陷阱、教甄實戰與查證邊界</h2>
+
+    <div class="callout">
+      <div class="callout-title">🎯 課堂講解三步收尾（讓高中生一聽就通）</div>
+      <p style="margin-bottom:0;">第一步先拋硬限制：「<strong>真核核糖體只認最前面的 5′ 端帽</strong>，把 3 個基因串一起，後面 2 個沒人讀」→ 第二步講替代方案：「細菌用<strong>延長線（操縱組）</strong>，真核升級成<strong>無線遙控器＋密碼鎖（強化子與共用調控元件）</strong>」→ 第三步丟彩蛋：「<strong>線蟲</strong>之所以能有操縱組，正是靠<strong>反式剪接</strong>幫後面每個基因補貼 5′ 端帽！」</p>
+    </div>
+
+    <h3>常見命題陷阱與系列延伸閱讀</h3>
+    <ul>
+      <li><strong>陷阱 1</strong>：「操縱組普遍存在於原核細胞和真核細胞中」→ <strong>錯</strong>（115 陽交附中教甄第 7 題選項 C 直接考此點）。</li>
+      <li><strong>陷阱 2</strong>：「真核細胞完全不存在任何多順反子或操縱組」→ <strong>過於絕對</strong>。精準說法為「絕大多數真核核基因不採用細菌式操縱組（除線蟲等少數經反式剪接加工之例外，以及源自內共生細菌之葉綠體操縱組）」。</li>
+      <li><strong>操縱組三部曲延伸閱讀</strong>：
+        ① <a href="operator-transcription-translation.html">操作子會不會被轉錄與轉譯產生蛋白質？（基因 vs. 子）</a>；
+        ② <a href="lac-operon-sugar-sensing.html">大腸桿菌怎麼知道環境中有沒有葡萄糖與乳糖？</a>；
+        ③ <a href="operon-inference-pierce.html">Pierce 操縱組推論過程（Jacob–Monod 順／反式推理）</a>；
+        另見 <a href="promoter-tata-box.html">真核啟動子、TATA 匣與甲基化</a> 與 <a href="endosymbiosis.html">內共生假說與演化序列</a>。
+      </li>
+    </ul>
+
+    <div class="boundary">
+      <div class="callout-title">📌 本機資料庫（Vault）查證邊界聲明</div>
+      <p style="margin-bottom:0;">本頁所有核心機制（5′ 端帽掃描 vs. 細菌內部核糖體結合位、分散基因共用調控／回應元件、組合式密碼鎖模型、Igoshin &amp; Ray 細胞體積與生化噪音假說、線蟲 15% 操縱組與反式剪接補帽、蠕蟲與原始脊索動物例外、葉綠體多順反子操縱組）皆有上述 8 部原文書正典直接支持。經全面檢索確認，演化生物學文獻中常見的「自私操縱組假說（Selfish operon model, Lawrence &amp; Roth 1996）與水平基因轉移解釋」，以及具名討論「尾海鞘（<em>Oikopleura</em>）／海鞘（<em>Ciona</em>）操縱組」或「錐蟲全基因體多順反子轉錄」之專段，目前在 Vault 譯本中查無直接記載，故未列為主幹。另 <code>trans-splicing</code> 於臺灣教育部《生命科學名詞》TSV 查無詞條，依 Vault 譯本統一譯為「反式剪接」；<code>enhancer</code> 依審定規範統一譯為「強化子」。</p>
+    </div>
+  </section>
+
+  <footer>
+    Bio-Wiki 概念考證庫 · 繁體中文與審定名詞遵循臺灣教育部規範 · 原文書與圖片引自 Ze-Agent Vault 正式譯本
+  </footer>
+</main>
+
+<!-- Reading Outpost Bottom Bar & Script -->
+<button class="ro-bottom-toc" type="button" onclick="roOpenDrawer('roTocDrawer')">📑 本篇段落導覽</button>
+<a class="ro-up-btn" href="#top" aria-label="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<script>
+  function roToggleTheme() {
+    var root = document.documentElement;
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('biowiki-theme', next); } catch (e) {}
+    roUpdateThemeBtn();
+  }
+  function roUpdateThemeBtn() {
+    var btn = document.getElementById('roThemeBtn');
+    if (!btn) return;
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.innerHTML = isLight ? '🌙 深色' : '☀️ 亮色';
+    btn.setAttribute('aria-label', isLight ? '切換為深色閱讀模式' : '切換為亮色閱讀模式');
+  }
+  roUpdateThemeBtn();
+  function roOpenDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('open');
+  }
+  function roCloseDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  }
+  function openLightbox(src, alt) {
+    var lb = document.getElementById('roLightbox');
+    var img = document.getElementById('roLightboxImg');
+    if (lb && img) {
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.add('open');
+    }
+  }
+  function toggleEnglish() {
+    document.body.classList.toggle('hide-en');
+    var btn = document.getElementById('toggleEnBtn');
+    if (btn) {
+      btn.textContent = document.body.classList.contains('hide-en')
+        ? '完整：顯示英文原文'
+        : '精簡：隱藏英文原文';
+    }
+  }
+  (function initReadingOutpostShell() {
+    var tocList = document.getElementById('roTocList');
+    var headings = document.querySelectorAll('h2');
+    if (tocList && headings.length) {
+      headings.forEach(function(h, idx) {
+        if (!h.id) h.id = 'ro-sec-' + (idx + 1);
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent.trim();
+        tocList.appendChild(a);
+      });
+    }
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th, tr:first-child th')).map(function(th) {
+        return th.innerText.trim().replace(/[\r\n\t ]+/g, ' ');
+      });
+      if (!headers.length) return;
+      table.classList.add('ro-resp-table');
+      table.querySelectorAll('tr').forEach(function(tr) {
+        if (tr.querySelector('th')) return;
+        Array.from(tr.children).forEach(function(td, idx) {
+          if (td.tagName === 'TD' && !td.getAttribute('data-label') && headers[idx]) {
+            td.setAttribute('data-label', headers[idx]);
+          }
+        });
+      });
+    });
+    document.querySelectorAll('main img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        openLightbox(img.src, img.alt);
+      });
+    });
+  })();
+</script>
+</body>
+</html>
