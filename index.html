@@ -651,7 +651,7 @@
     </div>
     <div class="ro-drawer-list" onclick="roCloseDrawer('roTocDrawer')">
       <a href="#cat-molbio">🧬 分子生物與基因表現（10 篇）</a>
-      <a href="#cat-genetics">🌱 遺傳學與顯隱性判準（4 篇）</a>
+      <a href="#cat-genetics">🌱 遺傳學與顯隱性判準（5 篇）</a>
       <a href="#cat-evolution">🦠 細胞演化與生物多樣性（1 篇）</a>
       <a href="#cat-physiology">🫀 動物構造與生殖生理（3 篇）</a>
       <a href="#cat-plant">🌻 植物構造與生理調控（1 篇）</a>
@@ -675,9 +675,9 @@
         <input class="search-input" id="searchInput" type="search" placeholder="搜尋概念、關鍵字或教科書（例：內共生、Campbell、RecA、鐮刀）" oninput="filterPosts()">
       </div>
       <div class="filter-pills">
-        <button class="filter-pill active" type="button" data-cat="all" onclick="selectCat('all', this)">全部專題 (19)</button>
+        <button class="filter-pill active" type="button" data-cat="all" onclick="selectCat('all', this)">全部專題 (20)</button>
         <button class="filter-pill" type="button" data-cat="molbio" onclick="selectCat('molbio', this)">分子生物與轉錄 (10)</button>
-        <button class="filter-pill" type="button" data-cat="genetics" onclick="selectCat('genetics', this)">遺傳與數量性狀 (4)</button>
+        <button class="filter-pill" type="button" data-cat="genetics" onclick="selectCat('genetics', this)">遺傳與數量性狀 (5)</button>
         <button class="filter-pill" type="button" data-cat="evolution" onclick="selectCat('evolution', this)">細胞演化與內共生 (1)</button>
         <button class="filter-pill" type="button" data-cat="physiology" onclick="selectCat('physiology', this)">動物生理與生殖 (3)</button>
         <button class="filter-pill" type="button" data-cat="plant" onclick="selectCat('plant', this)">植物生理與光週期 (1)</button>
@@ -855,6 +855,21 @@
     </div>
 
     <div class="post-list">
+      <a class="post-card" href="gene-allele-dna-chromosome.html" data-keywords="遺傳因子 基因 等位基因 DNA 染色體 allele gene chromosome 孟德爾 分子生物學 大同代理 教甄口試">
+        <div class="post-thumb">
+          <span class="post-thumb-icon">🧩</span>
+          <span class="post-thumb-tag">核心名詞</span>
+        </div>
+        <div class="post-content">
+          <h3 class="post-title">《遺傳因子、基因、等位基因、DNA 與染色體》從孟德爾到現代分子生物學</h3>
+          <p class="post-excerpt">五個詞分屬不同的「實體尺度」與「科學史階段」——一次釐清包含階層、高中各版課本定義差異、為何曾誤認遺傳物質是蛋白質，以及教甄口試實戰切入點。</p>
+          <div class="post-meta">
+            <span class="post-badge accent">尺度階層 · 科學史考證</span>
+            <span class="post-badge">Campbell · Pierce · 高中跨版本</span>
+          </div>
+        </div>
+      </a>
+
       <a class="post-card" href="xy-synapsis-crossing-over.html" data-keywords="XY染色體 性染色體 聯會 互換 易位 偽體染色體區 PAR PAR1 PAR2 MSY SRY XX男性 XY女性 四分體 二分體 二聯染色體 二價體 bivalent tetrad 23個四分體 高中易讀版 Goldberg Klug Pierce Brooker Campbell Solomon Raven Kandel">
         <div class="post-thumb">
           <span class="post-thumb-icon">🧬</span>
@@ -1101,5 +1116,6 @@
   }
 </script>
 
+<script src="site-nav.js"></script>
 </body>
 </html>
