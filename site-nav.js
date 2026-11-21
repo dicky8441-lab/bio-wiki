@@ -123,6 +123,12 @@
       shortName: '動物生理',
       items: [
         {
+          href: 'abo-transfusion-self-tolerance.html',
+          title: 'ABO 血型輸血（全血 vs. 紅血球）與為何沒有抗 A 抗體？',
+          tag: '輸血與免疫',
+          keywords: 'ABO 血型 複等位基因 共顯性 等顯性 輸血 全血 濃縮紅血球 成分輸血 血漿 稀釋效應 自體耐受性 中樞耐受 周邊耐受 受體編輯 選殖刪除 無反應狀態 天然抗體 IgM 腸道菌 交叉反應 Rh血型 抗D抗體 Guyton Hole Fox Vander Tortora Basic Immunology Campbell'
+        },
+        {
           href: 'lac-operon-vs-insulin-exocytosis.html',
           title: '沒吃飯不製造胰島素？lac 操縱組 vs. 調控型胞吐',
           tag: '跨單元',

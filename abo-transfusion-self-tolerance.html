@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>ABO 血型輸血與抗體機制：全血 vs. 紅血球、為何不產生抗 A 抗體？｜Bio-Wiki</title>
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem('biowiki-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+<style>
+  :root {
+    --bg-primary: #181614;
+    --bg-pillbar: #24201c;
+    --bg-card: #211e1a;
+    --bg-quote: #26221e;
+    --bg-tag: #2d2823;
+    --text-primary: #f6f1ea;
+    --text-body: #ddd5ca;
+    --text-secondary: #bfb5a8;
+    --text-muted: #9a8e80;
+    --primary: #5bc0eb;
+    --primary-light: rgba(91, 192, 235, 0.12);
+    --primary-border: rgba(91, 192, 235, 0.32);
+    --accent: #f4c44e;
+    --accent-light: rgba(244, 196, 78, 0.12);
+    --warn: #f87171;
+    --warn-bg: rgba(248, 113, 113, 0.10);
+    --border-color: rgba(246, 241, 234, 0.09);
+    --border-strong: rgba(246, 241, 234, 0.16);
+    --taupe-fab: rgba(104, 91, 78, 0.94);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  html[data-theme="light"] {
+    --bg-primary: #fbf8f4;
+    --bg-pillbar: #f0ece3;
+    --bg-card: #ffffff;
+    --bg-quote: #f6f2ea;
+    --bg-tag: #eee8dd;
+    --text-primary: #2f2820;
+    --text-body: #4a3f35;
+    --text-secondary: #5e5043;
+    --text-muted: #756656;
+    --primary: #1b9dce;
+    --primary-light: rgba(27, 157, 206, 0.12);
+    --primary-border: rgba(27, 157, 206, 0.35);
+    --accent: #b86b11;
+    --accent-light: rgba(244, 196, 78, 0.22);
+    --warn: #dc2626;
+    --warn-bg: rgba(220, 38, 38, 0.08);
+    --border-color: rgba(74, 63, 53, 0.12);
+    --border-strong: rgba(74, 63, 53, 0.22);
+    --taupe-fab: rgba(105, 90, 74, 0.94);
+    --shadow: 0 4px 18px rgba(47, 40, 32, 0.08);
+    color-scheme: light;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+  }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+    font-size: 18px;
+    line-height: 1.78;
+    padding: 0 0 96px 0;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Reading Outpost Top Pill Header */
+  .ro-header-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-primary) 70%, rgba(24, 22, 20, 0));
+  }
+
+  html[data-theme="light"] .ro-header-wrap {
+    background: linear-gradient(180deg, #fbf8f4 70%, rgba(251, 248, 244, 0));
+  }
+
+  .ro-pillbar {
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .ro-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .ro-menu-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #5bc0eb;
+    color: #181614;
+    border: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  html[data-theme="light"] .ro-menu-circle {
+    background: #67c3eb;
+    color: #1f1a15;
+  }
+
+  .ro-menu-circle span {
+    display: block;
+    width: 16px;
+    height: 2.2px;
+    background: #181614;
+    border-radius: 2px;
+  }
+
+  .ro-brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .ro-brand-zh {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-brand-en {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .ro-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .ro-theme-btn {
+    appearance: none;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+  }
+
+  .ro-cta-pill {
+    appearance: none;
+    background: #f4c44e;
+    color: #1c1814;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  html[data-theme="light"] .ro-cta-pill {
+    background: #f6c84c;
+    color: #2f2820;
+  }
+
+  /* Main Reading Column */
+  main.container {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 22px 0;
+  }
+
+  /* Hero */
+  .hero {
+    text-align: left;
+    margin-bottom: 32px;
+    padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .meta-line {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .meta-pill, .meta-pill-muted {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .meta-pill {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary-border);
+  }
+
+  h1 {
+    font-size: clamp(26px, 6.2vw, 34px);
+    line-height: 1.38;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    margin: 6px 0 14px;
+    text-align: left;
+  }
+
+  .subtitle {
+    font-size: 17px;
+    line-height: 1.68;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* Sections */
+  section {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: 42px;
+    scroll-margin-top: 84px;
+  }
+
+  h2 {
+    font-size: clamp(22px, 5.2vw, 27px);
+    line-height: 1.45;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 44px 0 18px;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+  }
+
+  h2 .sec-num {
+    color: var(--accent);
+    margin-right: 6px;
+    font-weight: 800;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 28px 0 12px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--text-body);
+    margin-bottom: 18px;
+  }
+
+  ul, ol {
+    margin: 0 0 22px 24px;
+    color: var(--text-body);
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+  }
+
+  strong {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  main a:not(.ro-cta-pill):not(.ro-brand-link) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  /* Sub-cards */
+  .tldr-card, .source-card, .callout, .callout-warn, .step-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin: 20px 0;
+  }
+
+  .tldr-card {
+    border-left: 4px solid var(--accent);
+  }
+
+  .callout {
+    border-left: 4px solid var(--primary);
+  }
+
+  .callout-warn {
+    border-left: 4px solid var(--warn);
+    background: var(--warn-bg);
+  }
+
+  .tldr-label, .callout-title, .source-book {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .callout-warn .callout-title {
+    color: var(--warn);
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .timeline-step {
+    padding-left: 4px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 12px;
+  }
+
+  .timeline-step:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .timeline-step-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .timeline-step-title span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    font-size: 14px;
+    font-weight: 800;
+    margin-right: 8px;
+  }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-weight: 800;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .step-title {
+    font-size: 18.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  /* Figures */
+  .figure-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .figure-img-wrap {
+    padding: 14px;
+    background: #f8fafc;
+    cursor: zoom-in;
+  }
+
+  main img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 8px;
+    margin: 0 auto;
+    cursor: zoom-in;
+  }
+
+  .zoom-hint {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    padding: 6px 4px 0;
+  }
+
+  .figure-body {
+    padding: 14px 16px 16px;
+  }
+
+  .figure-title {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .figure-caption {
+    font-size: 15.5px;
+    line-height: 1.68;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+
+  .figure-caption-en {
+    font-size: 13.5px;
+    line-height: 1.58;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+
+  .figure-guide {
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: var(--bg-quote);
+    border-left: 3px solid var(--accent);
+    font-size: 15px;
+    line-height: 1.68;
+    color: var(--text-body);
+  }
+
+  .figure-guide strong {
+    color: var(--accent);
+  }
+
+  /* Bilingual Textbook Quote Blocks */
+  .source-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .source-loc {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .quote-block {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .quote-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quote-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .quote-en {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 10px 0 12px;
+    word-break: break-word;
+  }
+
+  body.hide-en .quote-en {
+    display: none;
+  }
+
+  .quote-tw {
+    font-size: 17.5px;
+    line-height: 1.78;
+    color: var(--text-body);
+  }
+
+  .quote-tw strong {
+    color: var(--accent);
+    background: rgba(244, 196, 78, 0.10);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+
+  html[data-theme="light"] .quote-tw strong {
+    color: #8c4d06;
+    background: rgba(246, 200, 76, 0.28);
+  }
+
+  .toggle-en-btn {
+    appearance: none;
+    background: var(--bg-tag);
+    color: var(--accent);
+    border: 1px solid rgba(244, 196, 78, 0.35);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  /* Responsive Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0 26px;
+    font-size: 16px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-body);
+  }
+
+  th {
+    background: var(--bg-pillbar);
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  @media (max-width: 680px) {
+    table.ro-resp-table,
+    table.ro-resp-table thead,
+    table.ro-resp-table tbody,
+    table.ro-resp-table th,
+    table.ro-resp-table td,
+    table.ro-resp-table tr {
+      display: block;
+      width: 100%;
+    }
+
+    table.ro-resp-table thead {
+      display: none;
+    }
+
+    table.ro-resp-table tr {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    table.ro-resp-table td {
+      border: none;
+      border-bottom: 1px dashed var(--border-color);
+      padding: 8px 0;
+      text-align: left !important;
+    }
+
+    table.ro-resp-table td:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    table.ro-resp-table td:first-child {
+      padding-top: 0;
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    table.ro-resp-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+  }
+
+  /* Bottom Floating Controls */
+  .ro-bottom-toc {
+    position: fixed;
+    left: 16px;
+    bottom: 20px;
+    z-index: 95;
+    background: var(--taupe-fab);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 9px 15px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: calc(100vw - 88px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-up-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 95;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--taupe-fab);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    text-decoration: none !important;
+  }
+
+  /* Drawers & Lightbox */
+  .ro-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ro-drawer-backdrop.open {
+    display: flex;
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-backdrop {
+      align-items: center;
+      padding: 24px;
+    }
+  }
+
+  .ro-drawer-panel {
+    width: 100%;
+    max-width: 500px;
+    max-height: 78vh;
+    overflow-y: auto;
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px 20px 0 0;
+    padding: 18px 18px 28px;
+    box-shadow: var(--shadow);
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-panel {
+      border-radius: 18px;
+    }
+  }
+
+  .ro-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .ro-drawer-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .ro-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .ro-drawer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ro-drawer-list a {
+    display: block;
+    text-decoration: none !important;
+    color: var(--text-body) !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .ro-drawer-list a.active {
+    color: #181614 !important;
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 800;
+  }
+
+  .ro-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    cursor: zoom-out;
+  }
+
+  .ro-lightbox.open {
+    display: flex;
+  }
+
+  .ro-lightbox img {
+    max-width: 100%;
+    max-height: 92vh;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+</style>
+</head>
+<body>
+
+<div class="ro-header-wrap">
+  <div class="ro-pillbar">
+    <div class="ro-brand-group">
+      <button class="ro-menu-circle" type="button" aria-label="開啟專題選單" onclick="roOpenDrawer('roSiteDrawer')">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="ro-brand-link" href="index.html">
+        <span class="ro-brand-zh">400X 的日常切片</span>
+        <span class="ro-brand-en">BIO-WIKI EVIDENCE</span>
+      </a>
+    </div>
+    <div class="ro-top-actions">
+      <button class="ro-theme-btn" id="roThemeBtn" type="button" onclick="roToggleTheme()">☀️ 亮色</button>
+      <button class="ro-cta-pill" type="button" onclick="roOpenDrawer('roSiteDrawer')">專題目錄</button>
+    </div>
+  </div>
+</div>
+
+<!-- Site-Wide Topics Drawer (dynamically populated by site-nav.js) -->
+<div class="ro-drawer-backdrop" id="roSiteDrawer" onclick="if(event.target===this)roCloseDrawer('roSiteDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📚 Bio-Wiki 全站專題</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roSiteDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list">
+      <a href="index.html">🏠 首頁：主題分類總覽</a>
+      <a href="abo-transfusion-self-tolerance.html" class="active">ABO 血型輸血與抗體機制</a>
+    </div>
+  </div>
+</div>
+
+<!-- In-Page TOC Drawer -->
+<div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📑 本篇段落導覽</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list" id="roTocList" onclick="roCloseDrawer('roTocDrawer')"></div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="ro-lightbox" id="roLightbox" onclick="this.classList.remove('open')">
+  <img id="roLightboxImg" alt="">
+</div>
+
+<main class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="meta-line">
+      <span class="meta-pill">遺傳 × 動物生理 × 免疫</span>
+      <span class="meta-pill-muted">7 部原文正典考證</span>
+      <span class="meta-pill-muted">6 張原書圖解</span>
+    </div>
+    <h1>ABO 血型輸血與抗體機制：一定要只輸紅血球嗎？A 型人為何沒有抗 A 抗體？</h1>
+    <p class="subtitle">高中課本在複等位基因單元常用 ABO 血型帶出輸血原則，卻常省略三個關鍵背景：輸血能不能輸全血？為什麼 A 型人的身體不會做出抗 A 抗體、沒輸過血卻有抗 B 抗體？血漿裡難道沒有其他抗體嗎？以下以高中生能直接讀懂的脈絡，對照 Guyton、Hole、Fox、Vander、Tortora、Basic Immunology 與 Campbell 原文一次講清楚。</p>
+  </div>
+
+  <!-- TL;DR -->
+  <section id="sec-tldr">
+    <div class="tldr-card">
+      <div class="tldr-label">先抓這 3 個核心結論</div>
+      <div class="timeline">
+        <div class="timeline-step">
+          <div class="timeline-step-title"><span>1</span> 輸血不一定只輸紅血球，但「異型輸血」必須避免大量血漿</div>
+          <p>同型輸血最安全，可依臨床需求輸紅血球、血漿或全血。嚴重急性大出血休克時確實會使用全血；但若在緊急情況下進行異型輸血（例如 O 型輸給 A 型），因為捐血者血漿含抗 A 與抗 B 抗體，必須分離血漿、只輸 O 型紅血球，或在血漿量極少時緩慢輸注讓受血者血漿將其稀釋。</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-step-title"><span>2</span> A 型人不產生抗 A 抗體，靠的是「自體耐受性」發育篩選</div>
+          <p>B 細胞在骨髓發育時，表面受體是隨機基因重組產生的，原本確實會出現辨識自身 A 抗原的細胞。但這類未成熟 B 細胞在骨髓遇到自身抗原時，會被迫更換受體（受體編輯）或經由細胞凋亡被清除（選殖刪除），漏網之魚也會在周邊組織失去活性。</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-step-title"><span>3</span> 抗 B 抗體出生後才由腸道菌誘發，且血漿中充滿大量其他抗體</div>
+          <p>新生兒剛出生時幾乎沒有抗 A、抗 B 抗體；出生後 2 至 8 個月接觸飲食與腸道細菌，細菌表面的多醣結構與 B 抗原非常相似，便會刺激 A 型人體內保留下來的抗 B 細胞產生天然 IgM 抗體。而正常人血漿裡本來就同時存在成千上萬種針對病原體與疫苗的其他抗體，課本表格只是聚焦在 ABO 血型系統。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1 -->
+  <section id="sec-genetics-basis">
+    <h2><span class="sec-num">01</span> 先釐清起點：ABO 基因決定的是「紅血球表面抗原」，不是直接編碼抗體</h2>
+    <p>在遺傳學單元，我們學到人類第 9 號染色體上的 ABO 基因座有三個等位基因：Iᴬ、Iᴮ 與 i（<strong>複等位基因，multiple alleles</strong>）。每個人的體細胞只帶有其中兩個等位基因；Iᴬ 與 Iᴮ 對 i 均為顯性，而 Iᴬ 與 Iᴮ 同時存在時（IᴬIᴮ）兩者性狀都會完整表現，稱為<strong>共顯性（或等顯性，codominance）</strong>。</p>
+    <p>有一個很容易混淆的細節必須先分開：<strong>ABO 基因編碼的是「醣基轉移酶」這種酵素，而不是直接編碼抗體。</strong>紅血球（以及血管內皮等許多身體細胞）的細胞膜外表面本來就有一段共同的基礎寡醣鏈（核心聚醣／H 抗原）：</p>
+    <ul>
+      <li><strong>Iᴬ 等位基因</strong>：編碼一種醣基轉移酶，在核心聚醣末端加上 <strong>N-乙醯半乳糖胺（GalNAc）</strong>，形成 A 抗原。</li>
+      <li><strong>Iᴮ 等位基因</strong>：編碼另一種醣基轉移酶，在核心聚醣末端加上<strong>半乳糖（Gal）</strong>，形成 B 抗原。</li>
+      <li><strong>i 等位基因</strong>：沒有酵素活性，無法在末端加接單醣，因此 O 型（ii）紅血球表面只保留核心聚醣，缺乏 A 與 B 抗原。</li>
+    </ul>
+    <p>也就是說，遺傳直接決定的是「紅血球表面長出哪一種醣類抗原（凝集原）」；至於血漿裡會不會出現抗 A 或抗 B 抗體（凝集素），則是接下來免疫系統運作的結果。</p>
+
+    <article class="figure-card">
+      <div class="figure-img-wrap">
+        <img src="images/BasicImmuno7e_Fig10-15_abo_glycan_structure.png" alt="Basic Immunology 7e 圖 10.15：ABO 血型抗原的醣類化學結構與四種血型的抗原抗體對應" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖 1｜Basic Immunology 7e 圖 10.15：ABO 抗原的醣類結構與四型抗體對照</div>
+        <p class="figure-caption">上半部（A）顯示 A、B、O 三型共用相同的核心醣鏈，差別只在末端加上的單醣不同（A 型接 N-乙醯半乳糖胺、B 型接半乳糖、O 型不加接）。下半部（B）對照四種血型的紅血球表面抗原與血漿中的五聚體 IgM 抗體。</p>
+        <p class="figure-caption-en">Fig. 10.15 ABO blood group antigens. A, Chemical structure of ABO antigens. B, The antigens and antibodies present in people with the major ABO blood groups.</p>
+        <div class="figure-guide">
+          <strong>看圖重點：</strong>注意下半部抗體都畫成「五個 Y 字形接在一起的星狀結構」，代表抗 A 與抗 B 天然抗體主要屬於大分子的 <strong>IgM 五聚體</strong>，一個抗體分子就具有 10 個抗原結合位點，因此極易把紅血球彼此連結造成凝集。
+        </div>
+      </div>
+    </article>
+
+    <article class="figure-card">
+      <div class="figure-img-wrap">
+        <img src="images/Hole15e_Fig12-18_abo_antigens_igm.png" alt="Hole 15e 圖 12.18：四種 ABO 血型的紅血球抗原與血漿抗體組合" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖 2｜Hole 15e 圖 12.18：四種 ABO 血型的紅血球抗原與血漿抗體組合</div>
+        <p class="figure-caption">A 型紅血球有 A 抗原、血漿有抗 B 抗體；B 型紅血球有 B 抗原、血漿有抗 A 抗體；AB 型紅血球同時有 A 與 B 抗原、血漿無這兩種抗體；O 型紅血球無 A 與 B 抗原、血漿同時含抗 A 與抗 B 抗體。</p>
+        <p class="figure-caption-en">Figure 12.18 Different combinations of antigens and antibodies distinguish blood types. (Cells and antibodies not drawn to scale.)</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- Section 2 -->
+  <section id="sec-transfusion">
+    <h2><span class="sec-num">02</span> 輸血一定只能輸紅血球嗎？什麼時候會輸全血？</h2>
+    <p><strong>答案是：不一定只輸紅血球，但不同血品與不同輸血情境的配對規則並不相同。</strong>現代臨床最常規的做法是將血液分離後按需求輸注（例如只輸紅血球、只輸血漿或血小板），但在嚴重急性大出血導致休克時，教科書與特定急救情境下確實會輸注<strong>全血</strong>。</p>
+
+    <table class="ro-resp-table">
+      <thead>
+        <tr>
+          <th>輸血方式</th>
+          <th>輸入內容</th>
+          <th>ABO 配對與風險重點</th>
+          <th>主要適用情境</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>同型輸血</strong>（例：A → A）</td>
+          <td>依病況可輸紅血球、血漿或全血</td>
+          <td>供血者與受血者的抗原、抗體完全相合，沒有 ABO 凝集風險</td>
+          <td><strong>臨床第一選擇</strong>，最安全</td>
+        </tr>
+        <tr>
+          <td><strong>只輸紅血球</strong>（去除大部分血漿）</td>
+          <td>以紅血球為主，幾乎不含捐血者血漿</td>
+          <td>重點確認受血者血漿抗體不會攻擊捐血者紅血球；O 型紅血球因無 A、B 抗原可作緊急通用血球</td>
+          <td>貧血、手術失血需補充攜氧能力；現代血庫最常使用</td>
+        </tr>
+        <tr>
+          <td><strong>輸注全血</strong>（紅血球＋血漿）</td>
+          <td>同時包含捐血者紅血球與血漿中的抗體</td>
+          <td>必須顧及雙向反應；若將 O 型全血大量輸給 A 或 B 型受血者，O 型血漿中的抗 A／抗 B 抗體會攻擊受血者自身紅血球</td>
+          <td>嚴重急性大量失血（例如失血超過總血量 20% 造成出血性休克），需同時恢復血容量與攜氧量</td>
+        </tr>
+        <tr>
+          <td><strong>只輸血漿</strong></td>
+          <td>僅含血漿抗體、蛋白質與凝血因子，不含紅血球</td>
+          <td>配對方向與輸紅血球<strong>完全相反</strong>：AB 型血漿不含抗 A、抗 B 抗體，可輸給任何血型；O 型血漿只適合輸給 O 型</td>
+          <td>凝血功能不足、嚴重燒傷造成的大量血漿流失</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>為什麼異型輸血時，有的課本說「抗體會被稀釋」，有的卻說「不使用全血」？</h3>
+    <p>這兩種說法其實描述的是「輸血量少」與「輸血量大」的差別：</p>
+    <ul>
+      <li><strong>為何受血者抗體的威脅遠大於捐血者血漿抗體？（稀釋效應）</strong><br>
+      假設輸入少量且速度緩慢的異型血液，捐血者那一小袋血漿中的抗體一進到受血者體內，就會被受血者全身原本龐大的血漿立即稀釋，抗體濃度（效價）降到通常不足以引發顯著凝集。反之，受血者全身的血漿抗體濃度幾乎不會因為這點外來血液而被稀釋，因此只要輸入的紅血球帶有對應抗原，就會立刻被受血者抗體交聯凝集、堵塞微血管，並活化補體系統造成紅血球破裂（溶血）（見 <em>Guyton &amp; Hall</em> 15e Ch36、<em>Vander</em> 16e Ch18）。</li>
+      <li><strong>為何異型輸血不能放心輸「全血」？</strong><br>
+      如果輸的是未去血漿的<strong>全血</strong>，而且輸入體積偏大（例如大量失血需要多袋血液），捐血者血漿裡的抗體總量就不再微不足道。例如將 O 型全血輸給 B 型或 A 型受血者時，捐血者的抗 B 或抗 A 抗體會直接與受血者紅血球結合、固定補體並導致溶血（見 <em>Tortora</em> 13e Ch19、<em>Fox</em> 16e Ch13）。正因如此，血庫發明了<strong>血漿分離技術</strong>，把血球與血漿分開保存，讓異型緊急輸血時可以只輸去除血漿的 O 型紅血球，或將血漿量降到最低並緩慢輸血（見 <em>Hole</em> 15e Ch12、<em>Tortora</em> 13e Ch19）。</li>
+    </ul>
+
+    <article class="figure-card">
+      <div class="figure-img-wrap">
+        <img src="images/Fox16e_Fig13-5_agglutination_reaction.png" alt="Fox 16e 圖 13.5：A 型與 B 型紅血球抗原遇上對應血漿抗體時的凝集反應" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖 3｜Fox 16e 圖 13.5：抗原與抗體結合引發紅血球凝集</div>
+        <p class="figure-caption">A 型紅血球具 A 抗原、血漿具抗 B 抗體；B 型紅血球具 B 抗原、血漿具抗 A 抗體。當一種血型的紅血球遇到另一種血型血漿中的對應抗體時，抗體會將多顆紅血球互相連結成團塊（凝集反應），後續可能阻塞小血管並引發溶血與腎臟損傷。</p>
+        <p class="figure-caption-en">FIGURE 13.5 Agglutination reaction. People with type A blood have type A antigens on their red blood cells and antibodies in their plasma against the type B antigen. People with type B blood have type B antigens on their red blood cells and antibodies in their plasma against the type A antigen.</p>
+      </div>
+    </article>
+
+    <div class="callout">
+      <div class="callout-title">生理學課本與現代血庫實務的補充邊界</div>
+      <p style="margin-bottom:0;">在生理學教科書中，<em>Guyton &amp; Hall</em> 15e Ch24 與 <em>Brooker</em> 4e Ch41 明確記載「嚴重出血性休克時最佳治療為輸注全血，單純血漿流失則輸注血漿」。而在現代醫院臨床實務上（此項為外部輸血醫學補充，本機原文書庫未詳述），血庫平時多採<strong>成分輸血</strong>——將一袋捐血離心分成濃縮紅血球、新鮮冷凍血漿與血小板濃厚液，按病人缺乏的成分分開輸注，減少異體抗體與循環負擔；不過近年在嚴重創傷與戰場大出血急救時，也重新使用經抗體效價篩檢合格的「低效價 O 型全血（LTOWB）」。</p>
+    </div>
+  </section>
+
+  <!-- Section 3 -->
+  <section id="sec-self-tolerance">
+    <h2><span class="sec-num">03</span> 為什麼 A 型人不會製造抗 A 抗體？（自體耐受性兩道關卡）</h2>
+    <p>學生很容易以為：「因為基因設定好 A 型只能做抗 B，所以身體本來就做不出抗 A 抗體。」其實剛好相反——<strong>A 型人的骨髓裡，每天都可能隨機產生出帶有「抗 A 受體」的未成熟 B 細胞，只是它們在發育成熟前就被免疫系統嚴格淘汰或修改掉了。</strong></p>
+
+    <p>這套防止免疫系統攻擊自身組織的機制稱為<strong>自體耐受性（self-tolerance）</strong>。由於 ABO 抗原不僅存在於紅血球膜，也廣泛分布於血管內皮細胞與多種體細胞表面（<em>Basic Immunology</em> 7e Ch10），因此發育中的 B 細胞會直接接觸到自身的 A 抗原，並通過以下兩道關卡（<em>Basic Immunology</em> 7e Ch09、<em>Janeway</em> 10e Ch08）：</p>
+
+    <div class="step-box">
+      <div class="step-header">
+        <span class="step-num">1</span>
+        <div class="step-title">第一道關卡：骨髓內的中樞耐受性（Central B Cell Tolerance）</div>
+      </div>
+      <p>未成熟 B 細胞剛在骨髓中完成基因重組、表面開始表現 IgM 抗原受體（BCR）時，便會接受自體反應性檢驗。只要它與骨髓環境中廣泛存在的多價自身抗原（如自身細胞膜上的 A 醣類抗原）強烈結合（多價自身多醣的 B 細胞耐受性不需輔助型 T 細胞即可直接建立），細胞就會暫停成熟並啟動兩種處理方式：</p>
+      <ul style="margin-bottom:0;">
+        <li><strong>受體編輯（receptor editing）</strong>：未成熟 B 細胞重新開啟 RAG 基因，繼續進行輕鏈基因重組，換上一條新的免疫球蛋白輕鏈與原本重鏈配對，改組出不再辨識自身 A 抗原的新受體。估計正常成人約有 <strong>25% 至 50%</strong> 的成熟 B 細胞在發育期間都曾透過受體編輯被挽救。</li>
+        <li><strong>選殖刪除／負向選擇（clonal deletion / negative selection）</strong>：若反覆編輯輕鏈仍無法消除對自身 A 抗原的強烈結合，這顆未成熟 B 細胞便會啟動計畫性細胞死亡（<strong>細胞凋亡</strong>），直接從 B 細胞庫中被移除。</li>
+      </ul>
+    </div>
+
+    <article class="figure-card">
+      <div class="figure-img-wrap">
+        <img src="images/BasicImmuno7e_Fig9-6_b_central_tolerance.png" alt="Basic Immunology 7e 圖 9.6：骨髓中未成熟 B 淋巴球的中樞耐受性（受體編輯與細胞凋亡刪除）" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖 4｜Basic Immunology 7e 圖 9.6：骨髓中未成熟 B 細胞的中樞耐受性</div>
+        <p class="figure-caption">當骨髓中正在發育的未成熟 B 細胞強烈辨識自身抗原時，只有兩條路：左路進行「受體編輯」，改變抗體變異區成為不具自體反應性的 B 細胞；右路則啟動「細胞凋亡」，直接刪除這株細胞。</p>
+        <p class="figure-caption-en">Fig. 9.6 Central tolerance in immature B lymphocytes. An immature B cell that recognizes self antigen in the bone marrow changes its antigen receptor (receptor editing) or dies by apoptosis (negative selection, or deletion).</p>
+      </div>
+    </article>
+
+    <div class="step-box">
+      <div class="step-header">
+        <span class="step-num">2</span>
+        <div class="step-title">第二道關卡：骨髓外的周邊耐受性（Peripheral B Cell Tolerance）</div>
+      </div>
+      <p style="margin-bottom:0;">即使有少數自體反應性 B 細胞逃過骨髓篩選、進入血液與脾臟等周邊淋巴組織（剛離開骨髓者稱為過渡型 B 細胞），在沒有感染輔助訊號下若遇到自身抗原，仍會透過<strong>細胞凋亡被清除</strong>，或是降低表面受體數量、進入功能上無法活化分泌抗體的<strong>無反應狀態（anergy）</strong>。因此，A 型人長大後即使在腸道遇到帶有「類 A 醣類」的細菌，體內也沒有可用的抗 A B 細胞株能做出抗 A 抗體。</p>
+    </div>
+
+    <article class="figure-card">
+      <div class="figure-img-wrap">
+        <img src="images/BasicImmuno7e_Fig9-7_b_peripheral_tolerance.png" alt="Basic Immunology 7e 圖 9.7：B 淋巴球的周邊耐受性（無反應狀態與凋亡刪除）" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖 5｜Basic Immunology 7e 圖 9.7：B 淋巴球的周邊耐受性</div>
+        <p class="figure-caption">離開骨髓的 B 細胞若在周邊組織遇到自身抗原且缺乏 T 細胞協助，會進入功能失活的「無反應狀態（anergy）」，或直接進行細胞凋亡（deletion）遭到清除。</p>
+        <p class="figure-caption-en">Fig. 9.7 Peripheral tolerance in B lymphocytes. A mature B cell that recognizes a self-antigen without T cell help is functionally inactivated and becomes incapable of responding to that antigen (anergy), or it dies by apoptosis (deletion), or its activation is suppressed by engagement of inhibitory receptors.</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- Section 4 -->
+  <section id="sec-natural-and-other-ab">
+    <h2><span class="sec-num">04</span> 沒輸過 B 型血為何就有抗 B 抗體？血漿裡沒有其他抗體嗎？</h2>
+
+    <h3>1. 抗 B 抗體不是「一出生就有」，而是腸道菌群與食物誘發的交叉反應</h3>
+    <p>正常情況下，後天性免疫必須先接觸外來抗原才會產生對應抗體。那從未輸過血的 A 型人，為什麼血漿裡已經有抗 B 抗體？關鍵證據就藏在<strong>年齡曲線</strong>裡：</p>
+    <ul>
+      <li><strong>出生時幾乎為零</strong>：剛出生的新生兒血漿中幾乎測不到抗 A 或抗 B 凝集素；大約在<strong>出生後 2 至 8 個月</strong>才開始逐漸出現，並在 <strong>8 至 10 歲</strong>達到高峰，隨後隨著年齡增長緩慢下降（<em>Guyton &amp; Hall</em> 15e Ch36、<em>Hole</em> 15e Ch12）。</li>
+      <li><strong>腸道細菌與食物分子提供「相似的醣類」</strong>：嬰兒出生後開始進食並建立腸道微生物群，許多常見腸道細菌（例如腸桿菌科大腸桿菌細胞壁上的多醣 O 抗原）與食物成分，帶有與人類 A、B 血型醣類結構極為相似的抗原決定位（<em>Basic Immunology</em> 7e Ch10、<em>Campbell</em> 13e Ch43、<em>Tortora</em> 13e Ch19）。</li>
+      <li><strong>留下來的抗 B 細胞被活化</strong>：A 型人的免疫系統先前只刪除了「抗 A」B 細胞，但「抗 B」B 細胞完好無缺。當腸道細菌表面類似 B 醣的抗原決定位刺激免疫系統時，抗 B B 細胞便會活化分泌抗體；這些抗體日後遇到 B 型紅血球也會發生結合（交叉反應），因而稱為<strong>天然抗體（natural antibodies）</strong>。</li>
+      <li><strong>為何主要為 IgM？</strong> 因為 A、B 血型抗原是<strong>醣類</strong>（屬於 T 非依賴性抗原），無法結合到 MHC 分子上呈給輔助型 T 細胞以驅動抗體同種型轉換，因此抗 A、抗 B 抗體主要停留在高分子量的 <strong>IgM</strong> 類別（<em>Basic Immunology</em> 7e Ch07 &amp; Ch10）。大分子 IgM 不易穿過胎盤，這也是為什麼母胎 ABO 不合通常不像 Rh 不合那樣容易造成嚴重胎兒溶血（<em>Vander</em> 16e Ch18、<em>Hole</em> 15e Ch12）。</li>
+    </ul>
+
+    <article class="figure-card">
+      <div class="figure-img-wrap">
+        <img src="images/Guyton15e_Fig36-1_agglutinin_titer_age.png" alt="Guyton & Hall 15e 圖 36.1：不同年齡者血漿中抗 A 與抗 B 凝集素的平均效價變化" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖 6｜Guyton &amp; Hall 15e 圖 36.1：抗 A、抗 B 凝集素效價隨年齡的變化曲線</div>
+        <p class="figure-caption">橫軸為年齡（歲），縱軸為血漿中凝集素平均效價。紅線為 B 型與 O 型人的抗 A 凝集素，藍線為 A 型與 O 型人的抗 B 凝集素。兩條曲線在 0 歲時都從接近零起步，兒童期快速上升並在 8 至 10 歲達到最高峰，直接證實這些抗體是出生後接觸環境抗原才陸續形成的。</p>
+        <p class="figure-caption-en">Figure 36.1 Average titers of anti-A and anti-B agglutinins in the plasma of people with different blood types.</p>
+      </div>
+    </article>
+
+    <h3>2. A 型人的血漿裡當然有「大量其他抗體」</h3>
+    <p>課本表格寫「A 型血漿含抗 B 抗體」，只是<strong>把討論範圍限定在 ABO 血型系統</strong>，絕不表示 A 型人的血漿裡只有抗 B 這一種抗體。實際上，正常人血漿裡充滿各式各樣的抗體：</p>
+    <ul>
+      <li><strong>免疫球蛋白約占血漿蛋白總量的 20%</strong>（<em>Guyton &amp; Hall</em> 15e Ch35），其中 <strong>IgG 約占總抗體量的 75%</strong>。</li>
+      <li><strong>記錄一生的感染與疫苗史</strong>：骨髓中的<strong>長壽漿細胞</strong>能在病原體清除後持續存活數年甚至數十年，正常成人血液中超過一半的抗體都來自它們，包含針對過去感染過的病毒、細菌以及接種過疫苗的各種專一性抗體（<em>Basic Immunology</em> 7e Ch07、<em>Campbell</em> 13e Ch43）。人類 B 細胞整體可產生的抗體種類超過 10 億種（<em>Hole</em> 15e Ch14）。</li>
+      <li><strong>其他血型系統抗體（為何表格沒把抗 Rh 抗體列為預設抗體？）</strong>：人類紅血球表面已知超過 30 種常見（總計逾 400 種）抗原，其中臨床上另一組最重要的是 <strong>Rh 系統（D 抗原）</strong>。但它與 ABO 系統的產生機制完全不同：</li>
+    </ul>
+
+    <table class="ro-resp-table">
+      <thead>
+        <tr>
+          <th>比較項目</th>
+          <th>ABO 血型系統（抗 A／抗 B）</th>
+          <th>Rh 血型系統（抗 D／抗 Rh）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>抗原化學本質</strong></td>
+          <td>紅血球膜醣蛋白與醣脂上的<strong>醣類</strong></td>
+          <td>紅血球膜上的<strong>蛋白質</strong>（RhD 膜蛋白）</td>
+        </tr>
+        <tr>
+          <td><strong>未曾輸血或懷孕前血漿中有無抗體</strong></td>
+          <td><strong>有</strong>（出生後 2–8 個月經腸道菌與食物交叉反應出現，屬天然抗體）</td>
+          <td><strong>幾乎沒有</strong>（須先接觸 Rh⁺ 紅血球致敏後才會產生）</td>
+        </tr>
+        <tr>
+          <td><strong>主要抗體類別</strong></td>
+          <td>主要為大分子 <strong>IgM</strong>（醣類不引發 T 細胞驅動的類別轉換）</td>
+          <td><strong>IgG</strong>（蛋白質抗原經 T 細胞協助發生類別轉換並具免疫記憶）</td>
+        </tr>
+        <tr>
+          <td><strong>是否易穿過胎盤</strong></td>
+          <td><strong>不易</strong>（因此母胎 ABO 不合通常不易造成嚴重胎兒溶血）</td>
+          <td><strong>會穿過胎盤</strong>（Rh⁻ 母親致敏後再懷 Rh⁺ 胎兒易致新生兒溶血病）</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <div class="callout-title">外部免疫學補充說明（為何 Rh 不像 ABO 會被腸道菌誘發？）</div>
+      <p style="margin-bottom:0;">上述表格中的化學本質（醣類 vs. 蛋白質）、是否天然存在及 IgM／IgG 差異，均直接來自本機原文教科書。至於「為何腸道菌會誘發抗 A／抗 B，卻不會誘發抗 RhD」的進階原因（本機知識庫目前未明文並列因果）：RhD 是靈長類與脊椎動物紅血球特有的多跨膜蛋白質，自然界常見腸道細菌或食物中缺乏與其結構高度相似的交叉反應抗原決定位，因此 Rh⁻ 個體除非直接暴露於他人的 Rh⁺ 紅血球，否則不會自行產生抗 D 抗體。</p>
+    </div>
+  </section>
+
+  <!-- Section 5: Textbook Evidence -->
+  <section id="sec-sources">
+    <h2><span class="sec-num">05</span> 經典原文教科書原始文獻考證</h2>
+    <p>以下完整保留 Vault 內 7 部大學經典原文書的英文原句與繁中對照，以及臺灣高中跨版本教材重點，供備課與教甄查核。</p>
+    <button class="toggle-en-btn" id="toggleEnBtn" type="button" onclick="toggleEnglish()">精簡：隱藏英文原文</button>
+
+    <!-- Book 1: Guyton & Hall -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">1. Guyton &amp; Hall《Textbook of Medical Physiology》15e</div>
+        <div class="source-loc">Ch24 循環性休克 · Ch35 免疫與過敏 · Ch36 血型與輸血</div>
+      </div>
+
+      <div class="quote-block">
+        <div class="quote-label">① 供血者血漿稀釋效應（Ch36）</div>
+        <div class="quote-en">“The plasma portion of the donor blood immediately becomes diluted by all the plasma of the recipient, thereby decreasing the titer of the infused agglutinins to a level usually too low to cause agglutination. However, the small amount of infused blood does not significantly dilute the agglutinins in the recipient’s plasma. Therefore, the recipient’s agglutinins can still agglutinate the mismatched donor cells.”</div>
+        <div class="quote-tw">供血者血液中的血漿部分會<strong>立即被受血者的全部血漿稀釋</strong>，使輸入的凝集素效價下降到通常低得不足以造成凝集的程度。然而，輸入的少量血液不會顯著稀釋受血者血漿中的凝集素。因此，受血者的凝集素仍可使不相合的供血者細胞發生凝集。</div>
+      </div>
+
+      <div class="quote-block">
+        <div class="quote-label">② 凝集素出現年齡與食物／細菌來源（Ch36）</div>
+        <div class="quote-en">“Immediately after birth, the quantity of agglutinins in the plasma is almost zero. At 2 to 8 months after birth, an infant begins to produce agglutinins—anti-A agglutinins when type A agglutinogens are not present in the cells, and anti-B agglutinins when type B agglutinogens are not in the cells... A maximum titer is usually reached at 8 to 10 years of age... A possible answer to this question is that small amounts of type A and B antigens enter the body in food, bacteria, and other ways, and these substances initiate the development of the anti-A and anti-B agglutinins.”</div>
+        <div class="quote-tw">剛出生時，血漿中的凝集素含量<strong>幾乎為零</strong>。出生後 <strong>2 至 8 個月</strong>，嬰兒開始產生凝集素……效價通常在 <strong>8 至 10 歲</strong>達到最高……一個可能的答案是，少量 A 型與 B 型抗原會經由<strong>食物、細菌及其他途徑</strong>進入人體，而這些物質會引發抗 A 與抗 B 凝集素的形成。</div>
+      </div>
+
+      <div class="quote-block">
+        <div class="quote-label">③ 嚴重出血休克的全血治療與 Rh 非自然產生（Ch24 &amp; Ch36）</div>
+        <div class="quote-en">“If a person is in shock caused by hemorrhage, the best possible therapy is usually transfusion of whole blood. If the shock is caused by plasma loss, the best therapy is administration of plasma.” / “In the O-A-B system, the plasma agglutinins responsible for causing transfusion reactions develop spontaneously, whereas in the Rh system, spontaneous agglutinins almost never occur. Instead, the person must first be massively exposed to an Rh antigen—such as by transfusion of blood containing the Rh antigen—before enough agglutinins to cause a significant transfusion reaction will develop.”</div>
+        <div class="quote-tw"><strong>出血造成休克時，最佳治療通常是輸注全血</strong>。若休克由血漿流失造成，最佳治療是輸注血漿。／在 O-A-B 系統中，會引起輸血反應的血漿凝集素可自然產生；但在 <strong>Rh 系統中，幾乎不會自然產生凝集素</strong>。相反地，一個人必須先大量暴露於 Rh 抗原，之後才會產生足以引起顯著輸血反應的凝集素。</div>
+      </div>
+
+      <div class="quote-block">
+        <div class="quote-label">④ 正常人血漿抗體比例（Ch35）</div>
+        <div class="quote-en">“Antibodies are gamma globulins called immunoglobulins (Igs) that have molecular weights between 160,000 and 970,000 and constitute about 20% of all the plasma proteins... IgG, which is a bivalent antibody and constitutes about 75% of the antibodies of the normal person...”</div>
+        <div class="quote-tw">抗體是一類稱為免疫球蛋白（Igs）的 γ 球蛋白，約占<strong>所有血漿蛋白的 20%</strong>……<strong>IgG</strong> 是二價抗體，約占正常人<strong>抗體總量的 75%</strong>。</div>
+      </div>
+    </div>
+
+    <!-- Book 2: Hole 15e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">2. Hole's《Human Anatomy &amp; Physiology》15e</div>
+        <div class="source-loc">Ch12 血液（12.5 血型與輸血）</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">同型血優先，異型輸血須把血漿降到最低並緩慢輸血</div>
+        <div class="quote-en">“Using donor blood of the same type as the recipient is best for all ABO blood types (table 12.5). When donating a permissible blood type to the recipient, precautionary measures should be taken to reduce the chance of an adverse reaction, such as minimizing the plasma, and transfusing slowly so that the recipient’s larger blood volume will dilute the donor’s antibodies.”</div>
+        <div class="quote-tw">對所有 ABO 血型而言，<strong>使用與受血者相同類型的捐贈血液最好</strong>。當捐贈一個許可的血型給受血者時，應採取預防措施以減少不良反應的機會，例如<strong>把血漿降到最低，並緩慢輸血</strong>，使受血者較大的血量得以稀釋捐贈者的抗體。</div>
+      </div>
+    </div>
+
+    <!-- Book 3: Fox 16e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">3. Fox《Human Physiology》16e</div>
+        <div class="source-loc">Ch13 血液、心臟與循環</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">① 免疫耐受機制使 A 型缺乏抗 A 抗體</div>
+        <div class="quote-en">“The immune system exhibits tolerance to its own red blood cell antigens. People who are type A, for example, do not produce anti-A antibodies... Whatever the origin of anti-A and anti-B antibodies, people who have type A blood (for example) have antibodies that can bind to B antigens but lack antibodies against the A antigen because of tolerance mechanisms.”</div>
+        <div class="quote-tw">免疫系統對自身紅血球抗原具有<strong>耐受性</strong>。例如 A 型者不會生成抗 A 抗體……A 型者的抗體可與 B 抗原結合，卻因<strong>耐受機制</strong>而缺乏對抗 A 抗原的抗體。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">② 全適捐血者僅限血漿量很少時成立，實務強烈不鼓勵</div>
+        <div class="quote-en">“Type O is, therefore, a universal donor—but only as long as the volume of plasma donated is small, since plasma from a type O person would agglutinate type A, type B, and type AB red blood cells... (Donor plasma could agglutinate recipient red blood cells if the transfusion volume were too large.) Because of the dangers involved, use of the universal donor and recipient concept is strongly discouraged in practice.”</div>
+        <div class="quote-tw">所以 O 型可視為全適捐血者——<strong>但只有在捐贈血漿量很少時才成立</strong>，因為 O 型者的血漿會使 A、B 與 AB 型紅血球凝集……若輸血量過大，捐血者血漿仍可能使受血者紅血球凝集。由於涉及危險，實務上強烈不鼓勵使用全適捐血者與全適受血者的概念。</div>
+      </div>
+    </div>
+
+    <!-- Book 4: Vander 16e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">4. Vander's《Human Physiology》16e</div>
+        <div class="source-loc">Ch18 免疫系統（輸血反應）</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">捐血者抗體稀釋、Rh 典型免疫模式與 ABO IgM 不易穿過胎盤</div>
+        <div class="quote-en">“The latter is generally of little consequence, however, because the transfused antibodies become so diluted in the recipient’s plasma that they are ineffective in inducing a response. It is the destruction of the transfused cells by the recipient’s antibodies that produces the problem.” / “Antibodies in the Rh system, unlike the natural antibodies of the ABO system, follow the classical immunity pattern in that no one has anti-Rh antibodies unless exposed to Rh-positive cells from another person.” / “...partly because the antibodies, unlike the anti-Rh antibodies, are of the IgM type, which do not readily cross the placenta.”</div>
+        <div class="quote-tw">輸入血漿中的抗體在受血者血漿中被大幅稀釋，通常影響不大；<strong>真正造成問題的是受血者抗體破壞輸入的細胞</strong>。／<strong>Rh 系統的抗體遵循典型免疫模式</strong>：除非接觸另一個人的 Rh 陽性細胞，否則不會產生抗 Rh 抗體。／ABO 抗體與抗 Rh 抗體不同，屬於<strong>不易穿過胎盤的 IgM 類型</strong>。</div>
+      </div>
+    </div>
+
+    <!-- Book 5: Tortora 13e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">5. Tortora《Microbiology: An Introduction》13e</div>
+        <div class="source-loc">Ch19 免疫系統相關疾病</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">① 輸血不使用全血與血庫血漿分離</div>
+        <div class="quote-en">“Therefore, whole blood is not used in transfusions. For example, if whole blood from a type O donor were given to a type B recipient, the anti-B antibodies in the donor would immediately react with the recipient cells (that have B antigens), fixing complement and lysing cells.” / “Cells and plasma are separated so that the O cells, lacking A and B antigens, can be transfused to any recipient.”</div>
+        <div class="quote-tw">因此，<strong>輸血不使用全血</strong>。例如，若把 O 型捐血者的全血輸給 B 型受血者，捐血者的抗 B 抗體會立刻與受血者具有 B 抗原的細胞反應，固定補體並使細胞溶解。／<strong>將血球與血漿分開後</strong>，缺少 A、B 抗原的 O 型血球便可輸給任何受血者。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">② 出生後第一年腸道微生物群與 B 細胞自體耐受篩選</div>
+        <div class="quote-en">“During the first year of life, a newborn’s B cells start producing antibodies against bacteria in its developing microbiome. Some bacterial antigens are identical to molecules that comprise our personal blood type. If those B cells are allowed to mature, their antibodies would result in widespread tissue damage. Through screening mechanisms, the body destroys the B cells not exhibiting self-tolerance.”</div>
+        <div class="quote-tw">在出生後第一年，新生兒的 B 細胞開始針對其發育中微生物群的細菌產生抗體。某些細菌抗原與構成個人血型的分子完全相同。若允許這些 B 細胞成熟，其抗體將造成廣泛的組織損傷。<strong>身體會透過篩選機制，破壞未展現自體耐受性的 B 細胞</strong>。</div>
+      </div>
+    </div>
+
+    <!-- Book 6: Basic Immunology 7e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">6. Abbas《Basic Immunology》7e</div>
+        <div class="source-loc">Ch07 體液免疫反應 · Ch09 免疫耐受性與自體免疫 · Ch10 腫瘤與移植免疫學</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">① ABO 天然 IgM 抗體與腸道微生物交叉反應（Ch10）</div>
+        <div class="quote-en">“Individuals are tolerant of the blood group antigens they express but make antibodies specific for the antigens they do not express... These antibodies are called natural antibodies because they are made in the absence of overt exposure to the blood group antigens they recognize. They are likely produced by B cells in response to structurally similar antigens of intestinal microbes, and the antibodies cross-react with ABO blood group antigens. Because the blood group antigens are sugars, they do not elicit T cell responses that drive isotype switching, and the antibodies specific for A or B antigens are largely IgM.”</div>
+        <div class="quote-tw">個體會容忍自己表現的血型抗原，卻會製造對未表現抗原具有專一性的抗體……它們可能由 B 細胞回應<strong>腸道微生物中結構相似的抗原</strong>而製造，再與 ABO 血型抗原產生<strong>交叉反應</strong>。血型抗原是糖，不會引發能驅動同種型轉換的 T 細胞反應，因此 A、B 抗原專一性抗體<strong>主要為 IgM</strong>。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">② B 細胞對多價自身多醣的耐受性：受體編輯、刪除與無反應狀態（Ch09）</div>
+        <div class="quote-en">“Tolerance of B cells that recognize multivalent self polysaccharides, lipids, nucleic acids and membrane proteins can be induced in a T-independent manner.” / “When immature B lymphocytes interact strongly with self antigens in the bone marrow, the B cells either change their receptor specificity (receptor editing) or are killed (deletion) (Fig. 9.6).” / “Mature B lymphocytes that encounter self antigens in peripheral lymphoid tissues become incapable of responding to that antigen (Fig. 9.7)... B cells that have recently emerged from the bone marrow, called transitional B cells, are eliminated by apoptosis when their antigen receptors are triggered by self antigens in the periphery.”</div>
+        <div class="quote-tw">能辨識多價自身多醣、脂質、核酸與膜蛋白質的 B 細胞，可在<strong>不依賴 T 細胞</strong>的情況下產生耐受性。／未成熟 B 淋巴球在骨髓中與自身抗原產生強烈交互作用時，會進行<strong>受體編輯</strong>，或遭到殺死，也就是<strong>刪除</strong>。／成熟 B 淋巴球在周邊遇到自身抗原時會進入<strong>無反應狀態</strong>，過渡型 B 細胞則會經由<strong>細胞凋亡遭到清除</strong>。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">③ 長壽漿細胞反映個人一生的抗原接觸史（Ch07）</div>
+        <div class="quote-en">“It is estimated that more than half of the antibodies in the blood of a normal adult are produced by these long-lived plasma cells; thus, circulating antibodies reflect each individual’s history of antigen exposure.”</div>
+        <div class="quote-tw">據估計，正常成人血液中<strong>超過一半的抗體由這些長壽漿細胞製造</strong>；因此，循環抗體反映了每個人的抗原接觸史。</div>
+      </div>
+    </div>
+
+    <!-- Book 7: Campbell 13e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">7. Campbell《Biology》13e</div>
+        <div class="source-loc">Ch43 免疫系統（血型）</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">細菌抗原決定位與血球醣類相似，自體反應淋巴球於發育期已被清除</div>
+        <div class="quote-en">“Why does the immune system recognize particular sugars on red blood cells? It turns out that we are frequently exposed to certain bacteria that have epitopes very similar to the carbohydrates on blood cells. A person with type A blood will respond to the bacterial epitope similar to the B carbohydrate and make antibodies that will react with any B carbohydrate encountered upon a transfusion. However, that same person doesn’t make antibodies against the bacterial epitope similar to the A carbohydrate because lymphocytes that would be reactive with the body’s own cells and molecules were inactivated or eliminated during development.”</div>
+        <div class="quote-tw">我們常接觸到某些細菌，其抗原決定位與血球上的醣非常相似。A 型血的人會對「類似 B 醣的細菌決定位」起反應，製造出能與輸血時遇到之任何 B 醣反應的抗體。然而同一個人不會對「類似 A 醣的細菌決定位」製造抗體，因為發育期間<strong>「會與自身細胞和分子起反應的淋巴球」已被去活化或清除</strong>。</div>
+      </div>
+    </div>
+
+    <!-- Taiwan High School Editions -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">8. 臺灣高中 108 課綱跨版本教材對照</div>
+        <div class="source-loc">免疫系統跨版本整合（泰宇・三民・南一等各版）</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">耐受性定義、探討活動三種輸血成分比較與 Rh 血型</div>
+        <div class="quote-tw"><strong>〔泰宇詳述・耐受性〕</strong>骨髓中的先驅細胞持續以基因重組產生具不同抗原受體的 B/T 細胞，在初級淋巴器官發育的過程中，可辨識自體抗原的淋巴球會被去除，故正常成熟的 B/T 細胞不會對自體細胞產生免疫反應，此性質稱為耐受性。<br><br>
+        <strong>〔三民選修生物探討活動〕</strong>問題與討論直接請學生比較「<strong>輸全血、只輸血漿、只輸血球</strong>」三種不同情形下的抗原—抗體免疫反應。<br><br>
+        <strong>〔南一補充・Rh 血型〕</strong>Rh⁻ 母親被胎兒 Rh⁺ 紅血球致敏後產生的 IgG 抗體會經胎盤造成新生兒溶血；若母胎同時 ABO 不相容，因胎兒紅血球會先被母體天然 ABO 抗體破壞，反而會降低 Rh 致敏的機率。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Teaching Tips & Traps -->
+  <section id="sec-teaching">
+    <h2><span class="sec-num">06</span> 高中教學提醒與常見考題陷阱</h2>
+
+    <div class="callout-warn">
+      <div class="callout-title">⚠️ 學生與考題最常踩到的 3 個陷阱</div>
+      <ul style="margin-bottom:0;">
+        <li><strong>陷阱 1：「A 型新生兒一出生血漿裡就充滿抗 B 抗體」</strong><br>
+        錯。剛出生時抗 A、抗 B 抗體幾乎為零，是出生後 2 至 8 個月接觸飲食與腸道菌群才陸續形成，約在 8 至 10 歲達到高峰。</li>
+        <li><strong>陷阱 2：「O 型血漿不含抗體，所以 O 型全血可以大量輸給任何人」</strong><br>
+        錯。O 型是紅血球表面無 A、B 抗原，血漿裡其實同時含有抗 A 與抗 B 抗體；不含 ABO 抗體的是 AB 型血漿。因此緊急異型輸血必須優先使用「去除血漿的 O 型紅血球」，而非未經篩檢的大量 O 型全血。</li>
+        <li><strong>陷阱 3：「Rh 陰性者的血漿跟 ABO 一樣，本來就有抗 Rh 抗體」</strong><br>
+        錯。ABO 抗體是腸道菌相似醣類誘發的天然抗體（主要為 IgM、不易穿過胎盤）；Rh 抗體則是針對膜蛋白質抗原的典型免疫反應，必須先接觸 Rh⁺ 紅血球致敏後才會產生（為 IgG、會穿過胎盤）。</li>
+      </ul>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">課堂延伸提問設計</div>
+      <p style="margin-bottom:0;">講完複等位基因與輸血表後，可以接著問學生：「<strong>如果醫院今天不是要輸紅血球，而是要幫一位凝血功能不好的病人『只輸血漿』，那 AB 型和 O 型誰才是血漿的全適捐血者？</strong>」這個問題能立刻檢驗學生是否真的分得清楚「紅血球表面抗原」與「血漿中抗體」各自在哪一邊。</p>
+    </div>
+  </section>
+
+  <footer>
+    400X 的日常切片 Bio-Wiki · 依 Guyton 15e、Hole 15e、Fox 16e、Vander 16e、Tortora 13e、Basic Immunology 7e 與 Campbell 13e 原文編整 · 繁體中文與審定名詞遵循臺灣教育部規範
+  </footer>
+
+</main>
+
+<button class="ro-bottom-toc" type="button" onclick="roOpenDrawer('roTocDrawer')">📑 本篇段落導覽</button>
+<a class="ro-up-btn" href="#top" aria-label="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<script>
+  function roToggleTheme() {
+    var root = document.documentElement;
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('biowiki-theme', next); } catch (e) {}
+    roUpdateThemeBtn();
+  }
+  function roUpdateThemeBtn() {
+    var btn = document.getElementById('roThemeBtn');
+    if (!btn) return;
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.innerHTML = isLight ? '🌙 深色' : '☀️ 亮色';
+    btn.setAttribute('aria-label', isLight ? '切換為深色閱讀模式' : '切換為亮色閱讀模式');
+  }
+  roUpdateThemeBtn();
+
+  function roOpenDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('open');
+  }
+  function roCloseDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  }
+  function openLightbox(src, alt) {
+    var lb = document.getElementById('roLightbox');
+    var img = document.getElementById('roLightboxImg');
+    if (lb && img) {
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.add('open');
+    }
+  }
+  function toggleEnglish() {
+    document.body.classList.toggle('hide-en');
+    var btn = document.getElementById('toggleEnBtn');
+    if (btn) {
+      btn.textContent = document.body.classList.contains('hide-en')
+        ? '完整：顯示英文原文'
+        : '精簡：隱藏英文原文';
+    }
+  }
+  (function initReadingOutpostShell() {
+    var tocList = document.getElementById('roTocList');
+    var headings = document.querySelectorAll('h2');
+    if (tocList && headings.length) {
+      headings.forEach(function(h, idx) {
+        if (!h.id) h.id = 'ro-sec-' + (idx + 1);
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent.trim();
+        tocList.appendChild(a);
+      });
+    }
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th, tr:first-child th')).map(function(th) {
+        return th.innerText.trim().replace(/[\r\n\t ]+/g, ' ');
+      });
+      if (!headers.length) return;
+      table.classList.add('ro-resp-table');
+      table.querySelectorAll('tr').forEach(function(tr) {
+        if (tr.querySelector('th')) return;
+        Array.from(tr.children).forEach(function(td, idx) {
+          if (td.tagName === 'TD' && !td.getAttribute('data-label') && headers[idx]) {
+            td.setAttribute('data-label', headers[idx]);
+          }
+        });
+      });
+    });
+    document.querySelectorAll('main img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        openLightbox(img.src, img.alt);
+      });
+    });
+  })();
+</script>
+<script src="site-nav.js"></script>
+</body>
+</html>
