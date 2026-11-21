@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>按需供應的兩種速度：大腸桿菌 lac 操縱組 vs. 人類胰島素調控型胞吐｜Bio-Wiki</title>
+<style>
+  :root {
+    --bg-primary: #181614;
+    --bg-pillbar: #24201c;
+    --bg-card: #211e1a;
+    --bg-quote: #26221e;
+    --bg-tag: #2d2823;
+    --text-primary: #f6f1ea;
+    --text-body: #ddd5ca;
+    --text-secondary: #bfb5a8;
+    --text-muted: #9a8e80;
+    --primary: #5bc0eb;
+    --primary-light: rgba(91, 192, 235, 0.12);
+    --primary-border: rgba(91, 192, 235, 0.32);
+    --accent: #f4c44e;
+    --accent-light: rgba(244, 196, 78, 0.12);
+    --border-color: rgba(246, 241, 234, 0.09);
+    --border-strong: rgba(246, 241, 234, 0.16);
+    --taupe-fab: rgba(104, 91, 78, 0.94);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+  }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+    font-size: 18px;
+    line-height: 1.78;
+    padding: 0 0 96px 0;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .ro-header-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-primary) 70%, rgba(24, 22, 20, 0));
+  }
+
+  .ro-pillbar {
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .ro-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .ro-menu-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    border: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .ro-menu-circle span {
+    display: block;
+    width: 16px;
+    height: 2.2px;
+    background: #181614;
+    border-radius: 2px;
+  }
+
+  .ro-brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .ro-brand-zh {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-brand-en {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .ro-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .ro-theme-btn {
+    appearance: none;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    transition: transform 0.15s ease;
+  }
+
+  .ro-theme-btn:active {
+    transform: scale(0.96);
+  }
+
+  .ro-cta-pill {
+    appearance: none;
+    background: var(--accent);
+    color: #1c1814;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .container {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 22px 0;
+  }
+
+  header.hero {
+    text-align: left;
+    margin-bottom: 32px;
+    padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .badge-bar {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .badge-primary {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary-border);
+  }
+
+  .badge-accent {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: rgba(244, 196, 78, 0.32);
+  }
+
+  h1 {
+    font-size: clamp(26px, 6.2vw, 34px);
+    line-height: 1.38;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    margin: 6px 0 14px;
+    text-align: left;
+  }
+
+  .subtitle {
+    font-size: 17px;
+    line-height: 1.68;
+    color: var(--text-muted);
+    margin: 0;
+    text-align: left;
+  }
+
+  section {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: 42px;
+    scroll-margin-top: 84px;
+  }
+
+  h2 {
+    font-size: clamp(22px, 5.2vw, 27px);
+    line-height: 1.45;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 44px 0 18px;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+  }
+
+  h2 .sec-num {
+    color: var(--accent);
+    margin-right: 6px;
+    font-weight: 800;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 30px 0 12px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--text-body);
+    margin-bottom: 18px;
+  }
+
+  ul, ol {
+    margin: 0 0 22px 24px;
+    color: var(--text-body);
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+    color: var(--text-body);
+  }
+
+  strong, b {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.9em;
+    background: var(--bg-tag);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 6px;
+  }
+
+  main a:not(.ro-cta-pill):not(.ro-brand-link) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  .tldr-card, .source-card, .callout, .callout-warn, .boundary, .glossary-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 20px 20px;
+    margin: 20px 0;
+  }
+
+  .tldr-card {
+    border-left: 4px solid var(--accent);
+  }
+
+  .callout {
+    border-left: 4px solid var(--primary);
+  }
+
+  .callout-warn {
+    border-left: 4px solid var(--accent);
+  }
+
+  .boundary {
+    border-left: 4px solid var(--text-muted);
+  }
+
+  .tldr-label, .callout-title, .source-book {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .glossary-item {
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .glossary-item:last-child {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+
+  .glossary-term {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+
+  .source-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .source-loc {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .quote-block {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .quote-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quote-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .quote-en {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 10px 0 12px;
+    word-break: break-word;
+  }
+
+  body.hide-en .quote-en {
+    display: none;
+  }
+
+  .quote-tw {
+    font-size: 17.5px;
+    line-height: 1.78;
+    color: var(--text-body);
+  }
+
+  .quote-tw strong {
+    color: var(--accent);
+    background: rgba(244, 196, 78, 0.10);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+
+  .toggle-en-btn {
+    appearance: none;
+    background: var(--bg-tag);
+    color: var(--accent);
+    border: 1px solid rgba(244, 196, 78, 0.35);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  .figure-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .figure-title {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding: 12px 16px 4px;
+  }
+
+  .figure-img-wrap {
+    padding: 14px;
+    background: #f8fafc;
+    cursor: zoom-in;
+  }
+
+  main img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 8px;
+    margin: 0 auto;
+    cursor: zoom-in;
+  }
+
+  .zoom-hint {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    padding: 6px 4px 0;
+  }
+
+  .figure-caption {
+    font-size: 15px;
+    line-height: 1.68;
+    color: var(--text-secondary);
+    padding: 10px 16px 8px;
+  }
+
+  .figure-caption-en {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 0 16px 14px;
+  }
+
+  .table-wrap {
+    width: 100%;
+    margin: 18px 0 26px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 16px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-body);
+  }
+
+  th {
+    background: var(--bg-pillbar);
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  tr.highlight-tr td {
+    background: rgba(244, 196, 78, 0.12);
+    color: var(--text-primary);
+  }
+
+  @media (max-width: 680px) {
+    table.ro-resp-table,
+    table.ro-resp-table thead,
+    table.ro-resp-table tbody,
+    table.ro-resp-table th,
+    table.ro-resp-table td,
+    table.ro-resp-table tr {
+      display: block;
+      width: 100%;
+    }
+
+    table.ro-resp-table thead {
+      display: none;
+    }
+
+    table.ro-resp-table tr {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    table.ro-resp-table td {
+      border: none;
+      border-bottom: 1px dashed var(--border-color);
+      padding: 8px 0;
+      text-align: left !important;
+    }
+
+    table.ro-resp-table td:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    table.ro-resp-table td:first-child {
+      padding-top: 0;
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    table.ro-resp-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+  }
+
+  .ro-bottom-toc {
+    position: fixed;
+    left: 16px;
+    bottom: 20px;
+    z-index: 95;
+    background: var(--taupe-fab);
+    color: #f6f1ea;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 9px 15px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: calc(100vw - 88px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-up-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 95;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--taupe-fab);
+    color: #f6f1ea;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    text-decoration: none !important;
+  }
+
+  .ro-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ro-drawer-backdrop.open {
+    display: flex;
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-backdrop {
+      align-items: center;
+      padding: 24px;
+    }
+  }
+
+  .ro-drawer-panel {
+    width: 100%;
+    max-width: 500px;
+    max-height: 78vh;
+    overflow-y: auto;
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px 20px 0 0;
+    padding: 18px 18px 28px;
+    box-shadow: var(--shadow);
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-panel {
+      border-radius: 18px;
+    }
+  }
+
+  .ro-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .ro-drawer-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .ro-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .ro-drawer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ro-drawer-list a {
+    display: block;
+    text-decoration: none !important;
+    color: var(--text-body) !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .ro-drawer-list a.active {
+    color: #181614 !important;
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 800;
+  }
+
+  .ro-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    cursor: zoom-out;
+  }
+
+  .ro-lightbox.open {
+    display: flex;
+  }
+
+  .ro-lightbox img {
+    max-width: 100%;
+    max-height: 92vh;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  html[data-theme="light"] {
+    --bg-primary: #fbf8f4;
+    --bg-pillbar: #f0ece3;
+    --bg-card: #ffffff;
+    --bg-quote: #f6f2ea;
+    --bg-tag: #eee8dd;
+    --text-primary: #2f2820;
+    --text-body: #4a3f35;
+    --text-secondary: #5e5043;
+    --text-muted: #756656;
+    --primary: #1b9dce;
+    --primary-light: rgba(27, 157, 206, 0.12);
+    --primary-border: rgba(27, 157, 206, 0.35);
+    --accent: #b86b11;
+    --accent-light: rgba(244, 196, 78, 0.22);
+    --border-color: rgba(74, 63, 53, 0.12);
+    --border-strong: rgba(74, 63, 53, 0.22);
+    --taupe-fab: rgba(105, 90, 74, 0.94);
+    --shadow: 0 4px 18px rgba(47, 40, 32, 0.08);
+    color-scheme: light;
+  }
+
+  html[data-theme="light"] .ro-header-wrap {
+    background: linear-gradient(180deg, #fbf8f4 70%, rgba(251, 248, 244, 0));
+  }
+
+  html[data-theme="light"] .ro-menu-circle {
+    background: #67c3eb;
+    color: #1f1a15;
+  }
+
+  html[data-theme="light"] .ro-cta-pill {
+    background: #f6c84c;
+    color: #2f2820;
+  }
+
+  html[data-theme="light"] .ro-bottom-toc,
+  html[data-theme="light"] .ro-up-btn {
+    color: #ffffff;
+  }
+
+  html[data-theme="light"] .ro-drawer-list a.active {
+    background: #f6c84c;
+    border-color: #e0b034;
+    color: #2f2820 !important;
+  }
+
+  html[data-theme="light"] .quote-tw strong {
+    color: #8c4d06;
+    background: rgba(246, 200, 76, 0.28);
+  }
+</style>
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem('biowiki-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+
+<!-- Reading Outpost Dark Style Shell -->
+<div class="ro-header-wrap" id="top">
+  <div class="ro-pillbar">
+    <div class="ro-brand-group">
+      <button class="ro-menu-circle" type="button" aria-label="開啟專題選單" onclick="roOpenDrawer('roSiteDrawer')">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="ro-brand-link" href="index.html">
+        <span class="ro-brand-zh">400X 的日常切片</span>
+        <span class="ro-brand-en">BIO-WIKI EVIDENCE</span>
+      </a>
+    </div>
+    <div class="ro-top-actions">
+      <button class="ro-theme-btn" id="roThemeBtn" type="button" onclick="roToggleTheme()">☀️ 亮色</button>
+      <button class="ro-cta-pill" type="button" onclick="roOpenDrawer('roSiteDrawer')">專題目錄</button>
+    </div>
+  </div>
+</div>
+
+<!-- Site-Wide Topics Drawer -->
+<div class="ro-drawer-backdrop" id="roSiteDrawer" onclick="if(event.target===this)roCloseDrawer('roSiteDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📚 Bio-Wiki 全站專題</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roSiteDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list">
+      <a href="index.html">🏠 首頁：主題分類總覽</a>
+      <a href="chromatin.html">1. 染色質與染色體本質</a>
+      <a href="wheat-polygenic.html">2. 小麥多基因累加模型 (Campbell 14e)</a>
+      <a href="spermatogonia-hole.html">3. 精原細胞與生精歷程 (跨正典考證)</a>
+      <a href="griffith-transformation.html">4. Griffith 轉形作用</a>
+      <a href="promoter-tata-box.html">5. 啟動子、TATA 匣與甲基化</a>
+      <a href="sickle-cell-dominance.html">6. 鐮刀型貧血顯隱性層次分析</a>
+      <a href="endosymbiosis.html">7. 內共生假說與演化序列</a>
+      <a href="lactose-intolerance-lac-operon.html">8. 乳糖不耐症與大腸桿菌 lac 操縱組</a>
+      <a href="operon-inference-pierce.html">9. Pierce 操縱組推論過程</a>
+      <a href="gene-allele-dna-chromosome.html">10. 遺傳因子、基因、等位基因與染色體</a>
+      <a href="oogenesis-interphase-dyad.html">11. 初級卵母細胞、間期與二分體</a>
+      <a href="xy-synapsis-crossing-over.html">12. 人類 XY 染色體聯會、互換與四分體判定</a>
+      <a href="chromosome-breakage-cri-du-chat.html">13. 染色體斷裂成因與貓叫症（5p 缺失）</a>
+      <a href="operator-transcription-translation.html">14. 操作子會不會被轉錄與轉譯？（基因 vs. 子）</a>
+      <a href="lac-operon-sugar-sensing.html">15. 大腸桿菌如何感測葡萄糖與乳糖？</a>
+      <a href="why-eukaryotes-lack-operons.html">16. 為什麼真核細胞幾乎沒有操縱組？</a>
+      <a href="plant-photoreceptor-photoperiodism.html">17. 沒有感官如何感知世界？（細菌乳糖 vs. 植物光週期）</a>
+      <a href="genbio-8books-lac-detection.html">18. 普生 8 套課本怎麼講大腸桿菌偵測乳糖？</a>
+      <a href="prokaryote-gene-regulation-types.html">19. 原核基因調控分類：正／負 vs. 持續／誘導／抑制</a>
+      <a href="lac-operon-vs-insulin-exocytosis.html" class="active">20. 按需供應的兩種速度：lac 操縱組 vs. 胰島素胞吐</a>
+    </div>
+  </div>
+</div>
+
+<!-- In-Page TOC Drawer -->
+<div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📑 本篇段落導覽</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list" id="roTocList" onclick="roCloseDrawer('roTocDrawer')"></div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="ro-lightbox" id="roLightbox" onclick="this.classList.remove('open')">
+  <img id="roLightboxImg" src="" alt="">
+</div>
+
+<main class="container">
+
+  <header class="hero">
+    <div class="badge-bar">
+      <span class="badge badge-accent">跨單元易讀版</span>
+      <span class="badge badge-primary">分子生物學 × 細胞生物學 × 人體生理學</span>
+      <span class="badge">5 部正典 · 5 張原圖</span>
+    </div>
+    <h1>按需供應的兩種速度：大腸桿菌 <em>lac</em> 操縱組 vs. 人類胰島素調控型胞吐</h1>
+    <p class="subtitle">沒乳糖時大腸桿菌不必表現 <em>lac</em> 操縱組；沒吃飯時，我們的身體也是「不製造胰島素」嗎？一次串聯轉錄調控、調控型胞吐、雙相胰島素分泌與類固醇激素，看見細胞在「省能量」與「搶時間」之間的精妙取捨。</p>
+  </header>
+
+  <!-- TL;DR -->
+  <div class="tldr-card">
+    <div class="tldr-label">💡 一句話先講結論（高中生與備課老師速讀）</div>
+    <p>沒進食時，胰臟 β 細胞<strong>並不是「不製造」胰島素，而是「早就先做好、高濃度囤在分泌囊泡裡，只是先不釋放」</strong>！</p>
+    <p style="margin-bottom:0;">這剛好和大腸桿菌 <em>lac</em> 操縱組形成對比：<strong>大腸桿菌是「現點現做」</strong>（轉錄層次調控，乳糖來才合成，約 15 分鐘達高峰）；<strong>人類胰島素是「先囤貨急救、再補貨」</strong>（餐後 3–5 分鐘內先靠胞吐傾倒庫存壓住血糖，約 15 分鐘後才啟動新合成補貨）。至於人體裡真正像大腸桿菌一樣「不囤貨、需要才現做」的，反而是脂溶性的<strong>類固醇激素</strong>（如皮質醇、性激素），因為它們會直接穿過囊泡膜漏出去、根本存不住！</p>
+  </div>
+
+  <!-- Section 1: Big Comparison Table -->
+  <section id="sec-compare">
+    <h2><span class="sec-num">01</span> 三種「按需供應」策略一次看懂</h2>
+    <p>不管是細菌還是人體，背後都遵循「<strong>按需供應、避免浪費，而且平時都不是絕對的 0（都有非零基礎量）</strong>」的大原則；但因為各系統對「反應速度」和「化學性質」的限制不同，演化出了三種截然不同的控制層次：</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>比較項目</th>
+            <th>大腸桿菌 <em>lac</em> 操縱組</th>
+            <th>人類胰島素（胜肽激素）</th>
+            <th>人類類固醇激素（如皮質醇）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>平時沒訊號時「有沒有先製造？」</strong></td>
+            <td><strong>幾乎不製造</strong>（抑制蛋白結合操作子，僅極低量基礎轉錄）</td>
+            <td><strong>早就先製造並囤在分泌囊泡裡</strong>（空腹僅維持約 10 μU/mL 基礎分泌）</td>
+            <td><strong>幾乎不囤貨</strong>（脂溶性分子會自由穿過脂雙層，無法用囊泡儲存）</td>
+          </tr>
+          <tr class="highlight-tr">
+            <td><strong>主要開關在哪一層</strong></td>
+            <td><strong>轉錄層次</strong>（抑制蛋白 LacI ＋ 活化蛋白 CAP–cAMP）</td>
+            <td><strong>第一相：胞吐層次</strong>（Ca²⁺ 觸發囊泡融合）<br><strong>第二相：合成補貨</strong></td>
+            <td><strong>酵素合成層次</strong>（收到上游激素訊號才催化膽固醇生成，現做現擴散）</td>
+          </tr>
+          <tr>
+            <td><strong>反應速度</strong></td>
+            <td>較慢（約 <strong>15 分鐘</strong>使酵素暴增 1,000 倍）</td>
+            <td>極快（<strong>3–5 分鐘</strong>內暴增近 10 倍；<strong>15 分鐘</strong>後接續新合成第二波）</td>
+            <td>較慢（需活化細胞內合成酵素路徑）</td>
+          </tr>
+          <tr>
+            <td><strong>背後的演化取捨</strong></td>
+            <td>細胞小、能量珍貴；多等 15 分鐘消化乳糖不會致命</td>
+            <td>飯後血糖急升須在數分鐘內調降，不能等從 DNA 現做造成的延遲</td>
+            <td>親脂性結構決定存不住，只能透過調控合成速率控制釋放量</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 2: Regulated vs Constitutive Exocytosis -->
+  <section id="sec-exocytosis">
+    <h2><span class="sec-num">02</span> 細胞生物學視角：持續型胞吐 vs. 調控型胞吐</h2>
+    <p>在遺傳學裡，我們把不受環境開關控制、持續轉錄的基因叫做<strong>持續表現型基因（constitutive gene）</strong>；有趣的是，在細胞生物學（<strong>Alberts ECB 6e Ch. 15</strong>）裡，真核細胞的分泌也用一模一樣的字根分成兩條路線：</p>
+    <ul>
+      <li><strong>持續型胞吐路徑（constitutive exocytosis）</strong>：所有真核細胞日夜不停運作，持續補充細胞膜脂質、膜蛋白與一般分泌蛋白。</li>
+      <li><strong>調控型胞吐路徑（regulated exocytosis）</strong>：只存在於內分泌細胞（如胰臟 β 細胞）、神經元、消化腺等特化分泌細胞。細胞會先從粗面內質網與高基氏體把大量激素濃縮打包進<strong>分泌囊泡（secretory vesicles）</strong>，預先停靠在細胞膜下方，等外界訊號（血糖上升）一到才立刻融合釋放！</li>
+    </ul>
+
+    <div class="figure-card">
+      <div class="figure-title">圖一 · Alberts ECB 6e Fig. 15–30｜持續型胞吐（藍箭頭）vs. 調控型胞吐（紅箭頭）在高基氏體分流</div>
+      <div class="figure-img-wrap" onclick="openLightbox('images/AlbertsECB6_Fig15-30_constitutive_vs_regulated_exocytosis.png','Alberts ECB 6e Fig 15-30')">
+        <img src="images/AlbertsECB6_Fig15-30_constitutive_vs_regulated_exocytosis.png" alt="Alberts ECB 6e Figure 15-30 showing constitutive vs regulated exocytosis pathways diverging in trans Golgi network">
+        <span class="zoom-hint">🔍 點擊放大檢視原圖</span>
+      </div>
+      <div class="figure-caption"><strong>看圖重點</strong>：上方藍色箭頭是所有細胞持續運作的「持續型分泌」；下方紅色箭頭則是特化分泌細胞（如胰臟 β 細胞）專屬的「調控型分泌」——蛋白質早已先在高基氏體反面網路濃縮打包成囊泡，停在細胞膜旁，等到訊號傳遞下來才執行胞吐作用。</div>
+      <div class="figure-caption-en">Source: Alberts et al., Essential Cell Biology, 6th ed., Ch. 15, Figure 15–30 (Regulated and constitutive pathways of exocytosis).</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖二 · Vander 16e Fig. 11.4｜胰島素從「合成 → 加工切割 → 囊泡儲存 → 胞吐分泌」完整步驟</div>
+      <div class="figure-img-wrap" onclick="openLightbox('images/Vander16e_Fig11-4_peptide_hormone_storage_secretion.png','Vander 16e Fig 11.4')">
+        <img src="images/Vander16e_Fig11-4_peptide_hormone_storage_secretion.png" alt="Vander 16e Figure 11.4 showing synthesis, packaging, storage in secretory vesicles, and proinsulin cleavage to insulin and C-peptide">
+        <span class="zoom-hint">🔍 點擊放大檢視原圖</span>
+      </div>
+      <div class="figure-caption"><strong>看圖重點</strong>：注意左下方四個階段 <strong>Synthesis（合成）→ Packaging（包裝）→ Storage（儲存）→ Secretion（分泌）</strong>！胰島素是水溶性胜肽激素，先由前胰島素原切為胰島素原，再於囊泡內切成具活性的胰島素＋C 胜肽預先儲存；相對地，脂溶性的<strong>類固醇激素</strong>會直接穿過脂雙層，根本無法進入「Storage」這一步。</div>
+      <div class="figure-caption-en">Source: Widmaier, Raff &amp; Strang, Vander’s Human Physiology, 16th ed., Ch. 11, Figure 11.4 (Typical synthesis and secretion of peptide hormones).</div>
+    </div>
+  </section>
+
+  <!-- Section 3: Time-Course Curves Comparison -->
+  <section id="sec-curves">
+    <h2><span class="sec-num">03</span> 時間尺度的驚人巧合：3–5 分鐘急救 vs. 15 分鐘現做補貨</h2>
+    <p>把人體生理學的<strong>雙相胰島素分泌曲線（Guyton &amp; Hall 15e Fig. 79.8）</strong>和細菌分子生物學的<strong>乳糖誘導曲線（Sadava 12e Fig. 16.2）</strong>放在一起比對，會看見一個讓學生拍案叫絕的物理巧合：</p>
+    <ul>
+      <li><strong>血糖升高後 3–5 分鐘內（第一相）</strong>：葡萄糖經 GLUT2 進入 β 細胞 → 氧化產生大量 ATP → 關閉 ATP 敏感性 K⁺ 通道 → 細胞膜去極化 → 電壓閘控 Ca²⁺ 通道打開 → <strong>瞬間傾倒預先停靠在膜旁的胰島素囊泡</strong>，血漿胰島素立刻暴增近 10 倍！</li>
+      <li><strong>血糖升高約 15 分鐘後（第二相）</strong>：庫存先用掉一部分後，細胞啟動<strong>新胰島素的合成與釋放</strong>補貨，在 2–3 小時內推向更高平台。</li>
+      <li><strong>對照大腸桿菌（約 15 分鐘）</strong>：大腸桿菌因為沒有預先囤貨，加入乳糖後從轉錄、轉譯把 β-半乳糖苷酶衝到 1,000 倍，同樣需要<strong>約 15 分鐘</strong>！這正證明：凡是要「從頭合成新蛋白質」，細胞都需要十幾分鐘的準備時間；因此人體用「囊泡庫存」硬是把緊急反應速度提前了 3–5 倍！</li>
+    </ul>
+
+    <div class="figure-card">
+      <div class="figure-title">圖三 · Guyton &amp; Hall 15e Fig. 79.7｜血糖如何直接觸發 β 細胞「把囤好的胰島素囊泡吐出去」</div>
+      <div class="figure-img-wrap" onclick="openLightbox('images/Guyton15e_Fig79-7_glucose_stimulated_insulin_exocytosis.png','Guyton 15e Fig 79.7')">
+        <img src="images/Guyton15e_Fig79-7_glucose_stimulated_insulin_exocytosis.png" alt="Guyton and Hall 15e Figure 79.7 showing GLUT2, glucokinase, ATP closing K+ channel, depolarization, Ca2+ influx, and insulin exocytosis">
+        <span class="zoom-hint">🔍 點擊放大檢視原圖</span>
+      </div>
+      <div class="figure-caption"><strong>看圖重點</strong>：β 細胞感測血糖的開關不是直接去改 DNA，而是走「代謝產能 → 離子通道電位變化 → 鈣離子觸發胞吐」的快速路線，讓預先停靠的粉紅色胰島素囊泡馬上與細胞膜融合釋放。</div>
+      <div class="figure-caption-en">Source: Hall &amp; Hall, Guyton and Hall Textbook of Medical Physiology, 15th ed., Ch. 79, Figure 79.7.</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖四 · Guyton &amp; Hall 15e Fig. 79.8｜血糖驟升後的「雙相胰島素分泌曲線」（3–5 分鐘傾倒庫存 → 15 分鐘啟動新合成）</div>
+      <div class="figure-img-wrap" onclick="openLightbox('images/Guyton15e_Fig79-8_biphasic_insulin_secretion.png','Guyton 15e Fig 79.8')">
+        <img src="images/Guyton15e_Fig79-8_biphasic_insulin_secretion.png" alt="Guyton and Hall 15e Figure 79.8 biphasic plasma insulin curve showing initial 3-5 minute peak and second rise after 15 minutes">
+        <span class="zoom-hint">🔍 點擊放大檢視原圖</span>
+      </div>
+      <div class="figure-caption"><strong>看圖重點</strong>：留意三個數字——① 0 分鐘前空腹並非 0，而是維持約 <strong>10 μU/mL 基礎值</strong>；② 0 分鐘血糖上升後 <strong>3–5 分鐘</strong>衝出第一波急峰（傾倒預先形成的庫存）；③ <strong>15–20 分鐘</strong>開始第二波更高且持續的爬升（進一步釋放加上啟動新胰島素合成）。</div>
+      <div class="figure-caption-en">Source: Hall &amp; Hall, Guyton and Hall Textbook of Medical Physiology, 15th ed., Ch. 79, Figure 79.8.</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖五 · Sadava 12e Fig. 16.2｜對照組：大腸桿菌 <em>lac</em> 操縱組加入誘導物後的「轉錄現做」曲線</div>
+      <div class="figure-img-wrap" onclick="openLightbox('images/Sadava12e_Fig16-2_lac_basal_vs_induced.png','Sadava 12e Fig 16.2')">
+        <img src="images/Sadava12e_Fig16-2_lac_basal_vs_induced.png" alt="Sadava 12e Figure 16.2 showing basal level and lag period before induced beta-galactosidase and mRNA synthesis">
+        <span class="zoom-hint">🔍 點擊放大檢視原圖</span>
+      </div>
+      <div class="figure-caption"><strong>看圖重點</strong>：對照圖四看圖五！大腸桿菌在加入誘導物前同樣有非零 <strong>Basal level（基礎量）</strong>，但加入誘導物後<strong>沒有 3 分鐘瞬間爆衝的第一波</strong>，必須先經過一段延遲期（lag period）把 <em>lac</em> mRNA 轉錄出來、再轉譯成蛋白質（約 15 分鐘暴增千倍）；移除誘導物後再緩慢降回基礎量。</div>
+      <div class="figure-caption-en">Source: Hillis, Sadava et al., Life: The Science of Biology, 12th ed., Ch. 16, Figure 16.2.</div>
+    </div>
+  </section>
+
+  <!-- Section 4: Verbatim Bilingual Quotes -->
+  <section id="sec-quotes">
+    <h2><span class="sec-num">04</span> 跨領域正典中英原句對照</h2>
+    <p>以下完整彙整細胞生物學、人體生理學與普通生物學 5 部原文正典的逐字引文。</p>
+    <button class="toggle-en-btn" id="toggleEnBtn" type="button" onclick="toggleEnglish()">精簡：隱藏英文原文</button>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">1. 《Alberts Essential Cell Biology》6e — 持續型 vs. 調控型胞吐路徑</span>
+        <span class="source-loc">Ch. 15 細胞內區室與蛋白質運輸</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">特化分泌細胞先將胰島素存於分泌囊泡，聚集在細胞膜附近等待血糖上升訊號</div>
+        <div class="quote-en">"In addition to the constitutive exocytosis pathway, which operates continually in all eukaryotic cells, there is a regulated exocytosis pathway, which operates only in cells that are specialized for secretion. Each specialized secretory cell produces large quantities of a particular product—such as a hormone, mucus, or digestive enzymes—which is stored in secretory vesicles for later release. These vesicles, which are part of the endomembrane system, bud off from the trans Golgi network and accumulate near the plasma membrane. There they wait for an extracellular signal that will stimulate them to fuse with the plasma membrane and release their contents to the cell exterior by exocytosis (Figure 15–30). An increase in blood glucose, for example, signals insulin-producing endocrine cells in the pancreas to secrete the hormone (Figure 15–31)."</div>
+        <div class="quote-tw">除了所有真核細胞持續運作的<strong>持續型（原譯組成型）胞吐路徑</strong>外，特化分泌細胞還有一條<strong>調控型（原譯調節型）胞吐路徑</strong>，會預先製造大量激素並儲存在分泌囊泡中，聚集在細胞膜附近等待細胞外訊號刺激胞吐；例如血糖上升向胰臟 β 細胞發出分泌胰島素的訊號。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">2. 《Guyton &amp; Hall Medical Physiology》15e — 雙相胰島素分泌（3–5 分鐘 vs. 15 分鐘）</span>
+        <span class="source-loc">Ch. 79 胰島素、升糖素與糖尿病</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">第一相：3–5 分鐘內立即傾倒預先形成的胰島素；第二相：15 分鐘後啟動新合成系統</div>
+        <div class="quote-en">"1. The concentration of insulin in plasma increases almost 10-fold within 3 to 5 minutes after acute elevation of the blood glucose. This increase results from immediate dumping of preformed insulin from the beta cells of the islets of Langerhans. ... 2. Beginning at about 15 minutes, insulin secretion rises a second time and reaches a new plateau in 2 to 3 hours, usually at a rate of secretion even greater than that in the initial phase. This secretion results from additional release of preformed insulin and from activation of the enzyme system that synthesizes and releases new insulin from the cells."</div>
+        <div class="quote-tw">1. 血漿胰島素濃度在血糖急遽升高後 <strong>3 至 5 分鐘內增加將近 10 倍</strong>，源自蘭氏小島 β 細胞<strong>立即傾倒預先形成的胰島素</strong>。<br>2. <strong>約 15 分鐘</strong>開始第二次上升，源自進一步釋放預先形成的胰島素，以及<strong>合成並從細胞釋放新胰島素的酵素系統被活化</strong>。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">3. 《Vander’s Human Physiology》16e — 為何要預存囊泡 vs. 為何類固醇存不住</span>
+        <span class="source-loc">Ch. 04 細胞膜運輸 · Ch. 11 內分泌系統</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Ch. 04：預先儲存於分泌囊泡，避免刺激到來後才開始合成所造成的延遲</div>
+        <div class="quote-en">"Material stored in secretory vesicles is available for rapid secretion in response to a stimulus, without delays that might occur if the material had to be synthesized after the stimulus arrived."</div>
+        <div class="quote-tw"><strong>儲存在分泌囊泡中的物質可回應刺激而迅速分泌，避免刺激到來後才開始合成該物質所造成的延遲。</strong></div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Ch. 11：類固醇激素親脂、自由穿過脂雙層，一合成便直接擴散離開細胞</div>
+        <div class="quote-en">"Because steroid hormones are derived from cholesterol, they are lipophilic. Consequently, they can freely diffuse through lipid bilayers, including those that constitute secretory vesicles. Therefore, once a steroid hormone is synthesized, it diffuses out of the cell."</div>
+        <div class="quote-tw">類固醇激素衍生自膽固醇，具有親脂性，能自由擴散穿越脂雙層（包括分泌囊泡膜）；因此<strong>類固醇激素一旦合成，便會擴散離開細胞</strong>，無法預先包裝儲存。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">4. 《Campbell Biology》13e ＆ 《Sadava Life》12e — 轉錄調控的 15 分鐘與省能權衡</span>
+        <span class="source-loc">Campbell Ch. 18 · Sadava Ch. 16</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Campbell 13e ＆ Sadava 12e：蛋白質合成高度耗能，轉錄調控較慢但最省資源</div>
+        <div class="quote-en">[Campbell 13e Ch. 18] "Only a few molecules of this enzyme are present in an E. coli cell growing in the absence of lactose. If lactose is added to the bacterium’s environment, however, the number of β-galactosidase molecules in the cell increases 1,000-fold within about 15 minutes."<br><br>[Sadava 12e Ch. 16] "Regulation of protein synthesis—that is, regulation of the concentration of enzymes—is slower but results in greater savings of energy and resources. Protein synthesis is a highly endergonic process, since assembling mRNA, charging tRNA, and moving the ribosomes along mRNA all require the hydrolysis of nucleoside triphosphates such as ATP."</div>
+        <div class="quote-tw">[Campbell 13e] 若把乳糖加入細菌環境，細胞內 β-半乳糖苷酶分子數會在<strong>約 15 分鐘內增加為 1,000 倍</strong>。<br>[Sadava 12e] <strong>蛋白質合成的調控速度較慢，卻能節省更多能量與資源</strong>，因為組裝 mRNA、為 tRNA 充電與核糖體移動皆需大量水解 ATP。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Teaching & Boundary -->
+  <section id="sec-teaching">
+    <h2><span class="sec-num">05</span> 課堂提問設計與延伸閱讀</h2>
+
+    <div class="callout">
+      <div class="callout-title">🎯 選修生物最棒的跨單元延伸問題</div>
+      <p style="margin-bottom:0;">講完「<em>lac</em> 操縱組省能量」後，可以直接問學生：<br>「<em>既然沒乳糖就不製造酵素這麼省能量，那我們沒吃飯時，胰臟 β 細胞也是等血糖升高才開始從 DNA 轉錄製造胰島素嗎？</em>」<br>引導學生從「<strong>反應時間需求（3 分鐘急救 vs. 15 分鐘補貨）</strong>」與「<strong>激素水溶性／脂溶性（能不能鎖在囊泡裡）</strong>」兩個線索推導出答案，一次把分生、細生、動物生理三冊貫通！</p>
+    </div>
+
+    <h3>延伸閱讀（本站相關專題）</h3>
+    <ul>
+      <li>想完整複習原核正／負調控與持續／誘導／抑制分類，請見 <a href="prokaryote-gene-regulation-types.html">原核細胞的基因表現調控分類（13 套課本總盤點）</a>。</li>
+      <li>想深入了解大腸桿菌如何偵測乳糖與葡萄糖，請見 <a href="lac-operon-sugar-sensing.html">大腸桿菌如何感測葡萄糖與乳糖？</a> 與 <a href="genbio-8books-lac-detection.html">普生 8 套課本怎麼講大腸桿菌偵測乳糖？</a>。</li>
+      <li>想看另一組精彩跨界比較（細菌感測乳糖 vs. 植物沒有眼睛卻能看見光與光週期），請見 <a href="plant-photoreceptor-photoperiodism.html">沒有眼睛、鼻子、嘴巴，生命如何感知世界？</a>。</li>
+    </ul>
+
+    <div class="boundary">
+      <div class="callout-title">📌 本機資料庫（Vault）查證邊界聲明</div>
+      <p style="margin-bottom:0;">本頁所有機制與數據（持續型 vs. 調控型胞吐、前胰島素原切割與囊泡儲存、GLUT2–ATP–K⁺–Ca²⁺ 觸發胞吐、3–5 分鐘第一相與 15 分鐘第二相雙相曲線、類固醇激素親脂性無法儲存、<em>lac</em> 操縱組 15 分鐘誘導與轉錄調控省能權衡）皆直接引自 Alberts ECB 6e、Guyton &amp; Hall 15e、Vander 16e、Campbell 13e 與 Sadava 12e 正式譯本。另刻意未採用 Alberts ECB 6e 圖 15–31 電顯圖（因該版原書圖內標註為神經元突觸囊泡，與圖說文字存在原書編印出入），改採最清晰無歧義的圖 15–30 搭配 Vander 圖 11.4 與 Guyton 圖 79.7／79.8 呈現。</p>
+    </div>
+  </section>
+
+  <footer>
+    Bio-Wiki 概念考證庫 · 繁體中文與審定名詞遵循臺灣教育部規範 · 原文書與圖片引自 Ze-Agent Vault 正式譯本
+  </footer>
+</main>
+
+<!-- Reading Outpost Bottom Bar & Script -->
+<button class="ro-bottom-toc" type="button" onclick="roOpenDrawer('roTocDrawer')">📑 本篇段落導覽</button>
+<a class="ro-up-btn" href="#top" aria-label="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<script>
+  function roToggleTheme() {
+    var root = document.documentElement;
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('biowiki-theme', next); } catch (e) {}
+    roUpdateThemeBtn();
+  }
+  function roUpdateThemeBtn() {
+    var btn = document.getElementById('roThemeBtn');
+    if (!btn) return;
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.innerHTML = isLight ? '🌙 深色' : '☀️ 亮色';
+    btn.setAttribute('aria-label', isLight ? '切換為深色閱讀模式' : '切換為亮色閱讀模式');
+  }
+  roUpdateThemeBtn();
+  function roOpenDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('open');
+  }
+  function roCloseDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  }
+  function openLightbox(src, alt) {
+    var lb = document.getElementById('roLightbox');
+    var img = document.getElementById('roLightboxImg');
+    if (lb && img) {
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.add('open');
+    }
+  }
+  function toggleEnglish() {
+    document.body.classList.toggle('hide-en');
+    var btn = document.getElementById('toggleEnBtn');
+    if (btn) {
+      btn.textContent = document.body.classList.contains('hide-en')
+        ? '完整：顯示英文原文'
+        : '精簡：隱藏英文原文';
+    }
+  }
+  (function initReadingOutpostShell() {
+    var tocList = document.getElementById('roTocList');
+    var headings = document.querySelectorAll('h2');
+    if (tocList && headings.length) {
+      headings.forEach(function(h, idx) {
+        if (!h.id) h.id = 'ro-sec-' + (idx + 1);
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent.trim();
+        tocList.appendChild(a);
+      });
+    }
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th, tr:first-child th')).map(function(th) {
+        return th.innerText.trim().replace(/[\r\n\t ]+/g, ' ');
+      });
+      if (!headers.length) return;
+      table.classList.add('ro-resp-table');
+      table.querySelectorAll('tr').forEach(function(tr) {
+        if (tr.querySelector('th')) return;
+        Array.from(tr.children).forEach(function(td, idx) {
+          if (td.tagName === 'TD' && !td.getAttribute('data-label') && headers[idx]) {
+            td.setAttribute('data-label', headers[idx]);
+          }
+        });
+      });
+    });
+    document.querySelectorAll('main img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        openLightbox(img.src, img.alt);
+      });
+    });
+  })();
+</script>
+</body>
+</html>
