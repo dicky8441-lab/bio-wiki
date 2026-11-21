@@ -1021,11 +1021,12 @@
     <h2><span class="sec-num">02</span> 怎麼知道環境「有沒有葡萄糖」？——PTS 磷酸接力與誘導物排除</h2>
     <p>高中生常背過「葡萄糖低 → cAMP 高 → CAP 活化」，但多數人沒搞懂：<strong>葡萄糖只是糖分子，它怎麼讓細胞裡的 cAMP 變低？</strong>答案就藏在細胞膜運送葡萄糖的<strong>磷酸轉移酶系統（PTS）</strong>，而且它一口氣連動了兩道機制：</p>
 
-    <h3>感測線 A：PTS 磷酸接力 → 決定腺苷酸環化酶要不要做 cAMP</h3>
-    <p>大腸桿菌把葡萄糖運進門時，會同時從細胞內的 <strong>PEP（磷酸烯醇丙酮酸）</strong>拿一顆磷酸基，經由 <code>EI → HPr → EIIA → EIIB／EIIC</code> 一路接力貼到進門的葡萄糖上（讓葡萄糖以葡萄糖 6-磷酸形式進細胞，Prescott 12e Ch. 14）：</p>
+    <h3>感測線 A：PTS 磷酸轉移系統如何調控腺苷酸環化酶與 cAMP 濃度（正向調控機制）</h3>
+    <p>大腸桿菌吸收葡萄糖時，細胞膜上的<strong>葡萄糖運輸系統（磷酸轉移酶系統，PTS）</strong>會同步將細胞內高能分子（PEP）的磷酸基，經由系統中的<strong>調控蛋白（EIIA）</strong>轉移至進入細胞的葡萄糖上，使其磷酸化為<strong>葡萄糖 6-磷酸</strong>（Prescott 12e Ch. 14）。</p>
+    <p>細胞膜上負責催化 ATP 形成 <strong>cAMP</strong> 的<strong>腺苷酸環化酶</strong>，必須由「<strong>帶有磷酸基（磷酸化狀態）</strong>」的調控蛋白活化才能發揮作用。因此，環境中葡萄糖的有無，會透過改變此調控蛋白的磷酸化狀態，間接調控 <em>lac</em> 操縱組的轉錄速率：</p>
     <ul>
-      <li><strong>環境「有葡萄糖」時</strong>：進門的葡萄糖不斷把磷酸基領走 → 中繼蛋白 <strong>EIIA 處於去磷酸化狀態</strong> → 無法活化細胞膜上的<strong>腺苷酸環化酶</strong>（同時葡萄糖也會抑制 cAMP 合成並促進 cAMP 流出細胞，Brock 15e Ch. 06；Lehninger 8e Ch. 28）→ <strong>cAMP 濃度很低</strong> → <strong>CAP 拿不到 cAMP、無法結合 DNA（沒踩油門）</strong>。</li>
-      <li><strong>環境「沒有葡萄糖」時</strong>：門口沒葡萄糖能領走磷酸基，整條磷酸接力大塞車 → 磷酸基滯留在 <strong>EIIA~P（磷酸化狀態）</strong>上 → <strong>EIIA~P 轉而活化腺苷酸環化酶</strong>把大量 ATP 轉成 <strong>cAMP</strong> → <strong>cAMP–CAP 複合體</strong>結合到 <em>lac</em> 啟動子上游，彎曲 DNA 並強力招募 RNA 聚合酶（<strong>油門踩滿</strong>）！</li>
+      <li><strong>當環境中存在葡萄糖時</strong>：葡萄糖持續進入細胞並不斷接收磷酸基，使運輸系統中的調控蛋白（EIIA）維持在<strong>去磷酸化狀態</strong>，無法活化細胞膜上的<strong>腺苷酸環化酶</strong>（同時，葡萄糖亦會抑制 cAMP 合成並促進其排出細胞，Brock 15e Ch. 06；Lehninger 8e Ch. 28）。結果導致細胞內 <strong>cAMP 濃度偏低</strong>，活化蛋白 <strong>CAP</strong> 無法與 cAMP 結合而呈不活化狀態，不能結合至 <em>lac</em> 啟動子上游；此時 RNA 聚合酶與啟動子的親和力較低，<em>lac</em> 操縱組僅維持極低速率的轉錄。</li>
+      <li><strong>當環境中缺乏葡萄糖時</strong>：由於沒有葡萄糖進入細胞接收磷酸基，磷酸基的傳遞受阻而滯留於調控蛋白上，使其維持在<strong>磷酸化狀態（EIIA~P）</strong>。磷酸化的調控蛋白會轉而活化細胞膜上的<strong>腺苷酸環化酶</strong>，催化大量 ATP 轉化為 <strong>cAMP</strong>，使細胞內 <strong>cAMP 濃度上升</strong>。cAMP 與 CAP 結合形成 <strong>cAMP–CAP 複合體</strong>後，會結合至 <em>lac</em> 啟動子上游並使 DNA 彎曲，大幅提高 RNA 聚合酶與啟動子的結合能力（<strong>正向調控</strong>），促使 <em>lac</em> 操縱組進行高效率的轉錄。</li>
     </ul>
 
     <div class="figure-card">
