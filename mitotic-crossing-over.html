@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>有絲分裂互換與重組：中節位置、雙生斑與子細胞表現型機率推導｜Bio-Wiki</title>
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem('biowiki-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+<style>
+  :root {
+    --bg-primary: #181614;
+    --bg-pillbar: #24201c;
+    --bg-card: #211e1a;
+    --bg-quote: #26221e;
+    --bg-tag: #2d2823;
+    --text-primary: #f6f1ea;
+    --text-body: #ddd5ca;
+    --text-secondary: #bfb5a8;
+    --text-muted: #9a8e80;
+    --primary: #5bc0eb;
+    --primary-light: rgba(91, 192, 235, 0.12);
+    --primary-border: rgba(91, 192, 235, 0.32);
+    --accent: #f4c44e;
+    --accent-light: rgba(244, 196, 78, 0.12);
+    --warn: #f87171;
+    --warn-bg: rgba(248, 113, 113, 0.10);
+    --border-color: rgba(246, 241, 234, 0.09);
+    --border-strong: rgba(246, 241, 234, 0.16);
+    --taupe-fab: rgba(104, 91, 78, 0.94);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  html[data-theme="light"] {
+    --bg-primary: #fbf8f4;
+    --bg-pillbar: #f0ece3;
+    --bg-card: #ffffff;
+    --bg-quote: #f6f2ea;
+    --bg-tag: #eee8dd;
+    --text-primary: #2f2820;
+    --text-body: #4a3f35;
+    --text-secondary: #5e5043;
+    --text-muted: #756656;
+    --primary: #1b9dce;
+    --primary-light: rgba(27, 157, 206, 0.12);
+    --primary-border: rgba(27, 157, 206, 0.35);
+    --accent: #b86b11;
+    --accent-light: rgba(244, 196, 78, 0.22);
+    --warn: #dc2626;
+    --warn-bg: rgba(220, 38, 38, 0.08);
+    --border-color: rgba(74, 63, 53, 0.12);
+    --border-strong: rgba(74, 63, 53, 0.22);
+    --taupe-fab: rgba(105, 90, 74, 0.94);
+    --shadow: 0 4px 18px rgba(47, 40, 32, 0.08);
+    color-scheme: light;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+  }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+    font-size: 18px;
+    line-height: 1.78;
+    padding: 0 0 96px 0;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Reading Outpost Top Pill Header */
+  .ro-header-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-primary) 70%, rgba(24, 22, 20, 0));
+  }
+
+  html[data-theme="light"] .ro-header-wrap {
+    background: linear-gradient(180deg, #fbf8f4 70%, rgba(251, 248, 244, 0));
+  }
+
+  .ro-pillbar {
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .ro-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .ro-menu-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #5bc0eb;
+    color: #181614;
+    border: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  html[data-theme="light"] .ro-menu-circle {
+    background: #67c3eb;
+    color: #1f1a15;
+  }
+
+  .ro-menu-circle span {
+    display: block;
+    width: 16px;
+    height: 2.2px;
+    background: #181614;
+    border-radius: 2px;
+  }
+
+  .ro-brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .ro-brand-zh {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-brand-en {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .ro-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .ro-theme-btn {
+    appearance: none;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+  }
+
+  .ro-cta-pill {
+    appearance: none;
+    background: #f4c44e;
+    color: #1c1814;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  html[data-theme="light"] .ro-cta-pill {
+    background: #f6c84c;
+    color: #2f2820;
+  }
+
+  /* Main Reading Column */
+  main.container {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 22px 0;
+  }
+
+  /* Hero */
+  .hero {
+    text-align: left;
+    margin-bottom: 32px;
+    padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .meta-line {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .meta-pill, .meta-pill-muted {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .meta-pill {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary-border);
+  }
+
+  h1 {
+    font-size: clamp(26px, 6.2vw, 34px);
+    line-height: 1.38;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    margin: 6px 0 14px;
+    text-align: left;
+  }
+
+  .subtitle {
+    font-size: 17px;
+    line-height: 1.68;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* Sections */
+  section {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: 42px;
+    scroll-margin-top: 84px;
+  }
+
+  h2 {
+    font-size: clamp(22px, 5.2vw, 27px);
+    line-height: 1.45;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 44px 0 18px;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+  }
+
+  h2 .sec-num {
+    color: var(--accent);
+    margin-right: 6px;
+    font-weight: 800;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 28px 0 12px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--text-body);
+    margin-bottom: 18px;
+  }
+
+  ul, ol {
+    margin: 0 0 22px 24px;
+    color: var(--text-body);
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+  }
+
+  strong {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  code {
+    background: var(--bg-tag);
+    color: var(--accent);
+    padding: 1px 6px;
+    border-radius: 6px;
+    font-size: 0.92em;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  main a:not(.ro-cta-pill):not(.ro-brand-link) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  /* Sub-cards */
+  .tldr-card, .source-card, .callout, .callout-warn, .step-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin: 20px 0;
+  }
+
+  .tldr-card {
+    border-left: 4px solid var(--accent);
+  }
+
+  .callout {
+    border-left: 4px solid var(--primary);
+  }
+
+  .callout-warn {
+    border-left: 4px solid var(--warn);
+    background: var(--warn-bg);
+  }
+
+  .tldr-label, .callout-title, .source-book {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .callout-warn .callout-title {
+    color: var(--warn);
+  }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-weight: 800;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .step-title {
+    font-size: 18.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  /* Figures */
+  .figure-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .figure-img-wrap {
+    padding: 14px;
+    background: #f8fafc;
+    cursor: zoom-in;
+  }
+
+  main img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 8px;
+    margin: 0 auto;
+    cursor: zoom-in;
+  }
+
+  .zoom-hint {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    padding: 6px 4px 0;
+  }
+
+  .figure-body {
+    padding: 14px 16px 16px;
+  }
+
+  .figure-title {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .figure-caption {
+    font-size: 15.5px;
+    line-height: 1.68;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+
+  .figure-caption-en {
+    font-size: 13.5px;
+    line-height: 1.58;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+
+  .figure-guide {
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: var(--bg-quote);
+    border-left: 3px solid var(--accent);
+    font-size: 15px;
+    line-height: 1.68;
+    color: var(--text-body);
+  }
+
+  .figure-guide strong {
+    color: var(--accent);
+  }
+
+  /* Bilingual Textbook Quote Blocks */
+  .source-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .source-loc {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .quote-block {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .quote-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quote-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .quote-en {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 10px 0 12px;
+    word-break: break-word;
+  }
+
+  body.hide-en .quote-en {
+    display: none;
+  }
+
+  .quote-tw {
+    font-size: 17.5px;
+    line-height: 1.78;
+    color: var(--text-body);
+  }
+
+  .quote-tw strong {
+    color: var(--accent);
+    background: rgba(244, 196, 78, 0.10);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+
+  html[data-theme="light"] .quote-tw strong {
+    color: #8c4d06;
+    background: rgba(246, 200, 76, 0.28);
+  }
+
+  .toggle-en-btn {
+    appearance: none;
+    background: var(--bg-tag);
+    color: var(--accent);
+    border: 1px solid rgba(244, 196, 78, 0.35);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  /* Responsive Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0 26px;
+    font-size: 16px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-body);
+  }
+
+  th {
+    background: var(--bg-pillbar);
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  @media (max-width: 680px) {
+    table.ro-resp-table,
+    table.ro-resp-table thead,
+    table.ro-resp-table tbody,
+    table.ro-resp-table th,
+    table.ro-resp-table td,
+    table.ro-resp-table tr {
+      display: block;
+      width: 100%;
+    }
+
+    table.ro-resp-table thead {
+      display: none;
+    }
+
+    table.ro-resp-table tr {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    table.ro-resp-table td {
+      border: none;
+      border-bottom: 1px dashed var(--border-color);
+      padding: 8px 0;
+      text-align: left !important;
+    }
+
+    table.ro-resp-table td:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    table.ro-resp-table td:first-child {
+      padding-top: 0;
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    table.ro-resp-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+  }
+
+  /* Bottom Floating Controls */
+  .ro-bottom-toc {
+    position: fixed;
+    left: 16px;
+    bottom: 20px;
+    z-index: 95;
+    background: var(--taupe-fab);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 9px 15px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: calc(100vw - 88px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-up-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 95;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--taupe-fab);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    text-decoration: none !important;
+  }
+
+  /* Drawers & Lightbox */
+  .ro-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ro-drawer-backdrop.open {
+    display: flex;
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-backdrop {
+      align-items: center;
+      padding: 24px;
+    }
+  }
+
+  .ro-drawer-panel {
+    width: 100%;
+    max-width: 500px;
+    max-height: 78vh;
+    overflow-y: auto;
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px 20px 0 0;
+    padding: 18px 18px 28px;
+    box-shadow: var(--shadow);
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-panel {
+      border-radius: 18px;
+    }
+  }
+
+  .ro-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .ro-drawer-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .ro-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .ro-drawer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ro-drawer-list a {
+    display: block;
+    text-decoration: none !important;
+    color: var(--text-body) !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .ro-drawer-list a.active {
+    color: #181614 !important;
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 800;
+  }
+
+  .ro-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    cursor: zoom-out;
+  }
+
+  .ro-lightbox.open {
+    display: flex;
+  }
+
+  .ro-lightbox img {
+    max-width: 100%;
+    max-height: 92vh;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+</style>
+</head>
+<body>
+
+<div class="ro-header-wrap">
+  <div class="ro-pillbar">
+    <div class="ro-brand-group">
+      <button class="ro-menu-circle" type="button" aria-label="開啟專題選單" onclick="roOpenDrawer('roSiteDrawer')">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="ro-brand-link" href="index.html">
+        <span class="ro-brand-zh">400X 的日常切片</span>
+        <span class="ro-brand-en">BIO-WIKI EVIDENCE</span>
+      </a>
+    </div>
+    <div class="ro-top-actions">
+      <button class="ro-theme-btn" id="roThemeBtn" type="button" onclick="roToggleTheme()">☀️ 亮色</button>
+      <button class="ro-cta-pill" type="button" onclick="roOpenDrawer('roSiteDrawer')">專題目錄</button>
+    </div>
+  </div>
+</div>
+
+<!-- Site-Wide Topics Drawer -->
+<div class="ro-drawer-backdrop" id="roSiteDrawer" onclick="if(event.target===this)roCloseDrawer('roSiteDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📚 Bio-Wiki 全站專題</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roSiteDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list">
+      <a href="index.html">🏠 首頁：主題分類總覽</a>
+      <a href="homologs-diploid-aabb-crossover.html">23. 同源染色體 vs. 雙套（2n），與 AaBb × AaBb 自交如何判斷互換？</a>
+      <a href="mitotic-crossing-over.html" class="active">24. 有絲分裂互換與重組：中節位置、雙生斑與子細胞表現型機率推導</a>
+    </div>
+  </div>
+</div>
+
+<!-- In-Page TOC Drawer -->
+<div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📑 本篇段落導覽</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list" id="roTocList" onclick="roCloseDrawer('roTocDrawer')"></div>
+  </div>
+</div>
+
+<!-- Image Lightbox -->
+<div class="ro-lightbox" id="roLightbox" onclick="this.classList.remove('open')">
+  <img id="roLightboxImg" src="" alt="放大檢視圖片">
+</div>
+
+<main class="container" id="top">
+
+  <header class="hero">
+    <div class="meta-line">
+      <span class="meta-pill">遺傳學與顯隱性判準</span>
+      <span class="meta-pill-muted">113 全國聯招綜合題 4 · 5 部正典 · 5 張圖解</span>
+    </div>
+    <h1>有絲分裂互換與重組：中節位置、雙生斑與子細胞表現型機率推導</h1>
+    <p class="subtitle">
+      完整拆解 113 學年度（2024 年）全國聯招生物科綜合題第 4 題，並追溯其原圖藍本 <em>Goldberg Genetics 7e</em> Fig. 5.28：為什麼體細胞互換點位於「中節–A 之間」或「A–B 之間」會徹底改變子細胞表現型機率？再延伸至 Curt Stern 雙生斑實證與抑癌基因 <em>RB1</em> 之異型合子性喪失（LOH）。
+    </p>
+  </header>
+
+  <div class="tldr-card">
+    <div class="tldr-label">📌 一句話核心結論</div>
+    <p style="margin-bottom:10px;">
+      <strong>有絲分裂互換後，兩條同源染色體在中期各自獨立排列於赤道板、後期由姊妹染色分體分離（形成 2 種等機率排列組合）；因此，只有位於「互換點遠端（遠離中節那側）」的異型合子基因座，才有機會變成同型合子（異型合子性喪失，LOH），而「互換點近端（靠近中節那側）」的基因座永遠維持原本的異型合子狀態。</strong>
+    </p>
+    <p style="margin-bottom:0; color:var(--text-secondary); font-size:16px;">
+      • <strong>圖一（中節–A 間互換）</strong>：A 顯 B 顯 <strong>1/2</strong>｜A 隱 B 隱 <strong>0</strong>｜A 隱 B 顯 <strong>1/4</strong>｜A 顯 B 隱 <strong>1/4</strong>（產生雙生斑）。<br>
+      • <strong>圖二（A–B 間互換）</strong>：A 顯 B 顯 <strong>3/4</strong>｜A 隱 B 隱 <strong>0</strong>｜A 隱 B 顯 <strong>0</strong>｜A 顯 B 隱 <strong>1/4</strong>（僅產生單斑）。
+    </p>
+  </div>
+
+  <!-- Section 1: Exam Walkthrough -->
+  <section id="sec-exam-q4">
+    <h2><span class="sec-num">01</span> 113 全國聯招綜合題第 4 題完整推導</h2>
+
+    <div class="figure-card">
+      <div class="figure-img-wrap">
+        <img src="images/113_National_Joint_Exam_Q4_mitotic_crossing_over.jpg" alt="113 學年度全國聯招生物科綜合題第 4 題原題圖">
+        <span class="zoom-hint">🔍 點擊圖片放大檢視</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">原題：113 學年度（2024 年）全國聯招生物科・第二部分「綜合題」第 4 題</div>
+        <div class="figure-caption">
+          母細胞為表現型「A 顯 B 顯」、基因型 <code>AaBb</code> 的體細胞，且採<strong>反式連鎖</strong>（<code>A</code> 與 <code>b</code> 位於同一條染色體上，<code>a</code> 與 <code>B</code> 位於另一條同源染色體上）。題目分別給出兩種有絲分裂互換位置（圖一：中節與 A 之間；圖二：A 與 B 之間），要求計算子細胞出現四類表現型的機率。
+        </div>
+        <div class="figure-guide">
+          <strong>考源揭密：</strong>本題圖一與圖二的染色體畫法、反式連鎖配置與兩小題對照，幾乎完全對應 <em>Goldberg Genetics 7e</em> Fig. 5.28（果蠅 <em>sn⁺ y / sn y⁺</em> 的兩種互換位置，見下方第 03 節原圖）。
+        </div>
+      </div>
+    </div>
+
+    <div class="step-box">
+      <div class="step-header">
+        <span class="step-num">1</span>
+        <span class="step-title">先從左邊的「中節（centromere）」沿線往右讀，確認交換後各染色體的兩條姊妹染色分體</span>
+      </div>
+      <p style="margin-bottom:0;">
+        體細胞完成 S 期 DNA 複製後，上方同源染色體（記作中節 C1）原本連著兩條 <code>Ab</code> 姊妹染色分體；下方同源染色體（記作中節 C2）原本連著兩條 <code>aB</code> 姊妹染色分體。非姊妹染色分體互換時，<strong>中節本身不換位</strong>，只要從黑圓點往右沿著線段走過交叉點，就能準確寫出 C1 與 C2 各自帶著哪兩條染色分體。
+      </p>
+    </div>
+
+    <div class="step-box">
+      <div class="step-header">
+        <span class="step-num">2</span>
+        <span class="step-title">有絲分裂中期各自獨立排列於赤道板，後期「姊妹染色分體分離」→ 產生 2 種等機率組合</span>
+      </div>
+      <p style="margin-bottom:0;">
+        有絲分裂沒有減數分裂第一分裂的「同源染色體分離」，而是每條複製染色體各自排在赤道板上，後期中節分裂、兩條姊妹染色分體分別被拉向兩極。因此，<strong>每個子細胞必從 C1 拿走 1 條染色分體、同時從 C2 拿走 1 條染色分體</strong>；由於 C1 與 C2 的朝向彼此獨立，會形成 2 種機率各佔 <strong>1/2</strong> 的分離組合（共 4 個等機率子細胞結果）。
+      </p>
+    </div>
+
+    <h3>(1) 圖一：互換發生在「中節與 A 基因座」之間</h3>
+    <p>
+      沿著圖一交叉點追蹤，交換後兩條同源染色體各自連著的姊妹染色分體為：<br>
+      • <strong>上方中節（C1）</strong>：<code>Ab</code>（未互換股）、<code>aB</code>（已互換股）<br>
+      • <strong>下方中節（C2）</strong>：<code>Ab</code>（已互換股）、<code>aB</code>（未互換股）
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>有絲分裂分離排列</th>
+          <th>發生機率</th>
+          <th>子細胞甲（基因型 → 表現型）</th>
+          <th>子細胞乙（基因型 → 表現型）</th>
+          <th>組織表徵</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>排列一（同型合子化）</td>
+          <td>1/2</td>
+          <td><code>Ab / Ab</code>（<code>AAbb</code>）→ <strong>A 顯 B 隱</strong></td>
+          <td><code>aB / aB</code>（<code>aaBB</code>）→ <strong>A 隱 B 顯</strong></td>
+          <td>兩塊相鄰異常斑塊（<strong>雙生斑</strong>）</td>
+        </tr>
+        <tr>
+          <td>排列二（維持異型合子）</td>
+          <td>1/2</td>
+          <td><code>Ab / aB</code>（<code>AaBb</code>）→ <strong>A 顯 B 顯</strong></td>
+          <td><code>aB / Ab</code>（<code>AaBb</code>）→ <strong>A 顯 B 顯</strong></td>
+          <td>與周圍正常組織無異</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>將兩種等機率排列所產生的全部 4 個子細胞合併計算，得到圖一解答：</p>
+    <table>
+      <thead>
+        <tr>
+          <th>表現型</th>
+          <th>子細胞出現機率</th>
+          <th>對應基因型與原因</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>A 顯 B 顯</td>
+          <td><strong>1/2</strong>（50%）</td>
+          <td><code>AaBb</code>（2/4）</td>
+        </tr>
+        <tr>
+          <td>A 隱 B 隱</td>
+          <td><strong>0</strong></td>
+          <td>全組染色分體僅有 <code>Ab</code> 與 <code>aB</code>，不可能出現 <code>aabb</code></td>
+        </tr>
+        <tr>
+          <td>A 隱 B 顯</td>
+          <td><strong>1/4</strong>（25%）</td>
+          <td><code>aaBB</code>（1/4）</td>
+        </tr>
+        <tr>
+          <td>A 顯 B 隱</td>
+          <td><strong>1/4</strong>（25%）</td>
+          <td><code>AAbb</code>（1/4）</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>(2) 圖二：互換發生在「A 與 B 基因座」之間</h3>
+    <p>
+      沿著圖二交叉點追蹤，交換發生在 A 之後、B 之前，因此兩條同源染色體各自連著的姊妹染色分體為：<br>
+      • <strong>上方中節（C1）</strong>：<code>Ab</code>（未互換股）、<code>AB</code>（已互換股）<br>
+      • <strong>下方中節（C2）</strong>：<code>ab</code>（已互換股）、<code>aB</code>（未互換股）
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>有絲分裂分離排列</th>
+          <th>發生機率</th>
+          <th>子細胞甲（基因型 → 表現型）</th>
+          <th>子細胞乙（基因型 → 表現型）</th>
+          <th>組織表徵</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>排列一（僅 B 同型合子化）</td>
+          <td>1/2</td>
+          <td><code>Ab / ab</code>（<code>Aabb</code>）→ <strong>A 顯 B 隱</strong></td>
+          <td><code>AB / aB</code>（<code>AaBB</code>）→ <strong>A 顯 B 顯</strong></td>
+          <td>僅出現 B 隱性的<strong>單斑</strong></td>
+        </tr>
+        <tr>
+          <td>排列二（維持雙異型合子）</td>
+          <td>1/2</td>
+          <td><code>Ab / aB</code>（<code>AaBb</code>，反式）→ <strong>A 顯 B 顯</strong></td>
+          <td><code>AB / ab</code>（<code>AaBb</code>，順式）→ <strong>A 顯 B 顯</strong></td>
+          <td>與周圍正常組織無異</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>將兩種等機率排列所產生的全部 4 個子細胞合併計算，得到圖二解答：</p>
+    <table>
+      <thead>
+        <tr>
+          <th>表現型</th>
+          <th>子細胞出現機率</th>
+          <th>對應基因型與原因</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>A 顯 B 顯</td>
+          <td><strong>3/4</strong>（75%）</td>
+          <td><code>AaBB</code>（1/4）＋ <code>AaBb</code>（2/4）</td>
+        </tr>
+        <tr>
+          <td>A 隱 B 隱</td>
+          <td><strong>0</strong></td>
+          <td>C1 兩股皆含 <code>A</code>，子細胞必為 <code>Aa</code>，絕無 <code>aa</code></td>
+        </tr>
+        <tr>
+          <td>A 隱 B 顯</td>
+          <td><strong>0</strong></td>
+          <td>同上，A 基因座恆為 <code>Aa</code>，絕不表現 A 隱</td>
+        </tr>
+        <tr>
+          <td>A 顯 B 隱</td>
+          <td><strong>1/4</strong>（25%）</td>
+          <td><code>Aabb</code>（1/4）</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout-warn">
+      <div class="callout-title">⚠️ 學生解題最常踩到的兩個地雷</div>
+      <ul style="margin-bottom:0;">
+        <li><strong>地雷 1：拿減數分裂的規則來分</strong>——誤以為 4 條染色分體會分進 4 個單倍體細胞（<code>Ab</code>、<code>aB</code>、<code>AB</code>、<code>ab</code>），或誤以為 C1 整條去左邊、C2 整條去右邊。有絲分裂的子細胞仍是二倍體（2<em>n</em>），必由 C1、C2 各抽 1 條染色分體配對。</li>
+        <li><strong>地雷 2：在圖二看到 <code>ab</code> 染色分體，就以為會出現「A 隱 B 隱」</strong>——錯！雖然 C2 確實有一股變成 <code>ab</code>，但與它配對的另一股來自 C1（只有 <code>Ab</code> 或 <code>AB</code>，都帶顯性 <code>A</code>），因此組出來只可能是 <code>Aabb</code> 或 <code>AaBb</code>，絕不可能出現 <code>aabb</code>。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Section 2: Core Concepts & Comparisons -->
+  <section id="sec-mechanism">
+    <h2><span class="sec-num">02</span> 專有名詞解析、減數 vs. 有絲互換，與癌症 LOH 延伸</h2>
+
+    <h3>核心專有名詞白話對照</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>專有名詞（中英對照）</th>
+          <th>教科書定義</th>
+          <th>高中生易懂說明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>有絲分裂互換／重組<br>（mitotic crossing-over / recombination）</td>
+          <td>二倍體體細胞在 DNA 複製後的 S／G2 期至有絲分裂期間，同源染色體短暫配對並於非姊妹染色分體間交換片段的罕見事件（Brooker 8e；Goldberg 7e；Weinberg）。</td>
+          <td>互換不是減數分裂專利；體細胞偶爾也會因 DNA 斷裂修復，讓父源、母源染色體交換一段，進而在體內形成局部表現型不同的細胞斑塊。</td>
+        </tr>
+        <tr>
+          <td>中節（centromere）</td>
+          <td>複製後染色體上連接兩條姊妹染色分體、並於細胞分裂時供紡錘絲附著與控制分離方向的特定區域（臺灣教育部審定高中生物名詞）。</td>
+          <td>判讀有絲分裂互換的「錨點」。中節不會被交換，從中節往外看，靠近中節的那側不會變同型合子，遠離中節那側才有機會。</td>
+        </tr>
+        <tr>
+          <td>雙生斑／雙斑<br>（twin spot）</td>
+          <td>反式雙異型合子（如 <em>y sn⁺ / y⁺ sn</em>）體細胞於中節與近端基因間發生有絲分裂互換後，兩個互補同型合子子細胞各自增殖形成的相鄰異常組織斑塊（Brooker 8e；Goldberg 7e）。</td>
+          <td>1936 年 Curt Stern 在果蠅身上的經典證據：灰體長毛的背景裡，突然相鄰冒出一塊「灰體焦毛」與一塊「黃體長毛」，證明兩塊源自同一對分開的姊妹子細胞。</td>
+        </tr>
+        <tr>
+          <td>異型合子性喪失<br>（loss of heterozygosity, LOH）</td>
+          <td>原本為異型合子的體細胞，因有絲分裂重組、基因轉換、染色體缺失或不分離而喪失正常等位基因，轉變為同型合子或半合子狀態（Weinberg；Lodish 9e）。</td>
+          <td>細胞原本一好一壞（例如抑癌基因 <code>RB⁺/RB⁻</code>），體細胞互換把兩份壞基因送進同一個子細胞（<code>RB⁻/RB⁻</code>），煞車完全失靈，成為腫瘤發生的常見「二次打擊」。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>減數分裂互換 vs. 有絲分裂互換</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>比較面向</th>
+          <th>減數分裂互換（Meiotic）</th>
+          <th>有絲分裂互換（Mitotic）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>發生細胞與時期</td>
+          <td>生殖母細胞；減數分裂前期 I（同源染色體聯會形成四分體）</td>
+          <td>體細胞；分子重組常於複製後的 S／G2 期啟動，於有絲分裂分離呈現</td>
+        </tr>
+        <tr>
+          <td>啟動機制與關鍵蛋白</td>
+          <td>細胞主動編程：由減數分裂專一性酵素（Spo11、Dmc1 等）主動切斷並高頻互換</td>
+          <td>意外修復副作用：由複製叉遇模板斷裂或輻射造成 DSB 啟動；<strong>完全依賴 Rad51（不用 Dmc1）</strong>，多走不互換的 SDSA 途徑，少數經 DSBR 雙荷利第中間體才互換（Cox 2e）</td>
+        </tr>
+        <tr>
+          <td>發生頻率</td>
+          <td>極高（每對同源染色體通常至少 1 次）</td>
+          <td>極罕見（約每百萬次分裂 1 次，或 10⁻⁵–10⁻⁴／細胞世代）</td>
+        </tr>
+        <tr>
+          <td>後期分離模式</td>
+          <td>減數 I 同源染色體分離 → 減數 II 姊妹染色分體分離</td>
+          <td>同源染色體獨立排列於中期板，直接進行<strong>姊妹染色分體分離</strong></td>
+        </tr>
+        <tr>
+          <td>遺傳與醫學後果</td>
+          <td>產生重組配子，可遺傳給下一代</td>
+          <td>不遺傳給子代（除非進入生殖系）；造成個體<strong>遺傳鑲嵌體</strong>（雙生斑、酵母菌落分區）或抑癌基因 <strong>LOH</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <div class="callout-title">💡 為什麼「距離中節越遠」的基因，越容易發生有絲分裂重組與 LOH？</div>
+      <p style="margin-bottom:0;">
+        無論是果蠅體細胞基因定位還是人類視網膜母細胞瘤（<em>RB1</em> 位於第 13 號染色體），一個基因座要透過有絲分裂互換從異型合子變為同型合子，<strong>互換點必須落在「中節與該基因之間」</strong>。因此基因離中節越遠，兩者之間可供互換發生的染色體區段越長，發生同型合子化（LOH）的機率就越高（Weinberg <em>Biology of Cancer</em> 補充側欄 7.2）。在散發性與遺傳性視網膜母細胞瘤中，透過有絲分裂重組發生 LOH 的頻率（10⁻⁵–10⁻⁴）遠高於獨立第二次點突變（10⁻⁶），也是 Lodish 9e 明確點名「造成 LOH 最頻繁的機制」。
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 3: Textbook Figures -->
+  <section id="sec-figures">
+    <h2><span class="sec-num">03</span> 四大原文教科書原圖對照拆解</h2>
+
+    <div class="figure-card">
+      <div class="figure-img-wrap">
+        <img src="images/Goldberg7e_Fig5-28_mitotic_crossing_over_positions.png" alt="Goldberg Genetics 7e Figure 5.28 Mitotic crossing-over">
+        <span class="zoom-hint">🔍 點擊圖片放大檢視</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖 1｜Goldberg《Genetics: From Genes to Genomes》7e, Fig. 5.28（113 全國聯招第 4 題原圖藍本）</div>
+        <div class="figure-caption">
+          在 <em>y sn⁺ / y⁺ sn</em> 果蠅雌蠅中（染色體順序為「中節 — <em>sn</em> — <em>y</em>」）：(a) 中節與 <em>sn</em> 之間發生有絲分裂互換，依中期兩種等機率排列，分別產生「相鄰黃斑＋焦毛斑（Twin spot）」或「兩個野生型細胞」；(b) <em>sn</em> 與 <em>y</em> 之間發生互換，只會產生「單獨黃斑＋正常細胞」或「兩個正常細胞」，單次互換絕不會單獨產生焦毛斑。
+        </div>
+        <div class="figure-caption-en">
+          Figure 5.28 Mitotic crossing-over. (a) In a y sn+ / y+ sn Drosophila female, a mitotic crossover between the centromere and sn can produce two daughter cells, one homozygous for y and the other homozygous for sn, that develop into adjacent aberrant patches (twin spots). This outcome depends on one of two equally likely orientations of the chromatids. (b) Crossovers between sn and y can generate single yellow patches. However, a single mitotic crossover cannot produce a single singed spot if the sn gene is closer to the centromere than the y gene.
+        </div>
+        <div class="figure-guide">
+          <strong>與本題一對一映照：</strong>把圖中的 <code>sn⁺ / sn</code> 換成 <code>A / a</code>、把 <code>y / y⁺</code> 換成 <code>b / B</code>，(a) 就是 113 全國聯招圖一，(b) 就是圖二！一眼即可看懂 2 種等機率中期排列如何得出 1/2 : 1/4 : 1/4 與 3/4 : 1/4。
+        </div>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-img-wrap">
+        <img src="images/Brooker8e_Fig6-13_drosophila_twin_spot.png" alt="Brooker Genetics 8e Figure 6.13 Mitotic recombination in Drosophila that produces a twin spot">
+        <span class="zoom-hint">🔍 點擊圖片放大檢視</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖 2｜Brooker《Genetics: Analysis and Principles》8e, Fig. 6.13（雙生斑從單一胚胎細胞發育成成體斑塊）</div>
+        <div class="figure-caption">
+          受精卵 X 染色體為 <em>y⁺ sn / y sn⁺</em>。胚胎發育早期某一體細胞發生有絲分裂互換後，染色分體分離使相鄰兩子細胞分別成為 <em>y⁺y⁺ snsn</em>（灰體焦毛）與 <em>yy sn⁺sn⁺</em>（黃體長毛）；兩者持續正常有絲分裂，最終在灰體長毛的成體果蠅體表形成一對緊鄰的「雙生斑（twin spot）」。
+        </div>
+        <div class="figure-caption-en">
+          FIGURE 6.13 Mitotic recombination in Drosophila that produces a twin spot. As the embryo developed, a crossover occurred during mitosis in a single embryonic cell. After the mitotic crossing over, separation of the chromatids occurred, and one embryonic cell became y+y+ snsn and the adjacent sister cell became yy sn+sn+.
+        </div>
+        <div class="figure-guide">
+          <strong>教學亮點：</strong>這張圖補齊了「微觀染色體互換 → 兩個相鄰姊妹子細胞 → 宏觀成體緊鄰斑塊」的空間因果，也順便解釋了為什麼「斑塊越大代表互換發生在越早的胚胎分裂時期」。
+        </div>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-img-wrap">
+        <img src="images/Weinberg_BoC_Fig7-6_rb_mitotic_recombination_loh.png" alt="Weinberg Biology of Cancer Figure 7.6 Elimination of wild-type Rb gene copies">
+        <span class="zoom-hint">🔍 點擊圖片放大檢視</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖 3｜Weinberg《The Biology of Cancer》3e, Fig. 7.6（G2 期有絲分裂重組導致 <em>Rb</em> 抑癌基因 LOH）</div>
+        <div class="figure-caption">
+          在細胞週期 G2 期，人類兩條第 13 號同源染色體（一條帶正常 <em>Rb⁺</em>，一條帶突變 <em>Rb⁻</em> 藍線）發生有絲分裂重組後，染色分體於有絲分裂末期分離：一半機率維持雙子細胞皆為 <em>Rb</em> 異型合子，另一半機率發生 <strong>異型接合性喪失（LOH）</strong>，產生一個野生型同型合子 <em>Rb⁺/⁺</em> 與一個完全失去功能性 <em>Rb</em> 的突變同型合子 <em>Rb⁻/⁻</em>。
+        </div>
+        <div class="figure-caption-en">
+          Figure 7.6 Elimination of wild-type Rb gene copies. Mitotic recombination can lead to loss of heterozygosity (LOH) of a gene such as Rb. During the G2 phase of the cell cycle, genetic material can be exchanged between the chromatids of two homologous chromosomes through genetic crossing over. With equal probability, the process could yield two daughter cells that have undergone LOH at the Rb locus.
+        </div>
+        <div class="figure-guide">
+          <strong>癌症生物學串連：</strong>這張圖直接把「果蠅雙生斑」的邏輯搬到人類醫學——有絲分裂重組中那 1/4 變成隱性同型合子的子細胞，在 <em>RB1</em> 基因座上就成了啟動視網膜母細胞瘤的癌前細胞。
+        </div>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-img-wrap">
+        <img src="images/Cox2e_Fig13-21_mitotic_recombination_sdsa_dsbr.png" alt="Cox Molecular Biology 2e Figure 13-21 Mitotic recombination SDSA and DSBR pathways">
+        <span class="zoom-hint">🔍 點擊圖片放大檢視</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖 4｜Cox《Molecular Biology: Principles and Practice》2e, Fig. 13-21（分子修復途徑：SDSA vs. DSBR）</div>
+        <div class="figure-caption">
+          體細胞發生 DNA 雙股斷裂（DSB）後，由 RAD51 與 RAD52（脊椎動物亦需 BRCA2）啟動同源重組修復。最常走左側的 <strong>SDSA 途徑</strong>（合成依賴性單股黏合），修完後<strong>不產生互換</strong>；僅少部分走右側的 <strong>DSBR 途徑</strong>形成雙荷利第中間體（double Holliday intermediates），且在解析（Resolution）時才會產生真正的有絲分裂互換。
+        </div>
+        <div class="figure-caption-en">
+          FIGURE 13-21 Mitotic recombination. The most common path of mitotic recombination is SDSA (left). Crossovers occur in recombination events in the DSBR pathway (right). Rad52 protein may be involved in initiation of the second strand invasion that leads to the double Holliday intermediate.
+        </div>
+        <div class="figure-guide">
+          <strong>為何體細胞極力避免互換？</strong>走不互換的 SDSA 既能精準修補斷裂 DNA，又不會引發大規模 LOH；只有走 DSBR 解析成互換、且剛好用到「同源染色體」而非「姊妹染色分體」當模板時，才會出現本題的有絲分裂互換。
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Bilingual Textbook Quotes -->
+  <section id="sec-sources">
+    <h2>
+      <span class="sec-num">04</span> 5 部原文正典中英對照文獻考證
+      <div><button class="toggle-en-btn" id="toggleEnBtn" type="button" onclick="toggleEnglish()">精簡：隱藏英文原文</button></div>
+    </h2>
+
+    <!-- Source 1: Goldberg 7e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">1. Goldberg《Genetics: From Genes to Genomes》7e</div>
+        <div class="source-loc">Ch05 連鎖重組與基因作圖（5.6 有絲分裂重組與遺傳鑲嵌體）</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">① 啟動機制與罕見頻率（約百萬分之一）</div>
+        <div class="quote-en">“Unlike what happens in meiosis, however, mitotic crossovers are initiated by mistakes in chromosome replication or by chance exposures to radiation that break DNA molecules, rather than by a well-defined cellular program. As a result, mitotic recombination is a rare event, occurring about once in a million somatic cell divisions.”</div>
+        <div class="quote-tw">有絲分裂互換與減數分裂不同，它是由<strong>染色體複製錯誤</strong>或偶然暴露於造成 DNA 斷裂的<strong>輻射</strong>所啟動，而非由明確的細胞程序啟動。因此有絲分裂重組很罕見，大約<strong>每一百萬次體細胞分裂發生一次</strong>。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">② 互換位置決定雙斑或單斑，以及中期兩種等機率排列（對應本題圖一與圖二）</div>
+        <div class="quote-en">“The pairing is transient, and the homologous chromosomes soon resume their independent positions on the mitotic metaphase plate. There, the two chromosomes can line up relative to each other in either of two ways (Fig. 5.28a). One of these orientations would yield two daughter cells that remain heterozygous for both genes and are thus indistinguishable from the surrounding wild-type cells. The other orientation, however, will generate two homozygous daughter cells: one y sn+ / y sn+, the other y+ sn / y+ sn. Because the two daughter cells would lie next to each other, subsequent mitotic divisions would produce adjacent patches of y and sn tissue; that is, twin spots. Note that if crossing-over occurs between sn and y, single spots of yellow tissue can form, but a reciprocal singed spot cannot be generated in this fashion (Fig. 5.28b).”</div>
+        <div class="quote-tw">配對是短暫的，同源染色體很快恢復在<strong>有絲分裂中期板上的獨立位置</strong>，此時兩條染色體可依<strong>兩種等機率方向排列</strong>（圖 5.28a）：一種產生維持雙異型合子的正常子細胞，另一種產生兩個同型合子子細胞（<em>y sn⁺/y sn⁺</em> 與 <em>y⁺ sn/y⁺ sn</em>），形成<strong>雙斑</strong>。若互換發生在 <em>sn</em> 與 <em>y</em> 之間，只能形成單獨黃斑，<strong>無法單次產生互惠的焦毛斑</strong>（圖 5.28b）。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">③ 視網膜母細胞瘤（<em>RB</em>）與中節之間的有絲分裂重組</div>
+        <div class="quote-en">“As Fig. A shows, mitotic recombination between the RB gene and the centromere provides one mechanism by which a cell in an RB+ / RB− individual could become RB− / RB−. Once a homozygous RB− cell is generated, it can divide uncontrollably, leading to tumor formation.”</div>
+        <div class="quote-tw"><strong><em>RB</em> 基因與中節之間的有絲分裂重組</strong>，是 <em>RB⁺ / RB⁻</em> 異型合子個體中的視網膜細胞轉變為 <strong><em>RB⁻ / RB⁻</em> 同型合子</strong>的機制之一；一旦形成，便可能不受控制地分裂而長出腫瘤。</div>
+      </div>
+    </div>
+
+    <!-- Source 2: Brooker 8e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">2. Brooker《Genetics: Analysis and Principles》8e</div>
+        <div class="source-loc">Ch06 真核生物的遺傳連鎖與定位（6.5 有絲分裂重組）</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">① 定義與胚胎早期發生造成體細胞斑塊</div>
+        <div class="quote-en">“As discussed in Chapter 2, mitosis normally does not involve the homologous pairing of chromosomes to form bivalents. Therefore, crossing over during mitosis is expected to occur much less frequently than crossing over during meiosis. Nevertheless, it does happen on rare occasions. Mitotic crossing over may produce a pair of recombinant chromosomes that have a new combination of alleles, an event known as mitotic recombination. If this recombination occurs during an early stage of embryonic development, the daughter cells containing one recombinant chromosome and one nonrecombinant chromosome will continue to divide many times to produce a patch of tissue in the adult.”</div>
+        <div class="quote-tw">有絲分裂通常不涉及同源染色體配對形成二價體，故互換頻率遠低於減數分裂，但仍偶爾發生。有絲分裂互換產生具新等位基因組合的重組染色體，稱為<strong>有絲分裂重組</strong>；若發生於胚胎早期，子細胞持續分裂會在成體中形成特徵不同於周圍的組織斑塊。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">② Curt Stern 1936 年雙生斑（twin spot）實證</div>
+        <div class="quote-en">“During development, a rare crossover occurred during mitosis to produce two adjacent daughter cells that were y+y+ snsn and yy sn+sn+. As embryonic development proceeded, the cell on the left continued to divide to produce many cells, eventually producing a patch on the body that had gray color with singed bristles. The daughter cell next to it produced a patch of body tissue that was yellow with long bristles. These two adjacent patches—a twin spot—were surrounded by cells that were y+y sn+sn and had gray color and long bristles. Twin spots provide evidence that mitotic recombination occasionally occurs.”</div>
+        <div class="quote-tw">發育期間罕見的一次有絲分裂互換，產生相鄰的 <strong><em>y⁺y⁺ snsn</em>（灰體焦毛）</strong>與 <strong><em>yy sn⁺sn⁺</em>（黃體長毛）</strong>子細胞，後續各自增殖形成緊鄰的<strong>雙生斑（twin spot）</strong>，為有絲分裂重組的存在提供了直接證據。</div>
+      </div>
+    </div>
+
+    <!-- Source 3: Weinberg Biology of Cancer -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">3. Weinberg《The Biology of Cancer》3e</div>
+        <div class="source-loc">Ch07 腫瘤抑制基因（第 7.4 節與補充側欄 7.2）</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">① 頻率高達 10⁻⁵–10⁻⁴／細胞世代與異型接合性喪失（LOH）</div>
+        <div class="quote-en">“Importantly, such mitotic recombination is found to occur at a frequency of 10⁻⁵ to 10⁻⁴ per cell generation; it therefore provides a far more probable way for a cell to rid itself of the remaining wild-type copy of the Rb gene than direct mutational inactivation. ... However, following the mitotic recombination that leads to homozygosity at the Rb locus (with the resulting homologous chromosomes within a daughter cell possessing either an Rb–/– or an Rb+/+ genotype), a number of the alleles of genes that are physically close to Rb on Chromosome 13 will be carried along during the exchange, and thus will also become homozygous. This genetic alteration of a gene or an extended chromosomal region is usually termed loss of heterozygosity, or simply LOH (Figure 7.6).”</div>
+        <div class="quote-tw">有絲分裂重組的頻率約 <strong>10⁻⁵ 至 10⁻⁴／細胞世代</strong>，遠高於直接獨立突變（約 10⁻⁶）；交換會連同第 13 號染色體上鄰近基因一同帶走並轉為同型合子，這種基因或延伸染色體區域的改變稱為<strong>異型接合性喪失（LOH）</strong>。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">② 發生 LOH 的機率與「距中節距離」成正比</div>
+        <div class="quote-en">“For example, the probability of a TSG suffering LOH through mitotic recombination (see Figure 7.6) is roughly proportional to the distance of this TSG from the centromere of a chromosome. Hence, TSGs that map close to centromeres lose heterozygosity only infrequently through mitotic recombination.”</div>
+        <div class="quote-tw">一個抑瘤基因透過有絲分裂重組發生 LOH 的機率，大致與其<strong>距染色體中節的距離成正比</strong>；定位於中節附近的抑瘤基因，很少以此途徑喪失異型合子狀態。</div>
+      </div>
+    </div>
+
+    <!-- Source 4: Lodish 9e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">4. Lodish《Molecular Cell Biology》9e</div>
+        <div class="source-loc">Ch25 癌症（腫瘤抑制基因與 LOH）</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">有絲分裂重組是造成 LOH 最頻繁的機制</div>
+        <div class="quote-en">“Three mechanisms exist that can cause the loss of the normal allele. First, the normal allele can become inactive due to a de novo inactivating mutation or deletion. Second, chromosome missegregation can cause loss of the chromosome carrying the normal allele. Neither mechanism is particularly common. By far the most frequent mechanism for LOH is mitotic recombination between a chromatid bearing the normal allele and a homologous chromatid bearing a mutant allele. Subsequent chromosome segregation can generate a daughter cell that is homozygous for the mutant tumor-suppressor allele.”</div>
+        <div class="quote-tw">造成正常抑癌等位基因喪失（LOH）的三種機制中，全新突變／缺失與染色體不分離都不算特別常見；<strong>迄今造成 LOH 最頻繁的機制，是帶正常等位基因與帶突變等位基因的同源染色分體之間發生有絲分裂重組</strong>。</div>
+      </div>
+    </div>
+
+    <!-- Source 5: Cox 2e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">5. Cox《Molecular Biology: Principles and Practice》2e</div>
+        <div class="source-loc">Ch13 重組型 DNA 修復與同源重組（圖 13.21）</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">分子修復層次：限於 S／G2 期由 DSB 啟動，完全依賴 Rad51</div>
+        <div class="quote-en">“Double-strand breaks occur more rarely during mitosis, and recombination is correspondingly less frequent. ... Mitotic recombination is generally limited to the S and G2 phases of the cell cycle, when sister chromatids are present. Recombination between homologous chromosomes in diploid cells is much less frequent—probably a simple matter of the physical distance between homologs. ... The Dmc1 recombinase is specific to meiosis, so mitotic recombination relies entirely on Rad51. Recombination mediators include the Rad52 protein in all eukaryotes and, in vertebrates, the BRCA2 protein.”</div>
+        <div class="quote-tw">有絲分裂重組通常僅限於存在姊妹染色分體的 <strong>S 期與 G2 期</strong>，由雙股斷裂（DSB）啟動；因減數分裂專一性重組酶 Dmc1 不參與，故<strong>完全依賴 Rad51</strong>（並由 Rad52 及脊椎動物之 <strong>BRCA2</strong> 裝載）。</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">📚 教材覆蓋邊界與臺灣審定術語備註</div>
+      <p style="margin-bottom:0;">
+        經全面檢索，普通生物學譯本（Campbell 12e／13e、Sadava 12e、Solomon 11e、Freeman 8e）、Alberts ECB6 與臺灣高中選修生物跨版本整合目前皆未設「有絲分裂互換」專節，本題屬大學遺傳學與癌症生物學進階考點。術語嚴格依臺灣教育部《生命科學名詞》：<code>centromere</code> 譯為<strong>中節</strong>、<code>chromatid</code> 譯為<strong>染色分體</strong>、<code>non-sister chromatid</code> 譯為<strong>非姊妹染色分體</strong>；<code>twin spot</code> 依 Vault 遺傳學譯本採<strong>雙生斑／雙斑</strong>（非「孿生斑」）。
+      </p>
+    </div>
+  </section>
+
+  <!-- Section 5: Teaching & Exam Variations -->
+  <section id="sec-teaching">
+    <h2><span class="sec-num">05</span> 教甄進階變形與 10 秒速解口訣</h2>
+
+    <div class="callout">
+      <div class="callout-title">⚡ 10 秒心算規律：先切「互換點近端 vs. 遠端」</div>
+      <ul style="margin-bottom:0;">
+        <li><strong>互換點近端（靠近中節）</strong>：兩條姊妹染色分體沒交換 → 每個子細胞 100% 維持原本的異型合子（例如圖二的 A 座恆為 <code>Aa</code>，所有「A 隱」直接填 <strong>0</strong>）。</li>
+        <li><strong>互換點遠端（遠離中節）</strong>：上下兩條同源染色體各自變成「1 顯 1 隱」→ 隨機各抽 1 股，遠端整個區段必然呈現 <strong>1/4 同型合子甲 : 1/2 維持原異型合子 : 1/4 同型合子乙</strong>。</li>
+      </ul>
+    </div>
+
+    <div class="callout-warn">
+      <div class="callout-title">🎯 教甄最常見的 3 種延伸變形題</div>
+      <ul style="margin-bottom:0;">
+        <li><strong>變形 1：把反式連鎖（<code>Ab/aB</code>）改成順式連鎖（<code>AB/ab</code>）</strong><br>
+        若母細胞為順式 <code>AB/ab</code> 且互換發生在「中節與 A 之間」，排列一會產生 <code>AABB</code>（A 顯 B 顯）與 <code>aabb</code>（A 隱 B 隱），排列二產生兩個 <code>AaBb</code>（A 顯 B 顯）→ 結果變成 <strong>A 顯 B 顯 3/4、A 隱 B 隱 1/4，兩種單顯性皆為 0</strong>，不會出現雙生斑，而是單獨的雙隱性斑！</li>
+        <li><strong>變形 2：反推染色體上基因與中節的相對順序（體細胞定位）</strong><br>
+        給定反式雙異型合子出現「雙生斑」與「單獨 X 隱性斑」，卻幾乎從未出現「單獨 Y 隱性斑」→ 立刻反推順序必為 <strong>中節 — Y — X</strong>（X 在遠端、Y 在近端）。</li>
+        <li><strong>變形 3：結合癌症抑癌基因考「為何有絲分裂重組比第二次突變常見？」</strong><br>
+        引用 Weinberg 與 Lodish：單點突變率約 10⁻⁶，而有絲分裂重組造成整個遠端染色體臂同型合子化（LOH）的頻率達 10⁻⁵–10⁻⁴，且基因距離中節越遠、發生 LOH 的風險越高。</li>
+      </ul>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">跨頁連結：完整串聯連鎖互換與染色體斷裂修復</div>
+      <p style="margin-bottom:0;">
+        搭配閱讀 <a href="homologs-diploid-aabb-crossover.html">《同源染色體 vs. 雙套（2n），與 AaBb × AaBb 自交如何判斷互換？》</a>（比較減數分裂連鎖互換），以及 <a href="chromosome-breakage-cri-du-chat.html">《染色體斷裂成因與貓叫症（5p 缺失）》</a>（了解體細胞 DNA 雙股斷裂 DSB 的自然成因）。
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    400X 的日常切片 Bio-Wiki · 依 Goldberg Genetics 7e、Brooker Genetics 8e、Weinberg Biology of Cancer 3e、Lodish 9e、Cox 2e 原文與 113 全國聯招試題編整 · 繁體中文與審定名詞遵循臺灣教育部規範
+  </footer>
+
+</main>
+
+<button class="ro-bottom-toc" type="button" onclick="roOpenDrawer('roTocDrawer')">📑 本篇段落導覽</button>
+<a class="ro-up-btn" href="#top" aria-label="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<script>
+  function roToggleTheme() {
+    var root = document.documentElement;
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('biowiki-theme', next); } catch (e) {}
+    roUpdateThemeBtn();
+  }
+  function roUpdateThemeBtn() {
+    var btn = document.getElementById('roThemeBtn');
+    if (!btn) return;
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.innerHTML = isLight ? '🌙 深色' : '☀️ 亮色';
+    btn.setAttribute('aria-label', isLight ? '切換為深色閱讀模式' : '切換為亮色閱讀模式');
+  }
+  roUpdateThemeBtn();
+
+  function roOpenDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('open');
+  }
+  function roCloseDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  }
+  function openLightbox(src, alt) {
+    var lb = document.getElementById('roLightbox');
+    var img = document.getElementById('roLightboxImg');
+    if (lb && img) {
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.add('open');
+    }
+  }
+  function toggleEnglish() {
+    document.body.classList.toggle('hide-en');
+    var btn = document.getElementById('toggleEnBtn');
+    if (btn) {
+      btn.textContent = document.body.classList.contains('hide-en')
+        ? '完整：顯示英文原文'
+        : '精簡：隱藏英文原文';
+    }
+  }
+  (function initReadingOutpostShell() {
+    var tocList = document.getElementById('roTocList');
+    var headings = document.querySelectorAll('h2');
+    if (tocList && headings.length) {
+      headings.forEach(function(h, idx) {
+        if (!h.id) h.id = 'ro-sec-' + (idx + 1);
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent.trim();
+        tocList.appendChild(a);
+      });
+    }
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th, tr:first-child th')).map(function(th) {
+        return th.innerText.trim().replace(/[\r\n\t ]+/g, ' ');
+      });
+      if (!headers.length) return;
+      table.classList.add('ro-resp-table');
+      table.querySelectorAll('tr').forEach(function(tr) {
+        if (tr.querySelector('th')) return;
+        Array.from(tr.children).forEach(function(td, idx) {
+          if (td.tagName === 'TD' && !td.getAttribute('data-label') && headers[idx]) {
+            td.setAttribute('data-label', headers[idx]);
+          }
+        });
+      });
+    });
+    document.querySelectorAll('main img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        openLightbox(img.src, img.alt);
+      });
+    });
+  })();
+</script>
+<script src="site-nav.js"></script>
+</body>
+</html>

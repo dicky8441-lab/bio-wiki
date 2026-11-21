@@ -641,6 +641,7 @@
       <a href="abo-transfusion-self-tolerance.html">21. ABO 血型輸血（全血 vs. 紅血球）與為何沒有抗 A 抗體？</a>
       <a href="genetics-terminology-hierarchy.html">22. DNA、基因、等位基因、染色質、染色體與基因體怎麼串連？</a>
       <a href="homologs-diploid-aabb-crossover.html">23. 同源染色體 vs. 雙套（2n），與 AaBb × AaBb 自交如何判斷互換？</a>
+      <a href="mitotic-crossing-over.html">24. 有絲分裂互換與重組：中節位置、雙生斑與子細胞表現型機率推導</a>
     </div>
   </div>
 </div>
@@ -655,7 +656,7 @@
     <div class="ro-drawer-list" onclick="roCloseDrawer('roTocDrawer')">
       <a href="#cat-operon">🔥 操縱組與原核基因調控（6 篇）</a>
       <a href="#cat-molbio">🧬 染色體、DNA 與真核轉錄調控（3 篇）</a>
-      <a href="#cat-genetics">🌱 遺傳學與顯隱性判準（7 篇）</a>
+      <a href="#cat-genetics">🌱 遺傳學與顯隱性判準（8 篇）</a>
       <a href="#cat-evolution">🦠 細胞演化與生物多樣性（1 篇）</a>
       <a href="#cat-physiology">🫀 動物構造與生理調控（4 篇）</a>
       <a href="#cat-plant">🌻 植物構造與生理調控（1 篇）</a>
@@ -679,10 +680,10 @@
         <input class="search-input" id="searchInput" type="search" placeholder="搜尋概念、關鍵字或教科書（例：內共生、Campbell、RecA、鐮刀）" oninput="filterPosts()">
       </div>
       <div class="filter-pills">
-        <button class="filter-pill active" type="button" data-cat="all" onclick="selectCat('all', this)">全部專題 (22)</button>
+        <button class="filter-pill active" type="button" data-cat="all" onclick="selectCat('all', this)">全部專題 (23)</button>
         <button class="filter-pill" type="button" data-cat="operon" onclick="selectCat('operon', this)">操縱組與原核調控 (6)</button>
         <button class="filter-pill" type="button" data-cat="molbio" onclick="selectCat('molbio', this)">DNA 與真核轉錄 (3)</button>
-        <button class="filter-pill" type="button" data-cat="genetics" onclick="selectCat('genetics', this)">遺傳與數量性狀 (7)</button>
+        <button class="filter-pill" type="button" data-cat="genetics" onclick="selectCat('genetics', this)">遺傳與數量性狀 (8)</button>
         <button class="filter-pill" type="button" data-cat="evolution" onclick="selectCat('evolution', this)">細胞演化與內共生 (1)</button>
         <button class="filter-pill" type="button" data-cat="physiology" onclick="selectCat('physiology', this)">動物生理與免疫 (4)</button>
         <button class="filter-pill" type="button" data-cat="plant" onclick="selectCat('plant', this)">植物生理與光週期 (1)</button>
@@ -897,6 +898,21 @@
           <div class="post-meta">
             <span class="post-badge accent">5 部正典 · 6 張原圖</span>
             <span class="post-badge">Campbell 13e · Pierce 7e · Solomon 11e · Goldberg 7e · Klug</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="mitotic-crossing-over.html" data-keywords="有絲分裂互換 有絲分裂重組 mitotic crossing-over mitotic recombination 體細胞互換 中節 centromere 雙生斑 雙斑 twin spot Curt Stern 異型合子性喪失 異型接合性喪失 LOH 視網膜母細胞瘤 RB RB1 Rad51 SDSA DSBR 113全國聯招 綜合題 教甄 Goldberg Brooker Weinberg Lodish Cox">
+        <div class="post-thumb">
+          <span class="post-thumb-icon">🧬</span>
+          <span class="post-thumb-tag">體細胞互換</span>
+        </div>
+        <div class="post-content">
+          <h3 class="post-title">《有絲分裂互換與重組》中節位置、雙生斑與子細胞表現型機率推導</h3>
+          <p class="post-excerpt">完整拆解 113 全國聯招綜合題第 4 題並追溯其原圖藍本 Goldberg 7e Fig. 5.28：釐清「互換點遠端才能同型合子化、近端恆維持異型合子」定律，延伸至果蠅雙生斑與抑癌基因 <em>RB1</em> 之 LOH。</p>
+          <div class="post-meta">
+            <span class="post-badge accent">5 部正典 · 5 張圖解</span>
+            <span class="post-badge">Goldberg 7e · Brooker 8e · Weinberg · Lodish 9e · Cox 2e</span>
           </div>
         </div>
       </a>

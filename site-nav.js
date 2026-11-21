@@ -98,6 +98,12 @@
           keywords: '同源染色體 雙套 二倍體 2n 倍性 ploidy 姊妹染色分體 AaBb 互換 crossing over 連鎖 linkage 順式 反式 9:3:3:1 3:1 1:2:1 試交 甜豌豆 羅東高中 教甄 Campbell Pierce Solomon Goldberg Klug'
         },
         {
+          href: 'mitotic-crossing-over.html',
+          title: '有絲分裂互換與重組：中節位置、雙生斑與子細胞表現型機率推導',
+          tag: '體細胞互換',
+          keywords: '有絲分裂互換 有絲分裂重組 mitotic crossing-over mitotic recombination 體細胞互換 中節 centromere 雙生斑 雙斑 twin spot Curt Stern 異型合子性喪失 異型接合性喪失 LOH 視網膜母細胞瘤 RB RB1 Rad51 SDSA DSBR 113全國聯招 綜合題 教甄 Goldberg Brooker Weinberg Lodish Cox'
+        },
+        {
           href: 'xy-synapsis-crossing-over.html',
           title: '人類 XY 染色體會聯會、互換並算一個四分體嗎？',
           tag: '性染色體',
