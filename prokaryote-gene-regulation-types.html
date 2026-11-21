@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>原核細胞的基因表現調控分類：正／負調控 vs. 持續型／可誘導型／可抑制型｜Bio-Wiki</title>
+<style>
+  :root {
+    --bg-primary: #181614;
+    --bg-pillbar: #24201c;
+    --bg-card: #211e1a;
+    --bg-quote: #26221e;
+    --bg-tag: #2d2823;
+    --text-primary: #f6f1ea;
+    --text-body: #ddd5ca;
+    --text-secondary: #bfb5a8;
+    --text-muted: #9a8e80;
+    --primary: #5bc0eb;
+    --primary-light: rgba(91, 192, 235, 0.12);
+    --primary-border: rgba(91, 192, 235, 0.32);
+    --accent: #f4c44e;
+    --accent-light: rgba(244, 196, 78, 0.12);
+    --border-color: rgba(246, 241, 234, 0.09);
+    --border-strong: rgba(246, 241, 234, 0.16);
+    --taupe-fab: rgba(104, 91, 78, 0.94);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+  }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+    font-size: 18px;
+    line-height: 1.78;
+    padding: 0 0 96px 0;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .ro-header-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-primary) 70%, rgba(24, 22, 20, 0));
+  }
+
+  .ro-pillbar {
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .ro-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .ro-menu-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    border: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .ro-menu-circle span {
+    display: block;
+    width: 16px;
+    height: 2.2px;
+    background: #181614;
+    border-radius: 2px;
+  }
+
+  .ro-brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .ro-brand-zh {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-brand-en {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .ro-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .ro-theme-btn {
+    appearance: none;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    transition: transform 0.15s ease;
+  }
+
+  .ro-theme-btn:active {
+    transform: scale(0.96);
+  }
+
+  .ro-cta-pill {
+    appearance: none;
+    background: var(--accent);
+    color: #1c1814;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .container {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 22px 0;
+  }
+
+  header.hero {
+    text-align: left;
+    margin-bottom: 32px;
+    padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .badge-bar {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .badge-primary {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary-border);
+  }
+
+  .badge-accent {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: rgba(244, 196, 78, 0.32);
+  }
+
+  h1 {
+    font-size: clamp(26px, 6.2vw, 34px);
+    line-height: 1.38;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    margin: 6px 0 14px;
+    text-align: left;
+  }
+
+  .subtitle {
+    font-size: 17px;
+    line-height: 1.68;
+    color: var(--text-muted);
+    margin: 0;
+    text-align: left;
+  }
+
+  section {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: 42px;
+    scroll-margin-top: 84px;
+  }
+
+  h2 {
+    font-size: clamp(22px, 5.2vw, 27px);
+    line-height: 1.45;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 44px 0 18px;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+  }
+
+  h2 .sec-num {
+    color: var(--accent);
+    margin-right: 6px;
+    font-weight: 800;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 30px 0 12px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--text-body);
+    margin-bottom: 18px;
+  }
+
+  ul, ol {
+    margin: 0 0 22px 24px;
+    color: var(--text-body);
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+    color: var(--text-body);
+  }
+
+  strong, b {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.9em;
+    background: var(--bg-tag);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 6px;
+  }
+
+  main a:not(.ro-cta-pill):not(.ro-brand-link) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  .tldr-card, .source-card, .callout, .callout-warn, .boundary, .glossary-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 20px 20px;
+    margin: 20px 0;
+  }
+
+  .tldr-card {
+    border-left: 4px solid var(--accent);
+  }
+
+  .callout {
+    border-left: 4px solid var(--primary);
+  }
+
+  .callout-warn {
+    border-left: 4px solid var(--accent);
+  }
+
+  .boundary {
+    border-left: 4px solid var(--text-muted);
+  }
+
+  .tldr-label, .callout-title, .source-book {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .glossary-item {
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .glossary-item:last-child {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+
+  .glossary-term {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+
+  .source-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .source-loc {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .quote-block {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .quote-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quote-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .quote-en {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 10px 0 12px;
+    word-break: break-word;
+  }
+
+  body.hide-en .quote-en {
+    display: none;
+  }
+
+  .quote-tw {
+    font-size: 17.5px;
+    line-height: 1.78;
+    color: var(--text-body);
+  }
+
+  .quote-tw strong {
+    color: var(--accent);
+    background: rgba(244, 196, 78, 0.10);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+
+  .toggle-en-btn {
+    appearance: none;
+    background: var(--bg-tag);
+    color: var(--accent);
+    border: 1px solid rgba(244, 196, 78, 0.35);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  .figure-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .figure-title {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding: 12px 16px 4px;
+  }
+
+  .figure-img-wrap {
+    padding: 14px;
+    background: #f8fafc;
+    cursor: zoom-in;
+  }
+
+  main img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 8px;
+    margin: 0 auto;
+    cursor: zoom-in;
+  }
+
+  .zoom-hint {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    padding: 6px 4px 0;
+  }
+
+  .figure-caption {
+    font-size: 15px;
+    line-height: 1.68;
+    color: var(--text-secondary);
+    padding: 10px 16px 8px;
+  }
+
+  .figure-caption-en {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 0 16px 14px;
+  }
+
+  .table-wrap {
+    width: 100%;
+    margin: 18px 0 26px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 16px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-body);
+  }
+
+  th {
+    background: var(--bg-pillbar);
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  tr.highlight-tr td {
+    background: rgba(244, 196, 78, 0.12);
+    color: var(--text-primary);
+  }
+
+  @media (max-width: 680px) {
+    table.ro-resp-table,
+    table.ro-resp-table thead,
+    table.ro-resp-table tbody,
+    table.ro-resp-table th,
+    table.ro-resp-table td,
+    table.ro-resp-table tr {
+      display: block;
+      width: 100%;
+    }
+
+    table.ro-resp-table thead {
+      display: none;
+    }
+
+    table.ro-resp-table tr {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    table.ro-resp-table td {
+      border: none;
+      border-bottom: 1px dashed var(--border-color);
+      padding: 8px 0;
+      text-align: left !important;
+    }
+
+    table.ro-resp-table td:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    table.ro-resp-table td:first-child {
+      padding-top: 0;
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    table.ro-resp-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+  }
+
+  .ro-bottom-toc {
+    position: fixed;
+    left: 16px;
+    bottom: 20px;
+    z-index: 95;
+    background: var(--taupe-fab);
+    color: #f6f1ea;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 9px 15px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: calc(100vw - 88px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-up-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 95;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--taupe-fab);
+    color: #f6f1ea;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    text-decoration: none !important;
+  }
+
+  .ro-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ro-drawer-backdrop.open {
+    display: flex;
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-backdrop {
+      align-items: center;
+      padding: 24px;
+    }
+  }
+
+  .ro-drawer-panel {
+    width: 100%;
+    max-width: 500px;
+    max-height: 78vh;
+    overflow-y: auto;
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px 20px 0 0;
+    padding: 18px 18px 28px;
+    box-shadow: var(--shadow);
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-panel {
+      border-radius: 18px;
+    }
+  }
+
+  .ro-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .ro-drawer-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .ro-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .ro-drawer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ro-drawer-list a {
+    display: block;
+    text-decoration: none !important;
+    color: var(--text-body) !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .ro-drawer-list a.active {
+    color: #181614 !important;
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 800;
+  }
+
+  .ro-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    cursor: zoom-out;
+  }
+
+  .ro-lightbox.open {
+    display: flex;
+  }
+
+  .ro-lightbox img {
+    max-width: 100%;
+    max-height: 92vh;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  html[data-theme="light"] {
+    --bg-primary: #fbf8f4;
+    --bg-pillbar: #f0ece3;
+    --bg-card: #ffffff;
+    --bg-quote: #f6f2ea;
+    --bg-tag: #eee8dd;
+    --text-primary: #2f2820;
+    --text-body: #4a3f35;
+    --text-secondary: #5e5043;
+    --text-muted: #756656;
+    --primary: #1b9dce;
+    --primary-light: rgba(27, 157, 206, 0.12);
+    --primary-border: rgba(27, 157, 206, 0.35);
+    --accent: #b86b11;
+    --accent-light: rgba(244, 196, 78, 0.22);
+    --border-color: rgba(74, 63, 53, 0.12);
+    --border-strong: rgba(74, 63, 53, 0.22);
+    --taupe-fab: rgba(105, 90, 74, 0.94);
+    --shadow: 0 4px 18px rgba(47, 40, 32, 0.08);
+    color-scheme: light;
+  }
+
+  html[data-theme="light"] .ro-header-wrap {
+    background: linear-gradient(180deg, #fbf8f4 70%, rgba(251, 248, 244, 0));
+  }
+
+  html[data-theme="light"] .ro-menu-circle {
+    background: #67c3eb;
+    color: #1f1a15;
+  }
+
+  html[data-theme="light"] .ro-cta-pill {
+    background: #f6c84c;
+    color: #2f2820;
+  }
+
+  html[data-theme="light"] .ro-bottom-toc,
+  html[data-theme="light"] .ro-up-btn {
+    color: #ffffff;
+  }
+
+  html[data-theme="light"] .ro-drawer-list a.active {
+    background: #f6c84c;
+    border-color: #e0b034;
+    color: #2f2820 !important;
+  }
+
+  html[data-theme="light"] .quote-tw strong {
+    color: #8c4d06;
+    background: rgba(246, 200, 76, 0.28);
+  }
+</style>
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem('biowiki-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+
+<!-- Reading Outpost Dark Style Shell -->
+<div class="ro-header-wrap" id="top">
+  <div class="ro-pillbar">
+    <div class="ro-brand-group">
+      <button class="ro-menu-circle" type="button" aria-label="開啟專題選單" onclick="roOpenDrawer('roSiteDrawer')">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="ro-brand-link" href="index.html">
+        <span class="ro-brand-zh">400X 的日常切片</span>
+        <span class="ro-brand-en">BIO-WIKI EVIDENCE</span>
+      </a>
+    </div>
+    <div class="ro-top-actions">
+      <button class="ro-theme-btn" id="roThemeBtn" type="button" onclick="roToggleTheme()">☀️ 亮色</button>
+      <button class="ro-cta-pill" type="button" onclick="roOpenDrawer('roSiteDrawer')">專題目錄</button>
+    </div>
+  </div>
+</div>
+
+<!-- Site-Wide Topics Drawer -->
+<div class="ro-drawer-backdrop" id="roSiteDrawer" onclick="if(event.target===this)roCloseDrawer('roSiteDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📚 Bio-Wiki 全站專題</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roSiteDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list">
+      <a href="index.html">🏠 首頁：主題分類總覽</a>
+      <a href="chromatin.html">1. 染色質與染色體本質</a>
+      <a href="wheat-polygenic.html">2. 小麥多基因累加模型 (Campbell 14e)</a>
+      <a href="spermatogonia-hole.html">3. 精原細胞與生精歷程 (跨正典考證)</a>
+      <a href="griffith-transformation.html">4. Griffith 轉形作用</a>
+      <a href="promoter-tata-box.html">5. 啟動子、TATA 匣與甲基化</a>
+      <a href="sickle-cell-dominance.html">6. 鐮刀型貧血顯隱性層次分析</a>
+      <a href="endosymbiosis.html">7. 內共生假說與演化序列</a>
+      <a href="lactose-intolerance-lac-operon.html">8. 乳糖不耐症與大腸桿菌 lac 操縱組</a>
+      <a href="operon-inference-pierce.html">9. Pierce 操縱組推論過程</a>
+      <a href="gene-allele-dna-chromosome.html">10. 遺傳因子、基因、等位基因與染色體</a>
+      <a href="oogenesis-interphase-dyad.html">11. 初級卵母細胞、間期與二分體</a>
+      <a href="xy-synapsis-crossing-over.html">12. 人類 XY 染色體聯會、互換與四分體判定</a>
+      <a href="chromosome-breakage-cri-du-chat.html">13. 染色體斷裂成因與貓叫症（5p 缺失）</a>
+      <a href="operator-transcription-translation.html">14. 操作子會不會被轉錄與轉譯？（基因 vs. 子）</a>
+      <a href="lac-operon-sugar-sensing.html">15. 大腸桿菌如何感測葡萄糖與乳糖？</a>
+      <a href="why-eukaryotes-lack-operons.html">16. 為什麼真核細胞幾乎沒有操縱組？</a>
+      <a href="plant-photoreceptor-photoperiodism.html">17. 沒有感官如何感知世界？（細菌乳糖 vs. 植物光週期）</a>
+      <a href="genbio-8books-lac-detection.html">18. 普生 8 套課本怎麼講大腸桿菌偵測乳糖？</a>
+      <a href="prokaryote-gene-regulation-types.html" class="active">19. 原核基因調控分類：正／負 vs. 持續／誘導／抑制</a>
+    </div>
+  </div>
+</div>
+
+<!-- In-Page TOC Drawer -->
+<div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📑 本篇段落導覽</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list" id="roTocList" onclick="roCloseDrawer('roTocDrawer')"></div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="ro-lightbox" id="roLightbox" onclick="this.classList.remove('open')">
+  <img id="roLightboxImg" src="" alt="">
+</div>
+
+<main class="container">
+
+  <header class="hero">
+    <div class="badge-bar">
+      <span class="badge badge-accent">高中易讀版 · 13 套課本總盤點</span>
+      <span class="badge badge-primary">分子生物學 × 遺傳學</span>
+      <span class="badge">普生 8 套＋遺傳 5 套 · 5 張原圖</span>
+    </div>
+    <h1>原核細胞的基因表現調控分類：正／負調控 vs. 持續型／可誘導型／可抑制型</h1>
+    <p class="subtitle">為什麼「乳糖誘導打開 <em>lac</em> 操縱組」其實屬於負調控，而不是正調控？一次拆解兩條獨立分類軸線、遺傳學 2 × 2 四種交叉調控型態，並完整對照 8 套普通生物學與 5 套遺傳學原文正典。</p>
+  </header>
+
+  <!-- TL;DR -->
+  <div class="tldr-card">
+    <div class="tldr-label">💡 一句話先講結論（高中生與備課老師速讀）</div>
+    <p>原核細胞的基因表現分類最常讓人搞混，是因為大家把<strong>兩條完全不同的分類軸線</strong>混在一起：</p>
+    <ul>
+      <li><strong>軸線一（基因平常開或關、怎麼回應環境）</strong>：分為<strong>持續型</strong>（永遠開、不受環境開關控制）、<strong>可誘導型</strong>（預設關、有誘導物才開）與<strong>可抑制型</strong>（預設開、產物夠多才關）。</li>
+      <li><strong>軸線二（調控蛋白踩煞車還是踩油門）</strong>：分為<strong>負調控</strong>（主角是<strong>抑制蛋白</strong>，結合 DNA 就阻擋 RNA 聚合酶）與<strong>正調控</strong>（主角是<strong>活化蛋白</strong>，結合 DNA 就吸引並加速 RNA 聚合酶）。</li>
+    </ul>
+    <p style="margin-bottom:0;">因此<strong>「打開基因（誘導）」絕不等於「正調控」</strong>！<em>lac</em> 操縱組加入乳糖後轉錄打開，是因為異乳糖把「煞車（LacI 抑制蛋白）」鬆開，屬於<strong>負調控 × 可誘導型</strong>；真正踩下「油門」的是低葡萄糖時結合 DNA 的 <strong>CAP–cAMP</strong>，那才屬於<strong>正調控</strong>。</p>
+  </div>
+
+  <!-- Section 1: Axis 1 -->
+  <section id="sec-axis1">
+    <h2><span class="sec-num">01</span> 軸線一：持續型 vs. 可誘導型 vs. 可抑制型（依表現狀態分）</h2>
+    <p>先別管是哪種調控蛋白，單純看「這組基因平常開不開、會不會隨環境物質改變」，原核細胞的基因分成三大類：</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>類型</th>
+            <th>預設狀態</th>
+            <th>調控開關與代謝邏輯</th>
+            <th>原核細胞代表例子（普生＋遺傳學共識）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>持續型表現</strong><br>（constitutive；常對應管家基因）</td>
+            <td><strong>永遠開啟</strong><br>（不受環境開關調控）</td>
+            <td>細胞隨時生存必備，不管環境怎麼變都穩定轉錄；表現量高低由<strong>啟動子強弱</strong>決定（強啟動子產量大、弱啟動子產量小）。</td>
+            <td>• <strong>糖解作用酵素</strong>（Freeman 8e、Campbell 12e/13e、Solomon 11e）<br>• <strong>RNA 聚合酶基因</strong>（Solomon 11e 習題）、σ⁷⁰ 辨識的<strong>管家基因</strong>（Sadava 12e、Goldberg 7e）<br>• <strong>調節基因本身</strong>：<em>lacI</em>、<em>trpR</em>、CAP、<em>lexA</em>（弱啟動子低量持續表現）</td>
+          </tr>
+          <tr class="highlight-tr">
+            <td><strong>可誘導型</strong><br>（inducible）</td>
+            <td><strong>預設關閉</strong><br>（僅極低基礎轉錄）</td>
+            <td>需要特定小分子（<strong>誘導物 inducer</strong>）出現才能開啟；多見於<strong>分解代謝（catabolic）</strong>路徑——有食物受質才開工，避免白做酵素。</td>
+            <td>• <strong><em>lac</em> 操縱組</strong>（乳糖／異乳糖誘導）<br>• <strong><em>gal</em>（半乳糖）、<em>ara</em>（阿拉伯糖）、<em>mal</em>（麥芽糖）操縱組</strong><br>• <strong>費氏弧菌 <em>luxICDABE</em></strong>（群體感應自誘導物；Goldberg 7e）<br>• <strong>SOS 調節組</strong>（DNA 損傷誘導；Freeman 8e、Klug 12e）</td>
+          </tr>
+          <tr>
+            <td><strong>可抑制型</strong><br>（repressible）</td>
+            <td><strong>預設開啟</strong><br>（平常持續轉錄）</td>
+            <td>當終產物（<strong>輔抑制物 corepressor</strong> 或<strong>抑制物 inhibitor</strong>）累積過多時才關閉；多見於<strong>合成代謝（anabolic）</strong>路徑——缺原料自己做，夠用就停工。</td>
+            <td>• <strong><em>trp</em> 操縱組</strong>（色胺酸過多時關閉；普生與遺傳學核心正例）<br>• <strong>其他胺基酸／核苷酸合成路徑</strong>（<em>his</em>、<em>leu</em>、<em>phe</em>、<em>thr</em> 另具衰減調控；Solomon 11e 習題舉腺嘌呤合成酵素）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout-warn">
+      <div class="callout-title">⚠️ 常見易混點：正常的「持續型基因」vs. 開關壞掉的「持續型突變」</div>
+      <p style="margin-bottom:0;">正常大腸桿菌的 <em>lac</em> 操縱組屬於可誘導型；但若因為突變導致抑制蛋白失效（<code>lacI⁻</code>）或操作子無法結合抑制蛋白（<code>lacOᶜ</code>），原本該受調控的基因就會變成永遠開著——遺傳學上稱這種突變株表現為<strong>持續型突變（constitutive mutation）</strong>。它本質上是「煞車壞掉」，不同於原本就不需要開關的管家基因。</p>
+    </div>
+  </section>
+
+  <!-- Section 2: Axis 2 -->
+  <section id="sec-axis2">
+    <h2><span class="sec-num">02</span> 軸線二：負調控 vs. 正調控（依調控蛋白功能分）</h2>
+    <p>第二條軸線只看一件事：<strong>當調控蛋白結合到 DNA 上時，它對 RNA 聚合酶做了什麼？</strong></p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>比較項目</th>
+            <th>負調控（negative control）</th>
+            <th>正調控（positive control）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>主角調控蛋白</strong></td>
+            <td><strong>抑制蛋白（repressor）</strong></td>
+            <td><strong>活化蛋白（activator）</strong></td>
+          </tr>
+          <tr>
+            <td><strong>結合 DNA 後的效果</strong></td>
+            <td>結合於<strong>操作子（operator）</strong>，物理阻擋或干擾 RNA 聚合酶起始轉錄 → <strong>降低／關閉轉錄</strong></td>
+            <td>結合於啟動子旁的活化位，直接接觸並穩定吸引 RNA 聚合酶 → <strong>提高／促進轉錄</strong></td>
+          </tr>
+          <tr>
+            <td><strong>科學圖像理解</strong></td>
+            <td>就像<strong>煞車系統</strong>：蛋白一結合到 DNA，轉錄就停下來</td>
+            <td>就像<strong>油門系統</strong>：蛋白一結合到 DNA，轉錄才加速啟動</td>
+          </tr>
+          <tr>
+            <td><strong>原核代表實例</strong></td>
+            <td>• <em>lac</em> 操縱組的 <strong>LacI 抑制蛋白</strong><br>• <em>trp</em> 操縱組的 <strong>TrpR 抑制蛋白</strong><br>• SOS 調節組的 <strong>LexA 抑制蛋白</strong></td>
+            <td>• <em>lac</em> 等上百個分解操縱組的 <strong>CAP（CRP）–cAMP</strong><br>• 麥芽糖操縱組的 <strong>MalT</strong>、阿拉伯糖操縱組的 <strong>AraC</strong><br>• 費氏弧菌發光操縱組的 <strong>LuxR</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖一 · Freeman 8e Fig. 18.4｜負調控（抑制蛋白阻擋轉錄）vs. 正調控（活化蛋白觸發轉錄）</div>
+      <div class="figure-img-wrap" onclick="openLightbox('images/Freeman8e_Fig18-4_negative_vs_positive_control.png','Freeman 8e Fig 18.4')">
+        <img src="images/Freeman8e_Fig18-4_negative_vs_positive_control.png" alt="Freeman 8e Figure 18.4 comparing negative control by repressor and positive control by activator">
+        <span class="zoom-hint">🔍 點擊放大檢視原圖</span>
+      </div>
+      <div class="figure-caption"><strong>看圖重點</strong>：Freeman 8e 直接把兩種調控並排比較——左側 (a) 負調控：沒有抑制蛋白時 RNA 聚合酶就能轉錄，一有抑制蛋白結合 DNA 就畫上紅叉停工；右側 (b) 正調控：沒有活化蛋白時幾乎不轉錄，唯有活化蛋白結合 DNA 協助 RNA 聚合酶才啟動高效率轉錄。</div>
+      <div class="figure-caption-en">Source: Freeman et al., Biological Science, 8th ed., Ch. 18, Figure 18.4 (Negative and Positive Control Regulate Gene Transcription).</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖二 · Solomon 11e Table 14-1｜普通生物學最精簡的細菌轉錄調控總表</div>
+      <div class="figure-img-wrap" onclick="openLightbox('images/Solomon11e_Table14-1_bacterial_transcriptional_control.png','Solomon 11e Table 14-1')">
+        <img src="images/Solomon11e_Table14-1_bacterial_transcriptional_control.png" alt="Solomon 11e Table 14-1 summarizing Negative Control inducible/repressible genes and Positive Control">
+        <span class="zoom-hint">🔍 點擊放大檢視原圖</span>
+      </div>
+      <div class="figure-caption"><strong>看圖重點</strong>：在全部 8 套普通生物學中，Solomon 11e 表 14-1 是唯一把「負調控：可誘導基因（<em>lac</em>）」、「負調控：可抑制基因（<em>trp</em>）」與「正調控（CAP + cAMP）」收進同一張表格的版本，最直接呈現<strong>普通生物學層級的三足鼎立架構</strong>。</div>
+      <div class="figure-caption-en">Source: Martin, Solomon et al., Biology, 11th ed., Ch. 14, Table 14-1 (Transcriptional Control in Bacteria).</div>
+    </div>
+  </section>
+
+  <!-- Section 3: 2x2 Matrix (Genetics) -->
+  <section id="sec-matrix">
+    <h2><span class="sec-num">03</span> 進階大統整：2 × 2 四種交叉調控型態（遺傳學核心框架）</h2>
+    <p>把軸線一（可誘導／可抑制）與軸線二（負調控／正調控）交叉，就能推導出遺傳學最完整的 <strong>4 種轉錄調控型態</strong>。在本次盤點的全部 13 套課本中，<strong>Brooker 遺傳學 8e（圖 14.2）</strong>是唯一用一張總覽圖把四種機制完整畫出來的正典！</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>交叉型態</th>
+            <th>調控蛋白與剛合成活性</th>
+            <th>小分子效應物與作用</th>
+            <th>預設 → 加效應物後</th>
+            <th>13 套課本實例盤點</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-tr">
+            <td><strong>1. 負調控 × 可誘導型</strong><br>（負誘導）</td>
+            <td>抑制蛋白<br>剛合成即<strong>有活性</strong>（結合 DNA）</td>
+            <td><strong>誘導物（inducer）</strong>結合抑制蛋白 → 變構<strong>脫離 DNA</strong></td>
+            <td>預設<strong>關閉</strong> → <strong>開啟</strong></td>
+            <td>• <strong><em>lac</em> 操縱組</strong>（異乳糖；12 套全舉）<br>• <strong><em>gal</em> 操縱組</strong>（Goldberg 7e）<br>• <strong>SOS 調節組 / <em>lexA</em></strong>（Freeman 8e、Klug 12e）</td>
+          </tr>
+          <tr>
+            <td><strong>2. 負調控 × 可抑制型</strong><br>（負抑制）</td>
+            <td>抑制蛋白<br>剛合成時<strong>無活性</strong>（不結合 DNA）</td>
+            <td><strong>輔抑制物（corepressor）</strong>結合抑制蛋白 → 活化並<strong>結合 DNA</strong></td>
+            <td>預設<strong>開啟</strong> → <strong>關閉</strong></td>
+            <td>• <strong><em>trp</em> 操縱組</strong>（色胺酸；10 套課本均舉）</td>
+          </tr>
+          <tr class="highlight-tr">
+            <td><strong>3. 正調控 × 可誘導型</strong><br>（正誘導）</td>
+            <td>活化蛋白<br>剛合成時<strong>無活性</strong>（不結合 DNA）</td>
+            <td><strong>誘導物（inducer）</strong>結合活化蛋白 → 活化並<strong>結合 DNA</strong></td>
+            <td>預設<strong>關閉</strong> → <strong>開啟</strong></td>
+            <td>• <strong>CAP（CRP）–cAMP</strong>（Brooker 8e 明確稱 cAMP 為誘導物，活化 <em>lac</em>、<em>gal</em>、<em>ara</em>、<em>mal</em> 等上百個操縱組）<br>• <strong><em>ara</em> 阿拉伯糖操縱組</strong>（Pierce 7e Q26）<br>• <strong><em>mal</em> 麥芽糖操縱組 / MalT</strong>（Goldberg 7e）<br>• <strong>費氏弧菌 <em>luxICDABE</em> / LuxR</strong>（Goldberg 7e）</td>
+          </tr>
+          <tr>
+            <td><strong>4. 正調控 × 可抑制型</strong><br>（正抑制）</td>
+            <td>活化蛋白<br>剛合成即<strong>有活性</strong>（結合 DNA）</td>
+            <td><strong>抑制物（inhibitor）</strong>結合活化蛋白 → 變構<strong>脫離 DNA</strong></td>
+            <td>預設<strong>開啟</strong> → <strong>關閉</strong></td>
+            <td>⚠️ <strong>重要查證發現：12 套已譯本正文與習題均未舉任何真實原核操縱組為例</strong>；僅以理論圖解與假設題演練（Brooker 8e 圖 14.2d / C3 / C5、Pierce 7e TPS Q3、Klug 12e 題 20 假設 <em>tis</em> 操縱組）。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖三 · Brooker 遺傳學 8e Fig. 14.2｜全部 13 套課本唯一完整呈現「2 × 2 四種調控型態」的總覽圖</div>
+      <div class="figure-img-wrap" onclick="openLightbox('images/Brooker8e_Fig14-2_four_regulation_types.png','Brooker 8e Fig 14.2')">
+        <img src="images/Brooker8e_Fig14-2_four_regulation_types.png" alt="Brooker Genetics 8e Figure 14.2 showing all four combinations of repressor/activator and inducer/corepressor/inhibitor">
+        <span class="zoom-hint">🔍 點擊放大檢視原圖</span>
+      </div>
+      <div class="figure-caption"><strong>看圖重點</strong>：一口氣看懂四排：(a) 抑制蛋白＋誘導物（負誘導）、(b) 活化蛋白＋誘導物（正誘導）、(c) 抑制蛋白＋輔抑制物（負抑制）、(d) 活化蛋白＋抑制物（正抑制）。每一種調控蛋白都有兩個結合位（DNA 結合位＋小分子效應物結合位），小分子結合造成構形改變，決定蛋白質「黏上 DNA」還是「鬆脫離開 DNA」。</div>
+      <div class="figure-caption-en">Source: Brooker, Genetics: Analysis and Principles, 8th ed., Ch. 14, Figure 14.2 (Binding sites on regulatory transcription factors).</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖四 · Pierce 遺傳學 7e Fig. 16.4｜負調控 × 可誘導型操縱組（受質前驅物作為誘導物）</div>
+      <div class="figure-img-wrap" onclick="openLightbox('images/Pierce7e_Fig16-4_negative_inducible_operon.jpg','Pierce 7e Fig 16.4')">
+        <img src="images/Pierce7e_Fig16-4_negative_inducible_operon.jpg" alt="Pierce Genetics 7e Figure 16.4 showing negative inducible operon">
+        <span class="zoom-hint">🔍 點擊放大檢視原圖</span>
+      </div>
+      <div class="figure-caption"><strong>看圖重點</strong>：Pierce 7e 刻意用抽象的前驅物 V（Precursor V）與酵素 D、E、F 說明「負誘導」的通則：分解代謝路徑的起始受質擔任誘導物，結合活性抑制蛋白使其離開操作子，啟動轉錄將前驅物分解為產物 W。</div>
+      <div class="figure-caption-en">Source: Pierce, Genetics: A Conceptual Approach, 7th ed., Ch. 16, Figure 16.4 (Negative inducible operon).</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖五 · Pierce 遺傳學 7e Fig. 16.5｜負調控 × 可抑制型操縱組（終產物作為輔抑制物）</div>
+      <div class="figure-img-wrap" onclick="openLightbox('images/Pierce7e_Fig16-5_negative_repressible_operon.jpg','Pierce 7e Fig 16.5')">
+        <img src="images/Pierce7e_Fig16-5_negative_repressible_operon.jpg" alt="Pierce Genetics 7e Figure 16.5 showing negative repressible operon">
+        <span class="zoom-hint">🔍 點擊放大檢視原圖</span>
+      </div>
+      <div class="figure-caption"><strong>看圖重點</strong>：對照圖四看圖五最清楚！抑制蛋白剛合成時是無活性的（不會卡住操作子），因此預設持續轉錄酵素 G、H、I 合成產物 U；一旦終產物 U 累積過多，就回頭擔任<strong>輔抑制物（corepressor）</strong>活化抑制蛋白、卡住操作子關機。</div>
+      <div class="figure-caption-en">Source: Pierce, Genetics: A Conceptual Approach, 7th ed., Ch. 16, Figure 16.5 (Negative repressible operon).</div>
+    </div>
+  </section>
+
+  <!-- Section 4: Full 13-Textbook Audit -->
+  <section id="sec-audit">
+    <h2><span class="sec-num">04</span> 全 13 套課本盤點對照：普通生物學 8 套 vs. 遺傳學 5 套</h2>
+    <p>將普通生物學與遺傳學並列檢視，會發現一個非常清楚的教材階梯：<strong>全部 8 套普通生物學都不會展開 2 × 2 四象限</strong>（集中在負誘導 <em>lac</em>、負抑制 <em>trp</em>、正調控 CAP–cAMP 與持續型基因）；到了<strong>遺傳學課本</strong>，才會把「正／負」與「誘導／抑制」徹底解耦成兩條獨立軸線。</p>
+
+    <h3>A. 普通生物學 8 套（02 普通生物學）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>課本與章節</th>
+            <th>正／負</th>
+            <th>持續型</th>
+            <th>誘導／抑制</th>
+            <th>2×2 四象限</th>
+            <th>該書特色與主要實例</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-tr">
+            <td><strong>Solomon 11e</strong>（Ch. 14）</td>
+            <td>✅ 有</td>
+            <td>✅ 有專節</td>
+            <td>✅ 皆有</td>
+            <td>❌ 三欄表</td>
+            <td>普生最系統：專節講持續型基因強／弱啟動子；<strong>表 14-1</strong> 整合負誘導／負抑制／正調控。</td>
+          </tr>
+          <tr>
+            <td><strong>Sadava 12e</strong>（Ch. 16）</td>
+            <td>✅ 有</td>
+            <td>✅ 有</td>
+            <td>✅ 皆有</td>
+            <td>❌ 無</td>
+            <td>對比可誘導 vs. 持續型蛋白質，並以 <strong>σ⁷⁰（管家基因）vs. σ³⁸（逆境基因）</strong> 說明原核管家基因。</td>
+          </tr>
+          <tr>
+            <td><strong>Campbell 12e / 13e</strong>（Ch. 18）</td>
+            <td>✅ 有</td>
+            <td>⚠️ 弱提</td>
+            <td>✅ 皆有</td>
+            <td>❌ 無</td>
+            <td>明確將 <em>trp</em> 與 <em>lac</em> 並列為負調控兩類，特別澄清異乳糖誘導屬於負調控、CAP 才屬正調控。</td>
+          </tr>
+          <tr>
+            <td><strong>Raven 13e</strong>（Ch. 16）</td>
+            <td>✅ 有</td>
+            <td>⚠️ 弱提</td>
+            <td>✅ 皆有</td>
+            <td>❌ 無</td>
+            <td>直球點破「表面上誘導像正、抑制像負，其實兩者皆為抑制蛋白負調控」。</td>
+          </tr>
+          <tr>
+            <td><strong>Freeman 8e</strong>（Ch. 18）</td>
+            <td>✅ 有</td>
+            <td>✅ 有</td>
+            <td>⚠️ 未定名可抑制操縱組</td>
+            <td>❌ 無</td>
+            <td><strong>圖 18.4</strong> 負調控煞車／正調控油門極直覺；把 <em>trp</em> 稱負回饋控制；多舉 <strong>SOS 調節組（<em>lexA</em>）</strong>。</td>
+          </tr>
+          <tr>
+            <td><strong>Brooker 4e</strong>（Ch. 12）</td>
+            <td>✅ 有</td>
+            <td>✅ 有</td>
+            <td>⚠️ 僅可誘導</td>
+            <td>❌ 無</td>
+            <td>引言清楚定義持續型／管家基因（碳水化合物分解酵素），但本章未展開 <em>trp</em> 操縱組。</td>
+          </tr>
+          <tr>
+            <td><strong>Starr 14e</strong>（Ch. 10）</td>
+            <td>❌ 未定名</td>
+            <td>❌ 無</td>
+            <td>❌ 無</td>
+            <td>❌ 無</td>
+            <td>8 套中最簡略，僅講 <em>lac</em> 雙操作子成環與維生素 B₁₂ 核糖開關，未定義正負／誘導／抑制。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>B. 遺傳學 5 套（08 遺傳學）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>課本與章節</th>
+            <th>正／負</th>
+            <th>持續型</th>
+            <th>誘導／抑制</th>
+            <th>2×2 四象限</th>
+            <th>該書特色與主要實例</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-tr">
+            <td><strong>Brooker 8e</strong>（Ch. 14）</td>
+            <td>✅ 有</td>
+            <td>✅ 有</td>
+            <td>✅ 皆有</td>
+            <td>✅ <strong>最完整</strong></td>
+            <td><strong>全部 13 套唯一以圖 14.2 完整畫出 4 象限規則的課本</strong>；提及 CAP 活化 <em>mal</em>、<em>ara</em>、<em>mel</em> 等上百個操縱組。</td>
+          </tr>
+          <tr>
+            <td><strong>Pierce 7e</strong>（Ch. 16）</td>
+            <td>✅ 有</td>
+            <td>✅ 有</td>
+            <td>✅ 皆有</td>
+            <td>⚠️ 習題補齊</td>
+            <td>正文以圖 16.4／16.5 對照負誘導與負抑制並另述 CAP；習題補齊 <em>ara</em>（Q26）與正誘導／正抑制推理（TPS Q3）。</td>
+          </tr>
+          <tr>
+            <td><strong>Klug 12e</strong>（Ch. 16）</td>
+            <td>✅ 有</td>
+            <td>✅ 有</td>
+            <td>✅ 皆有</td>
+            <td>⚠️ 理論＋習題</td>
+            <td>16.1 宣告誘導或可抑制皆可受正／負控制；進階挑戰題（題 18、20、21）完整操演正誘導與正抑制。</td>
+          </tr>
+          <tr>
+            <td><strong>Goldberg 7e</strong>（Ch. 18）</td>
+            <td>✅ 有</td>
+            <td>⚠️ 突變與 σ⁷⁰</td>
+            <td>✅ 皆有</td>
+            <td>❌ 無四象限</td>
+            <td>講通分解／合成代謝演化邏輯，並額外舉出<strong>費氏弧菌 <em>luxICDABE</em>／LuxR</strong>、<em>gal</em>、<em>mal</em>（MalT）。</td>
+          </tr>
+          <tr>
+            <td><strong>Simons (2025)</strong></td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td><strong>查證邊界</strong>：資料庫目前僅預先裁圖 Ch01–Ch18（Ch08 對應基因調控），<strong>全書尚未翻譯任何文字章節</strong>。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 5: Verbatim Bilingual Quotes -->
+  <section id="sec-quotes">
+    <h2><span class="sec-num">05</span> 代表性原文正典中英原句對照</h2>
+    <p>以下精選遺傳學與普通生物學最具代表性的原文定義段落，保留完整英文原句與中文譯文，方便備課或命題查核。</p>
+    <button class="toggle-en-btn" id="toggleEnBtn" type="button" onclick="toggleEnglish()">精簡：隱藏英文原文</button>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">1. 《Brooker Genetics》8e — 持續型基因與 2 × 2 四種交叉規則</span>
+        <span class="source-loc">Ch. 14 細菌的基因調控</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">持續表現型基因（unregulated / constitutive genes）</div>
+        <div class="quote-en">"In comparison, unregulated genes have essentially constant levels of expression in all conditions over time. Unregulated genes are also called constitutive genes. Frequently, constitutive genes code proteins that are continuously needed for the survival of the bacterium."</div>
+        <div class="quote-tw">相較之下，未受調控的基因在各種條件及不同時間大致維持恆定的表現程度。未受調控的基因也稱為<strong>持續表現型基因</strong>。持續表現型基因通常為細菌持續生存所需的蛋白質編碼。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">為何術語容易混淆：可抑制型也能由活化蛋白控制、可誘導型也能由抑制蛋白控制</div>
+        <div class="quote-en">"An inducer may accomplish this in two ways: It can bind to a repressor protein and prevent it from binding to the DNA, or it can bind to an activator protein and cause it to bind to the DNA. ... A corepressor is a small effector molecule that binds to a repressor protein, thereby causing the protein to bind to the DNA. An inhibitor binds to an activator protein and prevents it from binding to the DNA. ... Unfortunately, this terminology can be confusing because a repressible gene could be controlled by an activator protein, or an inducible gene could be controlled by a repressor protein."</div>
+        <div class="quote-tw">誘導物可藉兩種方式提高轉錄：結合抑制蛋白阻止它結合 DNA，或結合活化蛋白促使它結合 DNA。……共抑制物（輔抑制物）結合抑制蛋白使其結合 DNA；抑制物結合活化蛋白阻止它結合 DNA。<strong>這套術語可能令人混淆，因為可抑制型基因可能由活化蛋白控制，而可誘導型基因也可能由抑制蛋白控制。</strong></div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">2. 《Pierce Genetics》7e ＆ 《Klug Genetics》12e — 兩軸獨立定義</span>
+        <span class="source-loc">Pierce Ch. 16 · Klug Ch. 16</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Pierce 7e：管家基因＝持續型基因；正負調控與可誘導／可抑制四名詞並列定義</div>
+        <div class="quote-en">"However, a few structural genes, particularly those that encode essential cellular functions (often called housekeeping genes), are expressed continually and are therefore said to be constitutive. Constitutive genes are not regulated."<br><br>"There are two types of transcriptional control: negative control, in which a regulatory protein is a repressor, binding to DNA and inhibiting transcription; and positive control, in which a regulatory protein is an activator, stimulating transcription. Operons can also be either inducible or repressible. Inducible operons are those in which transcription is normally off (not taking place); something must happen to induce transcription, or turn it on. Repressible operons are those in which transcription is normally on (taking place); something must happen to repress transcription, or turn it off."</div>
+        <div class="quote-tw">編碼必要細胞功能的<strong>管家基因</strong>持續表現，稱為<strong>持續型（原譯固成型）</strong>，不受調控。<br>轉錄調控分兩種：<strong>負調控</strong>由抑制蛋白結合 DNA 抑制轉錄；<strong>正調控</strong>由活化蛋白刺激轉錄。操縱組也可分為<strong>可誘導型</strong>（預設關閉，需被打開）或<strong>可抑制型</strong>（預設開啟，需被關閉）。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Klug 12e：無論誘導或可抑制，理論上皆可採正控制、負控制或兩者併用</div>
+        <div class="quote-en">"Regulation, whether of the inducible or repressible type, may be under either negative or positive control. Under negative control, genetic expression occurs unless it is shut off by some form of a regulator molecule. In contrast, under positive control, transcription occurs only if a regulator molecule directly stimulates RNA production. In theory, either type of control or a combination of the two can govern inducible or repressible systems."</div>
+        <div class="quote-tw"><strong>無論是誘導型或可抑制型調控，都可能採用負控制或正控制。</strong>理論上，誘導型或可抑制型系統可由其中任一種控制方式，或兩者共同調控。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">3. 《Campbell Biology》13e ＆ 《Raven Biology》13e — 破除「誘導＝正調控」迷思</span>
+        <span class="source-loc">Campbell Ch. 18 · Raven Ch. 16</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Campbell 13e（12e 同）：異乳糖只是把操縱組從抑制蛋白負向作用中解放，仍屬負調控</div>
+        <div class="quote-en">"Regulation of both the trp and lac operons involves the negative control of genes because the operons are switched off by the active form of their respective repressor protein. ... In the case of the lac operon, allolactose induces enzyme synthesis not by directly activating the lac operon, but by freeing it from the negative effect of the repressor (see Figure 18.4b). Gene regulation is said to be positive only when a regulatory protein interacts directly with the genome to increase transcription."</div>
+        <div class="quote-tw"><em>trp</em> 操縱組與 <em>lac</em> 操縱組的調控都屬於基因的<strong>負調控</strong>。以 <em>lac</em> 操縱組為例，異乳糖誘導酵素合成的方式，並不是直接活化操縱組，而是<strong>把它從抑制蛋白的負向作用中解放出來</strong>。唯有當調控蛋白直接與基因體互動以增加轉錄時，才稱為<strong>正調控</strong>。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Raven 13e：表面上抑制像負、誘導像正，其實兩者皆受抑制蛋白負調控</div>
+        <div class="quote-en">"On the surface, repression may appear to be negative and induction positive, but this is not the case. In fact, regulation of both the lac and the trp operons are negatively controlled by repressor proteins. This seemingly opposite behavior is possible because the two repressor proteins interact with DNA and their respective effectors in the opposite way."</div>
+        <div class="quote-tw"><strong>表面上，抑制似乎是負向、誘導似乎是正向，但事實並非如此。</strong><em>lac</em> 與 <em>trp</em> 操縱組其實都受抑制蛋白的負調控，只是兩種抑制蛋白與 DNA 及各自效應物的交互作用方向正好相反。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">4. 《Solomon Biology》11e ＆ 《Goldberg Genetics》7e — 持續型啟動子強弱與代謝邏輯</span>
+        <span class="source-loc">Solomon Ch. 14 · Goldberg Ch. 18</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Solomon 11e：持續型基因並非表現量都相同，由強／弱啟動子決定轉錄速率</div>
+        <div class="quote-en">"By contrast, constitutive genes are continuously transcribed, but they are not necessarily transcribed (or their mRNAs translated) at the same rate. ... Constitutive genes with efficient (“strong”) promoters bind RNA polymerase more frequently and consequently transcribe more mRNA molecules than those with inefficient (“weak”) promoters. Genes coding for repressor or activator proteins that regulate metabolic enzymes are usually constitutive and produce their protein products constantly. Because each cell usually needs relatively few molecules of any specific repressor or activator protein, promoters for those genes tend to be relatively weak."</div>
+        <div class="quote-tw">持續型基因會持續受到轉錄，但轉錄速率不一定相同：<strong>強啟動子</strong>較頻繁結合 RNA 聚合酶、產量高；而編碼抑制蛋白或活化蛋白的調節基因通常也是持續型基因，因細胞只需少量，其啟動子往往相對較<strong>弱</strong>。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Goldberg 7e：分解代謝需要可誘導、合成代謝需要可抑制</div>
+        <div class="quote-en">"Catabolic pathways demand inducible regulation: This means the pathway should be turned on—that is, induced—only when the complex molecules to be broken down (catabolites) are present in the cell’s environment. ... In contrast, anabolic pathways require repressible regulation: This means the pathway should be turned on only when the cell does not have enough of the needed end product, such as a specific amino acid."</div>
+        <div class="quote-tw"><strong>分解代謝路徑需要可誘導型調控</strong>（環境中有待分解分子才開啟）；相反地，<strong>合成代謝路徑需要可抑制型調控</strong>（只有終產物不足時開啟，足夠時就關閉以節省資源）。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Teaching & Boundary -->
+  <section id="sec-teaching">
+    <h2><span class="sec-num">06</span> 高中課堂秒懂口訣、教甄反推題技巧與查證邊界</h2>
+
+    <div class="callout">
+      <div class="callout-title">🎯 學生一試就靈的兩步判斷口訣</div>
+      <p style="margin-bottom:0;"><strong>第一步：先問「這組基因平常是開還是關？」</strong><br>
+      永遠開且不看環境 → <strong>持續型</strong>；平常關、有分子來才開 → <strong>可誘導型</strong>；平常開、成品夠多才關 → <strong>可抑制型</strong>。<br><br>
+      <strong>第二步：再問「如果把調控蛋白基因整個敲除（破壞），這組基因會怎樣？」</strong><br>
+      調控蛋白不見了，基因反而<strong>永遠打開（煞車壞掉）</strong> → 原本是<strong>負調控</strong>！<br>
+      調控蛋白不見了，基因從此<strong>永遠打不開（油門壞掉）</strong> → 原本是<strong>正調控</strong>！</p>
+    </div>
+
+    <h3>延伸閱讀（本站操縱組系列專題）</h3>
+    <ul>
+      <li>想看 <em>lac</em> 操縱組如何用「基礎漏轉錄＋PTS 磷酸接力＋誘導物排除」同時偵測乳糖與葡萄糖，請見 <a href="lac-operon-sugar-sensing.html">大腸桿菌如何感測葡萄糖與乳糖？</a>。</li>
+      <li>想看普通生物學 8 套課本各自怎麼交代「第一批乳糖如何進入細胞」，請見 <a href="genbio-8books-lac-detection.html">普生 8 套課本怎麼講大腸桿菌偵測乳糖？</a>。</li>
+      <li>想看沒有 DNA 定序的年代如何靠部分二倍體推論出整套 <em>lac</em> 調控線路，請見 <a href="operon-inference-pierce.html">Pierce 操縱組推論過程</a>。</li>
+      <li>想釐清操作子本身會不會轉錄轉譯，以及真核細胞為何幾乎沒有操縱組，請見 <a href="operator-transcription-translation.html">操作子會不會被轉錄與轉譯？</a> 與 <a href="why-eukaryotes-lack-operons.html">為什麼真核細胞幾乎沒有操縱組？</a>。</li>
+    </ul>
+
+    <div class="boundary">
+      <div class="callout-title">📌 本機資料庫（Vault）查證邊界聲明</div>
+      <p style="margin-bottom:0;">本頁完整盤點 <code>02 普通生物學</code> 全部 <strong>8 套</strong>譯本與 <code>08 遺傳學</code> 全部 <strong>5 套</strong>教科書。需誠實標明兩點查證邊界：（1）<code>Simons_Genetics (2025)</code> 目前僅預先裁切 Ch01–Ch18 圖檔（Ch08 對應基因調控），全書尚未翻譯任何文字章節，故未納入文字對照；（2）關於 2 × 2 矩陣中的「<strong>正調控 × 可抑制型（正抑制）</strong>」，已翻譯的 12 套普生與遺傳學課本均僅以理論圖解（Brooker 8e 圖 14.2d）或假設性習題呈現，均未列舉真實原核操縱組實例。所有中文術語皆對齊臺灣教育部《生命科學名詞》（持續表現型基因、可誘導型／可抑制型操縱組、正調控／負調控、輔抑制物、抑制蛋白、活化蛋白、操作子）。</p>
+    </div>
+  </section>
+
+  <footer>
+    Bio-Wiki 概念考證庫 · 繁體中文與審定名詞遵循臺灣教育部規範 · 原文書與圖片引自 Ze-Agent Vault 正式譯本
+  </footer>
+</main>
+
+<!-- Reading Outpost Bottom Bar & Script -->
+<button class="ro-bottom-toc" type="button" onclick="roOpenDrawer('roTocDrawer')">📑 本篇段落導覽</button>
+<a class="ro-up-btn" href="#top" aria-label="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<script>
+  function roToggleTheme() {
+    var root = document.documentElement;
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('biowiki-theme', next); } catch (e) {}
+    roUpdateThemeBtn();
+  }
+  function roUpdateThemeBtn() {
+    var btn = document.getElementById('roThemeBtn');
+    if (!btn) return;
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.innerHTML = isLight ? '🌙 深色' : '☀️ 亮色';
+    btn.setAttribute('aria-label', isLight ? '切換為深色閱讀模式' : '切換為亮色閱讀模式');
+  }
+  roUpdateThemeBtn();
+  function roOpenDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('open');
+  }
+  function roCloseDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  }
+  function openLightbox(src, alt) {
+    var lb = document.getElementById('roLightbox');
+    var img = document.getElementById('roLightboxImg');
+    if (lb && img) {
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.add('open');
+    }
+  }
+  function toggleEnglish() {
+    document.body.classList.toggle('hide-en');
+    var btn = document.getElementById('toggleEnBtn');
+    if (btn) {
+      btn.textContent = document.body.classList.contains('hide-en')
+        ? '完整：顯示英文原文'
+        : '精簡：隱藏英文原文';
+    }
+  }
+  (function initReadingOutpostShell() {
+    var tocList = document.getElementById('roTocList');
+    var headings = document.querySelectorAll('h2');
+    if (tocList && headings.length) {
+      headings.forEach(function(h, idx) {
+        if (!h.id) h.id = 'ro-sec-' + (idx + 1);
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent.trim();
+        tocList.appendChild(a);
+      });
+    }
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th, tr:first-child th')).map(function(th) {
+        return th.innerText.trim().replace(/[\r\n\t ]+/g, ' ');
+      });
+      if (!headers.length) return;
+      table.classList.add('ro-resp-table');
+      table.querySelectorAll('tr').forEach(function(tr) {
+        if (tr.querySelector('th')) return;
+        Array.from(tr.children).forEach(function(td, idx) {
+          if (td.tagName === 'TD' && !td.getAttribute('data-label') && headers[idx]) {
+            td.setAttribute('data-label', headers[idx]);
+          }
+        });
+      });
+    });
+    document.querySelectorAll('main img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        openLightbox(img.src, img.alt);
+      });
+    });
+  })();
+</script>
+</body>
+</html>
