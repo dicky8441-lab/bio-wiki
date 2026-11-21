@@ -944,12 +944,12 @@
 
   <header class="hero">
     <div class="badge-bar">
-      <span class="badge badge-primary">分子生物與基因表現</span>
-      <span class="badge badge-accent">高中易讀版</span>
-      <span class="badge">10 部正典 · 5 張原圖</span>
+      <span class="badge badge-primary">操縱組與原核基因調控</span>
+      <span class="badge badge-accent">高中易讀版 · 含普生 8 套全盤點</span>
+      <span class="badge">18 部正典 · 9 張原圖</span>
     </div>
     <h1>大腸桿菌怎麼知道環境中有沒有葡萄糖與乳糖？</h1>
-    <p class="subtitle">細菌沒有眼睛也沒有味覺受器——從「基礎滲漏轉錄」破解先有雞或蛋，到 PTS 磷酸接力、cAMP–CAP 油門與「誘導物排除」，一次搞懂四種糖類環境的完整判讀邏輯。</p>
+    <p class="subtitle">細菌沒有眼睛也沒有味覺受器——從「基礎滲漏轉錄」破解先有雞或蛋，到 PTS 磷酸接力、cAMP–CAP 活化與「誘導物排除」，並完整橫向盤點 8 套大學普通生物學課本怎麼講乳糖偵測，一次搞懂四種糖類環境的完整判讀邏輯。</p>
   </header>
 
   <!-- TL;DR Card -->
@@ -1137,10 +1137,114 @@
     </div>
   </section>
 
-  <!-- Section 4: Bilingual Sources -->
+  <!-- Section 4: 8 GenBio Textbooks Comparison (merged from genbio-8books-lac-detection.html) -->
+  <section id="sec-genbio8">
+    <h2><span class="sec-num">04</span> 普生 8 套課本怎麼講「大腸桿菌偵測乳糖」？（全盤點與 4 張原圖）</h2>
+    <p>把資料庫中全部 <strong>8 套英文原文普通生物學課本</strong>逐字比對後，會發現只有 <strong>3 套</strong>正面把「抑制從不完全 → 基礎轉錄 → 常備通透酶與酵素」講透（Brooker 4e、Solomon 11e、Freeman 8e）；另外 <strong>4 套</strong>只留下「平時有少量酵素」的線索卻沒連起因果（包含臺灣最常用的 Campbell 12e／13e）；還有 <strong>1 套</strong>（Starr 14e）直接跳過：</p>
+
+    <div class="table-wrap">
+      <table class="ro-resp-table">
+        <thead>
+          <tr>
+            <th>處理深度分級</th>
+            <th>課本與章節</th>
+            <th>課本實際怎麼寫</th>
+            <th>高中備課引用評價</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-tr">
+            <td><strong>✅ 完整解釋機制</strong><br>（第 1 名）</td>
+            <td><strong>Brooker 4e</strong><br><em>Principles of Biology</em><br>Ch. 12</td>
+            <td>明講抑制蛋白只是「大致上阻止」RNA 聚合酶越過操作子，因此無乳糖時仍會製造少量的乳糖通透酶、β-半乳糖苷酶與轉乙醯酶；接著第 1 步明寫「少量乳糖經由乳糖通透酶運進細胞質，β-半乳糖苷酶把其中一些轉換成異乳糖」。</td>
+            <td><strong>因果鏈最完整</strong>：把「未完全阻斷 → 常備三種酵素 → 運入最初乳糖 → 轉為異乳糖」一次串通。</td>
+          </tr>
+          <tr class="highlight-tr">
+            <td><strong>✅ 完整解釋機制</strong><br>（第 2 名）</td>
+            <td><strong>Solomon 11e</strong><br><em>Biology</em><br>Ch. 14</td>
+            <td>解釋無乳糖時操作子「幾乎總是」被抑制蛋白占據，但<strong>操作子短暫沒有抑制蛋白時會合成少量 mRNA</strong>（因大腸桿菌 mRNA 半衰期僅約 2–4 分鐘，故只合成極少數酵素分子）；有乳糖時，少數乳糖進入細胞並由細胞中原有的少數 β-半乳糖苷酶轉換成異乳糖。</td>
+            <td><strong>漏轉錄機制寫得最清楚</strong>：連為什麼酵素量極少（mRNA 半衰期短）都交代清楚。</td>
+          </tr>
+          <tr class="highlight-tr">
+            <td><strong>✅ 完整解釋機制</strong><br>（簡化異乳糖）</td>
+            <td><strong>Freeman 8e</strong><br><em>Biological Science</em><br>Ch. 18</td>
+            <td>在圖 18.6 圖說直球點破：「圖中畫出細胞膜與半乳糖苷通透酶，以提醒乳糖來自細胞外。<strong><em>lac</em> 基因的抑制從不完全，因此總會有一些半乳糖苷通透酶把乳糖運入細胞，開始誘導基因表現。</strong>」（正文另有括號註明：實際誘導物是異乳糖，但為求簡明暫稱乳糖為誘導物。）</td>
+            <td><strong>一句話最直白好記</strong>：直接指出「抑制從不完全＋膜上常備通透酶」，最適合課堂補充。</td>
+          </tr>
+          <tr>
+            <td><strong>⚠️ 只留線索，未連因果</strong></td>
+            <td><strong>Raven 13e</strong><br><em>Biology</em><br>Ch. 16</td>
+            <td>寫出「即使沒有乳糖，<em>lac</em> 操縱組仍會以極低程度表現」，下一句寫「乳糖出現時會被運入細胞，並產生足夠的異乳糖，使操縱組得以誘導」。</td>
+            <td>最接近完整，但沒有解釋「為什麼會以極低程度表現」，也未點破運入乳糖靠的就是這批低表現酵素。</td>
+          </tr>
+          <tr>
+            <td><strong>⚠️ 只留線索，未連因果</strong></td>
+            <td><strong>Campbell 12e ＆ 13e</strong><br><em>Campbell Biology</em><br>Ch. 18</td>
+            <td>兩版寫法幾乎完全相同：先提「沒有乳糖時，大腸桿菌只含有少數這種酵素（β-半乳糖苷酶）分子」，後段再提「異乳糖是由進入細胞的乳糖少量形成」。</td>
+            <td>臺灣最常用普生版本；但若只照 Campbell 講，遇到細心學生追問容易卡關。</td>
+          </tr>
+          <tr>
+            <td><strong>⚠️ 只留線索，未連因果</strong></td>
+            <td><strong>Sadava 12e</strong><br><em>Life: The Science of Biology</em><br>Ch. 16</td>
+            <td>實驗數據圖（圖 16.2）標出非零的「基礎量（Basal level）」，文字也寫平時「只有少量 β-半乳糖苷酶分子（另外兩種酵素也是如此）」、「不需要時 mRNA 合成量非常低」；但誘導段只寫「乳糖進入細胞後形成異乳糖」。</td>
+            <td>實驗曲線圖極佳，能讓學生親眼看到「沒誘導前不是 0」，但正文未點破因果箭頭。</td>
+          </tr>
+          <tr>
+            <td><strong>❌ 直接跳過</strong></td>
+            <td><strong>Starr 14e</strong><br><em>Biology: The Unity and Diversity of Life</em><br>Ch. 10</td>
+            <td>直接寫「細菌只有在乳糖存在時，才會製造這三種蛋白質……乳糖不存在時，RNA 聚合酶無法與扭轉的啟動子結合，因此基因無法轉錄」，接著只說乳糖存在時「其中一些會轉換成另一種糖」（連異乳糖名稱都省略）。</td>
+            <td>最簡化入門寫法，完全迴避「先有雞還是先有蛋」問題。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>4 張普生課本原圖實證：直接看見「常備通透酶」與「非零基礎量」</h3>
+    <div class="figure-card">
+      <div class="figure-title">圖 6 · Freeman 8e Fig. 18.6｜無乳糖狀態（a）細胞膜上依然畫有半乳糖苷通透酶</div>
+      <div class="figure-img-wrap">
+        <img src="images/Freeman8e_Fig18-6_lac_permease_always_present.png" alt="Freeman 8e Figure 18.6 showing plasma membrane and galactoside permease present even when lactose is absent">
+        <span class="zoom-hint">🔍 點擊放大檢視原圖</span>
+      </div>
+      <div class="figure-caption"><strong>看圖重點</strong>：許多課本畫 <em>lac</em> 操縱組時只畫 DNA，學生容易忘記乳糖一開始在細胞外。Freeman 8e 刻意在最外層加上細胞膜與<strong>半乳糖苷通透酶</strong>，在上方 <strong>(a) Lactose absent（無乳糖）</strong>時就已把通透酶畫在膜上，圖說更明寫「抑制從不完全，所以總會有少量通透酶把第一批乳糖運進細胞」。</div>
+      <div class="figure-caption-en">Source: Freeman et al., Biological Science, 8th ed., Ch. 18, Figure 18.6 (Negative Control of the lac Operon).</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 7 · Sadava 12e Fig. 16.2｜實驗數據實證：加入誘導物之前，酵素與 mRNA 都有非零「基礎量（Basal level）」</div>
+      <div class="figure-img-wrap">
+        <img src="images/Sadava12e_Fig16-2_lac_basal_vs_induced.png" alt="Sadava 12e Figure 16.2 graph showing non-zero basal level of beta-galactosidase and mRNA before adding inducer">
+        <span class="zoom-hint">🔍 點擊放大檢視原圖</span>
+      </div>
+      <div class="figure-caption"><strong>看圖重點</strong>：注意圖 (A) 與圖 (B) 左側加入誘導物（Add inducer）之前的基線——作者明確標出 <strong>Basal level（基礎量）</strong>，高度並不是貼在橫軸的 0 上；加入誘導物後，<em>lac</em> mRNA 立刻上升、β-半乳糖苷酶濃度暴增千倍；移除誘導物後又回落到原本極低的基礎水平。</div>
+      <div class="figure-caption-en">Source: Hillis, Sadava et al., Life: The Science of Biology, 12th ed., Ch. 16, Figure 16.2 (Lactose Induces the Expression of a Gene for an Enzyme).</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 8 · Brooker 4e Fig. 12.7｜少量乳糖運入並轉為異乳糖後，改變抑制蛋白立體結構</div>
+      <div class="figure-img-wrap">
+        <img src="images/Brooker4e_Fig12-7_lac_basal_and_induction.png" alt="Brooker 4e Figure 12.7 showing allolactose binding lac repressor and releasing it from operator">
+        <span class="zoom-hint">🔍 點擊放大檢視原圖</span>
+      </div>
+      <div class="figure-caption"><strong>看圖重點</strong>：配合 Brooker 4e 正文說明，無乳糖時抑制蛋白「大致上阻止」RNA 聚合酶越過操作子（仍保有少量三種酵素）；一旦環境出現乳糖，常備的乳糖通透酶把少量乳糖運入細胞質，常備的 β-半乳糖苷酶將其轉換為<strong>異乳糖</strong>，結合抑制蛋白引起構形改變並解除抑制。</div>
+      <div class="figure-caption-en">Source: Brooker et al., Principles of Biology, 4th ed., Ch. 12, Figure 12.7 (Negative control of an inducible set of genes).</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 9 · Solomon 11e Fig. 14-2｜操作子短暫空出產生少量酵素，讓異乳糖得以在第一時間生成</div>
+      <div class="figure-img-wrap">
+        <img src="images/Solomon11e_Fig14-2_lac_operon_repressor.png" alt="Solomon 11e Figure 14-2 showing lac operon repressed vs induced by allolactose">
+        <span class="zoom-hint">🔍 點擊放大檢視原圖</span>
+      </div>
+      <div class="figure-caption"><strong>看圖重點</strong>：Solomon 11e 說明 (a) 狀態下抑制蛋白「幾乎總是」占據操作子，但偶爾會短暫脫離讓細胞合成少量 mRNA（半衰期僅 2–4 分鐘），藉此保底維持極少數酵素分子；等 (b) 乳糖進來，這批既有酵素立刻把它變成異乳糖、解除抑制。</div>
+      <div class="figure-caption-en">Source: Martin, Solomon et al., Biology, 11th ed., Ch. 14, Figure 14-2 (The lac operon).</div>
+    </div>
+  </section>
+
+  <!-- Section 5: Bilingual Sources -->
   <section id="sec-sources">
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
-      <h2 style="margin-bottom:8px;flex:1;"><span class="sec-num">04</span> 經典英文原文教科書逐句考證</h2>
+      <h2 style="margin-bottom:8px;flex:1;"><span class="sec-num">05</span> 經典英文原文教科書逐句考證</h2>
       <button class="toggle-en-btn" id="toggleEnBtn" type="button" onclick="toggleEnglish()">精簡：隱藏英文原文</button>
     </div>
     <p>以下英文原文皆原封不動回溯自 Ze-Agent Vault 正式譯本，提供高中教師備課、教甄申論與同學深度查證。</p>
@@ -1207,15 +1311,41 @@
         <div class="quote-tw">這種安排使乳糖操縱組的控制區域能整合兩種不同訊號，<strong>只有同時符合「葡萄糖必須不存在」且「乳糖必須存在」時，操縱組才會高度表現</strong>（圖 8–9）；這套迴路很像電腦中執行 <strong>AND 邏輯運算</strong>的開關。</div>
       </div>
     </div>
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">5. 《全 8 套普通生物學課本逐本原句對照》— 大腸桿菌偵測乳糖的三種寫法光譜</span>
+        <span class="source-loc">Brooker 4e · Solomon 11e · Freeman 8e · Raven 13e · Campbell 12e/13e · Sadava 12e · Starr 14e</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Brooker 4e Ch. 12（完整解釋）：抑制蛋白「大致上阻止」轉錄，平時仍會製造少量三種酵素</div>
+        <div class="quote-en">"RNA polymerase can bind to the promoter when lac repressor is bound to the operator but is largely prevented from moving past the operator to transcribe the lacZ, lacY, and lacA genes. Therefore, if E. coli does not have lactose in its environment, only small amounts of lactose permease, β-galactosidase, and transacetylase are made. ... 1. A small amount of lactose is transported into the cytoplasm via lactose permease, and β-galactosidase converts some of it to allolactose."</div>
+        <div class="quote-tw">當 <em>lac</em> 抑制子結合在操作子上時，RNA 聚合酶仍可結合啟動子，但<strong>大致上被阻止</strong>越過操作子；因此沒有乳糖時仍會製造<strong>少量的乳糖通透酶、β-半乳糖苷酶與轉乙醯酶</strong>。乳糖出現時，少量乳糖經由乳糖通透酶運進細胞質，並由 β-半乳糖苷酶轉換成<strong>異乳糖</strong>。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Solomon 11e Ch. 14（完整解釋）：操作子短暫空出合成少量 mRNA（半衰期 2–4 分鐘）</div>
+        <div class="quote-en">"When cells grow in the absence of lactose, a repressor molecule nearly always occupies the operator site. When the operator site is briefly free of the repressor, the cell synthesizes a small amount of mRNA. However, the cell synthesizes very few enzyme molecules because E. coli mRNA is degraded rapidly (it has a half-life of about 2 to 4 minutes). ... If lactose is in the growth medium, a few molecules enter the cell and are converted to allolactose by the few β-galactosidase molecules present."</div>
+        <div class="quote-tw">無乳糖時，操作子<strong>幾乎總是</strong>被抑制蛋白占據；<strong>短暫沒有抑制蛋白時會合成少量 mRNA</strong>（半衰期約 2–4 分鐘，故只合成極少數酵素分子）。培養基有乳糖時，少數乳糖進入細胞並由原本存在的少數 β-半乳糖苷酶轉成<strong>異乳糖</strong>。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Freeman 8e Ch. 18（完整解釋）：抑制從不完全，細胞膜上總有少量半乳糖苷通透酶</div>
+        <div class="quote-en">"The plasma membrane and galactoside permease are shown as a reminder that lactose comes from outside the cell. Repression of lac genes is never complete, so there is always some galactoside permease to transport lactose into the cell and begin induction of gene expression."</div>
+        <div class="quote-tw">圖中畫出細胞膜與半乳糖苷通透酶，提醒乳糖來自細胞外。<strong><em>lac</em> 基因的抑制從不完全，因此總會有一些半乳糖苷通透酶把乳糖運入細胞，開始誘導基因表現。</strong></div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Raven 13e · Campbell 12e/13e · Sadava 12e（只留線索）vs. Starr 14e（直接跳過）</div>
+        <div class="quote-en">[Raven 13e] "Even in the absence of lactose, the lac operon is expressed at a very low level."<br><br>[Campbell 12e &amp; 13e] "Only a few molecules of this enzyme are present in an E. coli cell growing in the absence of lactose. ... For the lac operon, the inducer is allolactose, an isomer of lactose formed in small amounts from lactose that enters the cell."<br><br>[Sadava 12e] "While few molecules of β-galactosidase (and the other two enzymes) are present in an E. coli cell in the presence of glucose... mRNA synthesis is very low when the enzymes are not needed."<br><br>[Starr 14e] "Bacteria make these three proteins only when lactose is present. ... RNA polymerase cannot bind to the twisted-up promoter, so the lac operon’s genes cannot be transcribed."</div>
+        <div class="quote-tw">[Raven 13e] 沒有乳糖時仍以極低程度表現；[Campbell 12e/13e] 僅提平時只含少數 β-半乳糖苷酶分子，未明講基礎轉錄與通透酶；[Sadava 12e] 曲線圖標出非零 Basal level 且提 mRNA 合成量極低，但正文未串接因果；[Starr 14e] 簡化寫成無乳糖時無法轉錄，直接跳過基礎表現。</div>
+      </div>
+    </div>
   </section>
 
-  <!-- Section 5: Teaching & Boundary -->
+  <!-- Section 6: Teaching & Boundary -->
   <section id="sec-teaching">
-    <h2><span class="sec-num">05</span> 高中教學、常見陷阱、教甄實戰與查證邊界</h2>
+    <h2><span class="sec-num">06</span> 高中教學、常見陷阱、教甄實戰與查證邊界</h2>
 
     <div class="callout">
-      <div class="callout-title">🎯 課堂講解三層階梯（依學生程度決定教到哪一層）</div>
-      <p style="margin-bottom:0;"><strong>第一層（高中課本共同主幹）</strong>：有無乳糖的負調控。<br><strong>第二層（進階高中／教甄必考，如 114 中正高中問 4）</strong>：補上「基礎滲漏表現解決先有雞或蛋」＋「cAMP–CAP 正調控」＋四種條件排序（<code>無葡有乳 ≫ 有葡有乳 &gt; 有葡無乳 ≈ 無葡無乳</code>）。<br><strong>第三層（資優生追問「細菌到底怎麼感覺有葡萄糖？」）</strong>：直接搬出 <strong>PTS 磷酸接力（EIIA 活化腺苷酸環化酶）</strong>與<strong>誘導物排除</strong>，把原本抽象的因果鏈徹底接通！</p>
+      <div class="callout-title">🎯 課堂講解三層階梯（含 Campbell 13e 一分鐘補完法）</div>
+      <p style="margin-bottom:0;"><strong>第一層（高中課本共同主幹）</strong>：有無乳糖的負調控。若以 <strong>Campbell 13e</strong> 為主骨架，只需補上 <strong>Freeman 8e 圖 18.6</strong>（「抑制從不完全、膜上常備少量通透酶」）與 <strong>Sadava 12e 圖 16.2</strong>（非零 <code>Basal level</code> 曲線），就能讓學生建立「分子結合是動態可逆的」關鍵觀念。<br><strong>第二層（進階高中／教甄必考，如 114 中正高中問 4）</strong>：補上「cAMP–CAP 正調控」＋四種條件排序（<code>無葡有乳 ≫ 有葡有乳 &gt; 有葡無乳 ≈ 無葡無乳</code>）。<br><strong>第三層（資優生追問「細菌到底怎麼感覺有葡萄糖？」）</strong>：直接搬出 <strong>PTS 磷酸接力（EIIA 活化腺苷酸環化酶）</strong>與<strong>誘導物排除</strong>，把原本抽象的因果鏈徹底接通！</p>
     </div>
 
     <h3>三大高頻考試陷阱</h3>
@@ -1223,12 +1353,12 @@
       <li><strong>陷阱 1</strong>：「異化代謝物抑制（catabolite repression）是負調控」→ <strong>錯</strong>。雖然名稱帶「抑制」，但 CAP–cAMP 機制本質上是<strong>正調控（活化蛋白）在有葡萄糖時失效</strong>（Brooker 8e Ch. 14；Brock 15e Ch. 06）。</li>
       <li><strong>陷阱 2</strong>：「葡萄糖會直接結合 CAP 使其失去活性」→ <strong>錯</strong>。葡萄糖不直接結合 CAP，而是透過 PTS 與腺苷酸環化酶<strong>間接壓低細胞內 cAMP 濃度</strong>，讓 CAP 缺乏效應物而無法結合 DNA。</li>
       <li><strong>陷阱 3</strong>：「沒有葡萄糖、沒有乳糖時，因為 cAMP 高、CAP 已結合 DNA，所以仍會中度轉錄」→ <strong>錯</strong>。抑制蛋白結合操作子（負調控）是必要關卡；只要沒乳糖把煞車鬆開，就算 cAMP–CAP 就位也不會有效表現（AND 邏輯閘）。</li>
-      <li><strong>延伸閱讀（本站相關專題）</strong>：想釐清操作子本身會不會轉錄轉譯與「基因 vs. 子」命名密碼，請見 <a href="operator-transcription-translation.html">操作子會不會被轉錄與轉譯產生蛋白質？</a>；想看 <em>lac</em> 操縱組在人類大腸與乳糖不耐症情境中的真實運作，請見 <a href="lactose-intolerance-lac-operon.html">乳糖不耐症與大腸桿菌 lac 操縱組</a>；想看科學史如何用部分二倍體推論出整套迴路，請見 <a href="operon-inference-pierce.html">Pierce 操縱組推論過程</a>。</li>
+      <li><strong>延伸閱讀（本站相關專題）</strong>：想釐清操作子本身會不會轉錄轉譯與「基因 vs. 子」命名密碼，請見 <a href="operator-transcription-translation.html">操作子會不會被轉錄與轉譯產生蛋白質？</a>；想看 <em>lac</em> 操縱組在人類大腸與乳糖不耐症情境中的真實運作，請見 <a href="lactose-intolerance-lac-operon.html">乳糖不耐症與大腸桿菌 lac 操縱組</a>；想看科學史如何用 PaJaMo 實驗與部分二倍體推論出整套迴路，請見 <a href="operon-inference-pierce.html">乳糖操縱組推論科學史</a>。</li>
     </ul>
 
     <div class="boundary">
       <div class="callout-title">📌 本機資料庫（Vault）查證邊界聲明</div>
-      <p style="margin-bottom:0;">本頁所有機制（基礎滲漏轉錄與常備少量 LacY／LacZ、異乳糖為真正誘導物、PTS 磷酸接力調控腺苷酸環化酶、葡萄糖抑制 cAMP 合成並促進流出、誘導物排除阻斷乳糖通透酶、四條件 AND 邏輯閘與雙相生長曲線）皆有上述 10 部原文書正典直接支持。需誠實標明：目前 Vault 內 <strong>Prescott 12e Ch. 14</strong> 以 <code>PTS / EIIA</code> 說明活化腺苷酸環化酶（並於譯註補出 <code>EIIA^Glc</code>），而 <strong>Cox 2e Ch. 19</strong> 以「去磷酸化型葡萄糖通透酶」說明直接阻斷乳糖運輸蛋白（誘導物排除），兩者尚未在同一本 Vault 譯本的單一段落中同時以 <code>EIIA^Glc</code> 代號串接兩條路徑，本頁係整合上述正典共識呈現。另 <code>phosphotransferase</code> 與 <code>inducer exclusion</code> 於臺灣教育部《生命科學名詞》TSV 查無獨立詞條，依 Vault 正式譯本慣例譯為「磷酸轉移酶」與「誘導物排除」。</p>
+      <p style="margin-bottom:0;">本頁所有機制（基礎滲漏轉錄與常備少量 LacY／LacZ、異乳糖為真正誘導物、PTS 磷酸接力調控腺苷酸環化酶、葡萄糖抑制 cAMP 合成並促進流出、誘導物排除阻斷乳糖通透酶、四條件 AND 邏輯閘、雙相生長曲線，以及普通生物學 8 套課本跨版本比較）皆有上述 10 部大學進階原文書正典與 8 套普通生物學課本直接支持。需誠實標明：目前 Vault 內 <strong>Prescott 12e Ch. 14</strong> 以 <code>PTS / EIIA</code> 說明活化腺苷酸環化酶（並於譯註補出 <code>EIIA^Glc</code>），而 <strong>Cox 2e Ch. 19</strong> 以「去磷酸化型葡萄糖通透酶」說明直接阻斷乳糖運輸蛋白（誘導物排除），兩者尚未在同一本 Vault 譯本的單一段落中同時以 <code>EIIA^Glc</code> 代號串接兩條路徑，本頁係整合上述正典共識呈現。另 <code>phosphotransferase</code> 與 <code>inducer exclusion</code> 於臺灣教育部《生命科學名詞》TSV 查無獨立詞條，依 Vault 正式譯本慣例譯為「磷酸轉移酶」與「誘導物排除」。</p>
     </div>
   </section>
 

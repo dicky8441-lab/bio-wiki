@@ -647,11 +647,12 @@
 <div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
   <div class="ro-drawer-panel">
     <div class="ro-drawer-head">
-      <div class="ro-drawer-title">📑 五大主題分類跳轉</div>
+      <div class="ro-drawer-title">📑 六大主題分類跳轉</div>
       <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
     </div>
     <div class="ro-drawer-list" onclick="roCloseDrawer('roTocDrawer')">
-      <a href="#cat-molbio">🧬 分子生物與基因表現（10 篇）</a>
+      <a href="#cat-operon">🔥 操縱組與原核基因調控（6 篇）</a>
+      <a href="#cat-molbio">🧬 染色體、DNA 與真核轉錄調控（3 篇）</a>
       <a href="#cat-genetics">🌱 遺傳學與顯隱性判準（5 篇）</a>
       <a href="#cat-evolution">🦠 細胞演化與生物多樣性（1 篇）</a>
       <a href="#cat-physiology">🫀 動物構造與生理調控（4 篇）</a>
@@ -676,8 +677,9 @@
         <input class="search-input" id="searchInput" type="search" placeholder="搜尋概念、關鍵字或教科書（例：內共生、Campbell、RecA、鐮刀）" oninput="filterPosts()">
       </div>
       <div class="filter-pills">
-        <button class="filter-pill active" type="button" data-cat="all" onclick="selectCat('all', this)">全部專題 (21)</button>
-        <button class="filter-pill" type="button" data-cat="molbio" onclick="selectCat('molbio', this)">分子生物與轉錄 (10)</button>
+        <button class="filter-pill active" type="button" data-cat="all" onclick="selectCat('all', this)">全部專題 (20)</button>
+        <button class="filter-pill" type="button" data-cat="operon" onclick="selectCat('operon', this)">操縱組與原核調控 (6)</button>
+        <button class="filter-pill" type="button" data-cat="molbio" onclick="selectCat('molbio', this)">DNA 與真核轉錄 (3)</button>
         <button class="filter-pill" type="button" data-cat="genetics" onclick="selectCat('genetics', this)">遺傳與數量性狀 (5)</button>
         <button class="filter-pill" type="button" data-cat="evolution" onclick="selectCat('evolution', this)">細胞演化與內共生 (1)</button>
         <button class="filter-pill" type="button" data-cat="physiology" onclick="selectCat('physiology', this)">動物生理與免疫 (4)</button>
@@ -686,11 +688,11 @@
     </div>
   </section>
 
-  <!-- Category 1: Molecular Biology -->
-  <section class="category-section" id="cat-molbio" data-cat-section="molbio">
+  <!-- Category 1A: Operons & Prokaryotic Gene Regulation -->
+  <section class="category-section" id="cat-operon" data-cat-section="operon">
     <div class="category-header">
-      <h2 class="category-title">分子生物與基因表現</h2>
-      <p class="category-subtitle">染色質構造、細菌轉形同源重組、真核啟動子與原核操縱組調控</p>
+      <h2 class="category-title">操縱組與原核基因調控</h2>
+      <p class="category-subtitle">原核調控分類、操作子本質、雙糖感測、遺傳推論科學史、腸道生態與原真核比較</p>
       <div class="category-divider"></div>
     </div>
 
@@ -710,17 +712,62 @@
         </div>
       </a>
 
-      <a class="post-card" href="genbio-8books-lac-detection.html" data-keywords="普通生物學 8套 課本 比較 大腸桿菌 乳糖 操縱組 lac operon 基礎轉錄 滲漏轉錄 basal leaky 通透酶 permease 異乳糖 allolactose β-半乳糖苷酶 Brooker Solomon Freeman Raven Campbell Sadava Starr 高中易讀版">
+      <a class="post-card" href="operator-transcription-translation.html" data-keywords="操作子 operator 操縱組 operon 啟動子 promoter 調節基因 regulatory gene 結構基因 抑制蛋白 repressor lacO lacI trpO 轉錄 轉譯 5'-UTR 非轉譯區 O1 O2 O3 高中易讀版 Cox Goldberg Becker Weaver Klug Pierce Campbell Alberts Sadava Brock">
         <div class="post-thumb">
-          <span class="post-thumb-icon">📚</span>
-          <span class="post-thumb-tag">普生 8 版比較</span>
+          <span class="post-thumb-icon">🔐</span>
+          <span class="post-thumb-tag">高中易讀版</span>
         </div>
         <div class="post-content">
-          <h3 class="post-title">《普通生物學 8 套課本怎麼講大腸桿菌偵測乳糖？》基礎漏轉錄、常備通透酶與跨版本光譜</h3>
-          <p class="post-excerpt">全面盤點 8 套大學普生原文課本：僅 Brooker、Solomon、Freeman 正面點破「抑制從不完全、平時常備少量通透酶與酵素」；Campbell 等 4 套只留線索；Starr 直接跳過。</p>
+          <h3 class="post-title">《操作子會不會被轉錄與轉譯產生蛋白質？》從「基因 vs. 子」命名密碼到鹼基座標實證</h3>
+          <p class="post-excerpt">專為高中生釐清為何調節基因與結構基因叫「基因」、啟動子與操作子卻叫「子」，並以 <em>lac</em> O₁（+11）與 <em>trp</em> 啟動子內操作子原圖拆解「不轉譯、但 <em>lac</em> 開啟時部分會轉錄進 mRNA 前端」的分子實情。</p>
           <div class="post-meta">
-            <span class="post-badge accent">8 套普生全盤點 · 4 張原圖</span>
-            <span class="post-badge">Brooker 4e · Solomon 11e · Freeman 8e · Campbell 13e</span>
+            <span class="post-badge accent">10 部正典 · 13 張原圖</span>
+            <span class="post-badge">Cox 2e · Goldberg 7e · Becker 10e · Weaver 5e</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="lac-operon-sugar-sensing.html" data-keywords="大腸桿菌 乳糖操縱組 lac operon 葡萄糖 乳糖 感測 基礎滲漏轉錄 leaky basal 通透酶 LacY 異乳糖 allolactose PTS 磷酸轉移酶 EIIA 腺苷酸環化酶 cAMP CAP CRP 誘導物排除 inducer exclusion AND邏輯閘 雙相生長 diauxic growth 普通生物學 8套 課本 比較 高中易讀版 Prescott Cox Pierce Weaver Lehninger Freeman Raven Brooker Solomon Campbell Sadava Starr Brock Alberts">
+        <div class="post-thumb">
+          <span class="post-thumb-icon">📡</span>
+          <span class="post-thumb-tag">含普生 8 套比較</span>
+        </div>
+        <div class="post-content">
+          <h3 class="post-title">《大腸桿菌怎麼知道環境中有沒有葡萄糖與乳糖？》基礎滲漏、PTS 磷酸接力、誘導物排除與普生 8 套全盤點</h3>
+          <p class="post-excerpt">細菌沒有眼睛也沒味覺——拆解「常備少量通透酶＋異乳糖」偵測乳糖、「PTS 磷酸接力 → cAMP–CAP 與誘導物排除」偵測葡萄糖、AND 邏輯判讀，並完整整併全 8 套普通生物學課本對乳糖偵測的寫法光譜。</p>
+          <div class="post-meta">
+            <span class="post-badge accent">18 部正典（含普生 8 套）· 9 張原圖</span>
+            <span class="post-badge">Prescott 12e · Cox 2e · Freeman 8e · Brooker 4e · Campbell 13e</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="operon-inference-pierce.html" data-keywords="Pierce 操縱組 operon PaJaMo 部分二倍體 partial diploid 局部合子 merozygote 順式 cis 反式 trans lacI lacIs lacO lacOc lacP Jacob Monod Gilbert 平衡透析 足跡 定序 科學史">
+        <div class="post-thumb">
+          <span class="post-thumb-icon">🧩</span>
+          <span class="post-thumb-tag">遺傳科學史</span>
+        </div>
+        <div class="post-content">
+          <h3 class="post-title">《乳糖操縱組推論科學史》從 PaJaMo 實驗、部分二倍體到抑制蛋白純化與 DNA 定序</h3>
+          <p class="post-excerpt">跨 14 部原文書完整還原：Monod 如何推翻「內部活化物」假說、用 F′ 部分二倍體區分順反式並催生 mRNA 假說，以及 Gilbert 純化蛋白與 DMS 足跡如何意外催生 DNA 定序法。</p>
+          <div class="post-meta">
+            <span class="post-badge accent">11 張原書圖解</span>
+            <span class="post-badge">Pierce · Brooker · Goldberg · Klug · Cox · Weaver 等 14 部正典</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="lactose-intolerance-lac-operon.html" data-keywords="乳糖不耐症 lactose intolerance 大腸桿菌 E. coli lac操縱組 operon cAMP CAP CRP 黏蛋白 mucin 寡醣 oligosaccharide 短鏈脂肪酸 SCFA 膳食纖維 交叉餵食 Vander Lehninger Prescott Guyton Fox Lodish">
+        <div class="post-thumb">
+          <span class="post-thumb-icon">🥛</span>
+          <span class="post-thumb-tag">操縱組生態</span>
+        </div>
+        <div class="post-content">
+          <h3 class="post-title">《乳糖不耐症與大腸桿菌 lac 操縱組》大腸養分、黏蛋白寡醣與 cAMP 的真實接軌</h3>
+          <p class="post-excerpt">未消化的乳糖進大腸後，如何接上 <em>E. coli</em> 的 <em>lac</em> 操縱組？揭開小腸吸乾葡萄糖如何讓大腸維持高 cAMP，以及大腸桿菌平常撿食寡醣碎片的生態位。</p>
+          <div class="post-meta">
+            <span class="post-badge accent">8 部正典 · 5 張原圖</span>
+            <span class="post-badge">Vander 16e · Prescott 12e · Lehninger 8e · Guyton 15e</span>
           </div>
         </div>
       </a>
@@ -739,37 +786,18 @@
           </div>
         </div>
       </a>
+    </div>
+  </section>
 
-      <a class="post-card" href="lac-operon-sugar-sensing.html" data-keywords="大腸桿菌 乳糖操縱組 lac operon 葡萄糖 乳糖 感測 基礎滲漏轉錄 leaky basal 通透酶 LacY 異乳糖 allolactose PTS 磷酸轉移酶 EIIA 腺苷酸環化酶 cAMP CAP CRP 誘導物排除 inducer exclusion AND邏輯閘 雙相生長 diauxic growth 高中易讀版 Prescott Cox Pierce Weaver Lehninger Freeman Raven Brooker Brock Alberts">
-        <div class="post-thumb">
-          <span class="post-thumb-icon">📡</span>
-          <span class="post-thumb-tag">高中易讀版</span>
-        </div>
-        <div class="post-content">
-          <h3 class="post-title">《大腸桿菌怎麼知道環境中有沒有葡萄糖與乳糖？》基礎滲漏、PTS 磷酸接力與誘導物排除</h3>
-          <p class="post-excerpt">細菌沒有眼睛也沒味覺——專為高中生拆解「常備少量通透酶＋異乳糖」如何偵測乳糖、「PTS 磷酸接力 → cAMP–CAP 與誘導物排除」如何偵測葡萄糖，以及四種糖類環境的完整 AND 邏輯判讀。</p>
-          <div class="post-meta">
-            <span class="post-badge accent">10 部正典 · 5 張原圖</span>
-            <span class="post-badge">Prescott 12e · Cox 2e · Freeman 8e · Alberts ECB6</span>
-          </div>
-        </div>
-      </a>
+  <!-- Category 1B: Chromatin, DNA & Eukaryotic Transcription -->
+  <section class="category-section" id="cat-molbio" data-cat-section="molbio">
+    <div class="category-header">
+      <h2 class="category-title">染色體、DNA 與真核轉錄調控</h2>
+      <p class="category-subtitle">染色質構造、細菌轉形同源重組、真核核心啟動子與 DNA 甲基化調控</p>
+      <div class="category-divider"></div>
+    </div>
 
-      <a class="post-card" href="operator-transcription-translation.html" data-keywords="操作子 operator 操縱組 operon 啟動子 promoter 調節基因 regulatory gene 結構基因 抑制蛋白 repressor lacO lacI trpO 轉錄 轉譯 5'-UTR 非轉譯區 O1 O2 O3 高中易讀版 Cox Goldberg Becker Weaver Klug Pierce Campbell Alberts Sadava Brock">
-        <div class="post-thumb">
-          <span class="post-thumb-icon">🔐</span>
-          <span class="post-thumb-tag">高中易讀版</span>
-        </div>
-        <div class="post-content">
-          <h3 class="post-title">《操作子會不會被轉錄與轉譯產生蛋白質？》從「基因 vs. 子」命名密碼到鹼基座標實證</h3>
-          <p class="post-excerpt">專為高中生釐清為何調節基因與結構基因叫「基因」、啟動子與操作子卻叫「子」，並以 <em>lac</em> O₁（+11）與 <em>trp</em> 啟動子內操作子原圖拆解「不轉譯、但 <em>lac</em> 開啟時部分會轉錄進 mRNA 前端」的分子實情。</p>
-          <div class="post-meta">
-            <span class="post-badge accent">10 部正典 · 13 張原圖</span>
-            <span class="post-badge">Cox 2e · Goldberg 7e · Becker 10e · Weaver 5e</span>
-          </div>
-        </div>
-      </a>
-
+    <div class="post-list">
       <a class="post-card" href="chromatin.html" data-keywords="染色質 染色體 chromatin chromosome 間期 分裂期 組蛋白 核小體 Lodish Alberts Cox Becker Weaver Pierce Brooker">
         <div class="post-thumb">
           <span class="post-thumb-icon">🧬</span>
@@ -811,36 +839,6 @@
           <div class="post-meta">
             <span class="post-badge accent">大學正典＋高中 7 版</span>
             <span class="post-badge">Alberts MBOC7 · Lodish 9e · Weaver 5e</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="post-card" href="lactose-intolerance-lac-operon.html" data-keywords="乳糖不耐症 lactose intolerance 大腸桿菌 E. coli lac操縱組 operon cAMP CAP CRP 黏蛋白 mucin 寡醣 oligosaccharide 短鏈脂肪酸 SCFA 膳食纖維 交叉餵食 Vander Lehninger Prescott Guyton Fox Lodish">
-        <div class="post-thumb">
-          <span class="post-thumb-icon">🥛</span>
-          <span class="post-thumb-tag">操縱組生態</span>
-        </div>
-        <div class="post-content">
-          <h3 class="post-title">《乳糖不耐症與大腸桿菌 lac 操縱組》大腸養分、黏蛋白寡醣與 cAMP 的真實接軌</h3>
-          <p class="post-excerpt">未消化的乳糖進大腸後，如何接上 <em>E. coli</em> 的 <em>lac</em> 操縱組？揭開小腸吸乾葡萄糖如何讓大腸維持高 cAMP，以及大腸桿菌平常撿食寡醣碎片的生態位。</p>
-          <div class="post-meta">
-            <span class="post-badge accent">8 部正典 · 5 張原圖</span>
-            <span class="post-badge">Vander 16e · Prescott 12e · Lehninger 8e · Guyton 15e</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="post-card" href="operon-inference-pierce.html" data-keywords="Pierce 操縱組 operon PaJaMo 部分二倍體 partial diploid 局部合子 merozygote 順式 cis 反式 trans lacI lacIs lacO lacOc lacP Jacob Monod Gilbert 平衡透析 足跡 定序 科學史">
-        <div class="post-thumb">
-          <span class="post-thumb-icon">🧩</span>
-          <span class="post-thumb-tag">遺傳科學史</span>
-        </div>
-        <div class="post-content">
-          <h3 class="post-title">《乳糖操縱組推論科學史》從 PaJaMo 實驗、部分二倍體到抑制蛋白純化與 DNA 定序</h3>
-          <p class="post-excerpt">跨 14 部原文書完整還原：Monod 如何推翻「內部活化子」假說、用 F′ 部分二倍體區分順反式並催生 mRNA 假說，以及 Gilbert 純化蛋白與 DMS 足跡如何意外催生 DNA 定序法。</p>
-          <div class="post-meta">
-            <span class="post-badge accent">11 張原書圖解</span>
-            <span class="post-badge">Pierce · Brooker · Goldberg · Klug · Cox · Weaver 等 14 部正典</span>
           </div>
         </div>
       </a>

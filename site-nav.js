@@ -4,66 +4,55 @@
 (function () {
   var BIO_WIKI_CATEGORIES = [
     {
-      id: 'molbio',
-      icon: '🧬',
-      name: '分子生物與基因表現',
-      shortName: '分子生物',
+      id: 'operon',
+      icon: '🔥',
+      name: '操縱組與原核基因調控',
+      shortName: '操縱組',
       items: [
-        {
-          href: 'operator-transcription-translation.html',
-          title: '操作子會不會被轉錄與轉譯？（基因 vs. 子）',
-          tag: '操縱組',
-          series: 'operon',
-          keywords: '操作子 operator 操縱組 operon 啟動子 調節基因 結構基因 抑制蛋白 轉錄 轉譯 5-UTR O1 O2 O3 基因 vs 子 Cox Goldberg Becker Weaver Klug Pierce Campbell Alberts Sadava Brock'
-        },
         {
           href: 'prokaryote-gene-regulation-types.html',
           title: '原核基因調控怎麼分類？（正負 × 持續／誘導／抑制）',
-          tag: '操縱組',
-          series: 'operon',
+          tag: '總分類',
           keywords: '原核基因調控 正調控 負調控 持續型 管家基因 可誘導型 可抑制型 positive negative constitutive inducible repressible 2x2 四象限 lac trp ara mal Brooker Pierce Goldberg Klug Solomon Sadava Campbell Raven Freeman'
         },
         {
-          href: 'lac-operon-sugar-sensing.html',
-          title: '大腸桿菌如何感測環境中的葡萄糖與乳糖？',
-          tag: '操縱組',
-          series: 'operon',
-          keywords: '大腸桿菌 乳糖操縱組 lac operon 葡萄糖 乳糖 感測 基礎滲漏轉錄 leaky basal 通透酶 LacY 異乳糖 allolactose PTS EIIA cAMP CAP CRP 誘導物排除 AND邏輯閘 Prescott Cox Pierce Weaver Lehninger'
+          href: 'operator-transcription-translation.html',
+          title: '操作子會不會被轉錄與轉譯？（基因 vs. 子）',
+          tag: '構造本質',
+          keywords: '操作子 operator 操縱組 operon 啟動子 調節基因 結構基因 抑制蛋白 轉錄 轉譯 5-UTR O1 O2 O3 基因 vs 子 Cox Goldberg Becker Weaver Klug Pierce Campbell Alberts Sadava Brock'
         },
         {
-          href: 'genbio-8books-lac-detection.html',
-          title: '普生 8 套課本怎麼講大腸桿菌偵測乳糖？',
-          tag: '操縱組',
-          series: 'operon',
-          keywords: '普通生物學 8套 比較 大腸桿菌 乳糖 基礎轉錄 通透酶 異乳糖 Brooker Solomon Freeman Raven Campbell Sadava Starr'
+          href: 'lac-operon-sugar-sensing.html',
+          title: '大腸桿菌如何感測葡萄糖與乳糖？（含普生 8 套比較）',
+          tag: '雙糖感測',
+          keywords: '大腸桿菌 乳糖操縱組 lac operon 葡萄糖 乳糖 感測 基礎滲漏轉錄 leaky basal 通透酶 LacY 異乳糖 allolactose PTS EIIA cAMP CAP CRP 誘導物排除 AND邏輯閘 普通生物學 8套 比較 Brooker Solomon Freeman Raven Campbell Sadava Starr Prescott Cox Pierce Weaver Lehninger'
         },
         {
           href: 'operon-inference-pierce.html',
-          title: '沒有定序的年代，如何靠部分二倍體推論操縱組？',
-          tag: '操縱組',
-          series: 'operon',
+          title: '乳糖操縱組推論科學史（PaJaMo、部分二倍體到定序）',
+          tag: '科學史',
           keywords: 'Pierce 操縱組 推論 PaJaMo 部分二倍體 partial diploid 局部合子 順式 cis 反式 trans lacI lacIs lacO lacOc lacP Jacob Monod Gilbert 平衡透析 足跡 定序 科學史'
         },
         {
           href: 'lactose-intolerance-lac-operon.html',
           title: '乳糖不耐症與大腸桿菌 lac 操縱組怎麼接軌？',
-          tag: '操縱組',
-          series: 'operon',
+          tag: '腸道生態',
           keywords: '乳糖不耐症 lactose intolerance 大腸桿菌 lac操縱組 cAMP CAP 黏蛋白 寡醣 短鏈脂肪酸 膳食纖維 Vander Lehninger Prescott Guyton'
         },
         {
           href: 'why-eukaryotes-lack-operons.html',
           title: '為什麼真核細胞幾乎沒有操縱組？',
-          tag: '操縱組',
-          series: 'operon',
+          tag: '原真比較',
           keywords: '真核細胞 操縱組 單順反子 多順反子 5端帽 強化子 調控元件 組合調控 線蟲 C. elegans 反式剪接 trans-splicing Weaver Alberts Lodish Campbell'
-        },
-        {
-          href: 'promoter-tata-box.html',
-          title: '啟動子、TATA 匣與 DNA 甲基化怎麼調控轉錄？',
-          tag: '轉錄調控',
-          keywords: '啟動子 promoter TATA box TATA匣 DNA甲基化 methylation 轉錄因子 RNA聚合酶 高中7版 Alberts Lodish Weaver Campbell'
-        },
+        }
+      ]
+    },
+    {
+      id: 'molbio',
+      icon: '🧬',
+      name: '染色體、DNA 與真核轉錄調控',
+      shortName: 'DNA 與轉錄',
+      items: [
         {
           href: 'chromatin.html',
           title: '染色質與染色體的本質差別是什麼？',
@@ -75,6 +64,12 @@
           title: 'Griffith 轉形作用：外來 DNA 如何進入並重組？',
           tag: '經典實驗',
           keywords: 'Griffith 轉形作用 transformation 肺炎鏈球菌 R型菌 S型菌 莢膜 EndA ComEC RecA 同源重組 Pierce Prescott Klug Cox Weaver'
+        },
+        {
+          href: 'promoter-tata-box.html',
+          title: '啟動子、TATA 匣與 DNA 甲基化怎麼調控轉錄？',
+          tag: '轉錄調控',
+          keywords: '啟動子 promoter TATA box TATA匣 DNA甲基化 methylation 轉錄因子 RNA聚合酶 高中7版 Alberts Lodish Weaver Campbell'
         }
       ]
     },
@@ -246,7 +241,6 @@
 
     var currentFile = getCurrentFile();
     var allItems = [];
-    var operonCount = 0;
     BIO_WIKI_CATEGORIES.forEach(function (cat) {
       cat.items.forEach(function (item) {
         allItems.push({
@@ -259,7 +253,6 @@
           catIcon: cat.icon,
           catName: cat.shortName
         });
-        if (item.series === 'operon') operonCount++;
       });
     });
 
@@ -268,7 +261,7 @@
     var searchQuery = '';
     var expandedGroups = {};
 
-    // 預設展開目前所在頁面的分類；首頁預設展開第一個分類（分子生物）
+    // 預設展開目前所在頁面的分類；首頁預設展開第一個分類（操縱組）
     var currentCatId = null;
     allItems.forEach(function (it) {
       if (it.href === currentFile) currentCatId = it.catId;
@@ -276,15 +269,14 @@
     if (currentCatId) {
       expandedGroups[currentCatId] = true;
     } else {
-      expandedGroups['molbio'] = true;
+      expandedGroups['operon'] = true;
     }
 
     var panel = backdrop.querySelector('.ro-drawer-panel');
     if (!panel) return;
 
     var pillsHtml = [
-      '<button class="ro-nav-pill active" type="button" data-filter="all">全部 (' + totalCount + ')</button>',
-      '<button class="ro-nav-pill" type="button" data-filter="series:operon">🔥 操縱組系列 (' + operonCount + ')</button>'
+      '<button class="ro-nav-pill active" type="button" data-filter="all">全部 (' + totalCount + ')</button>'
     ];
     BIO_WIKI_CATEGORIES.forEach(function (cat) {
       pillsHtml.push(
