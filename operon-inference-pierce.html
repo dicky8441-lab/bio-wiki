@@ -1581,12 +1581,12 @@
         <div class="step-title">由 <em>lacP⁻</em> 確認 RNA 聚合酶結合的順式啟動子位點</div>
       </div>
       <ul>
-        <li><strong>單倍體觀察：</strong><em>lacP⁻</em> 無論有無乳糖皆完全不產酵素（與 <em>lacIˢ</em> 相同）。</li>
-        <li><strong>部分二倍體順反對照測試：</strong></li>
+        <li><strong>單倍體觀察：</strong><em>lacP⁻</em> 無論有無乳糖都完全無法產生任何 <em>lac</em> 酵素（全部結構基因一起關閉，已排除單一結構基因損壞；但單看單倍體仍有 3 種可能：① 像 <em>lacIˢ</em> 的反式顯性抑制、② 缺少某種可擴散活化蛋白的反式隱性缺失、③ 順式 DNA 位點損壞）。</li>
+        <li><strong>部分二倍體順反對照測試（需要 A、B 兩組聯手排除）：</strong></li>
       </ul>
 
       <div class="dna-pair">
-        <div class="dna-pair-head">測試組 A：<code>lacI⁺ lacP⁺ lacZ⁺ / lacI⁺ lacP⁻ lacZ⁻</code>（<code>lacP⁺</code> 與 <code>lacZ⁺</code> 同條；原文亦測 <code>P⁺Z⁺ / P⁻Z⁺</code>）</div>
+        <div class="dna-pair-head">測試組 A：<code>lacI⁺ lacP⁺ lacZ⁺ / lacI⁺ lacP⁻ lacZ⁻</code>（<code>lacP⁺</code> 與 <code>lacZ⁺</code> 同條；Pierce 原文亦測 <code>P⁺Z⁺ / P⁻Z⁺</code>）</div>
         <div class="dna-track">
           <span class="track-label">染色體 DNA</span>
           <div class="track-genes">
@@ -1603,7 +1603,7 @@
             <span class="gene-pill mut">lacZ⁻ 喪失功能</span>
           </div>
         </div>
-        <div class="dna-result">▶ <strong>實驗 A 結果：</strong><strong>正常可誘導！</strong>質體上的 <code>lacP⁻</code> 不會跨條關閉染色體 DNA，立刻排除 <em>lacIˢ</em> 型反式抑制。</div>
+        <div class="dna-result">▶ <strong>實驗 A 結果：</strong><strong>正常可誘導！</strong>質體上的 <code>lacP⁻</code> <strong>不會跨條害死染色體 DNA</strong> → 立刻排除 <em>lacIˢ</em> 型反式顯性抑制（但此時尚未排除「可擴散的活化蛋白」）。</div>
       </div>
 
       <div class="dna-pair">
@@ -1624,11 +1624,11 @@
             <span class="gene-pill mut">lacZ⁻ 喪失功能</span>
           </div>
         </div>
-        <div class="dna-result">▶ <strong>實驗 B 結果：</strong><strong>永遠關閉！</strong>質體上正常的 <code>lacP⁺</code> 無法跨條協助染色體上的 <code>lacZ⁺</code> 轉錄。</div>
+        <div class="dna-result">▶ <strong>實驗 B 結果：</strong><strong>永遠關閉！</strong>質體上完好的 <code>lacP⁺</code> <strong>也無法跨條救活染色體上的 <code>lacZ⁺</code></strong> → 排除可擴散的活化蛋白（反式隱性缺失）。</div>
       </div>
 
       <ul>
-        <li><strong>科學推論：</strong><em>lacP⁻</em> 同樣為<strong>順式作用</strong>的 DNA 位點，確認 <em>lacP</em> 是 RNA 聚合酶結合並啟動同一條 DNA 轉錄的<strong>啟動子</strong>（註：Pierce 7e 中譯本將此處兩組 <code>lacZ⁺</code>／<code>lacZ⁻</code> 誤植對調，請以英文原文為準）。</li>
+        <li><strong>科學推論：</strong>綜合 A、B 兩組——不只突變的 <code>lacP⁻</code> 影響不到另一條 DNA，正常的 <code>lacP⁺</code> 也無法跨條協助另一條 DNA 轉錄（必須與 <code>lacZ⁺</code> 物理連在同一條 DNA 上才有效）。這雙重鎖定 <em>lacP</em> 屬於<strong>順式作用</strong>的 DNA 位點，即 RNA 聚合酶結合並啟動同一條 DNA 轉錄的<strong>啟動子</strong>（一旦啟動子突變為 <code>lacP⁻</code>，不論有無乳糖，RNA 聚合酶都無法附著於該條 DNA）。</li>
       </ul>
     </div>
 
