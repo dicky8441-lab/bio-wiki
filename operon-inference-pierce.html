@@ -1250,15 +1250,21 @@
       </div>
     </article>
 
-    <p>為了讓 <code>lacI⁺</code> 與 <code>lacI⁻</code> 進入同一個細胞，1959 年 <strong>Arthur Pardee、François Jacob 與 Jacques Monod</strong> 進行了著名的 <strong>PaJaMo 實驗</strong>（取三人姓氏開頭字母）：他們在<strong>不含乳糖</strong>的培養基中，利用細菌 Hfr 接合把正常供體的 <code>lacI⁺ lacZ⁺</code> 送入 <code>lacI⁻ lacZ⁻</code> 受體細胞，並連續追蹤 β-半乳糖苷酶的合成變化（Goldberg 7e、Cox 2e）：</p>
+    <p>為了讓 <code>lacI⁺</code> 與 <code>lacI⁻</code> 進入同一個細胞，1959 年 <strong>Arthur Pardee、François Jacob 與 Jacques Monod</strong> 進行了著名的 <strong>PaJaMo 實驗</strong>（取三人姓氏開頭字母）：他們在<strong>不含乳糖</strong>的培養基中，利用細菌 Hfr 接合把正常供體的 <code>lacI⁺ lacZ⁺</code> <strong>DNA</strong> 送入原本為 <code>lacI⁻ lacZ⁻</code> 的受體細胞（接合幾乎只送進 DNA，不送供體細胞質裡的蛋白質），並連續追蹤 β-半乳糖苷酶的合成變化（Goldberg 7e、Cox 2e）：</p>
     <ol>
       <li><strong>接合剛完成時</strong>：β-半乳糖苷酶<strong>立刻開始合成</strong>！起初看起來非常支持 Monod 原本「<code>lacI⁻</code> 為顯性」的猜想。</li>
       <li><strong>約 1 小時後出現逆轉</strong>：在完全沒有改變培養基的情況下，β-半乳糖苷酶的合成<strong>突然停止</strong>！此時若額外加入乳糖誘導物，酵素合成又立刻重新飆升。</li>
     </ol>
 
     <div class="callout callout-mnemo">
-      <div class="callout-title">為什麼會有「先表現、後停止」的時間差？</div>
-      <p style="margin-bottom:0;">剛接合時，受體染色體原本是 <code>lacI⁻</code>，細胞質中完全沒有抑制物質，所以剛進入的 <code>lacZ⁺</code> 立即開始表現；但約 1 小時內，隨新導入的 <code>lacI⁺</code> 陸續合成並累積出足夠的<strong>可擴散抑制物質</strong>，系統就被關閉了！這項時間序列結果徹底推翻「內部活化子」假說，確立 <code>lacI⁺</code> 是反式顯性的負調控基因，同時也完美解釋了 Jacob 看到的 λ 原噬菌體合子誘導。</p>
+      <div class="callout-title">逐步拆解：為什麼「先表現、後停止」能一刀推翻「內部活化子假說」？</div>
+      <ol style="margin-bottom:10px;">
+        <li><strong>「先表現」本身其實兩種假說都解釋得通</strong>：如果「內部活化子假說」是真的，受體原本就帶著 <code>lacI⁻</code>，細胞質裡早就充滿內部活化子，所以剛送進來的 <code>lacZ⁺</code> 當然會立刻開始合成酵素（這正是實驗初期看似支持 Monod 的原因）。</li>
+        <li><strong>真正推翻「內部活化子假說」的是「約 1 小時後停止」</strong>：接合後，受體染色體上原本的 <code>lacI⁻</code> <strong>並沒有消失</strong>！若 <code>lacI⁻</code> 真的會持續製造內部活化子，而新送進來的 <code>lacI⁺</code> 只是「不會製造活化子的正常基因」，那麼細胞內的內部活化子應該源源不絕，<strong>酵素合成應該一直持續下去、永遠不會停</strong>。</li>
+        <li><strong>會「停下來」，證明 <code>lacI⁺</code> 主動製造了抑制物質</strong>：既然 <code>lacI⁻</code> 還在卻仍被關掉，代表新導入的 <code>lacI⁺</code> 絕非「不做活化子」，而是<strong>主動合成出可擴散的負調控抑制物質</strong>去關閉 <code>lacZ⁺</code>。</li>
+        <li><strong>為什麼不是一接合就立刻關掉，而是要等約 1 小時？</strong>因為接合只送進 <strong>DNA</strong>，沒把供體細胞質的抑制蛋白送過來：第 0 分鐘時受體細胞質內抑制蛋白濃度為 0，所以剛進來的 <code>lacZ⁺</code> <strong>先表現</strong>；約 1 小時內，隨新導入的 <code>lacI⁺</code> 陸續轉錄、轉譯並累積出足夠濃度的抑制蛋白，轉錄便<strong>停止</strong>（最後再加乳糖誘導物能恢復合成，則排除了細胞死亡或 <code>lacZ⁺</code> 損壞的可能）。</li>
+      </ol>
+      <p style="margin-bottom:0;"><strong>一句話總結：</strong>「先表現」還分不出勝負，真正淘汰「內部活化子假說」的是<strong>「約 1 小時後自己停下來」</strong>——同時也完美解釋了 Jacob 在 λ 噬菌體看到的合子誘導現象。</p>
     </div>
 
     <article class="figure-card">
