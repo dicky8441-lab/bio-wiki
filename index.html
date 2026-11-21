@@ -634,6 +634,7 @@
       <a href="operator-transcription-translation.html">14. 操作子會不會被轉錄與轉譯？（基因 vs. 子）</a>
       <a href="lac-operon-sugar-sensing.html">15. 大腸桿菌如何感測葡萄糖與乳糖？</a>
       <a href="why-eukaryotes-lack-operons.html">16. 為什麼真核細胞幾乎沒有操縱組？</a>
+      <a href="plant-photoreceptor-photoperiodism.html">17. 沒有感官如何感知世界？（細菌乳糖 vs. 植物光週期）</a>
     </div>
   </div>
 </div>
@@ -642,7 +643,7 @@
 <div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
   <div class="ro-drawer-panel">
     <div class="ro-drawer-head">
-      <div class="ro-drawer-title">📑 四大主題分類跳轉</div>
+      <div class="ro-drawer-title">📑 五大主題分類跳轉</div>
       <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
     </div>
     <div class="ro-drawer-list" onclick="roCloseDrawer('roTocDrawer')">
@@ -650,6 +651,7 @@
       <a href="#cat-genetics">🌱 遺傳學與顯隱性判準（4 篇）</a>
       <a href="#cat-evolution">🦠 細胞演化與生物多樣性（1 篇）</a>
       <a href="#cat-physiology">🫀 動物構造與生殖生理（2 篇）</a>
+      <a href="#cat-plant">🌻 植物構造與生理調控（1 篇）</a>
     </div>
   </div>
 </div>
@@ -670,11 +672,12 @@
         <input class="search-input" id="searchInput" type="search" placeholder="搜尋概念、關鍵字或教科書（例：內共生、Campbell、RecA、鐮刀）" oninput="filterPosts()">
       </div>
       <div class="filter-pills">
-        <button class="filter-pill active" type="button" data-cat="all" onclick="selectCat('all', this)">全部專題 (15)</button>
+        <button class="filter-pill active" type="button" data-cat="all" onclick="selectCat('all', this)">全部專題 (16)</button>
         <button class="filter-pill" type="button" data-cat="molbio" onclick="selectCat('molbio', this)">分子生物與轉錄 (8)</button>
         <button class="filter-pill" type="button" data-cat="genetics" onclick="selectCat('genetics', this)">遺傳與數量性狀 (4)</button>
         <button class="filter-pill" type="button" data-cat="evolution" onclick="selectCat('evolution', this)">細胞演化與內共生 (1)</button>
         <button class="filter-pill" type="button" data-cat="physiology" onclick="selectCat('physiology', this)">動物生理與生殖 (2)</button>
+        <button class="filter-pill" type="button" data-cat="plant" onclick="selectCat('plant', this)">植物生理與光週期 (1)</button>
       </div>
     </div>
   </section>
@@ -942,6 +945,32 @@
           <div class="post-meta">
             <span class="post-badge accent">11 部正典 · 8 張原圖</span>
             <span class="post-badge">Campbell 13e · Junqueira 17e · Gilbert 13e · Hole 15e</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Category 5: Plant Physiology -->
+  <section class="category-section" id="cat-plant" data-cat-section="plant">
+    <div class="category-header">
+      <h2 class="category-title">植物構造與生理調控</h2>
+      <p class="category-subtitle">光敏素與藍光受體、近日時鐘、光週期開花與植物環境感應</p>
+      <div class="category-divider"></div>
+    </div>
+
+    <div class="post-list">
+      <a class="post-card" href="plant-photoreceptor-photoperiodism.html" data-keywords="光敏素 phytochrome Pr Pfr 呈色基團 順反異構化 隱色素 cryptochrome 隱花色素 促向光蛋白 phototropin 向光素 光週期 photoperiodism 臨界夜長 暗期中斷 暗回復 近日時鐘 生物時鐘 circadian 外部一致性模型 CONSTANS CO FT 開花素 florigen 種子萌發 去黃化 遮蔭迴避 避蔭反應 芽休眠 落葉 塊莖 大腸桿菌 乳糖 高中易讀版 Taiz Campbell Hopkins Sadava Pierce">
+        <div class="post-thumb">
+          <span class="post-thumb-icon">🌻</span>
+          <span class="post-thumb-tag">跨界易讀版</span>
+        </div>
+        <div class="post-content">
+          <h3 class="post-title">《沒有眼睛、鼻子、嘴巴，生命如何感知世界？》大腸桿菌偵測乳糖 vs. 植物光受體與光週期</h3>
+          <p class="post-excerpt">跨單元並排「細菌偵測乳糖」與「植物看見紅光／藍光、算準黑夜長度」：一次拆解光敏素順反異構化入核、近日時鐘外部一致性模型（CO → FT 開花素）與五大光週期生理反應。</p>
+          <div class="post-meta">
+            <span class="post-badge accent">6 部正典 · 6 張原圖</span>
+            <span class="post-badge">Taiz 7e · Campbell 13e · Hopkins · Sadava 12e</span>
           </div>
         </div>
       </a>

@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>沒有眼睛、鼻子、嘴巴，生命如何感知世界？｜Bio-Wiki</title>
+<style>
+  :root {
+    --bg-primary: #181614;
+    --bg-pillbar: #24201c;
+    --bg-card: #211e1a;
+    --bg-quote: #26221e;
+    --bg-tag: #2d2823;
+    --text-primary: #f6f1ea;
+    --text-body: #ddd5ca;
+    --text-secondary: #bfb5a8;
+    --text-muted: #9a8e80;
+    --primary: #5bc0eb;
+    --primary-light: rgba(91, 192, 235, 0.12);
+    --primary-border: rgba(91, 192, 235, 0.32);
+    --accent: #f4c44e;
+    --accent-light: rgba(244, 196, 78, 0.12);
+    --border-color: rgba(246, 241, 234, 0.09);
+    --border-strong: rgba(246, 241, 234, 0.16);
+    --taupe-fab: rgba(104, 91, 78, 0.94);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+  }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+    font-size: 18px;
+    line-height: 1.78;
+    padding: 0 0 96px 0;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .ro-header-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-primary) 70%, rgba(24, 22, 20, 0));
+  }
+
+  .ro-pillbar {
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .ro-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .ro-menu-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    border: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .ro-menu-circle span {
+    display: block;
+    width: 16px;
+    height: 2.2px;
+    background: #181614;
+    border-radius: 2px;
+  }
+
+  .ro-brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .ro-brand-zh {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-brand-en {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .ro-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .ro-theme-btn {
+    appearance: none;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    transition: transform 0.15s ease;
+  }
+
+  .ro-theme-btn:active {
+    transform: scale(0.96);
+  }
+
+  .ro-cta-pill {
+    appearance: none;
+    background: var(--accent);
+    color: #1c1814;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .container {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 22px 0;
+  }
+
+  header.hero {
+    text-align: left;
+    margin-bottom: 32px;
+    padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .badge-bar {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .badge-primary {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary-border);
+  }
+
+  .badge-accent {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: rgba(244, 196, 78, 0.32);
+  }
+
+  h1 {
+    font-size: clamp(26px, 6.2vw, 34px);
+    line-height: 1.38;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    margin: 6px 0 14px;
+    text-align: left;
+  }
+
+  .subtitle {
+    font-size: 17px;
+    line-height: 1.68;
+    color: var(--text-muted);
+    margin: 0;
+    text-align: left;
+  }
+
+  section {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: 42px;
+    scroll-margin-top: 84px;
+  }
+
+  h2 {
+    font-size: clamp(22px, 5.2vw, 27px);
+    line-height: 1.45;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 44px 0 18px;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+  }
+
+  h2 .sec-num {
+    color: var(--accent);
+    margin-right: 6px;
+    font-weight: 800;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 30px 0 12px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--text-body);
+    margin-bottom: 18px;
+  }
+
+  ul, ol {
+    margin: 0 0 22px 24px;
+    color: var(--text-body);
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+    color: var(--text-body);
+  }
+
+  strong, b {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.9em;
+    background: var(--bg-tag);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 6px;
+  }
+
+  main a:not(.ro-cta-pill):not(.ro-brand-link) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  .tldr-card, .source-card, .callout, .callout-warn, .boundary {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 20px 20px;
+    margin: 20px 0;
+  }
+
+  .tldr-card {
+    border-left: 4px solid var(--accent);
+  }
+
+  .callout {
+    border-left: 4px solid var(--primary);
+  }
+
+  .callout-warn {
+    border-left: 4px solid var(--accent);
+  }
+
+  .boundary {
+    border-left: 4px solid var(--text-muted);
+  }
+
+  .tldr-label, .callout-title, .source-book {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    padding: 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    margin: 18px 0;
+  }
+
+  .flow span {
+    padding: 5px 10px;
+    border-radius: 8px;
+    background: var(--bg-tag);
+    color: var(--text-primary);
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .flow b {
+    color: var(--accent);
+  }
+
+  .source-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .source-loc {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .quote-block {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .quote-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quote-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .quote-en {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 10px 0 12px;
+    word-break: break-word;
+  }
+
+  body.hide-en .quote-en {
+    display: none;
+  }
+
+  .quote-tw {
+    font-size: 17.5px;
+    line-height: 1.78;
+    color: var(--text-body);
+  }
+
+  .quote-tw strong {
+    color: var(--accent);
+    background: rgba(244, 196, 78, 0.10);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+
+  .toggle-en-btn {
+    appearance: none;
+    background: var(--bg-tag);
+    color: var(--accent);
+    border: 1px solid rgba(244, 196, 78, 0.35);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  .figure-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .figure-title {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding: 12px 16px 4px;
+  }
+
+  .figure-img-wrap {
+    padding: 14px;
+    background: #f8fafc;
+    cursor: zoom-in;
+  }
+
+  main img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 8px;
+    margin: 0 auto;
+    cursor: zoom-in;
+  }
+
+  .zoom-hint {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    padding: 6px 4px 0;
+  }
+
+  .figure-caption {
+    font-size: 15px;
+    line-height: 1.68;
+    color: var(--text-secondary);
+    padding: 10px 16px 8px;
+  }
+
+  .figure-caption-en {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 0 16px 14px;
+  }
+
+  .table-wrap {
+    width: 100%;
+    margin: 18px 0 26px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 16px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-body);
+  }
+
+  th {
+    background: var(--bg-pillbar);
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  @media (max-width: 680px) {
+    table.ro-resp-table,
+    table.ro-resp-table thead,
+    table.ro-resp-table tbody,
+    table.ro-resp-table th,
+    table.ro-resp-table td,
+    table.ro-resp-table tr {
+      display: block;
+      width: 100%;
+    }
+
+    table.ro-resp-table thead {
+      display: none;
+    }
+
+    table.ro-resp-table tr {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    table.ro-resp-table td {
+      border: none;
+      border-bottom: 1px dashed var(--border-color);
+      padding: 8px 0;
+      text-align: left !important;
+    }
+
+    table.ro-resp-table td:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    table.ro-resp-table td:first-child {
+      padding-top: 0;
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    table.ro-resp-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+  }
+
+  .ro-bottom-toc {
+    position: fixed;
+    left: 16px;
+    bottom: 20px;
+    z-index: 95;
+    background: var(--taupe-fab);
+    color: #f6f1ea;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 9px 15px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: calc(100vw - 88px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-up-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 95;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--taupe-fab);
+    color: #f6f1ea;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    text-decoration: none !important;
+  }
+
+  .ro-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ro-drawer-backdrop.open {
+    display: flex;
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-backdrop {
+      align-items: center;
+      padding: 24px;
+    }
+  }
+
+  .ro-drawer-panel {
+    width: 100%;
+    max-width: 500px;
+    max-height: 78vh;
+    overflow-y: auto;
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px 20px 0 0;
+    padding: 18px 18px 28px;
+    box-shadow: var(--shadow);
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-panel {
+      border-radius: 18px;
+    }
+  }
+
+  .ro-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .ro-drawer-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .ro-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .ro-drawer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ro-drawer-list a {
+    display: block;
+    text-decoration: none !important;
+    color: var(--text-body) !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .ro-drawer-list a.active {
+    color: #181614 !important;
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 800;
+  }
+
+  .ro-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    cursor: zoom-out;
+  }
+
+  .ro-lightbox.open {
+    display: flex;
+  }
+
+  .ro-lightbox img {
+    max-width: 100%;
+    max-height: 92vh;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  html[data-theme="light"] {
+    --bg-primary: #fbf8f4;
+    --bg-pillbar: #f0ece3;
+    --bg-card: #ffffff;
+    --bg-quote: #f6f2ea;
+    --bg-tag: #eee8dd;
+    --text-primary: #2f2820;
+    --text-body: #4a3f35;
+    --text-secondary: #5e5043;
+    --text-muted: #756656;
+    --primary: #1b9dce;
+    --primary-light: rgba(27, 157, 206, 0.12);
+    --primary-border: rgba(27, 157, 206, 0.35);
+    --accent: #b86b11;
+    --accent-light: rgba(244, 196, 78, 0.22);
+    --border-color: rgba(74, 63, 53, 0.12);
+    --border-strong: rgba(74, 63, 53, 0.22);
+    --taupe-fab: rgba(105, 90, 74, 0.94);
+    --shadow: 0 4px 18px rgba(47, 40, 32, 0.08);
+    color-scheme: light;
+  }
+
+  html[data-theme="light"] .ro-header-wrap {
+    background: linear-gradient(180deg, #fbf8f4 70%, rgba(251, 248, 244, 0));
+  }
+
+  html[data-theme="light"] .ro-menu-circle {
+    background: #67c3eb;
+    color: #1f1a15;
+  }
+
+  html[data-theme="light"] .ro-cta-pill {
+    background: #f6c84c;
+    color: #2f2820;
+  }
+
+  html[data-theme="light"] .ro-bottom-toc,
+  html[data-theme="light"] .ro-up-btn {
+    color: #ffffff;
+  }
+
+  html[data-theme="light"] .ro-drawer-list a.active {
+    background: #f6c84c;
+    border-color: #e0b034;
+    color: #2f2820 !important;
+  }
+
+  html[data-theme="light"] .quote-tw strong {
+    color: #8c4d06;
+    background: rgba(246, 200, 76, 0.28);
+  }
+</style>
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem('biowiki-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+
+<!-- Reading Outpost Dark Style Shell -->
+<div class="ro-header-wrap" id="top">
+  <div class="ro-pillbar">
+    <div class="ro-brand-group">
+      <button class="ro-menu-circle" type="button" aria-label="開啟專題選單" onclick="roOpenDrawer('roSiteDrawer')">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="ro-brand-link" href="index.html">
+        <span class="ro-brand-zh">400X 的日常切片</span>
+        <span class="ro-brand-en">BIO-WIKI EVIDENCE</span>
+      </a>
+    </div>
+    <div class="ro-top-actions">
+      <button class="ro-theme-btn" id="roThemeBtn" type="button" onclick="roToggleTheme()">☀️ 亮色</button>
+      <button class="ro-cta-pill" type="button" onclick="roOpenDrawer('roSiteDrawer')">專題目錄</button>
+    </div>
+  </div>
+</div>
+
+<!-- Site-Wide Topics Drawer -->
+<div class="ro-drawer-backdrop" id="roSiteDrawer" onclick="if(event.target===this)roCloseDrawer('roSiteDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📚 Bio-Wiki 全站專題</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roSiteDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list">
+      <a href="index.html">🏠 首頁：主題分類總覽</a>
+      <a href="chromatin.html">1. 染色質與染色體本質</a>
+      <a href="wheat-polygenic.html">2. 小麥多基因累加模型 (Campbell 14e)</a>
+      <a href="spermatogonia-hole.html">3. 精原細胞與生精歷程 (跨正典考證)</a>
+      <a href="griffith-transformation.html">4. Griffith 轉形作用</a>
+      <a href="promoter-tata-box.html">5. 啟動子、TATA 匣與甲基化</a>
+      <a href="sickle-cell-dominance.html">6. 鐮刀型貧血顯隱性層次分析</a>
+      <a href="endosymbiosis.html">7. 內共生假說與演化序列</a>
+      <a href="lactose-intolerance-lac-operon.html">8. 乳糖不耐症與大腸桿菌 lac 操縱組</a>
+      <a href="operon-inference-pierce.html">9. Pierce 操縱組推論過程</a>
+      <a href="gene-allele-dna-chromosome.html">10. 遺傳因子、基因、等位基因與染色體</a>
+      <a href="oogenesis-interphase-dyad.html">11. 初級卵母細胞、間期與二分體</a>
+      <a href="xy-synapsis-crossing-over.html">12. 人類 XY 染色體聯會、互換與四分體判定</a>
+      <a href="chromosome-breakage-cri-du-chat.html">13. 染色體斷裂成因與貓叫症（5p 缺失）</a>
+      <a href="operator-transcription-translation.html">14. 操作子會不會被轉錄與轉譯？（基因 vs. 子）</a>
+      <a href="lac-operon-sugar-sensing.html">15. 大腸桿菌如何感測葡萄糖與乳糖？</a>
+      <a href="why-eukaryotes-lack-operons.html">16. 為什麼真核細胞幾乎沒有操縱組？</a>
+      <a href="plant-photoreceptor-photoperiodism.html" class="active">17. 沒有感官如何感知世界？（細菌乳糖 vs. 植物光週期）</a>
+    </div>
+  </div>
+</div>
+
+<!-- In-Page TOC Drawer -->
+<div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📑 本篇段落導覽</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list" id="roTocList" onclick="roCloseDrawer('roTocDrawer')"></div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="ro-lightbox" id="roLightbox" onclick="this.classList.remove('open')">
+  <img id="roLightboxImg" src="" alt="">
+</div>
+
+<main class="container">
+
+  <header class="hero">
+    <div class="badge-bar">
+      <span class="badge badge-primary">植物構造與生理調控</span>
+      <span class="badge badge-accent">跨單元對照 · 高中易讀版</span>
+      <span class="badge">6 部正典 · 6 張原圖</span>
+    </div>
+    <h1>沒有眼睛、鼻子、嘴巴，生命如何感知世界？</h1>
+    <p class="subtitle">從「大腸桿菌偵測乳糖」到「植物看見紅光與藍光、算準黑夜長度」——一次看透蛋白質構形開關、光敏素入核、近日時鐘與外部一致性模型（CO → FT 開花素）。</p>
+  </header>
+
+  <!-- TL;DR Card -->
+  <div class="tldr-card">
+    <div class="tldr-label">⚡ 跨界核心大觀念：蛋白質的「三維構形改變」，就是細胞的眼睛與舌頭</div>
+    <p style="margin-bottom:0;">不論是單細胞細菌還是高大樹木，缺乏動物感官器官的生命，靠的都是同一套底層邏輯：<strong>外界訊號（化學分子或光子） → 撞上專門的受體蛋白 → 誘發蛋白質三維構形改變 → 進而開關 DNA 上的基因轉錄！</strong></p>
+  </div>
+
+  <!-- Section 1: Cross-Kingdom Comparison -->
+  <section id="sec-compare">
+    <h2><span class="sec-num">01</span> 跨界總對照：大腸桿菌偵測乳糖 vs. 植物看見光與光週期</h2>
+    <p>先看這張對照表，把大腸桿菌（原核）與植物（真核）並排在一起，你會立刻看見跨物種生命設計的驚人共通性：</p>
+
+    <div class="table-wrap">
+      <table class="ro-resp-table">
+        <thead>
+          <tr>
+            <th>感測步驟</th>
+            <th>大腸桿菌（沒嘴巴、沒鼻子）偵測乳糖</th>
+            <th>植物（沒眼睛、沒手錶）偵測光與光週期</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>① 外界訊號</strong></td>
+            <td>環境中的<strong>乳糖分子</strong>（化學訊號）</td>
+            <td>陽光中的<strong>紅光、遠紅光、藍光光子</strong>與日夜長度（物理訊號）</td>
+          </tr>
+          <tr>
+            <td><strong>② 第一線收訊</strong></td>
+            <td>靠<strong>基礎滲漏轉錄</strong>常備少數通透酶（LacY）運進乳糖，再由常備 β-半乳糖苷酶轉成<strong>異乳糖</strong>（詳見 <a href="lac-operon-sugar-sensing.html">第 15 篇</a>）</td>
+            <td>細胞內的<strong>光受體蛋白</strong>（如光敏素、隱色素、促向光蛋白）透過呈色基團直接吸收特定波長光子</td>
+          </tr>
+          <tr>
+            <td><strong>③ 蛋白質構形切換</strong></td>
+            <td>異乳糖結合 <strong>Lac 抑制蛋白</strong> → 構形改變 → 脫離 DNA 操作子</td>
+            <td>呈色基團 C15–C16 <strong>順反異構化</strong> → 光敏素由 <strong>Pr 轉為 Pfr</strong> → 暴露入核訊號移入細胞核；促向光蛋白藍光下「解除封鎖」並自磷酸化</td>
+          </tr>
+          <tr>
+            <td><strong>④ 進階多訊號／計時</strong></td>
+            <td>搭配 <strong>PTS 磷酸接力 → cAMP–CAP</strong> 測葡萄糖，組成 <strong>AND 邏輯閘</strong></td>
+            <td>光受體校準 24 小時<strong>近日時鐘</strong>，以<strong>外部一致性模型（CO 穩定度）</strong>判讀日長</td>
+          </tr>
+          <tr>
+            <td><strong>⑤ 最終生理輸出</strong></td>
+            <td>開啟 <em>lac</em> 操縱組轉錄，大量製造乳糖分解酵素</td>
+            <td>降解核內 <strong>PIF</strong> 改寫基因；葉片產 <strong>FT 開花素</strong>經韌皮部運至莖頂誘發開花，或調控萌發、遮蔭迴避與休眠</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 2: How Plants See Light -->
+  <section id="sec-see-light">
+    <h2><span class="sec-num">02</span> 植物沒有眼睛，怎麼「看見」光線變化？（三大光受體）</h2>
+    <p>植物細胞裡裝了好幾款「專門吸收不同色光」的<strong>光受體蛋白</strong>。葉綠素是拿來做光合作用（抓能量），而光受體則是拿來讀情報（抓訊號）：</p>
+
+    <h3>1. 光敏素（Phytochrome）——看紅光與遠紅光的雙穩態開關</h3>
+    <ul>
+      <li><strong>吸光關鍵：呈色基團順反異構化（圖 1）</strong>：光敏素蛋白接上一塊線性四吡咯吸光晶片「<strong>光敏素膽素（phytochromobilin）</strong>」。黑暗中它呈現無活性的 <strong>Pr 型</strong>；一旦吸收 <strong>660 nm 紅光</strong>，C15–C16 雙鍵瞬間發生<strong>順反異構化</strong>（像折疊椅喀嚓翻面），帶動整個蛋白質構形重排成有活性的 <strong>Pfr 型</strong>！若再照 <strong>730 nm 遠紅光</strong>，它又會瞬間翻回 Pr 型（Taiz 7e Ch. 16）。</li>
+      <li><strong>衝進細胞核改寫基因（圖 2）</strong>：變成活化的 Pfr 型後，原本被遮住的核定位訊號（NLS）暴露出來（phyA 則由 FHY1 護送），光敏素雙體從細胞質移入<strong>細胞核</strong>，促使原本在暗中壓抑光反應的轉錄因子（<strong>PIF</strong>）磷酸化並被降解，一口氣改寫高達基因體約 10% 的基因表現（Taiz 7e Ch. 16；Sadava 12e Ch. 35）。</li>
+    </ul>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 1｜植物「看見」紅光的原子瞬間：光敏素呈色基團的順反異構化</div>
+      <div class="figure-img-wrap">
+        <img src="images/Taiz7e_Fig16-8_phytochrome_cis_trans_isomerization.png" alt="Taiz 7e 圖 16.8 光敏素呈色基團光敏素膽素在紅光與遠紅光下於 C15 發生順反異構化">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Taiz Plant Physiology 7e, Fig. 16.8</strong>：Pr（吸收 660 nm 紅光）的 D 環為 <em>cis</em> 順式構型；吸收紅光光子後，C15–C16 雙鍵翻轉成 <em>trans</em> 反式構型的 Pfr（吸收 730 nm 遠紅光）。這個原子尺度的翻轉，就是牽動整顆光敏素蛋白變形的開關！</div>
+      <div class="figure-caption-en">Original caption: Figure 16.8 Structure of the Pr and Pfr forms of the tetrapyrrole (A–D) chromophore (phytochromobilin) and the peptide region bound to the chromophore through a thioether linkage. The chromophore undergoes a cis–trans isomerization at carbon 15 in response to red and far-red light.</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 2｜紅光活化光敏素 → 暴露入核通行證 → 進入細胞核調控基因轉錄</div>
+      <div class="figure-img-wrap">
+        <img src="images/Taiz7e_Fig16-10_phytochrome_activation_nucleus.png" alt="Taiz 7e 圖 16.10 光敏素組裝、紅光活化由 Pr 轉為 Pfr 並暴露核定位訊號移入細胞核調控基因表現">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Taiz Plant Physiology 7e, Fig. 16.10</strong>：呈色基團（PφB）在質體合成後組裝到脫輔基蛋白上（步驟 1）；紅光誘發雙體構形改變（Pr → Pfr，步驟 2），暴露 phyB 的核定位訊號（phyA 則結合 FHY1）移入細胞核調控基因表現（步驟 3），少量留在細胞質介導快速反應（步驟 4）。</div>
+      <div class="figure-caption-en">Original caption: Figure 16.10 Steps in phytochrome activation and signal transduction in photomorphogenesis. After synthesis of phytochromobilin in the plastid and assembly with the apoprotein (1), phytochrome is activated by red light (2) and moves into the nucleus (3) to modulate gene expression.</div>
+    </div>
+
+    <h3>2. 兩大藍光受體：隱色素（Cryptochrome）與促向光蛋白（Phototropin）</h3>
+    <ul>
+      <li><strong>隱色素（cry1／cry2，考題常作隱花色素）</strong>：含有 FAD 呈色基團，吸收藍光／UV-A 後引發 C 端構形改變，於細胞核內抑制降解轉錄因子的 COP1／SPA1 複合體，負責抑制幼苗徒長、<strong>校準生物時鐘與穩定開花蛋白 CO</strong>（Taiz 7e Ch. 16）。</li>
+      <li><strong>促向光蛋白（phot1／phot2，考題常作向光素，圖 3）</strong>：定位在細胞膜上，含兩個 LOV 感光區（各帶一個 FMN）。黑暗中 N 端把 C 端激酶區「鎖住」；吸收藍光光子後 Jα 螺旋展開、<strong>解除封鎖並自磷酸化</strong>，啟動<strong>向光性彎曲、氣孔開啟與葉綠體移動</strong>（弱光排在上下壁多吸光、強光躲到側壁防曬傷）（Taiz 7e Ch. 16）。</li>
+    </ul>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 3｜藍光受體也是構形開關：促向光蛋白吸收藍光後「解除封鎖」並自磷酸化</div>
+      <div class="figure-img-wrap">
+        <img src="images/Taiz7e_Fig16-22_phototropin_uncaging.png" alt="Taiz 7e 圖 16.22 藍光誘導促向光蛋白 LOV 區域解除激酶區封鎖並發生自磷酸化">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Taiz Plant Physiology 7e, Fig. 16.22</strong>：黑暗中，帶 FMN 的 LOV1／LOV2 區把紅色激酶區「封鎖（cages）」住；藍光照射後 Jα 螺旋展開，激酶區被「解除封鎖（uncaging）」並自我磷酸化，觸發向光性、氣孔開啟與葉綠體移動。</div>
+      <div class="figure-caption-en">Original caption: Figure 16.22 Model for blue light–induced autophosphorylation of phototropin. Absorption of blue photons by the LOV domains results in primary photochemical changes that lead to the uncaging of the kinase domain and its activation.</div>
+    </div>
+  </section>
+
+  <!-- Section 3: How Plants Measure Time -->
+  <section id="sec-photoperiod">
+    <h2><span class="sec-num">03</span> 光敏素只看「亮不亮」，植物怎麼「算時間」偵測光週期與開花？</h2>
+    <p>知道「現在有光」還不夠——植物怎麼算出「今天黑夜夠不夠長、現在是不是秋天」？這裡分兩個層次看，高中生與教甄考生都會一次打通：</p>
+
+    <h3>層次 1：經典實驗事實——植物量的是「連續黑夜（臨界夜長）」與 R／FR 可逆性</h3>
+    <p>短日照植物其實是「<strong>長夜植物</strong>」（連續黑夜必須超過臨界夜長才開花），長日照植物則是「<strong>短夜植物</strong>」。如果在長夜中段閃短短幾分鐘<strong>紅光（暗期中斷）</strong>，Pr 瞬間變回 Pfr，植物立刻把一個長夜當成兩個短夜（短日不開、長日反開）；但如果緊接著照<strong>遠紅光</strong>把 Pfr 翻回 Pr，紅光效果就立刻被取消——結果永遠以<strong>最後一次照光</strong>為準（圖 4，Campbell 13e Ch. 39）。</p>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 4｜高中必考經典實驗：紅光與遠紅光夜間打斷的可逆效應</div>
+      <div class="figure-img-wrap">
+        <img src="images/Campbell13e_Fig39-20_night_break_r_fr_reversible.jpg" alt="Campbell 13e 圖 39.20 紅光與遠紅光對短日植物與長日植物光週期開花的可逆效應">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Campbell Biology 13e, Fig. 39.20</strong>：由上而下對照短日植物（菊花）與長日植物（鳶尾）：長夜中插入 <code>r</code>（紅光）→ 短日不開、長日開花；插入 <code>r → fr</code>（遠紅光）→ 恢復原狀（短日開花、長日不開）；不論閃幾次，永遠以<strong>最後一次光色</strong>決定結果！</div>
+      <div class="figure-caption-en">Original caption: Figure 39.20 Reversible effects of red and far-red light on photoperiodic response. A flash of red (r) light shortens the dark period. A subsequent flash of far-red (fr) light cancels the red flash's effect.</div>
+    </div>
+
+    <h3>層次 2：高中古典說法（暗回復）vs. 現代完整真相（外部一致性模型：近日時鐘＋CO→FT）</h3>
+    <p>許多課本會提到「入夜後 Pfr 會緩慢自發轉回 Pr（<strong>暗回復／熱回復</strong>），黑夜越長剩餘 Pfr 越少」。但現代植物生理學發現，植物不能只靠暗回復算時間——因為 <strong>Pfr 暗回復速率對溫度非常敏感</strong>（氣溫升高會轉得更快，Sadava 12e Ch. 37），而且把大豆放進 64 小時超長暗期測試暗期中斷時，開花反應呈現約 <strong>24 小時的週期振盪</strong>（Taiz 7e Ch. 20 Fig. 20.10），證明植物內部裝的其實是一個具<strong>溫度補償</strong>的 <strong>24 小時近日時鐘（生物時鐘）</strong>！</p>
+
+    <div class="flow">
+      <span>陽光經光敏素／隱色素校準近日時鐘</span><b>→</b>
+      <span>時鐘每日傍晚驅動葉片表現 <em>CO</em> mRNA</span><b>→</b>
+      <span>長日傍晚有光：光受體保護 CO 蛋白不降解</span><b>→</b>
+      <span>CO 活化葉脈伴細胞 <em>FT</em> 基因</span><b>→</b>
+      <span>FT 蛋白（開花素）經韌皮部運至莖頂</span><b>→</b>
+      <span>FT–FD 合體開啟 <em>AP1</em>／<em>LFY</em> 開花！</span>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 5｜外部一致性模型：體內時鐘節律與外部陽光的「重疊判讀」（阿拉伯芥 vs. 水稻）</div>
+      <div class="figure-img-wrap">
+        <img src="images/Taiz7e_Fig20-11_external_coincidence_co_hd1.png" alt="Taiz 7e 圖 20.11 外部一致性模型的分子基礎，比較長日照阿拉伯芥 CO-FT 與短日照水稻 Hd1-Hd3a">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Taiz Plant Physiology 7e, Fig. 20.11</strong>：左側<strong>長日照植物阿拉伯芥</strong>：近日時鐘讓 <em>CO</em> mRNA（綠線）固定在傍晚升高。短日（A）時 <em>CO</em> 高峰落在黑夜，CO 蛋白被分解，不產 FT、不開花；長日（B）時 <em>CO</em> 高峰與黃昏日光重疊，隱色素／phyA／FKF1 保護 CO 蛋白累積（藍線），啟動 <em>FT</em>（紅線）開花！右側<strong>短日照植物水稻</strong>：同源蛋白 Hd1 在長日日光下反而變成抑制子壓制 <em>Hd3a</em>（D），故只在短日（C）時開花。</div>
+      <div class="figure-caption-en">Original caption: Figure 20.11 Molecular basis of the external coincidence model in Arabidopsis (A and B) and rice (C and D).</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 6｜葉片感知光週期、莖頂執行開花：FT 蛋白（開花素）的韌皮部快遞旅程</div>
+      <div class="figure-img-wrap">
+        <img src="images/Taiz7e_Fig20-16_ft_florigen_phloem_sam.png" alt="Taiz 7e 圖 20.16 葉脈伴細胞合成 FT 開花素經 FTIP1 進入韌皮部運至莖頂分生組織與 FD 結合啟動花器官基因">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Taiz Plant Physiology 7e, Fig. 20.16</strong>：葉脈伴細胞整合日長、光質與溫度後表現 <em>FT</em>（步驟 1）→ 經 FTIP1 協助由內質網送入篩管（步驟 2）→ 隨韌皮部運至莖頂分生組織（步驟 3–4）→ FT 與轉錄因子 FD 形成複合體活化 <em>SOC1</em>、<em>AP1</em>、<em>LFY</em>，正回饋鎖定開花（步驟 5–6）！下方螢光顯微照清晰可見伴細胞中的綠色 FT–GFP 蛋白。</div>
+      <div class="figure-caption-en">Original caption: Figure 20.16 Multiple factors regulate flowering in Arabidopsis. FT protein moves via the phloem from leaf companion cells to the shoot apical meristem and interacts with FD to activate floral identity genes.</div>
+    </div>
+  </section>
+
+  <!-- Section 4: Other Photoperiodic & Photomorphogenic Responses -->
+  <section id="sec-other">
+    <h2><span class="sec-num">04</span> 除了開花，植物還用「分子眼睛＋光週期」控制哪些生理現象？</h2>
+    <div class="table-wrap">
+      <table class="ro-resp-table">
+        <thead>
+          <tr>
+            <th>生理現象</th>
+            <th>光敏素／光週期怎麼調控？</th>
+            <th>生態與生存意義</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>① 種子萌發</strong></td>
+            <td>萵苣等小型需光種子照紅光 → Pr 轉 Pfr → 促進吉貝素（GA）合成、弱化胚乳促發芽（遠紅光可逆轉）</td>
+            <td>確保養分有限的小種子只在林冠破口或土表才發芽，不會埋太深耗盡養分（Campbell 13e；Taiz 7e）</td>
+          </tr>
+          <tr>
+            <td><strong>② 去黃化（幼苗綠化）</strong></td>
+            <td>暗中幼苗細長蒼白；鑽出土照光後，光敏素降解 PIF、搭配隱色素與促向光蛋白減緩莖伸長、展開葉片並合成葉綠素</td>
+            <td>在土裡先把全部能量拿去衝破地面，見到陽光才轉成光合作用模式（Campbell 13e；Taiz 7e）</td>
+          </tr>
+          <tr>
+            <td><strong>③ 遮蔭迴避（避蔭反應）</strong></td>
+            <td>上方樹冠葉綠素吸走紅光、穿透遠紅光 → R:FR 比下降、Pfr 減少 → 加速節間垂直伸長、減少分枝</td>
+            <td>察覺頭頂有競爭對手遮光，立刻把資源全壓在長高搶陽光（Campbell 13e；Taiz 7e；RavenPlants 8e）</td>
+          </tr>
+          <tr>
+            <td><strong>④ 芽休眠與秋季落葉</strong></td>
+            <td>溫帶落葉樹（如白楊）靠光敏素 A 與近日時鐘感測秋天日長縮短，配合低溫啟動芽鱗休眠與葉片離層脫落</td>
+            <td>在嚴冬降臨前先回收養分、脫葉防凍傷並鎖定休眠芽過冬（Taiz 7e Ch. 19 &amp; 23；RavenPlants 8e）</td>
+          </tr>
+          <tr>
+            <td><strong>⑤ 貯藏器官／塊莖形成</strong></td>
+            <td>日長變化同步調控無性生殖與馬鈴薯塊莖等地下貯藏器官發育</td>
+            <td>在季節轉換前及早儲備澱粉等越冬與繁殖資源（Taiz 7e Ch. 20；Hopkins Ch. 24）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 5: Bilingual Sources -->
+  <section id="sec-sources">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+      <h2 style="margin-bottom:8px;flex:1;"><span class="sec-num">05</span> 經典英文原文教科書逐句考證</h2>
+      <button class="toggle-en-btn" id="toggleEnBtn" type="button" onclick="toggleEnglish()">精簡：隱藏英文原文</button>
+    </div>
+    <p>以下所有英文原文均原封不動回溯自 Ze-Agent Vault 正式譯本，提供高中教師備課、教甄申論與同學溯源查證。</p>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">1. 《Taiz Plant Physiology》7e — 光敏素順反異構化、入核與促向光蛋白解除封鎖</span>
+        <span class="source-loc">Ch. 16 來自陽光的訊號</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">呈色基團 C15–C16 順反異構化引發蛋白質結構重排，進而暴露 NLS 移入細胞核</div>
+        <div class="quote-en">"Exposure of the Pr form of phytochrome to red light causes atomic-scale structural changes in the chromophore phytochromobilin: The Pr chromophore undergoes a cis–trans isomerization between carbons 15 and 16 and rotation of the C14—C15 single bond (see Figure 16.8). The change in the chromophore leads to the rearrangement of crucial secondary-structure elements in the protein."<br><br>"Once in the nucleus, phytochromes interact with transcriptional regulators to mediate changes in gene transcription. Thus, one important function of phytochrome is to serve as a light-activated switch to bring about global changes in gene expression."</div>
+        <div class="quote-tw">Pr 型光敏素暴露於紅光時，呈色基團光敏素膽素在 C15 與 C16 間發生<strong>順反異構化</strong>，引發蛋白質關鍵二級結構重排。<strong>一旦進入細胞核，光敏素便與轉錄調控因子互動，作為光活化開關帶來基因表現的全域性改變。</strong></div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">促向光蛋白（藍光受體）的「解除封鎖」與自磷酸化開關</div>
+        <div class="quote-en">"In the dark, the N-terminal region, including the LOV domains, 'cages' and inhibits the activity of the kinase domain (Figure 16.22). Absorption of blue photons by the LOV domains results in primary photochemical changes that lead to the uncaging of the kinase domain and its activation by the unfolding of the Jα-helix. The activation of the C-terminal kinase domain then leads to receptor autophosphorylation on multiple serine residues."</div>
+        <div class="quote-tw">黑暗中 LOV 區「封鎖」激酶區；吸收藍光光子後，Jα 螺旋展開使激酶區被<strong>解除封鎖</strong>並發生自磷酸化，啟動所有促向光蛋白介導的反應。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">2. 《Taiz Plant Physiology》7e — 近日時鐘、外部一致性模型（CO）、FT 開花素與芽休眠</span>
+        <span class="source-loc">Ch. 19 &amp; Ch. 20</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">64 小時暗期實驗反駁單純累積計時；外部一致性模型使長日傍晚光受體穩定 CO</div>
+        <div class="quote-en">[Ch. 20] "If this SDP were simply measuring the length of night by the accumulation of a particular intermediate in the dark, any dark period greater than the critical night length should cause flowering. Yet long dark periods are not inductive for flowering if the light break is given at a time that does not properly coincide with a certain phase of the endogenous circadian oscillator."<br><br>"A critical feature of the external coincidence mechanism is that flowering in LDPs is promoted when a light-sensitive phase of the CO diel rhythm, which is generated in the leaf (the site of perception of the photoperiodic stimulus), coincides with the presence of light (an external signal). ... In the early evening, by contrast, cryptochromes, phyA, and FLAVIN-BINDING KELCH REPEAT, F-BOX 1 (FKF1)... antagonize this degradation and allow the CO protein to build up."</div>
+        <div class="quote-tw">倘若短日照植物只是靠在黑暗中累積某種中間產物測量夜長，任何超過臨界夜長的暗期都該開花；但實驗證明光中斷必須與<strong>內生近日振盪器</strong>相位吻合。在<strong>外部一致性模型</strong>下，葉片中受時鐘驅動的 <strong>CO 晝夜節律光敏感相位與外部光照同時發生</strong>時，隱色素、phyA 與 FKF1 拮抗其降解，使 CO 蛋白累積並啟動開花。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">FT 蛋白（開花素）經韌皮部運至莖頂與 FD 合體；落葉樹芽休眠受近日時鐘與光敏素 A 調控</div>
+        <div class="quote-en">[Ch. 20] "According to the current model, FT protein moves via the phloem from the leaves to the meristem under inductive photoperiods. ... Once in the floral meristem, the FT protein enters the nucleus and forms a complex with FLOWERING D (FD)... The complex formed by FT and FD then activates floral identity genes such as APETALA1 (AP1)."<br><br>[Ch. 19] "Circadian clock genes and flowering genes (see Chapter 20), together with phytochrome A, are involved in controlling dormancy in deciduous trees in relation to photoperiod and temperature."</div>
+        <div class="quote-tw">[Ch. 20] <strong>FT 蛋白經由韌皮部從葉片運到分生組織</strong>，入核與 <strong>FD</strong> 形成複合體，活化花器官特徵基因（如 <em>AP1</em>）。<br>[Ch. 19] <strong>近日時鐘基因、開花基因連同光敏素 A</strong>，共同控制落葉樹因應光週期與溫度的休眠。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">3. 《Campbell Biology》13e · 《Hopkins》 · 《Sadava》12e — 光可逆開關、暗回復溫度敏感性與夜間打斷</span>
+        <span class="source-loc">Campbell Ch. 39 · Hopkins Ch. 22 · Sadava Ch. 37</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Campbell 13e Ch. 39：紅光最能中斷夜長，緊接著遠紅光即可取消效果</div>
+        <div class="quote-en">"Red light is the most effective color in interrupting the night length. Action spectra and photoreversibility experiments show that phytochrome is the pigment that detects the red light (Figure 39.20). For example, if a flash of red light during the night length is followed by a flash of far-red light, then the plant detects no interruption of night length."</div>
+        <div class="quote-tw"><strong>紅光是中斷夜長最有效的光色</strong>；若夜間閃一次紅光後緊接著閃一次遠紅光，植物就不會偵測到夜長遭到中斷，展現光敏素的紅光／遠紅光可逆性。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Hopkins Ch. 22 ＆ Sadava 12e Ch. 37：Pfr 暗回復具溫度依賴性（同時作為溫度感測器）</div>
+        <div class="quote-en">[Hopkins Ch. 22] "Both physiological and spectrophotometric experiments have also indicated that some Pfr may revert to Pr by a temperature-dependent process called dark reversion."<br><br>[Sadava 12e Ch. 37] "If the rate at which Pfr dark-reverts to Pr speeds up as the temperature rises, then the amount of Pfr in a plant will decline, even if the light exposure stays the same."</div>
+        <div class="quote-tw">[Hopkins] 部分 Pfr 可透過<strong>依賴溫度的過程回復為 Pr（暗回復）</strong>。<br>[Sadava] 若 Pfr 暗逆轉速率隨溫度上升而加快，即使光照不變，植物中 Pfr 含量仍會下降（光敏素因而兼具溫度感測器功能）。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Teaching & Boundary -->
+  <section id="sec-teaching">
+    <h2><span class="sec-num">06</span> 高中教學、常見陷阱、教甄實戰與查證邊界</h2>
+
+    <div class="callout">
+      <div class="callout-title">🎯 課堂跨界串聯金句</div>
+      <p style="margin-bottom:0;">講到分子調控或植物感應時，直接把「大腸桿菌怎麼嚐乳糖」與「植物怎麼看見紅光、量出黑夜」放在同一個畫面——讓學生發現<strong>生命沒有眼睛鼻子沒關係，因為「蛋白質構形開關」就是細胞最精密的分子感官</strong>！</p>
+    </div>
+
+    <h3>常見命題陷阱與審定名詞提醒</h3>
+    <ul>
+      <li><strong>陷阱 1</strong>：「光敏素是植物激素，在葉片合成後經韌皮部運至莖頂誘發開花」→ <strong>錯</strong>！光敏素是<strong>胞內光受體蛋白</strong>（在葉片細胞質→細胞核作用）；真正搭韌皮部快遞運到莖頂的是下游產物 <strong>FT 蛋白（開花素）</strong>。</li>
+      <li><strong>陷阱 2</strong>：「短日照植物只要白天天數短、或黑夜恰等於臨界夜長就會開花」→ <strong>錯</strong>！決定因子是<strong>連續暗期大於臨界夜長</strong>（115 嘉科實中第 1 題考點）。</li>
+      <li><strong>審定名詞</strong>：依臺灣教育部《生命科學名詞》，<code>phytochrome</code>＝<strong>光敏素</strong>、<code>cryptochrome</code>＝<strong>隱色素</strong>（教甄亦見隱花色素）、<code>phototropin</code>＝<strong>促向光蛋白</strong>（教甄常作向光素）、<code>florigen</code>＝<strong>開花素</strong>、<code>circadian clock</code>＝<strong>近日時鐘</strong>、<code>shade avoidance</code>＝<strong>遮蔭迴避</strong>。</li>
+      <li><strong>系列延伸閱讀</strong>：回看原核側的完整分子感測機制，請見 <a href="lac-operon-sugar-sensing.html">大腸桿菌怎麼知道環境中有沒有葡萄糖與乳糖？</a>、<a href="operator-transcription-translation.html">操作子會不會被轉錄與轉譯產生蛋白質？</a> 與 <a href="why-eukaryotes-lack-operons.html">為什麼真核細胞幾乎沒有操縱組？</a>。</li>
+    </ul>
+
+    <div class="boundary">
+      <div class="callout-title">📌 本機資料庫（Vault）查證邊界聲明</div>
+      <p style="margin-bottom:0;">本頁所有核心機制（光敏素呈色基團順反異構化、Pr ⇄ Pfr 構形改變與入核、PIF 降解、隱色素與促向光蛋白解除封鎖、臨界夜長與 R/FR 夜間打斷可逆、64 小時暗期近日節律實驗、外部一致性模型 CO/Hd1 與 FT 開花素韌皮部運輸、種子萌發／去黃化／遮蔭迴避／落葉休眠）皆有上述原文書正典直接支持。需誠實標明：「單靠 Pfr 暗回復無法解釋溫度補償」係整合 Hopkins Ch. 22／Sadava Ch. 37（暗回復速率對溫度敏感）與 Taiz Ch. 20／Hopkins Ch. 24（生物時鐘具溫度補償且暗期敏感度呈 24 小時振盪）之跨章邏輯統整（Vault 原文書中未出現「沙漏／hourglass」字樣）；塊莖形成在 Vault 中僅於 Taiz Ch. 20 與 Hopkins Ch. 24 總述列舉，未細論馬鈴薯 <em>StSP6A</em> 分子路徑。</p>
+    </div>
+  </section>
+
+  <footer>
+    Bio-Wiki 概念考證庫 · 繁體中文與審定名詞遵循臺灣教育部規範 · 原文書與圖片引自 Ze-Agent Vault 正式譯本
+  </footer>
+</main>
+
+<!-- Reading Outpost Bottom Bar & Script -->
+<button class="ro-bottom-toc" type="button" onclick="roOpenDrawer('roTocDrawer')">📑 本篇段落導覽</button>
+<a class="ro-up-btn" href="#top" aria-label="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<script>
+  function roToggleTheme() {
+    var root = document.documentElement;
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('biowiki-theme', next); } catch (e) {}
+    roUpdateThemeBtn();
+  }
+  function roUpdateThemeBtn() {
+    var btn = document.getElementById('roThemeBtn');
+    if (!btn) return;
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.innerHTML = isLight ? '🌙 深色' : '☀️ 亮色';
+    btn.setAttribute('aria-label', isLight ? '切換為深色閱讀模式' : '切換為亮色閱讀模式');
+  }
+  roUpdateThemeBtn();
+  function roOpenDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('open');
+  }
+  function roCloseDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  }
+  function openLightbox(src, alt) {
+    var lb = document.getElementById('roLightbox');
+    var img = document.getElementById('roLightboxImg');
+    if (lb && img) {
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.add('open');
+    }
+  }
+  function toggleEnglish() {
+    document.body.classList.toggle('hide-en');
+    var btn = document.getElementById('toggleEnBtn');
+    if (btn) {
+      btn.textContent = document.body.classList.contains('hide-en')
+        ? '完整：顯示英文原文'
+        : '精簡：隱藏英文原文';
+    }
+  }
+  (function initReadingOutpostShell() {
+    var tocList = document.getElementById('roTocList');
+    var headings = document.querySelectorAll('h2');
+    if (tocList && headings.length) {
+      headings.forEach(function(h, idx) {
+        if (!h.id) h.id = 'ro-sec-' + (idx + 1);
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent.trim();
+        tocList.appendChild(a);
+      });
+    }
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th, tr:first-child th')).map(function(th) {
+        return th.innerText.trim().replace(/[\r\n\t ]+/g, ' ');
+      });
+      if (!headers.length) return;
+      table.classList.add('ro-resp-table');
+      table.querySelectorAll('tr').forEach(function(tr) {
+        if (tr.querySelector('th')) return;
+        Array.from(tr.children).forEach(function(td, idx) {
+          if (td.tagName === 'TD' && !td.getAttribute('data-label') && headers[idx]) {
+            td.setAttribute('data-label', headers[idx]);
+          }
+        });
+      });
+    });
+    document.querySelectorAll('main img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        openLightbox(img.src, img.alt);
+      });
+    });
+  })();
+</script>
+</body>
+</html>
