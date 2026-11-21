@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>大腸桿菌怎麼知道環境中有沒有葡萄糖與乳糖？｜Bio-Wiki</title>
+<style>
+  :root {
+    --bg-primary: #181614;
+    --bg-pillbar: #24201c;
+    --bg-card: #211e1a;
+    --bg-quote: #26221e;
+    --bg-tag: #2d2823;
+    --text-primary: #f6f1ea;
+    --text-body: #ddd5ca;
+    --text-secondary: #bfb5a8;
+    --text-muted: #9a8e80;
+    --primary: #5bc0eb;
+    --primary-light: rgba(91, 192, 235, 0.12);
+    --primary-border: rgba(91, 192, 235, 0.32);
+    --accent: #f4c44e;
+    --accent-light: rgba(244, 196, 78, 0.12);
+    --border-color: rgba(246, 241, 234, 0.09);
+    --border-strong: rgba(246, 241, 234, 0.16);
+    --taupe-fab: rgba(104, 91, 78, 0.94);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+  }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+    font-size: 18px;
+    line-height: 1.78;
+    padding: 0 0 96px 0;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .ro-header-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-primary) 70%, rgba(24, 22, 20, 0));
+  }
+
+  .ro-pillbar {
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .ro-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .ro-menu-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    border: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .ro-menu-circle span {
+    display: block;
+    width: 16px;
+    height: 2.2px;
+    background: #181614;
+    border-radius: 2px;
+  }
+
+  .ro-brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .ro-brand-zh {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-brand-en {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .ro-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .ro-theme-btn {
+    appearance: none;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    transition: transform 0.15s ease;
+  }
+
+  .ro-theme-btn:active {
+    transform: scale(0.96);
+  }
+
+  .ro-cta-pill {
+    appearance: none;
+    background: var(--accent);
+    color: #1c1814;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .container {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 22px 0;
+  }
+
+  header.hero {
+    text-align: left;
+    margin-bottom: 32px;
+    padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .badge-bar {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .badge-primary {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary-border);
+  }
+
+  .badge-accent {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: rgba(244, 196, 78, 0.32);
+  }
+
+  h1 {
+    font-size: clamp(26px, 6.2vw, 34px);
+    line-height: 1.38;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    margin: 6px 0 14px;
+    text-align: left;
+  }
+
+  .subtitle {
+    font-size: 17px;
+    line-height: 1.68;
+    color: var(--text-muted);
+    margin: 0;
+    text-align: left;
+  }
+
+  section {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: 42px;
+    scroll-margin-top: 84px;
+  }
+
+  h2 {
+    font-size: clamp(22px, 5.2vw, 27px);
+    line-height: 1.45;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 44px 0 18px;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+  }
+
+  h2 .sec-num {
+    color: var(--accent);
+    margin-right: 6px;
+    font-weight: 800;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 30px 0 12px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--text-body);
+    margin-bottom: 18px;
+  }
+
+  ul, ol {
+    margin: 0 0 22px 24px;
+    color: var(--text-body);
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+    color: var(--text-body);
+  }
+
+  strong, b {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.9em;
+    background: var(--bg-tag);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 6px;
+  }
+
+  main a:not(.ro-cta-pill):not(.ro-brand-link) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  .tldr-card, .source-card, .callout, .callout-warn, .boundary, .glossary-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 20px 20px;
+    margin: 20px 0;
+  }
+
+  .tldr-card {
+    border-left: 4px solid var(--accent);
+  }
+
+  .callout {
+    border-left: 4px solid var(--primary);
+  }
+
+  .callout-warn {
+    border-left: 4px solid var(--accent);
+  }
+
+  .boundary {
+    border-left: 4px solid var(--text-muted);
+  }
+
+  .tldr-label, .callout-title, .source-book {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 14px;
+  }
+
+  .timeline-step {
+    padding-left: 4px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 12px;
+  }
+
+  .timeline-step:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .timeline-step-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .timeline-step-title span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    font-size: 14px;
+    font-weight: 800;
+    margin-right: 8px;
+  }
+
+  .flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    padding: 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    margin: 18px 0;
+  }
+
+  .flow span {
+    padding: 5px 10px;
+    border-radius: 8px;
+    background: var(--bg-tag);
+    color: var(--text-primary);
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .flow b {
+    color: var(--accent);
+  }
+
+  .glossary-item {
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .glossary-item:last-child {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+
+  .glossary-term {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+
+  .source-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .source-loc {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .quote-block {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .quote-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quote-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .quote-en {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 10px 0 12px;
+    word-break: break-word;
+  }
+
+  body.hide-en .quote-en {
+    display: none;
+  }
+
+  .quote-tw {
+    font-size: 17.5px;
+    line-height: 1.78;
+    color: var(--text-body);
+  }
+
+  .quote-tw strong {
+    color: var(--accent);
+    background: rgba(244, 196, 78, 0.10);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+
+  .toggle-en-btn {
+    appearance: none;
+    background: var(--bg-tag);
+    color: var(--accent);
+    border: 1px solid rgba(244, 196, 78, 0.35);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  .figure-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .figure-title {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding: 12px 16px 4px;
+  }
+
+  .figure-img-wrap {
+    padding: 14px;
+    background: #f8fafc;
+    cursor: zoom-in;
+  }
+
+  main img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 8px;
+    margin: 0 auto;
+    cursor: zoom-in;
+  }
+
+  .zoom-hint {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    padding: 6px 4px 0;
+  }
+
+  .figure-caption {
+    font-size: 15px;
+    line-height: 1.68;
+    color: var(--text-secondary);
+    padding: 10px 16px 8px;
+  }
+
+  .figure-caption-en {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 0 16px 14px;
+  }
+
+  .table-wrap {
+    width: 100%;
+    margin: 18px 0 26px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 16px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-body);
+  }
+
+  th {
+    background: var(--bg-pillbar);
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  tr.highlight-tr td {
+    background: rgba(244, 196, 78, 0.12);
+    color: var(--text-primary);
+  }
+
+  @media (max-width: 680px) {
+    table.ro-resp-table,
+    table.ro-resp-table thead,
+    table.ro-resp-table tbody,
+    table.ro-resp-table th,
+    table.ro-resp-table td,
+    table.ro-resp-table tr {
+      display: block;
+      width: 100%;
+    }
+
+    table.ro-resp-table thead {
+      display: none;
+    }
+
+    table.ro-resp-table tr {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    table.ro-resp-table td {
+      border: none;
+      border-bottom: 1px dashed var(--border-color);
+      padding: 8px 0;
+      text-align: left !important;
+    }
+
+    table.ro-resp-table td:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    table.ro-resp-table td:first-child {
+      padding-top: 0;
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    table.ro-resp-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+  }
+
+  .ro-bottom-toc {
+    position: fixed;
+    left: 16px;
+    bottom: 20px;
+    z-index: 95;
+    background: var(--taupe-fab);
+    color: #f6f1ea;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 9px 15px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: calc(100vw - 88px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-up-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 95;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--taupe-fab);
+    color: #f6f1ea;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    text-decoration: none !important;
+  }
+
+  .ro-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ro-drawer-backdrop.open {
+    display: flex;
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-backdrop {
+      align-items: center;
+      padding: 24px;
+    }
+  }
+
+  .ro-drawer-panel {
+    width: 100%;
+    max-width: 500px;
+    max-height: 78vh;
+    overflow-y: auto;
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px 20px 0 0;
+    padding: 18px 18px 28px;
+    box-shadow: var(--shadow);
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-panel {
+      border-radius: 18px;
+    }
+  }
+
+  .ro-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .ro-drawer-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .ro-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .ro-drawer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ro-drawer-list a {
+    display: block;
+    text-decoration: none !important;
+    color: var(--text-body) !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .ro-drawer-list a.active {
+    color: #181614 !important;
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 800;
+  }
+
+  .ro-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    cursor: zoom-out;
+  }
+
+  .ro-lightbox.open {
+    display: flex;
+  }
+
+  .ro-lightbox img {
+    max-width: 100%;
+    max-height: 92vh;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  html[data-theme="light"] {
+    --bg-primary: #fbf8f4;
+    --bg-pillbar: #f0ece3;
+    --bg-card: #ffffff;
+    --bg-quote: #f6f2ea;
+    --bg-tag: #eee8dd;
+    --text-primary: #2f2820;
+    --text-body: #4a3f35;
+    --text-secondary: #5e5043;
+    --text-muted: #756656;
+    --primary: #1b9dce;
+    --primary-light: rgba(27, 157, 206, 0.12);
+    --primary-border: rgba(27, 157, 206, 0.35);
+    --accent: #b86b11;
+    --accent-light: rgba(244, 196, 78, 0.22);
+    --border-color: rgba(74, 63, 53, 0.12);
+    --border-strong: rgba(74, 63, 53, 0.22);
+    --taupe-fab: rgba(105, 90, 74, 0.94);
+    --shadow: 0 4px 18px rgba(47, 40, 32, 0.08);
+    color-scheme: light;
+  }
+
+  html[data-theme="light"] .ro-header-wrap {
+    background: linear-gradient(180deg, #fbf8f4 70%, rgba(251, 248, 244, 0));
+  }
+
+  html[data-theme="light"] .ro-menu-circle {
+    background: #67c3eb;
+    color: #1f1a15;
+  }
+
+  html[data-theme="light"] .ro-cta-pill {
+    background: #f6c84c;
+    color: #2f2820;
+  }
+
+  html[data-theme="light"] .ro-bottom-toc,
+  html[data-theme="light"] .ro-up-btn {
+    color: #ffffff;
+  }
+
+  html[data-theme="light"] .ro-drawer-list a.active {
+    background: #f6c84c;
+    border-color: #e0b034;
+    color: #2f2820 !important;
+  }
+
+  html[data-theme="light"] .quote-tw strong {
+    color: #8c4d06;
+    background: rgba(246, 200, 76, 0.28);
+  }
+</style>
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem('biowiki-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+
+<!-- Reading Outpost Dark Style Shell -->
+<div class="ro-header-wrap" id="top">
+  <div class="ro-pillbar">
+    <div class="ro-brand-group">
+      <button class="ro-menu-circle" type="button" aria-label="開啟專題選單" onclick="roOpenDrawer('roSiteDrawer')">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="ro-brand-link" href="index.html">
+        <span class="ro-brand-zh">400X 的日常切片</span>
+        <span class="ro-brand-en">BIO-WIKI EVIDENCE</span>
+      </a>
+    </div>
+    <div class="ro-top-actions">
+      <button class="ro-theme-btn" id="roThemeBtn" type="button" onclick="roToggleTheme()">☀️ 亮色</button>
+      <button class="ro-cta-pill" type="button" onclick="roOpenDrawer('roSiteDrawer')">專題目錄</button>
+    </div>
+  </div>
+</div>
+
+<!-- Site-Wide Topics Drawer -->
+<div class="ro-drawer-backdrop" id="roSiteDrawer" onclick="if(event.target===this)roCloseDrawer('roSiteDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📚 Bio-Wiki 全站專題</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roSiteDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list">
+      <a href="index.html">🏠 首頁：主題分類總覽</a>
+      <a href="chromatin.html">1. 染色質與染色體本質</a>
+      <a href="wheat-polygenic.html">2. 小麥多基因累加模型 (Campbell 14e)</a>
+      <a href="spermatogonia-hole.html">3. 精原細胞與生精歷程 (跨正典考證)</a>
+      <a href="griffith-transformation.html">4. Griffith 轉形作用</a>
+      <a href="promoter-tata-box.html">5. 啟動子、TATA 匣與甲基化</a>
+      <a href="sickle-cell-dominance.html">6. 鐮刀型貧血顯隱性層次分析</a>
+      <a href="endosymbiosis.html">7. 內共生假說與演化序列</a>
+      <a href="lactose-intolerance-lac-operon.html">8. 乳糖不耐症與大腸桿菌 lac 操縱組</a>
+      <a href="operon-inference-pierce.html">9. Pierce 操縱組推論過程</a>
+      <a href="gene-allele-dna-chromosome.html">10. 遺傳因子、基因、等位基因與染色體</a>
+      <a href="oogenesis-interphase-dyad.html">11. 初級卵母細胞、間期與二分體</a>
+      <a href="xy-synapsis-crossing-over.html">12. 人類 XY 染色體聯會、互換與四分體判定</a>
+      <a href="chromosome-breakage-cri-du-chat.html">13. 染色體斷裂成因與貓叫症（5p 缺失）</a>
+      <a href="operator-transcription-translation.html">14. 操作子會不會被轉錄與轉譯？（基因 vs. 子）</a>
+      <a href="lac-operon-sugar-sensing.html" class="active">15. 大腸桿菌如何感測葡萄糖與乳糖？</a>
+    </div>
+  </div>
+</div>
+
+<!-- In-Page TOC Drawer -->
+<div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📑 本篇段落導覽</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list" id="roTocList" onclick="roCloseDrawer('roTocDrawer')"></div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="ro-lightbox" id="roLightbox" onclick="this.classList.remove('open')">
+  <img id="roLightboxImg" src="" alt="">
+</div>
+
+<main class="container">
+
+  <header class="hero">
+    <div class="badge-bar">
+      <span class="badge badge-primary">分子生物與基因表現</span>
+      <span class="badge badge-accent">高中易讀版</span>
+      <span class="badge">10 部正典 · 5 張原圖</span>
+    </div>
+    <h1>大腸桿菌怎麼知道環境中有沒有葡萄糖與乳糖？</h1>
+    <p class="subtitle">細菌沒有眼睛也沒有味覺受器——從「基礎滲漏轉錄」破解先有雞或蛋，到 PTS 磷酸接力、cAMP–CAP 油門與「誘導物排除」，一次搞懂四種糖類環境的完整判讀邏輯。</p>
+  </header>
+
+  <!-- TL;DR Card -->
+  <div class="tldr-card">
+    <div class="tldr-label">⚡ 一句話先講結論（兩套獨立分子感測線路）</div>
+    <p>大腸桿菌不是靠「看」或「聞」，而是用<strong>兩條各自獨立的分子感測線路</strong>同時讀出環境中的兩種糖，再由 <em>lac</em> 操縱組像電腦 <strong>AND 邏輯閘</strong>一樣整合決定開不開機。</p>
+    <div class="timeline">
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>1</span>感測「有沒有乳糖」（煞車線路：抑制蛋白）</div>
+        <p style="margin-bottom:0;">平時抑制蛋白並不是 100% 關死，細胞會靠<strong>基礎滲漏轉錄</strong>常備少數幾分子<strong>通透酶（LacY）</strong>與 <strong>β-半乳糖苷酶（LacZ）</strong>。外面有乳糖時，先運進來並轉成<strong>異乳糖</strong>拉開抑制蛋白（鬆煞車）；沒乳糖就繼續踩死煞車。</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>2</span>感測「有沒有葡萄糖」（油門線路：PTS → cAMP–CAP ＋ 誘導物排除）</div>
+        <p style="margin-bottom:0;">靠細胞膜運送葡萄糖的 <strong>PTS 磷酸轉移酶系統</strong>：<strong>沒有葡萄糖</strong>時，磷酸基滯留在中繼蛋白 EIIA 上，活化<strong>腺苷酸環化酶</strong>產生大量 <strong>cAMP</strong>，讓 <strong>cAMP–CAP</strong> 結合啟動子上游（踩滿油門）；<strong>有葡萄糖</strong>時，磷酸基不斷被轉給進門的葡萄糖，不只讓 cAMP 驟降（不踩油門），去磷酸化的葡萄糖轉運蛋白還會直接卡住乳糖通透酶（<strong>誘導物排除</strong>），把乳糖擋在門外！</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>3</span>兩條線路整合：唯有「沒葡萄糖 且 有乳糖」才全開</div>
+        <p style="margin-bottom:0;"><strong>有葡有乳</strong> → 沒油門＋乳糖被擋門外（表現極低，專心吃葡萄糖）；<strong>有葡無乳</strong> → 沒油門＋煞車踩死（關閉）；<strong>無葡有乳</strong> → 油門踩滿＋煞車鬆開（全力全開！）；<strong>無葡無乳</strong> → 油門就位但煞車踩死（關閉待命）。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 1 -->
+  <section id="sec-lactose">
+    <h2><span class="sec-num">01</span> 怎麼知道環境「有沒有乳糖」？——破解先有雞還是先有蛋</h2>
+    <p>學到乳糖操縱組時，思緒敏銳的高中生一定會追問一個超棒的邏輯問題：「沒乳糖時，<em>lac</em> 操縱組不是被抑制蛋白關起來了嗎？既然關起來，細胞膜上就沒大量通透酶運乳糖、細胞裡也沒大量 β-半乳糖苷酶把乳糖變成異乳糖——那外面突然出現乳糖時，第一批乳糖是怎麼進門報信的？」</p>
+    <p>答案非常巧妙：<strong>Lac 抑制蛋白對操作子的關閉從來不是 100% 絕對鎖死！</strong></p>
+    <ul>
+      <li><strong>常備極微量的「基礎滲漏轉錄（basal / leaky transcription）」</strong>：抑制蛋白與操作子的結合是可逆的；偶爾它會短暫脫離操作子，讓 RNA 聚合酶溜過去合成極少量 mRNA（抑制使轉錄速率下降約 10³ 倍，但不是零）。因此即使在完全沒有乳糖的環境中，每個大腸桿菌細胞裡仍隨時保底有不到 3 個分子左右的 <strong>β-半乳糖苷酶</strong>與少數幾個<strong>半乳糖苷通透酶（LacY）</strong>常駐待命（Cox 2e Ch. 20；Lehninger 8e Ch. 28；Prescott 12e Ch. 14；Pierce 7e Ch. 16）。</li>
+      <li><strong>有乳糖 → 正回饋滾雪球</strong>：當外界出現乳糖，這幾個「常備通透酶」把少量乳糖運進細胞 → 常備 β-半乳糖苷酶順手把一小部分乳糖異構化成<strong>異乳糖（allolactose）</strong>。因為整個細胞裡本來就只有約 10 個（約 10–20 個）Lac 抑制蛋白四聚體（Weaver 5e Ch. 07；Cox 2e Ch. 20），一點點異乳糖就足以讓抑制蛋白變形、脫離操作子，進而大量合成更多通透酶與酵素，像滾雪球一樣把系統全面打開。</li>
+      <li><strong>沒乳糖 → 維持鎖定</strong>：外界沒乳糖 → 細胞內無異乳糖 → 抑制蛋白保持活性構形，牢牢結合在操作子上擋住轉錄。</li>
+    </ul>
+
+    <div class="flow">
+      <span>外界出現乳糖</span><b>→</b>
+      <span>常備少量 LacY 運入</span><b>→</b>
+      <span>常備少量 β-半乳糖苷酶轉成異乳糖</span><b>→</b>
+      <span>抑制蛋白變形脫離操作子</span><b>→</b>
+      <span>正回饋滾雪球大量開啟</span>
+    </div>
+
+    <h3>關鍵專有名詞白話解析</h3>
+    <div class="glossary-card">
+      <div class="glossary-item">
+        <div class="glossary-term">基礎滲漏轉錄（basal / leaky transcription）</div>
+        <p style="margin-bottom:0;">即使抑制蛋白結合在操作子上，偶爾仍會短暫鬆手，使細胞隨時維持極少量通透酶與 β-半乳糖苷酶當作「常備哨兵」，讓細菌能偵測到突然出現的乳糖。</p>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">異乳糖（allolactose）</div>
+        <p style="margin-bottom:0;">乳糖進入細胞後由 β-半乳糖苷酶重排產生的異構物（β-1,4 鍵轉為 β-1,6 鍵），是 <em>lac</em> 操縱組<strong>真正的生理誘導物</strong>。</p>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">磷酸轉移酶系統（PTS, phosphotransferase system）</div>
+        <p style="margin-bottom:0;">大腸桿菌輸入葡萄糖的「磷酸接力運輸系統」（PEP → EI → HPr → EIIA → EIIB／EIIC → 葡萄糖）。有沒有葡萄糖接走磷酸基，就是細菌感知外面有無葡萄糖的物理感測器。</p>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">腺苷酸環化酶（adenylyl cyclase）與 cAMP–CAP</div>
+        <p style="margin-bottom:0;">腺苷酸環化酶以 ATP 合成 <strong>cAMP</strong>（缺葡萄糖的飢餓訊號）。cAMP 結合 <strong>CAP（異化代謝物基因活化蛋白，又稱 CRP）</strong>後，就能結合啟動子上游大力招募 RNA 聚合酶。</p>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">誘導物排除（inducer exclusion）</div>
+        <p style="margin-bottom:0;">有葡萄糖時，去磷酸化的葡萄糖轉運蛋白會直接黏上並阻斷乳糖通透酶（LacY），讓外頭的乳糖根本進不來，從源頭防止異乳糖累積。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2 -->
+  <section id="sec-glucose">
+    <h2><span class="sec-num">02</span> 怎麼知道環境「有沒有葡萄糖」？——PTS 磷酸接力與誘導物排除</h2>
+    <p>高中生常背過「葡萄糖低 → cAMP 高 → CAP 活化」，但多數人沒搞懂：<strong>葡萄糖只是糖分子，它怎麼讓細胞裡的 cAMP 變低？</strong>答案就藏在細胞膜運送葡萄糖的<strong>磷酸轉移酶系統（PTS）</strong>，而且它一口氣連動了兩道機制：</p>
+
+    <h3>感測線 A：PTS 磷酸接力 → 決定腺苷酸環化酶要不要做 cAMP</h3>
+    <p>大腸桿菌把葡萄糖運進門時，會同時從細胞內的 <strong>PEP（磷酸烯醇丙酮酸）</strong>拿一顆磷酸基，經由 <code>EI → HPr → EIIA → EIIB／EIIC</code> 一路接力貼到進門的葡萄糖上（讓葡萄糖以葡萄糖 6-磷酸形式進細胞，Prescott 12e Ch. 14）：</p>
+    <ul>
+      <li><strong>環境「有葡萄糖」時</strong>：進門的葡萄糖不斷把磷酸基領走 → 中繼蛋白 <strong>EIIA 處於去磷酸化狀態</strong> → 無法活化細胞膜上的<strong>腺苷酸環化酶</strong>（同時葡萄糖也會抑制 cAMP 合成並促進 cAMP 流出細胞，Brock 15e Ch. 06；Lehninger 8e Ch. 28）→ <strong>cAMP 濃度很低</strong> → <strong>CAP 拿不到 cAMP、無法結合 DNA（沒踩油門）</strong>。</li>
+      <li><strong>環境「沒有葡萄糖」時</strong>：門口沒葡萄糖能領走磷酸基，整條磷酸接力大塞車 → 磷酸基滯留在 <strong>EIIA~P（磷酸化狀態）</strong>上 → <strong>EIIA~P 轉而活化腺苷酸環化酶</strong>把大量 ATP 轉成 <strong>cAMP</strong> → <strong>cAMP–CAP 複合體</strong>結合到 <em>lac</em> 啟動子上游，彎曲 DNA 並強力招募 RNA 聚合酶（<strong>油門踩滿</strong>）！</li>
+    </ul>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 1｜細菌怎麼「感覺」外面沒葡萄糖？PTS 磷酸接力活化腺苷酸環化酶</div>
+      <div class="figure-img-wrap">
+        <img src="images/Prescott12e_Fig14-19_pts_adenyl_cyclase.png" alt="Prescott 12e 圖 14.19 磷酸轉移酶系統 PTS 在沒有葡萄糖時由 EIIA~P 活化腺苷酸環化酶產生 cAMP">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Prescott's Microbiology 12e, Fig. 14.19</strong>：有葡萄糖時，PEP 的磷酸經由 EI → HPr → EIIA → EIIB 傳給進門的葡萄糖；<strong>沒有葡萄糖時</strong>，磷酸傳不出去而停在 <strong>EIIA~P</strong> 上，EIIA~P 隨即活化細胞膜上的<strong>腺苷酸環化酶（AC）</strong>把 ATP 轉成 <strong>cAMP</strong>。（註：依現代生化模型譯註，磷酸化 EIIA<sup>Glc</sup> 係與 AC 交互作用活化之，而非將磷酸基轉移給 AC。）</div>
+      <div class="figure-caption-en">Original caption: Figure 14.19 Activation of Adenyl Cyclase by the Phosphoenolpyruvate: Sugar Phosphotransferase System (PTS). PEP is phosphoenolpyruvate. EI and EII are enzymes I and II of the PTS, respectively. EII has three subunits: A, B, and C. HPr, heat-stable protein; AC, adenyl cyclase.</div>
+    </div>
+
+    <h3>感測線 B（雙重保險）：誘導物排除——有葡萄糖時直接把乳糖門鎖住</h3>
+    <p>不只沒踩油門，現代分子生物學（Cox 2e Ch. 19；Freeman 8e Ch. 18；Raven 13e Ch. 16）還強調第二層超乾脆的控制——<strong>誘導物排除（inducer exclusion）</strong>：</p>
+    <ul>
+      <li><strong>有葡萄糖時</strong>：剛把磷酸基交給葡萄糖、變成<strong>去磷酸化狀態的葡萄糖轉運蛋白</strong>（Cox 2e 稱去磷酸化葡萄糖通透酶），會直接結合並<strong>阻斷細胞膜上的乳糖通透酶（LacY）</strong>！外頭就算有滿滿乳糖也幾乎進不來，細胞內做不出異乳糖，抑制蛋白乾脆繼續鎖死操作子。</li>
+      <li><strong>沒葡萄糖時</strong>：葡萄糖轉運蛋白維持<strong>磷酸化</strong>狀態，不再卡住乳糖通透酶，乳糖通道瞬間暢通！</li>
+    </ul>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 2｜葡萄糖調控 <em>lac</em> 操縱組的雙模型對照：CAP 正調控 vs. 誘導物排除</div>
+      <div class="figure-img-wrap">
+        <img src="images/Freeman8e_Fig18-8_cap_and_inducer_exclusion.png" alt="Freeman 8e 圖 18.8 解釋葡萄糖如何調控 lac 操縱組的 CAP 正調控與誘導物排除雙模型">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Freeman Biological Science 8e, Fig. 18.8</strong>：兩圖皆預設「細胞外有乳糖」。(a) <strong>CAP 調控</strong>：細胞外葡萄糖高 → 細胞內 cAMP 低 → CAP 不結合 → 僅極低頻率轉錄；葡萄糖低 → cAMP 高 → CAP 結合 → 高頻率轉錄。(b) <strong>誘導物排除</strong>：細胞外葡萄糖高 → 抑制乳糖通透酶 → 細胞內乳糖低 → 抑制蛋白留在操作子上 → 無轉錄；葡萄糖低 → 乳糖順利進入 → 解除抑制。</div>
+      <div class="figure-caption-en">Original caption: Figure 18.8 Two Models to Explain How Glucose Regulates the lac Operon. Panels (a) and (b) both show the situation when lactose is present outside of the cell.</div>
+    </div>
+  </section>
+
+  <!-- Section 3 -->
+  <section id="sec-four-cases">
+    <h2><span class="sec-num">03</span> 四種糖類環境完整判讀（AND 邏輯閘與雙相生長）</h2>
+    <p>現在把「<strong>有沒有乳糖（煞車：抑制蛋白）</strong>」和「<strong>有沒有葡萄糖（油門：cAMP–CAP ＋ 誘導物排除）</strong>」合在一起，直接解答四種環境組合（涵蓋你問的三種情境，並補齊第四種「無葡無乳」）：</p>
+
+    <div class="table-wrap">
+      <table class="ro-resp-table">
+        <thead>
+          <tr>
+            <th>環境糖類組合</th>
+            <th>葡萄糖感測<br>（PTS → cAMP–CAP）</th>
+            <th>乳糖感測<br>（通透酶 → 異乳糖 → 抑制蛋白）</th>
+            <th><em>lac</em> 操縱組表現</th>
+            <th>大腸桿菌的選擇</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>① 有葡萄糖<br>有乳糖</strong></td>
+            <td>PTS 去磷酸化 → <strong>cAMP 低，CAP 不結合</strong>（沒踩油門）；且<strong>誘導物排除</strong>大幅阻斷乳糖進門</td>
+            <td>進門乳糖極少（即使少許進入拉開抑制蛋白，沒 CAP 幫忙，RNA 聚合酶也很難結合弱啟動子）</td>
+            <td><strong>極低／幾乎關閉</strong></td>
+            <td><strong>專心先吃葡萄糖</strong>，不浪費能量合成乳糖分解酵素</td>
+          </tr>
+          <tr>
+            <td><strong>② 有葡萄糖<br>沒有乳糖</strong></td>
+            <td>PTS 去磷酸化 → <strong>cAMP 低，CAP 不結合</strong>（沒踩油門）</td>
+            <td>沒乳糖 → 無異乳糖 → <strong>抑制蛋白緊綁操作子</strong>（煞車踩死）</td>
+            <td><strong>完全關閉</strong><br>（僅極微基礎量）</td>
+            <td>直接利用葡萄糖</td>
+          </tr>
+          <tr class="highlight-tr">
+            <td><strong>③ 沒有葡萄糖<br>有乳糖</strong></td>
+            <td>PTS 維持磷酸化 → 活化腺苷酸環化酶 → <strong>cAMP 高，cAMP–CAP 結合啟動子上游</strong>（油門踩滿）；不再阻斷 LacY</td>
+            <td>常備少量通透酶運入乳糖 → 轉成異乳糖 → <strong>抑制蛋白脫離操作子</strong>（煞車鬆開）</td>
+            <td><strong>高度大量表現<br>（唯一全開！）</strong></td>
+            <td>全力合成 β-半乳糖苷酶與通透酶，改吃乳糖</td>
+          </tr>
+          <tr>
+            <td><strong>④ 沒有葡萄糖<br>沒有乳糖</strong></td>
+            <td>PTS 維持磷酸化 → <strong>cAMP 高，cAMP–CAP 結合啟動子上游</strong>（油門就位待命）</td>
+            <td>沒乳糖 → 無異乳糖 → <strong>抑制蛋白緊綁操作子</strong>（煞車踩死）</td>
+            <td><strong>關閉</strong><br>（不浪費能量）</td>
+            <td>飢餓待命；一旦之後出現乳糖可立刻啟動</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 3｜像電腦 AND 邏輯閘一樣運作：唯有「沒葡萄糖 且 有乳糖」才會開機</div>
+      <div class="figure-img-wrap">
+        <img src="images/AlbertsECB6_Fig8-9_lac_operon_four_conditions.png" alt="Alberts ECB 6e 圖 8-9 乳糖操縱組在四種葡萄糖與乳糖條件下的開關狀態">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Alberts Essential Cell Biology 6e, Fig. 8–9</strong>：由上往下對照全部四種條件，前三個條件（<code>+GLU/+LAC</code>、<code>+GLU/−LAC</code>、<code>−GLU/−LAC</code>）皆呈現 <strong>OPERON OFF</strong>；唯有最下方 <strong><code>−GLUCOSE +LACTOSE</code></strong> 同時滿足「CAP–cAMP 結合」與「抑制蛋白離開」，才呈現 <strong>OPERON ON</strong>。</div>
+      <div class="figure-caption-en">Original caption: Figure 8–9 The Lac operon is controlled by two transcription regulators, the Lac repressor and CAP. For the operon to be transcribed, glucose must be absent (allowing the CAP activator to bind) and lactose must be present (releasing the Lac repressor).</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 4｜Lehninger 8e 四狀態分子圖：看清 (c) 有葡有乳仍有「極低量」vs. (d) 無葡有乳「大量」mRNA</div>
+      <div class="figure-img-wrap">
+        <img src="images/Lehninger8e_Fig28-18_crp_lac_positive_control.png" alt="Lehninger 8e 圖 28-18 CRP-cAMP 與 Lac 抑制蛋白在四種糖類條件下的表現量比較">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Lehninger Principles of Biochemistry 8e, Fig. 28-18</strong>：(a)、(b) 缺乳糖時，抑制蛋白抓住 O₁ 與 O₃ 使 DNA 成環，完全不表現；(c) 有乳糖也有葡萄糖時，cAMP 低導致 CRP 不結合，RNA 聚合酶偶爾結合，僅有<strong>極低程度表現</strong>；(d) 低葡萄糖＋有乳糖時，CRP–cAMP 協助 RNA 聚合酶穩固結合，產生<strong>高量 mRNA</strong>。</div>
+      <div class="figure-caption-en">Original caption: FIGURE 28-18 Positive regulation of the lac operon by CRP. (a) Glucose high, cAMP low, lactose absent. (b) Glucose low, cAMP high, lactose absent. (c) Glucose high, cAMP low, lactose present: Low level of gene expression. (d) Glucose low, cAMP high, lactose present: High level of gene expression.</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 5｜看得見的實驗證據：同時給葡萄糖與乳糖時的「雙相生長曲線（Diauxic growth）」</div>
+      <div class="figure-img-wrap">
+        <img src="images/Brooker8e_Fig14-8_diauxic_growth.png" alt="Brooker Genetics 8e 圖 14.8 大腸桿菌在同時有葡萄糖與乳糖培養基中的雙相生長曲線">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Brooker Genetics 8e, Fig. 14.8</strong>：同時投入葡萄糖與乳糖後，大腸桿菌先靠葡萄糖快速增殖（紅線，此時 <em>lac</em> 操縱組被抑制）；等第 5 小時葡萄糖耗盡，菌數出現一小段平緩的<strong>遲滯期（Lag phase）</strong>——這正是 PTS 磷酸化、cAMP 飆升、誘導物排除解除並大量合成乳糖酵素的切換時間；接著才進入第二波以乳糖為主的成長期（藍線）。</div>
+      <div class="figure-caption-en">Original caption: FIGURE 14.8 Diauxic growth of E. coli when given both glucose and lactose. At time zero, both glucose and lactose were added to a culture of E. coli cells. The division of cells to make more cells was then monitored for 10 hours.</div>
+    </div>
+  </section>
+
+  <!-- Section 4: Bilingual Sources -->
+  <section id="sec-sources">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+      <h2 style="margin-bottom:8px;flex:1;"><span class="sec-num">04</span> 經典英文原文教科書逐句考證</h2>
+      <button class="toggle-en-btn" id="toggleEnBtn" type="button" onclick="toggleEnglish()">精簡：隱藏英文原文</button>
+    </div>
+    <p>以下英文原文皆原封不動回溯自 Ze-Agent Vault 正式譯本，提供高中教師備課、教甄申論與同學深度查證。</p>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">1. 《Pierce Genetics》7e · 《Weaver》5e · 《Cox》2e — 如何知道有乳糖（基礎滲漏轉錄）</span>
+        <span class="source-loc">Pierce Ch. 16 · Weaver Ch. 07 · Cox Ch. 20</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Pierce 7e Ch. 16：阻遏從未完全關閉，少量通透酶與 β-半乳糖苷酶啟動誘導</div>
+        <div class="quote-en">"The answer is that repression never completely shuts down transcription of the lac operon. Even with an active repressor bound to the operator, there is a low level of transcription, and a few molecules of β-galactosidase, permease, and transacetylase are synthesized. When lactose appears in the medium, the permease that is present transports a small amount of lactose into the cell. There, the few molecules of β-galactosidase that are present convert some of the lactose into allolactose, which then induces transcription."</div>
+        <div class="quote-tw">答案是，<strong>阻遏從未完全關閉 <em>lac</em> 操縱組的轉錄</strong>。即使活性抑制蛋白結合到操作子，也有低量的轉錄，少量的 β-半乳糖苷酶、通透酶和轉乙醯酶被合成。當乳糖出現在培養基中時，存在的通透酶將少量乳糖運輸進細胞，少量的 β-半乳糖苷酶將一些乳糖轉化為<strong>異乳糖</strong>，異乳糖隨後誘導轉錄。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Weaver 5e Ch. 07 ＆ Cox 2e Ch. 20：每個細胞僅約 10–20 個抑制蛋白四聚體；基礎轉錄不可或缺</div>
+        <div class="quote-en">[Weaver 5e Ch. 07] "The answer is that repression is somewhat leaky, and a low basal level of the lac operon products is always present. This is enough to get the ball rolling by producing a little inducer. It does not take much inducer to do the job, because only about 10 tetramers of repressor are present per cell."<br><br>[Cox 2e Ch. 20] "Even in the repressed state, each cell has a few molecules of β-galactosidase and galactoside permease, presumably synthesized on the rare occasions when the repressor transiently dissociates from the operators. This basal level of transcription is essential to operon regulation."</div>
+        <div class="quote-tw">[Weaver 5e] <strong>抑制有點「漏」</strong>，細胞裡總是存在低量的基礎 <em>lac</em> 操縱組產物；不需要太多誘導物，因為<strong>每個細胞裡只有大約 10 個抑制蛋白四聚體</strong>。<br>[Cox 2e] 即使在抑制狀態，每個細胞仍有少量 β-半乳糖苷酶與半乳糖苷通透酶，推測是在抑制蛋白偶爾短暫離開操作子時合成。<strong>這種基礎轉錄量對操縱組調控不可或缺。</strong></div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">2. 《Prescott Microbiology》12e · 《Brock》15e · 《Lehninger》8e · 《Brooker》8e — 如何感測葡萄糖（PTS → 腺苷酸環化酶 → cAMP）</span>
+        <span class="source-loc">Prescott Ch. 14 · Brock Ch. 06 · Lehninger Ch. 28 · Brooker Ch. 14</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Prescott 12e Ch. 14：PTS 蛋白質的磷酸化狀態就是葡萄糖濃度的分子感測器</div>
+        <div class="quote-en">"We have seen how CAP controls catabolite operons; now let’s turn our attention to the regulation of cAMP and how glucose levels are sensed by the cell. Both depend on the state of a protein that functions in the phosphoenolpyruvate: sugar phosphotransferase system (PTS) (figure 14.19). ... The phosphorylation state of the PTS proteins is an indicator of glucose abundance. When glucose levels are low, enzyme IIB cannot accept the phosphate from enzyme IIA and transfer it to glucose. Instead, enzyme IIA phosphorylates adenyl cyclase, thus stimulating cAMP production."</div>
+        <div class="quote-tw">cAMP 的調控與細胞如何感測葡萄糖濃度，兩者都取決於<strong>磷酸烯醇丙酮酸：糖磷酸轉移酶系統（PTS）</strong>中蛋白質的狀態。<strong>PTS 蛋白質的磷酸化狀態可顯示葡萄糖是否充足</strong>。葡萄糖濃度低時，酵素 IIB 無法從酵素 IIA 接受磷酸再轉給葡萄糖，酵素 IIA 會改為活化<strong>腺苷酸環化酶</strong>，促進 <strong>cAMP</strong> 生成。（譯註：現行生化模型多描述磷酸化 EIIA<sup>Glc</sup> 與腺苷酸環化酶交互作用活化之，而非轉移磷醯基。）</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Brock 15e Ch. 06 ＆ Lehninger 8e Ch. 28：葡萄糖抑制 cAMP 合成並促進 cAMP 流出細胞</div>
+        <div class="quote-en">[Brock 15e Ch. 06] "Cyclic AMP is synthesized from ATP by an enzyme called adenylate cyclase (Figure 6.13). However, glucose inhibits the synthesis of cyclic AMP and also stimulates cyclic AMP transport out of the cell."<br><br>[Lehninger 8e Ch. 28] "In the presence of glucose, the synthesis of cAMP is inhibited and efflux of cAMP from the cell is stimulated. As [cAMP] declines, CRP binding to DNA declines, thereby decreasing the expression of the lac operon."</div>
+        <div class="quote-tw">[Brock 15e] cAMP 由<strong>腺苷酸環化酶</strong>以 ATP 合成；但<strong>葡萄糖會抑制 cAMP 的合成，也會促進 cAMP 輸出細胞</strong>。<br>[Lehninger 8e] 隨著細胞內 [cAMP] 降低，CRP 與 DNA 的結合下降，因而減少 <em>lac</em> 操縱組表現。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">3. 《Cox Molecular Biology》2e · 《Freeman》8e · 《Raven》13e — 誘導物排除（阻斷乳糖進門）</span>
+        <span class="source-loc">Cox Ch. 19 · Freeman Ch. 18 · Raven Ch. 16</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Cox 2e Ch. 19：去磷酸化葡萄糖通透酶直接結合並阻斷乳糖運輸蛋白</div>
+        <div class="quote-en">"A second level of control, called inducer exclusion, occurs when the lactose transporter is blocked by the glucose permease. The glucose permease is usually phosphorylated, and it becomes dephosphorylated on the transfer of phosphate to glucose during glucose transport. The dephosphorylated form of the permease binds and directly blocks the lactose and maltose transporters. When glucose is absent, the glucose permease exists mainly in its phosphorylated form and no longer inhibits the transporters of other sugars."</div>
+        <div class="quote-tw">稱為<strong>誘導物排除</strong>的第二層控制，發生於乳糖運輸蛋白受到葡萄糖通透酶阻斷時。葡萄糖運輸期間磷酸基轉移至葡萄糖後，通透酶便去磷酸化；<strong>去磷酸化型通透酶會結合並直接阻斷乳糖與麥芽糖運輸蛋白</strong>。沒有葡萄糖時，它主要以磷酸化型存在，不再抑制其他醣類的運輸蛋白。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Freeman 8e Ch. 18 ＆ Raven 13e Ch. 16：誘導物排除讓細胞內無法累積乳糖與異乳糖</div>
+        <div class="quote-en">[Freeman 8e Ch. 18] "In the case of the lac operon, when glucose is abundant in the environment, the transport of lactose into the cell by galactoside permease is inhibited (Figure 18.8b, top). Because lactose does not accumulate in the cytoplasm, the repressor remains bound to the operator."<br><br>[Raven 13e Ch. 16] "This mechanism, called inducer exclusion, is now thought to be the main form of glucose repression of the lac operon."</div>
+        <div class="quote-tw">[Freeman 8e] 環境中葡萄糖豐富時，<strong>半乳糖苷通透酶將乳糖運入細胞的作用會受抑制</strong>；因為乳糖不會在細胞質中累積，抑制蛋白繼續結合操作子。<br>[Raven 13e] <strong>誘導物排除現被認為是 <em>lac</em> 操縱組葡萄糖抑制的主要形式。</strong></div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">4. 《Alberts Essential Cell Biology》6e — 雙訊號整合如電腦 AND 邏輯閘</span>
+        <span class="source-loc">Ch. 08 基因表現的控制</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Alberts ECB 6e Ch. 08：唯有「乳糖存在 且 葡萄糖不存在」時執行轉錄程式</div>
+        <div class="quote-en">"This arrangement enables the control region of the Lac operon to integrate two different signals, so that the operon is highly expressed only when two conditions are met: glucose must be absent and lactose must be present (Figure 8–9). This circuit thus behaves much like a switch that carries out a logic operation in a computer. When lactose is present AND glucose is absent, the cell executes the appropriate program—in this case, transcription of the genes that permit the uptake and utilization of lactose."</div>
+        <div class="quote-tw">這種安排使乳糖操縱組的控制區域能整合兩種不同訊號，<strong>只有同時符合「葡萄糖必須不存在」且「乳糖必須存在」時，操縱組才會高度表現</strong>（圖 8–9）；這套迴路很像電腦中執行 <strong>AND 邏輯運算</strong>的開關。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Teaching & Boundary -->
+  <section id="sec-teaching">
+    <h2><span class="sec-num">05</span> 高中教學、常見陷阱、教甄實戰與查證邊界</h2>
+
+    <div class="callout">
+      <div class="callout-title">🎯 課堂講解三層階梯（依學生程度決定教到哪一層）</div>
+      <p style="margin-bottom:0;"><strong>第一層（高中課本共同主幹）</strong>：有無乳糖的負調控。<br><strong>第二層（進階高中／教甄必考，如 114 中正高中問 4）</strong>：補上「基礎滲漏表現解決先有雞或蛋」＋「cAMP–CAP 正調控」＋四種條件排序（<code>無葡有乳 ≫ 有葡有乳 &gt; 有葡無乳 ≈ 無葡無乳</code>）。<br><strong>第三層（資優生追問「細菌到底怎麼感覺有葡萄糖？」）</strong>：直接搬出 <strong>PTS 磷酸接力（EIIA 活化腺苷酸環化酶）</strong>與<strong>誘導物排除</strong>，把原本抽象的因果鏈徹底接通！</p>
+    </div>
+
+    <h3>三大高頻考試陷阱</h3>
+    <ul>
+      <li><strong>陷阱 1</strong>：「異化代謝物抑制（catabolite repression）是負調控」→ <strong>錯</strong>。雖然名稱帶「抑制」，但 CAP–cAMP 機制本質上是<strong>正調控（活化蛋白）在有葡萄糖時失效</strong>（Brooker 8e Ch. 14；Brock 15e Ch. 06）。</li>
+      <li><strong>陷阱 2</strong>：「葡萄糖會直接結合 CAP 使其失去活性」→ <strong>錯</strong>。葡萄糖不直接結合 CAP，而是透過 PTS 與腺苷酸環化酶<strong>間接壓低細胞內 cAMP 濃度</strong>，讓 CAP 缺乏效應物而無法結合 DNA。</li>
+      <li><strong>陷阱 3</strong>：「沒有葡萄糖、沒有乳糖時，因為 cAMP 高、CAP 已結合 DNA，所以仍會中度轉錄」→ <strong>錯</strong>。抑制蛋白結合操作子（負調控）是必要關卡；只要沒乳糖把煞車鬆開，就算 cAMP–CAP 就位也不會有效表現（AND 邏輯閘）。</li>
+      <li><strong>延伸閱讀（本站相關專題）</strong>：想釐清操作子本身會不會轉錄轉譯與「基因 vs. 子」命名密碼，請見 <a href="operator-transcription-translation.html">操作子會不會被轉錄與轉譯產生蛋白質？</a>；想看 <em>lac</em> 操縱組在人類大腸與乳糖不耐症情境中的真實運作，請見 <a href="lactose-intolerance-lac-operon.html">乳糖不耐症與大腸桿菌 lac 操縱組</a>；想看科學史如何用部分二倍體推論出整套迴路，請見 <a href="operon-inference-pierce.html">Pierce 操縱組推論過程</a>。</li>
+    </ul>
+
+    <div class="boundary">
+      <div class="callout-title">📌 本機資料庫（Vault）查證邊界聲明</div>
+      <p style="margin-bottom:0;">本頁所有機制（基礎滲漏轉錄與常備少量 LacY／LacZ、異乳糖為真正誘導物、PTS 磷酸接力調控腺苷酸環化酶、葡萄糖抑制 cAMP 合成並促進流出、誘導物排除阻斷乳糖通透酶、四條件 AND 邏輯閘與雙相生長曲線）皆有上述 10 部原文書正典直接支持。需誠實標明：目前 Vault 內 <strong>Prescott 12e Ch. 14</strong> 以 <code>PTS / EIIA</code> 說明活化腺苷酸環化酶（並於譯註補出 <code>EIIA^Glc</code>），而 <strong>Cox 2e Ch. 19</strong> 以「去磷酸化型葡萄糖通透酶」說明直接阻斷乳糖運輸蛋白（誘導物排除），兩者尚未在同一本 Vault 譯本的單一段落中同時以 <code>EIIA^Glc</code> 代號串接兩條路徑，本頁係整合上述正典共識呈現。另 <code>phosphotransferase</code> 與 <code>inducer exclusion</code> 於臺灣教育部《生命科學名詞》TSV 查無獨立詞條，依 Vault 正式譯本慣例譯為「磷酸轉移酶」與「誘導物排除」。</p>
+    </div>
+  </section>
+
+  <footer>
+    Bio-Wiki 概念考證庫 · 繁體中文與審定名詞遵循臺灣教育部規範 · 原文書與圖片引自 Ze-Agent Vault 正式譯本
+  </footer>
+</main>
+
+<!-- Reading Outpost Bottom Bar & Script -->
+<button class="ro-bottom-toc" type="button" onclick="roOpenDrawer('roTocDrawer')">📑 本篇段落導覽</button>
+<a class="ro-up-btn" href="#top" aria-label="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<script>
+  function roToggleTheme() {
+    var root = document.documentElement;
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('biowiki-theme', next); } catch (e) {}
+    roUpdateThemeBtn();
+  }
+  function roUpdateThemeBtn() {
+    var btn = document.getElementById('roThemeBtn');
+    if (!btn) return;
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.innerHTML = isLight ? '🌙 深色' : '☀️ 亮色';
+    btn.setAttribute('aria-label', isLight ? '切換為深色閱讀模式' : '切換為亮色閱讀模式');
+  }
+  roUpdateThemeBtn();
+  function roOpenDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('open');
+  }
+  function roCloseDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  }
+  function openLightbox(src, alt) {
+    var lb = document.getElementById('roLightbox');
+    var img = document.getElementById('roLightboxImg');
+    if (lb && img) {
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.add('open');
+    }
+  }
+  function toggleEnglish() {
+    document.body.classList.toggle('hide-en');
+    var btn = document.getElementById('toggleEnBtn');
+    if (btn) {
+      btn.textContent = document.body.classList.contains('hide-en')
+        ? '完整：顯示英文原文'
+        : '精簡：隱藏英文原文';
+    }
+  }
+  (function initReadingOutpostShell() {
+    var tocList = document.getElementById('roTocList');
+    var headings = document.querySelectorAll('h2');
+    if (tocList && headings.length) {
+      headings.forEach(function(h, idx) {
+        if (!h.id) h.id = 'ro-sec-' + (idx + 1);
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent.trim();
+        tocList.appendChild(a);
+      });
+    }
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th, tr:first-child th')).map(function(th) {
+        return th.innerText.trim().replace(/[\r\n\t ]+/g, ' ');
+      });
+      if (!headers.length) return;
+      table.classList.add('ro-resp-table');
+      table.querySelectorAll('tr').forEach(function(tr) {
+        if (tr.querySelector('th')) return;
+        Array.from(tr.children).forEach(function(td, idx) {
+          if (td.tagName === 'TD' && !td.getAttribute('data-label') && headers[idx]) {
+            td.setAttribute('data-label', headers[idx]);
+          }
+        });
+      });
+    });
+    document.querySelectorAll('main img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        openLightbox(img.src, img.alt);
+      });
+    });
+  })();
+</script>
+</body>
+</html>
