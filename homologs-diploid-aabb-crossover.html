@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>同源染色體 vs. 雙套（2n），與 AaBb × AaBb 自交如何判斷互換？｜Bio-Wiki</title>
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem('biowiki-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+<style>
+  :root {
+    --bg-primary: #181614;
+    --bg-pillbar: #24201c;
+    --bg-card: #211e1a;
+    --bg-quote: #26221e;
+    --bg-tag: #2d2823;
+    --text-primary: #f6f1ea;
+    --text-body: #ddd5ca;
+    --text-secondary: #bfb5a8;
+    --text-muted: #9a8e80;
+    --primary: #5bc0eb;
+    --primary-light: rgba(91, 192, 235, 0.12);
+    --primary-border: rgba(91, 192, 235, 0.32);
+    --accent: #f4c44e;
+    --accent-light: rgba(244, 196, 78, 0.12);
+    --warn: #f87171;
+    --warn-bg: rgba(248, 113, 113, 0.10);
+    --border-color: rgba(246, 241, 234, 0.09);
+    --border-strong: rgba(246, 241, 234, 0.16);
+    --taupe-fab: rgba(104, 91, 78, 0.94);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  html[data-theme="light"] {
+    --bg-primary: #fbf8f4;
+    --bg-pillbar: #f0ece3;
+    --bg-card: #ffffff;
+    --bg-quote: #f6f2ea;
+    --bg-tag: #eee8dd;
+    --text-primary: #2f2820;
+    --text-body: #4a3f35;
+    --text-secondary: #5e5043;
+    --text-muted: #756656;
+    --primary: #1b9dce;
+    --primary-light: rgba(27, 157, 206, 0.12);
+    --primary-border: rgba(27, 157, 206, 0.35);
+    --accent: #b86b11;
+    --accent-light: rgba(244, 196, 78, 0.22);
+    --warn: #dc2626;
+    --warn-bg: rgba(220, 38, 38, 0.08);
+    --border-color: rgba(74, 63, 53, 0.12);
+    --border-strong: rgba(74, 63, 53, 0.22);
+    --taupe-fab: rgba(105, 90, 74, 0.94);
+    --shadow: 0 4px 18px rgba(47, 40, 32, 0.08);
+    color-scheme: light;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+  }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+    font-size: 18px;
+    line-height: 1.78;
+    padding: 0 0 96px 0;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Reading Outpost Top Pill Header */
+  .ro-header-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-primary) 70%, rgba(24, 22, 20, 0));
+  }
+
+  html[data-theme="light"] .ro-header-wrap {
+    background: linear-gradient(180deg, #fbf8f4 70%, rgba(251, 248, 244, 0));
+  }
+
+  .ro-pillbar {
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .ro-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .ro-menu-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #5bc0eb;
+    color: #181614;
+    border: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  html[data-theme="light"] .ro-menu-circle {
+    background: #67c3eb;
+    color: #1f1a15;
+  }
+
+  .ro-menu-circle span {
+    display: block;
+    width: 16px;
+    height: 2.2px;
+    background: #181614;
+    border-radius: 2px;
+  }
+
+  .ro-brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .ro-brand-zh {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-brand-en {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .ro-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .ro-theme-btn {
+    appearance: none;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+  }
+
+  .ro-cta-pill {
+    appearance: none;
+    background: #f4c44e;
+    color: #1c1814;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  html[data-theme="light"] .ro-cta-pill {
+    background: #f6c84c;
+    color: #2f2820;
+  }
+
+  /* Main Reading Column */
+  main.container {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 22px 0;
+  }
+
+  /* Hero */
+  .hero {
+    text-align: left;
+    margin-bottom: 32px;
+    padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .meta-line {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .meta-pill, .meta-pill-muted {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .meta-pill {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary-border);
+  }
+
+  h1 {
+    font-size: clamp(26px, 6.2vw, 34px);
+    line-height: 1.38;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    margin: 6px 0 14px;
+    text-align: left;
+  }
+
+  .subtitle {
+    font-size: 17px;
+    line-height: 1.68;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* Sections */
+  section {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: 42px;
+    scroll-margin-top: 84px;
+  }
+
+  h2 {
+    font-size: clamp(22px, 5.2vw, 27px);
+    line-height: 1.45;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 44px 0 18px;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+  }
+
+  h2 .sec-num {
+    color: var(--accent);
+    margin-right: 6px;
+    font-weight: 800;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 28px 0 12px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--text-body);
+    margin-bottom: 18px;
+  }
+
+  ul, ol {
+    margin: 0 0 22px 24px;
+    color: var(--text-body);
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+  }
+
+  strong {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  code {
+    background: var(--bg-tag);
+    color: var(--accent);
+    padding: 1px 6px;
+    border-radius: 6px;
+    font-size: 0.92em;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  main a:not(.ro-cta-pill):not(.ro-brand-link) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  /* Sub-cards */
+  .tldr-card, .source-card, .callout, .callout-warn, .step-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin: 20px 0;
+  }
+
+  .tldr-card {
+    border-left: 4px solid var(--accent);
+  }
+
+  .callout {
+    border-left: 4px solid var(--primary);
+  }
+
+  .callout-warn {
+    border-left: 4px solid var(--warn);
+    background: var(--warn-bg);
+  }
+
+  .tldr-label, .callout-title, .source-book {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .callout-warn .callout-title {
+    color: var(--warn);
+  }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-weight: 800;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .step-title {
+    font-size: 18.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  /* Figures */
+  .figure-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .figure-img-wrap {
+    padding: 14px;
+    background: #f8fafc;
+    cursor: zoom-in;
+  }
+
+  main img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 8px;
+    margin: 0 auto;
+    cursor: zoom-in;
+  }
+
+  .zoom-hint {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    padding: 6px 4px 0;
+  }
+
+  .figure-body {
+    padding: 14px 16px 16px;
+  }
+
+  .figure-title {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .figure-caption {
+    font-size: 15.5px;
+    line-height: 1.68;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+
+  .figure-caption-en {
+    font-size: 13.5px;
+    line-height: 1.58;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+
+  .figure-guide {
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: var(--bg-quote);
+    border-left: 3px solid var(--accent);
+    font-size: 15px;
+    line-height: 1.68;
+    color: var(--text-body);
+  }
+
+  .figure-guide strong {
+    color: var(--accent);
+  }
+
+  /* Bilingual Textbook Quote Blocks */
+  .source-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .source-loc {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .quote-block {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .quote-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quote-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .quote-en {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 10px 0 12px;
+    word-break: break-word;
+  }
+
+  body.hide-en .quote-en {
+    display: none;
+  }
+
+  .quote-tw {
+    font-size: 17.5px;
+    line-height: 1.78;
+    color: var(--text-body);
+  }
+
+  .quote-tw strong {
+    color: var(--accent);
+    background: rgba(244, 196, 78, 0.10);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+
+  html[data-theme="light"] .quote-tw strong {
+    color: #8c4d06;
+    background: rgba(246, 200, 76, 0.28);
+  }
+
+  .toggle-en-btn {
+    appearance: none;
+    background: var(--bg-tag);
+    color: var(--accent);
+    border: 1px solid rgba(244, 196, 78, 0.35);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  /* Responsive Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0 26px;
+    font-size: 16px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-body);
+  }
+
+  th {
+    background: var(--bg-pillbar);
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  @media (max-width: 680px) {
+    table.ro-resp-table,
+    table.ro-resp-table thead,
+    table.ro-resp-table tbody,
+    table.ro-resp-table th,
+    table.ro-resp-table td,
+    table.ro-resp-table tr {
+      display: block;
+      width: 100%;
+    }
+
+    table.ro-resp-table thead {
+      display: none;
+    }
+
+    table.ro-resp-table tr {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    table.ro-resp-table td {
+      border: none;
+      border-bottom: 1px dashed var(--border-color);
+      padding: 8px 0;
+      text-align: left !important;
+    }
+
+    table.ro-resp-table td:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    table.ro-resp-table td:first-child {
+      padding-top: 0;
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    table.ro-resp-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+  }
+
+  /* Bottom Floating Controls */
+  .ro-bottom-toc {
+    position: fixed;
+    left: 16px;
+    bottom: 20px;
+    z-index: 95;
+    background: var(--taupe-fab);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 9px 15px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: calc(100vw - 88px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-up-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 95;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--taupe-fab);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    text-decoration: none !important;
+  }
+
+  /* Drawers & Lightbox */
+  .ro-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ro-drawer-backdrop.open {
+    display: flex;
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-backdrop {
+      align-items: center;
+      padding: 24px;
+    }
+  }
+
+  .ro-drawer-panel {
+    width: 100%;
+    max-width: 500px;
+    max-height: 78vh;
+    overflow-y: auto;
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px 20px 0 0;
+    padding: 18px 18px 28px;
+    box-shadow: var(--shadow);
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-panel {
+      border-radius: 18px;
+    }
+  }
+
+  .ro-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .ro-drawer-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .ro-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .ro-drawer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ro-drawer-list a {
+    display: block;
+    text-decoration: none !important;
+    color: var(--text-body) !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .ro-drawer-list a.active {
+    color: #181614 !important;
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 800;
+  }
+
+  .ro-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    cursor: zoom-out;
+  }
+
+  .ro-lightbox.open {
+    display: flex;
+  }
+
+  .ro-lightbox img {
+    max-width: 100%;
+    max-height: 92vh;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+</style>
+</head>
+<body>
+
+<div class="ro-header-wrap">
+  <div class="ro-pillbar">
+    <div class="ro-brand-group">
+      <button class="ro-menu-circle" type="button" aria-label="開啟專題選單" onclick="roOpenDrawer('roSiteDrawer')">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="ro-brand-link" href="index.html">
+        <span class="ro-brand-zh">400X 的日常切片</span>
+        <span class="ro-brand-en">BIO-WIKI EVIDENCE</span>
+      </a>
+    </div>
+    <div class="ro-top-actions">
+      <button class="ro-theme-btn" id="roThemeBtn" type="button" onclick="roToggleTheme()">☀️ 亮色</button>
+      <button class="ro-cta-pill" type="button" onclick="roOpenDrawer('roSiteDrawer')">專題目錄</button>
+    </div>
+  </div>
+</div>
+
+<!-- Site-Wide Topics Drawer (dynamically populated by site-nav.js) -->
+<div class="ro-drawer-backdrop" id="roSiteDrawer" onclick="if(event.target===this)roCloseDrawer('roSiteDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📚 Bio-Wiki 全站專題</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roSiteDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list">
+      <a href="index.html">🏠 首頁：主題分類總覽</a>
+      <a href="homologs-diploid-aabb-crossover.html" class="active">同源染色體 vs. 雙套，與 AaBb 自交互換判讀</a>
+    </div>
+  </div>
+</div>
+
+<!-- In-Page TOC Drawer -->
+<div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📑 本篇段落導覽</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list" id="roTocList" onclick="roCloseDrawer('roTocDrawer')"></div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="ro-lightbox" id="roLightbox" onclick="this.classList.remove('open')">
+  <img id="roLightboxImg" alt="">
+</div>
+
+<main class="container" id="top">
+
+  <div class="hero">
+    <div class="meta-line">
+      <span class="meta-pill">遺傳與分子生物學</span>
+      <span class="meta-pill-muted">114 羅東高中教甄 簡答 1(2)(3)</span>
+      <span class="meta-pill-muted">5 部原文正典 · 6 張原圖</span>
+    </div>
+    <h1>同源染色體 vs. 雙套（2n），與 AaBb × AaBb 自交如何判斷互換？</h1>
+    <p class="subtitle">直擊高中遺傳學最常混為一談的兩大教學關卡：怎麼把「同源染色體」和「雙套」切乾淨？如果不做試交、直接看 <code>AaBb × AaBb</code> 子代，又該如何確認有沒有發生互換？</p>
+  </div>
+
+  <!-- TL;DR -->
+  <div class="tldr-card">
+    <div class="tldr-label">一句話核心總結</div>
+    <p style="margin-bottom:12px;"><strong>「同源染色體」</strong>看的是<strong>單一對</strong>父源與母源染色體的對應關係，<strong>「雙套（2n）」</strong>看的是<strong>整個細胞</strong>擁有的染色體套數（即使複製後出現姊妹染色分體仍維持 2n）；而在 <code>AaBb × AaBb</code> 交配中，先以比例<strong>顯著偏離 9 : 3 : 3 : 1</strong> 確認兩基因連鎖，再依親代連鎖相位檢驗是否出現<strong>「完全連鎖時絕不可能出現的重組後代表現型」</strong>（順式看 <code>A_bb</code> 與 <code>aaB_</code>，反式看雙隱性 <code>aabb</code>），即可判定是否發生互換。</p>
+    <p style="margin-bottom:0;font-size:15.5px;color:var(--text-muted);">延伸對照：114 羅東高中簡答 1(1) 名詞階層見 <a href="genetics-terminology-hierarchy.html">遺傳學核心名詞階層與教學串連</a>；人類 X、Y 染色體局部同源特例見 <a href="xy-synapsis-crossing-over.html">人類 XY 染色體聯會、互換與四分體判定</a>。</p>
+  </div>
+
+  <!-- Section 1: Homologous Chromosomes vs Diploid -->
+  <section id="sec-homolog-diploid">
+    <h2><span class="sec-num">01</span> 如何分辨「同源染色體」與「雙套（2n）」？（問 1(2)）</h2>
+    <p>學生之所以容易把兩個詞混為一談，是因為在正常人類體細胞（2<em>n</em> ＝ 46）裡，「雙套」剛好代表「每一號染色體都有成對的同源染色體」。向學生解釋時，最有效的方法是直接切開<strong>觀察尺度</strong>：</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>比較面向</th>
+          <th>同源染色體（homologous chromosomes）</th>
+          <th>雙套／二倍體（diploid, 2n）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>觀察尺度</strong></td>
+          <td><strong>局部（單一對染色體之間的關係）</strong></td>
+          <td><strong>整體（整個細胞的染色體套數／倍性）</strong></td>
+        </tr>
+        <tr>
+          <td><strong>核心定義</strong></td>
+          <td>一父一母、長度、中節位置與帶紋相同，在相同基因座攜帶控制同一性狀基因的一對染色體（等位基因版本可能不同）。</td>
+          <td>細胞內具備<strong>兩組</strong>完整的染色體（父源 1 套 <em>n</em> ＋ 母源 1 套 <em>n</em>），也就是每一類染色體皆成對存在。</td>
+        </tr>
+        <tr>
+          <td><strong>人類實例</strong></td>
+          <td>第 1 號父源染色體與第 1 號母源染色體合稱「一對同源染色體」。</td>
+          <td>體細胞內全部 46 條染色體（23 對）合稱「雙套／二倍體細胞（2<em>n</em> ＝ 46）」。</td>
+        </tr>
+        <tr>
+          <td><strong>配子與異常倍數體</strong></td>
+          <td>配子（<em>n</em>）內沒有同源染色體配對；三體性（2<em>n</em>＋1）或四倍體（4<em>n</em>）中同一號染色體可有 3 條或 4 條彼此同源。</td>
+          <td>配子為單套（<em>n</em>）；三體性、四倍體（4<em>n</em>）則不再屬於單純雙套（2<em>n</em>）。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout-warn">
+      <div class="callout-title">⚠️ 高中生最常卡住的 2 個迷思（教甄必補）</div>
+      <ul style="margin-bottom:0;">
+        <li><strong>迷思 1：「DNA 複製後，染色體變成 X 形，細胞就從 2n 變成 4n 了？」</strong><br>
+        錯。S 期複製後每條染色體含有兩條由中節相連的<strong>姊妹染色分體</strong>，DNA 總量加倍，但<strong>細胞依然是雙套（2n）</strong>。Campbell 13e Ch13 明確提醒：無論染色分體有幾條，細胞都只有「母源 1 組＋父源 1 組」共兩組遺傳資訊，姊妹染色分體只是同一組資訊的副本。</li>
+        <li><strong>迷思 2：「同源染色體跟姊妹染色分體是一樣的嗎？」</strong><br>
+        不同。姊妹染色分體是同一條染色體複製出來的完全相同副本；同源染色體則是分別來自父方與母方的兩條對應染色體，攜帶相同基因座但等位基因可能不同（例如一條帶正常血紅素 β 鏈基因，另一條帶鐮刀型突變等位基因；Solomon 11e Ch10）。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Section 2: AaBb x AaBb Crossing Over -->
+  <section id="sec-aabb">
+    <h2><span class="sec-num">02</span> 親代 AaBb × AaBb 如何知道子代有沒有發生互換？（問 1(3)）</h2>
+    <p><strong>先立前提</strong>：兩對基因分別控制兩組完全顯隱性性狀、彼此無上位交互作用，且子代樣本數足夠大。只有當兩基因位於<strong>同一對同源染色體上（連鎖，linkage）</strong>時，才討論減數分裂前期 I 非姊妹染色分體之間的<strong>互換（crossing over）</strong>。</p>
+
+    <div class="step-box">
+      <div class="step-header">
+        <span class="step-num">1</span>
+        <span class="step-title">先對照 9 : 3 : 3 : 1，排除自由配合（確認是否連鎖）</span>
+      </div>
+      <p style="margin-bottom:0;">若 <code>A/a</code> 與 <code>B/b</code> 位於不同對染色體（獨立分配），雙親各等量產生 <code>AB</code>、<code>Ab</code>、<code>aB</code>、<code>ab</code> 四種配子（各 1/4），子代四種表現型預期比例必為 <strong>9 (<code>A_B_</code>) : 3 (<code>A_bb</code>) : 3 (<code>aaB_</code>) : 1 (<code>aabb</code>)</strong>。若實際觀察比例<strong>顯著偏離 9 : 3 : 3 : 1</strong>（可以卡方檢定 χ² 檢驗，如 1905 年 Bateson、Saunders 與 Punnett 的甜豌豆實驗），代表親本型配子頻率 &gt; 1/4、重組型配子 &lt; 1/4，兩基因具有<strong>連鎖</strong>關係。</p>
+    </div>
+
+    <div class="step-box">
+      <div class="step-header">
+        <span class="step-num">2</span>
+        <span class="step-title">依親代連鎖相位，比較「完全無互換」vs.「有發生互換」</span>
+      </div>
+      <p style="margin-bottom:0;">連鎖的 <code>AaBb</code> 親代有<strong>順式／偶聯（<code>AB/ab</code>）</strong>與<strong>反式／相斥（<code>Ab/aB</code>）</strong>兩種相位。若<strong>完全不發生互換</strong>，雙親只會形成 2 種親本配子，導致子代特定表現型完全缺席；<strong>一旦發生互換，就會形成重組配子，補出原本絕不可能出現的表現型類別</strong>：</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>親代連鎖相位</th>
+          <th>若「完全無互換」的子代表現型</th>
+          <th>若「有發生互換」的判定依據</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>順式／偶聯相位</strong><br><code>AB/ab × AB/ab</code></td>
+          <td>僅產 <code>AB</code>、<code>ab</code> 配子 → 子代<strong>只有 2 種表現型</strong>：<strong>3 (<code>A_B_</code>) : 1 (<code>aabb</code>)</strong>，<strong>絕不出現 <code>A_bb</code> 與 <code>aaB_</code></strong>。</td>
+          <td>子代<strong>出現 <code>A_bb</code> 與 <code>aaB_</code>（4 種表現型皆出現）</strong>，且比例顯著偏離 9:3:3:1：<strong><code>A_B_</code> &gt; 9/16、<code>aabb</code> &gt; 1/16</strong>，而 <code>A_bb</code>、<code>aaB_</code> 皆 &lt; 3/16。</td>
+        </tr>
+        <tr>
+          <td><strong>反式／相斥相位</strong><br><code>Ab/aB × Ab/aB</code></td>
+          <td>僅產 <code>Ab</code>、<code>aB</code> 配子 → 子代<strong>只有 3 種表現型</strong>：<strong>1 (<code>A_bb</code>) : 2 (<code>A_B_</code>) : 1 (<code>aaB_</code>)</strong>，<strong>絕不出現雙隱性 <code>aabb</code></strong>。</td>
+          <td>子代<strong>出現雙隱性 <code>aabb</code>（4 種表現型皆出現）</strong>，且比例顯著偏離 9:3:3:1：<strong><code>A_bb</code>、<code>aaB_</code> 皆 &gt; 3/16</strong>，而 <code>A_B_</code> &lt; 9/16、<code>aabb</code> &lt; 1/16。</td>
+        </tr>
+        <tr>
+          <td><strong>一順一反</strong><br><code>AB/ab × Ab/aB</code></td>
+          <td>順式產 <code>AB</code>、<code>ab</code>，反式產 <code>Ab</code>、<code>aB</code> → 子代<strong>只有 3 種表現型</strong>：<strong>2 (<code>A_B_</code>) : 1 (<code>A_bb</code>) : 1 (<code>aaB_</code>)</strong>，<strong>絕不出現 <code>aabb</code></strong>。</td>
+          <td>子代<strong>出現雙隱性 <code>aabb</code>（4 種表現型皆出現）</strong>，即代表反式親本必定經互換產生了 <code>ab</code> 配子（與順式親本的 <code>ab</code> 受精）。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="step-box">
+      <div class="step-header">
+        <span class="step-num">3</span>
+        <span class="step-title">定量反推重組率，並銜接「試交（AaBb × aabb）」的實驗優勢</span>
+      </div>
+      <ul style="margin-bottom:0;">
+        <li><strong>從雙隱性 <code>aabb</code> 比例反推重組率 <em>r</em></strong>（設雙親皆有相同重組率 <em>r</em>，0 &lt; <em>r</em> &lt; 0.5）：反式相位下，雙親產出重組配子 <code>ab</code> 的機率各為 <em>r</em>/2，故 <code>aabb</code> 子代比例 ＝ (<em>r</em>/2)²；只要觀察到 <code>aabb</code> 出現即可證實互換並由 <code>r = 2 × √(aabb 比例)</code> 推估。順式相位下，雙親產出親本配子 <code>ab</code> 的機率各為 (1 − <em>r</em>)/2，故 <code>aabb</code> ＝ [(1 − <em>r</em>)/2]² &gt; 1/16。</li>
+        <li><strong>為何實務上仍改用試交（<code>AaBb × aabb</code>）？</strong>在 <code>AaBb × AaBb</code> 自交中，雙顯性 <code>A_B_</code> 混雜了「親×親」「親×重」「重×重」三種受精來源，外觀相同卻難以反推個別親本的配子比例（Goldberg 7e Ch05）。改做 <code>AaBb × aabb</code> 試交後，雙隱性親本只提供 <code>ab</code> 配子、不遮蔽另一親本的等位基因，四種子代表現型比例便直接對應 <code>AaBb</code> 的配子比例：獨立分配為 <strong>1 : 1 : 1 : 1</strong>、完全連鎖為 <strong>1 : 1（僅 2 類）</strong>、連鎖且有互換則為 <strong>4 類皆有且親本型合計 &gt; 50%、重組型合計 &lt; 50%</strong>（Campbell 13e Ch15）。</li>
+      </ul>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">邊界特例：相距太遠的連鎖基因（重組率逼近 50%）</div>
+      <p style="margin-bottom:0;">若同一條染色體上的兩個基因相距甚遠，單次減數分裂中幾乎每次都會在其間發生至少一次互換，導致重組率逼近上限 50%。此時即使兩基因確實位於同一條染色體上，單看 <code>AaBb × AaBb</code> 子代比例也會接近 9 : 3 : 3 : 1，無法單靠此交配與自由配合區分，需透過中間標記基因的連鎖定位確認。</p>
+    </div>
+  </section>
+
+  <!-- Section 3: Textbook Figures -->
+  <section id="sec-figures">
+    <h2><span class="sec-num">03</span> 經典教科書原圖解析（點擊圖片可全螢幕放大）</h2>
+
+    <div class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Campbell13e_Fig13-4_describing_chromosomes_2n6.jpg', 'Campbell 13e 圖 13.4 二倍體 2n=6 染色體術語總圖')">
+        <img src="images/Campbell13e_Fig13-4_describing_chromosomes_2n6.jpg" alt="Campbell 13e 圖 13.4 二倍體 2n=6 染色體術語總圖">
+        <span class="zoom-hint">🔍 點擊放大檢視細節</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖 1｜Campbell 13e Fig. 13.4：二倍體細胞（2n = 6）的染色體術語總圖</div>
+        <div class="figure-caption">一個 2<em>n</em> = 6 的二倍體細胞完成 DNA 複製與凝縮後的狀態：紅色為母源染色體組（<em>n</em> = 3）、藍色為父源染色體組（<em>n</em> = 3），構成 3 對同源染色體；每條已複製染色體含 2 條姊妹染色分體，同源對中一紅一藍則為發生互換的非姊妹染色分體。</div>
+        <div class="figure-caption-en">“Describing chromosomes. A cell from an organism with a diploid number of 6 (2n = 6) is depicted here following chromosome duplication and condensation. Each homologous pair is composed of one chromosome from the maternal set (red) and one from the paternal set (blue).”</div>
+        <div class="figure-guide"><strong>讀圖重點：</strong>一張圖講透「雙套（紅色 1 組＋藍色 1 組＝2<em>n</em>）」、「同源染色體（一紅一藍成一對）」以及「即使每條皆已複製成 2 條姊妹染色分體，細胞仍是 2<em>n</em> = 6」。</div>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Pierce7e_Fig2-6_human_karyotype_homologs.jpg', 'Pierce 7e 圖 2.6 人類女性二倍體核型與同源染色體對')">
+        <img src="images/Pierce7e_Fig2-6_human_karyotype_homologs.jpg" alt="Pierce 7e 圖 2.6 人類女性二倍體核型與同源染色體對">
+        <span class="zoom-hint">🔍 點擊放大檢視細節</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖 2｜Pierce 7e Fig. 2.6：二倍體細胞的 23 對同源染色體（人類女性核型）</div>
+        <div class="figure-caption">(a) 人類女性細胞中期染色體螢光塗色散佈圖；(b) 依大小與構造排成 23 對同源染色體，整體展現 2<em>n</em> = 46 的二倍體倍性。</div>
+        <div class="figure-caption-en">“Diploid eukaryotic cells have two sets of chromosomes. (a) A set of chromosomes from a female human cell. … (b) The chromosomes are present in homologous pairs. Each pair consists of two chromosomes that are alike in size and structure and carry information for the same characteristics.”</div>
+        <div class="figure-guide"><strong>讀圖重點：</strong>看整體（46 條＝兩組 23 條）是「雙套」，看任一組編號中的兩條（例如第 1 號的兩條）則是「同源染色體對」。</div>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Goldberg7e_Fig5-4_linkage_alters_9331.png', 'Goldberg 7e 圖 5.4 連鎖改變 9:3:3:1 比例')">
+        <img src="images/Goldberg7e_Fig5-4_linkage_alters_9331.png" alt="Goldberg 7e 圖 5.4 連鎖改變 9:3:3:1 比例">
+        <span class="zoom-hint">🔍 點擊放大檢視細節</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖 3｜Goldberg Genetics 7e Fig. 5.4：連鎖如何打破 AaBb × AaBb 的 9 : 3 : 3 : 1</div>
+        <div class="figure-caption">順式雙雜合子 <code>AB/ab × AB/ab</code> 的 F₂ 龐尼特方格：親本型配子（<code>AB</code>、<code>ab</code>）頻率大於 1/4、重組型（<code>Ab</code>、<code>aB</code>）小於 1/4，導致 16 格不再等機率——深藍（親×親）放大、淡藍（重×重）縮小，結果 <code>A_B_</code> &gt; 9/16、<code>aabb</code> &gt; 1/16，而 <code>A_bb</code> 與 <code>aaB_</code> 各小於 3/16。</div>
+        <div class="figure-caption-en">“Figure 5.4 Linkage alters the 9:3:3:1 ratio. For linked genes, the F2 genotypic classes produced by parental gametes increase in frequency at the expense of the other classes. The blue colors and the relative sizes of the boxes in the Punnett square denote the frequencies at which particular genotypic classes will appear in the F2 generation.”</div>
+        <div class="figure-guide"><strong>讀圖重點：</strong>完美視覺化為何 <code>A_B_</code> 在自交中同時混進了深藍（親×親）、中藍（親×重）與淡藍（重×重），一眼看懂為什麼要讀準配子比例仍需改用試交。</div>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Klug_Fig5-1_independent_vs_linkage_vs_crossover.png', 'Klug 圖 5.1 獨立分配 vs 完全連鎖 vs 發生互換的配子對照')">
+        <img src="images/Klug_Fig5-1_independent_vs_linkage_vs_crossover.png" alt="Klug 圖 5.1 獨立分配 vs 完全連鎖 vs 發生互換的配子對照">
+        <span class="zoom-hint">🔍 點擊放大檢視細節</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖 4｜Klug Genetics Fig. 5.1：獨立分配、完全連鎖與連鎖互換的配子對照</div>
+        <div class="figure-caption">三欄並列比較：(a) 基因位於不同染色體時等量形成 4 種配子；(b) 完全連鎖無互換時只形成 2 種親本配子；(c) 連鎖且發生互換時，在大量親本配子之外額外出現少量 2 種重組配子。</div>
+        <div class="figure-caption-en">Comparison of gamete formation under independent assortment, complete linkage without crossing over, and linkage with crossing over.</div>
+        <div class="figure-guide"><strong>讀圖重點：</strong>搭配「順式無互換 3:1／反式無互換 1:2:1」與「有互換出現 4 種表現型但偏離 9:3:3:1」講解，因果鏈條最清楚。</div>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Pierce7e_Fig7-2_sweet_pea_f2_linkage.jpg', 'Pierce 7e 圖 7.2 甜豌豆 F2 偏離 9:3:3:1')">
+        <img src="images/Pierce7e_Fig7-2_sweet_pea_f2_linkage.jpg" alt="Pierce 7e 圖 7.2 甜豌豆 F2 偏離 9:3:3:1">
+        <span class="zoom-hint">🔍 點擊放大檢視細節</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖 5｜Pierce 7e Fig. 7.2：1905 年甜豌豆 F₁ 互交偏離 9 : 3 : 3 : 1 經典實例</div>
+        <div class="figure-caption">Bateson、Saunders 與 Punnett 讓紫花長花粉 × 紅花圓花粉的 F₁ 雙雜合子互交，F₂ 出現全部 4 種表現型，但親本型（紫長、紅圓）遠多於 9 : 3 : 3 : 1 預期，重組型（紫圓、紅長）少量出現——正是「連鎖且發生部分互換」的歷史首證。</div>
+        <div class="figure-caption-en">“Nonindependent assortment of flower color and pollen shape in sweet peas.”</div>
+        <div class="figure-guide"><strong>讀圖重點：</strong>教甄寫 <code>AaBb × AaBb</code> 互換判讀時，順手舉 1905 年甜豌豆 F₂ 實例（4 類皆有但親本型顯著過多），說服力立刻加倍。</div>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Campbell13e_Fig15-9_morgan_linkage_testcross.jpg', 'Campbell 13e 圖 15.9 Morgan 果蠅連鎖試交')">
+        <img src="images/Campbell13e_Fig15-9_morgan_linkage_testcross.jpg" alt="Campbell 13e 圖 15.9 Morgan 果蠅連鎖試交">
+        <span class="zoom-hint">🔍 點擊放大檢視細節</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖 6｜Campbell 13e Fig. 15.9：Morgan 果蠅試交直接讀出連鎖與互換（83% vs. 17%）</div>
+        <div class="figure-caption">將 F₁ 灰體正常翅雙雜合子雌蠅與黑體殘翅雙隱性雄蠅試交：獨立分配預期 1:1:1:1、完全連鎖預期 1:1:0:0，實際觀察為 965 : 944 : 206 : 185（親本型 83%、重組型 17%），直接測得連鎖與互換率。</div>
+        <div class="figure-caption-en">“Inquiry: How does linkage between two genes affect inheritance of characters?”</div>
+        <div class="figure-guide"><strong>讀圖重點：</strong>收束教學脈絡：自交能偵測連鎖與有無互換，而試交能排除顯性遮蔽、直接量測重組率。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Bilingual Textbook Evidence -->
+  <section id="sec-sources">
+    <h2><span class="sec-num">04</span> 經典教科書原始文獻段落考證</h2>
+    <p>以下英文原文與繁中譯文皆直接回溯自本機 Vault 正式譯本段落（皆已建立 <code>#^anchor</code> 區塊連結）。</p>
+    <button class="toggle-en-btn" id="toggleEnBtn" type="button" onclick="toggleEnglish()">精簡：隱藏英文原文</button>
+
+    <!-- Source 1: Campbell 13e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">1. Campbell《Biology》13e</div>
+        <div class="source-loc">Ch13 減數分裂與有性生殖 · Ch15 染色體遺傳基礎</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">① 同源染色體定義（Ch13）</div>
+        <div class="quote-en">“The two chromosomes of a pair have the same length, centromere position, and staining pattern: These are called homologous chromosomes (or homologs). … Both chromosomes of each pair carry genes controlling the same inherited characters.”</div>
+        <div class="quote-tw">同一對的兩條染色體在長度、中節位置和染色帶紋模式上相同，稱為<strong>同源染色體</strong>（homologous chromosomes，或 homologs）。每一對染色體的兩條都攜帶控制相同遺傳性狀的基因。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">② 二倍體（2n）定義，以及「複製後仍是 2n」（Ch13）</div>
+        <div class="quote-en">“Any cell with two chromosome sets is called a diploid cell and has a diploid number of chromosomes, abbreviated 2n. … (Even though the chromosomes are duplicated, we still say the cell is diploid, or 2n. This is because it has only two sets of information regardless of the number of chromatids, which are merely copies of the information in one set.)”</div>
+        <div class="quote-tw">含有兩組染色體的細胞稱為<strong>二倍體細胞</strong>（diploid cell），其染色體數目簡寫為 <strong>2n</strong>。（即使染色體已複製，我們仍稱此細胞為二倍體，即 2n。這是因為無論染色分體有多少，細胞都只有兩組資訊；染色分體只是其中一組資訊的副本。）</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">③ 親本型超過 50% 顯示連鎖、少量重組型來自互換（Ch15）</div>
+        <div class="quote-en">“Recall that most (83%) of the offspring from the testcross for body color and wing size had parental phenotypes. That suggested that the two genes were on the same chromosome, since the occurrence of parental types with a frequency greater than 50% indicates that the genes are linked. About 17% of offspring, however, were recombinants.”</div>
+        <div class="quote-tw">大多數（83%）後代呈現親本表現型，這暗示兩個基因位於同一染色體上——因為<strong>頻率超過 50% 的親本型後代，正是基因連鎖的特徵</strong>。然而，仍有約 17% 的後代為重組型（源自非姊妹染色分體互換）。</div>
+      </div>
+    </div>
+
+    <!-- Source 2: Pierce 7e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">2. Pierce《Genetics: A Conceptual Approach》7e</div>
+        <div class="source-loc">Ch02 染色體與細胞生殖 · Ch07 連鎖、互換與基因定位</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">① 兩套染色體、同源染色體對與倍性（ploidy）（Ch02）</div>
+        <div class="quote-en">“In most eukaryotic cells, there are two sets of chromosomes. … Each chromosome in one set has a corresponding chromosome in the other set; together, the two chromosomes constitute a homologous pair (Figure 2.6). … Cells that carry two sets of genetic information are diploid. In general, the ploidy of the cell indicates how many sets of genetic information it possesses.”</div>
+        <div class="quote-tw">一套中的每條染色體在另一套中都有一條對應的染色體，這兩條染色體合稱為<strong>同源染色體對</strong>。攜帶兩套遺傳資訊的細胞稱為<strong>二倍體</strong>（diploid）；一般來說，細胞的<strong>倍性</strong>（ploidy）表示其擁有的遺傳資訊套數。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">② Bateson、Saunders 與 Punnett 甜豌豆 F₂ 偏離 9:3:3:1，與連鎖／互換的相反作用（Ch07）</div>
+        <div class="quote-en">“When they intercrossed the F1, however, the resulting F2 progeny did not appear in the 9 : 3 : 3 : 1 ratio expected with independent assortment (Figure 7.2). An excess of F2 plants had purple flowers and long pollen or red flowers and round pollen (the parental phenotypes). … Linkage and crossing over can be seen as processes that have opposite effects: linkage keeps particular genes together, and crossing over mixes them up, producing new combinations of genes.”</div>
+        <div class="quote-tw">讓 F₁ 相互交配時，F₂ 後代並未出現獨立分配預期的 <strong>9 : 3 : 3 : 1</strong> 比例，而是親本表現型數量過多。<strong>連鎖和互換可以視為效果相反的過程</strong>：連鎖讓特定基因保持在一起，而互換則將它們混合，產生新的基因組合。</div>
+      </div>
+    </div>
+
+    <!-- Source 3: Solomon 11e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">3. Solomon《Biology》11e</div>
+        <div class="source-loc">Ch10 染色體、有絲分裂與減數分裂</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">同源染色體 vs. 姊妹染色分體，以及「一組染色體（set）」定義</div>
+        <div class="quote-en">“The most important feature of homologous chromosomes is that they carry information about the same genetic traits, although this information is not necessarily identical. … Homologous chromosomes can therefore be contrasted with the two members of a pair of sister chromatids, which are precisely identical to each other. A set of chromosomes has one of each kind of chromosome; in other words, it contains one member of each homologous pair. If a cell or nucleus contains two sets of chromosomes, it is said to have a diploid chromosome number.”</div>
+        <div class="quote-tw">同源染色體攜帶相同遺傳性狀的資訊，但未必完全相同；相對地，一對<strong>姊妹染色分體</strong>的兩個成員彼此完全相同。<strong>一組染色體</strong>包含每對同源染色體中的一個成員；含有兩組染色體的細胞即具有<strong>二倍體染色體數</strong>。</div>
+      </div>
+    </div>
+
+    <!-- Source 4: Goldberg Genetics 7e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">4. Goldberg《Genetics: From Genes to Genomes》7e</div>
+        <div class="source-loc">Ch05 連鎖、重組與基因作圖</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">① 順式 vs. 反式連鎖如何打破 AaBb × AaBb 的 9:3:3:1</div>
+        <div class="quote-en">“Had Mendel’s two genes been linked, the phenotypic ratio in the F2 would no longer have been 9:3:3:1 because the parental gametes would have been present more frequently than the recombinant gametes. Figure 5.4 shows the consequences of linkage if the F1 dihybrid individuals were both of genotype A B / a b: The 9/16 and 1/16 classes of F2 would have increased at the expense of the two 3/16 classes. Conversely, if the alleles of the parents are configured differently (A b / A b × a B / a B) such that the F1 are therefore A b / a B, then the two 3/16 genotypic classes would increase at the expense of the 9/16 and 1/16 classes (not shown).”</div>
+        <div class="quote-tw">若兩基因連鎖，F₂ 表現型比例便不再是 9:3:3:1。若 F₁ 皆為順式 <strong><em>AB/ab</em></strong>，F₂ 的 <strong>9/16 與 1/16 類別會增加</strong>，兩種 3/16 類別減少；反之若 F₁ 為反式 <strong><em>Ab/aB</em></strong>，則<strong>兩種 3/16 類別會增加</strong>，9/16 與 1/16 類別減少。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">② 為何 F₂ 自交不易直接讀出配子、需改用試交</div>
+        <div class="quote-en">“For example, all the F2 in Fig. 5.4 with genotype A– B– would have the same phenotype, but they could have arisen from fertilizations involving two parental gametes (3/4 of the dark blue squares), two recombinant gametes (2/4 of the light blue squares), or one of each kind (4/8 of the medium blue squares). However, by setting up testcrosses in which one parent was homozygous for the recessive alleles of both genes, geneticists can analyze easily the gene combinations received in the gametes from the other, doubly heterozygous parent.”</div>
+        <div class="quote-tw">基因型為 <strong><em>A_B_</em></strong> 的 F₂ 個體外觀相同，卻可能來自兩個親代型配子、兩個重組型配子或各一種配子受精；唯有透過<strong>試交</strong>，才能輕易分析雙異型合子親本所產生的配子組合。</div>
+      </div>
+    </div>
+
+    <!-- Source 5: Klug Genetics -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">5. Klug《Concepts of Genetics》</div>
+        <div class="source-loc">Ch05 真核生物的染色體定位（連鎖比）</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">完全連鎖（無互換）下 F₁ 互交產生獨特的 1 : 2 : 1 連鎖比</div>
+        <div class="quote-en">“As shown in Figure 5.2(a), when the F1 generation is interbred, each F1 individual forms only parental gametes because of complete linkage. Following fertilization, the F2 generation is produced in a 1 : 2 : 1 phenotypic and genotypic ratio. … Such a 1 : 2 : 1 ratio is characteristic of complete linkage.”</div>
+        <div class="quote-tw">F₁ 世代互相交配時，由於<strong>完全連鎖（無互換）</strong>，每個 F₁ 個體只形成親本型配子；反式配置受精後，F₂ 的表現型與基因型比例皆為 <strong>1 : 2 : 1</strong>（完全不出現雙隱性個體），這是完全連鎖的特徵比例。</div>
+      </div>
+    </div>
+
+    <!-- Source 6: Taiwan High School -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">6. 臺灣高中 108 課綱跨版本整合與教甄試題</div>
+        <div class="source-loc">選修生物一 01 跨版本整合 · 114 國立羅東高中</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">F₁ 自交先排除 9:3:3:1 與完全連鎖 3:1，再由試交拆解配子</div>
+        <div class="quote-tw"><strong>〔選修生物一 01 跨版本整合〕</strong>讓第一子代 <code>VvBb</code> 彼此交配，第二子代雖出現四種表現型，比例卻不符合獨立分配預期的 9 : 3 : 3 : 1，也不符合完全連鎖且無互換時的 3 : 1。自交結果先顯示兩個極端模型都不足以解釋資料，接著才以試交拆解第一子代所產的配子。<br><br>
+        <strong>〔教甄原題出處〕</strong>114 國立羅東高中第 1 次教師甄選初試（三、簡答題 第 1 題(2) 1 分、(3) 3 分）。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Exam & Teaching Tips -->
+  <section id="sec-teaching">
+    <h2><span class="sec-num">05</span> 教甄簡答題滿分佈局與常見陷阱</h2>
+
+    <div class="callout-warn">
+      <div class="callout-title">⚠️ 教甄作答最容易踩到的 3 個陷阱</div>
+      <ul style="margin-bottom:0;">
+        <li><strong>陷阱 1：答 1(3) 時直接寫「做試交看是不是 1 : 1 : 1 : 1」</strong><br>
+        答非所問會被扣大分！題幹明確問的是「<strong>親代 <code>AaBb × AaBb</code> 交配後所產生的子代</strong>」怎麼判斷有無互換。必須正面比較「9:3:3:1（獨立分配）」、「順式 3:1／反式 1:2:1（完全連鎖無互換）」與「4 種表現型皆出現但顯著偏離 9:3:3:1（連鎖且有互換）」，最後再補充「實務上為精準算重組率會改採 <code>AaBb × aabb</code> 試交」。</li>
+        <li><strong>陷阱 2：看到子代有 4 種表現型就立刻說「有發生互換」</strong><br>
+        錯！位於不同對染色體上的非連鎖基因也會產生 4 種表現型（9 : 3 : 3 : 1）。必須先以「顯著偏離 9 : 3 : 3 : 1」確立連鎖前提，再由新表現型出現確認互換。</li>
+        <li><strong>陷阱 3：把「親本型」當成「雙顯性與雙隱性」的同義詞</strong><br>
+        錯！在反式相位（<code>Ab/aB</code>）下，單顯性 <code>Ab</code> 與 <code>aB</code> 才是親本型配子，雙顯性 <code>AB</code> 與雙隱性 <code>ab</code> 反而是重組型配子。</li>
+      </ul>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">跨頁連結：一次完整串起高中遺傳與減數分裂</div>
+      <p style="margin-bottom:0;">可搭配閱讀 <a href="genetics-terminology-hierarchy.html">《遺傳學核心名詞階層與教學串連》</a>（補齊羅東高中問 1(1) 與成功高中非選 1），以及 <a href="oogenesis-interphase-dyad.html">《初級卵母細胞、間期與二分體》</a>（複習 S 期複製後的 2<em>n</em> 與二分體／四分體計數）。</p>
+    </div>
+  </section>
+
+  <footer>
+    400X 的日常切片 Bio-Wiki · 依 Campbell 13e、Pierce 7e、Solomon 11e、Goldberg Genetics 7e、Klug Genetics 與高中跨版本教材原文編整 · 繁體中文與審定名詞遵循臺灣教育部規範
+  </footer>
+
+</main>
+
+<button class="ro-bottom-toc" type="button" onclick="roOpenDrawer('roTocDrawer')">📑 本篇段落導覽</button>
+<a class="ro-up-btn" href="#top" aria-label="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<script>
+  function roToggleTheme() {
+    var root = document.documentElement;
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('biowiki-theme', next); } catch (e) {}
+    roUpdateThemeBtn();
+  }
+  function roUpdateThemeBtn() {
+    var btn = document.getElementById('roThemeBtn');
+    if (!btn) return;
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.innerHTML = isLight ? '🌙 深色' : '☀️ 亮色';
+    btn.setAttribute('aria-label', isLight ? '切換為深色閱讀模式' : '切換為亮色閱讀模式');
+  }
+  roUpdateThemeBtn();
+
+  function roOpenDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('open');
+  }
+  function roCloseDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  }
+  function openLightbox(src, alt) {
+    var lb = document.getElementById('roLightbox');
+    var img = document.getElementById('roLightboxImg');
+    if (lb && img) {
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.add('open');
+    }
+  }
+  function toggleEnglish() {
+    document.body.classList.toggle('hide-en');
+    var btn = document.getElementById('toggleEnBtn');
+    if (btn) {
+      btn.textContent = document.body.classList.contains('hide-en')
+        ? '完整：顯示英文原文'
+        : '精簡：隱藏英文原文';
+    }
+  }
+  (function initReadingOutpostShell() {
+    var tocList = document.getElementById('roTocList');
+    var headings = document.querySelectorAll('h2');
+    if (tocList && headings.length) {
+      headings.forEach(function(h, idx) {
+        if (!h.id) h.id = 'ro-sec-' + (idx + 1);
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent.trim();
+        tocList.appendChild(a);
+      });
+    }
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th, tr:first-child th')).map(function(th) {
+        return th.innerText.trim().replace(/[\r\n\t ]+/g, ' ');
+      });
+      if (!headers.length) return;
+      table.classList.add('ro-resp-table');
+      table.querySelectorAll('tr').forEach(function(tr) {
+        if (tr.querySelector('th')) return;
+        Array.from(tr.children).forEach(function(td, idx) {
+          if (td.tagName === 'TD' && !td.getAttribute('data-label') && headers[idx]) {
+            td.setAttribute('data-label', headers[idx]);
+          }
+        });
+      });
+    });
+    document.querySelectorAll('main img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        openLightbox(img.src, img.alt);
+      });
+    });
+  })();
+</script>
+<script src="site-nav.js"></script>
+</body>
+</html>

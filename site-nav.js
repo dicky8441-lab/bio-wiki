@@ -86,6 +86,18 @@
           keywords: '遺傳因子 基因 等位基因 DNA 染色體 allele gene chromosome 孟德爾 分子生物學 大同代理 教甄口試'
         },
         {
+          href: 'genetics-terminology-hierarchy.html',
+          title: 'DNA、基因、等位基因、染色質、染色體與基因體怎麼串連？',
+          tag: '名詞階層',
+          keywords: 'DNA 基因 等位基因 染色質 染色體 基因體 性狀 表徵 character trait chromatin chromosome genome allele 成功高中 羅東高中 教甄 Campbell Alberts Becker Brooker'
+        },
+        {
+          href: 'homologs-diploid-aabb-crossover.html',
+          title: '同源染色體 vs. 雙套（2n），與 AaBb × AaBb 自交如何判斷互換？',
+          tag: '連鎖與互換',
+          keywords: '同源染色體 雙套 二倍體 2n 倍性 ploidy 姊妹染色分體 AaBb 互換 crossing over 連鎖 linkage 順式 反式 9:3:3:1 3:1 1:2:1 試交 甜豌豆 羅東高中 教甄 Campbell Pierce Solomon Goldberg Klug'
+        },
+        {
           href: 'xy-synapsis-crossing-over.html',
           title: '人類 XY 染色體會聯會、互換並算一個四分體嗎？',
           tag: '性染色體',

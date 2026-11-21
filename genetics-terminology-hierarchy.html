@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>遺傳學核心名詞階層與教學串連：DNA、基因、等位基因、染色質、染色體與基因體｜Bio-Wiki</title>
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem('biowiki-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+<style>
+  :root {
+    --bg-primary: #181614;
+    --bg-pillbar: #24201c;
+    --bg-card: #211e1a;
+    --bg-quote: #26221e;
+    --bg-tag: #2d2823;
+    --text-primary: #f6f1ea;
+    --text-body: #ddd5ca;
+    --text-secondary: #bfb5a8;
+    --text-muted: #9a8e80;
+    --primary: #5bc0eb;
+    --primary-light: rgba(91, 192, 235, 0.12);
+    --primary-border: rgba(91, 192, 235, 0.32);
+    --accent: #f4c44e;
+    --accent-light: rgba(244, 196, 78, 0.12);
+    --warn: #f87171;
+    --warn-bg: rgba(248, 113, 113, 0.10);
+    --border-color: rgba(246, 241, 234, 0.09);
+    --border-strong: rgba(246, 241, 234, 0.16);
+    --taupe-fab: rgba(104, 91, 78, 0.94);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  html[data-theme="light"] {
+    --bg-primary: #fbf8f4;
+    --bg-pillbar: #f0ece3;
+    --bg-card: #ffffff;
+    --bg-quote: #f6f2ea;
+    --bg-tag: #eee8dd;
+    --text-primary: #2f2820;
+    --text-body: #4a3f35;
+    --text-secondary: #5e5043;
+    --text-muted: #756656;
+    --primary: #1b9dce;
+    --primary-light: rgba(27, 157, 206, 0.12);
+    --primary-border: rgba(27, 157, 206, 0.35);
+    --accent: #b86b11;
+    --accent-light: rgba(244, 196, 78, 0.22);
+    --warn: #dc2626;
+    --warn-bg: rgba(220, 38, 38, 0.08);
+    --border-color: rgba(74, 63, 53, 0.12);
+    --border-strong: rgba(74, 63, 53, 0.22);
+    --taupe-fab: rgba(105, 90, 74, 0.94);
+    --shadow: 0 4px 18px rgba(47, 40, 32, 0.08);
+    color-scheme: light;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+  }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+    font-size: 18px;
+    line-height: 1.78;
+    padding: 0 0 96px 0;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Reading Outpost Top Pill Header */
+  .ro-header-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-primary) 70%, rgba(24, 22, 20, 0));
+  }
+
+  html[data-theme="light"] .ro-header-wrap {
+    background: linear-gradient(180deg, #fbf8f4 70%, rgba(251, 248, 244, 0));
+  }
+
+  .ro-pillbar {
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .ro-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .ro-menu-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #5bc0eb;
+    color: #181614;
+    border: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  html[data-theme="light"] .ro-menu-circle {
+    background: #67c3eb;
+    color: #1f1a15;
+  }
+
+  .ro-menu-circle span {
+    display: block;
+    width: 16px;
+    height: 2.2px;
+    background: #181614;
+    border-radius: 2px;
+  }
+
+  .ro-brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .ro-brand-zh {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-brand-en {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .ro-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .ro-theme-btn {
+    appearance: none;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+  }
+
+  .ro-cta-pill {
+    appearance: none;
+    background: #f4c44e;
+    color: #1c1814;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  html[data-theme="light"] .ro-cta-pill {
+    background: #f6c84c;
+    color: #2f2820;
+  }
+
+  /* Main Reading Column */
+  main.container {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 22px 0;
+  }
+
+  /* Hero */
+  .hero {
+    text-align: left;
+    margin-bottom: 32px;
+    padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .meta-line {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .meta-pill, .meta-pill-muted {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .meta-pill {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary-border);
+  }
+
+  h1 {
+    font-size: clamp(26px, 6.2vw, 34px);
+    line-height: 1.38;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    margin: 6px 0 14px;
+    text-align: left;
+  }
+
+  .subtitle {
+    font-size: 17px;
+    line-height: 1.68;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* Sections */
+  section {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: 42px;
+    scroll-margin-top: 84px;
+  }
+
+  h2 {
+    font-size: clamp(22px, 5.2vw, 27px);
+    line-height: 1.45;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 44px 0 18px;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+  }
+
+  h2 .sec-num {
+    color: var(--accent);
+    margin-right: 6px;
+    font-weight: 800;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 28px 0 12px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--text-body);
+    margin-bottom: 18px;
+  }
+
+  ul, ol {
+    margin: 0 0 22px 24px;
+    color: var(--text-body);
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+  }
+
+  strong {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  main a:not(.ro-cta-pill):not(.ro-brand-link) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  pre.hierarchy-box {
+    background: var(--bg-quote);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    padding: 16px 18px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--text-primary);
+    overflow-x: auto;
+    margin: 18px 0 22px;
+    white-space: pre;
+  }
+
+  /* Sub-cards */
+  .tldr-card, .source-card, .callout, .callout-warn, .step-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin: 20px 0;
+  }
+
+  .tldr-card {
+    border-left: 4px solid var(--accent);
+  }
+
+  .callout {
+    border-left: 4px solid var(--primary);
+  }
+
+  .callout-warn {
+    border-left: 4px solid var(--warn);
+    background: var(--warn-bg);
+  }
+
+  .tldr-label, .callout-title, .source-book {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .callout-warn .callout-title {
+    color: var(--warn);
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .timeline-step {
+    padding-left: 4px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 12px;
+  }
+
+  .timeline-step:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .timeline-step-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .timeline-step-title span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    font-size: 14px;
+    font-weight: 800;
+    margin-right: 8px;
+  }
+
+  /* Figures */
+  .figure-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .figure-img-wrap {
+    padding: 14px;
+    background: #f8fafc;
+    cursor: zoom-in;
+  }
+
+  main img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 8px;
+    margin: 0 auto;
+    cursor: zoom-in;
+  }
+
+  .zoom-hint {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    padding: 6px 4px 0;
+  }
+
+  .figure-body {
+    padding: 14px 16px 16px;
+  }
+
+  .figure-title {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .figure-caption {
+    font-size: 15.5px;
+    line-height: 1.68;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+
+  .figure-caption-en {
+    font-size: 13.5px;
+    line-height: 1.58;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+
+  .figure-guide {
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: var(--bg-quote);
+    border-left: 3px solid var(--accent);
+    font-size: 15px;
+    line-height: 1.68;
+    color: var(--text-body);
+  }
+
+  .figure-guide strong {
+    color: var(--accent);
+  }
+
+  /* Bilingual Textbook Quote Blocks */
+  .source-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .source-loc {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .quote-block {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .quote-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quote-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .quote-en {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 10px 0 12px;
+    word-break: break-word;
+  }
+
+  body.hide-en .quote-en {
+    display: none;
+  }
+
+  .quote-tw {
+    font-size: 17.5px;
+    line-height: 1.78;
+    color: var(--text-body);
+  }
+
+  .quote-tw strong {
+    color: var(--accent);
+    background: rgba(244, 196, 78, 0.10);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+
+  html[data-theme="light"] .quote-tw strong {
+    color: #8c4d06;
+    background: rgba(246, 200, 76, 0.28);
+  }
+
+  .toggle-en-btn {
+    appearance: none;
+    background: var(--bg-tag);
+    color: var(--accent);
+    border: 1px solid rgba(244, 196, 78, 0.35);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  /* Responsive Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0 26px;
+    font-size: 16px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-body);
+  }
+
+  th {
+    background: var(--bg-pillbar);
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  @media (max-width: 680px) {
+    table.ro-resp-table,
+    table.ro-resp-table thead,
+    table.ro-resp-table tbody,
+    table.ro-resp-table th,
+    table.ro-resp-table td,
+    table.ro-resp-table tr {
+      display: block;
+      width: 100%;
+    }
+
+    table.ro-resp-table thead {
+      display: none;
+    }
+
+    table.ro-resp-table tr {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    table.ro-resp-table td {
+      border: none;
+      border-bottom: 1px dashed var(--border-color);
+      padding: 8px 0;
+      text-align: left !important;
+    }
+
+    table.ro-resp-table td:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    table.ro-resp-table td:first-child {
+      padding-top: 0;
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    table.ro-resp-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+  }
+
+  /* Bottom Floating Controls */
+  .ro-bottom-toc {
+    position: fixed;
+    left: 16px;
+    bottom: 20px;
+    z-index: 95;
+    background: var(--taupe-fab);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 9px 15px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: calc(100vw - 88px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-up-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 95;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--taupe-fab);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    text-decoration: none !important;
+  }
+
+  /* Drawers & Lightbox */
+  .ro-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ro-drawer-backdrop.open {
+    display: flex;
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-backdrop {
+      align-items: center;
+      padding: 24px;
+    }
+  }
+
+  .ro-drawer-panel {
+    width: 100%;
+    max-width: 500px;
+    max-height: 78vh;
+    overflow-y: auto;
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px 20px 0 0;
+    padding: 18px 18px 28px;
+    box-shadow: var(--shadow);
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-panel {
+      border-radius: 18px;
+    }
+  }
+
+  .ro-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .ro-drawer-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .ro-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .ro-drawer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ro-drawer-list a {
+    display: block;
+    text-decoration: none !important;
+    color: var(--text-body) !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .ro-drawer-list a.active {
+    color: #181614 !important;
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 800;
+  }
+
+  .ro-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    cursor: zoom-out;
+  }
+
+  .ro-lightbox.open {
+    display: flex;
+  }
+
+  .ro-lightbox img {
+    max-width: 100%;
+    max-height: 92vh;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+</style>
+</head>
+<body>
+
+<div class="ro-header-wrap">
+  <div class="ro-pillbar">
+    <div class="ro-brand-group">
+      <button class="ro-menu-circle" type="button" aria-label="開啟專題選單" onclick="roOpenDrawer('roSiteDrawer')">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="ro-brand-link" href="index.html">
+        <span class="ro-brand-zh">400X 的日常切片</span>
+        <span class="ro-brand-en">BIO-WIKI EVIDENCE</span>
+      </a>
+    </div>
+    <div class="ro-top-actions">
+      <button class="ro-theme-btn" id="roThemeBtn" type="button" onclick="roToggleTheme()">☀️ 亮色</button>
+      <button class="ro-cta-pill" type="button" onclick="roOpenDrawer('roSiteDrawer')">專題目錄</button>
+    </div>
+  </div>
+</div>
+
+<!-- Site-Wide Topics Drawer (dynamically populated by site-nav.js) -->
+<div class="ro-drawer-backdrop" id="roSiteDrawer" onclick="if(event.target===this)roCloseDrawer('roSiteDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📚 Bio-Wiki 全站專題</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roSiteDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list">
+      <a href="index.html">🏠 首頁：主題分類總覽</a>
+      <a href="genetics-terminology-hierarchy.html" class="active">遺傳學核心名詞階層與教學串連</a>
+    </div>
+  </div>
+</div>
+
+<!-- In-Page TOC Drawer -->
+<div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📑 本篇段落導覽</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list" id="roTocList" onclick="roCloseDrawer('roTocDrawer')"></div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="ro-lightbox" id="roLightbox" onclick="this.classList.remove('open')">
+  <img id="roLightboxImg" alt="">
+</div>
+
+<main class="container" id="top">
+
+  <div class="hero">
+    <div class="meta-line">
+      <span class="meta-pill">遺傳與分子生物學</span>
+      <span class="meta-pill-muted">113 成功高中・114 羅東高中教甄</span>
+      <span class="meta-pill-muted">4 部原文正典 · 4 張原圖</span>
+    </div>
+    <h1>遺傳學核心名詞階層與教學串連：DNA、基因、等位基因、染色質、染色體與基因體</h1>
+    <p class="subtitle">113 臺北市立成功高中與 114 國立羅東高中教甄筆試不約而同考了同一件事：如何向高中生釐清這群容易混淆的遺傳學專有名詞，並串成一條因果清楚的教學主軸？</p>
+  </div>
+
+  <!-- TL;DR -->
+  <div class="tldr-card">
+    <div class="tldr-label">一句話核心總結</div>
+    <p style="margin-bottom:12px;"><strong>DNA</strong> 是儲存遺傳密碼的化學分子，<strong>基因</strong>是 DNA 上能表現多肽或功能性 RNA 的功能片段，<strong>等位基因</strong>是同源染色體相同基因座上同一基因的不同版本；DNA 與蛋白質結合成<strong>染色質</strong>，細胞分裂時高度凝縮成<strong>染色體</strong>，而單套完整染色體（或整個細胞）所攜帶的全部遺傳資訊總和稱為<strong>基因體</strong>；基因表現後決定生物的<strong>性狀</strong>，個體呈現的特定形式即為<strong>表徵</strong>。</p>
+    <p style="margin-bottom:0;font-size:15.5px;color:var(--text-muted);">延伸對照：孟德爾「遺傳因子 → DNA」科學史與高中 6 版定義差異見 <a href="gene-allele-dna-chromosome.html">遺傳因子、基因、等位基因與染色體</a>；間期染色體實體辨析見 <a href="chromatin.html">染色質與染色體本質</a>；羅東高中其餘兩子題見 <a href="homologs-diploid-aabb-crossover.html">同源染色體 vs. 雙套與 AaBb 自交互換判讀</a>。</p>
+  </div>
+
+  <!-- Section 1: 8 Terminology Definitions -->
+  <section id="sec-terms">
+    <h2><span class="sec-num">01</span> 八個核心專有名詞：課本定義與高中生易懂說明</h2>
+    <p>教甄寫名詞解釋時，同時給出「精準學術定義」與「學生聽得懂的功能定位」最容易拿滿分。下表統一採用臺灣教育部《生命科學名詞》審定譯名（特別留意 <em>character</em>＝<strong>性狀</strong>、<em>trait</em>＝<strong>表徵</strong>）：</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>名詞（英文）</th>
+          <th>教科書正式定義</th>
+          <th>學生易懂說明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>DNA</strong><br>（deoxyribonucleic acid）</td>
+          <td>由兩條去氧核糖核苷酸鏈構成的雙股螺旋多核苷酸，以 A、T、G、C 鹼基序列儲存與傳遞遺傳資訊。</td>
+          <td>構成基因與染色體的「化學本體」，寫有遺傳密碼的分子長鏈。</td>
+        </tr>
+        <tr>
+          <td><strong>基因</strong><br>（gene）</td>
+          <td>DNA 分子上可被表現並產生功能性產物（多肽或功能性 RNA，如 tRNA、rRNA）的特定序列區域；分子層次常涵蓋啟動子等必需調控區（Campbell 13e Ch17；Alberts ECB6 Ch05）。</td>
+          <td>DNA 長鏈上有功能意義的段落；一條染色體的 DNA 上通常帶有數百至數千個基因。</td>
+        </tr>
+        <tr>
+          <td><strong>等位基因</strong><br>（allele）</td>
+          <td>同一基因的替代版本，位於一對同源染色體相對應的基因座（locus）；分子上為該段 DNA 核苷酸序列的細微差異（Campbell 13e Ch14）。</td>
+          <td>同一基因座上的不同版本，如豌豆花色基因的紫花等位基因 <em>P</em> 與白花等位基因 <em>p</em>。</td>
+        </tr>
+        <tr>
+          <td><strong>染色質</strong><br>（chromatin）</td>
+          <td>構成真核染色體的材料，即線性 DNA 與組蛋白及其他結構／調控蛋白的複合體；間期呈 10–30 nm 鬆散纖維分散於核中（Campbell 13e Ch12；Becker 10e Ch16）。</td>
+          <td>DNA 與蛋白質結合後的「鬆散纖維狀態」，方便酵素靠近進行複製與轉錄。</td>
+        </tr>
+        <tr>
+          <td><strong>染色體</strong><br>（chromosome）</td>
+          <td>攜帶遺傳資訊的獨立載體構造；每條真核染色體（複製前）含一條極長線性 DNA 與大量蛋白質，分裂期高度凝縮成顯微鏡下可見的條狀結構（Campbell 13e Ch12）。</td>
+          <td>把超長 DNA（單一人類細胞 DNA 伸展約 2 公尺）打包收納、確保細胞分裂時精準分配的載體。</td>
+        </tr>
+        <tr>
+          <td><strong>基因體</strong><br>（genome）</td>
+          <td>一個細胞或生物體一套完整染色體所攜帶的全部遺傳資訊總和（Alberts ECB6 Ch05；Campbell 13e Ch12 亦泛指一個細胞的全部 DNA）。</td>
+          <td>整個物種或細胞的全部遺傳資料庫（如人類單套 23 條染色體合計約 3.1 × 10⁹ 對核苷酸）。</td>
+        </tr>
+        <tr>
+          <td><strong>性狀</strong><br>（character）</td>
+          <td>生物個體間可變化、可比較的可遺傳特徵向度（Campbell 13e Ch14；Brooker Genetics 8e Ch03）。</td>
+          <td>比較遺傳時的「項目類別」，例如豌豆的「花色」或「種子形狀」。</td>
+        </tr>
+        <tr>
+          <td><strong>表徵</strong><br>（trait）</td>
+          <td>某一項性狀底下的特定變異或表現形式（Campbell 13e Ch14；臺灣《生命科學名詞》審定譯名）。</td>
+          <td>該項目底下的「具體表現選項」，例如花色這項性狀下的「紫花」或「白花」。</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Section 2: 4-Level Hierarchy (Luodong 114 Q1-1) -->
+  <section id="sec-hierarchy">
+    <h2><span class="sec-num">02</span> 四層包含階層：DNA、基因、染色體、基因體怎麼釐清？</h2>
+    <p>針對 <strong>114 國立羅東高中簡答題 1(1)</strong>，高中生最大的困惑是把這四個名詞想像成彼此並列的四個零件。教學時應直接切出「<strong>化學分子 → 功能片段 → 單一載體 → 整套資訊總和</strong>」四層包含關係：</p>
+
+    <pre class="hierarchy-box">基因體（Genome：全套完整染色體攜帶的全部遺傳資訊，人類單套 23 條 ≈ 3.1 × 10⁹ bp）
+ └── 染色體（Chromosome：單一載體＝1 條 DNA ＋ 蛋白質；間期呈染色質，分裂期高度凝縮）
+      └── DNA（Deoxyribonucleic acid：雙股螺旋去氧核糖核苷酸長鏈）
+           ├── 基因（Gene：能表現多肽或功能性 RNA 的功能片段，位於特定基因座）
+           │     └── 等位基因（Allele：同源染色體相同基因座上序列微異的不同版本）
+           └── 非編碼區與結構序列（內含子、基因間區、端粒、中節等）</pre>
+
+    <table>
+      <thead>
+        <tr>
+          <th>層次</th>
+          <th>名詞</th>
+          <th>組成重點</th>
+          <th>給學生的區分句</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1. 化學材質</td>
+          <td><strong>DNA</strong></td>
+          <td>去氧核糖核苷酸雙股螺旋</td>
+          <td>構成遺傳物質的化學分子本身</td>
+        </tr>
+        <tr>
+          <td>2. 功能片段</td>
+          <td><strong>基因</strong></td>
+          <td>編碼區＋啟動子等調控序列</td>
+          <td>DNA 上有功能意義的一段；1 條 DNA 含數百至數千個基因</td>
+        </tr>
+        <tr>
+          <td>3. 獨立載體</td>
+          <td><strong>染色體</strong></td>
+          <td>1 條線性 DNA（複製前）＋ 組蛋白等蛋白</td>
+          <td>把整條長 DNA 加蛋白質打包而成的單一分配結構</td>
+        </tr>
+        <tr>
+          <td>4. 資訊總和</td>
+          <td><strong>基因體</strong></td>
+          <td>全套染色體攜帶的全部遺傳資訊</td>
+          <td>一個物種或細胞所有染色體所含遺傳資訊的總集合</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <div class="callout-title">細節校準：基因體（genome）的兩種原文書口徑</div>
+      <p style="margin-bottom:0;"><strong>Alberts ECB6 Ch05</strong> 將真核基因體精確定義為「<strong>一套完整染色體（<em>n</em>）</strong>所攜帶的全部遺傳資訊（人類約 3.1 × 10⁹ 對核苷酸）」；<strong>Campbell 13e Ch12</strong> 則在細胞分裂章節先以「<strong>一個細胞的 DNA，即其遺傳資訊</strong>」導入。高中教學可說「生物體一套完整染色體（或整個細胞）所含全部遺傳資訊總和」，並適度補充真核細胞尚有粒線體與葉綠體的核外 DNA，就能兼顧易懂與嚴謹。</p>
+    </div>
+  </section>
+
+  <!-- Section 3: Chromatin vs Chromosome & 6-Term Narrative (Chenggong 113 Q1) -->
+  <section id="sec-narrative">
+    <h2><span class="sec-num">03</span> 染色質 vs. 染色體，與六名詞教學串連（113 成功高中）</h2>
+
+    <h3>1. 兩組最容易混淆的對照</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>比較項目</th>
+          <th>染色質（chromatin）</th>
+          <th>染色體（chromosome）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>化學組成</strong></td>
+          <td>線性 DNA ＋ 組蛋白與非組蛋白</td>
+          <td><strong>完全相同</strong>（由染色質進一步盤繞凝縮而成）</td>
+        </tr>
+        <tr>
+          <td><strong>主要時期</strong></td>
+          <td>間期（未分裂，含 DNA 複製期）</td>
+          <td>細胞分裂期高度凝縮短粗，光學顯微鏡清晰可見</td>
+        </tr>
+        <tr>
+          <td><strong>功能意義</strong></td>
+          <td>呈 10–30 nm 鬆散纖維，方便酵素接觸進行轉錄與複製</td>
+          <td>緊密打包成獨立條狀載體，避免拉斷並確保精準分配至子細胞</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>2. 六個名詞串成一條完整的教學概念（113 成功高中非選 1 實戰架構）</h3>
+    <p>題目要求將「<strong>基因、等位基因、性狀、表徵、染色質、染色體</strong>」串連為完整教學概念（2 分），最清楚的敘事動線是「<strong>分子包裝狀態 → 載體基因座與版本 → 基因表現到巨觀外觀</strong>」，並用單一例子（豌豆花色）收束：</p>
+
+    <div class="tldr-card">
+      <div class="timeline">
+        <div class="timeline-step">
+          <div class="timeline-step-title"><span>1</span>同一套材料，依細胞週期切換形態（染色質 → 染色體）</div>
+          <p style="margin-bottom:0;">在真核細胞核內，DNA 與組蛋白等蛋白質結合成<strong>染色質</strong>。細胞處於間期時維持鬆散的染色質纖維，以便進行 DNA 複製與基因轉錄；進入細胞分裂期時，染色質高度凝縮成獨立的<strong>染色體</strong>，確保遺傳物質精準分配到子細胞。</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-step-title"><span>2</span>染色體載體上的功能區段與版本（基因 → 等位基因）</div>
+          <p style="margin-bottom:0;">每條染色體的 DNA 上排列著數百至數千個<strong>基因</strong>，各自位於固定基因座；在一對同源染色體的相同基因座上，同一基因因核苷酸序列微小差異而有不同版本，稱為<strong>等位基因</strong>（例如控制豌豆花色酵素的紫花等位基因 <em>P</em> 與白花等位基因 <em>p</em>）。</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-step-title"><span>3</span>由分子指令到可觀察特徵（性狀 → 表徵）</div>
+          <p style="margin-bottom:0;">基因表現出功能性產物（如合成紫色素的酵素）後，決定生物體的各項<strong>性狀</strong>（例如「花色」）；個體繼承自雙親的<strong>等位基因</strong>組合（<em>PP</em>、<em>Pp</em> 或 <em>pp</em>）與環境互動後，最終呈現出具體的<strong>表徵</strong>（例如「紫花」或「白花」）。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Textbook Figures -->
+  <section id="sec-figures">
+    <h2><span class="sec-num">04</span> 經典教科書原圖解析（點擊圖片可全螢幕放大）</h2>
+
+    <div class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Campbell13e_Fig12-3_eukaryotic_chromosomes.jpg', 'Campbell 13e 圖 12.3 真核染色體')">
+        <img src="images/Campbell13e_Fig12-3_eukaryotic_chromosomes.jpg" alt="Campbell 13e 圖 12.3 真核染色體">
+        <span class="zoom-hint">🔍 點擊放大檢視細節</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖 1｜Campbell 13e Fig. 12.3：分裂前凝縮中的真核染色體（LM）</div>
+        <div class="figure-caption">非洲血百合準備分裂的細胞光學顯微影像：細胞核內原本分散的染色質開始高度凝縮，染成紫色的條狀染色體因而變得清晰可見；周圍紅色細絲為細胞骨架。</div>
+        <div class="figure-caption-en">“Eukaryotic chromosomes. Chromosomes (stained purple) are visible within the nucleus of this cell from an African blood lily. The thinner red threads in the surrounding cytoplasm are the cytoskeleton. The cell is preparing to divide (LM).”</div>
+        <div class="figure-guide"><strong>讀圖重點：</strong>搭配「染色質 → 染色體」講解時，這張光學顯微鏡實拍圖最能說明為何平時看不清、要到分裂期凝縮才看到一條條染色體。</div>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Campbell13e_Fig12-4_duplicated_chromosome_sem.jpg', 'Campbell 13e 圖 12.4 高度凝縮的複製人類染色體 SEM')">
+        <img src="images/Campbell13e_Fig12-4_duplicated_chromosome_sem.jpg" alt="Campbell 13e 圖 12.4 高度凝縮的複製人類染色體 SEM">
+        <span class="zoom-hint">🔍 點擊放大檢視細節</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖 2｜Campbell 13e Fig. 12.4：高度凝縮的複製人類染色體（SEM）</div>
+        <div class="figure-caption">掃描電子顯微鏡呈現一條已複製並高度凝縮的人類染色體：左右為兩條遺傳上完全相同的姊妹染色分體（sister chromatids），中央狹窄縊縮處為各自的中節（centromeres）。</div>
+        <div class="figure-caption-en">“A highly condensed, duplicated human chromosome. (SEM)”</div>
+        <div class="figure-guide"><strong>讀圖重點：</strong>每條姊妹染色分體各含 1 條完整的線性 DNA 與組蛋白複合體；注意臺灣審定術語一律稱「<strong>染色分體</strong>」。</div>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Campbell13e_Fig14-4_alleles_dna_sequence.jpg', 'Campbell 13e 圖 14.4 等位基因 DNA 序列差異')">
+        <img src="images/Campbell13e_Fig14-4_alleles_dna_sequence.jpg" alt="Campbell 13e 圖 14.4 等位基因 DNA 序列差異">
+        <span class="zoom-hint">🔍 點擊放大檢視細節</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖 3｜Campbell 13e Fig. 14.4：同源染色體基因座與等位基因的 DNA 序列差異</div>
+        <div class="figure-caption">F₁ 雜種豌豆的一對同源染色體在花色基因座（locus for flower-color gene）帶有兩種等位基因：上方紫花等位基因序列為 <code>CTAAATCGGT</code>，下方白花等位基因僅第 1 個鹼基不同（<code>ATAAATCGGT</code>）。</div>
+        <div class="figure-caption-en">“Alleles, alternative versions of a gene. This diagram shows a pair of homologous chromosomes in an F₁ hybrid pea plant, with the actual DNA sequence from the flower-color allele of each chromosome.”</div>
+        <div class="figure-guide"><strong>讀圖重點：</strong>這張圖直接把「染色體 → 基因座 → DNA 序列 → 等位基因 → 性狀（花色）與表徵（紫花／白花）」一次串在同一張畫面上。</div>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/AlbertsECB6_Fig5-10_yeast_genes_on_chromosome.png', 'Alberts ECB6 圖 5-10 染色體 DNA 上密集排列的基因')">
+        <img src="images/AlbertsECB6_Fig5-10_yeast_genes_on_chromosome.png" alt="Alberts ECB6 圖 5-10 染色體 DNA 上密集排列的基因">
+        <span class="zoom-hint">🔍 點擊放大檢視細節</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖 4｜Alberts ECB6 Fig. 5–10：一條染色體 DNA 上的多個基因排列</div>
+        <div class="figure-caption">出芽酵母菌（<em>S. cerevisiae</em>）單一染色體上一小段雙股 DNA 示意圖：其整個基因體約 1,250 萬對核苷酸、含 6,600 個基因，分布於 16 條染色體上；橘色區段標示各基因的編碼區（可位於雙股中的任一股）。</div>
+        <div class="figure-caption-en">“Figure 5–10 In yeast, genes are closely packed along chromosomes. This figure shows a small region of the DNA double helix in one chromosome from the budding yeast S. cerevisiae. The S. cerevisiae genome contains about 12.5 million nucleotide pairs and 6600 genes—spread across 16 chromosomes.”</div>
+        <div class="figure-guide"><strong>讀圖重點：</strong>直觀呈現「基因體 ＞ 染色體 ＞ DNA 雙股 ＞ 基因」的包含關係，並破除「一條染色體只有一個基因」的誤解。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Bilingual Textbook Evidence -->
+  <section id="sec-sources">
+    <h2><span class="sec-num">05</span> 經典教科書原始文獻段落考證</h2>
+    <p>以下英文原文與繁中譯文皆直接回溯自本機 Vault 正式譯本段落（已於原檔建立 <code>#^anchor</code> 區塊連結），未憑記憶改寫。</p>
+    <button class="toggle-en-btn" id="toggleEnBtn" type="button" onclick="toggleEnglish()">精簡：隱藏英文原文</button>
+
+    <!-- Source 1: Campbell 13e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">1. Campbell《Biology》13e</div>
+        <div class="source-loc">Ch12 細胞週期 · Ch14 孟德爾與基因概念 · Ch17 基因表現</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">① 基因體、染色體、基因與染色質的整體關係（Ch12）</div>
+        <div class="quote-en">“A cell’s DNA, its genetic information, is called its genome. Although a prokaryotic genome is often a single DNA molecule, eukaryotic genomes usually consist of a number of DNA molecules. … Each eukaryotic chromosome consists of one very long, linear DNA molecule associated with many proteins (see Figure 6.9). The DNA molecule carries several hundred to a few thousand genes, the units of information that specify an organism’s inherited traits. The associated proteins maintain the structure of the chromosome and help control the activity of the genes. Together, the entire complex of DNA and proteins that is the building material of chromosomes is referred to as chromatin.”</div>
+        <div class="quote-tw">一個細胞的 DNA，即其遺傳資訊，稱為<strong>基因體</strong>（genome）。原核生物的基因體通常只有一個 DNA 分子，真核生物的基因體則由多個 DNA 分子組成……每條真核染色體由一個非常長的線性 DNA 分子與大量蛋白質結合而成。這個 DNA 分子攜帶幾百到幾千個<strong>基因</strong>，即指定生物遺傳特徵的資訊單位。構成染色體的材料，也就是 DNA 與蛋白質共同組成的整個複合體，合稱為<strong>染色質</strong>（chromatin）。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">② 未分裂為染色質纖維，分裂期凝縮為顯微鏡可見染色體（Ch12）</div>
+        <div class="quote-en">“When a cell is not dividing, and even as it replicates its DNA in preparation for cell division, each chromosome is in the form of a long, thin chromatin fiber. After DNA replication, however, the chromosomes condense as a part of cell division: Each chromatin fiber becomes densely coiled and folded, making the chromosomes much shorter and so thick that we can see them with a light microscope.”</div>
+        <div class="quote-tw">細胞未在分裂時，即使正在複製 DNA 以準備分裂，每條染色體都呈現長而細的<strong>染色質纖維</strong>形態。DNA 複製完成後，染色體會在細胞分裂的過程中<strong>凝縮</strong>——每條染色質纖維緊密盤繞摺疊，使染色體變得短粗，在光學顯微鏡下清晰可見。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">③ 性狀（character）、表徵（trait）與等位基因（allele）（Ch14）</div>
+        <div class="quote-en">“A heritable feature that varies among individuals, such as flower color, is called a character. Each variant for a character, such as purple or white color for flowers, is called a trait. … Each of these alternative versions of a gene is called an allele. … each gene is a sequence of nucleotides at a specific place, or locus, along a particular chromosome. The DNA at that locus, however, can vary slightly in its nucleotide sequence.”</div>
+        <div class="quote-tw">可在個體間發生變化的可遺傳特徵（如花色）稱為<strong>性狀</strong>（character）；性狀的每種不同版本（如紫色或白色）則稱為<strong>表徵</strong>（trait）。基因的每種替代版本稱為<strong>等位基因</strong>（allele）。每個基因是特定染色體上某個位置（<strong>基因座</strong>，locus）的一段核苷酸序列，該基因座的 DNA 在核苷酸序列上可能有微小差異。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">④ 基因的現代功能定義：多肽或功能性 RNA（Ch17）</div>
+        <div class="quote-en">“Molecular biologists also often include promoters and certain other regulatory regions of DNA within the boundaries of a gene. … Thus, we arrive at the following definition: A gene is a region of DNA that can be expressed to produce a final functional product that is either a polypeptide or an RNA molecule.”</div>
+        <div class="quote-tw">分子生物學家也常將啟動子和某些調控區域納入基因邊界內。因此，我們得出以下定義：<strong>基因是 DNA 的一個區域，可以被表現，產生最終的功能性產物——可以是多肽，也可以是 RNA 分子。</strong></div>
+      </div>
+    </div>
+
+    <!-- Source 2: Alberts ECB6 -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">2. Alberts《Essential Cell Biology》6e</div>
+        <div class="source-loc">Ch05 DNA 與染色體</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">① 染色質、基因與基因體（一套完整染色體之全部資訊）</div>
+        <div class="quote-en">“Each of these chromosomes consists of a single, enormously long, linear DNA molecule associated with proteins that fold and pack the fine thread of DNA into a more compact structure. This complex of DNA and protein is called chromatin. … A gene can be defined as a segment of DNA that contains the instructions for making a particular protein or RNA molecule. … Together, the total genetic information carried by a complete set of the chromosomes present in a cell or organism constitutes its genome.”</div>
+        <div class="quote-tw">每條染色體都由一個極長的線性 DNA 分子及相關蛋白質構成；這些蛋白質摺疊並包裝 DNA 長絲，這種 DNA 與蛋白質的複合體稱為<strong>染色質</strong>。<strong>基因</strong>可定義為一段含有製造特定蛋白質或 RNA 分子指示的 DNA。細胞或生物體<strong>一套完整染色體所攜帶的全部遺傳資訊</strong>，合稱其<strong>基因體</strong>。</div>
+      </div>
+    </div>
+
+    <!-- Source 3: Becker 10e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">3. Becker《World of the Cell》10e</div>
+        <div class="source-loc">Ch16 細胞資訊的結構基礎：DNA、染色體與細胞核</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">染色質 10–30 nm 纖維於分裂期凝縮為可辨認之獨立染色體</div>
+        <div class="quote-en">“When bound to these proteins, the DNA is known as chromatin, which forms fibers 10–30 nm in diameter that are normally dispersed throughout the nucleus. At the time of cell division (and in a few other situations), these fibers condense and fold into much larger, compact structures that become recognizable as individual chromosomes.”</div>
+        <div class="quote-tw">DNA 與這些蛋白質結合時稱為<strong>染色質</strong>，形成直徑 10–30 nm 的纖維，通常分散於整個細胞核中。在細胞分裂時（以及少數其他情況下），這些纖維會凝縮並摺疊成更大、更緊密的構造，因而可辨認為一條條獨立的<strong>染色體</strong>。</div>
+      </div>
+    </div>
+
+    <!-- Source 4: Brooker Genetics 8e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">4. Brooker《Genetics》8e</div>
+        <div class="source-loc">Ch03 孟德爾遺傳</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Character（性狀）與 Trait（表徵）的嚴格區分</div>
+        <div class="quote-en">“The general characteristics of an organism are called characters. For example, flower color is a character of peas. The term trait, or variant, is typically used to describe the specific properties of a character. For example, purple flower color is a trait (or variant) of peas.”</div>
+        <div class="quote-tw">生物的一般特徵稱為<strong>性狀</strong>（characters），例如花色是豌豆的一項性狀。<strong>表徵</strong>（trait）或變異（variant）則用來描述某項性狀的特定性質，例如紫色花色是豌豆的一項表徵。</div>
+      </div>
+    </div>
+
+    <!-- Source 5: Taiwan High School -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">5. 臺灣高中 108 課綱跨版本整合與教甄試題</div>
+        <div class="source-loc">選修生物一 02 跨版本整合 · 113 成功高中 · 114 羅東高中</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">高中教材辨誤：染色體、DNA、基因不可畫成並列物件</div>
+        <div class="quote-tw"><strong>〔選修生物一 02 跨版本整合〕</strong>「染色體、DNA、基因」不可畫成三個彼此並列的物件：一條複製前的染色體含一個 DNA 分子及其相關蛋白質，基因則是 DNA 上具有功能意義的一段。<br><br>
+        <strong>〔教甄原題出處〕</strong>113 臺北市立成功高中第 1 次正式教師甄選初試（非選擇題第 1 題，5 分）；114 國立羅東高中第 1 次教師甄選初試（三、簡答題第 1 題(1)，2 分）。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Teaching & Exam Tips -->
+  <section id="sec-teaching">
+    <h2><span class="sec-num">06</span> 教甄作答與高中教學常見扣分陷阱</h2>
+
+    <div class="callout-warn">
+      <div class="callout-title">⚠️ 教甄與課堂最容易被扣分的 3 個盲點</div>
+      <ul style="margin-bottom:0;">
+        <li><strong>盲點 1：把基因只定義成「製造蛋白質的 DNA 片段」</strong><br>
+        過於簡化。務必補上「最終產物可以是<strong>多肽，也可以是功能性 RNA（如 rRNA、tRNA）</strong>」，才能符合 Campbell 13e Ch17 與 Alberts ECB6 Ch05 的現代定義。</li>
+        <li><strong>盲點 2：說「間期叫染色質、分裂期才變成染色體，兩者成分不同」</strong><br>
+        錯。兩者化學成分完全相同（皆為 DNA ＋ 蛋白質），差別在於凝縮程度與功能需求（鬆散便於複製轉錄 vs. 凝縮便於精準分配）；更精確地說，間期核內染色體依然各自獨立存在（詳見 <a href="chromatin.html">染色質與染色體本質</a>）。</li>
+        <li><strong>盲點 3：性狀與表徵混寫，或把紫花與白花說成「兩個基因」</strong><br>
+        依臺灣《生命科學名詞》，<em>character</em> 譯「<strong>性狀</strong>」（如花色）、<em>trait</em> 譯「<strong>表徵</strong>」（如紫花／白花）；紫花與白花在單基因模型中不是兩個基因，而是花色基因的兩種<strong>等位基因</strong>。</li>
+      </ul>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">延伸閱讀：接續完成 114 羅東高中第 1 題後兩小題</div>
+      <p style="margin-bottom:0;">釐清這組基礎名詞階層後，可接著閱讀 <a href="homologs-diploid-aabb-crossover.html">《同源染色體 vs. 雙套（2n），與 AaBb × AaBb 自交如何判斷互換？》</a>，一次補齊 114 羅東高中簡答題第 1 題的完整解答與 6 部原文書原圖考證。</p>
+    </div>
+  </section>
+
+  <footer>
+    400X 的日常切片 Bio-Wiki · 依 Campbell 13e、Alberts ECB6、Becker 10e、Brooker Genetics 8e 與高中跨版本教材原文編整 · 繁體中文與審定名詞遵循臺灣教育部規範
+  </footer>
+
+</main>
+
+<button class="ro-bottom-toc" type="button" onclick="roOpenDrawer('roTocDrawer')">📑 本篇段落導覽</button>
+<a class="ro-up-btn" href="#top" aria-label="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<script>
+  function roToggleTheme() {
+    var root = document.documentElement;
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('biowiki-theme', next); } catch (e) {}
+    roUpdateThemeBtn();
+  }
+  function roUpdateThemeBtn() {
+    var btn = document.getElementById('roThemeBtn');
+    if (!btn) return;
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.innerHTML = isLight ? '🌙 深色' : '☀️ 亮色';
+    btn.setAttribute('aria-label', isLight ? '切換為深色閱讀模式' : '切換為亮色閱讀模式');
+  }
+  roUpdateThemeBtn();
+
+  function roOpenDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('open');
+  }
+  function roCloseDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  }
+  function openLightbox(src, alt) {
+    var lb = document.getElementById('roLightbox');
+    var img = document.getElementById('roLightboxImg');
+    if (lb && img) {
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.add('open');
+    }
+  }
+  function toggleEnglish() {
+    document.body.classList.toggle('hide-en');
+    var btn = document.getElementById('toggleEnBtn');
+    if (btn) {
+      btn.textContent = document.body.classList.contains('hide-en')
+        ? '完整：顯示英文原文'
+        : '精簡：隱藏英文原文';
+    }
+  }
+  (function initReadingOutpostShell() {
+    var tocList = document.getElementById('roTocList');
+    var headings = document.querySelectorAll('h2');
+    if (tocList && headings.length) {
+      headings.forEach(function(h, idx) {
+        if (!h.id) h.id = 'ro-sec-' + (idx + 1);
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent.trim();
+        tocList.appendChild(a);
+      });
+    }
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th, tr:first-child th')).map(function(th) {
+        return th.innerText.trim().replace(/[\r\n\t ]+/g, ' ');
+      });
+      if (!headers.length) return;
+      table.classList.add('ro-resp-table');
+      table.querySelectorAll('tr').forEach(function(tr) {
+        if (tr.querySelector('th')) return;
+        Array.from(tr.children).forEach(function(td, idx) {
+          if (td.tagName === 'TD' && !td.getAttribute('data-label') && headers[idx]) {
+            td.setAttribute('data-label', headers[idx]);
+          }
+        });
+      });
+    });
+    document.querySelectorAll('main img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        openLightbox(img.src, img.alt);
+      });
+    });
+  })();
+</script>
+<script src="site-nav.js"></script>
+</body>
+</html>
