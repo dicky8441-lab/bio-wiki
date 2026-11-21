@@ -124,9 +124,9 @@
       items: [
         {
           href: 'abo-transfusion-self-tolerance.html',
-          title: 'ABO 血型輸血（全血 vs. 紅血球）與為何沒有抗 A 抗體？',
+          title: 'ABO 血型輸血、自體耐受與為何本來就有 A 抗原？',
           tag: '輸血與免疫',
-          keywords: 'ABO 血型 複等位基因 共顯性 等顯性 輸血 全血 濃縮紅血球 成分輸血 血漿 稀釋效應 自體耐受性 中樞耐受 周邊耐受 受體編輯 選殖刪除 無反應狀態 天然抗體 IgM 腸道菌 交叉反應 Rh血型 抗D抗體 Guyton Hole Fox Vander Tortora Basic Immunology Campbell'
+          keywords: 'ABO 血型 複等位基因 共顯性 等顯性 輸血 全血 濃縮紅血球 成分輸血 血漿 稀釋效應 自體耐受性 中樞耐受 周邊耐受 受體編輯 選殖刪除 無反應狀態 天然抗體 IgM 腸道菌 交叉反應 Rh血型 抗D抗體 醣萼 glycocalyx 帶3蛋白質 血型糖蛋白 分子擬態 軍備競賽 霍亂 瘧疾 平衡多型性 Guyton Hole Fox Vander Tortora Basic Immunology Campbell Stryer Alberts Junqueira Becker'
         },
         {
           href: 'lac-operon-vs-insulin-exocytosis.html',

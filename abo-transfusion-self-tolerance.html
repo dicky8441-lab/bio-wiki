@@ -898,18 +898,18 @@
   <!-- Hero -->
   <div class="hero">
     <div class="meta-line">
-      <span class="meta-pill">遺傳 × 動物生理 × 免疫</span>
-      <span class="meta-pill-muted">7 部原文正典考證</span>
-      <span class="meta-pill-muted">6 張原書圖解</span>
+      <span class="meta-pill">遺傳 × 動物生理 × 免疫 × 演化</span>
+      <span class="meta-pill-muted">11 部原文正典考證</span>
+      <span class="meta-pill-muted">8 張原書圖解</span>
     </div>
-    <h1>ABO 血型輸血與抗體機制：一定要只輸紅血球嗎？A 型人為何沒有抗 A 抗體？</h1>
-    <p class="subtitle">高中課本在複等位基因單元常用 ABO 血型帶出輸血原則，卻常省略三個關鍵背景：輸血能不能輸全血？為什麼 A 型人的身體不會做出抗 A 抗體、沒輸過血卻有抗 B 抗體？血漿裡難道沒有其他抗體嗎？以下以高中生能直接讀懂的脈絡，對照 Guyton、Hole、Fox、Vander、Tortora、Basic Immunology 與 Campbell 原文一次講清楚。</p>
+    <h1>ABO 血型輸血與抗體機制：全血 vs. 紅血球、為何無抗 A 抗體，以及紅血球為何本來就有 A 抗原？</h1>
+    <p class="subtitle">高中課本在複等位基因單元常用 ABO 血型帶出輸血原則，卻常省略四個關鍵問題：輸血能不能輸全血？為什麼 A 型人的身體不會做出抗 A 抗體、沒輸過血卻有抗 B 抗體？血漿裡沒有其他抗體嗎？紅血球表面又為什麼本來就要裝 A 抗原，難道不怕跟外來病原體太像而產生漏洞嗎？以下以高中生能直接看懂的脈絡，對照 11 部原文正典一次講清楚。</p>
   </div>
 
   <!-- TL;DR -->
   <section id="sec-tldr">
     <div class="tldr-card">
-      <div class="tldr-label">先抓這 3 個核心結論</div>
+      <div class="tldr-label">先抓這 4 個核心結論</div>
       <div class="timeline">
         <div class="timeline-step">
           <div class="timeline-step-title"><span>1</span> 輸血不一定只輸紅血球，但「異型輸血」必須避免大量血漿</div>
@@ -922,6 +922,10 @@
         <div class="timeline-step">
           <div class="timeline-step-title"><span>3</span> 抗 B 抗體出生後才由腸道菌誘發，且血漿中充滿大量其他抗體</div>
           <p>新生兒剛出生時幾乎沒有抗 A、抗 B 抗體；出生後 2 至 8 個月接觸飲食與腸道細菌，細菌表面的多醣結構與 B 抗原非常相似，便會刺激 A 型人體內保留下來的抗 B 細胞產生天然 IgM 抗體。而正常人血漿裡本來就同時存在成千上萬種針對病原體與疫苗的其他抗體，課本表格只是聚焦在 ABO 血型系統。</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-step-title"><span>4</span> 紅血球本來就需要醣萼，A 抗原與病原體相似確實會形成免疫盲點</div>
+          <p>A 抗原原本是紅血球細胞膜外側醣萼（保護膜、防沾黏、掛載於帶 3 蛋白質與血型糖蛋白）末端的單醣微調。病原體若表現出類似 A 抗原的醣類（分子擬態），確實會讓 A 型人缺乏對應天然抗體；但沒有一種血型對所有病原體都佔優勢（例如 O 型較抗重症瘧疾，卻較易得重症霍亂），長期演化軍備競賽反而讓族群同時保留 A、B、O 多樣性。</p>
         </div>
       </div>
     </div>
@@ -1159,10 +1163,65 @@
     </div>
   </section>
 
-  <!-- Section 5: Textbook Evidence -->
+  <!-- Section 5: Why A Antigen Exists & Molecular Mimicry -->
+  <section id="sec-why-a-antigen">
+    <h2><span class="sec-num">05</span> 延伸追問：紅血球為何本來就有 A 抗原？難道不會跟外來物太像而形成漏洞嗎？</h2>
+
+    <h3>1. 紅血球表面本來就需要一層醣萼（glycocalyx），不是為了「當血型」而演化的</h3>
+    <p>「抗原」是免疫學上從「會被別人免疫系統辨識」的角度取的名字，而不是它原本在身體裡的任務。其實，幾乎所有真核細胞與紅血球細胞膜外側都覆蓋著一層由膜醣蛋白與膜醣脂組成的親水醣類外衣，稱為<strong>醣萼（glycocalyx）</strong>：</p>
+    <ul>
+      <li><strong>保護膜表面與防止沾黏</strong>：醣鏈能吸引水分子，保護細胞膜免於機械摩擦與蛋白酶分解，並防止血球在血管內彼此黏附或黏在血管壁上（<em>Alberts</em> ECB6 Ch11、<em>Lehninger</em> 8e Ch07）；此外，紅血球血型糖蛋白（glycophorin）的醣鏈末端帶有負電的唾液酸，能讓紅血球彼此排斥、降低血液黏度（<em>Becker</em> 10e Ch07）。</li>
+      <li><strong>掛載於紅血球重要跨膜蛋白上</strong>：ABO 血型寡醣就是附著在紅血球膜上負責 Cl⁻／HCO₃⁻ 交換的<strong>帶 3 蛋白質（band 3）</strong>、<strong>血型糖蛋白 A（glycophorin A）</strong>（兩者同時協助固定膜下血影蛋白網格，維持紅血球通過微血管的彈性），以及膜醣脂外側（<em>Junqueira</em> 17e Ch12、<em>Lodish</em> 9e Ch10）。</li>
+      <li><strong>不只在紅血球，也參與黏膜保護與共生菌互動</strong>：ABO 醣類也表現於血管內皮與約 80% 人口（分泌型）的唾液和腸道黏液中，參與細胞間辨識與腸道菌群互動（<em>Tortora</em> 13e Ch19、<em>Basic Immunology</em> 7e Ch10）。</li>
+    </ul>
+    <p>不論哪種血型，紅血球表面本來就有基礎寡醣（核心聚醣／H 抗原）；A 型人只是因 Iᴬ 醣基轉移酶在末端多接了一個常見單醣 N-乙醯半乳糖胺（B 型接半乳糖），對自己人完全無害。</p>
+
+    <article class="figure-card">
+      <div class="figure-img-wrap">
+        <img src="images/AlbertsECB6_Fig11-33_glycocalyx.png" alt="Alberts ECB6 圖 11-33：真核細胞膜外側由醣脂、醣蛋白與蛋白聚醣構成的醣萼" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖 7｜Alberts ECB6 圖 11–33：真核細胞膜外側的醣萼（Glycocalyx）</div>
+        <p class="figure-caption">所有連接在膜醣脂、跨膜醣蛋白與蛋白聚醣上的寡醣與多醣鏈，全都朝向細胞膜外側（非細胞質側），形成具保護、潤滑、防止血球沾黏與細胞辨識功能的醣類外衣；ABO 血型抗原就是這層結構中的一部分。</p>
+        <p class="figure-caption-en">Figure 11–33 Eukaryotic cells are coated with sugars. This carbohydrate-rich layer is made of the oligosaccharide side chains attached to membrane glycolipids and glycoproteins, and of the polysaccharide chains on membrane proteoglycans. Note that all the carbohydrate is on the external (noncytosolic) surface of the plasma membrane.</p>
+      </div>
+    </article>
+
+    <h3>2. 製造出與病原體相似的 A 抗原，確實會帶來免疫盲點</h3>
+    <p><strong>這個推論是對的。</strong>一方面，自然界人類細胞與細菌細胞壁合成多醣用的都是那幾種常見單醣，結構本來就容易重疊；另一方面，某些寄生蟲與細菌也會演化出<strong>分子擬態（molecular mimicry）</strong>，在自身表面表現與宿主血型抗原極為相似的醣類結構來躲避免疫攻擊（<em>Stryer</em> 10e Ch11、<em>Raven</em> 13e Ch27）。</p>
+    <p>因為 A 型人已透過自體耐受性清除了抗 A B 細胞，<em>Stryer</em> 10e Ch11 直接點出其後果：如果某種病原生物在表面表現出與 A 抗原相似的醣類，<strong>A 型與 AB 型個體的免疫系統不會把這種醣類視為外來物，病原體便可能較容易大量繁殖</strong>；相對地，擁有抗 A 抗體的 B 型與 O 型個體則較受保護。（不過 A 型人仍保有吞噬細胞、補體系統以及辨識病原體其他蛋白質抗原的防線，並非毫無抵抗力。）</p>
+
+    <h3>3. 那演化為何不乾脆淘汰 A、B 抗原，讓全人類都變成 O 型？</h3>
+    <p>因為<strong>沒有任何一種血型能對所有病原體都佔優勢</strong>，保留 A、B、O 多樣性是人類與病原體長期軍備競賽下的<strong>平衡多型性</strong>（<em>Stryer</em> 10e Ch11、<em>Tortora</em> 13e Ch19、<em>Bergstrom</em> Ch07）：</p>
+    <ul>
+      <li><strong>O 型的代價（霍亂重症風險高約 8 倍）</strong>：霍亂弧菌（<em>Vibrio cholerae</em>）分泌的毒素會與 O 抗原（H 抗原）形成較緊密的非共價結合，使 <strong>O 型人感染霍亂後發展成重症的機率約高出 8 倍</strong>，B 型人受影響則小得多；因此在霍亂長期流行的印度次大陸，O 型比例明顯偏低、B 型反而常見。</li>
+      <li><strong>O 型的優勢（較抗重症瘧疾）</strong>：反過來看，在熱帶非洲等瘧疾流行區，<strong>O 型者受重症瘧疾的影響通常較小</strong>，使當地超過一半人口維持為 O 型。</li>
+      <li><strong>族群層次的互補保護</strong>：若全人類都是單一血型，一旦出現成功擬態該血型或專一利用該血型當受體的致命病原體，整個族群都可能重創。持續的病原體軍備競賽推動族群保留多種血型，使 ABO 多型性甚至在人類與黑猩猩等靈長類的演化史上被共同保留至今。</li>
+    </ul>
+
+    <article class="figure-card">
+      <div class="figure-img-wrap">
+        <img src="images/Stryer10e_Fig11-27_cholera_toxin_o_antigen.png" alt="Stryer 10e 圖 11.27：霍亂毒素與 O 抗原形成專一非共價交互作用之立體結構圖" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖 8｜Stryer 10e 圖 11.27：霍亂毒素（黃色）與 O 抗原（球棒模型）的高親和力結合</div>
+        <p class="figure-caption">生化結構研究顯示，霍亂毒素與 O 抗原（H 抗原）之間的非共價交互作用比其他血型抗原更緊密，這直接解釋了為何 O 型患者發展成重症霍亂的機率約高出 8 倍，說明「沒有 A、B 抗原」同樣有演化上的代價。</p>
+        <p class="figure-caption-en">FIGURE 11.27 Cholera toxin makes specific noncovalent interactions with the O antigen, resulting in higher affinity binding. Cholera toxin is shown in yellow and the O antigen as a ball-and-stick model.</p>
+      </div>
+    </article>
+
+    <div class="callout">
+      <div class="callout-title">考證邊界說明</div>
+      <p style="margin-bottom:0;">上述「醣萼保護與防沾黏」、「血型糖蛋白唾液酸負電斥力」、「帶 3 蛋白質與血型糖蛋白掛載 ABO 抗原」、「寄生蟲擬態血型抗原的演化軍備競賽」及「霍亂 vs. 瘧疾選汰」均直接出自本機原文教科書；至於臨床上哪一種特定病原體專靠擬態 A 抗原造成 A 型人重症，以及諾羅病毒、幽門螺旋桿菌與分泌型基因（<em>FUT2</em>）的細部關聯，本機知識庫目前查無白紙黑字記載。</p>
+    </div>
+  </section>
+
+  <!-- Section 6: Textbook Evidence -->
   <section id="sec-sources">
-    <h2><span class="sec-num">05</span> 經典原文教科書原始文獻考證</h2>
-    <p>以下完整保留 Vault 內 7 部大學經典原文書的英文原句與繁中對照，以及臺灣高中跨版本教材重點，供備課與教甄查核。</p>
+    <h2><span class="sec-num">06</span> 經典原文教科書原始文獻考證</h2>
+    <p>以下完整保留 Vault 內 11 部大學經典原文書的英文原句與繁中對照，以及臺灣高中跨版本教材重點，供備課與教甄查核。</p>
     <button class="toggle-en-btn" id="toggleEnBtn" type="button" onclick="toggleEnglish()">精簡：隱藏英文原文</button>
 
     <!-- Book 1: Guyton & Hall -->
@@ -1295,10 +1354,46 @@
       </div>
     </div>
 
+    <!-- Book 8: Stryer 10e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">8. Stryer《Biochemistry》10e</div>
+        <div class="source-loc">Ch11 碳水化合物與醣蛋白（血型與病原體軍備競賽）</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">① 病原體分子擬態血型抗原形成免疫漏洞與演化軍備競賽</div>
+        <div class="quote-en">“Why are different blood types present in the human population? Suppose that a pathogenic organism such as a parasite expresses on its cell surface a carbohydrate antigen similar to one of the blood-group antigens. Since this antigen is not detected as foreign in a person whose blood type matches the parasite antigen, the parasite may flourish. However, other people with different blood types will be protected. Hence, there will be selective pressure on human beings to vary blood type to prevent parasitic mimicry and a corresponding selective pressure on parasites to enhance mimicry. The constant ‘arms race’ between pathogenic microorganisms and human beings drives the evolution of diversity of surface antigens within the human population.”</div>
+        <div class="quote-tw">假設寄生蟲等病原生物在細胞表面表現一種與某個血型抗原相似的碳水化合物抗原。<strong>若一個人的血型與寄生蟲抗原相符，免疫系統不會把這種抗原視為外來物，寄生蟲便可能大量繁殖</strong>；其他血型的人則可受到保護。病原微生物與人類之間持續不斷的「<strong>軍備競賽</strong>」，會推動人類族群表面抗原多樣性的演化。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">② 霍亂毒素與 O 抗原緊密結合（O 型重症率約高 8 倍）</div>
+        <div class="quote-en">“Blood type does not appear to influence the likelihood of contracting cholera, but individuals with blood type O are approximately eight times more likely to have severe disease. Biochemical studies show that the O antigen binds more tightly to the toxin responsible for disease symptoms than do the other blood type antigens (Figure 11.27).”</div>
+        <div class="quote-tw">血型似乎不影響感染霍亂的機率，但 <strong>O 型血的人發展成重症的機率約高八倍</strong>。生化研究顯示，<strong>O 抗原與造成疾病症狀之毒素的結合，比其他血型抗原更緊密</strong>（圖 11.27）。</div>
+      </div>
+    </div>
+
+    <!-- Book 9-11: Alberts, Junqueira, Becker -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">9–11. Alberts ECB6 · Junqueira 17e · Becker 10e</div>
+        <div class="source-loc">Alberts Ch11 膜的結構 · Junqueira Ch12 血液 · Becker Ch07 膜的結構與化學</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">① 醣萼保護細胞表面並防止血球彼此黏附（Alberts ECB6 Ch11）</div>
+        <div class="quote-en">“This layer of carbohydrate helps protect the cell surface from mechanical damage. And because the oligosaccharides and polysaccharides attract water molecules, they also give the cell a slimy surface, which helps motile cells such as white blood cells squeeze through narrow spaces and prevents blood cells from sticking to one another or to the walls of blood vessels.”</div>
+        <div class="quote-tw">這層醣類可協助<strong>保護細胞表面，避免機械性損傷</strong>。由於寡醣與多醣會吸引水分子，它們也使細胞表面帶有黏滑性，協助白血球擠過狹窄空間，並<strong>防止血球彼此黏附或黏在血管壁上</strong>。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">② ABO 抗原掛載於帶 3 蛋白質與血型糖蛋白 A（Junqueira 17e Ch12）與唾液酸斥力（Becker 10e Ch07）</div>
+        <div class="quote-en">“Most of the latter represent integral membrane proteins (see Chapter 2), including ion channels, the anion transporter called band 3 protein, and glycophorin A. The glycosylated extracellular domains of the two latter proteins include antigenic sites which form the basis for the ABO blood typing system.” / “Notice that both branches of the chain terminate in a negatively charged sialic acid. Because of these anionic groups on their surfaces, erythrocytes repel each other, thereby reducing blood viscosity.”</div>
+        <div class="quote-tw">紅血球膜大多是整合膜蛋白，包括離子通道、稱為<strong>帶 3 蛋白質</strong>的陰離子轉運蛋白，以及<strong>血型糖蛋白 A</strong>。後兩者的糖基化細胞外區域具有抗原位點，是 ABO 血型系統的基礎。／血型糖蛋白醣鏈的兩個分枝末端皆為帶負電的<strong>唾液酸</strong>。由於紅血球表面具有這些陰離子基團，<strong>紅血球會彼此排斥，因而降低血液黏度</strong>。</div>
+      </div>
+    </div>
+
     <!-- Taiwan High School Editions -->
     <div class="source-card">
       <div class="source-header">
-        <div class="source-book">8. 臺灣高中 108 課綱跨版本教材對照</div>
+        <div class="source-book">12. 臺灣高中 108 課綱跨版本教材對照</div>
         <div class="source-loc">免疫系統跨版本整合（泰宇・三民・南一等各版）</div>
       </div>
       <div class="quote-block">
@@ -1310,9 +1405,9 @@
     </div>
   </section>
 
-  <!-- Section 6: Teaching Tips & Traps -->
+  <!-- Section 7: Teaching Tips & Traps -->
   <section id="sec-teaching">
-    <h2><span class="sec-num">06</span> 高中教學提醒與常見考題陷阱</h2>
+    <h2><span class="sec-num">07</span> 高中教學提醒與常見考題陷阱</h2>
 
     <div class="callout-warn">
       <div class="callout-title">⚠️ 學生與考題最常踩到的 3 個陷阱</div>
@@ -1333,7 +1428,7 @@
   </section>
 
   <footer>
-    400X 的日常切片 Bio-Wiki · 依 Guyton 15e、Hole 15e、Fox 16e、Vander 16e、Tortora 13e、Basic Immunology 7e 與 Campbell 13e 原文編整 · 繁體中文與審定名詞遵循臺灣教育部規範
+    400X 的日常切片 Bio-Wiki · 依 Guyton 15e、Hole 15e、Fox 16e、Vander 16e、Tortora 13e、Basic Immunology 7e、Campbell 13e、Stryer 10e、Alberts ECB6、Junqueira 17e 與 Becker 10e 原文編整 · 繁體中文與審定名詞遵循臺灣教育部規範
   </footer>
 
 </main>
