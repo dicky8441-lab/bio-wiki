@@ -42,7 +42,7 @@
           title: '沒有定序的年代，如何靠部分二倍體推論操縱組？',
           tag: '操縱組',
           series: 'operon',
-          keywords: 'Pierce 操縱組 推論 部分二倍體 partial diploid 局部合子 順式 cis 反式 trans lacI lacO Jacob Monod'
+          keywords: 'Pierce 操縱組 推論 PaJaMo 部分二倍體 partial diploid 局部合子 順式 cis 反式 trans lacI lacIs lacO lacOc lacP Jacob Monod Gilbert 平衡透析 足跡 定序 科學史'
         },
         {
           href: 'lactose-intolerance-lac-operon.html',
@@ -206,14 +206,14 @@
       '.ro-nav-pill { appearance: none; flex-shrink: 0; background: var(--bg-card); color: var(--text-secondary); border: 1px solid var(--border-color); border-radius: 999px; padding: 5px 11px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.15s ease; white-space: nowrap; }',
       '.ro-nav-pill.active { background: var(--primary); color: #181614; border-color: var(--primary); font-weight: 800; }',
       'html[data-theme="light"] .ro-nav-pill.active { color: #ffffff; }',
-      '.ro-nav-body { padding: 12px 16px 24px; overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 10px; }',
-      '.ro-nav-home-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }',
+      '.ro-nav-body { padding: 12px 16px 24px; overflow-y: auto; flex: 1; min-height: 0; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; display: flex; flex-direction: column; gap: 10px; }',
+      '.ro-nav-home-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-shrink: 0; }',
       '.ro-nav-home { flex: 1; display: block; text-decoration: none !important; color: var(--text-body) !important; padding: 10px 14px; border-radius: 12px; background: var(--bg-card); border: 1px solid var(--border-color); font-size: 15px; font-weight: 700; }',
       '.ro-nav-home.active { color: #181614 !important; background: var(--accent); border-color: var(--accent); font-weight: 800; }',
       'html[data-theme="light"] .ro-nav-home.active { background: #f6c84c; border-color: #e0b034; color: #2f2820 !important; }',
       '.ro-nav-expand-btn { appearance: none; background: var(--bg-card); color: var(--text-muted); border: 1px solid var(--border-color); border-radius: 12px; padding: 10px 11px; font-size: 12.5px; font-weight: 700; cursor: pointer; white-space: nowrap; font-family: inherit; }',
       '.ro-nav-expand-btn:hover { color: var(--text-primary); border-color: var(--border-strong); }',
-      '.ro-nav-group { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 14px; overflow: hidden; }',
+      '.ro-nav-group { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 14px; overflow: hidden; flex-shrink: 0; }',
       '.ro-nav-group-head { width: 100%; appearance: none; background: transparent; border: none; padding: 11px 14px; display: flex; align-items: center; justify-content: space-between; gap: 8px; cursor: pointer; font-family: inherit; text-align: left; }',
       '.ro-nav-group-left { display: flex; align-items: center; gap: 8px; min-width: 0; }',
       '.ro-nav-group-title { font-size: 15px; font-weight: 800; color: var(--text-primary); }',
@@ -222,14 +222,14 @@
       '.ro-nav-group.open .ro-nav-chevron { transform: rotate(90deg); color: var(--accent); }',
       '.ro-nav-group-items { display: none; padding: 0 10px 10px; flex-direction: column; gap: 6px; border-top: 1px dashed var(--border-color); padding-top: 8px; }',
       '.ro-nav-group.open .ro-nav-group-items { display: flex; }',
-      '.ro-nav-item { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; text-decoration: none !important; color: var(--text-body) !important; padding: 10px 12px; border-radius: 10px; background: var(--bg-primary); border: 1px solid var(--border-color); font-size: 15px; font-weight: 600; line-height: 1.48; transition: border-color 0.15s ease; }',
+      '.ro-nav-item { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; flex-shrink: 0; text-decoration: none !important; color: var(--text-body) !important; padding: 10px 12px; border-radius: 10px; background: var(--bg-primary); border: 1px solid var(--border-color); font-size: 15px; font-weight: 600; line-height: 1.48; transition: border-color 0.15s ease; }',
       '.ro-nav-item:hover { border-color: var(--primary-border); }',
       '.ro-nav-item.active { color: #181614 !important; background: var(--accent); border-color: var(--accent); font-weight: 800; }',
       'html[data-theme="light"] .ro-nav-item.active { background: #f6c84c; border-color: #e0b034; color: #2f2820 !important; }',
       '.ro-nav-item-text { flex: 1; min-width: 0; }',
       '.ro-nav-item-tag { flex-shrink: 0; font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 999px; background: var(--bg-tag); color: var(--text-muted); border: 1px solid var(--border-color); margin-top: 2px; }',
       '.ro-nav-item.active .ro-nav-item-tag { background: rgba(24, 22, 20, 0.14); color: #181614; border-color: transparent; }',
-      '.ro-nav-flat-list { display: flex; flex-direction: column; gap: 7px; }',
+      '.ro-nav-flat-list { display: flex; flex-direction: column; gap: 7px; flex-shrink: 0; }',
       '.ro-nav-flat-item { background: var(--bg-card); }',
       '.ro-nav-empty { text-align: center; padding: 26px 12px; color: var(--text-muted); font-size: 14.5px; }'
     ].join('\n');
