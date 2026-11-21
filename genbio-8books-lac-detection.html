@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>普通生物學 8 套課本怎麼講「大腸桿菌如何知道環境中有乳糖」？｜Bio-Wiki</title>
+<style>
+  :root {
+    --bg-primary: #181614;
+    --bg-pillbar: #24201c;
+    --bg-card: #211e1a;
+    --bg-quote: #26221e;
+    --bg-tag: #2d2823;
+    --text-primary: #f6f1ea;
+    --text-body: #ddd5ca;
+    --text-secondary: #bfb5a8;
+    --text-muted: #9a8e80;
+    --primary: #5bc0eb;
+    --primary-light: rgba(91, 192, 235, 0.12);
+    --primary-border: rgba(91, 192, 235, 0.32);
+    --accent: #f4c44e;
+    --accent-light: rgba(244, 196, 78, 0.12);
+    --border-color: rgba(246, 241, 234, 0.09);
+    --border-strong: rgba(246, 241, 234, 0.16);
+    --taupe-fab: rgba(104, 91, 78, 0.94);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+  }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+    font-size: 18px;
+    line-height: 1.78;
+    padding: 0 0 96px 0;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .ro-header-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-primary) 70%, rgba(24, 22, 20, 0));
+  }
+
+  .ro-pillbar {
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .ro-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .ro-menu-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    border: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .ro-menu-circle span {
+    display: block;
+    width: 16px;
+    height: 2.2px;
+    background: #181614;
+    border-radius: 2px;
+  }
+
+  .ro-brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .ro-brand-zh {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-brand-en {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .ro-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .ro-theme-btn {
+    appearance: none;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    transition: transform 0.15s ease;
+  }
+
+  .ro-theme-btn:active {
+    transform: scale(0.96);
+  }
+
+  .ro-cta-pill {
+    appearance: none;
+    background: var(--accent);
+    color: #1c1814;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .container {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 22px 0;
+  }
+
+  header.hero {
+    text-align: left;
+    margin-bottom: 32px;
+    padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .badge-bar {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .badge-primary {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary-border);
+  }
+
+  .badge-accent {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: rgba(244, 196, 78, 0.32);
+  }
+
+  h1 {
+    font-size: clamp(26px, 6.2vw, 34px);
+    line-height: 1.38;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    margin: 6px 0 14px;
+    text-align: left;
+  }
+
+  .subtitle {
+    font-size: 17px;
+    line-height: 1.68;
+    color: var(--text-muted);
+    margin: 0;
+    text-align: left;
+  }
+
+  section {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: 42px;
+    scroll-margin-top: 84px;
+  }
+
+  h2 {
+    font-size: clamp(22px, 5.2vw, 27px);
+    line-height: 1.45;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 44px 0 18px;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+  }
+
+  h2 .sec-num {
+    color: var(--accent);
+    margin-right: 6px;
+    font-weight: 800;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 30px 0 12px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--text-body);
+    margin-bottom: 18px;
+  }
+
+  ul, ol {
+    margin: 0 0 22px 24px;
+    color: var(--text-body);
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+    color: var(--text-body);
+  }
+
+  strong, b {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.9em;
+    background: var(--bg-tag);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 6px;
+  }
+
+  main a:not(.ro-cta-pill):not(.ro-brand-link) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  .tldr-card, .source-card, .callout, .callout-warn, .boundary, .glossary-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 20px 20px;
+    margin: 20px 0;
+  }
+
+  .tldr-card {
+    border-left: 4px solid var(--accent);
+  }
+
+  .callout {
+    border-left: 4px solid var(--primary);
+  }
+
+  .callout-warn {
+    border-left: 4px solid var(--accent);
+  }
+
+  .boundary {
+    border-left: 4px solid var(--text-muted);
+  }
+
+  .tldr-label, .callout-title, .source-book {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 14px;
+  }
+
+  .timeline-step {
+    padding-left: 4px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 12px;
+  }
+
+  .timeline-step:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .timeline-step-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .timeline-step-title span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    font-size: 14px;
+    font-weight: 800;
+    margin-right: 8px;
+  }
+
+  .flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    padding: 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    margin: 18px 0;
+  }
+
+  .flow span {
+    padding: 5px 10px;
+    border-radius: 8px;
+    background: var(--bg-tag);
+    color: var(--text-primary);
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .flow b {
+    color: var(--accent);
+  }
+
+  .glossary-item {
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .glossary-item:last-child {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+
+  .glossary-term {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+
+  .source-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .source-loc {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .quote-block {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .quote-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quote-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .quote-en {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 10px 0 12px;
+    word-break: break-word;
+  }
+
+  body.hide-en .quote-en {
+    display: none;
+  }
+
+  .quote-tw {
+    font-size: 17.5px;
+    line-height: 1.78;
+    color: var(--text-body);
+  }
+
+  .quote-tw strong {
+    color: var(--accent);
+    background: rgba(244, 196, 78, 0.10);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+
+  .toggle-en-btn {
+    appearance: none;
+    background: var(--bg-tag);
+    color: var(--accent);
+    border: 1px solid rgba(244, 196, 78, 0.35);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  .figure-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .figure-title {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding: 12px 16px 4px;
+  }
+
+  .figure-img-wrap {
+    padding: 14px;
+    background: #f8fafc;
+    cursor: zoom-in;
+  }
+
+  main img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 8px;
+    margin: 0 auto;
+    cursor: zoom-in;
+  }
+
+  .zoom-hint {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    padding: 6px 4px 0;
+  }
+
+  .figure-caption {
+    font-size: 15px;
+    line-height: 1.68;
+    color: var(--text-secondary);
+    padding: 10px 16px 8px;
+  }
+
+  .figure-caption-en {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 0 16px 14px;
+  }
+
+  .table-wrap {
+    width: 100%;
+    margin: 18px 0 26px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 16px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-body);
+  }
+
+  th {
+    background: var(--bg-pillbar);
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  tr.highlight-tr td {
+    background: rgba(244, 196, 78, 0.12);
+    color: var(--text-primary);
+  }
+
+  @media (max-width: 680px) {
+    table.ro-resp-table,
+    table.ro-resp-table thead,
+    table.ro-resp-table tbody,
+    table.ro-resp-table th,
+    table.ro-resp-table td,
+    table.ro-resp-table tr {
+      display: block;
+      width: 100%;
+    }
+
+    table.ro-resp-table thead {
+      display: none;
+    }
+
+    table.ro-resp-table tr {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    table.ro-resp-table td {
+      border: none;
+      border-bottom: 1px dashed var(--border-color);
+      padding: 8px 0;
+      text-align: left !important;
+    }
+
+    table.ro-resp-table td:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    table.ro-resp-table td:first-child {
+      padding-top: 0;
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    table.ro-resp-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+  }
+
+  .ro-bottom-toc {
+    position: fixed;
+    left: 16px;
+    bottom: 20px;
+    z-index: 95;
+    background: var(--taupe-fab);
+    color: #f6f1ea;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 9px 15px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: calc(100vw - 88px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-up-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 95;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--taupe-fab);
+    color: #f6f1ea;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    text-decoration: none !important;
+  }
+
+  .ro-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ro-drawer-backdrop.open {
+    display: flex;
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-backdrop {
+      align-items: center;
+      padding: 24px;
+    }
+  }
+
+  .ro-drawer-panel {
+    width: 100%;
+    max-width: 500px;
+    max-height: 78vh;
+    overflow-y: auto;
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px 20px 0 0;
+    padding: 18px 18px 28px;
+    box-shadow: var(--shadow);
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-panel {
+      border-radius: 18px;
+    }
+  }
+
+  .ro-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .ro-drawer-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .ro-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .ro-drawer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ro-drawer-list a {
+    display: block;
+    text-decoration: none !important;
+    color: var(--text-body) !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .ro-drawer-list a.active {
+    color: #181614 !important;
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 800;
+  }
+
+  .ro-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    cursor: zoom-out;
+  }
+
+  .ro-lightbox.open {
+    display: flex;
+  }
+
+  .ro-lightbox img {
+    max-width: 100%;
+    max-height: 92vh;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  html[data-theme="light"] {
+    --bg-primary: #fbf8f4;
+    --bg-pillbar: #f0ece3;
+    --bg-card: #ffffff;
+    --bg-quote: #f6f2ea;
+    --bg-tag: #eee8dd;
+    --text-primary: #2f2820;
+    --text-body: #4a3f35;
+    --text-secondary: #5e5043;
+    --text-muted: #756656;
+    --primary: #1b9dce;
+    --primary-light: rgba(27, 157, 206, 0.12);
+    --primary-border: rgba(27, 157, 206, 0.35);
+    --accent: #b86b11;
+    --accent-light: rgba(244, 196, 78, 0.22);
+    --border-color: rgba(74, 63, 53, 0.12);
+    --border-strong: rgba(74, 63, 53, 0.22);
+    --taupe-fab: rgba(105, 90, 74, 0.94);
+    --shadow: 0 4px 18px rgba(47, 40, 32, 0.08);
+    color-scheme: light;
+  }
+
+  html[data-theme="light"] .ro-header-wrap {
+    background: linear-gradient(180deg, #fbf8f4 70%, rgba(251, 248, 244, 0));
+  }
+
+  html[data-theme="light"] .ro-menu-circle {
+    background: #67c3eb;
+    color: #1f1a15;
+  }
+
+  html[data-theme="light"] .ro-cta-pill {
+    background: #f6c84c;
+    color: #2f2820;
+  }
+
+  html[data-theme="light"] .ro-bottom-toc,
+  html[data-theme="light"] .ro-up-btn {
+    color: #ffffff;
+  }
+
+  html[data-theme="light"] .ro-drawer-list a.active {
+    background: #f6c84c;
+    border-color: #e0b034;
+    color: #2f2820 !important;
+  }
+
+  html[data-theme="light"] .quote-tw strong {
+    color: #8c4d06;
+    background: rgba(246, 200, 76, 0.28);
+  }
+</style>
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem('biowiki-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+
+<!-- Reading Outpost Dark Style Shell -->
+<div class="ro-header-wrap" id="top">
+  <div class="ro-pillbar">
+    <div class="ro-brand-group">
+      <button class="ro-menu-circle" type="button" aria-label="開啟專題選單" onclick="roOpenDrawer('roSiteDrawer')">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="ro-brand-link" href="index.html">
+        <span class="ro-brand-zh">400X 的日常切片</span>
+        <span class="ro-brand-en">BIO-WIKI EVIDENCE</span>
+      </a>
+    </div>
+    <div class="ro-top-actions">
+      <button class="ro-theme-btn" id="roThemeBtn" type="button" onclick="roToggleTheme()">☀️ 亮色</button>
+      <button class="ro-cta-pill" type="button" onclick="roOpenDrawer('roSiteDrawer')">專題目錄</button>
+    </div>
+  </div>
+</div>
+
+<!-- Site-Wide Topics Drawer -->
+<div class="ro-drawer-backdrop" id="roSiteDrawer" onclick="if(event.target===this)roCloseDrawer('roSiteDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📚 Bio-Wiki 全站專題</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roSiteDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list">
+      <a href="index.html">🏠 首頁：主題分類總覽</a>
+      <a href="chromatin.html">1. 染色質與染色體本質</a>
+      <a href="wheat-polygenic.html">2. 小麥多基因累加模型 (Campbell 14e)</a>
+      <a href="spermatogonia-hole.html">3. 精原細胞與生精歷程 (跨正典考證)</a>
+      <a href="griffith-transformation.html">4. Griffith 轉形作用</a>
+      <a href="promoter-tata-box.html">5. 啟動子、TATA 匣與甲基化</a>
+      <a href="sickle-cell-dominance.html">6. 鐮刀型貧血顯隱性層次分析</a>
+      <a href="endosymbiosis.html">7. 內共生假說與演化序列</a>
+      <a href="lactose-intolerance-lac-operon.html">8. 乳糖不耐症與大腸桿菌 lac 操縱組</a>
+      <a href="operon-inference-pierce.html">9. Pierce 操縱組推論過程</a>
+      <a href="gene-allele-dna-chromosome.html">10. 遺傳因子、基因、等位基因與染色體</a>
+      <a href="oogenesis-interphase-dyad.html">11. 初級卵母細胞、間期與二分體</a>
+      <a href="xy-synapsis-crossing-over.html">12. 人類 XY 染色體聯會、互換與四分體判定</a>
+      <a href="chromosome-breakage-cri-du-chat.html">13. 染色體斷裂成因與貓叫症（5p 缺失）</a>
+      <a href="operator-transcription-translation.html">14. 操作子會不會被轉錄與轉譯？（基因 vs. 子）</a>
+      <a href="lac-operon-sugar-sensing.html">15. 大腸桿菌如何感測葡萄糖與乳糖？</a>
+      <a href="why-eukaryotes-lack-operons.html">16. 為什麼真核細胞幾乎沒有操縱組？</a>
+      <a href="plant-photoreceptor-photoperiodism.html">17. 沒有感官如何感知世界？（細菌乳糖 vs. 植物光週期）</a>
+      <a href="genbio-8books-lac-detection.html" class="active">18. 普生 8 套課本怎麼講大腸桿菌偵測乳糖？</a>
+    </div>
+  </div>
+</div>
+
+<!-- In-Page TOC Drawer -->
+<div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📑 本篇段落導覽</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list" id="roTocList" onclick="roCloseDrawer('roTocDrawer')"></div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="ro-lightbox" id="roLightbox" onclick="this.classList.remove('open')">
+  <img id="roLightboxImg" src="" alt="">
+</div>
+
+<main class="container">
+
+  <header class="hero">
+    <div class="badge-bar">
+      <span class="badge badge-accent">普生 8 套全盤點</span>
+      <span class="badge badge-primary">分子生物學 · 跨版本比較</span>
+      <span class="badge">8 部原文書 · 4 張原圖</span>
+    </div>
+    <h1>普通生物學 8 套課本怎麼講「大腸桿菌如何知道環境中有乳糖」？</h1>
+    <p class="subtitle">如果沒乳糖時 <em>lac</em> 操縱組已經被抑制蛋白關起來，第一批乳糖是怎麼進細胞、怎麼變成異乳糖的？全面檢視 8 套大學普通生物學正典，一次看懂「完整解釋／只留線索／直接跳過」三種寫法光譜。</p>
+  </header>
+
+  <!-- TL;DR -->
+  <div class="tldr-card">
+    <div class="tldr-label">💡 一句話先講結論（高中生與備課老師速讀）</div>
+    <p>上課教到乳糖操縱組時，敏銳的學生一定會問這個「先有雞還是先有蛋」的問題：<strong>既然平時抑制蛋白把 <em>lac</em> 操縱組關起來了，細胞膜上沒有通透酶、細胞裡也沒有 β-半乳糖苷酶，那第一批乳糖怎麼進得來、怎麼轉變成異乳糖去開鎖？</strong></p>
+    <p style="margin-bottom:0;">真正答案其實很乾脆：<strong>抑制蛋白並不是 100% 焊死在操作子上。</strong>它會偶爾短暫脫離，讓 RNA 聚合酶偷偷滑過去完成極低頻率的<strong>基礎轉錄（basal / leaky transcription）</strong>。因此大腸桿菌平時細胞膜上就常備極少量的<strong>半乳糖苷通透酶</strong>，細胞質裡也常備極少量的 <strong>β-半乳糖苷酶</strong>。但是翻遍全部 <strong>8 套普通生物學課本</strong>會發現，只有 <strong>3 套</strong>把這個關鍵正面說清楚（Brooker 4e、Solomon 11e、Freeman 8e），另外 <strong>4 套</strong>只留下「平時有少量酵素」的線索卻沒接起因果（連最常用的 Campbell 12e／13e 都在這組），還有 <strong>1 套</strong>（Starr 14e）乾脆完全跳過。</p>
+  </div>
+
+  <!-- Key Terms -->
+  <div class="glossary-card">
+    <div class="callout-title">📖 先搞懂這 3 個關鍵詞，下面 8 套課本一看就懂</div>
+    <div class="glossary-item">
+      <div class="glossary-term">1. 基礎轉錄／滲漏轉錄（basal / leaky transcription）</div>
+      <p style="margin-bottom:0;">即使沒有乳糖、抑制蛋白結合在操作子上，因為抑制蛋白會偶爾短暫脫離 DNA，RNA 聚合酶仍會極低頻率地轉錄出少量 <em>lac</em> mRNA。也就是說，操縱組的「關閉」並不是完全歸零，而是維持極低速的待機運轉。</p>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">2. 半乳糖苷通透酶（galactoside permease, LacY）</div>
+      <p style="margin-bottom:0;">由 <em>lacY</em> 基因轉譯出的細胞膜運輸蛋白，專門把細胞外的乳糖運進細胞質。乳糖是雙醣、無法自由穿過細胞膜，因此必須靠細胞膜上預先常備的極少量通透酶，才能把第一批乳糖帶進細胞。</p>
+    </div>
+    <div class="glossary-item">
+      <div class="glossary-term">3. 異乳糖（allolactose）</div>
+      <p style="margin-bottom:0;">乳糖進入細胞後，被原本就存在細胞質中的極少量 <strong>β-半乳糖苷酶</strong>（由 <em>lacZ</em> 編碼）在側反應中轉換而成的結構異構物。真正能與抑制蛋白結合、改變其立體結構使其脫離操作子的「誘導物（inducer）」，就是異乳糖。</p>
+    </div>
+  </div>
+
+  <div class="flow">
+    <span>抑制蛋白偶爾短暫脫離操作子</span> <b>→</b>
+    <span>極低量基礎轉錄出少量 mRNA</span> <b>→</b>
+    <span>常備少量通透酶＋β-半乳糖苷酶</span> <b>→</b>
+    <span>環境出現乳糖，少量運入細胞</span> <b>→</b>
+    <span>轉為異乳糖，解除抑制、全速開啟</span>
+  </div>
+
+  <!-- Section 1: 8-Textbook Comparison Table -->
+  <section id="sec-compare">
+    <h2><span class="sec-num">01</span> 普通生物學 8 套課本敘述深度一覽表</h2>
+    <p>把資料庫中收錄的 <strong>8 套英文原文普通生物學課本</strong>逐字比對後，可以清楚分成三個層級：<strong>正面講通因果（3 套）</strong>、<strong>有寫出線索但沒點破因果（4 套）</strong>，以及<strong>為了簡化而直接跳過（1 套）</strong>。</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>處理深度分級</th>
+            <th>課本與章節</th>
+            <th>課本實際怎麼寫</th>
+            <th>高中備課引用評價</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-tr">
+            <td><strong>✅ 完整解釋機制</strong><br>（第 1 名）</td>
+            <td><strong>Brooker 4e</strong><br><em>Principles of Biology</em><br>Ch. 12</td>
+            <td>明講抑制蛋白只是「大致上阻止」RNA 聚合酶越過操作子，因此無乳糖時仍會製造少量的乳糖通透酶、β-半乳糖苷酶與轉乙醯酶；接著第 1 步明寫「少量乳糖經由乳糖通透酶運進細胞質，β-半乳糖苷酶把其中一些轉換成異乳糖」。</td>
+            <td><strong>因果鏈最完整</strong>：把「未完全阻斷 → 常備三種酵素 → 運入最初乳糖 → 轉為異乳糖」一次串通。</td>
+          </tr>
+          <tr class="highlight-tr">
+            <td><strong>✅ 完整解釋機制</strong><br>（第 2 名）</td>
+            <td><strong>Solomon 11e</strong><br><em>Biology</em><br>Ch. 14</td>
+            <td>解釋無乳糖時操作子「幾乎總是」被抑制蛋白占據，但<strong>操作子短暫沒有抑制蛋白時會合成少量 mRNA</strong>（因大腸桿菌 mRNA 半衰期僅約 2–4 分鐘，故只合成極少數酵素分子）；有乳糖時，少數乳糖進入細胞並由細胞中原有的少數 β-半乳糖苷酶轉換成異乳糖。</td>
+            <td><strong>漏轉錄機制寫得最生動</strong>：連為什麼酵素量極少（mRNA 半衰期短）都交代清楚。</td>
+          </tr>
+          <tr class="highlight-tr">
+            <td><strong>✅ 完整解釋機制</strong><br>（簡化異乳糖）</td>
+            <td><strong>Freeman 8e</strong><br><em>Biological Science</em><br>Ch. 18</td>
+            <td>在圖 18.6 圖說直球點破：「圖中畫出細胞膜與半乳糖苷通透酶，以提醒乳糖來自細胞外。<strong><em>lac</em> 基因的抑制從不完全，因此總會有一些半乳糖苷通透酶把乳糖運入細胞，開始誘導基因表現。</strong>」（正文另有括號註明：實際誘導物是異乳糖，但為求簡明暫稱乳糖為誘導物。）</td>
+            <td><strong>一句話最直白好記</strong>：直接指出「抑制從不完全＋膜上常備通透酶」，最適合課堂補充。</td>
+          </tr>
+          <tr>
+            <td><strong>⚠️ 只留線索，未連因果</strong></td>
+            <td><strong>Raven 13e</strong><br><em>Biology</em><br>Ch. 16</td>
+            <td>寫出「即使沒有乳糖，<em>lac</em> 操縱組仍會以極低程度表現」，下一句寫「乳糖出現時會被運入細胞，並產生足夠的異乳糖，使操縱組得以誘導」。</td>
+            <td>最接近完整，但沒有解釋「為什麼會以極低程度表現」，也未點破運入乳糖靠的就是這批低表現酵素。</td>
+          </tr>
+          <tr>
+            <td><strong>⚠️ 只留線索，未連因果</strong></td>
+            <td><strong>Campbell 12e</strong><br><em>Campbell Biology</em><br>Ch. 18</td>
+            <td>先提「沒有乳糖時，大腸桿菌只含有少數這種酵素（β-半乳糖苷酶）分子」，後段再提「異乳糖是由進入細胞的乳糖少量形成」。</td>
+            <td>留了兩條線索，但沒解釋為何平時會有少數酵素，也沒說最初的乳糖怎麼進細胞。</td>
+          </tr>
+          <tr>
+            <td><strong>⚠️ 只留線索，未連因果</strong></td>
+            <td><strong>Campbell 13e</strong><br><em>Campbell Biology</em><br>Ch. 18</td>
+            <td>與 12e 幾乎完全相同：提及「只含有少數幾個這種酵素分子」以及「異乳糖是由進入細胞的乳糖少量轉變而成」。</td>
+            <td>臺灣最常用普生版本；但若只照 Campbell 講，遇到細心學生追問容易一時卡關。</td>
+          </tr>
+          <tr>
+            <td><strong>⚠️ 只留線索，未連因果</strong></td>
+            <td><strong>Sadava 12e</strong><br><em>Life: The Science of Biology</em><br>Ch. 16</td>
+            <td>正面數據圖（圖 16.2）標出非零的「基礎量（Basal level）」，文字也寫平時「只有少量 β-半乳糖苷酶分子（另外兩種酵素也是如此）」、「不需要時 mRNA 合成量非常低」；但誘導段只寫「乳糖進入細胞後形成異乳糖」。</td>
+            <td>實驗曲線圖極佳，能讓學生親眼看到「沒誘導前不是 0」，但正文未點破因果箭頭。</td>
+          </tr>
+          <tr>
+            <td><strong>❌ 直接跳過</strong></td>
+            <td><strong>Starr 14e</strong><br><em>Biology: The Unity and Diversity of Life</em><br>Ch. 10</td>
+            <td>直接寫「細菌只有在乳糖存在時，才會製造這三種蛋白質……乳糖不存在時，RNA 聚合酶無法與扭轉的啟動子結合，因此基因無法轉錄」，接著只說乳糖存在時「其中一些會轉換成另一種糖」（連異乳糖名稱都省略）。</td>
+            <td>最簡化入門寫法，完全迴避「先有雞還是先有蛋」問題。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 2: Textbook Figures -->
+  <section id="sec-figures">
+    <h2><span class="sec-num">02</span> 4 張普生課本原圖實證：直接看見「常備通透酶」與「非零基礎量」</h2>
+    <p>文字以外，這四張普生課本原圖特別適合在課堂投影給高中生看：從 <strong>Freeman 8e 特地把細胞膜上的通透酶畫出來</strong>，到 <strong>Sadava 12e 用曲線圖標出非零的 <code>Basal level</code>（基礎量）</strong>，都能一眼破除「關起來等於完全歸零」的誤解。點擊任意圖片皆可放大檢視。</p>
+
+    <div class="figure-card">
+      <div class="figure-title">圖一 · Freeman 8e Fig. 18.6｜無乳糖狀態（a）細胞膜上依然畫有半乳糖苷通透酶</div>
+      <div class="figure-img-wrap" onclick="openLightbox('images/Freeman8e_Fig18-6_lac_permease_always_present.png','Freeman 8e Fig 18.6')">
+        <img src="images/Freeman8e_Fig18-6_lac_permease_always_present.png" alt="Freeman 8e Figure 18.6 showing plasma membrane and galactoside permease present even when lactose is absent">
+        <span class="zoom-hint">🔍 點擊放大檢視原圖</span>
+      </div>
+      <div class="figure-caption"><strong>看圖重點</strong>：許多課本畫 <em>lac</em> 操縱組時只畫 DNA，學生因此忘記「乳糖一開始是在細胞外面」。Freeman 8e 刻意在最外層加上細胞膜與<strong>半乳糖苷通透酶（galactoside permease）</strong>，甚至在上方 <strong>(a) Lactose absent（無乳糖）</strong>時就已把通透酶畫在膜上，圖說更明寫「抑制從不完全，所以總會有少量通透酶把第一批乳糖運進細胞」。</div>
+      <div class="figure-caption-en">Source: Freeman et al., Biological Science, 8th ed., Ch. 18, Figure 18.6 (Negative Control of the lac Operon).</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖二 · Sadava 12e Fig. 16.2｜實驗數據實證：加入誘導物之前，酵素與 mRNA 都有非零「基礎量（Basal level）」</div>
+      <div class="figure-img-wrap" onclick="openLightbox('images/Sadava12e_Fig16-2_lac_basal_vs_induced.png','Sadava 12e Fig 16.2')">
+        <img src="images/Sadava12e_Fig16-2_lac_basal_vs_induced.png" alt="Sadava 12e Figure 16.2 graph showing non-zero basal level of beta-galactosidase and mRNA before adding inducer">
+        <span class="zoom-hint">🔍 點擊放大檢視原圖</span>
+      </div>
+      <div class="figure-caption"><strong>看圖重點</strong>：注意圖 (A) 與圖 (B) 左側加入誘導物（Add inducer）之前的基線——作者明確標出 <strong>Basal level（基礎量）</strong>，高度並不是貼在橫軸的 0 上！加入誘導物後，<em>lac</em> mRNA 立刻上升、β-半乳糖苷酶濃度暴增千倍；移除誘導物後，又回落到原本極低的基礎水平。</div>
+      <div class="figure-caption-en">Source: Hillis, Sadava et al., Life: The Science of Biology, 12th ed., Ch. 16, Figure 16.2 (Lactose Induces the Expression of a Gene for an Enzyme).</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖三 · Brooker 4e Fig. 12.7｜少量乳糖運入並轉為異乳糖後，改變抑制蛋白立體結構</div>
+      <div class="figure-img-wrap" onclick="openLightbox('images/Brooker4e_Fig12-7_lac_basal_and_induction.png','Brooker 4e Fig 12.7')">
+        <img src="images/Brooker4e_Fig12-7_lac_basal_and_induction.png" alt="Brooker 4e Figure 12.7 showing allolactose binding lac repressor and releasing it from operator">
+        <span class="zoom-hint">🔍 點擊放大檢視原圖</span>
+      </div>
+      <div class="figure-caption"><strong>看圖重點</strong>：配合 Brooker 4e 正文說明，無乳糖時抑制蛋白「大致上阻止」RNA 聚合酶越過操作子（仍保有少量三種酵素）；一旦環境出現乳糖，常備的乳糖通透酶把少量乳糖運入細胞質，常備的 β-半乳糖苷酶將其轉換為<strong>異乳糖（allolactose）</strong>，異乳糖結合抑制蛋白引起構形改變，讓抑制蛋白鬆脫，進而大量轉錄並轉譯三種酵素。</div>
+      <div class="figure-caption-en">Source: Brooker et al., Principles of Biology, 4th ed., Ch. 12, Figure 12.7 (Negative control of an inducible set of genes).</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖四 · Solomon 11e Fig. 14-2｜操作子短暫空出產生少量酵素，讓異乳糖得以在第一時間生成</div>
+      <div class="figure-img-wrap" onclick="openLightbox('images/Solomon11e_Fig14-2_lac_operon_repressor.png','Solomon 11e Fig 14-2')">
+        <img src="images/Solomon11e_Fig14-2_lac_operon_repressor.png" alt="Solomon 11e Figure 14-2 showing lac operon repressed vs induced by allolactose">
+        <span class="zoom-hint">🔍 點擊放大檢視原圖</span>
+      </div>
+      <div class="figure-caption"><strong>看圖重點</strong>：Solomon 11e 在圖說對應的正文中，把 (a) 狀態描述得極為傳神——抑制蛋白「幾乎總是」占據操作子，但偶爾會短暫脫離讓細胞合成少量 mRNA（半衰期僅 2–4 分鐘），藉此保底維持極少數酵素分子；等 (b) 乳糖進來，這批既有酵素立刻把它變成異乳糖、解除抑制。</div>
+      <div class="figure-caption-en">Source: Martin, Solomon et al., Biology, 11th ed., Ch. 14, Figure 14-2 (The lac operon).</div>
+    </div>
+  </section>
+
+  <!-- Section 3: Verbatim Bilingual Quotes from All 8 Textbooks -->
+  <section id="sec-quotes">
+    <h2><span class="sec-num">03</span> 全 8 套普通生物學課本中英原句逐本對照</h2>
+    <p>以下完整保留 Vault 中 8 套普通生物學課本的英文原句與臺灣繁體中文翻譯，依「完整解釋 → 只留線索 → 直接跳過」順序排列，方便教師備課、出題或製作講義直接查證引用。</p>
+    <button class="toggle-en-btn" id="toggleEnBtn" type="button" onclick="toggleEnglish()">精簡：隱藏英文原文</button>
+
+    <!-- Group A -->
+    <h3>A 組：正面完整解釋「抑制不完全／基礎轉錄」（3 套）</h3>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">1. 《Brooker Principles of Biology》4e — 因果鏈最完整</span>
+        <span class="source-loc">Ch. 12 透過基因調控掌控遺傳資訊</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">抑制蛋白只是「大致上阻止」RNA 聚合酶，平時仍會製造少量三種酵素</div>
+        <div class="quote-en">"RNA polymerase can bind to the promoter when lac repressor is bound to the operator but is largely prevented from moving past the operator to transcribe the lacZ, lacY, and lacA genes. Therefore, if E. coli does not have lactose in its environment, only small amounts of lactose permease, β-galactosidase, and transacetylase are made."</div>
+        <div class="quote-tw">當 <em>lac</em> 抑制子結合在操作子（原譯「操縱基因」）上時，RNA 聚合酶仍可結合啟動子，但<strong>大致上被阻止</strong>越過操作子去轉錄 <em>lacZ</em>、<em>lacY</em> 與 <em>lacA</em> 基因。因此，如果大腸桿菌的環境中沒有乳糖，<strong>就只會製造少量的乳糖通透酶、β-半乳糖苷酶與轉乙醯酶</strong>。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">誘導第 1 步：少量乳糖經由通透酶運入，由 β-半乳糖苷酶轉成異乳糖</div>
+        <div class="quote-en">"1. A small amount of lactose is transported into the cytoplasm via lactose permease, and β-galactosidase converts some of it to allolactose."</div>
+        <div class="quote-tw">1. <strong>少量乳糖經由乳糖通透酶被運輸進細胞質，β-半乳糖苷酶把其中一些轉換成異乳糖</strong>。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">2. 《Solomon Biology》11e — 基礎漏轉錄機制與 mRNA 半衰期寫得最清楚</span>
+        <span class="source-loc">Ch. 14 基因調控</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">操作子短暫沒有抑制蛋白時合成少量 mRNA，但因半衰期短只產生極少數酵素</div>
+        <div class="quote-en">"When cells grow in the absence of lactose, a repressor molecule nearly always occupies the operator site. When the operator site is briefly free of the repressor, the cell synthesizes a small amount of mRNA. However, the cell synthesizes very few enzyme molecules because E. coli mRNA is degraded rapidly (it has a half-life of about 2 to 4 minutes)."</div>
+        <div class="quote-tw">細胞在缺乏乳糖的環境中生長時，操作子位置<strong>幾乎總是</strong>被抑制蛋白分子占據。<strong>當操作子位置短暫沒有抑制蛋白時，細胞會合成少量 mRNA。</strong>然而，由於大腸桿菌的 mRNA 會迅速降解（半衰期約 2 至 4 分鐘），細胞只能合成極少數的酵素分子。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">細胞中原有的少數 β-半乳糖苷酶把第一批乳糖轉換成異乳糖</div>
+        <div class="quote-en">"If lactose is in the growth medium, a few molecules enter the cell and are converted to allolactose by the few β-galactosidase molecules present."</div>
+        <div class="quote-tw">如果生長培養基中含有乳糖，少數乳糖分子會進入細胞，並<strong>由細胞中原有的少數 β-半乳糖苷酶分子轉換成異乳糖</strong>。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">3. 《Freeman Biological Science》8e — 最直白的一句話點破（但刻意簡化異乳糖）</span>
+        <span class="source-loc">Ch. 18 細菌的基因表現調控（圖 18.6 圖說＆正文）</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">圖 18.6 圖說：抑制從不完全，所以總有少量半乳糖苷通透酶</div>
+        <div class="quote-en">"The plasma membrane and galactoside permease are shown as a reminder that lactose comes from outside the cell. Repression of lac genes is never complete, so there is always some galactoside permease to transport lactose into the cell and begin induction of gene expression."</div>
+        <div class="quote-tw">圖中畫出細胞膜與半乳糖苷通透酶，以提醒乳糖來自細胞外。<strong><em>lac</em> 基因的抑制從不完全，因此總會有一些半乳糖苷通透酶把乳糖運入細胞，開始誘導基因表現。</strong></div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">正文括號註記：為求簡明暫以乳糖稱呼誘導物</div>
+        <div class="quote-en">"(Later work showed that the inducer is actually a derivative of lactose called allolactose. For historical accuracy and simplicity, however, this discussion refers to lactose itself as the inducer.)"</div>
+        <div class="quote-tw">（後來的研究顯示，真正的誘導物其實是乳糖的衍生物，稱為異乳糖。不過為了還原歷史脈絡與簡明起見，本節討論先直接將乳糖本身稱為誘導物。）</div>
+      </div>
+    </div>
+
+    <!-- Group B -->
+    <h3>B 組：有留「平時有少量酵素／極低表現」線索，但沒連成因果鏈（4 套）</h3>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">4. 《Raven Biology》13e — 兩句相鄰，差一步點破因果</span>
+        <span class="source-loc">Ch. 16 基因表現的調控</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">寫出「極低程度表現」與「乳糖運入產生異乳糖」，未明講為何會極低表現</div>
+        <div class="quote-en">"Even in the absence of lactose, the lac operon is expressed at a very low level. When lactose becomes available, it is transported into the cell and enough allolactose is produced that induction of the operon can occur."</div>
+        <div class="quote-tw">即使沒有乳糖，<strong><em>lac</em> 操縱組仍會以極低程度表現</strong>。乳糖出現時會被運入細胞，並產生足夠的異乳糖，使操縱組得以誘導。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">5 &amp; 6. 《Campbell Biology》12e ＆ 13e — 臺灣最常用，但兩條線索分開寫</span>
+        <span class="source-loc">Ch. 18 基因表現的調控</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Campbell 12e ＆ 13e：提了「只含少數酵素分子」與「進入細胞的乳糖轉成異乳糖」，但未點破基礎轉錄與通透酶</div>
+        <div class="quote-en">[Campbell 12e &amp; 13e Ch. 18] "Only a few molecules of this enzyme are present in an E. coli cell growing in the absence of lactose. ... For the lac operon, the inducer is allolactose, an isomer of lactose formed in small amounts from lactose that enters the cell."</div>
+        <div class="quote-tw">[Campbell 13e] 在沒有乳糖的環境中生長的大腸桿菌細胞，<strong>只含有少數幾個這種酵素分子</strong>（按：指 β-半乳糖苷酶）。……對 <em>lac</em> 操縱組而言，誘導物是異乳糖（allolactose），它是由<strong>進入細胞的乳糖少量轉變而成</strong>的乳糖異構物。（Campbell 12e 原文完全一致。）</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">7. 《Sadava Life: The Science of Biology》12e — 曲線圖有標 Basal level，但正文未串接</span>
+        <span class="source-loc">Ch. 16 基因表現的調控</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">三個段落分別提了少量酵素、低 mRNA 合成與異乳糖形成，未明講因果關聯</div>
+        <div class="quote-en">"While few molecules of β-galactosidase (and the other two enzymes) are present in an E. coli cell in the presence of glucose..." / "mRNA synthesis is very low when the enzymes are not needed." / "the actual inducer is allolactose, a molecule that forms from lactose once it enters the cell."</div>
+        <div class="quote-tw">在葡萄糖存在時，一個大腸桿菌細胞<strong>只有少量 β-半乳糖苷酶分子（另外兩種酵素也是如此）</strong>……不需要這些酵素時，<strong>mRNA 的合成量非常低</strong>……實際的誘導物是異乳糖，也就是乳糖進入細胞後形成的一種分子。</div>
+      </div>
+    </div>
+
+    <!-- Group C -->
+    <h3>C 組：簡化模型，直接跳過基礎表現（1 套）</h3>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">8. 《Starr Biology: The Unity and Diversity of Life》14e — 簡化版寫法</span>
+        <span class="source-loc">Ch. 10 基因表現的調控</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">直接寫「乳糖不存在時基因無法轉錄」，連異乳糖名稱也一併省略</div>
+        <div class="quote-en">"Bacteria make these three proteins only when lactose is present. When lactose is not present, a repressor binds to the two operators and twists the region of DNA with the promoter into a loop. RNA polymerase cannot bind to the twisted-up promoter, so the lac operon’s genes cannot be transcribed. When lactose is present, some of it is converted to another sugar that binds to the repressor and changes its shape."</div>
+        <div class="quote-tw">細菌<strong>只有在乳糖存在時</strong>，才會製造這三種蛋白質。乳糖不存在時，抑制蛋白會與兩個操作子結合，並把含有啟動子的 DNA 區域扭成一個環。RNA 聚合酶無法與扭轉的啟動子結合，因此 <em>lac</em> 操縱組的基因<strong>無法轉錄</strong>。乳糖存在時，其中一些會轉換成<strong>另一種糖</strong>，與抑制蛋白結合並改變其形狀。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Teaching Takeaways & Boundary -->
+  <section id="sec-teaching">
+    <h2><span class="sec-num">04</span> 給高中生物老師的備課建議與延伸閱讀</h2>
+
+    <div class="callout">
+      <div class="callout-title">🎯 一分鐘補齊課本邏輯鏈的最佳組合</div>
+      <p style="margin-bottom:0;">在臺灣高中課堂或教甄備課時，大多數老師會以 <strong>Campbell 13e</strong> 為主骨架。只要在講完「沒乳糖時抑制蛋白結合操作子」之後，順手補上 <strong>Freeman 8e 圖 18.6</strong> 的那一句——「<em>lac</em> 基因的抑制從來不是 100% 關死，細胞膜上平時就有極少量通透酶、細胞內也有極少量 β-半乳糖苷酶」——再配上 <strong>Sadava 12e 圖 16.2</strong> 的非零 <code>Basal level</code> 曲線圖，學生不但立刻秒懂「第一批乳糖怎麼進來」，更能順帶建立一個重要觀念：<strong>細胞裡的分子結合都是動態可逆的（會結合也會短暫鬆脫），並不是機械式的死開關。</strong></p>
+    </div>
+
+    <h3>延伸閱讀（本站相關專題）</h3>
+    <ul>
+      <li>想看更進階的大學遺傳學、分生與微生物學正典（Pierce 7e、Weaver 5e、Cox 2e、Prescott 12e、Lehninger 8e），以及大腸桿菌如何同時感測<strong>葡萄糖（PTS 磷酸接力 → cAMP–CAP 與誘導物排除）</strong>，請見 <a href="lac-operon-sugar-sensing.html">大腸桿菌怎麼知道環境中有沒有葡萄糖與乳糖？</a>。</li>
+      <li>想把「大腸桿菌偵測乳糖」跟「植物沒有眼睛卻能看見光、算準光週期開花」並排對照，請見 <a href="plant-photoreceptor-photoperiodism.html">沒有眼睛、鼻子、嘴巴，生命如何感知世界？</a>。</li>
+      <li>想釐清操作子本身到底會不會被轉錄或轉譯，請見 <a href="operator-transcription-translation.html">操作子會不會被轉錄與轉譯？（基因 vs. 子）</a>。</li>
+      <li>想了解真核細胞為何幾乎不用操縱組，請見 <a href="why-eukaryotes-lack-operons.html">為什麼真核細胞幾乎沒有操縱組？</a>。</li>
+    </ul>
+
+    <div class="boundary">
+      <div class="callout-title">📌 本機資料庫（Vault）查證邊界聲明</div>
+      <p style="margin-bottom:0;">本頁盤點範圍涵蓋資料庫中 <code>02 普通生物學</code> 分類底下全部 <strong>8 套</strong>英文原文普通生物學課本譯本（Brooker 4e、Solomon 11e、Freeman 8e、Raven 13e、Campbell 12e、Campbell 13e、Sadava 12e、Starr 14e），8 套書皆已完整翻譯至原核基因調控章節，無缺章漏查。本頁僅呈現「普通生物學」層級的跨版本敘述比較；若需遺傳學、分子生物學、生物化學與微生物學專書之深入討論，請參閱上述延伸閱讀專題。另所有專業譯名（操作子、操縱組、啟動子、抑制蛋白、通透酶、異乳糖）皆依臺灣教育部審定名詞與原書譯本核對。</p>
+    </div>
+  </section>
+
+  <footer>
+    Bio-Wiki 概念考證庫 · 繁體中文與審定名詞遵循臺灣教育部規範 · 原文書與圖片引自 Ze-Agent Vault 正式譯本
+  </footer>
+</main>
+
+<!-- Reading Outpost Bottom Bar & Script -->
+<button class="ro-bottom-toc" type="button" onclick="roOpenDrawer('roTocDrawer')">📑 本篇段落導覽</button>
+<a class="ro-up-btn" href="#top" aria-label="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<script>
+  function roToggleTheme() {
+    var root = document.documentElement;
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('biowiki-theme', next); } catch (e) {}
+    roUpdateThemeBtn();
+  }
+  function roUpdateThemeBtn() {
+    var btn = document.getElementById('roThemeBtn');
+    if (!btn) return;
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.innerHTML = isLight ? '🌙 深色' : '☀️ 亮色';
+    btn.setAttribute('aria-label', isLight ? '切換為深色閱讀模式' : '切換為亮色閱讀模式');
+  }
+  roUpdateThemeBtn();
+  function roOpenDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('open');
+  }
+  function roCloseDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  }
+  function openLightbox(src, alt) {
+    var lb = document.getElementById('roLightbox');
+    var img = document.getElementById('roLightboxImg');
+    if (lb && img) {
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.add('open');
+    }
+  }
+  function toggleEnglish() {
+    document.body.classList.toggle('hide-en');
+    var btn = document.getElementById('toggleEnBtn');
+    if (btn) {
+      btn.textContent = document.body.classList.contains('hide-en')
+        ? '完整：顯示英文原文'
+        : '精簡：隱藏英文原文';
+    }
+  }
+  (function initReadingOutpostShell() {
+    var tocList = document.getElementById('roTocList');
+    var headings = document.querySelectorAll('h2');
+    if (tocList && headings.length) {
+      headings.forEach(function(h, idx) {
+        if (!h.id) h.id = 'ro-sec-' + (idx + 1);
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent.trim();
+        tocList.appendChild(a);
+      });
+    }
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th, tr:first-child th')).map(function(th) {
+        return th.innerText.trim().replace(/[\r\n\t ]+/g, ' ');
+      });
+      if (!headers.length) return;
+      table.classList.add('ro-resp-table');
+      table.querySelectorAll('tr').forEach(function(tr) {
+        if (tr.querySelector('th')) return;
+        Array.from(tr.children).forEach(function(td, idx) {
+          if (td.tagName === 'TD' && !td.getAttribute('data-label') && headers[idx]) {
+            td.setAttribute('data-label', headers[idx]);
+          }
+        });
+      });
+    });
+    document.querySelectorAll('main img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        openLightbox(img.src, img.alt);
+      });
+    });
+  })();
+</script>
+</body>
+</html>
