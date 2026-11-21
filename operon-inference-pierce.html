@@ -1221,20 +1221,22 @@
       <h2><span class="sec-num">02</span> 推翻錯誤假說的轉折：1959 年 PaJaMo 實驗</h2>
     </div>
 
-    <p>今天我們都知道 <em>lacI⁺</em> 是負調控的抑制蛋白，但在 1950 年代末，<strong>Monod 起初其實假設錯了！</strong>看到 <em>lacI⁻</em> 突變株在沒有乳糖時也能持續表現酵素，他和團隊原本猜測：<strong><em>lacI⁻</em> 突變讓細胞合成了一種「內部活化蛋白／內部誘導物」</strong>，所以不需要外界乳糖就能自行開啟操縱組（Brooker 遺傳 8e、Cox 2e）。</p>
+    <p>要理解 1959 年 <strong>Arthur Pardee、François Jacob 與 Jacques Monod</strong> 的 <strong>PaJaMo 實驗</strong>（取三人姓氏開頭字母），必須先回到當時科學家真正想解決的問題：為什麼正常的大腸桿菌在沒有乳糖誘導物時不會大量製造 β-半乳糖苷酶，但帶有 <code>lacI⁻</code> 突變的細菌，卻能在沒有誘導物的情況下持續製造這種酵素？</p>
+
+    <p>當時有兩種可能的解釋（Brooker 遺傳 8e、Cox 2e）：</p>
 
     <div class="grid-2">
       <div class="mini-card">
-        <h4>假說 A｜負調控（抑制蛋白假說）</h4>
-        <p>正常 <code>lacI⁺</code> 負責製造關閉轉錄的抑制蛋白；<code>lacI⁻</code> 只是失去抑制功能。</p>
-        <p><strong>預測：</strong>把 <code>lacI⁺</code> 與 <code>lacI⁻</code> 放入同一細胞，<code>lacI⁺</code> 應為<strong>顯性</strong>（無乳糖時會被關掉）。</p>
+        <h4>假說 A｜內部活化物（或內部誘導物）假說</h4>
+        <p>認為基因的表現需要某種活化物或誘導物才能啟動，而 <code>lacI⁻</code> 突變導致細胞持續產生這種內部活化物，因此即使外界沒有乳糖，細菌仍會持續製造 β-半乳糖苷酶。</p>
       </div>
       <div class="mini-card">
-        <h4>假說 B｜正調控（內部活化子假說）</h4>
-        <p><code>lacI⁻</code> 突變產生了一種內部活化蛋白，主動開啟 <em>lac</em> 操縱組。</p>
-        <p><strong>預測：</strong>把 <code>lacI⁺</code> 與 <code>lacI⁻</code> 放入同一細胞，<code>lacI⁻</code> 應為<strong>顯性</strong>（無乳糖時仍會持續表現）。</p>
+        <h4>假說 B｜抑制物假說（負調控）</h4>
+        <p>認為正常的 <code>lacI⁺</code> 能產生某種抑制性調控物質（抑制物），阻止 β-半乳糖苷酶合成；而 <code>lacI⁻</code> 突變使這種抑制作用消失，細菌才會持續製造酵素。</p>
       </div>
     </div>
+
+    <p>問題在於，<strong>這兩種假說都能解釋 <code>lacI⁻</code> 突變株為何持續製造酵素</strong>。如果是因為細胞持續產生活化物，酵素當然會不斷合成；如果是因為細胞失去抑制物，酵素同樣會不斷合成。因此，光看單倍體 <code>lacI⁻</code> 突變株並不足以判斷究竟是哪一種機制在控制基因表現。</p>
 
     <article class="figure-card">
       <div class="figure-img-wrap" onclick="openLightbox('images/BrookerGenetics8e_Fig14-6_internal_activator_vs_repressor.png', this.querySelector('img').alt)">
@@ -1243,29 +1245,29 @@
       </div>
       <div class="figure-body">
         <div class="figure-title">圖證 2｜Brooker 遺傳學 8e 圖 14.6：兩種對立假說正面交鋒</div>
-        <p class="figure-caption">(a) 正確解釋：<em>lacI⁻</em> 失去可擴散的抑制蛋白功能；(b) 研究者原本的假說：<em>lacI⁻</em> 合成了一種內部活化蛋白（Internal activator）去開啟 <em>lac</em> 操縱組。</p>
+        <p class="figure-caption">(a) 抑制物假說（正確解釋）：<em>lacI⁻</em> 失去可擴散的抑制物功能；(b) 內部活化物假說（研究者起初的猜想）：<em>lacI⁻</em> 合成了一種內部活化物（Internal activator）去開啟 <em>lac</em> 操縱組。</p>
         <div class="figure-guide">
-          <strong>👀 看圖重點：</strong>單看單倍體 <em>lacI⁻</em> 細菌，(a) 和 (b) 都會造成「沒乳糖也持續表現」，根本分不出誰對誰錯——這正是必須把 <code>lacI⁺</code> 和 <code>lacI⁻</code> 放進同一個細胞裡測試顯隱性的原因！
+          <strong>👀 看圖重點：</strong>單看單倍體 <em>lacI⁻</em> 細菌，(a) 和 (b) 都會造成「無乳糖也持續表現」，根本分不出勝負——這正是必須把 <code>lacI⁺</code> 與 <code>lacI⁻</code> 放入同一細胞檢驗的原因。
         </div>
       </div>
     </article>
 
-    <p>為了讓 <code>lacI⁺</code> 與 <code>lacI⁻</code> 進入同一個細胞，1959 年 <strong>Arthur Pardee、François Jacob 與 Jacques Monod</strong> 進行了著名的 <strong>PaJaMo 實驗</strong>（取三人姓氏開頭字母）：他們在<strong>不含乳糖</strong>的培養基中，利用細菌 Hfr 接合把正常供體的 <code>lacI⁺ lacZ⁺</code> <strong>DNA</strong> 送入原本為 <code>lacI⁻ lacZ⁻</code> 的受體細胞（接合幾乎只送進 DNA，不送供體細胞質裡的蛋白質），並連續追蹤 β-半乳糖苷酶的合成變化（Goldberg 7e、Cox 2e）：</p>
+    <h3>如何設計實驗區分兩種假說？</h3>
+    <p>研究人員想到一個關鍵做法：<strong>如果讓正常的 <code>lacI⁺</code> 和突變的 <code>lacI⁻</code> 同時存在於同一個細胞中，結果會如何？</strong></p>
+    <p>於是，他們在<strong>沒有乳糖誘導物</strong>的條件下，利用細菌 Hfr 接合將供體的 <code>lacI⁺ lacZ⁺</code> DNA 送入原本帶有 <code>lacI⁻ lacZ⁻</code> 的受體細胞（Goldberg 7e、Cox 2e）。這個設計有兩個重要目的：</p>
     <ol>
-      <li><strong>接合剛完成時</strong>：β-半乳糖苷酶<strong>立刻開始合成</strong>！起初看起來非常支持 Monod 原本「<code>lacI⁻</code> 為顯性」的猜想。</li>
-      <li><strong>約 1 小時後出現逆轉</strong>：在完全沒有改變培養基的情況下，β-半乳糖苷酶的合成<strong>突然停止</strong>！此時若額外加入乳糖誘導物，酵素合成又立刻重新飆升。</li>
+      <li><strong>確保酵素來自新導入的基因</strong>：受體原本帶有 <code>lacZ⁻</code>，缺乏正常的 β-半乳糖苷酶基因，因此必須取得供體的 <code>lacZ⁺</code> 才能製造具正常功能的酵素。</li>
+      <li><strong>讓 <code>lacI⁺</code> 與 <code>lacI⁻</code> 共存於同一細胞</strong>：接合後的細胞同時帶有原本的 <code>lacI⁻</code> 與新導入的 <code>lacI⁺</code>，讓研究人員能直接觀察正常基因的加入是否改變了持續表現的狀態。</li>
     </ol>
 
-    <div class="callout callout-mnemo">
-      <div class="callout-title">逐步拆解：為什麼「先表現、後停止」能一刀推翻「內部活化子假說」？</div>
-      <ol style="margin-bottom:10px;">
-        <li><strong>「先表現」本身其實兩種假說都解釋得通</strong>：如果「內部活化子假說」是真的，受體原本就帶著 <code>lacI⁻</code>，細胞質裡早就充滿內部活化子，所以剛送進來的 <code>lacZ⁺</code> 當然會立刻開始合成酵素（這正是實驗初期看似支持 Monod 的原因）。</li>
-        <li><strong>真正推翻「內部活化子假說」的是「約 1 小時後停止」</strong>：接合後，受體染色體上原本的 <code>lacI⁻</code> <strong>並沒有消失</strong>！若 <code>lacI⁻</code> 真的會持續製造內部活化子，而新送進來的 <code>lacI⁺</code> 只是「不會製造活化子的正常基因」，那麼細胞內的內部活化子應該源源不絕，<strong>酵素合成應該一直持續下去、永遠不會停</strong>。</li>
-        <li><strong>會「停下來」，證明 <code>lacI⁺</code> 主動製造了抑制物質</strong>：既然 <code>lacI⁻</code> 還在卻仍被關掉，代表新導入的 <code>lacI⁺</code> 絕非「不做活化子」，而是<strong>主動合成出可擴散的負調控抑制物質</strong>去關閉 <code>lacZ⁺</code>。</li>
-        <li><strong>為什麼不是一接合就立刻關掉，而是要等約 1 小時？</strong>因為接合只送進 <strong>DNA</strong>，沒把供體細胞質的抑制蛋白送過來：第 0 分鐘時受體細胞質內抑制蛋白濃度為 0，所以剛進來的 <code>lacZ⁺</code> <strong>先表現</strong>；約 1 小時內，隨新導入的 <code>lacI⁺</code> 陸續轉錄、轉譯並累積出足夠濃度的抑制蛋白，轉錄便<strong>停止</strong>（最後再加乳糖誘導物能恢復合成，則排除了細胞死亡或 <code>lacZ⁺</code> 損壞的可能）。</li>
-      </ol>
-      <p style="margin-bottom:0;"><strong>一句話總結：</strong>「先表現」還分不出勝負，真正淘汰「內部活化子假說」的是<strong>「約 1 小時後自己停下來」</strong>——同時也完美解釋了 Jacob 在 λ 噬菌體看到的合子誘導現象。</p>
-    </div>
+    <h3>兩種假說各自會預測什麼結果？</h3>
+    <ul>
+      <li><strong>如果「內部活化物（內部誘導物）假說」正確</strong>：由於受體原本帶有 <code>lacI⁻</code>，細胞內應該早已持續存在活化物。當供體的 <code>lacZ⁺</code> 進入受體後，便會在活化物作用下立刻開始製造 β-半乳糖苷酶。即使供體同時帶入正常的 <code>lacI⁺</code>，也不應該讓酵素合成停止——因為按照這個假說，<code>lacI⁺</code> 不會主動製造抑制物，而原本持續產生活化物的 <code>lacI⁻</code> 也沒有消失。因此，<strong>細胞應該持續合成 β-半乳糖苷酶，不會停止</strong>。</li>
+      <li><strong>如果「抑制物假說」正確</strong>：由於受體原本是 <code>lacI⁻</code>，細胞質中缺乏正常功能的抑制物；而且細菌接合主要傳遞的是 DNA，而非供體細胞質中已製造好的抑制物。因此，剛取得 <code>lacZ⁺</code> 時尚未建立抑制作用，酵素會先開始合成；然而隨供體同時帶入的 <code>lacI⁺</code> 在受體細胞內逐漸表現並累積出足夠的抑制物後，<code>lacZ⁺</code> 表現便會受到抑制。因此，<strong>細胞應該先開始製造 β-半乳糖苷酶，經過一段時間後再停止合成</strong>。</li>
+    </ul>
+
+    <h3>實驗結果與關鍵區辨力</h3>
+    <p>實測結果顯示：接合後的細胞一開始確實開始製造 β-半乳糖苷酶，但<strong>大約 1 小時後，即使培養環境完全沒有改變，酵素的合成卻停止了</strong>！更重要的是，此時若再加入乳糖誘導物，細胞又能重新製造 β-半乳糖苷酶——這證明細胞並沒有死亡或失去製造酵素的能力，而是酵素合成受到了某種可被誘導物解除的調控作用。</p>
 
     <article class="figure-card">
       <div class="figure-img-wrap" onclick="openLightbox('images/Goldberg7e_Fig18-5_PaJaMo_experiment.png', this.querySelector('img').alt)">
@@ -1274,12 +1276,18 @@
       </div>
       <div class="figure-body">
         <div class="figure-title">圖證 3｜Goldberg 遺傳學 7e 圖 18.5：1959 年 PaJaMo 實驗時間曲線</div>
-        <p class="figure-caption">將 <code>lacI⁺ lacZ⁺</code> 經接合導入 <code>lacI⁻ lacZ⁻</code> 受體後，無誘導物組（藍色實線）先上升隨後停止合成並下降；加入誘導物組（紅色虛線）則持續大幅上升。</p>
+        <p class="figure-caption">將 <code>lacI⁺ lacZ⁺</code> 經接合導入 <code>lacI⁻ lacZ⁻</code> 受體後，無誘導物組（藍色實線）先上升、隨後停止合成並下降；加入誘導物組（紅色虛線）則持續大幅上升。</p>
         <div class="figure-guide">
-          <strong>👀 看圖重點：</strong>緊盯這兩條分岔的曲線——藍色實線（No inducer）前半段上升證明剛進來的 <code>lacZ⁺</code> 沒人攔它，後半段停止上升並下滑證明新合成的 <code>lacI⁺</code> 產物累積後主動關掉了轉錄；紅色虛線（+ inducer）則證明系統不是壞了，而是可被誘導物再次開啟。
+          <strong>👀 看圖重點：</strong>緊盯分岔的兩條曲線——藍色實線（No inducer）前半段上升兩種假說都能解釋，但後半段停止上升並下滑才真正淘汰了內部活化物假說；紅色虛線（+ inducer）則確認 <code>lacZ⁺</code> 仍完好，只是被新累積的 <code>lacI⁺</code> 抑制物關閉了。
         </div>
       </div>
     </article>
+
+    <div class="callout callout-mnemo">
+      <div class="callout-title">PaJaMo 實驗的核心推理與證據邊界</div>
+      <p><strong>核心推理：</strong>接合後「一開始開始合成酵素」其實無法區分兩種假說，因為原本存在活化物與原本缺乏抑制物都能解釋這個現象。真正具有區辨力的是<strong>「為什麼經過約 1 小時後會停止合成」</strong>——如果 <code>lacI⁻</code> 持續製造活化物，原本的 <code>lacI⁻</code> 並未消失，加入 <code>lacI⁺</code> 便沒有理由讓酵素停下來；唯獨抑制物假說能完整解釋「接合只傳 DNA → 初期無抑制物而先表現 → <code>lacI⁺</code> 表現並累積出抑制物後停止（以現代已知機制而言，即轉錄、轉譯出抑制蛋白阻礙轉錄）→ 加入誘導物解除抑制而恢復」，同時也解釋了 Jacob 在 λ 噬菌體看到的合子誘導現象。</p>
+      <p style="margin-bottom:0;"><strong>證據邊界：</strong>這項實驗提供了負調控抑制物模型的強力遺傳證據，但當時並未直接分離並鑑定出抑制物究竟是不是蛋白質；抑制蛋白的分子本質，是直到後續 1966 年的生化純化研究（見第 05 節）才正式確立的。</p>
+    </div>
   </section>
 
   <!-- Section 3: Tool & Notation -->
