@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<title>結構基因與調節基因的定義｜Bio-Wiki</title>
+<meta name="description" content="從乳糖操縱組看結構基因與調節基因各自的功能，逐版對照臺灣高中教材與原文書譯本。">
+<style>
+  :root {
+    --bg-primary: #181614;
+    --bg-pillbar: #24201c;
+    --bg-card: #211e1a;
+    --bg-quote: #26221e;
+    --bg-tag: #2d2823;
+    --text-primary: #f6f1ea;
+    --text-body: #ddd5ca;
+    --text-secondary: #bfb5a8;
+    --text-muted: #9a8e80;
+    --primary: #5bc0eb;
+    --primary-light: rgba(91, 192, 235, 0.12);
+    --primary-border: rgba(91, 192, 235, 0.32);
+    --accent: #f4c44e;
+    --accent-light: rgba(244, 196, 78, 0.12);
+    --border-color: rgba(246, 241, 234, 0.09);
+    --border-strong: rgba(246, 241, 234, 0.16);
+    --taupe-fab: rgba(104, 91, 78, 0.94);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+  }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+    font-size: 18px;
+    line-height: 1.78;
+    padding: 0 0 96px 0;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Reading Outpost Signature Top Pill Header */
+  .ro-header-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-primary) 70%, rgba(24, 22, 20, 0));
+  }
+
+  .ro-pillbar {
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .ro-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .ro-menu-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    border: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .ro-menu-circle span {
+    display: block;
+    width: 16px;
+    height: 2.2px;
+    background: #181614;
+    border-radius: 2px;
+  }
+
+  .ro-brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .ro-brand-zh {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-brand-en {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .ro-cta-pill {
+    appearance: none;
+    background: var(--accent);
+    color: #1c1814;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  /* Main Reading Column (Reading Outpost 16-18 chars/line on mobile) */
+  .container, .wrap, main.container, main.wrap {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 22px 0;
+  }
+
+  /* Hero / Article Header */
+  header, .hero {
+    text-align: left !important;
+    margin-bottom: 32px;
+    padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .badge-bar, .meta-line {
+    display: flex;
+    justify-content: flex-start !important;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .badge, .meta-pill, .meta-pill-muted, .eyebrow, .tag {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .badge-primary, .meta-pill, .eyebrow {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary-border);
+  }
+
+  .badge-accent, .badge.red {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: rgba(244, 196, 78, 0.32);
+  }
+
+  h1 {
+    font-size: clamp(26px, 6.2vw, 34px);
+    line-height: 1.38;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    margin: 6px 0 14px;
+    text-align: left;
+  }
+
+  .subtitle, .lead, .meta {
+    font-size: 17px;
+    line-height: 1.68;
+    color: var(--text-muted);
+    margin: 0;
+    max-width: none;
+    text-align: left;
+  }
+
+  /* Unboxed Article Flow */
+  section, section.card, .card {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-bottom: 42px;
+    scroll-margin-top: 84px;
+  }
+
+  h2, .card-title {
+    font-size: clamp(22px, 5.2vw, 27px);
+    line-height: 1.45;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 44px 0 18px;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+  }
+
+  h2::before {
+    display: none !important;
+  }
+
+  h2 .sec-num {
+    color: var(--accent);
+    margin-right: 6px;
+    font-weight: 800;
+  }
+
+  h3, .step-box h3, .insight-title {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 30px 0 12px;
+  }
+
+  p, .summary-item, .insight-point, .hero-text {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--text-body);
+    margin-bottom: 18px;
+  }
+
+  ul, ol {
+    margin: 0 0 22px 24px;
+    color: var(--text-body);
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+    color: var(--text-body);
+  }
+
+  strong, b {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  /* Reading Outpost Signature Cyan-Underlined Content Links */
+  main a:not(.ro-cta-pill):not(.ro-brand-link),
+  .container a:not(.ro-cta-pill):not(.ro-brand-link),
+  .wrap a:not(.ro-cta-pill):not(.ro-brand-link) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  /* Soft Warm Sub-cards (Quotes, Takeaways, Callouts) */
+  .tldr-card, .hero-card, .summary-card, .book-card, .source-card,
+  .quote-bilingual, .insight-card, .callout, .callout-mnemo,
+  .question-box, .translation-box, .answer, .boundary, .source,
+  .answer-tile, aside.card, .step-list li {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius) !important;
+    padding: 20px 20px !important;
+    margin: 20px 0 !important;
+    box-shadow: none !important;
+  }
+
+  .tldr-card, .hero-card, .callout-mnemo, .answer, .question-box {
+    border-left: 4px solid var(--accent) !important;
+  }
+
+  .callout, .translation-box {
+    border-left: 4px solid var(--primary) !important;
+  }
+
+  .tldr-label, .hero-title, .summary-title, .book-title, .source-book, .callout-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent) !important;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .timeline-step {
+    padding-left: 4px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 12px;
+  }
+
+  .timeline-step:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .timeline-step-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .timeline-step-title span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    font-size: 14px;
+    font-weight: 800;
+    margin-right: 8px;
+  }
+
+  .grid-cards, .summary-grid, .two-col, .source-grid, .answer-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  @media (min-width: 640px) {
+    .grid-cards, .source-grid, .answer-hero {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* Bilingual Textbook Quote Blocks */
+  .book-header, .source-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .book-meta, .source-loc, .source-tag, .summary-subtitle, .summary-badge {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .quote-entry, .quote-block {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .quote-entry:last-child, .quote-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quote-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .en-box, .quote-en, blockquote {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 10px 0 12px;
+    word-break: break-word;
+  }
+
+  body.hide-en .en-box,
+  body.hide-en .quote-en,
+  body.hide-en .figure-caption-en {
+    display: none;
+  }
+
+  .zh-box, .quote-tw {
+    font-size: 17.5px;
+    line-height: 1.78;
+    color: var(--text-body);
+  }
+
+  .zh-box strong, .quote-tw strong {
+    color: var(--accent);
+    background: rgba(244, 196, 78, 0.10);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+
+  .toggle-en-btn {
+    appearance: none;
+    background: var(--bg-tag);
+    color: var(--accent);
+    border: 1px solid rgba(244, 196, 78, 0.35);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  /* Figures & Images */
+  .figure-card, .fig-card, figure, .figure-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .figure-img-wrap, .fig-body, .figure-body {
+    padding: 14px;
+  }
+
+  .figure-img-wrap {
+    background: #f8fafc;
+    cursor: zoom-in;
+  }
+
+  main img, .container img, .wrap img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 8px;
+    margin: 0 auto;
+    cursor: zoom-in;
+  }
+
+  .zoom-hint {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    padding: 6px 4px 0;
+  }
+
+  .figure-title, .fig-title, .fig-header {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding: 12px 16px 4px;
+  }
+
+  .figure-caption, .fig-caption, figcaption {
+    font-size: 15px;
+    line-height: 1.68;
+    color: var(--text-secondary);
+    padding: 6px 16px 14px;
+    background: transparent;
+    border: none;
+  }
+
+  .figure-caption-en {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 0 16px 14px;
+  }
+
+  /* Layer List & Flow */
+  .layer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 16px 0 24px;
+  }
+
+  .layer-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-size: 17px;
+  }
+
+  .layer-badge {
+    font-size: 13px;
+    font-weight: 700;
+    color: #181614;
+    background: var(--accent);
+    padding: 2px 9px;
+    border-radius: 6px;
+    white-space: nowrap;
+    margin-top: 3px;
+  }
+
+  .flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    padding: 18px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    margin: 18px 0;
+  }
+
+  .flow span {
+    padding: 6px 11px;
+    border-radius: 8px;
+    background: var(--bg-tag);
+    color: var(--text-primary);
+    font-size: 15px;
+  }
+
+  .flow b {
+    color: var(--accent);
+  }
+
+  .step-list {
+    list-style: none;
+    margin-left: 0;
+  }
+
+  .ans-value {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+
+  .chart-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin: 20px 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 14px;
+  }
+
+  /* Responsive Tables -> Stacked Mobile Cards (< 680px) */
+  .table-wrap, .table-wrapper {
+    width: 100%;
+    margin: 18px 0 26px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 16px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-body);
+  }
+
+  th {
+    background: var(--bg-pillbar);
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  tr.highlight-tr td {
+    background: rgba(244, 196, 78, 0.12);
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  @media (max-width: 680px) {
+    table.ro-resp-table,
+    table.ro-resp-table thead,
+    table.ro-resp-table tbody,
+    table.ro-resp-table th,
+    table.ro-resp-table td,
+    table.ro-resp-table tr {
+      display: block;
+      width: 100%;
+    }
+
+    table.ro-resp-table thead {
+      display: none;
+    }
+
+    table.ro-resp-table tr {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    table.ro-resp-table td {
+      border: none;
+      border-bottom: 1px dashed var(--border-color);
+      padding: 8px 0;
+      text-align: left !important;
+    }
+
+    table.ro-resp-table td:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    table.ro-resp-table td:first-child {
+      padding-top: 0;
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    table.ro-resp-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+  }
+
+  /* Reading Outpost Bottom-Left TOC Pill & Bottom-Right Up Button */
+  .ro-bottom-toc {
+    position: fixed;
+    left: 16px;
+    bottom: 20px;
+    z-index: 95;
+    background: var(--taupe-fab);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 9px 15px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: calc(100vw - 88px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-up-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 95;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--taupe-fab);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    text-decoration: none !important;
+  }
+
+  /* Drawers & Lightbox */
+  .ro-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ro-drawer-backdrop.open {
+    display: flex;
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-backdrop {
+      align-items: center;
+      padding: 24px;
+    }
+  }
+
+  .ro-drawer-panel {
+    width: 100%;
+    max-width: 500px;
+    max-height: 78vh;
+    overflow-y: auto;
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px 20px 0 0;
+    padding: 18px 18px 28px;
+    box-shadow: var(--shadow);
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-panel {
+      border-radius: 18px;
+    }
+  }
+
+  .ro-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .ro-drawer-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .ro-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .ro-drawer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ro-drawer-list a {
+    display: block;
+    text-decoration: none !important;
+    color: var(--text-body) !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .ro-drawer-list a.active {
+    color: #181614 !important;
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 800;
+  }
+
+  .ro-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    cursor: zoom-out;
+  }
+
+  .ro-lightbox.open {
+    display: flex;
+  }
+
+  .ro-lightbox img {
+    max-width: 100%;
+    max-height: 92vh;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    padding: 6px 0;
+  }
+
+  html[data-theme="light"] {
+    --bg-primary: #fbf8f4;
+    --bg-pillbar: #f0ece3;
+    --bg-card: #ffffff;
+    --bg-quote: #f6f2ea;
+    --bg-tag: #eee8dd;
+    --text-primary: #2f2820;
+    --text-body: #4a3f35;
+    --text-secondary: #5e5043;
+    --text-muted: #756656;
+    --primary: #1b9dce;
+    --primary-light: rgba(27, 157, 206, 0.12);
+    --primary-border: rgba(27, 157, 206, 0.35);
+    --accent: #b86b11;
+    --accent-light: rgba(244, 196, 78, 0.22);
+    --border-color: rgba(74, 63, 53, 0.12);
+    --border-strong: rgba(74, 63, 53, 0.22);
+    --taupe-fab: rgba(105, 90, 74, 0.94);
+    --shadow: 0 4px 18px rgba(47, 40, 32, 0.08);
+    color-scheme: light;
+  }
+
+  html[data-theme="light"] .ro-header-wrap {
+    background: linear-gradient(180deg, #fbf8f4 70%, rgba(251, 248, 244, 0));
+  }
+
+  html[data-theme="light"] .ro-menu-circle {
+    background: #67c3eb;
+    color: #1f1a15;
+  }
+
+  html[data-theme="light"] .ro-cta-pill {
+    background: #f6c84c;
+    color: #2f2820;
+  }
+
+  html[data-theme="light"] .ro-bottom-toc,
+  html[data-theme="light"] .ro-up-btn {
+    color: #ffffff;
+  }
+
+  html[data-theme="light"] .ro-drawer-list a.active {
+    background: #f6c84c;
+    border-color: #e0b034;
+    color: #2f2820 !important;
+  }
+
+  html[data-theme="light"] .zh-box strong,
+  html[data-theme="light"] .quote-tw strong {
+    color: #8c4d06;
+    background: rgba(246, 200, 76, 0.28);
+  }
+
+  .ro-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .ro-theme-btn {
+    appearance: none;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    transition: transform 0.15s ease;
+  }
+
+  .ro-theme-btn:active {
+    transform: scale(0.96);
+  }
+
+</style>
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem('biowiki-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+<!-- Reading Outpost Dark Style Shell -->
+<div class="ro-header-wrap" id="top">
+  <div class="ro-pillbar">
+    <div class="ro-brand-group">
+      <button class="ro-menu-circle" type="button" aria-label="開啟專題選單" onclick="roOpenDrawer('roSiteDrawer')">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="ro-brand-link" href="index.html">
+        <span class="ro-brand-zh">400X 的日常切片</span>
+        <span class="ro-brand-en">BIO-WIKI EVIDENCE</span>
+      </a>
+    </div>
+    <div class="ro-top-actions">
+      <button class="ro-theme-btn" id="roThemeBtn" type="button" onclick="roToggleTheme()">☀️ 亮色</button>
+      <button class="ro-cta-pill" type="button" onclick="roOpenDrawer('roSiteDrawer')">專題目錄</button>
+    </div>
+  </div>
+</div>
+
+<div class="ro-drawer-backdrop" id="roSiteDrawer" onclick="if(event.target===this)roCloseDrawer('roSiteDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📚 Bio-Wiki 全站專題</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roSiteDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list">
+            <a href="index.html">🏠 首頁：主題分類總覽</a>
+      <a href="chromatin.html">1. 染色質與染色體本質</a>
+      <a href="wheat-polygenic.html">2. 小麥多基因累加模型 (Campbell 14e)</a>
+      <a href="spermatogonia-hole.html">3. 精原細胞與生精歷程 (跨正典考證)</a>
+      <a href="griffith-transformation.html">4. Griffith 轉形作用</a>
+      <a href="promoter-tata-box.html">5. 啟動子、TATA 匣與甲基化</a>
+      <a href="sickle-cell-dominance.html">6. 鐮刀型貧血顯隱性層次分析</a>
+      <a href="endosymbiosis.html">7. 內共生假說與演化序列</a>
+      <a href="lactose-intolerance-lac-operon.html">8. 乳糖不耐症與大腸桿菌 lac 操縱組</a>
+      <a href="operon-inference-pierce.html">9. Pierce 操縱組推論過程</a>
+      <a href="gene-allele-dna-chromosome.html">10. 遺傳因子、基因、等位基因與染色體</a>
+      <a href="oogenesis-interphase-dyad.html">11. 初級卵母細胞、間期與二分體</a>
+      <a href="xy-synapsis-crossing-over.html">12. 人類 XY 染色體聯會、互換與四分體判定</a>
+      <a href="chromosome-breakage-cri-du-chat.html">13. 染色體斷裂成因與貓叫症（5p 缺失）</a>
+      <a href="operator-transcription-translation.html">14. 操作子會不會被轉錄與轉譯？（基因 vs. 子）</a>
+      <a href="lac-operon-sugar-sensing.html">15. 大腸桿菌如何感測葡萄糖與乳糖？</a>
+      <a href="why-eukaryotes-lack-operons.html">16. 為什麼原核有操縱組，真核卻幾乎沒有？</a>
+      <a href="plant-photoreceptor-photoperiodism.html">17. 沒有感官如何感知世界？（細菌乳糖 vs. 植物光週期）</a>
+      <a href="genbio-8books-lac-detection.html">18. 普生 8 套課本怎麼講大腸桿菌偵測乳糖？</a>
+      <a href="prokaryote-gene-regulation-types.html">19. 原核基因調控分類：正／負 vs. 持續／誘導／抑制</a>
+      <a href="lac-operon-vs-insulin-exocytosis.html">20. 按需供應的兩種速度：lac 操縱組 vs. 胰島素胞吐</a>
+      <a href="structural-and-regulatory-genes.html" class="active">結構基因與調節基因的定義</a>
+      <a href="prokaryotic-eukaryotic-gene-regulation.html">26. 原核與真核的基因表現調控</a>
+    </div>
+  </div>
+</div>
+
+<div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📑 本篇段落導覽</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list" id="roTocList" onclick="roCloseDrawer('roTocDrawer')"></div>
+  </div>
+</div>
+
+<div class="ro-lightbox" id="roLightbox" onclick="this.classList.remove('open')">
+  <img id="roLightboxImg" alt="">
+</div>
+
+
+<!-- Minimal Sticky Topbar -->
+<!-- In-Page TOC Drawer -->
+<!-- Site-Wide Topics Drawer -->
+<!-- Lightbox for Images -->
+<main class="container">
+  <header class="hero">
+    <h1>結構基因與調節基因的定義</h1>
+    <p class="subtitle">從乳糖操縱組看結構基因與調節基因各自的功能，逐版對照臺灣高中教材與原文書譯本。</p>
+  </header>
+
+<div class="tldr-card"><blockquote>
+<p><strong>在同一套基因調控系統中，結構基因的產物執行該系統的細胞功能，調節基因的產物則改變目標基因的表現。兩者依產物在該系統扮演的角色區分。</strong></p>
+</blockquote></div>
+
+<section id="definitions">
+<h2>一、兩個詞各自怎麼定義？</h2>
+<table class="resp-table">
+<thead>
+<tr>
+<th>名稱</th>
+<th>高中操縱組的用法</th>
+<th>原文書的用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="名稱"><strong>結構基因（structural gene）</strong></td>
+<td data-label="高中操縱組的用法">編碼執行該操縱組功能所需蛋白質的基因，例如代謝酵素或膜上的運輸蛋白。通常與同組的其他結構基因一起轉錄。</td>
+<td data-label="原文書的用法">Pierce 7e 明列其編碼的蛋白質可用於代謝、生物合成或細胞結構。這個詞也用於真核案例，例如 Klug 的酵母菌半乳糖系統。</td>
+</tr>
+<tr>
+<td data-label="名稱"><strong>調節基因（regulatory gene；regulator gene）</strong></td>
+<td data-label="高中操縱組的用法">編碼能改變目標基因轉錄的調節蛋白，例如 <em>lacI</em> 編碼抑制蛋白。</td>
+<td data-label="原文書的用法">Pierce 7e 把調節基因的產物寫成 RNA 或蛋白質。蛋白質可促進或抑制轉錄，有些調節 RNA 會讓目標 mRNA 更容易降解，或減少它的轉譯。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>調節蛋白與調節基因各有分工。</strong> 調節基因是 DNA 上的基因。調節蛋白是基因表現後產生、實際參與調控的蛋白質。以乳糖操縱組而言，操作子是 DNA 上供抑制蛋白結合的調節序列，屬於另一類元件。可延伸閱讀 <a href="operator-transcription-translation.html">操作子會不會轉錄與轉譯產生蛋白質？</a>。</p>
+</section>
+
+<section id="lac-operon">
+<h2>二、拿乳糖操縱組對照</h2>
+<table class="resp-table">
+<thead>
+<tr>
+<th>名稱</th>
+<th>類別</th>
+<th>產物或身分</th>
+<th>在乳糖調控中的角色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="名稱"><em>lacZ</em></td>
+<td data-label="類別">結構基因</td>
+<td data-label="產物或身分">β 半乳糖苷酶</td>
+<td data-label="在乳糖調控中的角色">催化乳糖分解。</td>
+</tr>
+<tr>
+<td data-label="名稱"><em>lacY</em></td>
+<td data-label="類別">結構基因</td>
+<td data-label="產物或身分">乳糖通透酶</td>
+<td data-label="在乳糖調控中的角色">協助乳糖進入細胞。</td>
+</tr>
+<tr>
+<td data-label="名稱"><em>lacA</em></td>
+<td data-label="類別">結構基因</td>
+<td data-label="產物或身分">轉乙醯酶</td>
+<td data-label="在乳糖調控中的角色">可對某些半乳糖苷進行乙醯化。</td>
+</tr>
+<tr>
+<td data-label="名稱"><em>lacI</em></td>
+<td data-label="類別">調節基因</td>
+<td data-label="產物或身分">乳糖抑制蛋白</td>
+<td data-label="在乳糖調控中的角色">其產物可結合操作子、抑制轉錄。<em>lacI</em> 有自己的啟動子，位於乳糖操縱組之外。</td>
+</tr>
+<tr>
+<td data-label="名稱"><em>lacO</em></td>
+<td data-label="類別">調節序列</td>
+<td data-label="產物或身分">操作子</td>
+<td data-label="在乳糖調控中的角色">是抑制蛋白結合的 DNA 序列。</td>
+</tr>
+</tbody>
+</table>
+<p>「位於操縱組之外」是 <em>lacI</em> 的排列情形。解題時先確認基因的產物及其作用，再判斷基因與操縱組的位置。調節蛋白可影響轉錄，同一組的結構基因則會一起被轉錄。114 年臺中女中教師甄試第 3 題以「構造基因」指 <em>z</em>，可從題目的 <em>i</em>、<em>o</em>、<em>z</em> 確認用詞所指。</p>
+</section>
+
+  <section id="figures">
+    <h2>用兩張原書圖對照</h2>
+    <figure class="figure-card">
+      <figcaption class="figure-title">Pierce 7e 圖 16.3｜典型操縱組</figcaption>
+      <div class="figure-img-wrap">
+        <img loading="lazy" width="1464" height="739" src="images/Pierce7e_Fig16-3_operon_vs_regulator_gene.jpg" alt="典型操縱組包含基因 a、b、c；左側調節基因以獨立啟動子表現">
+      </div>
+      <p class="figure-caption">左側調節基因產生調節蛋白。右側的 a、b、c 是結構基因，三者共同轉錄，各自編碼圖中的酵素 A、B、C。</p>
+      <p class="figure-caption-en" lang="en">An operon is a single transcription unit that includes a series of structural genes, a promoter, and an operator.</p>
+    </figure>
+    <figure class="figure-card">
+      <figcaption class="figure-title">Becker 10e 圖 20-2｜大腸桿菌的乳糖操縱組</figcaption>
+      <div class="figure-img-wrap">
+        <img loading="lazy" width="1416" height="648" src="images/Becker10e_Fig20-2_lac_operon_overview.png" alt="乳糖操縱組包含 lacZ、lacY、lacA，旁邊的調節基因 lacI 編碼抑制蛋白">
+      </div>
+      <p class="figure-caption"><em>lacI</em> 編碼抑制蛋白。乳糖操縱組內的 <em>lacZ</em>、<em>lacY</em>、<em>lacA</em> 一起轉錄，產生與乳糖利用有關的蛋白質。</p>
+      <p class="figure-caption-en" lang="en">The nearby regulatory gene lacI encodes the lac repressor protein R.</p>
+    </figure>
+  </section>
+
+<section id="usage">
+<h2>三、遇到不同書使用同一個詞</h2>
+<ul>
+<li><strong>「結構基因」涵蓋多廣，要看書中的對照對象。</strong> Sadava 強調它指定蛋白質的胺基酸序列，Prescott、Raven 植物學可用它泛稱蛋白質編碼基因；Wilson &amp; Walker 在基因區段模型裡則用它指會被轉錄成 RNA 的區段。若題目正在對照結構基因與調節基因，採用產物的功能區分較清楚；若題目在區分轉錄區與調節區，依該書的區段用法理解。</li>
+<li>
+<p><strong>術語表保留了這個詞。</strong> 本機《生命科學名詞》將 <code>regulatory gene</code> 對應為「調節基因」，將 <code>structural gene</code> 收作「結構基因」，並標註「舊名」。部分原文書的譯本使用「調控基因」，仍可從括註的英文詞辨識。</p>
+</li>
+<li>
+<p><strong>真核生物也有兩詞並用的案例。</strong> Klug 以酵母菌 GAL 系統說明，部分基因的蛋白質負責運輸或利用半乳糖，另一組基因的產物控制前一組的轉錄。這個例子也顯示，兩詞可以用來描述操縱組以外的系統。</p>
+</li>
+<li><strong>廣義的調節基因包含調節 RNA。</strong> Pierce 明列調節基因的產物可以是 RNA 或蛋白質。Campbell 的微 RNA 例子說明，有些調節 RNA 會和目標 mRNA 配對，使它降解或降低轉譯。判讀涉及 RNA 的題目時應看題目採用的定義範圍。</li>
+<li><strong>Hickman 19e 的用語特別。</strong> 該書在動物真核轉錄控制一節，把和被轉錄區相連的啟動子區稱作 <em>regulatory gene</em>，並把會被轉錄成 mRNA 或 rRNA 的 DNA 稱作 <em>structural gene</em>。這裡討論的是啟動子位置如何影響相連基因的表現。依 Pierce 與高中乳糖操縱組的用語，這種啟動子屬於調節序列，<em>regulatory gene</em> 則指產生調節蛋白或 RNA 的基因。</li>
+</ul>
+</section>
+
+<section id="classroom">
+<h2>教學提示</h2>
+<p>拿 <em>lacZ</em> 和 <em>lacI</em> 讓學生各說出「基因 → 產物 → 產物做什麼」。只背「結構基因製造酵素」會漏掉 <em>lacY</em> 的運輸功能。只背「調節基因製造抑制蛋白」會漏掉活化蛋白，也會漏掉大學教材納入的調節 RNA。</p>
+</section>
+
+<section id="high-school">
+<h2>高中七版逐版對照</h2>
+<p>以可取得的課文或教師用書核對。表中列印刷頁，並標示使用的資料版本。</p><table class="resp-table">
+<thead>
+<tr>
+<th>版本</th>
+<th>章節／頁碼</th>
+<th>結構基因</th>
+<th>調節基因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="版本">三民</td>
+<td data-label="章節／頁碼">§ 4-2，p.153</td>
+<td data-label="結構基因">稱 lacZ、lacY、lacA 為三個結構基因，產物與乳糖代謝有關。</td>
+<td data-label="調節基因">位於乳糖操縱組外，產物為抑制蛋白。</td>
+</tr>
+<tr>
+<td data-label="版本">全華</td>
+<td data-label="章節／頁碼">§ 5-2-1、§ 5-2-2，p.144</td>
+<td data-label="結構基因">功能相關、相鄰的基因共用啟動子。乳糖操縱組的三個結構基因各有乳糖代謝相關產物。</td>
+<td data-label="調節基因">操縱組外的調節基因表現出抑制蛋白，由它控制結構基因的表現。</td>
+</tr>
+<tr>
+<td data-label="版本">南一</td>
+<td data-label="章節／頁碼">§ 2-3.2，p.124–125</td>
+<td data-label="結構基因">正文與圖 2-21 說明乳糖吸收與代謝的三個相鄰基因。本節未見「結構基因」這個名稱。</td>
+<td data-label="調節基因">正文與圖 2-21 明列調節基因，其產物為抑制蛋白。</td>
+</tr>
+<tr>
+<td data-label="版本">康熹（舊課綱）</td>
+<td data-label="章節／頁碼">§ 11-3.2，p.94</td>
+<td data-label="結構基因">在乳糖操縱組的例子裡，稱編碼乳糖代謝相關酵素的基因為結構基因。</td>
+<td data-label="調節基因">稱編碼抑制蛋白的基因為調節基因。抑制蛋白能結合操作子。</td>
+</tr>
+<tr>
+<td data-label="版本">泰宇</td>
+<td data-label="章節／頁碼">§ 3-4.2，p.163–165</td>
+<td data-label="結構基因">三個相連結構基因共用啟動子，一起被轉錄，各自有起始與終止密碼子並轉譯出各自的蛋白質。</td>
+<td data-label="調節基因">稱編碼該抑制蛋白的基因為調節基因，另指出它有自己的啟動子。</td>
+</tr>
+<tr>
+<td data-label="版本">龍騰</td>
+<td data-label="章節／頁碼">§ 4-3，p.163</td>
+<td data-label="結構基因">乳糖操縱組內有多個編碼乳糖代謝相關酵素的結構基因。</td>
+<td data-label="調節基因">操縱組外有產物為抑制蛋白的調節基因。</td>
+</tr>
+<tr>
+<td data-label="版本">翰林（較早的 108 課綱版與 114 年教師手冊附課文）</td>
+<td data-label="章節／頁碼">較早版課本 p.145–146／手冊 p.285–286；114 年課本 p.151–152／手冊 p.309–310</td>
+<td data-label="結構基因">較早版先給一般定義，產物通常構成細胞結構或作為生理、生化反應所需的酵素。114 年版從乳糖代謝切入，說明有三個相鄰基因。</td>
+<td data-label="調節基因">較早版說調節蛋白開啟或關閉結構基因表現。114 年版將功能放在乳糖調控脈絡中說明，圖 4-13 分列兩類基因。</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+<section id="sources">
+<h2>原文書的定義與用法</h2>
+<button id="toggleEnBtn" class="toggle-en-btn" type="button" aria-pressed="false" onclick="toggleEnglish()">隱藏英文原文</button>
+<div class="source-card"><h3>Pierce 遺傳學 7e，第 16 章</h3><p>結構基因編碼代謝、生物合成或細胞結構所用的蛋白質。調節基因的產物可為 RNA 或蛋白質。</p><div class="quote-block"><div class="quote-en" lang="en">Structural genes encode proteins that are used in metabolism or biosynthesis or that play a structural role in the cell.</div><div class="quote-tw">編碼在代謝或生合成中使用或在細胞中發揮結構作用的蛋白質。</div></div></div>
+<div class="source-card"><h3>Sadava 生命科學 12e，第 16 章（結構基因）</h3><p>以指定蛋白質胺基酸序列來定義結構基因，舉酵素與細胞骨架蛋白。</p><div class="quote-block"><div class="quote-en" lang="en">structural genes specify the primary structures (the amino acid sequences) of protein molecules</div><div class="quote-tw">結構基因指定蛋白質分子的初級結構，也就是胺基酸序列</div></div></div>
+<div class="source-card"><h3>Campbell 生物學 13e，第 18 章（乳糖操縱組）</h3><p>將 <em>lacI</em> 稱為調節基因，編碼能結合操作子的抑制蛋白，並位在乳糖操縱組之外。</p><div class="quote-block"><div class="quote-en" lang="en">The regulatory gene, lacI, located outside the lac operon, codes for an allosteric repressor protein</div><div class="quote-tw">位於 lac 操縱組之外的調節基因 lacI，編碼一個異位調節抑制蛋白</div></div></div>
+<div class="source-card"><h3>Klug 遺傳學，第 17 章</h3><p>酵母菌 GAL 系統中，兩組基因分別負責利用半乳糖所需的功能，以及對這些基因施加正、負轉錄調控。</p><div class="quote-block"><div class="quote-en" lang="en">The products of the regulatory genes positively and negatively control the transcription of the structural genes.</div><div class="quote-tw">調控基因的產物則對結構基因的轉錄施加正向與負向調控。</div></div></div>
+<div class="source-card"><h3>Hickman 動物學 19e，第 5 章</h3><p>在真核順式調控段落，以「結構基因」指轉錄成 mRNA 或 rRNA 的 DNA，以「調控基因」指相連的啟動子區。</p><div class="quote-block"><div class="quote-en" lang="en">the attached promoter region is called the regulatory gene</div><div class="quote-tw">所連接的啟動子區域稱為調控基因</div></div></div><h3>逐部譯本檢索</h3><p>將本機「原文書翻譯」各學科資料夾內 6,726 個 Markdown 與純文字檔納入檢索，比對「結構基因、構造基因、調節基因、調控基因」及英文 <code>structural gene(s)</code>、<code>regulatory gene(s)</code>、<code>regulator gene(s)</code>。排除備份、重複段落、單純意指「調節基因表現」的動詞用法後，逐一回讀相關段落。下表收錄 39 部／版譯本的 69 筆來源，包括明文定義、例示及相關用法。</p><details open><summary>查看各書的說法與章節</summary><table class="resp-table">
+<thead>
+<tr>
+<th>書名與章次</th>
+<th>出現方式</th>
+<th>該書的說法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="書名與章次">Alberts_ECB6，第 8 章</td>
+<td data-label="出現方式">語境用法</td>
+<td data-label="該書的說法">乳糖操縱組編碼攝入與分解乳糖的蛋白質，轉錄受抑制與活化蛋白控制；正文以角色說明。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Alberts_ECB6，第 10 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">稱果蠅胚胎呈條帶式表現的基因為調節基因；著重觀察，未提供雙詞正式定義。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Bear4e，第 17 章</td>
+<td data-label="出現方式">明文定義或區辨</td>
+<td data-label="該書的說法">以括註把調節基因定為調節其他基因表現的基因；fru 是行為例子。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Becker 10e，第 20 章</td>
+<td data-label="出現方式">明文定義或區辨</td>
+<td data-label="該書的說法">乳糖利用涉及兩類基因：乳糖攝取與代謝蛋白的編碼基因，以及產物控制第一類基因的調節基因。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Becker 10e，第 20 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">酵母 SIR 基因是調節基因例，其蛋白質可抑制其他基因表現。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Bergstrom_Evolution，第 13 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">Hox、snail、Dlx 作為調節神經脊發育的基因例。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Brock 15e，第 6 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">色胺酸操縱組五個產生生合成工具蛋白的基因稱結構基因。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Brooker 4e，第 12 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">乳糖操縱組正文稱 lacI 編碼抑制蛋白且有自己的啟動子；以功能例示。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Brooker 4e，第 20 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">動物 Hox 基因編碼轉錄因子，也會經其他調節基因影響更下游基因的表現。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Brooker_Genetics 8e，第 12 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">調節基因編碼反式作用轉錄因子，作用靶點可以距離遙遠甚至位於另一條染色體。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Brooker_Genetics 8e，第 14 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">譯編說明以色胺酸操縱組的蛋白質編碼區為結構基因；正文著重弱化控制，未另立詞條。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Campbell 12e，第 18 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">色胺酸操縱組的調節基因 trpR 編碼抑制蛋白，本身另有啟動子。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Campbell 12e，第 18 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">lacI 位於乳糖操縱組外，編碼可結合操作子的抑制蛋白；lacZ 等編碼乳糖利用蛋白質。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Campbell 12e，第 18 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">真核細胞的主調節基因 MyoD 編碼蛋白質，促進肌肉細胞分化的表現程序。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Campbell 13e，第 18 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">色胺酸操縱組的調節基因 trpR 編碼抑制蛋白，本身另有啟動子。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Campbell 13e，第 18 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">lacI 位於乳糖操縱組外，編碼可結合操作子的抑制蛋白；lacZ 等編碼乳糖利用蛋白質。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Campbell 13e，第 18 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">微 RNA 基因可藉由發揮功能的微 RNA 產物影響目標傳訊 RNA；這是廣義調節功能的例證。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Campbell 13e，第 18 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">真核細胞的主調節基因 myoD 編碼蛋白質，促進肌肉細胞分化的表現程序。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Cox 2e，第 19 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">以 p53 參與細胞凋亡的調節基因為例。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Cox 2e，第 22 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">發育調節基因依序引導細胞走向不同組織命運。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Evolution 4e，第 15 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">Hox 基因參與由相互作用的調節基因及其受調節基因構成的網路。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Evolution 4e，第 15 章</td>
+<td data-label="出現方式">語境用法</td>
+<td data-label="該書的說法">將傳訊蛋白質、轉錄因子、順式調節元件與結構基因列為發育路徑成員。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Evolution 5e，第 7 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">以編碼轉錄因子的基因為調節基因的一類，討論體色的形成。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Evolution 5e，第 11 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">同新版以 Hox 參與調節基因與目標基因的網路為例。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Freeman 8e，第 18 章</td>
+<td data-label="出現方式">語境用法</td>
+<td data-label="該書的說法">以乳糖操縱組的抑制蛋白基因 lacI 區分於受其控制的 lacZ、lacY、lacA。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Freeman 8e，第 21 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">動物發育有調節基因依序開啟其他調節基因的級聯；列具體功能。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Gilbert 13e，第 10 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">果蠅的間隙基因為發育調節基因，基因本身的表現也受強化子控制。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Gilbert 13e，第 26 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">稱編碼蛋白質、其突變可能帶來表型變異的基因為結構基因；另以改變發育調節基因解釋表型差異。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Goldberg_Genetics7e，第 18 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">lacZ、lacY、lacA 明稱結構基因，編碼乳糖利用所需蛋白；啟動子和操作子為調控元件。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Goldberg_Genetics7e，第 18 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">將調節基因和調節 DNA 序列分列；可影響各基因的表現。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">GuytonHall15e，第 3 章</td>
+<td data-label="出現方式">明文定義或區辨</td>
+<td data-label="該書的說法">調節基因促成調節蛋白的形成，該蛋白可活化或抑制轉錄。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Hickman 19e，第 5 章</td>
+<td data-label="出現方式">不同用法</td>
+<td data-label="該書的說法">該書順式調控段落將轉錄成 RNA 的區段稱結構基因（包括 rRNA 例），把相連的啟動子區域稱調節基因。這是該段特殊用法。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Hill 4e，第 14 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">PAX6 和其他調節基因互動，是眼睛發育的調節例。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Hopkins_PlantPhysiology，第 11 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">固氮基因群並列編碼酵素的結構基因與調節基因。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Hopkins_PlantPhysiology，第 24 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">以植物特定時間表現的調節基因產生可開啟開花基因的蛋白質為例。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Janeway 10e，第 13 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">在病毒學分類語境，用調節基因指編碼調節蛋白的一組基因。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Kandel 6e，第 2 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">同一調節基因可在不同物種的行為中具有不同功能。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">KavanaghFungi2e，第 2 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">真菌交配調節基因可能控制交配費洛蒙表現，也涉及其他交配相關過程。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Klug_Genetics，第 16 章</td>
+<td data-label="出現方式">明文定義或區辨</td>
+<td data-label="該書的說法">明文稱編碼酵素一級結構的基因為結構基因，隨即列乳糖操縱組的三個例子。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Klug_Genetics，第 16 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">乳糖操縱組的結構基因分別產生乳糖利用蛋白；lacI 的抑制蛋白調節結構基因的轉錄。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Klug_Genetics，第 17 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">酵母 GAL 系統有 4 個半乳糖利用的結構基因與 3 個調節基因；兩詞也見於真核生物。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Lehninger8e，第 28 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">在色胺酸操縱組中稱前導區後的受控蛋白質編碼基因為結構基因。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Lehninger8e，第 28 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">稱多個主導胚胎發育命運的基因為調節基因，其蛋白質或 RNA 產物共同作用。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Lodish 9e，第 5 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">病毒學語境的結構基因所編碼的是維持病毒顆粒構造的蛋白質，屬該處用法。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Lodish 9e，第 25 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">癌症章以生長調節基因說明調節區改變可影響其表現。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Pierce 7e，第 16 章</td>
+<td data-label="出現方式">明文定義或區辨</td>
+<td data-label="該書的說法">兩詞定義。結構基因編碼供代謝、生合成或細胞結構使用的蛋白質；調節基因產物可為 RNA 或蛋白質，影響其他基因的轉錄或轉譯。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Pierce 7e，第 16 章</td>
+<td data-label="出現方式">明文定義或區辨</td>
+<td data-label="該書的說法">操縱組專義。調節基因產生可結合操作子的調節蛋白以增減轉錄，通常獨立表現。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Prescott 12e，第 13 章</td>
+<td data-label="出現方式">明文定義或區辨</td>
+<td data-label="該書的說法">細菌基因體的蛋白質編碼基因統稱結構基因，屬該章廣義用法。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Prescott 12e，第 14 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">乳糖操縱組的三個結構基因受 LacI 抑制蛋白控制，lacI 位於該操縱組上游。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Raven 13e，第 16 章</td>
+<td data-label="出現方式">語境用法</td>
+<td data-label="該書的說法">以 lacI 和編碼乳糖利用蛋白的一組基因說明角色；圖後的譯編說明才稱三者為結構基因。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Raven 13e，第 53 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">果蠅 fru 被稱為調節基因，可開啟影響求偶神經迴路的其他基因。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">RavenPlants8e，第 9 章</td>
+<td data-label="出現方式">明文定義或區辨</td>
+<td data-label="該書的說法">真核蛋白質編碼序列稱結構基因，常由內含子隔開，屬該章廣義用法。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">RavenPlants8e，第 9 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">比較細菌結構基因可共同轉錄成同一條 RNA，真核結構基因通常分開轉錄。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Sadava 12e，第 16 章</td>
+<td data-label="出現方式">明文定義或區辨</td>
+<td data-label="該書的說法">結構基因指定蛋白質胺基酸序列，例為酵素或細胞骨架蛋白。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Sadava 12e，第 16 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">以調節基因的蛋白質產物結合 DNA 調節序列區分兩者，典型操縱組包含結構基因。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Sadava 12e，第 16 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">以色胺酸操縱組的調節基因 trpR 和結構基因說明兩類功能。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">SherwoodAnimalPhysiology，第 9 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">Tbx-5 是調節基因，編碼影響心臟發育圖式的轉錄因子。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Simpson_PlantSystematics，第 2 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">發育時序與分類脈絡，調節基因變異可能導致形態差異。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Solomon 11e，第 14 章</td>
+<td data-label="出現方式">明文定義或區辨</td>
+<td data-label="該書的說法">乳糖操縱組的酵素編碼序列各稱結構基因，三個基因的蛋白質參與不同環節。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Starr14e，第 10 章</td>
+<td data-label="出現方式">語境用法</td>
+<td data-label="該書的說法">以三個乳糖操縱組基因各自編碼蛋白質來說明；這段沒有用結構基因為正式名稱。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Starr14e，第 43 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">以魚類階序改變時首先提高某調節基因的表現，帶動其他基因的變化為例。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Stryer10e，第 31 章</td>
+<td data-label="出現方式">明文定義或區辨</td>
+<td data-label="該書的說法">操縱組模型分列結構基因、調節基因及操作子；調節基因編碼調節蛋白。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Stryer10e，第 31 章</td>
+<td data-label="出現方式">明文定義或區辨</td>
+<td data-label="該書的說法">細菌調節基因可產生與控制位點互動、促進或抑制轉錄的蛋白質。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Taiz 7e，第 21 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">植物發育例示，桃核與阿拉伯芥果皮木質化時會誘導表現部分相似的調節基因。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Tortora 13e，第 8 章</td>
+<td data-label="出現方式">明文定義或區辨</td>
+<td data-label="該書的說法">結構基因決定蛋白質構造；乳糖利用的結構基因與 DNA 控制區有別。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Tortora 13e，第 8 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">I 調節基因編碼抑制蛋白；蛋白質與操作子結合而抑制轉錄。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Weaver 5e，第 7 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">稱乳糖利用蛋白質的編碼基因為結構基因，列乳糖系統為例。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">Weaver 5e，第 7 章</td>
+<td data-label="出現方式">例示</td>
+<td data-label="該書的說法">調節基因 lacI 產生抑制蛋白；其產物與操作子結合。</td>
+</tr>
+<tr>
+<td data-label="書名與章次">WilsonWalker 8e，第 4 章</td>
+<td data-label="出現方式">不同用法</td>
+<td data-label="該書的說法">在基因三區段的模型，把會被轉錄成 RNA 的中央區段稱結構基因，和上下游調控區分列。</td>
+</tr>
+</tbody>
+</table></details>
+</section>
+
+  <section id="related">
+    <h2>延伸閱讀</h2>
+    <ul>
+      <li><a href="operator-transcription-translation.html">操作子會不會被轉錄或轉譯？</a></li>
+      <li><a href="operon-inference-pierce.html">乳糖操縱組的實驗推論</a></li>
+    </ul>
+  </section>
+
+  <footer>
+    Bio-Wiki 概念考證庫
+  </footer>
+
+</main>
+
+<!-- Reading Outpost Bottom Bar & Script -->
+<button class="ro-bottom-toc" type="button" onclick="roOpenDrawer('roTocDrawer')">📑 本篇段落導覽</button>
+<a class="ro-up-btn" href="#top" aria-label="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<script>
+  function roToggleTheme() {
+    var root = document.documentElement;
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('biowiki-theme', next); } catch (e) {}
+    roUpdateThemeBtn();
+  }
+  function roUpdateThemeBtn() {
+    var btn = document.getElementById('roThemeBtn');
+    if (!btn) return;
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.innerHTML = isLight ? '🌙 深色' : '☀️ 亮色';
+    btn.setAttribute('aria-label', isLight ? '切換為深色閱讀模式' : '切換為亮色閱讀模式');
+  }
+  roUpdateThemeBtn();
+  function roOpenDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('open');
+  }
+  function roCloseDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  }
+  function openLightbox(src, alt) {
+    var lb = document.getElementById('roLightbox');
+    var img = document.getElementById('roLightboxImg');
+    if (lb && img) {
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.add('open');
+    }
+  }
+  function toggleEnglish() {
+    var hidden = document.body.classList.toggle('hide-en');
+    var btn = document.getElementById('toggleEnBtn');
+    if (btn) {
+      btn.textContent = hidden ? '顯示英文原文' : '隱藏英文原文';
+      btn.setAttribute('aria-pressed', String(hidden));
+    }
+  }
+  (function initReadingOutpostShell() {
+    var tocList = document.getElementById('roTocList');
+    var headings = document.querySelectorAll('main section[id] h2');
+    if (tocList && headings.length) {
+      headings.forEach(function(h) {
+        var sectionId = h.closest('section[id]').id;
+        var a = document.createElement('a');
+        a.href = '#' + sectionId;
+        a.textContent = h.textContent.trim();
+        tocList.appendChild(a);
+      });
+    }
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th, tr:first-child th')).map(function(th) {
+        return th.innerText.trim().replace(/[\r\n\t ]+/g, ' ');
+      });
+      if (!headers.length) return;
+      table.classList.add('ro-resp-table');
+      table.querySelectorAll('tr').forEach(function(tr) {
+        if (tr.querySelector('th')) return;
+        Array.from(tr.children).forEach(function(td, idx) {
+          if (td.tagName === 'TD' && !td.getAttribute('data-label') && headers[idx]) {
+            td.setAttribute('data-label', headers[idx]);
+          }
+        });
+      });
+    });
+    document.querySelectorAll('main img, .container img, .wrap img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        openLightbox(img.src, img.alt);
+      });
+    });
+  })();
+</script>
+<script src="site-nav.js"></script>
+</body>
+</html>

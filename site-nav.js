@@ -10,6 +10,12 @@
       shortName: '操縱組',
       items: [
         {
+          href: 'structural-and-regulatory-genes.html',
+          title: '結構基因與調節基因的定義',
+          tag: '基因表現',
+          keywords: '結構基因 構造基因 調節基因 調控基因 structural gene regulatory gene regulator gene 操縱組 操作子 乳糖 lacI lacZ lacY lacA Campbell Pierce Becker'
+        },
+        {
           href: 'prokaryotic-eukaryotic-gene-regulation.html',
           title: '原核與真核的基因表現調控',
           tag: '基因表現',
