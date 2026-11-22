@@ -47,7 +47,7 @@
         },
         {
           href: 'why-eukaryotes-lack-operons.html',
-          title: '為什麼真核細胞幾乎沒有操縱組？',
+          title: '為什麼原核有操縱組，真核卻幾乎沒有？',
           tag: '原真演化',
           keywords: '真核細胞 操縱組 演化 古菌 單順反子 多順反子 5端帽 強化子 調控元件 組合調控 細胞記憶 基因水平轉移 遺傳漂變 核膜 內含子 線蟲 C. elegans 反式剪接 trans-splicing Weaver Alberts Lodish Campbell Prescott Evolution Stryer Freeman'
         }
