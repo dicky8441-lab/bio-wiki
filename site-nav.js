@@ -10,6 +10,12 @@
       shortName: '操縱組',
       items: [
         {
+          href: 'prokaryotic-eukaryotic-gene-regulation.html',
+          title: '原核與真核的基因表現調控',
+          tag: '基因表現',
+          keywords: '原核 真核 基因表現調控 細菌 大腸桿菌 轉錄 轉譯 RNA 加工 mRNA 壽命 穩定性 轉譯起始效率 選擇式剪接 Campbell Freeman Alberts'
+        },
+        {
           href: 'prokaryote-gene-regulation-types.html',
           title: '原核基因調控怎麼分類？（正負 × 持續／誘導／抑制）',
           tag: '總分類',
