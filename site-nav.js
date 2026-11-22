@@ -10,6 +10,12 @@
       shortName: '操縱組',
       items: [
         {
+          href: 'operon-deep-questions-cap-fadr-effectors.html',
+          title: '原核操縱組進階三問：CAP 結合位、FadR 正抑制與誘導物／輔抑制物邊界',
+          tag: '進階三問',
+          keywords: 'CAP CRP 結合位 activator-binding site 操作子 operator FadR fabA fabB fabHDG 可抑制型正調控 positive repressible acyl-CoA 誘導物 inducer 受質 IPTG 異乳糖 自誘導物 AHL SOS LexA RecA 輔抑制物 corepressor Fur DtxR Fe2+ MetJ SAM PurR Brock Brooker Pierce Goldberg Campbell Weaver Lehninger 高中7版 翰林'
+        },
+        {
           href: 'trp-operon-corepressor.html',
           title: '色胺酸操縱組的抑制蛋白為何平時無活性？（共同抑制物解析）',
           tag: 'trp 操縱組',

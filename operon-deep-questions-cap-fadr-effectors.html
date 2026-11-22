@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>原核操縱組進階三問：CAP 結合位、FadR 正抑制與誘導物／輔抑制物邊界｜Bio-Wiki</title>
+<style>
+  :root {
+    --bg-primary: #181614;
+    --bg-pillbar: #24201c;
+    --bg-card: #211e1a;
+    --bg-quote: #26221e;
+    --bg-tag: #2d2823;
+    --text-primary: #f6f1ea;
+    --text-body: #ddd5ca;
+    --text-secondary: #bfb5a8;
+    --text-muted: #9a8e80;
+    --primary: #5bc0eb;
+    --primary-light: rgba(91, 192, 235, 0.12);
+    --primary-border: rgba(91, 192, 235, 0.32);
+    --accent: #f4c44e;
+    --accent-light: rgba(244, 196, 78, 0.12);
+    --border-color: rgba(246, 241, 234, 0.09);
+    --border-strong: rgba(246, 241, 234, 0.16);
+    --taupe-fab: rgba(104, 91, 78, 0.94);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+  }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+    font-size: 18px;
+    line-height: 1.78;
+    padding: 0 0 96px 0;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .ro-header-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-primary) 70%, rgba(24, 22, 20, 0));
+  }
+
+  .ro-pillbar {
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .ro-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .ro-menu-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    border: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .ro-menu-circle span {
+    display: block;
+    width: 16px;
+    height: 2.2px;
+    background: #181614;
+    border-radius: 2px;
+  }
+
+  .ro-brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .ro-brand-zh {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-brand-en {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .ro-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .ro-theme-btn {
+    appearance: none;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    transition: transform 0.15s ease;
+  }
+
+  .ro-theme-btn:active {
+    transform: scale(0.96);
+  }
+
+  .ro-cta-pill {
+    appearance: none;
+    background: var(--accent);
+    color: #1c1814;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .container {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 22px 0;
+  }
+
+  header.hero {
+    text-align: left;
+    margin-bottom: 32px;
+    padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .badge-bar {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .badge-primary {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary-border);
+  }
+
+  .badge-accent {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: rgba(244, 196, 78, 0.32);
+  }
+
+  h1 {
+    font-size: clamp(26px, 6.2vw, 34px);
+    line-height: 1.38;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    margin: 6px 0 14px;
+    text-align: left;
+  }
+
+  .subtitle {
+    font-size: 17px;
+    line-height: 1.68;
+    color: var(--text-muted);
+    margin: 0;
+    text-align: left;
+  }
+
+  section {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: 42px;
+    scroll-margin-top: 84px;
+  }
+
+  h2 {
+    font-size: clamp(22px, 5.2vw, 27px);
+    line-height: 1.45;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 44px 0 18px;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+  }
+
+  h2 .sec-num {
+    color: var(--accent);
+    margin-right: 6px;
+    font-weight: 800;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 30px 0 12px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--text-body);
+    margin-bottom: 18px;
+  }
+
+  ul, ol {
+    margin: 0 0 22px 24px;
+    color: var(--text-body);
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+    color: var(--text-body);
+  }
+
+  strong, b {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.9em;
+    background: var(--bg-tag);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 6px;
+  }
+
+  main a:not(.ro-cta-pill):not(.ro-brand-link) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  .tldr-card, .source-card, .callout, .callout-warn, .boundary, .glossary-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 20px 20px;
+    margin: 20px 0;
+  }
+
+  .tldr-card {
+    border-left: 4px solid var(--accent);
+  }
+
+  .callout {
+    border-left: 4px solid var(--primary);
+  }
+
+  .callout-warn {
+    border-left: 4px solid var(--accent);
+  }
+
+  .boundary {
+    border-left: 4px solid var(--text-muted);
+  }
+
+  .tldr-label, .callout-title, .source-book {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .glossary-item {
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .glossary-item:last-child {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+
+  .glossary-term {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+
+  .source-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .source-loc {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .quote-block {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .quote-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quote-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .quote-en {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 10px 0 12px;
+    word-break: break-word;
+  }
+
+  body.hide-en .quote-en {
+    display: none;
+  }
+
+  .quote-tw {
+    font-size: 17.5px;
+    line-height: 1.78;
+    color: var(--text-body);
+  }
+
+  .quote-tw strong {
+    color: var(--accent);
+    background: rgba(244, 196, 78, 0.10);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+
+  .toggle-en-btn {
+    appearance: none;
+    background: var(--bg-tag);
+    color: var(--accent);
+    border: 1px solid rgba(244, 196, 78, 0.35);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  .figure-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .figure-title {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding: 12px 16px 4px;
+  }
+
+  .figure-img-wrap {
+    padding: 14px;
+    background: #f8fafc;
+    cursor: zoom-in;
+  }
+
+  main img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 8px;
+    margin: 0 auto;
+    cursor: zoom-in;
+  }
+
+  .zoom-hint {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    padding: 6px 4px 0;
+  }
+
+  .figure-caption {
+    font-size: 15px;
+    line-height: 1.68;
+    color: var(--text-secondary);
+    padding: 10px 16px 8px;
+  }
+
+  .figure-caption ul {
+    margin: 8px 0 6px 20px;
+    color: var(--text-secondary);
+  }
+
+  .figure-caption li {
+    font-size: 15px;
+    line-height: 1.66;
+    margin-bottom: 6px;
+    color: var(--text-secondary);
+  }
+
+  .figure-caption-en {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 0 16px 14px;
+  }
+
+  .table-wrap {
+    width: 100%;
+    margin: 18px 0 26px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 16px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-body);
+  }
+
+  th {
+    background: var(--bg-pillbar);
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  tr.highlight-tr td {
+    background: rgba(244, 196, 78, 0.12);
+    color: var(--text-primary);
+  }
+
+  @media (max-width: 680px) {
+    table.ro-resp-table,
+    table.ro-resp-table thead,
+    table.ro-resp-table tbody,
+    table.ro-resp-table th,
+    table.ro-resp-table td,
+    table.ro-resp-table tr {
+      display: block;
+      width: 100%;
+    }
+
+    table.ro-resp-table thead {
+      display: none;
+    }
+
+    table.ro-resp-table tr {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    table.ro-resp-table td {
+      border: none;
+      border-bottom: 1px dashed var(--border-color);
+      padding: 8px 0;
+      text-align: left !important;
+    }
+
+    table.ro-resp-table td:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    table.ro-resp-table td:first-child {
+      padding-top: 0;
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    table.ro-resp-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+  }
+
+  .ro-bottom-toc {
+    position: fixed;
+    left: 16px;
+    bottom: 20px;
+    z-index: 95;
+    background: var(--taupe-fab);
+    color: #f6f1ea;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 9px 15px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: calc(100vw - 88px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-up-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 95;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--taupe-fab);
+    color: #f6f1ea;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    text-decoration: none !important;
+  }
+
+  .ro-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ro-drawer-backdrop.open {
+    display: flex;
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-backdrop {
+      align-items: center;
+      padding: 24px;
+    }
+  }
+
+  .ro-drawer-panel {
+    width: 100%;
+    max-width: 500px;
+    max-height: 78vh;
+    overflow-y: auto;
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px 20px 0 0;
+    padding: 18px 18px 28px;
+    box-shadow: var(--shadow);
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-panel {
+      border-radius: 18px;
+    }
+  }
+
+  .ro-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .ro-drawer-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .ro-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .ro-drawer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ro-drawer-list a {
+    display: block;
+    text-decoration: none !important;
+    color: var(--text-body) !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .ro-drawer-list a.active {
+    color: #181614 !important;
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 800;
+  }
+
+  .ro-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    cursor: zoom-out;
+  }
+
+  .ro-lightbox.open {
+    display: flex;
+  }
+
+  .ro-lightbox img {
+    max-width: 100%;
+    max-height: 92vh;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  html[data-theme="light"] {
+    --bg-primary: #fbf8f4;
+    --bg-pillbar: #f0ece3;
+    --bg-card: #ffffff;
+    --bg-quote: #f6f2ea;
+    --bg-tag: #eee8dd;
+    --text-primary: #2f2820;
+    --text-body: #4a3f35;
+    --text-secondary: #5e5043;
+    --text-muted: #756656;
+    --primary: #1b9dce;
+    --primary-light: rgba(27, 157, 206, 0.12);
+    --primary-border: rgba(27, 157, 206, 0.35);
+    --accent: #b86b11;
+    --accent-light: rgba(244, 196, 78, 0.22);
+    --border-color: rgba(74, 63, 53, 0.12);
+    --border-strong: rgba(74, 63, 53, 0.22);
+    --taupe-fab: rgba(105, 90, 74, 0.94);
+    --shadow: 0 4px 18px rgba(47, 40, 32, 0.08);
+    color-scheme: light;
+  }
+
+  html[data-theme="light"] .ro-header-wrap {
+    background: linear-gradient(180deg, #fbf8f4 70%, rgba(251, 248, 244, 0));
+  }
+
+  html[data-theme="light"] .ro-menu-circle {
+    background: #67c3eb;
+    color: #1f1a15;
+  }
+
+  html[data-theme="light"] .ro-cta-pill {
+    background: #f6c84c;
+    color: #2f2820;
+  }
+
+  html[data-theme="light"] .ro-bottom-toc,
+  html[data-theme="light"] .ro-up-btn {
+    color: #ffffff;
+  }
+
+  html[data-theme="light"] .ro-drawer-list a.active {
+    background: #f6c84c;
+    border-color: #e0b034;
+    color: #2f2820 !important;
+  }
+
+  html[data-theme="light"] .quote-tw strong {
+    color: #8c4d06;
+    background: rgba(246, 200, 76, 0.28);
+  }
+</style>
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem('biowiki-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+
+<!-- Reading Outpost Dark Style Shell -->
+<div class="ro-header-wrap" id="top">
+  <div class="ro-pillbar">
+    <div class="ro-brand-group">
+      <button class="ro-menu-circle" type="button" aria-label="開啟專題選單" onclick="roOpenDrawer('roSiteDrawer')">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="ro-brand-link" href="index.html">
+        <span class="ro-brand-zh">400X 的日常切片</span>
+        <span class="ro-brand-en">BIO-WIKI EVIDENCE</span>
+      </a>
+    </div>
+    <div class="ro-top-actions">
+      <button class="ro-theme-btn" id="roThemeBtn" type="button" onclick="roToggleTheme()">☀️ 亮色</button>
+      <button class="ro-cta-pill" type="button" onclick="roOpenDrawer('roSiteDrawer')">專題目錄</button>
+    </div>
+  </div>
+</div>
+
+<!-- Site-Wide Topics Drawer -->
+<div class="ro-drawer-backdrop" id="roSiteDrawer" onclick="if(event.target===this)roCloseDrawer('roSiteDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📚 Bio-Wiki 全站專題</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roSiteDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list">
+      <a href="index.html">🏠 首頁：主題分類總覽</a>
+      <a href="prokaryote-gene-regulation-types.html">19. 原核基因調控分類：正／負 vs. 持續／誘導／抑制</a>
+      <a href="operon-deep-questions-cap-fadr-effectors.html" class="active">28. 原核操縱組進階三問：CAP 結合位、FadR 正抑制與誘導物／輔抑制物邊界</a>
+    </div>
+  </div>
+</div>
+
+<!-- In-Page TOC Drawer -->
+<div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📑 本篇段落導覽</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list" id="roTocList" onclick="roCloseDrawer('roTocDrawer')"></div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="ro-lightbox" id="roLightbox" onclick="this.classList.remove('open')">
+  <img id="roLightboxImg" src="" alt="">
+</div>
+
+<main class="container">
+
+  <header class="hero">
+    <div class="badge-bar">
+      <span class="badge badge-accent">高中易讀版 · 進階三問考證</span>
+      <span class="badge badge-primary">分子生物學 × 微生物學 × 遺傳學</span>
+      <span class="badge">多部正典＋高中 7 版＋PubMed · 5 張原圖</span>
+    </div>
+    <h1>原核操縱組進階三問：CAP 會結合在操作子嗎？FadR 算可抑制型正調控嗎？誘導物／輔抑制物一定是受質／產物嗎？</h1>
+    <p class="subtitle">延續 2 × 2 原核基因調控矩陣，一次釐清高中課堂與教甄備課最常追問的三個關鍵邊界：活化蛋白結合位與操作子的差別、真實原核世界的「可抑制型正調控」經典案例 FadR，以及為何「受質誘導／產物抑制」只是常見趨勢而非定義上限。</p>
+  </header>
+
+  <!-- TL;DR -->
+  <div class="tldr-card">
+    <div class="tldr-label">💡 一句話先講結論（三個問題一次解答）</div>
+    <ul>
+      <li><strong>問題一（CAP 會結合在操作子嗎？）</strong>：<strong>不會！</strong>在 <em>lac</em> 操縱組中，操作子專供 <strong>LacI 抑制蛋白</strong>結合；CAP（CRP）結合在<strong>啟動子上游專屬的 CAP 結合位（活化蛋白結合位）</strong>，用來接觸 RNA 聚合酶 α 次單元並協助招募。</li>
+      <li><strong>問題二（FadR 算可抑制型正調控嗎？）</strong>：<strong>是的！</strong>大腸桿菌 <strong>FadR</strong> 剛合成即具活性，平常結合在脂肪酸合成基因（<em>fabA</em>、<em>fabB</em>、<em>fabHDG</em>）啟動子 −40 處主動活化轉錄；當長鏈醯基輔酶 A 結合後使 FadR 脫離 DNA、關閉合成，是真實原核界公認的<strong>可抑制型正調控</strong>經典實例。</li>
+      <li><strong>問題三（誘導物一定是受質、輔抑制物一定是產物嗎？）</strong>：<strong>都不一定！</strong>「受質誘導、產物抑制」是代謝操縱組的常見趨勢，但誘導物可以是異構物（異乳糖）、無法代謝的類似物（IPTG）、純訊號分子（cAMP、自誘導物 AHL）或 DNA 損傷訊號（SOS）；輔抑制物也可以是無機金屬離子（Fe²⁺）、下游衍生物（SAM）或游離嘌呤鹼基。</li>
+    </ul>
+  </div>
+
+  <!-- Section 1: CAP vs Operator -->
+  <section id="sec-cap">
+    <h2><span class="sec-num">01</span> 問題一：CAP（CRP）會結合在操作子上嗎？</h2>
+    <p><strong>不會。</strong>把大腸桿菌 <em>lac</em> 操縱組由上游（5′）到下游（3′）攤開，各調控元件的排列順序非常清楚：</p>
+    <p><code>lacI</code>（獨立調節基因） → <strong>CAP 結合位</strong>（啟動子上游，長約 22 bp） → <strong><em>lac</em> 啟動子</strong>（RNA 聚合酶結合處） → <strong><em>lac</em> 主操作子 O₁</strong>（啟動子下游端、重疊轉錄起始點 +1） → 結構基因 <code>lacZ</code>、<code>lacY</code>、<code>lacA</code></p>
+
+    <ul>
+      <li><strong>主／輔操作子都是抑制蛋白的專屬位置</strong>：分子生物學（Weaver 5e Ch. 7）顯示 <em>lac</em> 其實有 3 個操作子（主操作子 O₁ 在 +11，輔助操作子 O₃ 在 −82、O₂ 在 +412），供 LacI 四聚體將 DNA 拉成環以強化抑制；三者全都是 LacI 抑制蛋白的結合處，不是 CAP 的結合位。</li>
+      <li><strong>空間功能決定位置</strong>：操作子 O₁ 卡在啟動子尾端與轉錄起始點上，適合抑制蛋白擋住 RNA 聚合酶；CAP–cAMP 則需要站在<strong>啟動子上游側</strong>，使 DNA 彎曲並直接接觸 RNA 聚合酶的 α 次單元，讓轉錄起始效率提高約 50 倍。</li>
+      <li><strong>課本細微用語差異（為何偶有混淆）</strong>：部分課本（Freeman 8e、Raven 13e、Brooker 8e Ch. 14、Becker 10e、Weaver 5e）稱其為「啟動子上游的 CAP 結合位」，部分課本（Campbell 13e、Pierce 7e、Klug 12e）畫在「啟動子最上游端」；此外，Brooker 8e 在 Ch. 12 對比真核強化子時曾順帶廣義統稱細菌調控位為操作子，但在 Ch. 14 講 <em>lac</em> 實例時仍把 <strong>CAP 位</strong>與<strong>操作子（<em>lacO</em>）</strong>明確分開。微生物學正典 <strong>Brock 15e Ch. 6</strong> 與遺傳學正典 <strong>Pierce 7e Ch. 16</strong> 則直接明言：操作子是抑制蛋白結合位，活化蛋白通常結合在操作子以外的<strong>活化蛋白結合位</strong>。</li>
+    </ul>
+
+    <div class="figure-card">
+      <div class="figure-title">圖一 · Goldberg 遺傳學 7e Fig. 18.16｜直接看懂 DNA 序列座標：CRP–cAMP 結合位 vs. RNA 聚合酶啟動子 vs. 操作子</div>
+      <div class="figure-img-wrap" onclick="openLightbox('images/Goldberg7e_Fig18-16_operator_promoter_overlap.png','Goldberg 7e Fig 18.16 showing CRP-cAMP binding site, RNA polymerase binding site, and lac operator')">
+        <img src="images/Goldberg7e_Fig18-16_operator_promoter_overlap.png" alt="Goldberg Genetics 7e Figure 18.16 DNA sequence map showing CRP-cAMP binding site upstream of RNA polymerase binding site and operator">
+        <span class="zoom-hint">🔍 點擊放大檢視原圖</span>
+      </div>
+      <div class="figure-caption"><strong>看圖重點</strong>：由左到右一眼看清——綠色框是 <strong>CRP–cAMP 結合位</strong>（位於最上游），中間是 RNA 聚合酶結合的啟動子區，右側紫色框才是與轉錄起始點重疊的 <strong><em>lac</em> 操作子</strong>（LacI 抑制蛋白結合處）。兩者在序列座標上完全分開。</div>
+      <div class="figure-caption-en">Source: Goldberg et al., Genetics: From Genes to Genomes, 7th ed., Ch. 18, Figure 18.16.</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖二 · Brock 微生物學 15e Fig. 6.8｜活化蛋白結合的是「活化蛋白結合位」，而非操作子</div>
+      <div class="figure-img-wrap" onclick="openLightbox('images/Brock15e_Fig6-8_maltose_activator_binding_site.png','Brock 15e Fig 6.8 maltose activator protein binding to activator-binding site')">
+        <img src="images/Brock15e_Fig6-8_maltose_activator_binding_site.png" alt="Brock Biology of Microorganisms 15e Figure 6.8 showing positive control with activator-binding site upstream of promoter">
+        <span class="zoom-hint">🔍 點擊放大檢視原圖</span>
+      </div>
+      <div class="figure-caption"><strong>看圖重點</strong>：Brock 15e 以麥芽糖操縱組示範正調控，並於正文刻意對照圖 6.6／6.7 與圖 6.8——抑制蛋白結合的區域叫<strong>操作子（operator）</strong>，活化蛋白結合在啟動子上游的區域叫<strong>活化蛋白結合位（activator-binding site）</strong>，但受其控制的整組基因依然稱為操縱組。</div>
+      <div class="figure-caption-en">Source: Madigan et al., Brock Biology of Microorganisms, 15th ed., Ch. 6, Figure 6.8 (Positive control of enzyme induction in the maltose operon).</div>
+    </div>
+
+    <h3>高中 7 版教材對照（選修生物Ⅰ基因表現調控章節）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>版本</th>
+            <th>是否提及 CAP 與正調控</th>
+            <th>差異或可能誤讀分析</th>
+            <th>查找狀態（本機副本）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>三民</strong>（113 新版）</td>
+            <td>未提及 CAP，僅教負調控</td>
+            <td>明確定義操作子為「抑制蛋白辨識並結合的一段 DNA 序列」。</td>
+            <td>選生Ⅰ 課本／手冊 Ch. 4（已核讀）</td>
+          </tr>
+          <tr>
+            <td><strong>全華</strong>（2023 課本／舊手冊）</td>
+            <td>未提及 CAP，僅教負調控</td>
+            <td>操作子明定為抑制蛋白結合位置。</td>
+            <td>選生Ⅰ 課本／備課用書 Ch. 5（已核讀）</td>
+          </tr>
+          <tr>
+            <td><strong>南一</strong>（108）</td>
+            <td>無法確認</td>
+            <td>—</td>
+            <td>選生Ⅰ Ch. 2 PDF 字型加密亂碼，尚未 OCR 核讀</td>
+          </tr>
+          <tr>
+            <td><strong>康熹</strong>（103 課綱）</td>
+            <td>未提及 CAP，僅教負調控</td>
+            <td>屬較舊課綱，僅介紹乳糖操縱組負調控。</td>
+            <td>選修生物(下) Ch. 11（已核讀）</td>
+          </tr>
+          <tr>
+            <td><strong>泰宇</strong>（115 新版）</td>
+            <td>未提及 CAP，僅教 <em>lac</em>／<em>trp</em> 負調控</td>
+            <td>操作子明定為抑制蛋白附著序列。</td>
+            <td>選生Ⅰ 115 課本／授課指引 Ch. 3（已核讀）</td>
+          </tr>
+          <tr class="highlight-tr">
+            <td><strong>翰林</strong>（113 選一手冊）</td>
+            <td><strong>7 版中唯一在教師手冊補充 CAP 正調控</strong>（PDF p.46–47，非課本主文）</td>
+            <td>⚠️ <strong>最易引起誤解處</strong>：p.46 總論先將操縱組調控全歸在「調節蛋白與操作子的互動」下，p.47 又只寫「唯有 CAP 先與 RNA 聚合酶接合」而省略 DNA 上 CAP 結合位，容易讓師生誤以為 CAP 結合在操作子或不結合 DNA。</td>
+            <td>翰林 113 選一手冊 Ch. 4 p.46–47（已核讀）</td>
+          </tr>
+          <tr>
+            <td><strong>龍騰</strong>（108 課本與手冊）</td>
+            <td>未提及 CAP，僅教負調控</td>
+            <td>操作子位於啟動子與結構基因之間，為抑制蛋白結合位置。</td>
+            <td>選生Ⅰ 課本／手冊 Ch. 4（已核讀）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 2: FadR Positive Repressible Control -->
+  <section id="sec-fadr">
+    <h2><span class="sec-num">02</span> 問題二：FadR 活化蛋白算「可抑制型正調控」嗎？</h2>
+    <p><strong>是的！</strong>我們在 <a href="prokaryote-gene-regulation-types.html">原核基因調控分類</a> 盤點全部 12 套已翻譯普生與遺傳學課本時發現，第 4 象限「<strong>可抑制型正調控（positive repressible control）</strong>」在基礎教科書中只有理論圖解（Brooker 8e 圖 14.2d）與假設題；而一線微生物分子生物學中，大腸桿菌 <strong>FadR</strong> 對不飽和脂肪酸合成基因（<strong><em>fabA</em>、<em>fabB</em></strong> 與 <strong><em>fabHDG</em> 操縱組</strong>）的調控，正是這個象限貨真價實的經典代表！</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>判斷軸線</th>
+            <th>FadR 對 <em>fabA</em>／<em>fabB</em>／<em>fabHDG</em> 的實際行為</th>
+            <th>歸類結論</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-tr">
+            <td><strong>正調控 vs. 負調控</strong></td>
+            <td>FadR 結合在 <em>fabA</em>、<em>fabB</em> 啟動子上游側（約 <strong>−40</strong> 處），直接協助招募 RNA 聚合酶並大幅提高轉錄。把 <em>fadR</em> 基因敲除後，<em>fabA</em>／<em>fabB</em> 表現量大幅下降。</td>
+            <td><strong>正調控</strong><br>（FadR 是活化蛋白）</td>
+          </tr>
+          <tr>
+            <td><strong>可誘導 vs. 可抑制</strong></td>
+            <td>環境缺乏外來長鏈脂肪酸時，剛合成的 <strong>FadR 本身即具活性</strong>並結合 DNA，讓合成基因<strong>預設開啟</strong>；當外來長鏈脂肪酸充足、在細胞內轉化為<strong>長鏈醯基輔酶 A（long-chain acyl-CoA）</strong>後，該分子作為小分子<strong>抑制物（inhibitor）</strong>結合 FadR 引發構形改變，使 <strong>FadR 從 DNA 脫離</strong>，失去活化而關閉轉錄。</td>
+            <td><strong>可抑制型</strong><br>（預設開啟 → 效應物來後關閉）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">🔄 FadR 的精妙設計：一顆蛋白同步切換「合成」與「分解」</div>
+      <p style="margin-bottom:0;">同一顆 <strong>FadR</strong> 蛋白感測同一個訊號分子（<strong>長鏈醯基輔酶 A</strong>），卻同時管理兩套相反路徑：<br>
+      • <strong>脂肪酸分解（β-氧化，<em>fadL</em>、<em>fadD</em>、<em>fadBA</em> 等 <em>fad</em> 調節組）</strong>：FadR 擔任<strong>抑制蛋白</strong> → <strong>可誘導型負調控</strong>（外來脂肪酸多 → 長鏈醯基輔酶 A 讓 FadR 脫離操作子 → <strong>打開分解</strong>）。<br>
+      • <strong>不飽和脂肪酸合成（<em>fabA</em>、<em>fabB</em>、<em>fabHDG</em>）</strong>：FadR 擔任<strong>活化蛋白</strong> → <strong>可抑制型正調控</strong>（外來脂肪酸多 → 長鏈醯基輔酶 A 讓 FadR 脫離啟動子 −40 處 → <strong>關閉合成</strong>）。<br><br>
+      只要單一訊號讓 FadR 同時從兩邊 DNA 鬆手，細菌就一鍵完成「關掉合成、打開分解」的代謝切換。</p>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖三 · Brooker 遺傳學 8e Fig. 14.2｜對照面板 (d) 理論模型：FadR–<em>fabA</em>／<em>fabB</em> 正好補齊真實原核實例</div>
+      <div class="figure-img-wrap" onclick="openLightbox('images/Brooker8e_Fig14-2_four_regulation_types.png','Brooker 8e Fig 14.2 four regulation types including panel d positive repressible')">
+        <img src="images/Brooker8e_Fig14-2_four_regulation_types.png" alt="Brooker Genetics 8e Figure 14.2 showing panel d activator protein plus inhibitor representing positive repressible control">
+        <span class="zoom-hint">🔍 點擊放大檢視原圖</span>
+      </div>
+      <div class="figure-caption"><strong>看圖重點</strong>：對照最下方 <strong>(d) 活化蛋白＋抑制物（可抑制型正調控）</strong>——無效應物時活化蛋白結合 DNA 維持轉錄；一旦小分子抑制物結合，活化蛋白變構脫離 DNA、轉錄關閉。大腸桿菌 FadR（活化蛋白）與長鏈醯基輔酶 A（抑制物）對 <em>fabA</em>、<em>fabB</em>、<em>fabHDG</em> 的調控機制與圖 (d) 完全吻合。</div>
+      <div class="figure-caption-en">Source: Brooker, Genetics: Analysis and Principles, 8th ed., Ch. 14, Figure 14.2 (Binding sites on regulatory transcription factors).</div>
+    </div>
+
+    <div class="callout-warn">
+      <div class="callout-title">⚠️ 精確註記：單基因／調節組 vs. 多基因操縱組</div>
+      <p style="margin-bottom:0;"><em>fabA</em> 與 <em>fabB</em> 各自是獨立轉錄的單基因，合屬 <strong>FadR 調節組（regulon）</strong>，而非排成單一多基因操縱組。若要舉嚴格意義上的<strong>多基因操縱組</strong>，My 等人（2013）已證實大腸桿菌脂肪酸合成操縱組 <strong><em>fabHDG</em></strong> 同樣由 FadR 直接正向活化並在長鏈醯基輔酶 A 存在時關閉。</p>
+    </div>
+
+    <h3>FadR 主要一線文獻依據（外部 PubMed 已核對，本機 Vault 查無）</h3>
+    <ul>
+      <li>Henry MF, Cronan JE Jr. (1991), <em>J. Mol. Biol.</em> — 首次指出 FadR 同時活化脂肪酸合成並抑制分解（<a href="https://pubmed.ncbi.nlm.nih.gov/1722255/" target="_blank" rel="noopener">PMID 1722255</a>）。</li>
+      <li>Henry MF, Cronan JE Jr. (1992), <em>Cell</em> — <em>A new mechanism of transcriptional regulation: release of an activator triggered by small molecule binding</em>，確立 FadR 結合 <em>fabA</em> 啟動子 −40 位點並受長鏈醯基輔酶 A 釋放（<a href="https://pubmed.ncbi.nlm.nih.gov/1505031/" target="_blank" rel="noopener">PMID 1505031</a>）。</li>
+      <li>Campbell JW, Cronan JE Jr. (2001), <em>J. Bacteriol.</em> — 證實 FadR 直接正向調控 <em>fabB</em>（<a href="https://pubmed.ncbi.nlm.nih.gov/11566998/" target="_blank" rel="noopener">PMID 11566998</a>）。</li>
+      <li>van Aalten DMF, DiRusso CC, Knudsen J. (2001), <em>EMBO J.</em> — 解析 FadR–DNA 與 FadR–myristoyl-CoA 晶體結構，揭露別構釋放機制（<a href="https://pubmed.ncbi.nlm.nih.gov/11296236/" target="_blank" rel="noopener">PMID 11296236</a>）。</li>
+      <li>My L et al. (2013), <em>J. Bacteriol.</em> — 證實 <em>fabHDG</em> 操縱組由 FadR 直接活化（<a href="https://pubmed.ncbi.nlm.nih.gov/23772072/" target="_blank" rel="noopener">PMID 23772072</a>）。</li>
+    </ul>
+  </section>
+
+  <!-- Section 3: Inducer != Substrate, Corepressor != Product -->
+  <section id="sec-effectors">
+    <h2><span class="sec-num">03</span> 問題三：誘導物一定是受質嗎？輔抑制物一定是產物嗎？</h2>
+    <p><strong>兩個都不一定！</strong>「受質誘導、產物抑制」是分解代謝與合成代謝操縱組的<strong>常見演化趨勢</strong>（Brooker 8e Ch. 14），但並非誘導物與輔抑制物的必要條件。<strong>Brock 微生物學 15e Ch. 6</strong> 明確提醒：「並非所有誘導物與輔抑制物都是相關酵素真正的受質或最終產物。」</p>
+
+    <h3>A. 可誘導型調控：非（原始）受質誘導的 4 種情況</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>例外類型</th>
+            <th>代表實例</th>
+            <th>為什麼不是（原始）受質？</th>
+            <th>來源歸屬</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-tr">
+            <td><strong>1. 受質的異構物或活化衍生物</strong></td>
+            <td>• <strong><em>lac</em> 操縱組</strong>：異乳糖（allolactose）<br>• <strong><em>fad</em> 調節組</strong>：長鏈醯基輔酶 A</td>
+            <td>乳糖才是 β-半乳糖苷酶受質，但真正結合 LacI 的是副反應轉成的<strong>異構物異乳糖</strong>；<em>fad</em> 系統亦須先將脂肪酸活化成醯基輔酶 A 才觸發 FadR 脫離。</td>
+            <td>Vault（Brock 15e、Brooker 8e、Stryer 10e）；FadR 為外部文獻</td>
+          </tr>
+          <tr>
+            <td><strong>2. 結構類似物（不可代謝誘導物）</strong></td>
+            <td><strong>IPTG</strong>（異丙基硫代半乳糖苷）</td>
+            <td>實驗室常用於強效誘導 <em>lac</em> 操縱組，但 <strong>β-半乳糖苷酶完全無法水解它</strong>（不是受質）。</td>
+            <td>Vault（Lehninger 8e、Brock 15e）</td>
+          </tr>
+          <tr class="highlight-tr">
+            <td><strong>3. 純訊號分子</strong></td>
+            <td>• <strong>cAMP</strong>（活化 CAP，Brooker 8e 稱其為誘導物）<br>• <strong>自誘導物 AHL</strong>（費氏弧菌群體感應，活化 LuxR 開啟 <em>luxICDABE</em> 發光）</td>
+            <td>cAMP 反映低葡萄糖、AHL 反映細菌族群密度，兩者都<strong>不是</strong>下游酵素（乳糖分解酶或螢光素酶）的分解受質。</td>
+            <td>Vault（Brooker 8e、Goldberg 7e、Brock 15e）</td>
+          </tr>
+          <tr>
+            <td><strong>4. 壓力訊號誘導（無小分子受質）</strong></td>
+            <td><strong>大腸桿菌 SOS 調節組</strong>（RecA–LexA）</td>
+            <td>嚴重 DNA 損傷產生的<strong>單股 DNA 缺口</strong>活化 RecA，促使 LexA 抑制蛋白自催化切割，一口氣誘導近 60 個 DNA 修復基因。</td>
+            <td>Vault（Lehninger 8e）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖四 · Goldberg 遺傳學 7e Fig. 18.34｜非受質誘導物代表：費氏弧菌群體感應自誘導物（AHL）</div>
+      <div class="figure-img-wrap" onclick="openLightbox('images/Goldberg7e_Fig18-34_vibrio_quorum_sensing_autoinducer.png','Goldberg 7e Fig 18.34 Vibrio fischeri quorum sensing autoinducer LuxR')">
+        <img src="images/Goldberg7e_Fig18-34_vibrio_quorum_sensing_autoinducer.png" alt="Goldberg Genetics 7e Figure 18.34 showing Vibrio fischeri LuxI autoinducer binding LuxR to activate luxICDABE bioluminescence operon">
+        <span class="zoom-hint">🔍 點擊放大檢視原圖</span>
+      </div>
+      <div class="figure-caption"><strong>看圖重點</strong>：費氏弧菌的 LuxI 酵素合成小分子「自誘導物」釋放到環境中；當菌數夠高、自誘導物回流累積超過閾值，便與活化蛋白 LuxR 結合，開啟 <em>luxICDABE</em> 發光操縱組。這個誘導物是<strong>族群密度通訊訊號</strong>，不是要被分解的營養受質。</div>
+      <div class="figure-caption-en">Source: Goldberg et al., Genetics: From Genes to Genomes, 7th ed., Ch. 18, Figure 18.34 (Quorum sensing controls Vibrio fischeri bioluminescence).</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖五 · Lehninger 生化 8e Fig. 28-21｜無小分子受質的誘導系統：SOS 反應（ssDNA＋RecA 切割 LexA）</div>
+      <div class="figure-img-wrap" onclick="openLightbox('images/Lehninger8e_Fig28-21_sos_response_reca_lexa.png','Lehninger 8e Fig 28-21 SOS response RecA and LexA cleavage')">
+        <img src="images/Lehninger8e_Fig28-21_sos_response_reca_lexa.png" alt="Lehninger Principles of Biochemistry 8e Figure 28-21 showing DNA damage activating RecA to trigger LexA repressor autocleavage and SOS gene induction">
+        <span class="zoom-hint">🔍 點擊放大檢視原圖</span>
+      </div>
+      <div class="figure-caption"><strong>看圖重點</strong>：正常情況下 LexA 抑制蛋白結合在各修復基因的操作子上（關閉）；當細胞遭遇嚴重 DNA 損傷、出現單股 DNA 缺口，結合在單股缺口的 RecA 會促使 LexA 自我切割失活，直接解除抑制並誘導近 60 個修復基因。</div>
+      <div class="figure-caption-en">Source: Nelson &amp; Cox, Lehninger Principles of Biochemistry, 8th ed., Ch. 28, Figure 28-21 (The SOS response in E. coli).</div>
+    </div>
+
+    <h3>B. 可抑制型調控：非該路徑「合成產物」擔任輔抑制物的 3 種情況</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>例外類型</th>
+            <th>代表實例</th>
+            <th>為什麼不是該路徑合成的「產物」？</th>
+            <th>來源歸屬</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-tr">
+            <td><strong>1. 環境輸入的無機金屬離子</strong></td>
+            <td>• <strong>大腸桿菌 Fur</strong>：<strong>Fe²⁺</strong> 關閉鐵吸收與鐵載體基因<br>• <strong>白喉棒狀桿菌 DtxR</strong>：<strong>Fe²⁺</strong> 抑制<strong>白喉毒素基因（<em>tox</em>）</strong>與鐵吸收基因</td>
+            <td>Fe²⁺ 是從環境攝取的無機離子，並非酵素合成的代謝產物；白喉毒素更與鐵合成無關。</td>
+            <td>外部 PubMed 文獻（Vault 查無原核 Fur／DtxR）：<a href="https://pubmed.ncbi.nlm.nih.gov/8444893/" target="_blank" rel="noopener">PMID 8444893</a>、<a href="https://pubmed.ncbi.nlm.nih.gov/41745905/" target="_blank" rel="noopener">PMID 41745905</a></td>
+          </tr>
+          <tr>
+            <td><strong>2. 下游活化衍生物或游離鹼基指標</strong></td>
+            <td>• <strong>大腸桿菌 MetJ（<em>met</em> 調節組）</strong>：輔抑制物為 <strong>S-腺苷甲硫胺酸（SAM）</strong>（非甲硫胺酸本身）<br>• <strong>大腸桿菌 PurR（<em>pur</em> 嘌呤從頭合成）</strong>：輔抑制物為<strong>鳥糞嘌呤或次黃嘌呤</strong></td>
+            <td>細胞改用更能反映代謝庫存的下游活化態衍生物（SAM）或游離鹼基作為關機訊號，而非直接感測途徑終產物。</td>
+            <td>外部 PubMed 文獻（Vault 查無）：<a href="https://pubmed.ncbi.nlm.nih.gov/20196619/" target="_blank" rel="noopener">PMID 20196619</a>、<a href="https://pubmed.ncbi.nlm.nih.gov/9278422/" target="_blank" rel="noopener">PMID 9278422</a></td>
+          </tr>
+          <tr>
+            <td><strong>3. 結構類似物</strong></td>
+            <td>與終產物結構相似的外來或人工化合物</td>
+            <td>只要能結合抑制蛋白並誘發構形改變即可關閉轉錄，未必由該路徑合成。</td>
+            <td>Vault（Brock 15e Ch. 6）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout-warn">
+      <div class="callout-title">⚠️ 兩條常被混在一起的術語界線</div>
+      <p style="margin-bottom:0;"><strong>1. 輔抑制物（corepressor）vs. 抑制物（inhibitor）</strong>：在原核 2 × 2 嚴格分類（Brooker 8e Ch. 14）中，「輔抑制物」專指結合<strong>抑制蛋白</strong>使其結合 DNA 的小分子（負抑制，如色胺酸）；結合<strong>活化蛋白</strong>使其脫離 DNA 的小分子（正抑制，如 FadR 的長鏈醯基輔酶 A）稱為<strong>抑制物（inhibitor）</strong>。<br><br>
+      <strong>2. 真核細胞的 corepressor</strong>：在真核基因調控中，corepressor（如 NCoR、SMRT、Sin3）是指被抑制因子招募來去乙醯化組蛋白的<strong>大型蛋白質複合體</strong>，完全不是小分子代謝產物。</p>
+    </div>
+  </section>
+
+  <!-- Section 4: Verbatim Bilingual Quotes -->
+  <section id="sec-quotes">
+    <h2><span class="sec-num">04</span> 代表性原文正典中英原句對照</h2>
+    <p>以下精選本機譯本庫中針對「活化蛋白結合位 vs. 操作子」與「誘導物／輔抑制物不限受質／產物」的原文關鍵段落。</p>
+    <button class="toggle-en-btn" id="toggleEnBtn" type="button" onclick="toggleEnglish()">精簡：隱藏英文原文</button>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">1. 《Brock Biology of Microorganisms》15e — 活化蛋白結合位≠操作子；效應物≠必為受質或終產物</span>
+        <span class="source-loc">Ch. 6 微生物調控系統</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">活化蛋白結合位 vs. 操作子</div>
+        <div class="quote-en">"However, the region on the DNA that is the binding site of the activator is not called an operator (Figures 6.6 and 6.7) but instead an activator-binding site (Figure 6.8). Nevertheless, the genes controlled by this activator-binding site are still called an operon."</div>
+        <div class="quote-tw">活化蛋白在 DNA 上結合的位置稱為<strong>活化蛋白結合位</strong>（圖 6.8）。<strong>操作子則是抑制蛋白的結合位</strong>（圖 6.6 和 6.7）。由活化蛋白結合位控制的這群基因，仍稱為操縱組。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">誘導物與輔抑制物未必是真正的受質或最終產物</div>
+        <div class="quote-en">"These substances, which are typically small molecules, are collectively called effectors. Interestingly, not all inducers and corepressors are actual substrates or end products of the enzymes involved. For example, structural analogs may induce or repress even though they are not substrates of the enzyme. Isopropylthiogalactoside (IPTG), for instance, is an inducer of β-galactosidase even though IPTG cannot be hydrolyzed by this enzyme."</div>
+        <div class="quote-tw">這類物質統稱效應物，通常是小分子。<strong>並非所有誘導物與輔抑制物都是相關酵素真正的受質或最終產物。</strong>與受質結構相似的化合物，有時也能誘導或抑制。例如，異丙基硫代半乳糖苷（IPTG）是 β-半乳糖苷酶的誘導物，即使這種酵素無法水解 IPTG。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">2. 《Pierce Genetics》7e ＆ 《Brooker Genetics》8e — CAP 位與操作子分列；代謝歸類是普遍趨勢</span>
+        <span class="source-loc">Pierce Ch. 16 · Brooker Ch. 14</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Pierce 7e：正調控活化蛋白通常結合在操作子以外的位點</div>
+        <div class="quote-en">"In positive transcriptional control, the regulatory protein involved is an activator: it binds to DNA (usually at a site other than the operator) and stimulates transcription. For example, in the case of the lac operon, catabolite activator protein (CAP) binds to the promoter..."</div>
+        <div class="quote-tw">在正調控轉錄中，所涉及的調控蛋白是一個<strong>活化蛋白</strong>：它結合到 DNA（<strong>通常在操作子以外的位點</strong>），並刺激轉錄。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Brooker 8e：並列區分 CAP 位與操作子；分解可誘導／合成可抑制屬普遍趨勢</div>
+        <div class="quote-en">"The CAP site and the operator site are regulatory elements—short segments of DNA that are recognized by regulatory transcription factors (RTFs). ... The CAP site is a DNA sequence recognized by an activator protein called catabolite activator protein (CAP)."<br><br>"When the genes in an operon code proteins that function in the catabolism, or breakdown, of a substance, they are usually regulated in an inducible manner. The substance to be broken down or a related compound often acts as the inducer."</div>
+        <div class="quote-tw"><strong>CAP 位與操作子位置</strong>都是調控元件……CAP 位由活化蛋白 CAP 辨識；操作子位置則提供 <em>lac</em> 抑制蛋白的結合位。<br>當操縱組編碼分解代謝蛋白質時，<strong>通常</strong>以可誘導方式調控，被分解的物質或相關化合物<strong>往往</strong>作為誘導物。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">3. 《Campbell Biology》13e ＆ 《Weaver Molecular Biology》5e — CAP 結合位在啟動子上游端</span>
+        <span class="source-loc">Campbell Ch. 18 · Weaver Ch. 7</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Campbell 13e（圖 18.5）＆ Weaver 5e（第 7 章）</div>
+        <div class="quote-en">"RNA polymerase has high affinity for the lac promoter only when CRP is bound to a DNA site at the upstream end of the promoter."<br><br>"Later molecular biological work, which we will discuss shortly, has shown that the CAP–cAMP binding site (the activator-binding site) lies just upstream of the promoter."</div>
+        <div class="quote-tw">只有當 CRP 結合於<strong>啟動子上游端的某個 DNA 位點</strong>時，RNA 聚合酶才對 <em>lac</em> 啟動子有高親和力。<br>後來的分子生物學研究顯示，<strong>CAP–cAMP 結合位（即活化位）就位於啟動子的上游</strong>。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">4. 《Lehninger Biochemistry》8e ＆ 《Goldberg Genetics》7e — IPTG、SOS 反應與群體感應自誘導物</span>
+        <span class="source-loc">Lehninger Ch. 28 · Goldberg Ch. 18</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Lehninger 8e：IPTG 非受質誘導物＆SOS 損傷訊號誘導</div>
+        <div class="quote-en">"Several β-galactosides structurally related to allolactose are inducers of the lac operon but are not substrates for β-galactosidase; others are substrates but not inducers. One particularly effective and nonmetabolizable inducer of the lac operon that is often used experimentally is isopropylthiogalactoside (IPTG)."<br><br>"The RecA protein provides the functional link between the biological signal (DNA damage) and induction of the SOS genes. Heavy DNA damage leads to numerous single-strand gaps in the DNA, and only RecA that is bound to single-stranded DNA can facilitate cleavage of the LexA repressor..."</div>
+        <div class="quote-tw">數種在構造上與異乳糖相關的 β-半乳糖苷，<strong>可誘導 <em>lac</em> 操縱組，卻不是 β-半乳糖苷酶的受質</strong>（如 IPTG）。<br>嚴重 DNA 損傷會在 DNA 產生許多單股缺口，只有結合單股 DNA 的 RecA 才能促進 LexA 抑制蛋白切割並誘導 SOS 反應。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Goldberg 7e：費氏弧菌自誘導物結合 LuxR 活化發光基因</div>
+        <div class="quote-en">"LuxR protein is a transcriptional activator protein needed for transcription of luxICDABE mRNA. LuxI protein is an enzyme that generates a molecule called an autoinducer. The autoinducer is an effector—it binds to LuxR and enables it to bind DNA."</div>
+        <div class="quote-tw">LuxR 是轉錄活化蛋白，為 <em>luxICDABE</em> mRNA 轉錄所需；LuxI 產生稱為<strong>自誘導物</strong>的效應物，與 LuxR 結合後使其能結合 DNA。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Teaching & Boundary -->
+  <section id="sec-teaching">
+    <h2><span class="sec-num">05</span> 高中課堂怎麼說、延伸閱讀與查證邊界</h2>
+
+    <div class="callout">
+      <div class="callout-title">🎯 高中課堂可直接口述的精準說法</div>
+      <p style="margin-bottom:0;"><strong>談 CAP 位置</strong>：「在 <em>lac</em> 操縱組上，<strong>操作子</strong>位在啟動子後面，專門給<strong>抑制蛋白（LacI）</strong>結合來擋路；低葡萄糖時協助加速轉錄的 <strong>CAP–cAMP</strong> 是活化蛋白，結合在<strong>啟動子前面（上游）專屬的 CAP 結合位</strong>，幫忙把 RNA 聚合酶拉穩。」<br><br>
+      <strong>談受質誘導／產物抑制</strong>：「高中用乳糖（受質誘導）和色胺酸（產物抑制）幫助大家抓到細胞節能邏輯，但這只是最常見的趨勢；誘導物與輔抑制物的本質是<strong>訊號效應物</strong>，現實中也可以是異構物、通訊分子、金屬離子或 DNA 損傷訊號。」</p>
+    </div>
+
+    <h3>延伸閱讀（本站操縱組系列專題）</h3>
+    <ul>
+      <li>回到完整 2 × 2 矩陣與 13 套課本總盤點（含課堂教學投影片）：<a href="prokaryote-gene-regulation-types.html">原核細胞的基因表現調控分類：正／負調控 vs. 持續型／可誘導型／可抑制型</a>。</li>
+      <li>釐清操作子會不會被轉錄或轉譯：<a href="operator-transcription-translation.html">操作子會不會被轉錄與轉譯？（基因 vs. 子）</a>。</li>
+      <li>看 <em>trp</em> 操縱組為何「共同抑制物」不是去抑制「抑制蛋白」：<a href="trp-operon-corepressor.html">色胺酸操縱組的抑制蛋白為何平時無活性？</a>。</li>
+      <li>看大腸桿菌如何同時偵測葡萄糖與乳糖：<a href="lac-operon-sugar-sensing.html">大腸桿菌如何感測葡萄糖與乳糖？</a>。</li>
+    </ul>
+
+    <div class="boundary">
+      <div class="callout-title">📌 本機資料庫（Vault）與外部文獻查證邊界聲明</div>
+      <p style="margin-bottom:0;"><strong>本機 Vault 查有</strong>：CAP 結合位≠操作子、IPTG 非受質誘導物、異乳糖異構物誘導、群體感應自誘導物 AHL、SOS 損傷訊號誘導，皆已由 <code>400_Knowledge/_原文書翻譯/</code> 多部正典逐字核對；高中 7 版備課用書均已逐一查找本機副本（其中南一 108 選生Ⅰ Ch. 2 PDF 因字型加密無法純文字抽取，尚未 OCR 核讀）。<br>
+      <strong>外部一線文獻補充（本機 Vault 查無）</strong>：大腸桿菌 <strong>FadR</strong>（<em>fabA</em>、<em>fabB</em>、<em>fabHDG</em> 可抑制型正調控）與非產物輔抑制物實例（<strong>Fur</strong>／Fe²⁺、<strong>DtxR</strong>／Fe²⁺、<strong>MetJ</strong>／SAM、<strong>PurR</strong>／鳥糞嘌呤或次黃嘌呤）均於全 Vault 檢索為 0 筆，係依 PubMed 同儕審查原始論文補充並標明 PMID 連結。</p>
+    </div>
+  </section>
+
+  <footer>
+    Bio-Wiki 概念考證庫 · 繁體中文與審定名詞遵循臺灣教育部規範 · 原文書與圖片引自 Ze-Agent Vault 正式譯本，一線案例核對自 PubMed
+  </footer>
+</main>
+
+<!-- Reading Outpost Bottom Bar & Script -->
+<button class="ro-bottom-toc" type="button" onclick="roOpenDrawer('roTocDrawer')">📑 本篇段落導覽</button>
+<a class="ro-up-btn" href="#top" aria-label="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<script>
+  function roToggleTheme() {
+    var root = document.documentElement;
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('biowiki-theme', next); } catch (e) {}
+    roUpdateThemeBtn();
+  }
+  function roUpdateThemeBtn() {
+    var btn = document.getElementById('roThemeBtn');
+    if (!btn) return;
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.innerHTML = isLight ? '🌙 深色' : '☀️ 亮色';
+    btn.setAttribute('aria-label', isLight ? '切換為深色閱讀模式' : '切換為亮色閱讀模式');
+  }
+  roUpdateThemeBtn();
+  function roOpenDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('open');
+  }
+  function roCloseDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  }
+  function openLightbox(src, alt) {
+    var lb = document.getElementById('roLightbox');
+    var img = document.getElementById('roLightboxImg');
+    if (lb && img) {
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.add('open');
+    }
+  }
+  function toggleEnglish() {
+    document.body.classList.toggle('hide-en');
+    var btn = document.getElementById('toggleEnBtn');
+    if (btn) {
+      btn.textContent = document.body.classList.contains('hide-en')
+        ? '完整：顯示英文原文'
+        : '精簡：隱藏英文原文';
+    }
+  }
+  (function initReadingOutpostShell() {
+    var tocList = document.getElementById('roTocList');
+    var headings = document.querySelectorAll('h2');
+    if (tocList && headings.length) {
+      headings.forEach(function(h, idx) {
+        if (!h.id) h.id = 'ro-sec-' + (idx + 1);
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent.trim();
+        tocList.appendChild(a);
+      });
+    }
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th, tr:first-child th')).map(function(th) {
+        return th.innerText.trim().replace(/[\r\n\t ]+/g, ' ');
+      });
+      if (!headers.length) return;
+      table.classList.add('ro-resp-table');
+      table.querySelectorAll('tr').forEach(function(tr) {
+        if (tr.querySelector('th')) return;
+        Array.from(tr.children).forEach(function(td, idx) {
+          if (td.tagName === 'TD' && !td.getAttribute('data-label') && headers[idx]) {
+            td.setAttribute('data-label', headers[idx]);
+          }
+        });
+      });
+    });
+    document.querySelectorAll('main img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        openLightbox(img.src, img.alt);
+      });
+    });
+  })();
+</script>
+<script src="site-nav.js"></script>
+</body>
+</html>

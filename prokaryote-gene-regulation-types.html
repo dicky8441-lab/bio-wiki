@@ -489,6 +489,18 @@
     padding: 10px 16px 8px;
   }
 
+  .figure-caption ul {
+    margin: 8px 0 6px 20px;
+    color: var(--text-secondary);
+  }
+
+  .figure-caption li {
+    font-size: 15px;
+    line-height: 1.66;
+    margin-bottom: 6px;
+    color: var(--text-secondary);
+  }
+
   .figure-caption-en {
     font-size: 13.5px;
     color: var(--text-muted);
@@ -883,7 +895,7 @@
     <div class="badge-bar">
       <span class="badge badge-accent">高中易讀版 · 13 套課本總盤點</span>
       <span class="badge badge-primary">分子生物學 × 遺傳學</span>
-      <span class="badge">普生 8 套＋遺傳 5 套 · 5 張原圖</span>
+      <span class="badge">普生 8 套＋遺傳 5 套 · 5 張原圖＋教學投影片</span>
     </div>
     <h1>原核細胞的基因表現調控分類：正／負調控 vs. 持續型／可誘導型／可抑制型</h1>
     <p class="subtitle">為什麼「乳糖誘導打開 <em>lac</em> 操縱組」其實屬於負調控，而不是正調控？一次拆解兩條獨立分類軸線、遺傳學 2 × 2 四種交叉調控型態，並完整對照 8 套普通生物學與 5 套遺傳學原文正典。</p>
@@ -1007,7 +1019,30 @@
   <!-- Section 3: 2x2 Matrix (Genetics) -->
   <section id="sec-matrix">
     <h2><span class="sec-num">03</span> 進階大統整：2 × 2 四種交叉調控型態（遺傳學核心框架）</h2>
-    <p>把軸線一（可誘導／可抑制）與軸線二（負調控／正調控）交叉，就能推導出遺傳學最完整的 <strong>4 種轉錄調控型態</strong>。在本次盤點的全部 13 套課本中，<strong>Brooker 遺傳學 8e（圖 14.2）</strong>是唯一用一張總覽圖把四種機制完整畫出來的正典！</p>
+    <p>把軸線一（可誘導／可抑制）與軸線二（負調控／正調控）交叉，就能推導出遺傳學最完整的 <strong>4 種轉錄調控型態</strong>。在本次盤點的全部 13 套課本中，<strong>Brooker 遺傳學 8e（圖 14.2）</strong>是唯一用一張總覽圖把四種機制完整畫出來的正典！下面先搭配課堂教學投影片看懂「如何反推調控蛋白平時有無活性」，再對照 13 套課本的效應物與實例盤點。</p>
+
+    <div class="figure-card">
+      <div class="figure-title">教學投影片 · 〈原核生物的基因組成——操縱組〉（第 7 頁）｜構造骨架與 2 × 2 調控邏輯反推</div>
+      <div class="figure-img-wrap" onclick="openLightbox('images/user-slide_prokaryote-operon-regulation-matrix.jpg','使用者提供的教學投影片：原核生物的基因組成——操縱組')">
+        <img src="images/user-slide_prokaryote-operon-regulation-matrix.jpg" alt="使用者提供的教學投影片：原核生物的基因組成——操縱組，包含調節基因、啟動子、操作子、結構基因示意圖與正向負向調控對照可誘導型與抑制型的 2x2 表格">
+        <span class="zoom-hint">🔍 點擊放大檢視投影片</span>
+      </div>
+      <div class="figure-caption">
+        <strong>讀圖重點：</strong>
+        <ul>
+          <li><strong>操縱組本體 vs. 調節基因位置</strong>：操縱組由<strong>啟動子（promoter）＋操作子（operator）＋一組功能相關的結構基因（gene a、gene b、gene c）</strong>組成；左側的<strong>調節基因</strong>經轉錄、轉譯產生調控蛋白，它位於操縱組之外、擁有獨立啟動子，實際位置不一定緊鄰操縱組（右上角亦註明「未按比例繪製，也未按實際位置繪製」）。</li>
+          <li><strong>正向調控的結合位置補充</strong>：上方示意圖呈現操縱組的基本骨架；在<strong>正向調控</strong>中，活化蛋白多半結合於啟動子上游或附近的<strong>活化蛋白結合位</strong>（如 CAP 結合位）以協助 RNA 聚合酶結合，而非狹義阻擋轉錄的操作子。</li>
+          <li><strong>由 2 × 2 表直接反推調控蛋白平時活性（免死背）</strong>：
+            <br>• <strong>正向調控 × 可誘導型</strong>（促進＋平常不表現）→ 調控蛋白平常<strong>不具活性</strong>。
+            <br>• <strong>正向調控 × 可抑制型</strong>（促進＋平常有表現）→ 調控蛋白平時<strong>具活性</strong>。
+            <br>• <strong>負向調控 × 可誘導型</strong>（抑制＋平常不表現）→ 調控蛋白平時<strong>具活性</strong>，例：<strong>乳糖操縱組（受質誘導）</strong>（分子層次直接結合 LacI 抑制蛋白的誘導物為乳糖異構物<strong>異乳糖</strong>）。
+            <br>• <strong>負向調控 × 可抑制型</strong>（抑制＋平常有表現）→ 調控蛋白平時<strong>不具活性</strong>，例：<strong>色胺酸操縱組（產物抑制）</strong>（終產物色胺酸擔任輔抑制物活化 TrpR）。
+          </li>
+          <li><strong>審定名詞對照</strong>：表格右欄簡稱「抑制型」，對齊臺灣教育部《生命科學名詞》與大學課本標準譯名為「<strong>可抑制型（repressible）</strong>」；「正向／負向調控」即「正調控／負調控」。</li>
+        </ul>
+      </div>
+      <div class="figure-caption-en">Source: 使用者提供課堂教學投影片〈原核生物的基因組成——操縱組〉（第 7 頁）。</div>
+    </div>
 
     <div class="table-wrap">
       <table>
@@ -1047,7 +1082,7 @@
             <td>活化蛋白<br>剛合成即<strong>有活性</strong>（結合 DNA）</td>
             <td><strong>抑制物（inhibitor）</strong>結合活化蛋白 → 變構<strong>脫離 DNA</strong></td>
             <td>預設<strong>開啟</strong> → <strong>關閉</strong></td>
-            <td>⚠️ <strong>重要查證發現：12 套已譯本正文與習題均未舉任何真實原核操縱組為例</strong>；僅以理論圖解與假設題演練（Brooker 8e 圖 14.2d / C3 / C5、Pierce 7e TPS Q3、Klug 12e 題 20 假設 <em>tis</em> 操縱組）。</td>
+            <td>⚠️ <strong>重要查證發現：12 套已譯本正文與習題均未舉任何真實原核操縱組為例</strong>；僅以理論圖解與假設題演練（Brooker 8e 圖 14.2d / C3 / C5、Pierce 7e TPS Q3、Klug 12e 題 20 假設 <em>tis</em> 操縱組）。<br>💡 <strong>一線文獻補充</strong>：大腸桿菌 <strong>FadR</strong> 活化不飽和脂肪酸合成基因（<em>fabA</em>、<em>fabB</em>、<em>fabHDG</em>）並受長鏈醯基輔酶 A 釋放即屬此型，詳見 <a href="operon-deep-questions-cap-fadr-effectors.html#sec-fadr">原核操縱組進階三問</a>。</td>
           </tr>
         </tbody>
       </table>
@@ -1302,16 +1337,20 @@
     <h2><span class="sec-num">06</span> 高中課堂秒懂口訣、教甄反推題技巧與查證邊界</h2>
 
     <div class="callout">
-      <div class="callout-title">🎯 學生一試就靈的兩步判斷口訣</div>
+      <div class="callout-title">🎯 學生一試就靈的三步判斷口訣</div>
       <p style="margin-bottom:0;"><strong>第一步：先問「這組基因平常是開還是關？」</strong><br>
       永遠開且不看環境 → <strong>持續型</strong>；平常關、有分子來才開 → <strong>可誘導型</strong>；平常開、成品夠多才關 → <strong>可抑制型</strong>。<br><br>
       <strong>第二步：再問「如果把調控蛋白基因整個敲除（破壞），這組基因會怎樣？」</strong><br>
-      調控蛋白不見了，基因反而<strong>永遠打開（煞車壞掉）</strong> → 原本是<strong>負調控</strong>！<br>
-      調控蛋白不見了，基因從此<strong>永遠打不開（油門壞掉）</strong> → 原本是<strong>正調控</strong>！</p>
+      調控蛋白不見了，基因反而<strong>永遠打開（原本負責抑制）</strong> → <strong>負調控</strong>！<br>
+      調控蛋白不見了，基因從此<strong>永遠打不開（原本負責促進）</strong> → <strong>正調控</strong>！<br><br>
+      <strong>第三步：對應投影片 2 × 2 表，直接反推「調控蛋白剛合成時有沒有活性」</strong><br>
+      調控功能與平常表現<strong>一致</strong>（促進＋平常有表現，或抑制＋平常不表現） → 調控蛋白<strong>平時具活性</strong>。<br>
+      調控功能與平常表現<strong>相反</strong>（促進＋平常不表現，或抑制＋平常有表現） → 調控蛋白<strong>平時不具活性</strong>。</p>
     </div>
 
     <h3>延伸閱讀（本站操縱組系列專題）</h3>
     <ul>
+      <li><strong>進階三問延伸考證</strong>：CAP 會結合在操作子上嗎？FadR 算「可抑制型正調控」嗎？誘導物一定是受質、輔抑制物一定是產物嗎？請見 <a href="operon-deep-questions-cap-fadr-effectors.html">原核操縱組進階三問：CAP 結合位、FadR 正抑制與誘導物／輔抑制物邊界</a>。</li>
       <li>想看 <em>lac</em> 操縱組如何用「基礎漏轉錄＋PTS 磷酸接力＋誘導物排除」同時偵測乳糖與葡萄糖，請見 <a href="lac-operon-sugar-sensing.html">大腸桿菌如何感測葡萄糖與乳糖？</a>。</li>
       <li>想看普通生物學 8 套課本各自怎麼交代「第一批乳糖如何進入細胞」，請見 <a href="genbio-8books-lac-detection.html">普生 8 套課本怎麼講大腸桿菌偵測乳糖？</a>。</li>
       <li>想看沒有 DNA 定序的年代如何靠部分二倍體推論出整套 <em>lac</em> 調控線路，請見 <a href="operon-inference-pierce.html">Pierce 操縱組推論過程</a>。</li>
