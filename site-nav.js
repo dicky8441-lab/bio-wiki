@@ -10,6 +10,12 @@
       shortName: '操縱組',
       items: [
         {
+          href: 'trp-operon-corepressor.html',
+          title: '色胺酸操縱組的抑制蛋白為何平時無活性？（共同抑制物解析）',
+          tag: 'trp 操縱組',
+          keywords: '色胺酸操縱組 trp operon tryptophan 共同抑制物 輔抑制物 corepressor co-repressor 抑制蛋白 repressor 脫輔抑制物 aporepressor trpR 可抑制型 負調控 鏡像 乳糖操縱組 Campbell Freeman Raven Solomon Alberts Becker Weaver Cox Brooker Prescott'
+        },
+        {
           href: 'structural-and-regulatory-genes.html',
           title: '結構基因與調節基因的定義',
           tag: '基因表現',

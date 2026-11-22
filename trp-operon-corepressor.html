@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<title>色胺酸操縱組的抑制蛋白為何平時無活性？「共同抑制物」究竟是抑制誰？｜Bio-Wiki</title>
+<meta name="description" content="一次拆解色胺酸操縱組（trp operon）兩大高頻迷思：抑制蛋白未結合色胺酸時原本就無活性，結合色胺酸後才被活化；共同抑制物（輔抑制物 corepressor）不是抑制抑制蛋白，而是與抑制蛋白合作抑制轉錄。">
+<style>
+  :root {
+    --bg-primary: #181614;
+    --bg-pillbar: #24201c;
+    --bg-card: #211e1a;
+    --bg-quote: #26221e;
+    --bg-tag: #2d2823;
+    --text-primary: #f6f1ea;
+    --text-body: #ddd5ca;
+    --text-secondary: #bfb5a8;
+    --text-muted: #9a8e80;
+    --primary: #5bc0eb;
+    --primary-light: rgba(91, 192, 235, 0.12);
+    --primary-border: rgba(91, 192, 235, 0.32);
+    --accent: #f4c44e;
+    --accent-light: rgba(244, 196, 78, 0.12);
+    --border-color: rgba(246, 241, 234, 0.09);
+    --border-strong: rgba(246, 241, 234, 0.16);
+    --taupe-fab: rgba(104, 91, 78, 0.94);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+  }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+    font-size: 18px;
+    line-height: 1.78;
+    padding: 0 0 96px 0;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Reading Outpost Signature Top Pill Header */
+  .ro-header-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-primary) 70%, rgba(24, 22, 20, 0));
+  }
+
+  .ro-pillbar {
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .ro-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .ro-menu-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    border: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .ro-menu-circle span {
+    display: block;
+    width: 16px;
+    height: 2.2px;
+    background: #181614;
+    border-radius: 2px;
+  }
+
+  .ro-brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .ro-brand-zh {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-brand-en {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .ro-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .ro-theme-btn {
+    appearance: none;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    transition: transform 0.15s ease;
+  }
+
+  .ro-theme-btn:active {
+    transform: scale(0.96);
+  }
+
+  .ro-cta-pill {
+    appearance: none;
+    background: var(--accent);
+    color: #1c1814;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  /* Main Reading Column */
+  .container {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 22px 0;
+  }
+
+  /* Hero */
+  header.hero {
+    text-align: left;
+    margin-bottom: 32px;
+    padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .badge-bar {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .badge-primary {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary-border);
+  }
+
+  .badge-accent {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: rgba(244, 196, 78, 0.32);
+  }
+
+  h1 {
+    font-size: clamp(26px, 6.2vw, 34px);
+    line-height: 1.38;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    margin: 6px 0 14px;
+    text-align: left;
+  }
+
+  .subtitle {
+    font-size: 17px;
+    line-height: 1.68;
+    color: var(--text-muted);
+    margin: 0;
+    text-align: left;
+  }
+
+  /* Unboxed Article Flow */
+  section {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: 42px;
+    scroll-margin-top: 84px;
+  }
+
+  h2 {
+    font-size: clamp(22px, 5.2vw, 27px);
+    line-height: 1.45;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 44px 0 18px;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+  }
+
+  h2 .sec-num {
+    color: var(--accent);
+    margin-right: 6px;
+    font-weight: 800;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 30px 0 12px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--text-body);
+    margin-bottom: 18px;
+  }
+
+  ul, ol {
+    margin: 0 0 22px 24px;
+    color: var(--text-body);
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+    color: var(--text-body);
+  }
+
+  strong, b {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.9em;
+    background: var(--bg-tag);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 6px;
+  }
+
+  main a:not(.ro-cta-pill):not(.ro-brand-link) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  /* Soft Warm Sub-cards */
+  .tldr-card, .source-card, .callout, .callout-warn, .boundary, .glossary-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 20px 20px;
+    margin: 20px 0;
+  }
+
+  .tldr-card {
+    border-left: 4px solid var(--accent);
+  }
+
+  .callout {
+    border-left: 4px solid var(--primary);
+  }
+
+  .callout-warn {
+    border-left: 4px solid var(--accent);
+  }
+
+  .boundary {
+    border-left: 4px solid var(--text-muted);
+  }
+
+  .tldr-label, .callout-title, .source-book {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 14px;
+  }
+
+  .timeline-step {
+    padding-left: 4px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 12px;
+  }
+
+  .timeline-step:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .timeline-step-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .timeline-step-title span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    font-size: 14px;
+    font-weight: 800;
+    margin-right: 8px;
+  }
+
+  .glossary-item {
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .glossary-item:last-child {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+
+  .glossary-term {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+
+  /* Bilingual Textbook Quote Blocks */
+  .source-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .source-loc {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .quote-block {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .quote-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quote-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .quote-en {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 10px 0 12px;
+    word-break: break-word;
+  }
+
+  body.hide-en .quote-en {
+    display: none;
+  }
+
+  .quote-tw {
+    font-size: 17.5px;
+    line-height: 1.78;
+    color: var(--text-body);
+  }
+
+  .quote-tw strong {
+    color: var(--accent);
+    background: rgba(244, 196, 78, 0.10);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+
+  .toggle-en-btn {
+    appearance: none;
+    background: var(--bg-tag);
+    color: var(--accent);
+    border: 1px solid rgba(244, 196, 78, 0.35);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  /* Figures & Images */
+  .figure-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .figure-title {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding: 12px 16px 4px;
+  }
+
+  .figure-img-wrap {
+    padding: 14px;
+    background: #f8fafc;
+    cursor: zoom-in;
+  }
+
+  main img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 8px;
+    margin: 0 auto;
+    cursor: zoom-in;
+  }
+
+  .zoom-hint {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    padding: 6px 4px 0;
+  }
+
+  .figure-caption {
+    font-size: 15px;
+    line-height: 1.68;
+    color: var(--text-secondary);
+    padding: 10px 16px 8px;
+  }
+
+  .figure-caption-en {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 0 16px 14px;
+  }
+
+  /* Responsive Tables -> Stacked Mobile Cards (< 680px) */
+  .table-wrap {
+    width: 100%;
+    margin: 18px 0 26px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 16px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-body);
+  }
+
+  th {
+    background: var(--bg-pillbar);
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  @media (max-width: 680px) {
+    table.ro-resp-table,
+    table.ro-resp-table thead,
+    table.ro-resp-table tbody,
+    table.ro-resp-table th,
+    table.ro-resp-table td,
+    table.ro-resp-table tr {
+      display: block;
+      width: 100%;
+    }
+
+    table.ro-resp-table thead {
+      display: none;
+    }
+
+    table.ro-resp-table tr {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    table.ro-resp-table td {
+      border: none;
+      border-bottom: 1px dashed var(--border-color);
+      padding: 8px 0;
+      text-align: left !important;
+    }
+
+    table.ro-resp-table td:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    table.ro-resp-table td:first-child {
+      padding-top: 0;
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    table.ro-resp-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+  }
+
+  /* Bottom Floating TOC & Up Button */
+  .ro-bottom-toc {
+    position: fixed;
+    left: 16px;
+    bottom: 20px;
+    z-index: 95;
+    background: var(--taupe-fab);
+    color: #f6f1ea;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 9px 15px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: calc(100vw - 88px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-up-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 95;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--taupe-fab);
+    color: #f6f1ea;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    text-decoration: none !important;
+  }
+
+  /* Drawers & Lightbox */
+  .ro-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ro-drawer-backdrop.open {
+    display: flex;
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-backdrop {
+      align-items: center;
+      padding: 24px;
+    }
+  }
+
+  .ro-drawer-panel {
+    width: 100%;
+    max-width: 500px;
+    max-height: 78vh;
+    overflow-y: auto;
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px 20px 0 0;
+    padding: 18px 18px 28px;
+    box-shadow: var(--shadow);
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-panel {
+      border-radius: 18px;
+    }
+  }
+
+  .ro-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .ro-drawer-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .ro-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .ro-drawer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ro-drawer-list a {
+    display: block;
+    text-decoration: none !important;
+    color: var(--text-body) !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .ro-drawer-list a.active {
+    color: #181614 !important;
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 800;
+  }
+
+  .ro-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    cursor: zoom-out;
+  }
+
+  .ro-lightbox.open {
+    display: flex;
+  }
+
+  .ro-lightbox img {
+    max-width: 100%;
+    max-height: 92vh;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  /* Light Mode Overrides */
+  html[data-theme="light"] {
+    --bg-primary: #fbf8f4;
+    --bg-pillbar: #f0ece3;
+    --bg-card: #ffffff;
+    --bg-quote: #f6f2ea;
+    --bg-tag: #eee8dd;
+    --text-primary: #2f2820;
+    --text-body: #4a3f35;
+    --text-secondary: #5e5043;
+    --text-muted: #756656;
+    --primary: #1b9dce;
+    --primary-light: rgba(27, 157, 206, 0.12);
+    --primary-border: rgba(27, 157, 206, 0.35);
+    --accent: #b86b11;
+    --accent-light: rgba(244, 196, 78, 0.22);
+    --border-color: rgba(74, 63, 53, 0.12);
+    --border-strong: rgba(74, 63, 53, 0.22);
+    --taupe-fab: rgba(105, 90, 74, 0.94);
+    --shadow: 0 4px 18px rgba(47, 40, 32, 0.08);
+    color-scheme: light;
+  }
+
+  html[data-theme="light"] .ro-header-wrap {
+    background: linear-gradient(180deg, #fbf8f4 70%, rgba(251, 248, 244, 0));
+  }
+
+  html[data-theme="light"] .ro-menu-circle {
+    background: #67c3eb;
+    color: #1f1a15;
+  }
+
+  html[data-theme="light"] .ro-cta-pill {
+    background: #f6c84c;
+    color: #2f2820;
+  }
+
+  html[data-theme="light"] .ro-bottom-toc,
+  html[data-theme="light"] .ro-up-btn {
+    color: #ffffff;
+  }
+
+  html[data-theme="light"] .ro-drawer-list a.active {
+    background: #f6c84c;
+    border-color: #e0b034;
+    color: #2f2820 !important;
+  }
+
+  html[data-theme="light"] .quote-tw strong {
+    color: #8c4d06;
+    background: rgba(246, 200, 76, 0.28);
+  }
+</style>
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem('biowiki-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+
+<!-- Reading Outpost Dark Style Shell -->
+<div class="ro-header-wrap" id="top">
+  <div class="ro-pillbar">
+    <div class="ro-brand-group">
+      <button class="ro-menu-circle" type="button" aria-label="開啟專題選單" onclick="roOpenDrawer('roSiteDrawer')">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="ro-brand-link" href="index.html">
+        <span class="ro-brand-zh">400X 的日常切片</span>
+        <span class="ro-brand-en">BIO-WIKI EVIDENCE</span>
+      </a>
+    </div>
+    <div class="ro-top-actions">
+      <button class="ro-theme-btn" id="roThemeBtn" type="button" onclick="roToggleTheme()">☀️ 亮色</button>
+      <button class="ro-cta-pill" type="button" onclick="roOpenDrawer('roSiteDrawer')">專題目錄</button>
+    </div>
+  </div>
+</div>
+
+<!-- Site-Wide Topics Drawer (dynamically populated by site-nav.js) -->
+<div class="ro-drawer-backdrop" id="roSiteDrawer" onclick="if(event.target===this)roCloseDrawer('roSiteDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📚 Bio-Wiki 全站專題</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roSiteDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list">
+      <a href="index.html">🏠 首頁：主題分類總覽</a>
+      <a href="trp-operon-corepressor.html" class="active">色胺酸操縱組的抑制蛋白為何平時無活性？</a>
+    </div>
+  </div>
+</div>
+
+<!-- In-Page TOC Drawer -->
+<div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📑 本篇段落導覽</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list" id="roTocList" onclick="roCloseDrawer('roTocDrawer')"></div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="ro-lightbox" id="roLightbox" onclick="this.classList.remove('open')">
+  <img id="roLightboxImg" src="" alt="">
+</div>
+
+<main class="container">
+
+  <header class="hero">
+    <div class="badge-bar">
+      <span class="badge badge-primary">操縱組與原核基因調控</span>
+      <span class="badge badge-accent">高中易讀版</span>
+      <span class="badge">10 部正典 · 6 張原圖</span>
+    </div>
+    <h1>色胺酸操縱組的抑制蛋白為何平時無活性？「共同抑制物」究竟是抑制誰？</h1>
+    <p class="subtitle">一次解開色胺酸操縱組（<em>trp</em> operon）最容易搞反的兩個核心疑問：抑制蛋白剛合成時就無活性，結合色胺酸後才會被活化；而 <code>corepressor</code> 是與抑制蛋白合作去抑制轉錄，絕不是去抑制「抑制蛋白」。</p>
+  </header>
+
+  <!-- TL;DR Card -->
+  <div class="tldr-card">
+    <div class="tldr-label">⚡ 一句話先講結論</div>
+    <p><strong>色胺酸操縱組的抑制蛋白在未結合色胺酸時原本就無活性，唯有結合色胺酸改變構形後才會轉為有活性，並結合操作子阻擋 RNA 聚合酶轉錄。</strong>色胺酸稱為「共同抑制物（審定名詞：輔抑制物，corepressor）」，意思是<strong>與抑制蛋白共同合作去抑制操縱組的轉錄</strong>，而不是去抑制「抑制蛋白」本身。</p>
+    <div class="timeline">
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>1</span>抑制蛋白平時無活性 ≠ 結合色胺酸害它失活</div>
+        <p style="margin-bottom:0;">調節基因 <em>trpR</em> 剛表現出來的抑制蛋白（分子生物學稱脫輔抑制物 aporepressor）天生就抓不住操作子；結合色胺酸後，它才從<strong>無活性 → 有活性</strong>。</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>2</span><code>co-repressor</code>＝幫抑制蛋白一起抑制「轉錄」</div>
+        <p style="margin-bottom:0;">英文 <code>co-</code> 是「共同／輔助」的意思。色胺酸活化抑制蛋白後，兩者組成的複合體結合到操作子，物理上<strong>阻擋 RNA 聚合酶結合啟動子</strong>，直接關閉轉錄起始。</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>3</span>與 <em>lac</em> 操縱組互為「鏡像」，但兩者都是負調控</div>
+        <p style="margin-bottom:0;"><em>lac</em> 抑制蛋白預設有活性、結合異乳糖才失活；<em>trp</em> 抑制蛋白預設無活性、結合色胺酸才活化。因為兩者都靠活化態抑制蛋白關掉轉錄，所以同屬<strong>負調控</strong>。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 1: Glossary -->
+  <section id="glossary">
+    <h2><span class="sec-num">01</span>核心名詞先對齊（課本定義＋高中生易懂說明）</h2>
+    <div class="glossary-card">
+      <div class="glossary-item">
+        <div class="glossary-term">色胺酸操縱組（tryptophan operon, <em>trp</em> operon）</div>
+        <p><strong>課本定義</strong>：大腸桿菌 DNA 上由單一啟動子、操作子（位於啟動子內或與之重疊）、前導序列（<em>trpL</em>）與五個連續結構基因（<em>trpE</em>、<em>trpD</em>、<em>trpC</em>、<em>trpB</em>、<em>trpA</em>）組成的可抑制型操縱組，編碼由前驅物合成色胺酸所需的酵素。</p>
+        <p style="margin-bottom:0;"><strong>學生易懂說明</strong>：細菌用來自己合成胺基酸色胺酸的一整套基因開關。平常需要胺基酸時會開著持續轉錄；等到細胞內色胺酸夠多時再關掉，節省能量與原料。</p>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">抑制蛋白／脫輔抑制物（trp repressor / aporepressor）</div>
+        <p><strong>課本定義</strong>：由位於 <em>trp</em> 操縱組外、具自身啟動子的調節基因（<em>trpR</em>）持續低量表現的別構調控蛋白。剛合成且未結合色胺酸時為無活性形態（脫輔抑制物），對操作子親和力極低；唯有結合色胺酸改變立體構形後，才成為具 DNA 結合能力的活性抑制蛋白。</p>
+        <p style="margin-bottom:0;"><strong>學生易懂說明</strong>：負責關閉 <em>trp</em> 操縱組的蛋白質開關，但它單獨存在時無法卡上操作子；一定要先接上色胺酸，形狀才會調整成能緊密結合 DNA 的狀態。</p>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">共同抑制物／輔抑制物（corepressor / co-repressor）</div>
+        <p><strong>課本定義</strong>：結合至無活性抑制蛋白的別構位，使其構形改變並活化以結合操作子、關閉操縱組轉錄的小分子效應物。臺灣教育部《生命科學名詞》審定為「輔抑制物」，高中選修生物一課本普遍稱為「共同抑制物」或「協同抑制物」。</p>
+        <p style="margin-bottom:0;"><strong>學生易懂說明</strong>：<code>co-</code> 代表「共同／輔助」，也就是「跟抑制蛋白聯手去抑制基因轉錄的小分子」，絕不是「去抑制『抑制蛋白』的分子」。</p>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">可抑制型負調控（repressible negative control）</div>
+        <p><strong>課本定義</strong>：操縱組預設處於可轉錄狀態，當代謝終產物（輔抑制物）累積並活化抑制蛋白、使其結合操作子以關閉轉錄的負向調控機制，常見於胺基酸等合成代謝路徑。</p>
+        <p style="margin-bottom:0;"><strong>學生易懂說明</strong>：平常保持開啟、終產物夠多才關閉的負回饋機制；因為最終仍是靠活性抑制蛋白結合 DNA 來關掉轉錄，所以和乳糖操縱組一樣都屬於「負調控」。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Two Myths Debunked -->
+  <section id="debunk">
+    <h2><span class="sec-num">02</span>拆解兩個最常搞反的連環疑問</h2>
+
+    <h3>疑問一：抑制蛋白平時無活性，是因為結合了色胺酸嗎？</h3>
+    <p><strong>剛好相反。</strong>色胺酸操縱組的調節基因（<em>trpR</em>）轉錄、轉譯出來的抑制蛋白，在<strong>尚未結合色胺酸的游離狀態下，本來就是無活性的</strong>（Weaver 5e 特別將這狀態稱為脫輔抑制物 aporepressor）。此時它對操作子的親和力極低，結合不上去，所以 RNA 聚合酶可以自由結合啟動子並轉錄 <em>trpE</em>～<em>trpA</em>。</p>
+    <p>當細胞內色胺酸濃度上升，兩分子色胺酸會結合到抑制蛋白二聚體的別構位，把一對螺旋-轉折-螺旋（helix-turn-helix）結構中的兩段辨識螺旋向外撐開，使兩段螺旋之間的距離調整至約 3.4 nm，正好嵌進 DNA 相鄰的兩個大溝（Raven 13e 圖 16.7）。也就是說，<strong>色胺酸不是讓抑制蛋白失活，而是讓抑制蛋白從「無活性」轉變為「有活性」</strong>。</p>
+
+    <div class="callout-warn">
+      <div class="callout-title">⚠️ 為什麼會記反？因為把 <em>lac</em> 操縱組套到 <em>trp</em> 上了</div>
+      <p style="margin-bottom:0;">「小分子結合抑制蛋白 → 抑制蛋白失去活性」是<strong>乳糖操縱組（<em>lac</em> operon）</strong>的行為（異乳糖作為誘導物，使原本有活性的 <em>lac</em> 抑制蛋白失活並脫離操作子）。<em>trp</em> 操縱組的別構方向剛好跟它完全顛倒。</p>
+    </div>
+
+    <h3>疑問二：色胺酸作為「共同抑制物」，究竟是抑制轉錄，還是抑制了抑制蛋白？</h3>
+    <p><strong>是與抑制蛋白合作，間接抑制 RNA 聚合酶的轉錄起始；絕不是抑制「抑制蛋白」的活性。</strong></p>
+    <p>把整個因果鏈按順序攤開成四個步驟，就能一次看清每一個角色的作用對象：</p>
+    <ol>
+      <li><strong>終產物累積</strong>：細胞內色胺酸濃度升高（自行合成足夠，或直接從外界環境吸收）。</li>
+      <li><strong>別構活化抑制蛋白</strong>：色胺酸結合到無活性的 <em>trp</em> 抑制蛋白 → <strong>活化</strong>抑制蛋白，使其具備與 DNA 結合的構形。</li>
+      <li><strong>阻斷轉錄起始</strong>：活化後的「抑制蛋白—色胺酸複合體」緊密結合到 <em>trp</em> 操作子（位於 <em>trp</em> 啟動子內部／與啟動子重疊），直接<strong>阻擋 RNA 聚合酶結合啟動子</strong>，停止結構基因的<strong>轉錄</strong>。</li>
+      <li><strong>連帶停止酵素合成</strong>：不再轉錄出新的 <em>trp</em> 多順反子 mRNA（且原有 mRNA 半生期很短，約 3 分鐘，Cox 2e Ch20），核糖體自然就不再轉譯出合成色胺酸的酵素。</li>
+    </ol>
+
+    <div class="callout">
+      <div class="callout-title">🎯 精準區分「轉錄」與「轉譯」層次</div>
+      <p style="margin-bottom:0;">色胺酸—抑制蛋白複合體直接作用在<strong>轉錄起始</strong>這一道關卡（擋住 RNA 聚合酶），並不是直接去抑制核糖體的<strong>轉譯</strong>作用。沒有合成色胺酸的酵素出現，是因為沒有 mRNA 產生的下游結果——這點在教甄考題裡極常考（例如 115 陽交附中第 7 題選項 A 即以「抑制蛋白質的轉譯」作陷阱）。</p>
+    </div>
+  </section>
+
+  <!-- Section 3: Mirror Comparison Table -->
+  <section id="mirror-comparison">
+    <h2><span class="sec-num">03</span>鏡像對照：色胺酸操縱組（<em>trp</em>）vs. 乳糖操縱組（<em>lac</em>）</h2>
+    <p>Weaver 5e 把 <em>trp</em> 操縱組的負調控形容成 <em>lac</em> 操縱組負調控的「鏡像（mirror image）」。兩者都是負調控（都由活化態抑制蛋白關閉轉錄），但預設狀態與小分子開關方向完全相反：</p>
+
+    <div class="table-wrap">
+      <table class="ro-resp-table">
+        <thead>
+          <tr>
+            <th>比較項目</th>
+            <th>色胺酸操縱組（<em>trp</em> operon）</th>
+            <th>乳糖操縱組（<em>lac</em> operon）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="比較項目">調控類別</td>
+            <td data-label="色胺酸操縱組（trp operon）"><strong>可抑制型負調控</strong>（預設開啟）</td>
+            <td data-label="乳糖操縱組（lac operon）"><strong>可誘導型負調控</strong>（預設關閉）</td>
+          </tr>
+          <tr>
+            <td data-label="比較項目">代謝路徑性質</td>
+            <td data-label="色胺酸操縱組（trp operon）"><strong>合成代謝</strong>（由前驅物製造色胺酸）</td>
+            <td data-label="乳糖操縱組（lac operon）"><strong>分解代謝</strong>（將乳糖水解為單醣）</td>
+          </tr>
+          <tr>
+            <td data-label="比較項目">調節基因（操縱組外）</td>
+            <td data-label="色胺酸操縱組（trp operon）"><em>trpR</em>（持續低量表現）</td>
+            <td data-label="乳糖操縱組（lac operon）"><em>lacI</em>（持續低量表現）</td>
+          </tr>
+          <tr>
+            <td data-label="比較項目">未結合小分子時的抑制蛋白</td>
+            <td data-label="色胺酸操縱組（trp operon）"><strong>無活性</strong>（脫輔抑制物，無法結合操作子）</td>
+            <td data-label="乳糖操縱組（lac operon）"><strong>有活性</strong>（緊密結合操作子、關閉轉錄）</td>
+          </tr>
+          <tr>
+            <td data-label="比較項目">小分子效應物與角色</td>
+            <td data-label="色胺酸操縱組（trp operon）"><strong>色胺酸</strong>（終產物）＝共同抑制物／輔抑制物（corepressor）</td>
+            <td data-label="乳糖操縱組（lac operon）"><strong>異乳糖</strong>（受質異構物）＝誘導物（inducer）</td>
+          </tr>
+          <tr>
+            <td data-label="比較項目">結合小分子後，抑制蛋白活性</td>
+            <td data-label="色胺酸操縱組（trp operon）"><strong>無活性 → 有活性（活化）</strong></td>
+            <td data-label="乳糖操縱組（lac operon）"><strong>有活性 → 無活性（去活化）</strong></td>
+          </tr>
+          <tr>
+            <td data-label="比較項目">結合小分子後，轉錄結果</td>
+            <td data-label="色胺酸操縱組（trp operon）">結合操作子 → <strong>關閉轉錄（抑制）</strong></td>
+            <td data-label="乳糖操縱組（lac operon）">脫離操作子 → <strong>開啟轉錄（誘導）</strong></td>
+          </tr>
+          <tr>
+            <td data-label="比較項目">細胞生理邏輯</td>
+            <td data-label="色胺酸操縱組（trp operon）">平常需要自造胺基酸，終產物夠多就停工省能量（負回饋）</td>
+            <td data-label="乳糖操縱組（lac operon）">平常沒乳糖不需浪費能量造酵素，有受質才開工</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 4: Original Textbook Figures -->
+  <section id="figures">
+    <h2><span class="sec-num">04</span>六部經典教科書原圖對照（點擊可放大檢視）</h2>
+    <p>以下精選橫跨普通生物學、細胞生物學、分子生物學與微生物學的 6 張原書機制圖，從宏觀開關流程一路看到 3.4 nm 螺旋變構與 PDB 1TRO 晶體結構模型：</p>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 1｜Campbell Biology 13e Fig. 18.3 — <em>trp</em> 操縱組的雙態開關全貌</div>
+      <div class="figure-img-wrap">
+        <img src="images/Campbell13e_Fig18-3_trp_operon_switch.jpg" alt="Campbell 13e Fig. 18.3 The trp operon in E. coli">
+        <span class="zoom-hint">🔍 點擊圖片放大</span>
+      </div>
+      <div class="figure-caption">上圖 (a) 色胺酸缺乏時，<em>trpR</em> 合成的抑制蛋白處於非活性（Inactive repressor），無法結合操作子，RNA 聚合酶順利轉錄 <em>trpE–A</em>；下圖 (b) 色胺酸（corepressor）結合後轉為活性抑制蛋白（Active repressor），結合位於啟動子內的操作子並標示「No RNA made」。</div>
+      <div class="figure-caption-en">Figure 18.3 The trp operon in E. coli: regulated synthesis of repressible enzymes. (a) Without tryptophan, the repressor is inactive and RNA polymerase transcribes the five genes. (b) Accumulation of tryptophan (corepressor) activates the repressor, blocking transcription.</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 2｜Becker 細胞生物學 10e Fig. 20-6 — 無活性 → 結合色胺酸 → 活化態的因果箭頭</div>
+      <div class="figure-img-wrap">
+        <img src="images/Becker10e_Fig20-6_trp_operon_repressor.png" alt="Becker 10e Fig. 20-6 Regulation of the Tryptophan Operon by the trp Repressor">
+        <span class="zoom-hint">🔍 點擊圖片放大</span>
+      </div>
+      <div class="figure-caption">此圖最直白地畫出「Inactive form of repressor（R）＋ Tryptophan（T）→ Active form of repressor（R–T）→ 結合操作子 O → 阻擋 RNA 聚合酶」的活化方向；(b) 無色胺酸時游離 R 維持無活性，操縱組解除抑制並轉錄出多順反子 mRNA。</div>
+      <div class="figure-caption-en">Figure 20-6 Regulation of the Tryptophan (trp) Operon by the trp Repressor. (a) Tryptophan present, repressor bound to operator, operon repressed. (b) Tryptophan absent, free trp repressor is inactive and operon is derepressed.</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 3｜Weaver 分子生物學 5e Fig. 7.25 — 脫輔抑制物（aporepressor）與輔抑制物（corepressor）</div>
+      <div class="figure-img-wrap">
+        <img src="images/Weaver5e_Fig7-25_trp_operator_in_promoter.png" alt="Weaver 5e Fig. 7.25 Negative control of the trp operon">
+        <span class="zoom-hint">🔍 點擊圖片放大</span>
+      </div>
+      <div class="figure-caption">Weaver 5e 精確區分「脫輔抑制物（綠色，單獨無活性）」與「結合黑色色胺酸（輔抑制物）後形成的活性抑制物」，同時呈現 <em>trp</em> 操作子完全位在 <em>trp</em> 啟動子（<em>trpO,P</em>）之內。</div>
+      <div class="figure-caption-en">Figure 7.25 Negative control of the trp operon. (a) Derepression: without tryptophan, the aporepressor (green) cannot bind to the operator. (b) Repression: tryptophan, the corepressor (black), binds to the inactive aporepressor, changing it to repressor.</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 4｜Raven 生物學 13e Fig. 16.7 — 色胺酸如何把抑制蛋白從無活性「撐成」有活性</div>
+      <div class="figure-img-wrap">
+        <img src="images/Raven13e_Fig16-7_trp_repressor_conformation.png" alt="Raven 13e Fig. 16.7 Tryptophan binding alters repressor conformation">
+        <span class="zoom-hint">🔍 點擊圖片放大</span>
+      </div>
+      <div class="figure-caption">沒有色胺酸時（上方），二聚體兩側的藍色辨識螺旋往內傾斜、對不準 DNA 溝槽；兩分子色胺酸楔入結合後（下方），將兩段辨識螺旋的間距拉開至 3.4 nm，正好緊密嵌入 DNA 相鄰的兩段大溝。</div>
+      <div class="figure-caption-en">Figure 16.7 Tryptophan binding alters repressor conformation. The binding of tryptophan to the repressor increases the distance between the two recognition helices in the repressor, allowing the repressor to fit snugly into two adjacent portions of the major groove in DNA.</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 5｜Cox 分子生物學 2e Fig. 20-11 — 同源二聚體 Trp 抑制蛋白與 PDB 1TRO 晶體結構模型</div>
+      <div class="figure-img-wrap">
+        <img src="images/Cox2e_Fig20-11_trp_operon_and_pdb_1tro.png" alt="Cox 2e Fig. 20-11 Regulation of the trp operon and PDB 1TRO">
+        <span class="zoom-hint">🔍 點擊圖片放大</span>
+      </div>
+      <div class="figure-caption">(a) 無色胺酸時 Trp 抑制蛋白無法結合操作子，操縱組 ON；(b) 色胺酸充足時，兩個紅色色胺酸分子結合於同源二聚體介面，促使複合體跨騎於與啟動子重疊的操作子上（OFF）。下方為 X 光晶體結構模型（PDB ID: 1TRO）。</div>
+      <div class="figure-caption-en">Figure 20-11 Regulation of the trp operon. (a) In the absence of tryptophan, the Trp repressor cannot bind the operator. (b) Tryptophan serves as the effector molecule; their association causes the homodimeric Trp repressor to bind the operator, blocking transcription (PDB ID 1TRO).</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 6｜Prescott 微生物學 12e Fig. 14.8 — 共同抑制物—抑制蛋白複合體活化示意</div>
+      <div class="figure-img-wrap">
+        <img src="images/Prescott12e_Fig14-8_trp_repressor_corepressor.png" alt="Prescott 12e Fig. 14.8 Regulation of the trp Operon by Tryptophan and TrpR">
+        <span class="zoom-hint">🔍 點擊圖片放大</span>
+      </div>
+      <div class="figure-caption">直白標示 (a) 低色胺酸時為 <code>Inactive trp repressor</code>，轉錄完整進行；(b) 高色胺酸時，色胺酸與抑制蛋白組成具活性的 <code>Corepressor-repressor form active complex</code>，再結合至操作子 <em>o</em> 阻斷轉錄。</div>
+      <div class="figure-caption-en">Figure 14.8 Regulation of the trp Operon by Tryptophan and TrpR. When synthesized, TrpR is unable to bind the operator. It is activated by the binding of tryptophan, its corepressor.</div>
+    </div>
+  </section>
+
+  <!-- Section 5: Bilingual Textbook Evidence -->
+  <section id="evidence">
+    <h2><span class="sec-num">05</span>十部經典教科書原始文獻考證（中英對照）</h2>
+    <p>以下所有英文原文均直接回溯自本機知識庫所收錄之正式原文書譯本，一字不改，供備課、命題與教甄口筆試查核。</p>
+    <button class="toggle-en-btn" id="toggleEnBtn" type="button" aria-pressed="false" onclick="toggleEnglish()">隱藏英文原文</button>
+
+    <!-- Campbell 13e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">Campbell Biology 13e（普通生物學）<span class="source-loc">Ch18 · Concept 18.1</span></div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">① <em>trp</em> 抑制蛋白合成時為非活性，唯有結合色胺酸於異位調節位點才變為活性形式</div>
+        <div class="quote-en">The trp repressor is synthesized in the inactive form, which has little affinity for the trp operator. Only when a tryptophan molecule binds to the trp repressor at an allosteric site does the repressor protein change to the active form that can attach to the operator, turning the operon off.</div>
+        <div class="quote-tw">trp 抑制蛋白<strong>合成時為非活性形式</strong>，對 trp 操縱子的親和力很低。唯有當一個色胺酸分子結合到 trp 抑制蛋白的異位調節位點時，抑制蛋白才會轉變為能附著到操縱子上的<strong>活性形式</strong>，進而關閉操縱組。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">② 共抑制物（corepressor）定義：與抑制蛋白「合作」關閉操縱組的小分子</div>
+        <div class="quote-en">Tryptophan functions in this system as a corepressor, a small molecule that cooperates with a repressor protein to switch an operon off. As tryptophan accumulates, more tryptophan molecules associate with trp repressor molecules, which can then bind to the trp operator and shut down production of the tryptophan pathway enzymes.</div>
+        <div class="quote-tw">色胺酸在這個系統中作為<strong>共抑制物（corepressor）——一種與抑制蛋白合作以關閉操縱組的小分子</strong>。隨著色胺酸累積，愈來愈多的色胺酸分子與 trp 抑制蛋白分子結合，使後者得以結合 trp 操縱子，關閉色胺酸路徑酵素的生產。</div>
+      </div>
+    </div>
+
+    <!-- Freeman 8e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">Freeman Biological Science 8e（普通生物學）<span class="source-loc">Ch18 · 18.1</span></div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">直接點破 <code>co-repressor</code> 的字面意義：它與抑制蛋白共同作用，使抑制蛋白「具有活性」</div>
+        <div class="quote-en">Note that in both the lac and trp operons, a small molecule binding to the repressor changes the repressor’s shape and activity. This is allosteric regulation. The only difference is that for the trp operon the small molecule regulator is called a co-repressor, because it works with the repressor to make it active.</div>
+        <div class="quote-tw">請注意，在 <em>lac</em> 與 <em>trp</em> 操縱組中，小分子與抑制蛋白結合，都會改變抑制蛋白的形狀與活性。這就是別構調控。唯一的差異是，在 <em>trp</em> 操縱組中，小分子調節物稱為<strong>輔抑制物，因為它會與抑制蛋白共同作用，使抑制蛋白具有活性</strong>。</div>
+      </div>
+    </div>
+
+    <!-- Raven 13e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">Raven Biology 13e（普通生物學）<span class="source-loc">Ch16 · 16.3</span></div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">① 色胺酸結合改變一對螺旋-轉折-螺旋模體的方向，使複合體阻擋 RNA 聚合酶結合啟動子</div>
+        <div class="quote-en">When levels of tryptophan rise, then tryptophan (the corepressor) binds to the repressor and alters its conformation, allowing it to bind to its operator. Binding of the repressor–corepressor complex to the operator prevents RNA polymerase from binding to the promoter. The actual change in repressor structure due to tryptophan binding is an alteration of the orientation of a pair of helix-turn-helix motifs that allows their recognition helices to fit into adjacent major grooves of the DNA (figure 16.7).</div>
+        <div class="quote-tw">色胺酸濃度上升時，色胺酸會作為輔抑制物，與抑制蛋白結合並改變其構形，使它能結合操作子。抑制蛋白—輔抑制物複合體結合操作子後，會<strong>阻止 RNA 聚合酶結合啟動子</strong>。色胺酸結合造成的抑制蛋白實際構造變化，是一對螺旋-轉折-螺旋模體的方向改變，使其辨識螺旋能嵌入 DNA 相鄰的大溝（圖 16.7）。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">② 誘導與抑制如何同屬負調控</div>
+        <div class="quote-en">In induction, the repressor alone can bind to DNA, and the inducer prevents DNA binding. In the case of repression, the repressor only binds DNA when bound to the corepressor.</div>
+        <div class="quote-tw">誘導時，抑制蛋白單獨便能結合 DNA，誘導物會阻止它結合 DNA；<strong>抑制時，抑制蛋白只有在結合輔抑制物後，才會結合 DNA</strong>。</div>
+      </div>
+    </div>
+
+    <!-- Solomon 11e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">Solomon Biology 11e（普通生物學）<span class="source-loc">Ch14 · Gene Regulation</span></div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">與乳糖抑制蛋白不同：先以不活化型合成，唯有結合色胺酸於別構位才活化 DNA 結合位點</div>
+        <div class="quote-en">A distant repressor gene codes for a diffusible repressor protein, which differs from the lactose repressor in that the cell synthesizes it in an inactive form that cannot bind to the operator region of the trp operon. The DNA-binding site of the repressor becomes effective only when tryptophan, its corepressor, binds to an allosteric site on the repressor (FIG. 14-4b).</div>
+        <div class="quote-tw">一個位置較遠的抑制基因會編碼可擴散的抑制蛋白。這個抑制蛋白與乳糖抑制蛋白不同：<strong>細胞會先以不活化型合成它</strong>，因此它無法與 trp 操縱組的操作子區域結合。<strong>只有當色胺酸這種輔抑制物與抑制蛋白的別構位結合時，抑制蛋白的 DNA 結合位點才會發揮作用</strong>（圖 14-4b）。</div>
+      </div>
+    </div>
+
+    <!-- Alberts ECB 6e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">Alberts Essential Cell Biology 6e（細胞生物學）<span class="source-loc">Ch08 · Control of Gene Expression</span></div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">色胺酸結合使別構蛋白三維結構細微改變，藉此結合操作子、阻擋 RNA 聚合酶</div>
+        <div class="quote-en">The transcription regulator is known as the tryptophan repressor, and it is controlled in an ingenious way: the repressor can bind to DNA only if it is also bound to tryptophan (Figure 8–7). ... The tryptophan repressor is an allosteric protein (see Figure 4–42): the binding of tryptophan causes a subtle change in its three-dimensional structure so that the protein can now bind tightly to the operator sequence.</div>
+        <div class="quote-tw">這個轉錄調控蛋白稱為色胺酸抑制蛋白，其控制方式相當巧妙：<strong>抑制蛋白只有在同時與色胺酸結合時，才能與 DNA 結合</strong>（圖 8–7）。……色胺酸抑制蛋白是一種別構蛋白：色胺酸與它結合後，會使其三維結構產生細微改變，使蛋白質得以與操作子序列緊密結合。</div>
+      </div>
+    </div>
+
+    <!-- Becker 10e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">Becker’s World of the Cell 10e（細胞生物學）<span class="source-loc">Ch20 · Regulation of Gene Expression</span></div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">效應物結合時活化、游離時不活化——與 <em>lac</em> 抑制蛋白相反</div>
+        <div class="quote-en">The regulatory gene for this operon, called trpR, encodes a trp repressor protein that—in contrast to the lac repressor—is active (binds to operator DNA) when the effector is attached to it and is inactive in its free form. The effector in such systems (in this case, tryptophan) is sometimes referred to as a corepressor because it is required, along with the repressor protein, to shut off transcription of the operon.</div>
+        <div class="quote-tw">此操縱組的調控基因稱為 trpR，編碼 trp 抑制蛋白；它與 lac 抑制蛋白相反，<strong>在效應物與其結合時為活化狀態（能與操縱序列 DNA 結合），游離時則不活化</strong>。這類系統的效應物（此處為色胺酸）有時稱為輔抑制物，因為它必須與抑制蛋白共同作用，才能關閉操縱組的轉錄。</div>
+      </div>
+    </div>
+
+    <!-- Weaver 5e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">Weaver Molecular Biology 5e（分子生物學）<span class="source-loc">Ch07 · 7.3 The trp Operon</span></div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">脫輔抑制物（aporepressor）＋ 輔抑制物（corepressor）＝ 活性 <em>trp</em> 抑制物；與 <em>lac</em> 互為鏡像</div>
+        <div class="quote-en">In the absence of tryptophan, no trp repressor exists—only an inactive protein called the aporepressor. When the aporepressor binds tryptophan, it changes to a conformation with a much higher affinity for the trp operator (Figure 7.25b). ... The combination of aporepressor plus tryptophan is the trp repressor; therefore, tryptophan is called a corepressor. ... The negative control of the trp operon is, in a sense, the mirror image of the negative control of the lac operon.</div>
+        <div class="quote-tw">在沒有色胺酸時，並不存在 trp 抑制物——只有一個稱為<strong>脫輔抑制物（aporepressor）的無活性蛋白</strong>。當脫輔抑制物結合色胺酸時，它會改變成一種對 trp 操作子有高得多親和力的構形（圖 7.25b）。……<strong>脫輔抑制物加上色胺酸的組合，就是 trp 抑制物；因此，色胺酸被稱為輔抑制物（corepressor）</strong>。……trp 操縱組的負調控，某種意義上是 lac 操縱組負調控的<strong>鏡像</strong>。</div>
+      </div>
+    </div>
+
+    <!-- Cox 2e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">Cox Molecular Biology 2e（分子生物學）<span class="source-loc">Ch20 · Bacterial Gene Regulation</span></div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">共抑制物使抑制蛋白「具備結合 DNA 的能力」，與 <em>lac</em> 的解離方向相反</div>
+        <div class="quote-en">In this way, the trp operon is negatively regulated: a corepressor (in this case tryptophan) binds the repressor protein, rendering the repressor competent for DNA binding. This is distinct from the negative regulation of the lac operon, in which the Lac repressor binds the operator in the absence of inducer (allolactose), dissociating from DNA only when the small-molecule effector is present.</div>
+        <div class="quote-tw">trp 操縱組因此接受負調控：<strong>共抑制物（此處為色胺酸）與抑制蛋白結合，使抑制蛋白具備結合 DNA 的能力</strong>。這不同於 lac 操縱組的負調控；Lac 抑制蛋白在沒有誘導物異乳糖時會結合操縱基因，只有小分子效應物存在時才離開 DNA。</div>
+      </div>
+    </div>
+
+    <!-- Brooker Genetics 8e & Prescott 12e -->
+    <div class="source-card">
+      <div class="source-header">
+        <div class="source-book">Brooker Genetics 8e（遺傳學）＆ Prescott Microbiology 12e（微生物學）<span class="source-loc">Brooker Ch14 · Prescott Ch14</span></div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">① Brooker 8e Ch14：高色胺酸時作為共同抑制物結合抑制蛋白、抑制 RNA 聚合酶轉錄</div>
+        <div class="quote-en">When the tryptophan levels within the cell become high, tryptophan acts as a corepressor that binds to trp repressor. This causes a conformational change in trp repressor that allows it to bind to the trp operator site (Figure 14.12b). This binding inhibits the ability of RNA polymerase to transcribe the operon.</div>
+        <div class="quote-tw">細胞內色胺酸濃度升高時，色胺酸會作為共同抑制物，結合色胺酸抑制蛋白，使其發生構形改變，因而能結合色胺酸操縱序列位點（圖 14.12b）。此結合會<strong>抑制 RNA 聚合酶轉錄操縱組的能力</strong>。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">② Prescott 12e Ch14：TrpR 合成時不活化；色胺酸改變其螺旋-轉折-螺旋方向並阻擋轉錄起始</div>
+        <div class="quote-en">To accomplish this regulatory goal, TrpR is synthesized in an inactive form that cannot bind the trp operator as long as tryptophan levels are low (figure 14.8a). When tryptophan is present, it acts as a corepressor, binding one domain of TrpR and thereby altering the orientation of its helix-turn-helix motif. The repressor-corepressor complex then attaches to the operator, blocking transcription initiation (figure 14.8b).</div>
+        <div class="quote-tw">為達成此調控目標，<strong>TrpR 合成時屬於不活化型</strong>；只要色胺酸含量偏低，它就無法與 trp 操作子結合（圖 14.8a）。色胺酸存在時，會作為共同抑制物，與 TrpR 的一個域結合，進而改變其螺旋-轉折-螺旋基序的方向。抑制蛋白－共同抑制物複合體接著與操作子結合，<strong>阻擋轉錄起始</strong>（圖 14.8b）。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: High School & Exam Strategy -->
+  <section id="teaching">
+    <h2><span class="sec-num">06</span>高中課本對照、常見陷阱與教甄實戰</h2>
+
+    <div class="callout">
+      <div class="callout-title">📚 臺灣高中選修生物一（七版課本）共識盤點</div>
+      <ul>
+        <li><strong>有收錄色胺酸操縱組（5 版）</strong>：<strong>全華、泰宇、翰林</strong>設專節完整介紹，<strong>三民、龍騰</strong>於專欄／小百科說明。五版口徑完全一致——色胺酸不足時，抑制蛋白不具活性、無法結合操作子；色胺酸過多時，色胺酸作為<strong>共同抑制物</strong>（翰林譯協同抑制物）結合並改變抑制蛋白構形，使其結合操作子以阻擋 RNA 聚合酶轉錄。</li>
+        <li><strong>未收錄（2 版）</strong>：<strong>南一版、康熹版</strong>選修生物一僅教乳糖操縱組，未納入色胺酸操縱組。</li>
+        <li><strong>術語對齊</strong>：教育部《生命科學名詞》審定 <code>corepressor</code> 為「<strong>輔抑制物</strong>」，高中課本通稱「<strong>共同抑制物</strong>」，兩者完全等價。</li>
+      </ul>
+    </div>
+
+    <div class="callout-warn">
+      <div class="callout-title">🧪 教甄實戰高頻陷阱（對照 114 羅東高中、115 陽交附中）</div>
+      <ul>
+        <li><strong>陷阱一｜把活性方向跟 <em>lac</em> 寫反</strong>：看到 114 羅東高中第 3 題的實驗表格，記住「蛋白質 B（<em>trp</em> 抑制蛋白）在<strong>色胺酸高時結合 DNA、色胺酸低時脫離 DNA</strong>」，方向跟蛋白質 A（<em>lac</em> 抑制蛋白）完全相反；而調節基因 mRNA（丁）在四種條件下永遠恆定不變。</li>
+        <li><strong>陷阱二｜把「轉錄」偷換成「轉譯」</strong>：115 陽交附中第 7 題選項 A 寫「抑制蛋白和操作子結合而抑制蛋白質的轉譯」——錯在層級！操縱組的抑制蛋白—共同抑制物複合體擋的是 <strong>RNA 聚合酶的轉錄起始</strong>，不是直接擋核糖體的轉譯。</li>
+        <li><strong>陷阱三｜進階微調機制（弱化作用 attenuation）</strong>：大腸桿菌 <em>trp</em> 操縱組其實有雙層調控——抑制蛋白在轉錄起始提供約 70 倍抑制，加上 <em>trpL</em> 前導序列在轉錄延長期利用原核「轉錄—轉譯偶聯」的弱化作用再補 10 倍，合計達約 700 倍調控幅度（Weaver 5e Ch07、Cox 2e Ch20）。</li>
+      </ul>
+    </div>
+
+    <div class="boundary">
+      <div class="tldr-label" style="color:var(--text-secondary);">🔍 考證邊界與查無範圍說明</div>
+      <p style="margin-bottom:0;">本機知識庫同步檢索了所有普通生物學與分子生物學譯本：其中 <strong>Brooker 4e</strong>（Ch12）、<strong>Starr 14e</strong>（Ch10）與 <strong>Lodish 9e</strong>（Ch08）未展開原核 <em>trp</em> 操縱組抑制蛋白開關；<strong>Stryer 10e</strong>（Ch31）以 <em>pur</em> 抑制蛋白示範 corepressor、<strong>Brock 15e</strong>（Ch06）以 <em>arg</em> 操縱組示範 corepressor，兩書對 <em>trp</em> 操縱組則聚焦於弱化作用。至於「共同抑制物是否會被誤讀為去抑制『抑制蛋白』」的中文語意拆解，屬於高中教學現場常見迷思歸納，特此標明來源界線。</p>
+    </div>
+  </section>
+
+  <!-- Related Pages -->
+  <section id="related">
+    <h2><span class="sec-num">07</span>延伸閱讀</h2>
+    <ul>
+      <li><a href="prokaryote-gene-regulation-types.html">原核基因調控怎麼分類？（正／負調控 × 持續／可誘導／可抑制）</a></li>
+      <li><a href="operator-transcription-translation.html">操作子會不會被轉錄與轉譯？（基因 vs. 子）</a></li>
+      <li><a href="structural-and-regulatory-genes.html">結構基因與調節基因的定義（跨版本比較）</a></li>
+      <li><a href="lac-operon-sugar-sensing.html">大腸桿菌如何感測葡萄糖與乳糖？（含普生 8 套比較）</a></li>
+    </ul>
+  </section>
+
+  <footer>
+    400X 的日常切片 Bio-Wiki｜英文原文教科書考證庫 · 最後更新 2026-11-22
+  </footer>
+
+</main>
+
+<!-- Reading Outpost Bottom Bar & Script -->
+<button class="ro-bottom-toc" type="button" onclick="roOpenDrawer('roTocDrawer')">📑 本篇段落導覽</button>
+<a class="ro-up-btn" href="#top" aria-label="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<script>
+  function roToggleTheme() {
+    var root = document.documentElement;
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('biowiki-theme', next); } catch (e) {}
+    roUpdateThemeBtn();
+  }
+  function roUpdateThemeBtn() {
+    var btn = document.getElementById('roThemeBtn');
+    if (!btn) return;
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.innerHTML = isLight ? '🌙 深色' : '☀️ 亮色';
+    btn.setAttribute('aria-label', isLight ? '切換為深色閱讀模式' : '切換為亮色閱讀模式');
+  }
+  roUpdateThemeBtn();
+  function roOpenDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('open');
+  }
+  function roCloseDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  }
+  function openLightbox(src, alt) {
+    var lb = document.getElementById('roLightbox');
+    var img = document.getElementById('roLightboxImg');
+    if (lb && img) {
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.add('open');
+    }
+  }
+  function toggleEnglish() {
+    var hidden = document.body.classList.toggle('hide-en');
+    var btn = document.getElementById('toggleEnBtn');
+    if (btn) {
+      btn.textContent = hidden ? '顯示英文原文' : '隱藏英文原文';
+      btn.setAttribute('aria-pressed', String(hidden));
+    }
+  }
+  (function initReadingOutpostShell() {
+    var tocList = document.getElementById('roTocList');
+    var headings = document.querySelectorAll('main section[id] h2');
+    if (tocList && headings.length) {
+      headings.forEach(function(h) {
+        var sectionId = h.closest('section[id]').id;
+        var a = document.createElement('a');
+        a.href = '#' + sectionId;
+        a.textContent = h.textContent.trim();
+        tocList.appendChild(a);
+      });
+    }
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th, tr:first-child th')).map(function(th) {
+        return th.innerText.trim().replace(/[\r\n\t ]+/g, ' ');
+      });
+      if (!headers.length) return;
+      table.classList.add('ro-resp-table');
+      table.querySelectorAll('tr').forEach(function(tr) {
+        if (tr.querySelector('th')) return;
+        Array.from(tr.children).forEach(function(td, idx) {
+          if (td.tagName === 'TD' && !td.getAttribute('data-label') && headers[idx]) {
+            td.setAttribute('data-label', headers[idx]);
+          }
+        });
+      });
+    });
+    document.querySelectorAll('main img, .container img, .wrap img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        openLightbox(img.src, img.alt);
+      });
+    });
+  })();
+</script>
+<script src="site-nav.js"></script>
+</body>
+</html>
