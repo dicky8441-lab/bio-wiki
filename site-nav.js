@@ -126,6 +126,12 @@
           title: '小麥穀粒顏色的多基因累加模型怎麼推導？',
           tag: '數量性狀',
           keywords: '小麥 穀粒顏色 多基因遺傳 polygenic inheritance 累加模型 數量性狀 二項式分佈 Nilsson-Ehle Campbell Pierce'
+        },
+        {
+          href: 'environment-phenotype-vs-gene-regulation.html',
+          title: '環境影響表現型＝基因調控嗎？（繡球花、喜馬拉雅兔與雪靴兔）',
+          tag: '表現型可塑性',
+          keywords: '環境影響表現型 表現型可塑性 phenotypic plasticity 反應規範 norm of reaction 基因調控 繡球花 Hydrangea 土壤 pH 游離鋁 花青素 喜馬拉雅兔 Himalayan 暹羅貓 Siamese 酪胺酸酶 tyrosinase 溫度敏感性等位基因 冰袋實驗 雪靴兔 雪鞋兔 snowshoe hare 荷爾蒙 表觀遺傳 高中必修 115新北高中聯招 Campbell Solomon Sadava Raven Starr Pierce Brooker Hickman Evolution'
         }
       ]
     },

@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>環境影響表現型＝基因調控嗎？繡球花、喜馬拉雅兔與雪靴兔三層次拆解｜Bio-Wiki</title>
+<style>
+  :root {
+    --bg-primary: #181614;
+    --bg-pillbar: #24201c;
+    --bg-card: #211e1a;
+    --bg-quote: #26221e;
+    --bg-tag: #2d2823;
+    --text-primary: #f6f1ea;
+    --text-body: #ddd5ca;
+    --text-secondary: #bfb5a8;
+    --text-muted: #9a8e80;
+    --primary: #5bc0eb;
+    --primary-light: rgba(91, 192, 235, 0.12);
+    --primary-border: rgba(91, 192, 235, 0.32);
+    --accent: #f4c44e;
+    --accent-light: rgba(244, 196, 78, 0.12);
+    --border-color: rgba(246, 241, 234, 0.09);
+    --border-strong: rgba(246, 241, 234, 0.16);
+    --taupe-fab: rgba(104, 91, 78, 0.94);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+  }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+    font-size: 18px;
+    line-height: 1.78;
+    padding: 0 0 96px 0;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .ro-header-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-primary) 70%, rgba(24, 22, 20, 0));
+  }
+
+  .ro-pillbar {
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .ro-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .ro-menu-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    border: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .ro-menu-circle span {
+    display: block;
+    width: 16px;
+    height: 2.2px;
+    background: #181614;
+    border-radius: 2px;
+  }
+
+  .ro-brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .ro-brand-zh {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-brand-en {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .ro-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .ro-theme-btn {
+    appearance: none;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    transition: transform 0.15s ease;
+  }
+
+  .ro-theme-btn:active {
+    transform: scale(0.96);
+  }
+
+  .ro-cta-pill {
+    appearance: none;
+    background: var(--accent);
+    color: #1c1814;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .container {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 22px 0;
+  }
+
+  header.hero {
+    text-align: left;
+    margin-bottom: 32px;
+    padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .badge-bar {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .badge-primary {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary-border);
+  }
+
+  .badge-accent {
+    background: var(--accent-light);
+    color: var(--accent);
+    border-color: rgba(244, 196, 78, 0.32);
+  }
+
+  h1 {
+    font-size: clamp(26px, 6.2vw, 34px);
+    line-height: 1.38;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    margin: 6px 0 14px;
+    text-align: left;
+  }
+
+  .subtitle {
+    font-size: 17px;
+    line-height: 1.68;
+    color: var(--text-muted);
+    margin: 0;
+    text-align: left;
+  }
+
+  section {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: 42px;
+    scroll-margin-top: 84px;
+  }
+
+  h2 {
+    font-size: clamp(22px, 5.2vw, 27px);
+    line-height: 1.45;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 44px 0 18px;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+  }
+
+  h2 .sec-num {
+    color: var(--accent);
+    margin-right: 6px;
+    font-weight: 800;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 30px 0 12px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--text-body);
+    margin-bottom: 18px;
+  }
+
+  ul, ol {
+    margin: 0 0 22px 24px;
+    color: var(--text-body);
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+    color: var(--text-body);
+  }
+
+  strong, b {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.9em;
+    background: var(--bg-tag);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 6px;
+  }
+
+  main a:not(.ro-cta-pill):not(.ro-brand-link) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  .tldr-card, .source-card, .callout, .callout-warn, .boundary, .glossary-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 20px 20px;
+    margin: 20px 0;
+  }
+
+  .tldr-card {
+    border-left: 4px solid var(--accent);
+  }
+
+  .callout {
+    border-left: 4px solid var(--primary);
+  }
+
+  .callout-warn {
+    border-left: 4px solid var(--accent);
+  }
+
+  .boundary {
+    border-left: 4px solid var(--text-muted);
+  }
+
+  .tldr-label, .callout-title, .source-book {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 14px;
+  }
+
+  .timeline-step {
+    padding-left: 4px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 12px;
+  }
+
+  .timeline-step:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .timeline-step-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .timeline-step-title span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    font-size: 14px;
+    font-weight: 800;
+    margin-right: 8px;
+  }
+
+  .source-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .source-loc {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .quote-block {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .quote-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quote-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .quote-en {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 10px 0 12px;
+    word-break: break-word;
+  }
+
+  body.hide-en .quote-en {
+    display: none;
+  }
+
+  .quote-tw {
+    font-size: 17.5px;
+    line-height: 1.78;
+    color: var(--text-body);
+  }
+
+  .quote-tw strong {
+    color: var(--accent);
+    background: rgba(244, 196, 78, 0.10);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+
+  .toggle-en-btn {
+    appearance: none;
+    background: var(--bg-tag);
+    color: var(--accent);
+    border: 1px solid rgba(244, 196, 78, 0.35);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  .figure-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .figure-title {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding: 12px 16px 4px;
+  }
+
+  .figure-img-wrap {
+    padding: 14px;
+    background: #f8fafc;
+    cursor: zoom-in;
+  }
+
+  main img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 8px;
+    margin: 0 auto;
+    cursor: zoom-in;
+  }
+
+  .zoom-hint {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    padding: 6px 4px 0;
+  }
+
+  .figure-caption {
+    font-size: 15px;
+    line-height: 1.68;
+    color: var(--text-secondary);
+    padding: 10px 16px 8px;
+  }
+
+  .figure-caption-en {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 0 16px 14px;
+  }
+
+  .table-wrap {
+    width: 100%;
+    margin: 18px 0 26px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 16px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-body);
+  }
+
+  th {
+    background: var(--bg-pillbar);
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  @media (max-width: 680px) {
+    table.ro-resp-table,
+    table.ro-resp-table thead,
+    table.ro-resp-table tbody,
+    table.ro-resp-table th,
+    table.ro-resp-table td,
+    table.ro-resp-table tr {
+      display: block;
+      width: 100%;
+    }
+
+    table.ro-resp-table thead {
+      display: none;
+    }
+
+    table.ro-resp-table tr {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    table.ro-resp-table td {
+      border: none;
+      border-bottom: 1px dashed var(--border-color);
+      padding: 8px 0;
+      text-align: left !important;
+    }
+
+    table.ro-resp-table td:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    table.ro-resp-table td:first-child {
+      padding-top: 0;
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    table.ro-resp-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+  }
+
+  .ro-bottom-toc {
+    position: fixed;
+    left: 16px;
+    bottom: 20px;
+    z-index: 95;
+    background: var(--taupe-fab);
+    color: #f6f1ea;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 9px 15px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: calc(100vw - 88px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-up-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 95;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--taupe-fab);
+    color: #f6f1ea;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    text-decoration: none !important;
+  }
+
+  .ro-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ro-drawer-backdrop.open {
+    display: flex;
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-backdrop {
+      align-items: center;
+      padding: 24px;
+    }
+  }
+
+  .ro-drawer-panel {
+    width: 100%;
+    max-width: 500px;
+    max-height: 78vh;
+    overflow-y: auto;
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px 20px 0 0;
+    padding: 18px 18px 28px;
+    box-shadow: var(--shadow);
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-panel {
+      border-radius: 18px;
+    }
+  }
+
+  .ro-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .ro-drawer-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .ro-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .ro-drawer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ro-drawer-list a {
+    display: block;
+    text-decoration: none !important;
+    color: var(--text-body) !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .ro-drawer-list a.active {
+    color: #181614 !important;
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 800;
+  }
+
+  .ro-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    cursor: zoom-out;
+  }
+
+  .ro-lightbox.open {
+    display: flex;
+  }
+
+  .ro-lightbox img {
+    max-width: 100%;
+    max-height: 92vh;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  html[data-theme="light"] {
+    --bg-primary: #fbf8f4;
+    --bg-pillbar: #f0ece3;
+    --bg-card: #ffffff;
+    --bg-quote: #f6f2ea;
+    --bg-tag: #eee8dd;
+    --text-primary: #2f2820;
+    --text-body: #4a3f35;
+    --text-secondary: #5e5043;
+    --text-muted: #756656;
+    --primary: #1b9dce;
+    --primary-light: rgba(27, 157, 206, 0.12);
+    --primary-border: rgba(27, 157, 206, 0.35);
+    --accent: #b86b11;
+    --accent-light: rgba(244, 196, 78, 0.22);
+    --border-color: rgba(74, 63, 53, 0.12);
+    --border-strong: rgba(74, 63, 53, 0.22);
+    --taupe-fab: rgba(105, 90, 74, 0.94);
+    --shadow: 0 4px 18px rgba(47, 40, 32, 0.08);
+    color-scheme: light;
+  }
+
+  html[data-theme="light"] .ro-header-wrap {
+    background: linear-gradient(180deg, #fbf8f4 70%, rgba(251, 248, 244, 0));
+  }
+
+  html[data-theme="light"] .ro-menu-circle {
+    background: #67c3eb;
+    color: #1f1a15;
+  }
+
+  html[data-theme="light"] .ro-cta-pill {
+    background: #f6c84c;
+    color: #2f2820;
+  }
+
+  html[data-theme="light"] .ro-bottom-toc,
+  html[data-theme="light"] .ro-up-btn {
+    color: #ffffff;
+  }
+
+  html[data-theme="light"] .ro-drawer-list a.active {
+    background: #f6c84c;
+    border-color: #e0b034;
+    color: #2f2820 !important;
+  }
+
+  html[data-theme="light"] .quote-tw strong {
+    color: #8c4d06;
+    background: rgba(246, 200, 76, 0.28);
+  }
+</style>
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem('biowiki-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+
+<!-- Reading Outpost Dark Style Shell -->
+<div class="ro-header-wrap" id="top">
+  <div class="ro-pillbar">
+    <div class="ro-brand-group">
+      <button class="ro-menu-circle" type="button" aria-label="開啟專題選單" onclick="roOpenDrawer('roSiteDrawer')">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="ro-brand-link" href="index.html">
+        <span class="ro-brand-zh">400X 的日常切片</span>
+        <span class="ro-brand-en">BIO-WIKI EVIDENCE</span>
+      </a>
+    </div>
+    <div class="ro-top-actions">
+      <button class="ro-theme-btn" id="roThemeBtn" type="button" onclick="roToggleTheme()">☀️ 亮色</button>
+      <button class="ro-cta-pill" type="button" onclick="roOpenDrawer('roSiteDrawer')">專題目錄</button>
+    </div>
+  </div>
+</div>
+
+<!-- Site-Wide Topics Drawer (hydrated by site-nav.js) -->
+<div class="ro-drawer-backdrop" id="roSiteDrawer" onclick="if(event.target===this)roCloseDrawer('roSiteDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📚 Bio-Wiki 全站專題</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roSiteDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list">
+      <a href="index.html">🏠 首頁：主題分類總覽</a>
+      <a href="environment-phenotype-vs-gene-regulation.html" class="active">環境影響表現型與基因調控</a>
+    </div>
+  </div>
+</div>
+
+<!-- In-Page TOC Drawer -->
+<div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📑 本篇段落導覽</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list" id="roTocList" onclick="roCloseDrawer('roTocDrawer')"></div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="ro-lightbox" id="roLightbox" onclick="this.classList.remove('open')">
+  <img id="roLightboxImg" src="" alt="">
+</div>
+
+<main class="container">
+
+  <header class="hero">
+    <div class="badge-bar">
+      <span class="badge badge-primary">遺傳學與顯隱性判準</span>
+      <span class="badge badge-primary">表現型可塑性</span>
+      <span class="badge badge-accent">高中易讀版</span>
+      <span class="badge">9 部正典＋高中 6 版 · 6 張原圖</span>
+    </div>
+    <h1>環境影響表現型＝基因調控嗎？繡球花、喜馬拉雅兔與雪靴兔三層次拆解</h1>
+    <p class="subtitle">高一必修生物常把繡球花變色、喜馬拉雅兔低溫黑毛與雪靴兔換毛並排在「環境影響基因表現」單元。對照 9 部英文原典與高中 6 版教材，一次釐清哪些只是化學呈色與蛋白質構形問題、哪些才真正觸動轉錄層次的基因調控。</p>
+  </header>
+
+  <!-- TL;DR Card -->
+  <div class="tldr-card">
+    <div class="tldr-label">⚡ 一句話先講結論（三個經典例子，分屬三個不同生理層次）</div>
+    <p>這三個例子都展現了<strong>表現型可塑性（phenotypic plasticity）</strong>——同一基因型在不同環境下呈現不同表現型——但<strong>並非全都屬於狹義的「基因調控（轉錄開關）」</strong>：</p>
+    <div class="timeline">
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>1</span>繡球花（土壤 pH → 藍紫／粉紅花）＝ 化學環境與色素呈色層次（非基因調控）</div>
+        <p style="margin-bottom:0;">不是酸鹼值切換「藍花基因」與「粉紅花基因」。土壤偏酸（pH 5.5 以下）時<strong>游離鋁</strong>溶解度提高、易被根部吸收並與花瓣花青素形成藍色化合物；偏鹼（pH 6.5–7.0）時鋁不易溶解，花朵呈粉紅色（Campbell 13e；Solomon 11e）。</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>2</span>喜馬拉雅兔與暹羅貓（低溫末端黑毛）＝ 蛋白質摺疊與酵素活性層次（非轉錄調控）</div>
+        <p style="margin-bottom:0;">牠們帶有<strong>溫度敏感性等位基因</strong>（<em>c</em>ʰ／<em>c</em>ˢ），編碼熱不穩定的<strong>酪胺酸酶（tyrosinase）</strong>。深色毛基因在全身<strong>其實一直都有表現</strong>，但軀幹高溫（高於約 33–35 °C）使突變酵素摺疊異常而失去活性；耳、鼻、四肢末端或敷冰袋處溫度較低（約 25–30 °C），酵素得以維持活性而合成黑色素（Sadava 12e；Campbell 13e；Raven 13e；Pierce 7e；Brooker 8e）。</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>3</span>雪靴兔換毛（夏棕冬白）與異形葉、表觀遺傳 ＝ 真正的「基因調控」層次</div>
+        <p style="margin-bottom:0;">雪靴兔（原文書多譯「雪鞋兔」）靠季節性的<strong>日照長度與溫度變化</strong>觸發<strong>荷爾蒙訊號</strong>，啟動換毛並調控毛囊內色素合成相關基因表現，使新毛沉積不同色素（Starr 14e；Evolution 5e）。這才屬於「環境訊號 → 荷爾蒙／訊息分子 → 轉錄因子或表觀修飾 → 下游基因表現」的真正基因調控。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 1 -->
+  <section id="sec-compare">
+    <h2><span class="sec-num">01</span> 三例總對照與核心專有名詞解析</h2>
+    <p>高一必修生物用「環境影響基因表現」來形容這些現象時，指的是廣義的<strong>表現型展現（phenotypic expression）</strong>，也就是從基因型一路走到外觀性狀的整體結果；但到了高三選修生物講「<strong>基因表現的調控（gene regulation）</strong>」，討論的核心是細胞是否調整特定基因的轉錄與轉譯量。兩者若沒切分清楚，就會把「酵素高溫失活」誤認為「高溫關閉基因」。</p>
+
+    <div class="table-wrap">
+      <table class="ro-resp-table">
+        <thead>
+          <tr>
+            <th>比較項目</th>
+            <th>繡球花（<em>Hydrangea</em>）</th>
+            <th>喜馬拉雅兔（暹羅貓同原理）</th>
+            <th>雪靴兔（原文書譯「雪鞋兔」）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>表現型差異</strong></td>
+            <td>酸性土開藍紫花，鹼性土開粉紅花</td>
+            <td>軀幹長白毛，低溫末端（耳、鼻、足、尾）與敷冰袋處長黑毛</td>
+            <td>夏季長棕色毛，冬季換成白色毛</td>
+          </tr>
+          <tr>
+            <td><strong>屬於表現型可塑性？</strong></td>
+            <td><strong>是</strong>（相同基因型，不同土壤環境）</td>
+            <td><strong>是</strong>（相同基因型，局部體溫差異）</td>
+            <td><strong>是</strong>（相同基因型，季節光週期與氣溫）</td>
+          </tr>
+          <tr>
+            <td><strong>屬於狹義基因調控？</strong></td>
+            <td><strong>否</strong></td>
+            <td><strong>否</strong></td>
+            <td><strong>是</strong></td>
+          </tr>
+          <tr>
+            <td><strong>作用生理層次</strong></td>
+            <td><strong>色素合成後的化學呈色環境</strong>（游離鋁溶解度與吸收）</td>
+            <td><strong>轉譯後的蛋白質立體構形與酵素活性</strong>（熱不穩定突變酵素）</td>
+            <td><strong>荷爾蒙訊號 → 轉錄層次基因調控</strong>（季節性換毛與色素沉積）</td>
+          </tr>
+          <tr>
+            <td><strong>基因本身有無表現？</strong></td>
+            <td>花青素合成基因皆有表現，差異在吸收鋁的量</td>
+            <td>酪胺酸酶基因在全身<strong>一直都有表現</strong>，差別在酵素於高溫下失活</td>
+            <td>隨季節荷爾蒙訊號切換毛囊內色素相關基因的表現與沉積</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="glossary-card">
+      <div class="callout-title">📖 專有名詞白話解析（高中生可直接讀懂的定義對照）</div>
+      <ul>
+        <li><strong>表現型可塑性（phenotypic plasticity）</strong>：單一基因型在不同環境條件下產生不同表現型的能力（Campbell 13e Ch. 14；Raven 13e Ch. 12）。它只描述「相同 DNA 在不同環境長出不同樣子」這個結果，不限定背後一定靠開關基因轉錄達成。</li>
+        <li><strong>反應規範（norm of reaction）</strong>：單一基因型在不同環境條件下可能發育出的表現型範圍（Solomon 11e Ch. 11；Brooker <em>Genetics</em> 8e 譯為反應常模）。ABO 血型的反應規範極窄，人類身高與繡球花花色的反應規範則較寬。</li>
+        <li><strong>溫度敏感性等位基因（temperature-sensitive allele）</strong>：編碼產物（多為酵素）只在特定溫度範圍內維持功能、超出該溫度即失活的突變等位基因（Pierce 7e Ch. 05；Brooker 8e Ch. 04）。突變改變了蛋白質熱穩定度，而不是改變 DNA 是否被轉錄。</li>
+        <li><strong>基因調控（gene regulation）</strong>：細胞透過染色質修飾（表觀遺傳）、轉錄因子結合、RNA 加工或轉譯調控，決定特定基因在何時、何處表現以及表現多少（Campbell 13e Ch. 18）。高中課程講「基因調控」時，重點主要在轉錄層次的開關控制。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Section 2 -->
+  <section id="sec-hydrangea">
+    <h2><span class="sec-num">02</span> 層次一（化學呈色環境）：繡球花為何隨土壤 pH 變色？</h2>
+    <p>把同一株繡球花扦插出基因型完全相同的子代，分別種在酸性與鹼性土壤裡，花色會從藍紫色一路變到粉紅色。這個現象在「DNA → 蛋白質 → 色素 → 表現型」這條路徑上，介入點在<strong>最後一站（色素呈現顏色的化學環境）</strong>：</p>
+    <ul>
+      <li><strong>關鍵中介因子是「游離鋁（free aluminum）」</strong>：土壤酸鹼值並非直接把花瓣當成石蕊試紙變色，而是透過改變土壤中鋁元素的溶解度來影響植物吸收量（Campbell 13e Ch. 14；Solomon 11e Ch. 11）。</li>
+      <li><strong>pH 5.5 以下（酸性土壤）</strong>：鋁較易溶解而被根部吸收，進入花瓣組織後與花青素結合形成藍色化合物，花呈藍色；園藝上也可施用明礬或硫酸鋁促成藍花。</li>
+      <li><strong>pH 5.6–6.4（弱酸性土壤）</strong>：可利用鋁含量居中，花朵呈紫色。</li>
+      <li><strong>pH 6.5–7.0（微酸至中性／加入石灰石偏鹼）</strong>：鋁不易溶解且難被根部吸收，花青素則呈現粉紅色。</li>
+    </ul>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 1｜繡球花花色隨土壤 pH 與可利用鋁變化（同一基因型由藍轉紫再轉粉紅）</div>
+      <div class="figure-img-wrap">
+        <img src="images/Solomon11e_Fig11-21_hydrangea_soil_ph.png" alt="Solomon 11e 圖 11-21 相同基因型的繡球花依土壤 pH 與鋁的可利用性開出藍色、紫色與粉紅色花朵">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Solomon Biology 11e, Fig. 11-21</strong>：基因型完全相同的繡球花，在 pH 5.5 以下（鋁易溶解）開藍花、pH 5.6–6.4 開紫花、pH 6.5–7.0（鋁難溶解）開粉紅花。此差異來自土壤礦物離子可利用性與色素化學呈色，而非開關不同花色基因。</div>
+      <div class="figure-caption-en">Original caption: Figure 11-21 Influence of the environment on hydrangea flower color. These hydrangeas are all the same genotype, but their flowers vary in color depending on availability of aluminum, which in turn is dependent on soil pH. Blue flowers develop in a soil pH of 5.5 or less, purple flowers in a soil pH of 5.6 to 6.4, and pink flowers in a soil pH of 6.5 to 7.0.</div>
+    </div>
+  </section>
+
+  <!-- Section 3 -->
+  <section id="sec-himalayan">
+    <h2><span class="sec-num">03</span> 層次二（蛋白質構形與酵素活性）：喜馬拉雅兔與暹羅貓真的是基因沒表現嗎？</h2>
+    <p>喜馬拉雅兔（<em>c</em>ʰ 等位基因）與暹羅貓（<em>c</em>ˢ 等位基因）的耳朵、鼻尖、腳掌與尾巴毛色深黑，身體軀幹卻是白色或淺色，這稱為<strong>末端限色（point restriction）</strong>。如果把喜馬拉雅兔背部的白毛剃掉並敷上冰袋，新長出來的毛竟然會變成黑色。</p>
+    <p>很多同學看到冰袋實驗，就以為「低溫打開了黑色素基因、高溫關掉了黑色素基因」。但遺傳學與普通生物學正典給出的分子答案非常明確：<strong>黑色素合成基因在全身細胞裡一直都有表現，出問題的是轉譯出來的酵素蛋白質不耐熱。</strong></p>
+    <ul>
+      <li><strong>單一胺基酸誤義突變</strong>：編碼<strong>酪胺酸酶（tyrosinase，催化黑色素合成第一步的關鍵酵素）</strong>的基因發生誤義突變，改變了一個胺基酸，使酵素三維結構對溫度變得極為敏感（Campbell 13e Ch. 17；Brooker 8e Ch. 04）。</li>
+      <li><strong>軀幹核心體溫較高（約 37–39 °C，超過失活門檻約 33–35 °C）</strong>：突變的酪胺酸酶無法維持正確摺疊而<strong>失去催化活性</strong>，即使基因持續轉錄與轉譯，也無法合成黑色素，因此長出白毛（胎兒在子宮內全身溫暖，剛出生時也全身皆白）。</li>
+      <li><strong>身體末端較涼（約 25–30 °C）或背部敷冰袋降溫處</strong>：局部溫度低於失活門檻，突變酵素能摺疊成具功能的立體構形，順利催化黑色素生成而長出黑毛。</li>
+    </ul>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 2｜喜馬拉雅兔溫度對照：30 °C 飼養全身呈白色，25 °C 飼養於末端長出黑斑</div>
+      <div class="figure-img-wrap">
+        <img src="images/Solomon11e_Fig11-22_himalayan_rabbit_temperature.png" alt="Solomon 11e 圖 11-22 喜馬拉雅基因型兔子在溫暖環境（30°C）呈全白，在較涼環境（25°C）耳鼻足尾長出深色毛">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Solomon Biology 11e, Fig. 11-22</strong>：相同喜馬拉雅基因型（<em>c</em>ʰ）的兔子，在溫暖環境（30 °C）飼養時全身無黑斑，在較涼環境（25 °C）飼養時，耳、鼻、足、尾等散熱較快之低溫處便出現深色毛斑。</div>
+      <div class="figure-caption-en">Original caption: Figure 11-22 Influence of the environment on rabbit coat color. (a) The Himalayan genotype at warm temperatures. (b) The Himalayan genotype at cold temperatures. These rabbits have the same genotype for coat color, but have been exposed to different temperatures.</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 3｜末端限色兔與暹羅貓：原圖直接標註「低溫讓酵素維持活性，高溫使酵素無法維持活性」</div>
+      <div class="figure-img-wrap">
+        <img src="images/Sadava12e_Fig12-15_point_restriction_rabbit_cat.png" alt="Sadava 12e 圖 12.15 末端限色兔子與暹羅貓並排實拍，標示末端溫度較低使黑色素酵素具活性，軀幹溫度過高使酵素失活">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Sadava Life 12e, Fig. 12.15</strong>：注意圖中英文對話框的精準措辭——是環境溫度決定 <em>the enzyme that produces black coat color to be active</em>（酵素是否有活性）。內文更直言：「這表示深色毛基因其實一直有表現，只是環境抑制了突變酵素的活性。」</div>
+      <div class="figure-caption-en">Original caption: Figure 12.15 The Environment Influences Gene Expression. This rabbit and cat express a coat pattern called “point restriction.” Their genotypes specify dark fur, but the enzyme for dark color is inactive at normal body temperature, so only the extremities—the coolest regions of the body—express the dark fur phenotype.</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 4｜暹羅貓 <em>c</em>ˢ 等位基因與 33 °C 酪胺酸酶活性門檻</div>
+      <div class="figure-img-wrap">
+        <img src="images/Raven13e_Fig12-9_siamese_tyrosinase_33c.png" alt="Raven 13e 圖 12.9 暹羅貓標註高於 33°C 酪胺酸酶失活無色素，低於 33°C 酪胺酸酶具活性產生深色色素">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Raven Biology 13e, Fig. 12.9</strong>：直接標出關鍵溫度門檻與酵素名稱——高於 33 °C 時 <strong>tyrosinase（酪胺酸酶）</strong>失活無色素；低於 33 °C 時酪胺酸酶具活性並催化深色黑色素生成。</div>
+      <div class="figure-caption-en">Original caption: Figure 12.9 Siamese cat. The pattern of coat color is due to an allele that encodes a temperature-sensitive form of the enzyme tyrosinase.</div>
+    </div>
+  </section>
+
+  <!-- Section 4 -->
+  <section id="sec-regulation">
+    <h2><span class="sec-num">04</span> 層次三（真正的基因調控）：雪靴兔換毛、水毛茛異形葉與表觀遺傳</h2>
+    <p>那麼，什麼時候「環境影響表現型」才真的和<strong>基因調控</strong>有關？演化發育生物學正典 <em>Evolution</em> 5e（Futuyma, Ch. 11）點出了標準分子路徑：</p>
+    <div class="callout">
+      <div class="callout-title">🔗 環境驅動基因調控的標準路徑</div>
+      <p style="margin-bottom:0;"><strong>環境刺激（日照長度、溫度、低氧、飲食）</strong> → 改變<strong>荷爾蒙或其他細胞傳訊分子</strong>濃度 → 影響<strong>轉錄因子活性</strong>或<strong>染色質表觀遺傳修飾（DNA 甲基化／組蛋白修飾）</strong> → 改變<strong>下游基因的轉錄表現量</strong>。</p>
+    </div>
+    <ul>
+      <li><strong>雪靴兔（<em>Lepus americanus</em>，原文書譯「雪鞋兔」）</strong>：與喜馬拉雅兔完全不同，雪靴兔不是靠冷空氣直接讓皮膚酵素變性，而是隨季節<strong>日照長度（光週期）與氣溫變化</strong>，由神經內分泌系統發出<strong>荷爾蒙訊號</strong>，啟動年度換毛並調控新長毛髮中色素的種類與沉積量（夏棕、冬白），提供配合季節的保護色（Starr 14e Ch. 13；Hickman 19e Ch. 28）。</li>
+      <li><strong>異葉水蓑衣與水毛茛（<em>Ranunculus aquatilis</em>）</strong>：同一株植物的葉原基在水中（高濕、低溫）發育時啟動不同發育基因表現，長成羽狀深裂的沉水葉；在空氣中則長成完整平滑的陸生葉（Evolution 5e Fig. 11.28；高中南一版必修生物）。</li>
+      <li><strong>水蚤（<em>Daphnia</em>）低氧反應</strong>：水中含氧量下降直接提升血紅素基因的表現量，使水蚤身體變紅並提高攜氧效率（Starr 14e Ch. 13）。</li>
+      <li><strong>環境誘導的表觀遺傳調控</strong>：例如母鼠懷孕期飲食補充甲基供體改變後代 <em>agouti</em> 基因的 DNA 甲基化程度、荷蘭饑餓冬天妊娠期營養缺乏造成後代特定基因甲基化差異，以及同卵雙胞胎因生活環境不同累積 DNA 甲基化與疾病風險差異（Campbell 13e Ch. 18；Brooker 4e Ch. 16）。</li>
+    </ul>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 5｜雪鞋兔（高中三民版譯「雪靴兔」）：靠季節光週期與荷爾蒙訊號調控換毛與色素沉積</div>
+      <div class="figure-img-wrap">
+        <img src="images/Hickman19e_Fig28-8_snowshoe_hare_seasonal_molt.jpg" alt="Hickman 19e 圖 28.8 北美雪鞋兔（雪靴兔）夏季棕色毛被與冬季白色毛被野外對照">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Hickman Integrated Principles of Zoology 19e, Fig. 28.8</strong>：北美雪鞋兔（<em>Lepus americanus</em>）每年進行季節換毛，夏季呈棕灰色（A），冬季呈白色偽裝毛被（B）。Starr 14e Ch. 13 指出此變化由季節日照與溫度觸發荷爾蒙訊號，控制換毛與新毛色素沉積。</div>
+      <div class="figure-caption-en">Original caption: Figure 28.8 Snowshoe hare, Lepus americanus, in A, brown summer coat and B, white winter coat. In winter, extra hair growth on the hind feet broadens the animal's support in snow.</div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-title">圖 6｜發育基因調控造就的表現型可塑性：亞利桑那尺蛾幼蟲與水毛茛異形葉</div>
+      <div class="figure-img-wrap">
+        <img src="images/Evolution5e_Fig11-28_phenotypic_plasticity_examples.png" alt="Evolution 5e 圖 11.28 表現型可塑性範例：春季與夏季亞利桑那尺蛾幼蟲擬態花序與細枝，以及水毛茛沉水葉與陸生葉形態差異">
+        <span class="zoom-hint">🔍 點擊圖片可全螢幕放大</span>
+      </div>
+      <div class="figure-caption"><strong>Futuyma &amp; Kirkpatrick Evolution 5e, Fig. 11.28</strong>：（A）春季食橡樹花序孵化的亞利桑那尺蛾幼蟲外形似花序，夏季食葉者外形似細枝；（B）水毛茛同一基因型依葉片發育環境（水中、水面、空中）啟動不同發育基因調控而形成截然不同的葉形。</div>
+      <div class="figure-caption-en">Original caption: Figure 11.28 Examples of phenotypic plasticity. (A) Larvae of the geometrid moth Nemoria arizonaria that hatch in the spring resemble the oak flowers (catkins) on which they feed. Larvae that hatch in the summer feed on oak leaves and resemble twigs. (B) The form of a leaf of the water-crowfoot Ranunculus aquatilis depends on whether it is submerged, aerial, or at the air-water interface during development.</div>
+    </div>
+  </section>
+
+  <!-- Section 5 -->
+  <section id="sec-hs-compare">
+    <h2><span class="sec-num">05</span> 高中必修生物 6 版課文措辭比對：迷思從哪裡來？</h2>
+    <p>檢索臺灣高中 108 課綱必修生物 6 套版本（生殖與遺傳單元「環境因子改變性狀的表現」），可以清楚看出為什麼許多學生（甚至教師在銜接選修課程時）會把喜馬拉雅兔誤認成轉錄基因調控：</p>
+
+    <div class="table-wrap">
+      <table class="ro-resp-table">
+        <thead>
+          <tr>
+            <th>教材版本</th>
+            <th>收錄主要案例</th>
+            <th>對喜馬拉雅兔機制的措辭寫法</th>
+            <th>與大學正典一致度</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>大學正典基準</strong><br>（Sadava / Campbell / Raven / Pierce / Brooker）</td>
+            <td>繡球花、喜馬拉雅兔、暹羅貓、雪鞋兔</td>
+            <td>明確指出深色毛基因一直有表現，是誤義突變使<strong>酪胺酸酶在高溫失去催化活性</strong></td>
+            <td>正典標準</td>
+          </tr>
+          <tr>
+            <td><strong>泰宇版</strong></td>
+            <td>喜馬拉雅兔、繡球花（略提）</td>
+            <td>寫末梢溫度降低使「黑色素生成酵素<strong>恢復活性</strong>」，未寫成基因不表現</td>
+            <td><strong>最精準</strong></td>
+          </tr>
+          <tr>
+            <td><strong>翰林版／三民備課</strong></td>
+            <td>喜馬拉雅兔（翰林附 33 °C 與冰袋）、洋繡球、韭菜／韭黃；三民正文舉雪靴兔、西洋蓍草</td>
+            <td>前後混合寫法：先說「酵素的基因表現受溫度調控」，緊接著又寫「高於 33 °C 呈不活化狀態／溫度低時酵素活性較高」</td>
+            <td>中等（容易造成前後語意混淆）</td>
+          </tr>
+          <tr>
+            <td><strong>龍騰版</strong></td>
+            <td>繡球花（pH 3.5–5.5 與鋁）、喜馬拉雅兔（冰袋實驗）</td>
+            <td>寫成「體溫較高的軀幹，<strong>基因則不表現，酵素缺乏</strong>，故無法合成黑色素」</td>
+            <td><strong>超譯成轉錄層次</strong>（與分子實情不符，教學宜釐清）</td>
+          </tr>
+          <tr>
+            <td><strong>南一版</strong></td>
+            <td>異葉水蓑衣、ALDH2*2 飲酒代謝</td>
+            <td>異葉水蓑衣寫較高濕度與較低溫度啟動相關基因表現</td>
+            <td>合理（異形葉屬發育基因調控）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Section 6: Original Textbook Evidence -->
+  <section id="sec-evidence">
+    <h2><span class="sec-num">06</span> 經典原文教科書白紙黑字考證</h2>
+    <p>以下完整回溯本機知識庫（Vault）內 9 部英文教科書正典的原始中英對照段落，逐一驗證三個層次的白紙黑字根據。</p>
+    <button class="toggle-en-btn" id="toggleEnBtn" type="button" onclick="toggleEnglish()">精簡：隱藏英文原文</button>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">1. 《Campbell Biology》13e — 表現型可塑性、繡球花、暹羅貓誤義摺疊與表觀遺傳</span>
+        <span class="source-loc">Ch. 14 · Ch. 17 Q13 · Ch. 18</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Ch. 14 表現型可塑性定義 ＆ 圖 14.14 繡球花</div>
+        <div class="quote-en">"Biologists use the term phenotypic plasticity to describe the ability of an individual genotype to produce different phenotypes under different environmental conditions."<br><br>"The effect of environment on phenotype. The outcome of a genotype lies within a phenotypic range that depends on the environment in which the genotype is expressed. For example, the acidity and free aluminum content of the soil affect the color of hydrangea flowers, which range from pink (basic soil) to blue-violet (acidic soil)."</div>
+        <div class="quote-tw">生物學家使用<strong>表現型可塑性（phenotypic plasticity）</strong>一詞，描述同一基因型在不同環境條件下產生不同表現型的能力。例如，<strong>土壤的酸度與游離鋁含量</strong>會影響繡球花的花色，從粉紅色（鹼性土壤）到藍紫色（酸性土壤）不等。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Ch. 17 章末整合題 13：暹羅貓酪胺酸酶的誤義突變與蛋白質三維摺疊</div>
+        <div class="quote-en">"Some mutations result in proteins that function well at one temperature but are nonfunctional at a different (usually higher) temperature. Siamese cats have such a 'temperature-sensitive' mutation in a gene encoding an enzyme that makes dark pigment in the fur."</div>
+        <div class="quote-tw">暹羅貓的<strong>酪胺酸酶（tyrosinase）</strong>基因有一個改變蛋白質形狀的<strong>誤義突變</strong>。在正常體溫（約 37–39 °C）下，突變酵素以不正確的三維形狀折疊而無法催化黑色素合成；在較涼爽的身體末端（約 25–30 °C），則以較接近功能性的構形折疊而催化黑色素合成。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Ch. 18 行為與環境透過 DNA 甲基化影響真核轉錄調控</div>
+        <div class="quote-en">"Epigenetic variations might help explain cases where one identical twin acquires a genetically based disease, such as schizophrenia, but the other does not, despite their identical genomes. Some differences in behavior or environment may lead to differing degrees of DNA methylation in the two twins. ... Evidently, enzymes that modify chromatin structure are integral parts of the eukaryotic cell’s machinery for regulating transcription."</div>
+        <div class="quote-tw">行為或環境的差異可能導致同卵雙胞胎在 <strong>DNA 甲基化程度</strong>上產生不同；修飾染色質結構的酵素是真核細胞<strong>轉錄調控機制</strong>不可或缺的一部分。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">2. 《Solomon Biology》11e — 繡球花 pH 與鋁溶解度、喜馬拉雅兔與反應規範</span>
+        <span class="source-loc">Ch. 11 §11.4 · Fig. 11-21 &amp; 11-22</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">繡球花鋁的可利用性受土壤 pH 控制</div>
+        <div class="quote-en">"The color of certain genetically identical hydrangea flowers ranges from blue to purple to pink depending on the level of aluminum in the soil before the flowers begin to develop. It is easy to manipulate the level of aluminum by adding alum or aluminum sulfate to the soil or by lowering the soil pH (in acidic soils, aluminum is more soluble). Under these conditions, hydrangea flowers are blue. In alkaline soils (made by adding limestone to the soil), aluminum is less soluble, and the flowers are pink (FIG. 11-21)."</div>
+        <div class="quote-tw">遺傳上相同的繡球花依花朵發育前土壤中的<strong>鋁含量</strong>呈現藍、紫、粉紅花色。<strong>鋁在酸性土壤中較易溶解</strong>，花呈藍色；在鹼性土壤中（加入石灰石）鋁較不易溶解，花朵則呈粉紅色。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">反應規範（norm of reaction）定義</div>
+        <div class="quote-en">"The range of phenotypic possibilities that can develop from a single genotype under different environmental conditions is known as the norm of reaction."</div>
+        <div class="quote-tw">單一基因型在不同環境條件下可能發育出的表現型範圍，稱為<strong>反應規範</strong>。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">3. 《Sadava Life》12e — 直接點破「深色毛基因一直有表現，是突變酵素被抑制」</span>
+        <span class="source-loc">Ch. 12 · Fig. 12.15</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">末端限色、35 °C 失活門檻與冰袋實驗的關鍵詮釋</div>
+        <div class="quote-en">"A familiar example of this phenomenon involves 'point restriction' coat patterns found in Siamese cats and certain rabbit breeds (Figure 12.15). These animals carry a mutant allele of a gene that controls the growth of dark fur all over the body. As a result of this mutation, the enzyme encoded by the gene is inactive at temperatures above a certain point (usually around 35°C). ... If a patch of white fur on a point-restricted rabbit’s back is shaved off and an ice pack is placed on the skin where the patch was, the fur that grows back will be dark. This indicates that although the gene for dark fur was expressed all along, the environment inhibited the activity of the mutant enzyme."</div>
+        <div class="quote-tw">剃除末端限色兔背上白毛並敷上冰袋，重新長出的毛會呈深色。<strong>這表示深色毛基因其實一直有表現，只是環境抑制了突變酵素的活性。</strong></div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">4. 《Raven Biology》13e — 表現型可塑性與暹羅貓 33 °C 酪胺酸酶門檻</span>
+        <span class="source-loc">Ch. 12 · Fig. 12.9</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label"><em>c</em>ˢ 等位基因編碼熱敏感變體酪胺酸酶</div>
+        <div class="quote-en">"The production of different phenotypes for the same genotype due to environmental conditions is called phenotypic plasticity."<br><br>"The striking pigment pattern seen in Siamese cats is due to an environmental effect on the enzyme tyrosinase, which catalyzes the first step in melanin synthesis. The cS allele in cats encodes a heat-sensitive variant of tyrosinase that is inactive in warmer central regions of the body, but active in colder peripheral regions (figure 12.9)."</div>
+        <div class="quote-tw">暹羅貓的色素分布源於環境影響催化黑色素合成第一步的<strong>酪胺酸酶</strong>。<em>c</em>ˢ 等位基因編碼熱敏感變體，在溫暖軀幹失活（高於 33 °C），在較冷周邊具活性（低於 33 °C）。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">5. 《Pierce Genetics》7e ＆ 《Brooker Genetics》8e — 遺傳學正典：溫度敏感性等位基因</span>
+        <span class="source-loc">Pierce Ch. 05 §5.5 · Brooker Ch. 04 §4.3</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Pierce 7e：喜馬拉雅兔 25 °C vs. 30 °C 與溫度敏感性等位基因定義</div>
+        <div class="quote-en">"The dark pigment develops, however, only when a rabbit is reared at a temperature of 25°C or lower; if a Himalayan rabbit is reared at 30°C, no dark patches develop. The expression of the himalayan allele is thus temperature dependent; an enzyme necessary for the production of dark pigment is inactivated at higher temperatures. ... The himalayan allele is an example of a temperature-sensitive allele, an allele whose product is functional only at certain temperatures."</div>
+        <div class="quote-tw">深色素僅在 25 °C 或更低溫度下發育，30 °C 飼養則無深色斑塊；合成深色素所需酵素在較高溫度下失活。<em>himalayan</em> 等位基因是<strong>溫度敏感性等位基因（temperature-sensitive allele）</strong>——其產物僅在特定溫度下具功能。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Brooker 8e：酪胺酸酶單一胺基酸改變導致高溫功能不佳</div>
+        <div class="quote-en">"It is due to a mutation in the gene that codes tyrosinase, which is an enzyme involved in making the pigment melanin. ... The mutation changes one amino acid in tyrosinase and this causes the enzyme to work poorly in warmer parts of the body. However, in the cooler extremities, it is able to function and produce darker fur. This is an example of a temperature-sensitive allele."</div>
+        <div class="quote-tw">編碼<strong>酪胺酸酶</strong>的基因突變改變了一個胺基酸，使酵素在溫暖部位功能不佳，但在較涼末端能運作並形成深色毛。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">6. 《Starr Biology》14e ＆ 《Hickman Zoology》19e — 雪鞋兔（雪靴兔）的荷爾蒙換毛調控</span>
+        <span class="source-loc">Starr Ch. 13 · Hickman Ch. 28 Fig. 28.8</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Starr 14e：季節溫度與日照長度觸發荷爾蒙訊號改變新毛色素沉積</div>
+        <div class="quote-en">"Seasonal changes in temperature and the length of day affect the production of melanin and other pigments that color the skin and fur of many animals. These species have different color phases in different seasons (Figure 13.15A). Hormonal signals triggered by the seasonal changes cause fur to be shed, and new fur grows back with different types and amounts of pigments deposited in it."</div>
+        <div class="quote-tw">溫度與日照長度的季節變化所觸發的<strong>荷爾蒙訊號</strong>，會使毛髮脫落，並讓新長出的毛<strong>沉積不同種類與數量的色素</strong>，為雪鞋兔提供符合季節的保護色。</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Hickman 19e：三次年度換毛與「冬季白變（leukemism）≠ 白化（albinism）」</div>
+        <div class="quote-en">"The snowshoe hare of North America has three annual molts: the white winter coat is replaced by a brownish gray summer coat, and this is replaced in autumn by a grayer coat, which is soon shed to reveal the winter white coat beneath (Figure 28.8). White fur of arctic mammals in winter (leukemism) is not to be confused with albinism, caused by a recessive gene that blocks pigment (melanin) formation."</div>
+        <div class="quote-tw">北美雪鞋兔有三次年度換毛（夏棕、秋灰、冬白）。冬季白毛屬於<strong>白變</strong>，不可與隱性基因阻斷黑色素形成的<strong>白化症</strong>混淆——雪鞋兔冬季仍具深色眼睛與深色耳尖。</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">7. 《Futuyma &amp; Kirkpatrick Evolution》5e — 表現型可塑性如何透過基因調控達成</span>
+        <span class="source-loc">Ch. 11 §11.5 · Fig. 11.28</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">環境刺激 → 激素／傳訊分子 → 轉錄因子 → 下游基因表現</div>
+        <div class="quote-en">"Plastic changes in phenotype often result from changes in gene regulation. These changes have various causes; for example, environmental stimuli often alter levels of hormones or other signaling molecules that affect levels of transcription factors, which in turn alter the expression of downstream genes."</div>
+        <div class="quote-tw">表現型的可塑性改變常源自<strong>基因調控改變</strong>：例如環境刺激改變<strong>激素或其他傳訊分子</strong>濃度，進而影響<strong>轉錄因子</strong>濃度，再改變<strong>下游基因的表現</strong>。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: Teaching, Exam & Boundary -->
+  <section id="sec-teaching">
+    <h2><span class="sec-num">07</span> 高中教學提示、教甄實戰與查證邊界</h2>
+
+    <div class="callout">
+      <div class="callout-title">🎯 課堂講解與高一→高三銜接心法</div>
+      <p style="margin-bottom:0;">高一必修上到這個單元時，不必硬塞高三轉錄因子細節，但建議在黑板上畫出一條簡單的五站箭頭：「<strong>DNA（基因型） → 轉錄（基因調控） → 蛋白質（酵素活性） → 化學呈色（色素環境） → 表現型</strong>」，再把三個例子貼在各自的位置——<strong>雪靴兔</strong>貼在轉錄調控、<strong>喜馬拉雅兔</strong>貼在酵素活性、<strong>繡球花</strong>貼在色素化學環境。學生一眼就能看懂「三者都是環境影響表現型，但介入的站點不同」，將來學選修生物基因調控也不會錯亂。</p>
+    </div>
+
+    <div class="callout-warn">
+      <div class="callout-title">📝 教甄實戰考點：115 新北高中聯招 第 50 題（扦插繡球花）</div>
+      <p style="margin-bottom:8px;"><strong>題幹重點</strong>：園丁從同一株藍花繡球花母本<strong>扦插</strong>獲得 100 株花苗種於花園各區，開花時多數為粉紅花、僅約三分之一開藍花，問最合理的解釋為何？</p>
+      <p style="margin-bottom:0;"><strong>唯一判準</strong>：看到「<strong>扦插</strong>（無性生殖）」就知道 100 株花苗與母本<strong>基因型完全相同</strong>，因此所有涉及基因型差異的干擾項（複等位基因、完全顯性、共顯性）全數淘汰，正解為 <strong>(D) 環境因素如土壤 pH 值等會影響花色基因的表現型</strong>。</p>
+    </div>
+
+    <h3>常見命題陷阱與延伸閱讀</h3>
+    <ul>
+      <li><strong>陷阱 1（冰袋實驗可遺傳嗎？）</strong>：喜馬拉雅兔背部敷冰袋長出黑毛後，與同品種交配所生子代背部並不會自動長黑毛——環境僅改變局部體表毛囊的酵素作用溫度，未改變生殖細胞 DNA。</li>
+      <li><strong>陷阱 2（繡球花不是單純酸鹼指示劑）</strong>：若酸性土壤本身缺乏游離鋁，繡球花仍無法開出純藍花；關鍵是土壤 pH 控制了游離鋁的可利用性。</li>
+      <li><strong>譯名留意</strong>：高中三民版譯為「<strong>雪靴兔</strong>」，英文教科書譯本（Starr、Campbell、Hickman）多譯「<strong>雪鞋兔</strong>」，兩者皆指北美 <em>Lepus americanus</em>；此外臺灣統一使用「<strong>表現型可塑性</strong>」，不使用中國用語「表型可塑性」。</li>
+      <li><strong>延伸閱讀</strong>：<a href="promoter-tata-box.html">啟動子、TATA 匣與 DNA 甲基化怎麼調控轉錄？</a>、<a href="plant-photoreceptor-photoperiodism.html">沒有感官怎麼感知世界？（細菌乳糖 vs. 植物光週期）</a>、<a href="sickle-cell-dominance.html">鐮刀型貧血顯隱性層次分析</a>。</li>
+    </ul>
+
+    <div class="boundary">
+      <div class="callout-title">📌 本機資料庫（Vault）查證邊界聲明</div>
+      <p style="margin-bottom:0;">本頁所有核心定義、溫度門檻、冰袋實驗詮釋與高中 6 版教材比對，皆來自 Ze-Agent Vault 內 9 部英文原典（Campbell 13e、Solomon 11e、Sadava 12e、Raven 13e、Starr 14e、Pierce 7e、Brooker <em>Genetics</em> 8e、Hickman 19e、Evolution 5e）與高中必修跨版本整合、115 新北高中聯招第 50 題。<br><br>以下進階生理分子細節於本機原文書譯本中查無直接展開，屬外部學術常識補充並明確標示邊界：① 繡球花萼片液胞中飛燕草素-3-葡萄糖苷（delphinidin-3-glucoside）、輔色素與 Al³⁺ 依液胞 pH 與鋁轉運蛋白形成金屬錯合物之精細配位化學（原書僅載「土壤 pH 與游離鋁溶解度／可利用性」）；② 雪靴兔光週期經松果腺褪黑激素、催乳素進一步調控毛囊內 <em>Agouti</em> 等基因表現之詳細內分泌分子通路（Starr 14e 僅載至「季節日照與溫度觸發荷爾蒙訊號，控制換毛與新毛色素沉積」）。</p>
+    </div>
+  </section>
+
+  <footer>
+    Bio-Wiki 概念考證庫 · 繁體中文與審定名詞遵循臺灣教育部規範 · 原文書與圖片引自 Ze-Agent Vault 正式譯本
+  </footer>
+</main>
+
+<!-- Reading Outpost Bottom Bar & Script -->
+<button class="ro-bottom-toc" type="button" onclick="roOpenDrawer('roTocDrawer')">📑 本篇段落導覽</button>
+<a class="ro-up-btn" href="#top" aria-label="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<script>
+  function roToggleTheme() {
+    var root = document.documentElement;
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('biowiki-theme', next); } catch (e) {}
+    roUpdateThemeBtn();
+  }
+  function roUpdateThemeBtn() {
+    var btn = document.getElementById('roThemeBtn');
+    if (!btn) return;
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.innerHTML = isLight ? '🌙 深色' : '☀️ 亮色';
+    btn.setAttribute('aria-label', isLight ? '切換為深色閱讀模式' : '切換為亮色閱讀模式');
+  }
+  roUpdateThemeBtn();
+  function roOpenDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('open');
+  }
+  function roCloseDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  }
+  function openLightbox(src, alt) {
+    var lb = document.getElementById('roLightbox');
+    var img = document.getElementById('roLightboxImg');
+    if (lb && img) {
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.add('open');
+    }
+  }
+  function toggleEnglish() {
+    document.body.classList.toggle('hide-en');
+    var btn = document.getElementById('toggleEnBtn');
+    if (btn) {
+      btn.textContent = document.body.classList.contains('hide-en')
+        ? '完整：顯示英文原文'
+        : '精簡：隱藏英文原文';
+    }
+  }
+  (function initReadingOutpostShell() {
+    var tocList = document.getElementById('roTocList');
+    var headings = document.querySelectorAll('h2');
+    if (tocList && headings.length) {
+      headings.forEach(function(h, idx) {
+        if (!h.id) h.id = 'ro-sec-' + (idx + 1);
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent.trim();
+        tocList.appendChild(a);
+      });
+    }
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th, tr:first-child th')).map(function(th) {
+        return th.innerText.trim().replace(/[\r\n\t ]+/g, ' ');
+      });
+      if (!headers.length) return;
+      table.classList.add('ro-resp-table');
+      table.querySelectorAll('tr').forEach(function(tr) {
+        if (tr.querySelector('th')) return;
+        Array.from(tr.children).forEach(function(td, idx) {
+          if (td.tagName === 'TD' && !td.getAttribute('data-label') && headers[idx]) {
+            td.setAttribute('data-label', headers[idx]);
+          }
+        });
+      });
+    });
+    document.querySelectorAll('main img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        openLightbox(img.src, img.alt);
+      });
+    });
+  })();
+</script>
+<script src="site-nav.js"></script>
+</body>
+</html>
