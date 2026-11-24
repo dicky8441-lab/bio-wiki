@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>染色質、染色體與紡錘絲：材料、實體與核染劑判準｜Bio-Wiki</title>
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem('biowiki-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+<style>
+  :root {
+    --bg-primary: #181614;
+    --bg-pillbar: #24201c;
+    --bg-card: #211e1a;
+    --bg-quote: #26221e;
+    --bg-tag: #2d2823;
+    --text-primary: #f6f1ea;
+    --text-body: #ddd5ca;
+    --text-secondary: #bfb5a8;
+    --text-muted: #9a8e80;
+    --primary: #5bc0eb;
+    --primary-light: rgba(91, 192, 235, 0.12);
+    --primary-border: rgba(91, 192, 235, 0.32);
+    --accent: #f4c44e;
+    --accent-light: rgba(244, 196, 78, 0.12);
+    --warn: #f87171;
+    --warn-bg: rgba(248, 113, 113, 0.10);
+    --border-color: rgba(246, 241, 234, 0.09);
+    --border-strong: rgba(246, 241, 234, 0.16);
+    --taupe-fab: rgba(104, 91, 78, 0.94);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  html[data-theme="light"] {
+    --bg-primary: #fbf8f4;
+    --bg-pillbar: #f0ece3;
+    --bg-card: #ffffff;
+    --bg-quote: #f6f2ea;
+    --bg-tag: #eee8dd;
+    --text-primary: #2f2820;
+    --text-body: #4a3f35;
+    --text-secondary: #5e5043;
+    --text-muted: #756656;
+    --primary: #1b9dce;
+    --primary-light: rgba(27, 157, 206, 0.12);
+    --primary-border: rgba(27, 157, 206, 0.35);
+    --accent: #b86b11;
+    --accent-light: rgba(244, 196, 78, 0.22);
+    --warn: #dc2626;
+    --warn-bg: rgba(220, 38, 38, 0.08);
+    --border-color: rgba(74, 63, 53, 0.12);
+    --border-strong: rgba(74, 63, 53, 0.22);
+    --taupe-fab: rgba(105, 90, 74, 0.94);
+    --shadow: 0 4px 18px rgba(47, 40, 32, 0.08);
+    color-scheme: light;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+  }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+    font-size: 18px;
+    line-height: 1.78;
+    padding: 0 0 96px 0;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Reading Outpost Top Pill Header */
+  .ro-header-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-primary) 70%, rgba(24, 22, 20, 0));
+  }
+
+  html[data-theme="light"] .ro-header-wrap {
+    background: linear-gradient(180deg, #fbf8f4 70%, rgba(251, 248, 244, 0));
+  }
+
+  .ro-pillbar {
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .ro-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .ro-menu-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #5bc0eb;
+    color: #181614;
+    border: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  html[data-theme="light"] .ro-menu-circle {
+    background: #67c3eb;
+    color: #1f1a15;
+  }
+
+  .ro-menu-circle span {
+    display: block;
+    width: 16px;
+    height: 2.2px;
+    background: #181614;
+    border-radius: 2px;
+  }
+
+  .ro-brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .ro-brand-zh {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-brand-en {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .ro-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .ro-theme-btn {
+    appearance: none;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+  }
+
+  .ro-cta-pill {
+    appearance: none;
+    background: #f4c44e;
+    color: #1c1814;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  html[data-theme="light"] .ro-cta-pill {
+    background: #f6c84c;
+    color: #2f2820;
+  }
+
+  /* Main Reading Column */
+  main.container {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 22px 0;
+  }
+
+  /* Hero */
+  .hero {
+    text-align: left;
+    margin-bottom: 32px;
+    padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .meta-line {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .meta-pill, .meta-pill-muted {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .meta-pill {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary-border);
+  }
+
+  h1 {
+    font-size: clamp(26px, 6.2vw, 34px);
+    line-height: 1.38;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    margin: 6px 0 14px;
+    text-align: left;
+  }
+
+  .subtitle {
+    font-size: 17px;
+    line-height: 1.68;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* Sections */
+  section {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: 42px;
+    scroll-margin-top: 84px;
+  }
+
+  h2 {
+    font-size: clamp(22px, 5.2vw, 27px);
+    line-height: 1.45;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 44px 0 18px;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+  }
+
+  h2 .sec-num {
+    color: var(--accent);
+    margin-right: 6px;
+    font-weight: 800;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 28px 0 12px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--text-body);
+    margin-bottom: 18px;
+  }
+
+  ul, ol {
+    margin: 0 0 22px 24px;
+    color: var(--text-body);
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+  }
+
+  strong {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.9em;
+    background: var(--bg-tag);
+    color: var(--accent);
+    padding: 1px 6px;
+    border-radius: 5px;
+  }
+
+  main a:not(.ro-cta-pill):not(.ro-brand-link) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  /* Sub-cards */
+  .tldr-card, .source-card, .callout, .callout-warn {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin: 20px 0;
+  }
+
+  .tldr-card {
+    border-left: 4px solid var(--accent);
+  }
+
+  .callout {
+    border-left: 4px solid var(--primary);
+  }
+
+  .callout-warn {
+    border-left: 4px solid var(--warn);
+    background: var(--warn-bg);
+  }
+
+  .tldr-label, .callout-title, .source-book {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .callout-warn .callout-title {
+    color: var(--warn);
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .timeline-step {
+    padding-left: 4px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 12px;
+  }
+
+  .timeline-step:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .timeline-step-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .timeline-step-title span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    font-size: 14px;
+    font-weight: 800;
+    margin-right: 8px;
+  }
+
+  /* Figures */
+  .figure-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .figure-img-wrap {
+    padding: 14px;
+    background: #f8fafc;
+    cursor: zoom-in;
+  }
+
+  main img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 8px;
+    margin: 0 auto;
+    cursor: zoom-in;
+  }
+
+  .zoom-hint {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    padding: 6px 4px 0;
+  }
+
+  .figure-body {
+    padding: 14px 16px 16px;
+  }
+
+  .figure-title {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .figure-caption {
+    font-size: 15.5px;
+    line-height: 1.68;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+
+  .figure-caption-en {
+    font-size: 13.5px;
+    line-height: 1.58;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+
+  .figure-guide {
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: var(--bg-quote);
+    border-left: 3px solid var(--accent);
+    font-size: 15px;
+    line-height: 1.68;
+    color: var(--text-body);
+  }
+
+  .figure-guide strong {
+    color: var(--accent);
+  }
+
+  /* Bilingual Textbook Quote Blocks */
+  .source-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .source-loc {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .quote-block {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .quote-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quote-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .quote-en {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 10px 0 12px;
+    word-break: break-word;
+  }
+
+  body.hide-en .quote-en {
+    display: none;
+  }
+
+  .quote-tw {
+    font-size: 17.5px;
+    line-height: 1.78;
+    color: var(--text-body);
+  }
+
+  .quote-tw strong {
+    color: var(--accent);
+    background: rgba(244, 196, 78, 0.10);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+
+  html[data-theme="light"] .quote-tw strong {
+    color: #8c4d06;
+    background: rgba(246, 200, 76, 0.28);
+  }
+
+  .toggle-en-btn {
+    appearance: none;
+    background: var(--bg-tag);
+    color: var(--accent);
+    border: 1px solid rgba(244, 196, 78, 0.35);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  /* Responsive Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0 26px;
+    font-size: 16px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-body);
+  }
+
+  th {
+    background: var(--bg-pillbar);
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  @media (max-width: 680px) {
+    table.ro-resp-table,
+    table.ro-resp-table thead,
+    table.ro-resp-table tbody,
+    table.ro-resp-table th,
+    table.ro-resp-table td,
+    table.ro-resp-table tr {
+      display: block;
+      width: 100%;
+    }
+
+    table.ro-resp-table thead {
+      display: none;
+    }
+
+    table.ro-resp-table tr {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    table.ro-resp-table td {
+      border: none;
+      border-bottom: 1px dashed var(--border-color);
+      padding: 8px 0;
+      text-align: left !important;
+    }
+
+    table.ro-resp-table td:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    table.ro-resp-table td:first-child {
+      padding-top: 0;
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    table.ro-resp-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+  }
+
+  /* Bottom Floating Controls */
+  .ro-bottom-toc {
+    position: fixed;
+    left: 16px;
+    bottom: 20px;
+    z-index: 95;
+    background: var(--taupe-fab);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 9px 15px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: calc(100vw - 88px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-up-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 95;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--taupe-fab);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    text-decoration: none !important;
+  }
+
+  /* Drawers & Lightbox */
+  .ro-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ro-drawer-backdrop.open {
+    display: flex;
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-backdrop {
+      align-items: center;
+      padding: 24px;
+    }
+  }
+
+  .ro-drawer-panel {
+    width: 100%;
+    max-width: 500px;
+    max-height: 78vh;
+    overflow-y: auto;
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px 20px 0 0;
+    padding: 18px 18px 28px;
+    box-shadow: var(--shadow);
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-panel {
+      border-radius: 18px;
+    }
+  }
+
+  .ro-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .ro-drawer-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .ro-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .ro-drawer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ro-drawer-list a {
+    display: block;
+    text-decoration: none !important;
+    color: var(--text-body) !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .ro-drawer-list a.active {
+    color: #181614 !important;
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 800;
+  }
+
+  .ro-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    cursor: zoom-out;
+  }
+
+  .ro-lightbox.open {
+    display: flex;
+  }
+
+  .ro-lightbox img {
+    max-width: 100%;
+    max-height: 92vh;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+</style>
+</head>
+<body>
+
+<div class="ro-header-wrap">
+  <div class="ro-pillbar">
+    <div class="ro-brand-group">
+      <button class="ro-menu-circle" type="button" aria-label="開啟專題選單" onclick="roOpenDrawer('roSiteDrawer')">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="ro-brand-link" href="index.html">
+        <span class="ro-brand-zh">400X 的日常切片</span>
+        <span class="ro-brand-en">BIO-WIKI EVIDENCE</span>
+      </a>
+    </div>
+    <div class="ro-top-actions">
+      <button class="ro-theme-btn" id="roThemeBtn" type="button" onclick="roToggleTheme()">☀️ 亮色</button>
+      <button class="ro-cta-pill" type="button" onclick="roOpenDrawer('roSiteDrawer')">專題目錄</button>
+    </div>
+  </div>
+</div>
+
+<!-- Site-Wide Topics Drawer (dynamically populated by site-nav.js) -->
+<div class="ro-drawer-backdrop" id="roSiteDrawer" onclick="if(event.target===this)roCloseDrawer('roSiteDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📚 Bio-Wiki 全站專題</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roSiteDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list">
+      <a href="index.html">🏠 首頁：主題分類總覽</a>
+      <a href="chromatin.html">染色質與染色體本質</a>
+      <a href="chromatin-chromosome-spindle-staining.html" class="active">染色質、染色體與紡錘絲</a>
+    </div>
+  </div>
+</div>
+
+<!-- In-Page TOC Drawer -->
+<div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📑 本篇段落導覽</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list" id="roTocList" onclick="roCloseDrawer('roTocDrawer')"></div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="ro-lightbox" id="roLightbox" onclick="this.classList.remove('open')">
+  <img id="roLightboxImg" alt="">
+</div>
+
+<main class="container" id="top">
+
+  <div class="hero">
+    <div class="meta-line">
+      <span class="meta-pill">染色體、DNA 與真核轉錄調控</span>
+      <span class="meta-pill-muted">4 部正典＋佛萊明 1880 原文</span>
+      <span class="meta-pill-muted">高中必修／選修跨版本</span>
+      <span class="meta-pill-muted">6 張圖證</span>
+    </div>
+    <h1>染色質、染色體與紡錘絲：成分材料、可計數實體與核染劑判準</h1>
+    <p class="subtitle">從佛萊明（Walther Flemming）1880 年「chromatic vs. achromatic」原始文獻出發，一次釐清染色質為何是材料、染色體為何從間期到分裂期都可計數，以及為什麼「紡錘絲無法被染色」必須加上「使用鹼性核染劑」的前提。</p>
+  </div>
+
+  <!-- TL;DR -->
+  <div class="tldr-card">
+    <div class="tldr-label">⚡ 一句話核心與四點檢核</div>
+    <div class="timeline">
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>1</span>染色質（chromatin）是成分材料，染色體（chromosome）是全程存在的可計數實體</div>
+        <p style="margin-bottom:0;"><strong>染色質</strong>是由 DNA 與蛋白質構成的複合材料；<strong>染色體</strong>則是由染色質組成的獨立結構單位。從間期到分裂期，細胞核裡一直都是「一條一條的染色體」（依中節計數），只是間期高度伸展、彼此佔據各自疆域而無法用傳統光鏡逐條數出。</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>2</span>「可染色 vs. 無法染色」是針對「鹼性核染劑（DNA 染劑）」的結果</div>
+        <p style="margin-bottom:0;">染色體含大量帶負電的 DNA，會強烈結合鹼性核染劑（<strong>染色像</strong>）；紡錘絲由微管蛋白（tubulin）組成、不含核酸，不吸核染劑（古典細胞學稱<strong>非染色質 achromatin / 無色細絲 achromatic threads</strong>），靠折光與背景襯托顯現。但只要改用抗微管蛋白免疫螢光抗體或蛋白質染劑，紡錘絲依然能染得非常清楚。</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>3</span>佛萊明 1880 年命名的是 chromatin 與 achromatin，chromosome 由瓦爾代爾於 1888 年提出</div>
+        <p style="margin-bottom:0;">佛萊明（Walther Flemming）於 1880 年正式定義 <em>chromatin</em> 與 <em>achromatin</em>，並於 1882 年創名 <em>mitosis</em>（有絲分裂）；至於 <em>chromosome</em> 一詞，則是 1888 年才由瓦爾代爾（Waldeyer）命名。</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>4</span>「布料 vs. 一件一件衣服」的比喻很貼切，補上「攤開 vs. 打包」就無死角</div>
+        <p style="margin-bottom:0;"><strong>布料</strong>＝染色質，<strong>一件件衣服</strong>＝一條條染色體。<strong>間期</strong>像把 46 件衣服全部攤開掛平方便取用（轉錄與複製），<strong>分裂期</strong>則是各自緊密摺疊打包成 46 個小包，方便搬運分配與清點數目。</p>
+      </div>
+    </div>
+    <p style="margin-top:14px;margin-bottom:0;font-size:15.5px;color:var(--text-muted);">延伸閱讀：7 部原文書對染色質 vs. 染色體的詞條彙整見 <a href="chromatin.html">《染色質與染色體本質》</a>；「DNA → 基因 → 染色體 → 基因體」階層串連見 <a href="genetics-terminology-hierarchy.html">《遺傳學核心名詞階層與教學串連》</a>。</p>
+  </div>
+
+  <!-- Section 1: Audit of the 4 claims -->
+  <section id="sec-audit">
+    <h2><span class="sec-num">01</span> 四個常見說法的精準度檢核</h2>
+    <p>把日常教學筆記中常出現的四組判斷攤開檢驗，哪些可以直接沿用、哪些必須補上前提條件，一目瞭然：</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>教學說法</th>
+          <th>正確性判定</th>
+          <th>精確補充與修正邊界</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>可染色的絲狀物－染色體</strong></td>
+          <td>方向正確，需分清名詞歷史</td>
+          <td>DNA 帶負電易與<strong>鹼性核染劑</strong>結合。嚴格說佛萊明 1880 年命名「核染劑可染物質」為 <strong>chromatin（染色質）</strong>，1888 年瓦爾代爾才將分裂期凝縮的實體條狀構造命名為 <strong>chromosome（染色體）</strong>。</td>
+        </tr>
+        <tr>
+          <td><strong>無法被染色的絲狀物（被背景襯托出來）－紡錘絲</strong></td>
+          <td>古典核染情境正確，不可講得太絕對</td>
+          <td>必須加上「<strong>在使用鹼性核染劑（DNA 染劑）時</strong>」的前提。紡錘絲是微管蛋白（不含核酸），故不被核染劑著色（古典細胞學稱無色細絲 <em>achromatic threads</em>）；但改用<strong>抗微管蛋白螢光抗體</strong>或蛋白質染劑仍可清晰染色。</td>
+        </tr>
+        <tr>
+          <td><strong>間期、分裂期都是染色體（可計數實體）；染色質是成分材料</strong></td>
+          <td><strong>完全正確</strong></td>
+          <td>與 Campbell 13e、Alberts ECB6（間期染色體）、Lodish 9e（染色體疆域）完全一致。高中課本說「間期呈染色質、分裂期成染色體」是在描述<strong>光鏡可見度</strong>，而非間期沒有染色體。</td>
+        </tr>
+        <tr>
+          <td><strong>染色質是布料；染色體是「一件一件」的衣服</strong></td>
+          <td>極佳的材料 vs. 個體比喻</td>
+          <td>精準打破「不可數材料 vs. 可數單位」混淆。教學時可再補一句：「間期＝衣服攤開掛平（方便轉錄複製），分裂期＝各自摺疊打包（方便搬運計數）」，同時提醒寫進考卷仍用「DNA 與蛋白質複合體／獨立結構實體」。</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Section 2: Textbook & Historical Figures -->
+  <section id="sec-figures">
+    <h2><span class="sec-num">02</span> 原文文獻與教科書圖證（點擊可放大）</h2>
+
+    <article class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Flemming_1880_JCB1965_chromatic_achromatic.jpg', this.querySelector('img').alt)">
+        <img src="images/Flemming_1880_JCB1965_chromatic_achromatic.jpg" alt="Walther Flemming 1880 JCB 1965 English translation on stainable substance and achromatic threads" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖證 1｜佛萊明（1880／1965 <em>JCB</em> 英譯）原始引文：可染色物質 vs. 無色軸向細絲</div>
+        <p class="figure-caption">引文出自德國細胞學家佛萊明（Walther Flemming）1880 年論文（1965 年 <em>The Journal of Cell Biology</em> 第 25 卷第 1 期第 3–69 頁英譯版）。原文檢討早期「核物質（stainable substance）」與「核液（nuclear sap）」二分法不夠精準，因為在所謂核液中還存在<strong>不吸色的軸向核內細絲（unstainable, axially oriented nuclear threads / achromatic threads）</strong>。</p>
+        <div class="figure-guide"><strong>閱讀焦點：</strong>緊接在這段之後，佛萊明就把前者命名為 <strong>chromatin</strong>（前提是「在核染劑處理下會吸收染料」），後者順理成章稱為 <strong>achromatin</strong>（非染色質）！</div>
+      </div>
+    </article>
+
+    <article class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Campbell13e_Fig12-3_eukaryotic_chromosomes.jpg', this.querySelector('img').alt)">
+        <img src="images/Campbell13e_Fig12-3_eukaryotic_chromosomes.jpg" alt="Campbell Biology 13e Figure 12.3 Eukaryotic chromosomes in African blood lily" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖證 2｜Campbell 13e 圖 12.3：非洲血百合細胞核內深染的真核染色體</div>
+        <p class="figure-caption">染色體（chromosome）源自希臘文 <em>chroma</em>（顏色）與 <em>soma</em>（身體），正因為它在細胞準備分裂、染色質高度凝縮時會大量吸收顯微鏡核染劑，在光學顯微鏡下呈現深藍／紫色粗絲，因而得名。</p>
+        <p class="figure-caption-en">Figure 12.3 Eukaryotic chromosomes. Chromosomes (stained purple) are visible within the nucleus of this cell from an African blood lily. The thinner red threads in the surrounding cytoplasm are the cytoskeleton. The cell is preparing to divide (LM). (Campbell Biology, 13th ed., Ch. 12)</p>
+      </div>
+    </article>
+
+    <article class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Campbell13e_Fig12-1_spindle_microtubules.jpg', this.querySelector('img').alt)">
+        <img src="images/Campbell13e_Fig12-1_spindle_microtubules.jpg" alt="Campbell Biology 13e Figure 12.1 Fluorescence micrographs of dividing marine worm embryo showing blue chromosomes and orange-gold microtubules" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖證 3｜Campbell 13e 圖 12.1：紡錘絲不是「永遠不能染色」——改用抗微管抗體就看得很清楚</div>
+        <p class="figure-caption">海洋蠕蟲胚胎由 2 細胞分裂成 4 細胞的多色螢光顯微照：<strong>DNA／染色體染成藍色</strong>，而由微管組成的<strong>紡錘絲與星狀體則染成橘金色</strong>。這張圖直接提醒我們：紡錘絲只是不吸「鹼性核染劑」，改用專一性蛋白質抗體即可顯色。</p>
+        <p class="figure-caption-en">Figure 12.1 A multicellular organism starts out as a single cell that divides into two. Those two cells then divide into four, as shown in these fluorescence micrographs of a marine worm embryo. (Campbell Biology, 13th ed., Ch. 12)</p>
+      </div>
+    </article>
+
+    <article class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Alberts_ECB6_Fig5-1_dividing_vs_interphase.png', this.querySelector('img').alt)">
+        <img src="images/Alberts_ECB6_Fig5-1_dividing_vs_interphase.png" alt="Alberts ECB6 Figure 5-1 Dividing vs nondividing plant cell chromosomes" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖證 4｜Alberts ECB6 圖 5–1：右側未分裂細胞「含有完全相同的一組染色體」</div>
+        <p class="figure-caption">兩個相鄰植物細胞以 DNA 螢光染劑標定：左側正在分裂，染色體高度凝縮可區分出一條條獨立結構（棕色標示其中一條）；<strong>右側細胞未分裂（間期），裡面裝著完全相同的一組染色體</strong>，只是 DNA 處於極度伸展的構形，無法從外觀逐條拆開分辨。</p>
+        <p class="figure-caption-en">Figure 5–1 Chromosomes become visible as eukaryotic cells prepare to divide. (A) Two adjacent plant cells photographed using a fluorescence microscope... The cell on the right, which is not dividing, contains the identical chromosomes, but they cannot be distinguished as individual entities because the DNA is in a much more extended conformation at this phase in the cell’s division cycle. (Alberts, Essential Cell Biology, 6th ed., Ch. 5)</p>
+      </div>
+    </article>
+
+    <article class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Lodish9e_Fig7-29_chromosome_territories.jpg', this.querySelector('img').alt)">
+        <img src="images/Lodish9e_Fig7-29_chromosome_territories.jpg" alt="Lodish 9e Experimental Figure 7-29 Human interphase chromosome territories" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖證 5｜Lodish 9e 實驗圖 7–29：間期染色體並未混成一團，而是各有「染色體疆域」</div>
+        <p class="figure-caption">以專一染色體塗染探針（chromosome paint probe）對間期人類細胞核進行螢光原位雜交（FISH）：(a) 兩條第 7 號（青色）與兩條第 8 號（紫色）染色體各自佔據核內特定位置；(b) 全套染色體標定顯示<strong>每條間期染色體都留在互不重疊的專屬疆域內</strong>，證實間期染色體依然是獨立存在的計數實體。</p>
+        <p class="figure-caption-en">EXPERIMENTAL FIGURE 7-29 During interphase, human chromosomes remain in non-overlapping territories in the nucleus. (Lodish et al., Molecular Cell Biology, 9th ed., Ch. 7)</p>
+      </div>
+    </article>
+
+    <article class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Becker10e_Fig16-19_chromatin_packing.png', this.querySelector('img').alt)">
+        <img src="images/Becker10e_Fig16-19_chromatin_packing.png" alt="Becker 10e Figure 16-19 Levels of chromatin packing" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖證 6｜Becker 10e 圖 16–19：同一份染色質材料，如何從核小體摺疊成 1,400 nm 分裂期染色體</div>
+        <p class="figure-caption">由 (a) DNA 雙股螺旋纏繞組蛋白成核小體（10 nm）、(b) 染色質纖維（30 nm）、(c) 環狀結構域（300 nm）、(d) 高度摺疊染色質（700 nm）一路盤繞成 (e) 複製後的分裂期染色體（1,400 nm）。從頭到尾都是同一條染色質材料改變包裝緊密度。</p>
+        <p class="figure-caption-en">Figure 16-19 Levels of Chromatin Packing. These illustrations and TEMs show a current model for progressive stages of DNA coiling and folding, culminating in the highly compacted chromosome of a dividing cell. (Becker’s World of the Cell, 10th ed., Ch. 16)</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- Section 3: Flemming Deep Dive -->
+  <section id="sec-flemming">
+    <h2><span class="sec-num">03</span> 佛萊明 1880 年原文考證：染色像 vs. 無色像</h2>
+    <p>很多老師在網路補充資料上看過這段英文引文，其實它有兩個很容易被忽略的關鍵脈絡，只要讀完緊接在後面的兩句話就會全部打通：</p>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">Walther Flemming (1880)／Leonie K. Piternick 英譯 (1965)</span>
+        <span class="source-loc"><em>The Journal of Cell Biology</em>, Vol. 25, No. 1, pp. 3–69</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">段落 A｜補充資料截圖所引段（核物質 vs. 無色軸向細絲）</div>
+        <div class="quote-en">"I have stated earlier that it might be possible to apply the terms nuclear substance and nuclear sap to the phenomena of nuclear division by calling the stainable substance which goes to form the daughter nuclei the nuclear substance and the remaining material the nuclear sap. On closer examination even this seems to be inappropriate, for formed structures exist even in the latter material, these being the unstainable, axially oriented nuclear threads (achromatic threads, see below), and, in addition, branched threads; this substance therefore cannot simply be called sap."</div>
+        <div class="quote-tw">「我先前曾說，或許可以把『核物質（nuclear substance）』與『核液（nuclear sap）』這兩個詞套用到核分裂現象上：把進入子核的<strong>可染色物質</strong>稱為核物質，其餘材料稱為核液。但仔細檢視後，連這樣分也不恰當，因為在後者材料中仍存在具有固定形態的構造，也就是<strong>不吸色且呈軸向排列的核內細絲（無色細絲，achromatic threads，見下文）</strong>以及分支細絲；因此這部分材料不能單純稱為液體。」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">段落 B｜緊接其後的正式命名（點出「核染劑」前提與 chromatin / achromatin）</div>
+        <div class="quote-en">"Further study of the division phenomena requires a brief discussion of the material which thus far I have called the stainable substance of the nucleus. Since the term nuclear substance could easily result in misinterpretation... I shall coin the term chromatin for the time being. ... Therefore, we will designate as chromatin that substance, in the nucleus, which upon treatment with dyes known as nuclear stains does absorb the dye... The term achromatin suggests itself automatically for the unstainable substance of the nucleus. The terms chromatic and achromatic which will be used henceforth are thus explained."</div>
+        <div class="quote-tw">「為了進一步研究分裂現象，必須簡要討論我至今一直稱為『細胞核可染色物質』的材料。由於『核物質』一詞容易引起誤解……我暫且創設 <strong>chromatin（染色質）</strong>一詞……因此，我們將細胞核中<strong>在以所謂核染劑（nuclear stains）處理時會吸收染料的物質</strong>指定為 <strong>chromatin（染色質）</strong>……至於細胞核中不吸色的物質，<strong>achromatin（非染色質）</strong>這個名稱便自然浮現。下文將使用的 <strong>chromatic（有色／染色）</strong>與 <strong>achromatic（無色／非染色）</strong>兩詞也由此說明完畢。」</div>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>觀察對象</th>
+          <th>化學成分</th>
+          <th>傳統鹼性核染劑（洋紅、地衣紅、苯胺染劑）</th>
+          <th>微管免疫螢光／蛋白質染劑</th>
+          <th>古典細胞學術語</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>染色體／染色質</strong></td>
+          <td>DNA（帶負電）＋ 組蛋白等蛋白質</td>
+          <td><strong>強烈著色</strong>（深紫／深紅，即染色像）</td>
+          <td>可另用 DAPI／Hoechst 等 DNA 螢光染劑標記</td>
+          <td>染色像（chromatic figure），由 <strong>chromatin</strong> 構成</td>
+        </tr>
+        <tr>
+          <td><strong>紡錘絲</strong></td>
+          <td>微管蛋白（tubulin 聚合成微管，不含核酸）</td>
+          <td><strong>不著色</strong>，靠折光率與背景對比襯托</td>
+          <td><strong>可清楚著色</strong>（例如抗微管蛋白抗體呈橘金色）</td>
+          <td>無色像（achromatic figure），由 <strong>achromatin</strong>（<em>achromatic threads</em>）構成</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Section 4: Original Textbook Sources -->
+  <section id="sec-sources">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;border-bottom:1px solid var(--border-color);margin:44px 0 18px;padding-bottom:10px;">
+      <h2 style="margin:0;padding:0;border:none;"><span class="sec-num">04</span> 四部英文正典與高中跨版本原文考證</h2>
+      <button class="toggle-en-btn" type="button" id="toggleEnBtn" onclick="toggleEnglish()">精簡：隱藏英文原文</button>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">1. 《Campbell Biology》13e</span>
+        <span class="source-loc">Ch. 12 細胞週期（12.1 節）</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">染色體字源、染色質為「構成材料」</div>
+        <div class="quote-en">"The replication and distribution of so much DNA are manageable because the DNA molecules are packaged into structures called chromosomes (from the Greek chroma, color, and soma, body), so named because they take up certain dyes used in microscopy (Figure 12.3). ... Together, the entire complex of DNA and proteins that is the building material of chromosomes is referred to as chromatin. As you will soon see, the chromatin of a chromosome varies in its degree of condensation during the process of cell division."</div>
+        <div class="quote-tw">「DNA 分子被包裝進稱為<strong>染色體</strong>（chromosome，源自希臘文 chroma「顏色」與 soma「身體」，因能被顯微鏡染料染色而得名）的結構中（圖 12.3）……<strong>構成染色體的材料，也就是 DNA 與蛋白質共同組成的整個複合體，合稱為染色質（chromatin）。</strong>如你即將看到的，一條染色體中的染色質在細胞分裂過程中的凝縮程度會有所變化。」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">間期「每條染色體」以長而細的染色質纖維存在</div>
+        <div class="quote-en">"When a cell is not dividing, and even as it replicates its DNA in preparation for cell division, each chromosome is in the form of a long, thin chromatin fiber. After DNA replication, however, the chromosomes condense as a part of cell division: Each chromatin fiber becomes densely coiled and folded, making the chromosomes much shorter and so thick that we can see them with a light microscope."</div>
+        <div class="quote-tw">「<strong>細胞未在分裂時，即使正在複製 DNA 以準備分裂，每條染色體都呈現長而細的染色質纖維形態。</strong>DNA 複製完成後，染色體會在細胞分裂的過程中凝縮——每條染色質纖維緊密盤繞折疊，使染色體變得短粗，在光學顯微鏡下清晰可見。」</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">2. 《Essential Cell Biology》6e (Alberts)</span>
+        <span class="source-loc">Ch. 5 DNA 與染色體（5.1 節 ＆ 5.2 節）</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">DNA 與蛋白質複合體稱為染色質；未分裂細胞仍有相同一組染色體</div>
+        <div class="quote-en">"Each of these chromosomes consists of a single, enormously long, linear DNA molecule associated with proteins that fold and pack the fine thread of DNA into a more compact structure. This complex of DNA and protein is called chromatin. ... During interphase, chromosomes exist as long, thin threads of DNA in the nucleus and cannot be easily distinguished in the light microscope (see Figure 5–1). We refer to chromosomes in this extended state as interphase chromosomes."</div>
+        <div class="quote-tw">「每一條染色體都由一個極長的線性 DNA 分子及相關蛋白質構成……這種 DNA 與蛋白質的複合體稱為染色質……<strong>間期染色體在細胞核內呈細長 DNA 絲，在光學顯微鏡下不易彼此區分（見圖 5–1）；我們把這種伸展狀態稱為間期染色體。</strong>」</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">3. 《Molecular Cell Biology》9e (Lodish) ＆ 《Becker's World of the Cell》10e</span>
+        <span class="source-loc">Lodish Ch. 7 ＆ Becker Ch. 16</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Lodish 9e：間期染色體疆域（Interphase Chromosome Territories）</div>
+        <div class="quote-en">"Individual interphase chromosomes are less condensed than metaphase chromosomes (see Figure 7-23e, f). Nonetheless, interphase chromatin is not spread throughout the entire nucleus. In situ hybridization of interphase nuclei with chromosome-specific fluorescently labeled probes (called chromosome paint probes) has shown that the DNA of each interphase chromosome is localized within a region of the nucleus (Figure 7-29a). These localized regions are called chromosome territories."</div>
+        <div class="quote-tw">「個別的間期染色體比中期染色體更不凝聚……儘管如此，間期染色質並不是散布在整個細胞核中。用染色體專一的螢光標記探針……對間期細胞核進行原位雜交，結果顯示：<strong>每一條間期染色體的 DNA 都局限在細胞核的某個區域內（圖 7-29a）。這些局限的區域稱為染色體疆域（chromosome territories）。</strong>」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Becker 10e：平時分散於核中，分裂時可辨認為個別染色體</div>
+        <div class="quote-en">"When bound to these proteins, the DNA is known as chromatin, which forms fibers 10–30 nm in diameter that are normally dispersed throughout the nucleus. At the time of cell division (and in a few other situations), these fibers condense and fold into much larger, compact structures that become recognizable as individual chromosomes."</div>
+        <div class="quote-tw">「DNA 與這些蛋白質結合時稱為<strong>染色質</strong>；染色質形成直徑 10–30 nm 的纖維，通常分散於整個細胞核中。在細胞分裂時（以及少數其他情況下），這些纖維會凝縮並摺疊成更大、更緊密的構造，因而可辨認為一條條獨立的<strong>染色體</strong>。」</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">4. 臺灣高中 108 課綱跨版本整合與科學史稽核</span>
+        <span class="source-loc">必修生物《細胞的構造與功能》§18–§19 ＆ 選修生物一 Ch. 2 稽核</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">高中課本染色體計數規則與佛萊明科學史邊界</div>
+        <div class="quote-tw">
+          <strong>〔必修生物《細胞的構造與功能》§18〕</strong>染色體的數目依<strong>中節數目</strong>計算，所以一條二分體雖含有兩條姊妹染色分體，仍只算一條染色體。<br><br>
+          <strong>〔必修生物《細胞的構造與功能》§19〕</strong>1870 年代，動物學家觀察青蛙、兔子和貓的眼角膜細胞分裂，發現正在分裂的細胞中出現明顯彎曲、看似細線，而且容易被染料染色的構造，這些絲狀物後來稱為染色體。1879 年，德國生物學家佛萊明記錄了這類構造；他再依希臘字源「彎曲的線」，於 1882 年創名「有絲分裂」一詞。<br><br>
+          <strong>〔選修生物一 01 染色體遺傳覆蓋稽核〕</strong>若教材將「命名為染色體」直接歸於佛萊明有科學史歸因風險；通常 <em>chromosome</em> 命名歸於 Waldeyer（1888），佛萊明的重要貢獻是描述染色質與有絲分裂。
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Teaching & Exam Tips -->
+  <section id="sec-teaching">
+    <h2><span class="sec-num">05</span> 教學口語轉換與教甄防雷</h2>
+
+    <div class="callout">
+      <div class="callout-title">課堂口訣建議：如何一次講透這四個概念？</div>
+      <p style="margin-bottom:10px;"><strong>1. 講「材料 vs. 實體」：</strong>染色質是<strong>布料</strong>（DNA ＋ 蛋白質），染色體是<strong>一件一件的衣服</strong>。間期是把 46 件衣服全部<strong>攤開掛平</strong>方便轉錄與複製，分裂期則是各自<strong>摺疊打包</strong>成 46 個小包方便搬運與清點。</p>
+      <p style="margin-bottom:0;"><strong>2. 講「染色 vs. 不染色」：</strong>在實驗室常用的<strong>鹼性核染劑</strong>下，吸色變深的是染色體（染色像），不吸色、靠背景襯托的是紡錘絲（無色像）；但紡錘絲不是「永遠不能染色」，用專一性微管蛋白抗體一樣能把紡錘體染得金光閃閃。</p>
+    </div>
+
+    <div class="callout-warn">
+      <div class="callout-title">⚠️ 教甄與課堂最容易踩雷的 3 個地方</div>
+      <ul style="margin-bottom:0;">
+        <li><strong>雷區 1：誤用非臺灣審定譯名</strong><br>
+        依臺灣《生命科學名詞》審定，<em>chromatid</em> 一律譯為「<strong>染色分體</strong>」（切勿混用中國用語的「單體」寫法），<em>achromatin</em> 譯為「<strong>非染色質</strong>」。</li>
+        <li><strong>雷區 2：斷言「間期細胞沒有染色體」或「紡錘絲絕對無法被染色」</strong><br>
+        前者會與 Alberts「間期染色體」、Lodish「染色體疆域」及 S 期「染色體複製」衝突；後者會與免疫螢光顯微照（微管染色）直接衝突，務必加上「在傳統光鏡與核染劑條件下」的限定。</li>
+        <li><strong>雷區 3：把 <em>chromosome</em> 的命名算在佛萊明頭上</strong><br>
+        申論題若提到科學史，寫「佛萊明（1880/1882）描述核內可染色物質並命名<strong>染色質（chromatin）</strong>與<strong>有絲分裂（mitosis）</strong>，後來由瓦爾代爾（1888）命名<strong>染色體（chromosome）</strong>」最穩妥不扣分。</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    400X 的日常切片 Bio-Wiki · 依 Campbell 13e、Alberts ECB6、Lodish 9e、Becker 10e、Flemming (1880/1965) 與臺灣審定名詞編整
+  </footer>
+
+</main>
+
+<button class="ro-bottom-toc" type="button" onclick="roOpenDrawer('roTocDrawer')">📑 本篇段落導覽</button>
+<a class="ro-up-btn" href="#top" aria-label="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<script>
+  function roToggleTheme() {
+    var root = document.documentElement;
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('biowiki-theme', next); } catch (e) {}
+    roUpdateThemeBtn();
+  }
+  function roUpdateThemeBtn() {
+    var btn = document.getElementById('roThemeBtn');
+    if (!btn) return;
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.innerHTML = isLight ? '🌙 深色' : '☀️ 亮色';
+    btn.setAttribute('aria-label', isLight ? '切換為深色閱讀模式' : '切換為亮色閱讀模式');
+  }
+  roUpdateThemeBtn();
+
+  function roOpenDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('open');
+  }
+  function roCloseDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  }
+  function openLightbox(src, alt) {
+    var lb = document.getElementById('roLightbox');
+    var img = document.getElementById('roLightboxImg');
+    if (lb && img) {
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.add('open');
+    }
+  }
+  function toggleEnglish() {
+    document.body.classList.toggle('hide-en');
+    var btn = document.getElementById('toggleEnBtn');
+    if (btn) {
+      btn.textContent = document.body.classList.contains('hide-en')
+        ? '完整：顯示英文原文'
+        : '精簡：隱藏英文原文';
+    }
+  }
+  (function initReadingOutpostShell() {
+    var tocList = document.getElementById('roTocList');
+    var headings = document.querySelectorAll('h2');
+    if (tocList && headings.length) {
+      headings.forEach(function(h, idx) {
+        if (!h.id) h.id = 'ro-sec-' + (idx + 1);
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent.trim();
+        tocList.appendChild(a);
+      });
+    }
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th, tr:first-child th')).map(function(th) {
+        return th.innerText.trim().replace(/[\r\n\t ]+/g, ' ');
+      });
+      if (!headers.length) return;
+      table.classList.add('ro-resp-table');
+      table.querySelectorAll('tr').forEach(function(tr) {
+        if (tr.querySelector('th')) return;
+        Array.from(tr.children).forEach(function(td, idx) {
+          if (td.tagName === 'TD' && !td.getAttribute('data-label') && headers[idx]) {
+            td.setAttribute('data-label', headers[idx]);
+          }
+        });
+      });
+    });
+    document.querySelectorAll('main img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        openLightbox(img.src, img.alt);
+      });
+    });
+  })();
+</script>
+<script src="site-nav.js"></script>
+</body>
+</html>

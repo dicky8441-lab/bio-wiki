@@ -84,6 +84,12 @@
           keywords: '染色質 染色體 chromatin chromosome 間期 分裂期 組蛋白 核小體 Lodish Alberts Cox Becker Weaver Pierce Brooker'
         },
         {
+          href: 'chromatin-chromosome-spindle-staining.html',
+          title: '染色質、染色體與紡錘絲：材料、實體與核染劑判準（含佛萊明原文）',
+          tag: '核染與實體',
+          keywords: '染色質 染色體 紡錘絲 chromatin chromosome achromatin achromatic threads spindle fiber 佛萊明 弗萊明 Walther Flemming Waldeyer 核染劑 nuclear stains 染色像 無色像 染色體疆域 chromosome territories 布料 衣服 間期 分裂期 Campbell Alberts Lodish Becker'
+        },
+        {
           href: 'griffith-transformation.html',
           title: 'Griffith 轉形作用：外來 DNA 如何進入並重組？',
           tag: '經典實驗',
