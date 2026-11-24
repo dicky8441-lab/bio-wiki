@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>岡崎片段發現科學史：半不連續複製與脈衝追蹤實驗｜Bio-Wiki</title>
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem('biowiki-theme');
+      if (saved === 'light' || saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    } catch (e) {}
+  })();
+</script>
+<style>
+  :root {
+    --bg-primary: #181614;
+    --bg-pillbar: #24201c;
+    --bg-card: #211e1a;
+    --bg-quote: #26221e;
+    --bg-tag: #2d2823;
+    --text-primary: #f6f1ea;
+    --text-body: #ddd5ca;
+    --text-secondary: #bfb5a8;
+    --text-muted: #9a8e80;
+    --primary: #5bc0eb;
+    --primary-light: rgba(91, 192, 235, 0.12);
+    --primary-border: rgba(91, 192, 235, 0.32);
+    --accent: #f4c44e;
+    --accent-light: rgba(244, 196, 78, 0.12);
+    --warn: #f87171;
+    --warn-bg: rgba(248, 113, 113, 0.10);
+    --border-color: rgba(246, 241, 234, 0.09);
+    --border-strong: rgba(246, 241, 234, 0.16);
+    --taupe-fab: rgba(104, 91, 78, 0.94);
+    --radius: 16px;
+    --radius-sm: 12px;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  }
+
+  html[data-theme="light"] {
+    --bg-primary: #fbf8f4;
+    --bg-pillbar: #f0ece3;
+    --bg-card: #ffffff;
+    --bg-quote: #f6f2ea;
+    --bg-tag: #eee8dd;
+    --text-primary: #2f2820;
+    --text-body: #4a3f35;
+    --text-secondary: #5e5043;
+    --text-muted: #756656;
+    --primary: #1b9dce;
+    --primary-light: rgba(27, 157, 206, 0.12);
+    --primary-border: rgba(27, 157, 206, 0.35);
+    --accent: #b86b11;
+    --accent-light: rgba(244, 196, 78, 0.22);
+    --warn: #dc2626;
+    --warn-bg: rgba(220, 38, 38, 0.08);
+    --border-color: rgba(74, 63, 53, 0.12);
+    --border-strong: rgba(74, 63, 53, 0.22);
+    --taupe-fab: rgba(105, 90, 74, 0.94);
+    --shadow: 0 4px 18px rgba(47, 40, 32, 0.08);
+    color-scheme: light;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-primary);
+  }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-body);
+    font-size: 18px;
+    line-height: 1.78;
+    padding: 0 0 96px 0;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Reading Outpost Top Pill Header */
+  .ro-header-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, var(--bg-primary) 70%, rgba(24, 22, 20, 0));
+  }
+
+  html[data-theme="light"] .ro-header-wrap {
+    background: linear-gradient(180deg, #fbf8f4 70%, rgba(251, 248, 244, 0));
+  }
+
+  .ro-pillbar {
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+
+  .ro-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .ro-menu-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #5bc0eb;
+    color: #181614;
+    border: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  html[data-theme="light"] .ro-menu-circle {
+    background: #67c3eb;
+    color: #1f1a15;
+  }
+
+  .ro-menu-circle span {
+    display: block;
+    width: 16px;
+    height: 2.2px;
+    background: #181614;
+    border-radius: 2px;
+  }
+
+  .ro-brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
+  }
+
+  .ro-brand-zh {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-brand-en {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .ro-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .ro-theme-btn {
+    appearance: none;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+  }
+
+  .ro-cta-pill {
+    appearance: none;
+    background: #f4c44e;
+    color: #1c1814;
+    border: none;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  html[data-theme="light"] .ro-cta-pill {
+    background: #f6c84c;
+    color: #2f2820;
+  }
+
+  /* Main Reading Column */
+  main.container {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 22px 0;
+  }
+
+  /* Hero */
+  .hero {
+    text-align: left;
+    margin-bottom: 32px;
+    padding: 4px 0 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .meta-line {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .meta-pill, .meta-pill-muted {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--bg-tag);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .meta-pill {
+    background: var(--primary-light);
+    color: var(--primary);
+    border-color: var(--primary-border);
+  }
+
+  h1 {
+    font-size: clamp(26px, 6.2vw, 34px);
+    line-height: 1.38;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+    margin: 6px 0 14px;
+    text-align: left;
+  }
+
+  .subtitle {
+    font-size: 17px;
+    line-height: 1.68;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* Sections */
+  section {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: 42px;
+    scroll-margin-top: 84px;
+  }
+
+  h2 {
+    font-size: clamp(22px, 5.2vw, 27px);
+    line-height: 1.45;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 44px 0 18px;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    display: block;
+  }
+
+  h2 .sec-num {
+    color: var(--accent);
+    margin-right: 6px;
+    font-weight: 800;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 28px 0 12px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.78;
+    color: var(--text-body);
+    margin-bottom: 18px;
+  }
+
+  ul, ol {
+    margin: 0 0 22px 24px;
+    color: var(--text-body);
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+  }
+
+  strong {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.9em;
+    background: var(--bg-tag);
+    color: var(--accent);
+    padding: 1px 6px;
+    border-radius: 5px;
+  }
+
+  main a:not(.ro-cta-pill):not(.ro-brand-link) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  /* Sub-cards */
+  .tldr-card, .source-card, .callout, .callout-warn {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin: 20px 0;
+  }
+
+  .tldr-card {
+    border-left: 4px solid var(--accent);
+  }
+
+  .callout {
+    border-left: 4px solid var(--primary);
+  }
+
+  .callout-warn {
+    border-left: 4px solid var(--warn);
+    background: var(--warn-bg);
+  }
+
+  .tldr-label, .callout-title, .source-book {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .callout-warn .callout-title {
+    color: var(--warn);
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .timeline-step {
+    padding-left: 4px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 12px;
+  }
+
+  .timeline-step:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .timeline-step-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .timeline-step-title span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #181614;
+    font-size: 14px;
+    font-weight: 800;
+    margin-right: 8px;
+  }
+
+  /* Figures */
+  .figure-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .figure-img-wrap {
+    padding: 14px;
+    background: #f8fafc;
+    cursor: zoom-in;
+  }
+
+  main img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 8px;
+    margin: 0 auto;
+    cursor: zoom-in;
+  }
+
+  .zoom-hint {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    padding: 6px 4px 0;
+  }
+
+  .figure-body {
+    padding: 14px 16px 16px;
+  }
+
+  .figure-title {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .figure-caption {
+    font-size: 15.5px;
+    line-height: 1.68;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+
+  .figure-caption-en {
+    font-size: 13.5px;
+    line-height: 1.58;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+
+  .figure-guide {
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: var(--bg-quote);
+    border-left: 3px solid var(--accent);
+    font-size: 15px;
+    line-height: 1.68;
+    color: var(--text-body);
+  }
+
+  .figure-guide strong {
+    color: var(--accent);
+  }
+
+  /* Bilingual Textbook Quote Blocks */
+  .source-header {
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .source-loc {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .quote-block {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed var(--border-color);
+  }
+
+  .quote-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quote-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .quote-en {
+    background: var(--bg-quote);
+    border-left: 3px solid var(--primary);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 15px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 10px 0 12px;
+    word-break: break-word;
+  }
+
+  body.hide-en .quote-en {
+    display: none;
+  }
+
+  .quote-tw {
+    font-size: 17.5px;
+    line-height: 1.78;
+    color: var(--text-body);
+  }
+
+  .quote-tw strong {
+    color: var(--accent);
+    background: rgba(244, 196, 78, 0.10);
+    padding: 0 4px;
+    border-radius: 4px;
+  }
+
+  html[data-theme="light"] .quote-tw strong {
+    color: #8c4d06;
+    background: rgba(246, 200, 76, 0.28);
+  }
+
+  .toggle-en-btn {
+    appearance: none;
+    background: var(--bg-tag);
+    color: var(--accent);
+    border: 1px solid rgba(244, 196, 78, 0.35);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  /* Responsive Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0 26px;
+    font-size: 16px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-body);
+  }
+
+  th {
+    background: var(--bg-pillbar);
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  @media (max-width: 680px) {
+    table.ro-resp-table,
+    table.ro-resp-table thead,
+    table.ro-resp-table tbody,
+    table.ro-resp-table th,
+    table.ro-resp-table td,
+    table.ro-resp-table tr {
+      display: block;
+      width: 100%;
+    }
+
+    table.ro-resp-table thead {
+      display: none;
+    }
+
+    table.ro-resp-table tr {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    table.ro-resp-table td {
+      border: none;
+      border-bottom: 1px dashed var(--border-color);
+      padding: 8px 0;
+      text-align: left !important;
+    }
+
+    table.ro-resp-table td:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    table.ro-resp-table td:first-child {
+      padding-top: 0;
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    table.ro-resp-table td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+  }
+
+  /* Bottom Floating Controls */
+  .ro-bottom-toc {
+    position: fixed;
+    left: 16px;
+    bottom: 20px;
+    z-index: 95;
+    background: var(--taupe-fab);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 9px 15px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: calc(100vw - 88px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ro-up-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 95;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--taupe-fab);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    text-decoration: none !important;
+  }
+
+  /* Drawers & Lightbox */
+  .ro-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .ro-drawer-backdrop.open {
+    display: flex;
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-backdrop {
+      align-items: center;
+      padding: 24px;
+    }
+  }
+
+  .ro-drawer-panel {
+    width: 100%;
+    max-width: 500px;
+    max-height: 78vh;
+    overflow-y: auto;
+    background: var(--bg-pillbar);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px 20px 0 0;
+    padding: 18px 18px 28px;
+    box-shadow: var(--shadow);
+  }
+
+  @media (min-width: 640px) {
+    .ro-drawer-panel {
+      border-radius: 18px;
+    }
+  }
+
+  .ro-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .ro-drawer-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .ro-drawer-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .ro-drawer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ro-drawer-list a {
+    display: block;
+    text-decoration: none !important;
+    color: var(--text-body) !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .ro-drawer-list a.active {
+    color: #181614 !important;
+    background: var(--accent);
+    border-color: var(--accent);
+    font-weight: 800;
+  }
+
+  .ro-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    cursor: zoom-out;
+  }
+
+  .ro-lightbox.open {
+    display: flex;
+  }
+
+  .ro-lightbox img {
+    max-width: 100%;
+    max-height: 92vh;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+</style>
+</head>
+<body>
+
+<div class="ro-header-wrap">
+  <div class="ro-pillbar">
+    <div class="ro-brand-group">
+      <button class="ro-menu-circle" type="button" aria-label="開啟專題選單" onclick="roOpenDrawer('roSiteDrawer')">
+        <span></span><span></span><span></span>
+      </button>
+      <a class="ro-brand-link" href="index.html">
+        <span class="ro-brand-zh">400X 的日常切片</span>
+        <span class="ro-brand-en">BIO-WIKI EVIDENCE</span>
+      </a>
+    </div>
+    <div class="ro-top-actions">
+      <button class="ro-theme-btn" id="roThemeBtn" type="button" onclick="roToggleTheme()">☀️ 亮色</button>
+      <button class="ro-cta-pill" type="button" onclick="roOpenDrawer('roSiteDrawer')">專題目錄</button>
+    </div>
+  </div>
+</div>
+
+<!-- Site-Wide Topics Drawer (dynamically populated by site-nav.js) -->
+<div class="ro-drawer-backdrop" id="roSiteDrawer" onclick="if(event.target===this)roCloseDrawer('roSiteDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📚 Bio-Wiki 全站專題</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roSiteDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list">
+      <a href="index.html">🏠 首頁：主題分類總覽</a>
+      <a href="okazaki-fragments-discovery.html" class="active">岡崎片段發現科學史</a>
+    </div>
+  </div>
+</div>
+
+<!-- In-Page TOC Drawer -->
+<div class="ro-drawer-backdrop" id="roTocDrawer" onclick="if(event.target===this)roCloseDrawer('roTocDrawer')">
+  <div class="ro-drawer-panel">
+    <div class="ro-drawer-head">
+      <div class="ro-drawer-title">📑 本篇段落導覽</div>
+      <button class="ro-drawer-close" type="button" onclick="roCloseDrawer('roTocDrawer')">✕</button>
+    </div>
+    <div class="ro-drawer-list" id="roTocList" onclick="roCloseDrawer('roTocDrawer')"></div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="ro-lightbox" id="roLightbox" onclick="this.classList.remove('open')">
+  <img id="roLightboxImg" alt="">
+</div>
+
+<main class="container" id="top">
+
+  <div class="hero">
+    <div class="meta-line">
+      <span class="meta-pill">染色體、DNA 與真核轉錄調控</span>
+      <span class="meta-pill-muted">8 部正典＋高中跨版本與教甄</span>
+      <span class="meta-pill-muted">實驗設計與科學史</span>
+      <span class="meta-pill-muted">6 張原書圖解</span>
+    </div>
+    <h1>科學家怎麼發現岡崎片段？半不連續複製的科學史與脈衝追蹤實驗設計</h1>
+    <p class="subtitle">1960 年代，所有已知 DNA 聚合酶都只能沿 5′→3′ 方向延長新股，但 DNA 雙螺旋兩股卻彼此反平行——岡崎令治與岡崎恒子如何靠「2 秒放射性脈衝＋鹼性變性梯度離心＋連接酶突變株對照」，在活細胞裡抓出轉瞬即逝的岡崎片段？</p>
+  </div>
+
+  <!-- TL;DR -->
+  <div class="tldr-card">
+    <div class="tldr-label">⚡ 一句話核心與四大實驗邏輯</div>
+    <div class="timeline">
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>1</span>理論起點：兩股反平行與聚合酶 5′→3′ 單向性互斥</div>
+        <p style="margin-bottom:0;">所有天然 DNA 聚合酶只能把新核苷酸接到既有鏈的 3′-OH 端（5′→3′ 合成）。當複製叉向前移動時，只有一條股（領先股）能順著複製叉連續合成，另一條（延遲股）必須等複製叉拉開後再朝反方向分段合成，事後以 DNA 連接酶縫合。</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>2</span>時間定格：2 秒極短 ³H-胸腺嘧啶核苷脈衝捕獲短片段</div>
+        <p style="margin-bottom:0;">在連接酶來得及縫合之前，以短至 2 秒的放射性脈衝標記複製中的 T4 噬菌體或大腸桿菌 DNA；脈衝或追蹤時間一拉長，放射性便從管頂小片段峰（1,000–2,000 nt）移向管底大分子長股峰。</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>3</span>空間拆解：鹼性變性梯度離心分離新生短股與親代模板</div>
+        <p style="margin-bottom:0;">新生岡崎片段一開始靠氫鍵黏在親代長模板股上；唯有在強鹼性（高 pH）梯度中破壞氫鍵使雙股變性成單股，才能依真正長度將短單股留在離心管頂部附近。</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-step-title"><span>4</span>排除假象：DNA 連接酶缺陷突變株在長脈衝下仍累積短片段</div>
+        <p style="margin-bottom:0;">若改用缺乏 DNA 連接酶活性的 T4 或大腸桿菌 <code>lig</code> 突變株，即使標記長達 1 分鐘，低分子量岡崎片段仍大量累積且無法接成長股，排除「抽提扯斷」的人為假象。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 1: Scientific History -->
+  <section id="sec-history">
+    <h2><span class="sec-num">01</span> 科學史時間軸：從極性矛盾到岡崎夫婦接棒（1953–1985）</h2>
+    <p>高中課本常直接給結論：「領先股連續合成、延遲股分段合成岡崎片段。」但回到 1960 年代，這個機制其實是從結構與酵素的死胡同裡推導出來的。</p>
+
+    <p>依《Stryer 生物化學》10e 人物專欄記載，<strong>岡崎恒子（Tsuneko Okazaki）</strong>與<strong>岡崎令治（Reiji Okazaki）</strong>在二戰艱困時期堅持求學，兩人於名古屋大學結識並結婚；1960 年代初期曾短暫赴史丹佛大學 <strong>Arthur Kornberg</strong>（剛純化出 DNA 聚合酶）實驗室研究，返日回到名古屋大學後便持續追問：「只能單向合成的 DNA 聚合酶，如何同時複製反平行的兩條 DNA 股？」</p>
+
+    <table class="ro-resp-table">
+      <thead>
+        <tr>
+          <th>時期</th>
+          <th>關鍵人物與事件</th>
+          <th>解決的科學問題</th>
+          <th>知識庫來源</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1953–1960s 初</td>
+          <td>雙螺旋反平行結構確立；Kornberg 確立聚合酶只沿 5′→3′ 合成</td>
+          <td>浮現矛盾：複製叉看似同時推進，但不可能有 3′→5′ 聚合酶</td>
+          <td>Weaver 5e、Becker 10e、Stryer 10e</td>
+        </tr>
+        <tr>
+          <td>1967</td>
+          <td>多個實驗室同時發現 <strong>DNA 連接酶（DNA ligase）</strong></td>
+          <td>找到能把 3′-OH 與 5′-磷酸接起來形成磷酸二酯鍵的「縫合酵素」</td>
+          <td>Stryer 10e Ch. 28</td>
+        </tr>
+        <tr>
+          <td>1968</td>
+          <td><strong>岡崎團隊經典實驗</strong>：T4／大腸桿菌 2 秒 ³H 脈衝＋變性梯度離心＋連接酶突變對照</td>
+          <td>證實細胞內真的短暫存在 1,000–2,000 nt 片段，且靠連接酶接成長股</td>
+          <td>Weaver 5e、Cox 2e、Freeman 8e、Klug、Lehninger 8e</td>
+        </tr>
+        <tr>
+          <td>1970s–1985</td>
+          <td><code>dut1 ung2</code> 排除修復斷裂；1975 年令治逝世後，<strong>岡崎恒子（1985）</strong>測出完整引子長度</td>
+          <td>證明大腸桿菌每個岡崎片段由 <strong>10–12 nt（11 ± 1 nt）</strong> 完整 RNA 引子起始</td>
+          <td>Weaver 5e Ch. 20、Stryer 10e Ch. 28</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <article class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Weaver5e_Ch20_Fig20-5_replication_models.png', this.querySelector('img').alt)">
+        <img src="images/Weaver5e_Ch20_Fig20-5_replication_models.png" alt="Weaver 5e 圖 20.5：DNA 複製的連續、半不連續與不連續三種模型比較" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖證 1｜Weaver 5e 圖 20.5：DNA 複製的三種理論模型對照</div>
+        <p class="figure-caption">(a) 連續模型要求上股沿 3′→5′ 合成（與所有已知聚合酶矛盾）；(b) 半不連續模型為現代標準教科書模型，僅延遲股分段；(c) 雙股皆不連續模型為岡崎團隊根據初期數據提出的原始解釋。</p>
+        <p class="figure-caption-en">Figure 20.5 Continuous, semidiscontinuous, and discontinuous models of DNA replication. (Weaver, Molecular Biology, 5e)</p>
+        <div class="figure-guide">
+          <strong>👀 看圖重點：</strong>藍色箭頭代表連續合成，粉紅色短箭頭代表分段合成。注意 (b) 與 (c) 的所有箭頭全都是 5′→3′ 方向，這才是它們能避開聚合酶單向性限制的關鍵。
+        </div>
+      </div>
+    </article>
+
+    <article class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Cox2e_Ch11_Fig11-4_replication_fork.png', this.querySelector('img').alt)">
+        <img src="images/Cox2e_Ch11_Fig11-4_replication_fork.png" alt="Cox 2e 圖 11.4：複製叉的結構與領先股、延遲股方向" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖證 2｜Cox 2e 圖 11.4：單一複製叉上的領先股與延遲股</div>
+        <p class="figure-caption">複製叉向上移動打開雙股；左側領先股朝同一方向連續延伸，右側延遲股則必須等待模板暴露後，以紫色 RNA 引子起始並朝遠離複製叉方向合成岡崎片段。</p>
+        <p class="figure-caption-en">Figure 11.4 Structure of the replication fork. (Cox et al., Molecular Biology, 2e)</p>
+        <div class="figure-guide">
+          <strong>👀 看圖重點：</strong>對比右側新合成的兩段岡崎片段——越靠近複製叉頂端的那一段，其實是「越晚」合成的；每個片段前端都有紫色短標記（RNA 引子）。
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- Section 2: Experimental Design -->
+  <section id="sec-experiment">
+    <h2><span class="sec-num">02</span> 1968 年實驗設計四大巧思：怎麼抓到只活幾秒的短片段？</h2>
+    <p>要驗證不連續複製模型，實驗上最大的障礙是<strong>時間尺度極短</strong>：細胞裡的岡崎片段剛做好幾秒內就會被連接酶接成整條大分子 DNA。岡崎團隊透過以下四層設計，成功在活細胞裡抓出這個過渡產物：</p>
+
+    <h3>1. 為什麼選「感染 T4 噬菌體的大腸桿菌」？</h3>
+    <p>除了直接用大腸桿菌做脈衝—追蹤實驗，岡崎團隊（1968）主力採用<strong>受噬菌體 T4 感染的大腸桿菌</strong>，原因有二（Weaver 5e、Cox 2e）：第一，T4 在細菌內會同時複製大量自身複本，讓原本轉瞬即逝的短片段總量大增、放射性訊號容易偵測；第二，當時已有現成的 <strong>T4 DNA 連接酶突變株</strong>可作為負對照。</p>
+
+    <h3>2. 極短脈衝（2 秒）＋ 脈衝—追蹤（Pulse–Chase）</h3>
+    <p>研究人員讓正在複製 DNA 的細胞短暫接觸 <strong>³H-胸腺嘧啶核苷（³H-thymidine）</strong>（脈衝），在片段尚未被縫合前立即中止反應抽提 DNA；另一組則拉長標記時間，或把細胞轉移到不含放射性的培養基中繼續培養（追蹤），觀察原本在小片段裡的放射性如何隨時間遷移。</p>
+
+    <article class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Weaver5e_Ch20_Fig20-6_okazaki_pulse_ligase_mutant.png', this.querySelector('img').alt)">
+        <img src="images/Weaver5e_Ch20_Fig20-6_okazaki_pulse_ligase_mutant.png" alt="Weaver 5e 圖 20.6：2 秒至 120 秒脈衝超高速離心沉降曲線與 T4 連接酶突變株對照" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖證 3｜Weaver 5e 圖 20.6：短脈衝捕獲短片段 vs. DNA 連接酶突變株累積</div>
+        <p class="figure-caption">(a) 野生型 T4 在 2 秒、7 秒時放射性幾乎全部集中於離心管頂部附近（Short DNA pieces，1,000–2,000 nt）；至 30、60、120 秒後，放射性逐漸轉移至管底側的 Long DNA pieces 高峰。(b) 換成 DNA 連接酶缺陷型 T4 突變株時，即使標記達 60 秒（1 分鐘），小片段高峰依然占絕對主導。</p>
+        <p class="figure-caption-en">Figure 20.6 Experimental demonstration of at least semidiscontinuous DNA replication. (Weaver, Molecular Biology, 5e)</p>
+        <div class="figure-guide">
+          <strong>👀 看圖重點：</strong>橫軸是「離離心管頂部的相對距離」（越往左越小、越往右越大）。看懂 (a) 與 (b) 的 <strong>60 sec 綠色曲線</strong>對比：野生型已大半移向右側大片段區，連接酶突變株卻全數卡在左側短片段峰！
+        </div>
+      </div>
+    </article>
+
+    <h3>3. 為什麼一定要用「鹼性／變性梯度離心」？</h3>
+    <p>剛合成好的岡崎片段，雖然骨幹還沒和前一段接起來，但它依然靠著鹼基配對的<strong>氫鍵</strong>緊緊黏在長長的親代模板股上（Klug Ch. 11）。如果用中性緩衝液直接離心，短片段會跟著母股一起沉到離心管底部，測起來就會誤以為是一條長 DNA。</p>
+    <p>因此，岡崎實驗室必須在<strong>強鹼性（高 pH）條件</strong>下進行梯度超高速離心（《Lehninger 生物化學》8e 習題 9 明述為<strong>鹼性蔗糖密度梯度</strong>；《Cox 分子生物學》2e 寫為<strong>鹼性 CsCl 梯度</strong>），強制打斷雙股間的氫鍵，把新生放射性子代股與未標記親代模板股拆成單股，才得以讓短片段停在管頂端、長股沉至管底端。</p>
+
+    <h3>4. DNA 連接酶突變株對照：排除「抽提扯斷」假象</h3>
+    <p>針對「小片段會不會只是實驗室抽提過程把長 DNA 弄斷的誤差」這個合理懷疑，缺乏 DNA 連接酶的突變株給出了致命一擊：在 T4 連接酶突變株（Weaver 5e 圖 20.6b）以及大腸桿菌 <code>lig</code> 突變株（Klug Ch. 11、Lehninger 8e 習題 9）中，<strong>把標記時間拉長到 1 分鐘甚至更久，低分子量短片段仍大量累積</strong>。在大腸桿菌連接酶突變株的鹼性蔗糖密度梯度沉降中，清楚呈現兩條放射性帶——高分子量帶（連續合成的領先股）與低分子量帶（未接合的岡崎片段）。</p>
+
+    <article class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Freeman8e_Ch15_Fig15-9_lagging_strand_direction.png', this.querySelector('img').alt)">
+        <img src="images/Freeman8e_Ch15_Fig15-9_lagging_strand_direction.png" alt="Freeman 8e 圖 15.9：Time 1 到 Time 2 複製叉打開後延遲股暴露單股模板" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖證 4｜Freeman 8e 圖 15.9：從 Time 1 到 Time 2 暴露單股模板</div>
+        <p class="figure-caption">領先股跟隨複製叉前進，而延遲股必須朝遠離複製叉方向合成，因此隨著解旋推進，延遲股模板會暴露出一段尚未複製的單股 DNA，等待下一次引子起始。</p>
+        <p class="figure-caption-en">Figure 15.9 The Lagging Strand Is Synthesized Away from the Replication Fork. (Freeman et al., Biological Science, 8e)</p>
+      </div>
+    </article>
+
+    <article class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Freeman8e_Ch15_Fig15-10_lagging_strand_process.png', this.querySelector('img').alt)">
+        <img src="images/Freeman8e_Ch15_Fig15-10_lagging_strand_process.png" alt="Freeman 8e 圖 15.10：細菌延遲股合成五步驟，從引子添加到連接酶封口" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖證 5｜Freeman 8e 圖 15.10：脈衝—追蹤期「短片段變長」的分子接力</div>
+        <p class="figure-caption">步驟 1–3 由引子酶與 DNA 聚合酶 III 做出一段段帶 RNA 引子的岡崎片段；步驟 4–5 由 DNA 聚合酶 I 置換 RNA 引子、再由 DNA 連接酶封合缺口——這兩步正是脈衝—追蹤實驗中標記 DNA 分子量隨時間升高的酵素原因。</p>
+        <p class="figure-caption-en">Figure 15.10 Lagging-Strand Synthesis in Bacteria. (Freeman et al., Biological Science, 8e)</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- Section 3: Advanced Twists -->
+  <section id="sec-twists">
+    <h2><span class="sec-num">03</span> 科學史的兩段精彩深掘：雙股不連續之爭與 1985 引子長度測定</h2>
+
+    <h3>1. 為什麼 2 秒脈衝全在小片段區？`dut1 ung2` 排除「修復斷裂」假說</h3>
+    <p>仔細看 Weaver 5e 圖 20.6a 就會發現一個耐人尋味的問題：如果領先股是連續的、只有一半新 DNA 是短片段，為什麼 2 秒脈衝時幾乎<strong>所有</strong>放射性都出現在小片段區，卻沒看到一半沉到底部？</p>
+    <p>岡崎團隊當時大膽推論「<strong>兩股都採不連續複製</strong>」（圖 20.5c）。但另一派學者提出替代假說：細胞有時會誤把 dUTP（當作 dUMP）併入新合成的 DNA，隨後尿嘧啶 N-去醣酶（<code>ung</code> 基因產物）會切掉尿嘧啶產生容易斷裂的無鹼基位點，所以連連續股看起來也像短片段！</p>
+    <p>為了驗證這個替代解釋，研究者改用同時減少 dUMP 併入並缺乏尿嘧啶 N-去醣酶的 <strong><code>dut1 ung2</code> 雙突變株</strong>重複實驗，結果顯示大多數新標記 DNA 依然是岡崎片段大小——證明這些短片段並非來自 dUMP 修復斷裂（Weaver 5e 指出該實驗雖支持大腸桿菌雙股皆不連續，但未獲學界普遍採納，主流模型仍採半不連續複製）。</p>
+
+    <h3>2. 岡崎恒子（1985）：用核酸酶突變株＋加帽酶測出完整 RNA 引子（10–12 nt）</h3>
+    <p>1975 年岡崎令治因廣島原子彈輻射後遺症引發白血病過世後，岡崎恒子仍獨力育兒並持續深入研究（Stryer 10e）。早期研究人員在估算岡崎片段 5′ 端 RNA 引子長度時，只測到短短 <strong>1–3 nt</strong>，原因是：① 純化前引子已被細胞內核酸酶切短；② 分不清「降解殘骸」與「完整引子」。</p>
+    <p>1985 年，岡崎恒子團隊用兩項極精準的設計一次解決兩大難題（Weaver 5e 圖 20.8）：</p>
+    <ul>
+      <li><strong>保護完整引子</strong>：改用缺乏 <strong>RNase H</strong> 與／或 <strong>DNA 聚合酶 I 核酸酶活性</strong>的突變大腸桿菌，阻止 RNA 引子被提前降解。</li>
+      <li><strong>只標記未降解的 5′ 端</strong>：使用加帽酶<strong>鳥苷醯轉移酶（guanylyl transferase）</strong>與 <strong>[α-³²P]GTP</strong>。此酵素只會將 GMP 接到仍保留 5′-末端磷酸基的完整 RNA 上，5′ 端被啃過的斷裂引子完全不會被標記！</li>
+      <li><strong>去 DNA 後電泳</strong>：以 DNase 消化掉岡崎片段的 DNA 部分，只留下帶放射性的完整 RNA 引子跑膠，測得清楚的 <strong>11 ± 1 nt（可解析為 10、11、12 nt 三條帶）</strong>；野生型對照組則因引子全被核酸酶分解而看不到帶。</li>
+    </ul>
+
+    <article class="figure-card">
+      <div class="figure-img-wrap" onclick="openLightbox('images/Weaver5e_Ch20_Fig20-8_okazaki_rna_primer_length.png', this.querySelector('img').alt)">
+        <img src="images/Weaver5e_Ch20_Fig20-8_okazaki_rna_primer_length.png" alt="Weaver 5e 圖 20.8：岡崎恒子 1985 年以加帽酶標記與電泳測得岡崎片段完整 RNA 引子為 10–12 nt" loading="lazy">
+        <span class="zoom-hint">點擊放大</span>
+      </div>
+      <div class="figure-body">
+        <div class="figure-title">圖證 6｜Weaver 5e 圖 20.8：岡崎恒子（1985）電泳測定完整 RNA 引子為 10–12 nt</div>
+        <p class="figure-caption">泳道 a–d 為 DNase 處理前，e–h 為 DNase 消化掉 DNA 部分後：野生型（h）幾乎無訊號，僅缺乏 RNase H 的單突變（e）與同時缺乏 RNase H 與 Pol I 核酸酶活性的雙突變（g）出現強烈訊號，落在 11 ± 1 nt 位置。</p>
+        <p class="figure-caption-en">Figure 20.8 Finding and measuring RNA primers. (Weaver, Molecular Biology, 5e)</p>
+        <div class="figure-guide">
+          <strong>👀 看圖重點：</strong>比較泳道 <strong>g（雙突變，訊號最強）</strong> 與 <strong>h（野生型，空白）</strong>，以及右側的 <code>Gpp(pA)₁₂</code>（相當於 13-mer 加帽標準品，實際引子為 10–12 nt + 1 個加帽 G）。
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- Section 4: Original Textbook Sources -->
+  <section id="sec-sources">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;border-bottom:1px solid var(--border-color);margin:44px 0 18px;padding-bottom:10px;">
+      <h2 style="margin:0;padding:0;border:none;"><span class="sec-num">04</span> 多部英文原文教科書與高中教材考證</h2>
+      <button class="toggle-en-btn" type="button" id="toggleEnBtn" onclick="toggleEnglish()">精簡：隱藏英文原文</button>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">1. 《Molecular Biology》5e (Robert F. Weaver)</span>
+        <span class="source-loc">Ch. 20 DNA Replication, Damage, and Repair</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">T4 噬菌體 2 秒脈衝標定＋超高速離心分離（1,000–2,000 nt 小片段）</div>
+        <div class="quote-en">"For his model system, Okazaki chose replication of phage T4 DNA. This had the advantage of simplicity, as well as the availability of T4 ligase mutants. To test the first prediction, Okazaki and colleagues gave shorter and shorter pulses of 3H-labeled thymidine to E. coli cells that were replicating T4 DNA. To be sure of catching short pieces of DNA before they could be joined together, they even administered pulses as short as 2 sec. Finally, they measured the approximate sizes of the newly synthesized DNAs by ultracentrifugation. ... Already at 2 sec, some labeled DNA was visible in the gradient; within the limits of detection, it appeared that all of the label was in very small DNA pieces, 1000–2000 nt long, which remained near the top of the centrifuge tube. With increasing pulse time, another peak of labeled DNA appeared much nearer the bottom of the tube."</div>
+        <div class="quote-tw">「對於他的模型系統，岡崎選擇了噬菌體 T4 DNA 的複製。這具有簡單的優點，並且可以獲得 T4 連接酶突變體。……為了確保在短片段 DNA 被連接在一起之前捕獲它們，他們甚至給予了<strong>短至 2 秒的脈衝</strong>。……早在 2 秒時，在梯度中就已能看到一些標記的 DNA；在檢測極限內，似乎所有的標記都在非常小的 DNA 片段中，長度為 <strong>1000–2000 nt</strong>，這些片段留在離心管的頂部附近。隨著脈衝時間的增加，另一個標記 DNA 的峰值出現在離離心管底部更近的地方。」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">T4 連接酶突變株對照：標記 1 分鐘仍累積岡崎片段</div>
+        <div class="quote-en">"Okazaki’s group performed this experiment with the T4 mutant containing a defective DNA ligase gene. Figure 20.6b shows that the peak of Okazaki fragments predominated in this mutant. Even after a full minute of labeling, this was still the major species of labeled DNA, suggesting that Okazaki fragments are not just an artifact of very short labeling times."</div>
+        <div class="quote-tw">「岡崎的團隊使用含有缺陷型 DNA 連接酶基因的 T4 突變體進行了這項實驗。圖 20.6b 顯示岡崎片段的峰值在該突變體中占主導地位。<strong>即使在標記了整整一分鐘之後，這仍然是標記 DNA 的主要物種</strong>，這表明岡崎片段不僅僅是極短標記時間的人工產物。」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">岡崎恒子 1985 年測定完整 RNA 引子長度（10–12 nt）</div>
+        <div class="quote-en">"Most of this work was carried out by Tuneko Okazaki, Reiji Okazaki’s wife and scientific colleague. She and her coworkers’ first estimate of the primer size was too low—only 1–3 nt. Two problems contributed to this underestimation: (1) Nucleases had already reduced the size of the primers by the time they could be purified, and (2) the investigators had no way of distinguishing degraded from intact primers. In a second set of experiments, completed in 1985, Okazaki’s group solved both of these problems and found that intact primers are really about 10–12 nt long."</div>
+        <div class="quote-tw">「這項工作大部分是由岡崎令治的妻子兼科學同事岡崎恒子（Tuneko Okazaki）完成的。她和同事們對引子大小的第一個估計太低了——只有 1–3 nt。……在 <strong>1985 年完成的第二組實驗中</strong>，岡崎的團隊解決了這兩個問題，並發現<strong>完整的引子實際上大約有 10–12 nt 長</strong>。」</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">2. 《Molecular Biology: Principles and Practice》2e (Cox et al.)</span>
+        <span class="source-loc">Ch. 11 DNA Replication</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">T4 大量複製放大訊號、鹼性 CsCl 梯度分離與原真核長度差異</div>
+        <div class="quote-en">"To look for these lagging-strand fragments, Okazaki used E. coli cells infected with T4 phage. Because T4 makes many copies of itself simultaneously, detection of lagging-strand fragments is made easier by their abundance. T4-infected E. coli cells were labeled with radioactive nucleotide precursors for brief time intervals, then the DNA was analyzed in alkaline CsCl gradients to separate the new, radioactive DNA strands from the unlabeled parental strands. Small fragments in the 1,000 to 2,000 nucleotide (1 to 2 kb) range were observed, as predicted, and have come to be known as Okazaki fragments. Lagging-strand Okazaki fragments are 1 to 2 kb long in bacteria, but are shorter—only 100 to 200 nucleotides—in eukaryotes."</div>
+        <div class="quote-tw">「為了尋找這些延遲股片段，岡崎使用了感染 T4 噬菌體的大腸桿菌細胞。由於 T4 會同時製造許多自己的拷貝，延遲股片段因為量多而更容易被偵測到。研究者用放射性核苷酸前驅物短暫標記受 T4 感染的大腸桿菌細胞一小段時間，然後在<strong>鹼性 CsCl 梯度</strong>中分析 DNA，把新的放射性 DNA 股和未標記的親代股分開。……延遲股上的岡崎片段在細菌中長 1 到 2 kb，但在真核生物中較短——只有 100 到 200 個核苷酸。」</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">3. 《Biochemistry》10e (Stryer) ＆ 《Lehninger Principles of Biochemistry》8e</span>
+        <span class="source-loc">Stryer Ch. 28 ＆ Lehninger Ch. 25 習題 9</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Stryer 10e：岡崎恒子與岡崎令治生平與 Kornberg 實驗室淵源</div>
+        <div class="quote-en">"Tsuneko met and married Reiji while they were both at Nagoya University, and in the early 1960s they briefly worked at Stanford University in the lab of Arthur Kornberg, who had recently extracted DNA polymerase activity from E. coli. Back at Nagoya University, they continued to investigate how DNA polymerase could be replicating antiparallel strands of DNA in only one direction, eventually leading to their discovery of the short-lived DNA fragments that now carry their name. In 1975 Reiji died of leukemia, a consequence of his exposure to intense radiation in Hiroshima as a teenager. Dr. Tsuneko Okazaki continued in research while also raising two children, and she went on to have a distinguished academic career."</div>
+        <div class="quote-tw">「恒子與令治都就讀名古屋大學，兩人在那裡相識並結婚。1960 年代初期，他們曾短暫前往史丹佛大學 <strong>Arthur Kornberg</strong> 的實驗室工作……返回名古屋大學後，他們繼續研究 DNA 聚合酶如何只沿一個方向複製反平行的 DNA 股……1975 年，令治因白血病去世；這是他青少年時期在廣島暴露於強烈輻射的後果。岡崎恒子博士一面繼續研究，一面養育兩名子女，後來成就了傑出的學術生涯。」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Lehninger 8e Ch. 25 習題 9：連接酶缺陷突變株於鹼性蔗糖密度梯度的雙帶現象</div>
+        <div class="quote-en">"Some E. coli mutants contain defective DNA ligase. When researchers expose these mutants to ³H-labeled thymine and then sediment the DNA produced on an alkaline sucrose density gradient, two radioactive bands appear. One corresponds to a high molecular weight fraction, the other to a low molecular weight fraction. Explain."</div>
+        <div class="quote-tw">「某些大腸桿菌突變株的 DNA 接合酶有缺陷。研究人員讓突變株接觸 ³H 標記胸腺嘧啶，再把生成 DNA 放入<strong>鹼性蔗糖密度梯度</strong>沉降，出現兩條放射性帶：一條對應高分子量分群，另一條對應低分子量分群。」</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">4. 《Biological Science》8e (Freeman) ＆ 《Concepts of Genetics》(Klug)</span>
+        <span class="source-loc">Freeman Ch. 15 ＆ Klug Ch. 11</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Freeman 8e：脈衝—追蹤策略（Pulse–Chase）與追蹤期片段變長</div>
+        <div class="quote-en">"Their study was based on the pulse–chase strategy (Ch. 7, Section 7.5). They briefly exposed a culture of growing E. coli cells to radioactive deoxyribonucleotides (the pulse) and then transferred the cells to a growth medium with nonradioactive deoxyribonucleotides (the chase). ... The researchers found short radioactively labeled DNA fragments averaging about 1000 deoxyribonucleotides long when they separated DNA strands obtained from the cells early in the chase period. ... The short DNAs gradually became longer during the chase. This is because Okazaki fragments are linked together soon after they’re formed."</div>
+        <div class="quote-tw">「他們的研究採用<strong>脈衝—追蹤策略（pulse–chase strategy）</strong>。研究人員讓正在生長的一群大腸桿菌短暫接觸具放射性的去氧核糖核苷酸（脈衝），接著將細胞轉移到含非放射性去氧核糖核苷酸的生長培養基中（追蹤）。……研究人員在追蹤期早期分離細胞中的 DNA 股時，發現平均約 1000 個去氧核糖核苷酸長的短放射性標記 DNA 片段。……追蹤期間，這些短 DNA 逐漸變長，原因是岡崎片段形成後很快就會彼此連接。」</div>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">Klug 遺傳學 Ch. 11 習題 29：1968 經典脈衝與變性梯度離心</div>
+        <div class="quote-en">"Reiji and Tuneko Okazaki conducted a now classic experiment in 1968 in which they discovered a population of short fragments synthesized during DNA replication. They introduced a short pulse of 3H-thymidine into a culture of E. coli and extracted DNA from the cells at various intervals. In analyzing the DNA after centrifugation in denaturing gradients, they noticed that as the interval between the time of 3H-thymidine introduction and the time of centrifugation increased, the proportion of short strands decreased and more labeled DNA was found in larger strands."</div>
+        <div class="quote-tw">「Reiji 與 Tuneko Okazaki 在 1968 年進行了一項如今已成經典的實驗……他們對大腸桿菌培養物短暫施加 ³H-胸腺嘧啶核苷脈衝，並在不同時間間隔後抽取細胞 DNA。以<strong>變性梯度離心</strong>分析 DNA 時，他們發現：從加入 ³H-胸腺嘧啶核苷到離心的間隔愈長，短股所占比例愈低，而帶標記 DNA 愈多出現在較長的股中。」</div>
+      </div>
+    </div>
+
+    <div class="source-card">
+      <div class="source-header">
+        <span class="source-book">5. 臺灣高中 108 課綱 7 版整合與教甄真題邊界</span>
+        <span class="source-loc">選修生物一 Ch. 2 跨版本整合 ＆ 114 新北高中聯招 第 4 題</span>
+      </div>
+      <div class="quote-block">
+        <div class="quote-label">高中課本共同核心與教甄命題對照</div>
+        <div class="quote-tw">
+          <strong>〔選修生物一 Ch. 2 跨版本整合〕</strong>親代兩股反向平行，但兩個複製叉都持續向前。以 3′→5′ 方向朝向複製叉的模板，可讓新股跟著複製叉連續以 5′→3′ 合成，這條新股稱領先股。另一模板的方向相反，新股只能背離複製叉分段合成；每當複製叉再打開一段，就需另造引子並形成一段岡崎片段，這條新股稱延遲股（部分來源稱延滯股）。（註：全臺 7 版高中教材皆僅介紹定義與機制，未收錄 1968 年脈衝實驗設計。）<br><br>
+          <strong>〔114 新北高中聯招 第 4 題〕</strong>聚合酶連鎖反應（PCR）與真核細胞內 DNA 複製時，下列哪個步驟是相同的？選項 (C)「DNA 連接酶將岡崎片段連結起來」為錯誤選項，因 PCR 兩條 DNA 引子各自連續延伸，不產生岡崎片段。
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Teaching & Exam Tips -->
+  <section id="sec-teaching">
+    <h2><span class="sec-num">05</span> 高中教學切入點、資料庫邊界與教甄防雷</h2>
+
+    <div class="callout">
+      <div class="callout-title">課堂提問與實驗探究切入點</div>
+      <p style="margin-bottom:10px;"><strong>1. 先丟出實驗難題，再談技術設計：</strong>別只叫學生背「岡崎片段＝延遲股上的短片段」，可以先問：<em>「如果短片段在活細胞裡幾秒鐘內就會被接起來，你要怎麼設計實驗證明它曾經存在？」</em> 自然帶出「2 秒短脈衝定格 → 鹼性變性拆開雙股 → 連接酶突變株鎖住中間產物」三層邏輯。</p>
+      <p style="margin-bottom:0;"><strong>2. 跨單元必考連結：</strong>比較 <strong>PCR vs. 細胞內複製</strong>時，因為 PCR 是兩條人工 DNA 引子分開延伸、沒有複製叉反方向推進的問題，所以<strong>沒有岡崎片段、不需要移除引子、也不需要 DNA 連接酶</strong>；而真核線型染色體延遲股最末端岡崎片段移除 RNA 引子後，正因為沒有前方 3′-OH 可延伸，才產生端粒縮短問題。</p>
+    </div>
+
+    <div class="callout-warn">
+      <div class="callout-title">⚠️ 教科書差異與考證邊界提醒</div>
+      <ul style="margin-bottom:0;">
+        <li><strong>離心梯度介質敘述差異</strong>：Lehninger 8e 習題 9 明確寫作「<strong>鹼性蔗糖密度梯度</strong>（alkaline sucrose density gradient）」、Klug 習題 29 寫「變性梯度離心」，而 Cox 2e 正文則寫作「<strong>鹼性 CsCl 梯度</strong>（alkaline CsCl gradients）」。</li>
+        <li><strong>本機資料庫尚無細節之處</strong>：1972 年 Sugino 等人證明岡崎片段 5′ 端共價接有 RNA 引子的 Cs₂SO₄ 梯度與 ³²P 鄰近轉移實驗步驟，以及溫度敏感型 <code>lig-ts</code> 突變株升溫時間序列原始圖表，目前知識庫僅有概念性提及，未收錄原始步驟。</li>
+        <li><strong>臺灣審定名詞規範</strong>：<em>lagging strand</em> 依臺灣《生命科學名詞》審定為「<strong>延遲股</strong>」（部分課本譯延滯股／後隨股），<em>DNA ligase</em> 譯「<strong>DNA 連接酶／DNA 接合酶</strong>」，<em>pulse–chase</em> 譯「短暫標記分析法／脈衝—追蹤策略」。</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    400X 的日常切片 Bio-Wiki · 依 Weaver 5e、Cox 2e、Stryer 10e、Freeman 8e、Campbell 13e、Klug、Becker 10e、Lehninger 8e 與臺灣審定名詞編整
+  </footer>
+
+</main>
+
+<button class="ro-bottom-toc" type="button" onclick="roOpenDrawer('roTocDrawer')">📑 本篇段落導覽</button>
+<a class="ro-up-btn" href="#top" aria-label="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<script>
+  function roToggleTheme() {
+    var root = document.documentElement;
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    var next = current === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('biowiki-theme', next); } catch (e) {}
+    roUpdateThemeBtn();
+  }
+  function roUpdateThemeBtn() {
+    var btn = document.getElementById('roThemeBtn');
+    if (!btn) return;
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    btn.innerHTML = isLight ? '🌙 深色' : '☀️ 亮色';
+    btn.setAttribute('aria-label', isLight ? '切換為深色閱讀模式' : '切換為亮色閱讀模式');
+  }
+  roUpdateThemeBtn();
+
+  function roOpenDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('open');
+  }
+  function roCloseDrawer(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  }
+  function openLightbox(src, alt) {
+    var lb = document.getElementById('roLightbox');
+    var img = document.getElementById('roLightboxImg');
+    if (lb && img) {
+      img.src = src;
+      img.alt = alt || '';
+      lb.classList.add('open');
+    }
+  }
+  function toggleEnglish() {
+    document.body.classList.toggle('hide-en');
+    var btn = document.getElementById('toggleEnBtn');
+    if (btn) {
+      btn.textContent = document.body.classList.contains('hide-en')
+        ? '完整：顯示英文原文'
+        : '精簡：隱藏英文原文';
+    }
+  }
+  (function initReadingOutpostShell() {
+    var tocList = document.getElementById('roTocList');
+    var headings = document.querySelectorAll('h2');
+    if (tocList && headings.length) {
+      headings.forEach(function(h, idx) {
+        if (!h.id) h.id = 'ro-sec-' + (idx + 1);
+        var a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent.trim();
+        tocList.appendChild(a);
+      });
+    }
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th, tr:first-child th')).map(function(th) {
+        return th.innerText.trim().replace(/[\r\n\t ]+/g, ' ');
+      });
+      if (!headers.length) return;
+      table.classList.add('ro-resp-table');
+      table.querySelectorAll('tr').forEach(function(tr) {
+        if (tr.querySelector('th')) return;
+        Array.from(tr.children).forEach(function(td, idx) {
+          if (td.tagName === 'TD' && !td.getAttribute('data-label') && headers[idx]) {
+            td.setAttribute('data-label', headers[idx]);
+          }
+        });
+      });
+    });
+    document.querySelectorAll('main img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        openLightbox(img.src, img.alt);
+      });
+    });
+  })();
+</script>
+<script src="site-nav.js"></script>
+</body>
+</html>

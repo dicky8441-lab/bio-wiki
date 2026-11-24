@@ -96,6 +96,12 @@
           keywords: 'Griffith 轉形作用 transformation 肺炎鏈球菌 R型菌 S型菌 莢膜 EndA ComEC RecA 同源重組 Pierce Prescott Klug Cox Weaver'
         },
         {
+          href: 'okazaki-fragments-discovery.html',
+          title: '岡崎片段發現科學史：半不連續複製與脈衝追蹤實驗',
+          tag: '經典實驗',
+          keywords: '岡崎片段 Okazaki fragments 岡崎令治 岡崎恒子 半不連續複製 semidiscontinuous 領先股 延遲股 脈衝追蹤 pulse-chase 鹼性蔗糖密度梯度 鹼性CsCl 變性梯度離心 T4 噬菌體 DNA連接酶 lig dut1 ung2 RNA引子 Weaver Cox Stryer Freeman Campbell Klug Becker Lehninger'
+        },
+        {
           href: 'promoter-tata-box.html',
           title: '啟動子、TATA 匣與 DNA 甲基化怎麼調控轉錄？',
           tag: '轉錄調控',
