@@ -134,6 +134,12 @@
           keywords: '同源染色體 雙套 二倍體 2n 倍性 ploidy 姊妹染色分體 AaBb 互換 crossing over 連鎖 linkage 順式 反式 9:3:3:1 3:1 1:2:1 試交 甜豌豆 羅東高中 教甄 Campbell Pierce Solomon Goldberg Klug'
         },
         {
+          href: 'meiosis-i-mendel-laws.html',
+          title: '為什麼分離律與獨立分配律都發生在減數分裂 I？（含染色體學說推理引導）',
+          tag: '減數與孟德爾',
+          keywords: '減數分裂I 分離律 獨立分配律 自由配合律 同源染色體 姊妹染色分體 共同定向 co-oriented 二價體 四分體 互換 單一細胞兩種配子 遺傳的染色體學說 薩登 包法利 摩根 互交 精卵 細胞核 PCK 教甄 Campbell Alberts Pierce Solomon Goldberg Becker Lodish'
+        },
+        {
           href: 'mitotic-crossing-over.html',
           title: '有絲分裂互換與重組：中節位置、雙生斑與子細胞表現型機率推導',
           tag: '體細胞互換',
